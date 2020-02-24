@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataProcess.Protocol
+namespace DataProcess.Parser
 {
-    public class EnvParser
+    public class DataConvert
     {
     }
 }

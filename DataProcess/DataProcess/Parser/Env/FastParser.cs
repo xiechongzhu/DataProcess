@@ -8,5 +8,6 @@ namespace DataProcess.Parser
 {
     public class FastParser
     {
+        
     }
 }

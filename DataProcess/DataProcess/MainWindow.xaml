@@ -3,8 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
     x:Class="DataProcess.MainWindow"
-    Title="数据接收解析软件" Height="800" Width="1000" WindowState="Maximized">
+    Title="数据接收解析软件" Height="800" Width="1000" WindowState="Maximized" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -18,16 +19,414 @@
             <dx:SimpleButton Content="启动" x:Name="btnStart" Margin="10,0,0,0" Click="btnStart_Click" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Start.svg}"/>
             <dx:SimpleButton Content="停止" x:Name="btnStop" Margin="10,0,0,0" IsEnabled="False" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Stop.svg}" Click="btnStop_Click"/>
             <Label Content="组播地址:" Margin="10,0,0,0"/>
-            <TextBox Width="100" Margin="10,0,0,0" x:Name="editIpAddr"/>
+            <TextBox Width="100" Margin="10,0,0,0" x:Name="editIpAddr" Text="239.255.255.250"/>
             <Label Content="端口:" Margin="10,0,0,0"/>
-            <TextBox Width="60" Margin="10,0,0,0" x:Name="editPort"/>
+            <TextBox Width="60" Margin="10,0,0,0" x:Name="editPort" Text="5000"/>
         </ToolBar>
         <dx:DXTabControl Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
             <dx:DXTabItem Header="Tab"/>
         </dx:DXTabControl>
         <dx:DXTabControl Margin="5,5,5,5" Grid.Row="1" Grid.Column="1">
             <dx:DXTabItem Header="缓变参数">
-                <Grid Background="Transparent"/>
+                <Grid Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="labelSyncFire" Grid.Row="0" Grid.Column="0" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+                    <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartHood">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="头罩温度(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartInsAir">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="仪器仓空温(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartInsWall">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="仪器仓壁温(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAttAir">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓空温(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAttWalls1">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓壁温Ⅰ(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartAttWalls2">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓壁温Ⅱ(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAttWalls3">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓壁温Ⅲ(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAttWalls4">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓壁温Ⅳ(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="3" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartAttWalls5">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓壁温Ⅴ(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAttWalls6">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓壁温Ⅵ(℃)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartInsPresure">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="仪器仓压力(kPa)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartAttiPresure">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控仓压力(kPa)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLevel2Transmitter">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="二级发送机压力(MPa)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartGestureControlHigh">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控动力高压(MPa)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                    <dxc:ChartControl Grid.Row="5" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartGestureControlLow">
+                        <dxc:ChartControl.Titles>
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </dxc:ChartControl.Titles>
+                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Label>
+                                        <dxc:AxisLabel FontSize="12"/>
+                                    </dxc:AxisY2D.Label>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="姿控动力低压(MPa)" Visible="True" FontSize="12"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near">
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Visible="False"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:SplineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False"/>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl>
+                </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="速变参数">
                 <Grid Background="Transparent"/>
