@@ -16,10 +16,14 @@
         <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <dx:SimpleButton Content="启动" x:Name="btnStart" Margin="10,0,0,0" Click="btnStart_Click" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Start.svg}" />
             <dx:SimpleButton Content="停止" x:Name="btnStop" Margin="10,0,0,0" IsEnabled="False" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Stop.svg}" Click="btnStop_Click" />
-            <Label Content="组播地址:" Margin="10,0,0,0" />
-            <TextBox Width="100" Margin="10,0,0,0" x:Name="editIpAddr" Text="239.255.255.250" />
-            <Label Content="端口:" Margin="10,0,0,0" />
-            <TextBox Width="60" Margin="10,0,0,0" x:Name="editPort" Text="5000" />
+            <Label Content="环境参数组播地址:" Margin="10,0,0,0" />
+            <TextBox Width="100" Margin="10,0,0,0" x:Name="editIpEnvAddr" Text="239.255.255.250" />
+            <Label Content="环境参数端口:" Margin="10,0,0,0" />
+            <TextBox Width="60" Margin="10,0,0,0" x:Name="editEnvPort" Text="5000" />
+            <Label Content="飞控组播地址:" Margin="10,0,0,0" />
+            <TextBox Width="100" Margin="10,0,0,0" x:Name="editIpFlyAddr" Text="239.255.255.250" />
+            <Label Content="飞控端口:" Margin="10,0,0,0" />
+            <TextBox Width="60" Margin="10,0,0,0" x:Name="editFlyPort" Text="5000" />
             <dx:SimpleButton Content="历史数据" x:Name="btnHistory" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Business Objects/BO_Contract.svg}" Click="btnHistory_Click"/>
         </ToolBar>
         <dx:DXTabControl Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
@@ -488,7 +492,665 @@
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="速变参数">
-                <Grid Background="Transparent" />
+                <Grid Background="Transparent">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <Grid Background="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="180"/>
+                                <RowDefinition Height="180"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake1">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号1(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake1" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake2">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号2(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake2" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake3">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号3(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake3" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake4">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D GridLinesVisible="True" Interlaced="True" Logarithmic="False" GridLinesMinorVisible="False">
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号4(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake4" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake5">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号5(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake5" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake6">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号6(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake6" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake7">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号7(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake7" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake8">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号8(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake8" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake9">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号9(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake9" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake10">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号10(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake10" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake11">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号11(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake11" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="3" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake12">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="振动信号12(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake12" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLashT3">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号时统T3" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT3" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLashT2">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号时统T2" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT2" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartLashT1">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号时统T1" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT1" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLashT0">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号时统T0" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT0" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLash1_1">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号1-1(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_1" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="5" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartLash1_2">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号1-2(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_2" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="6" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLash1_3">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号1-3(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_3" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLash2">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="冲击信号2(g)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="6" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNoise1">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="噪声信号1(dB)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise1" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="7" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNoise2">
+                                <dxc:ChartControl.Titles>
+                                    <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                </dxc:ChartControl.Titles>
+                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisY>
+                                        <dxc:AxisY2D>
+                                            <dxc:AxisY2D.Label>
+                                                <dxc:AxisLabel FontSize="12" />
+                                            </dxc:AxisY2D.Label>
+                                            <dxc:AxisY2D.Title>
+                                                <dxc:AxisTitle Content="噪声信号2(dB)" Visible="True" FontSize="12" />
+                                            </dxc:AxisY2D.Title>
+                                        </dxc:AxisY2D>
+                                    </dxc:XYDiagram2D.AxisY>
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                            <dxc:AxisX2D.Title>
+                                                <dxc:AxisTitle Visible="False" />
+                                            </dxc:AxisX2D.Title>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                    <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise2" >
+                                        <dxc:LineSeries2D.LineStyle>
+                                            <dxc:LineStyle LineJoin="Bevel"/>
+                                        </dxc:LineSeries2D.LineStyle>
+                                    </dxc:LineSeries2D>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="尾端参数">
                 <Grid Background="Transparent" />

@@ -74,15 +74,22 @@ namespace DataProcess.Protocol
             switch ((EnvProtocol.DataType)header.dataType)
             {
                 case EnvProtocol.DataType.DataTypeSlow:
-                    SlowPacket packet;
-                    if(SlowParser.Parse(body, out packet))
+                    SlowPacket slowPacket;
+                    if(SlowParser.Parse(body, out slowPacket))
                     {
                         IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SlowPacket)));
-                        Marshal.StructureToPtr(packet, ptr, true);
+                        Marshal.StructureToPtr(slowPacket, ptr, true);
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, ptr);
                     }
                     break;
                 case EnvProtocol.DataType.DataTypeFast:
+                    FastPacket fastPacket;
+                    if (FastParser.Parse(body, out fastPacket))
+                    {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(FastPacket)));
+                        Marshal.StructureToPtr(fastPacket, ptr, true);
+                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, ptr);
+                    }
                     break;
                 case EnvProtocol.DataType.DataTypeTail:
                     break;

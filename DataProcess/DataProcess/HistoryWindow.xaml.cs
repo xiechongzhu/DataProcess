@@ -20,7 +20,7 @@ namespace DataProcess
     /// <summary>
     /// HistoryWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class HistoryWindow : Window
+    public partial class HistoryWindow : DevExpress.Xpf.Core.ThemedWindow
     {
         private DataTable dt = new DataTable();
 

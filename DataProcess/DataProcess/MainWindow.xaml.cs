@@ -78,24 +78,24 @@ namespace DataProcess
 
             foreach (SlowPacket packet in packets)
             {
-                for(int i = 0; i < packet.temperatureSensor.Length; ++i)
+                for (int i = 0; i < 2; ++i)
                 {
-                    hoodSeriesList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].hood));
-                    insAirSeriesList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].insAir));
-                    insWallList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].insWall));
-                    attAirList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].attAir));
-                    attWallList1.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].attWalls[0]));
-                    attWallList2.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].attWalls[1]));
-                    attWallList3.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].attWalls[2]));
-                    attWallList4.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].attWalls[3]));
-                    attWallList5.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].attWalls[4]));
-                    attWallList6.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor[i].attWalls[5]));
+                    hoodSeriesList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.hood[i]));
+                    insAirSeriesList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.insAir[i]));
+                    insWallList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.insWall[i]));
+                    attAirList.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.attAir[i]));
+                    attWallList1.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.attWalls[i * 6]));
+                    attWallList2.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.attWalls[i * 6 + 1]));
+                    attWallList3.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.attWalls[i * 6 + 2]));
+                    attWallList4.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.attWalls[i * 6 + 3]));
+                    attWallList5.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.attWalls[i * 6 + 4]));
+                    attWallList6.Add(new SeriesPoint(slowDataIndex + i, packet.temperatureSensor.attWalls[i * 6 + 5]));
                 }
 
-                for(int i = 0; i < packet.pressureSensor.Length; ++i)
+                for(int i = 0; i < 2; ++i)
                 {
-                    insPresureList.Add(new SeriesPoint(slowDataIndex + i, packet.pressureSensor[i].instrument));
-                    attPresureList.Add(new SeriesPoint(slowDataIndex + i, packet.pressureSensor[i].attitudeControl));
+                    insPresureList.Add(new SeriesPoint(slowDataIndex + i, packet.pressureSensor.instrument[i]));
+                    attPresureList.Add(new SeriesPoint(slowDataIndex + i, packet.pressureSensor.attitudeControl[i]));
                 }
 
                 for(int i = 0; i < packet.level2Transmitter.Length; ++i)
@@ -135,21 +135,21 @@ namespace DataProcess
             if (packets.Count > 0)
             {
                 SlowPacket lastPacket = packets[packets.Count - 1];
-                ChartHood.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length-1].hood);
-                ChartInsAir.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].insAir);
-                ChartInsWall.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].insWall);
-                ChartAttAir.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].attAir);
-                ChartAttWalls1.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].attWalls[0]);
-                ChartAttWalls2.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].attWalls[1]);
-                ChartAttWalls3.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].attWalls[2]);
-                ChartAttWalls4.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].attWalls[3]);
-                ChartAttWalls5.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].attWalls[4]);
-                ChartAttWalls6.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor[lastPacket.temperatureSensor.Length - 1].attWalls[5]);
-                ChartInsPresure.Titles[0].Content = String.Format("{0:F}", lastPacket.pressureSensor[lastPacket.pressureSensor.Length - 1].instrument);
-                ChartAttiPresure.Titles[0].Content = String.Format("{0:F}", lastPacket.pressureSensor[lastPacket.pressureSensor.Length - 1].attitudeControl);
-                ChartLevel2Transmitter.Titles[0].Content = String.Format("{0:F}", lastPacket.level2Transmitter[lastPacket.level2Transmitter.Length - 1]);
-                ChartGestureControlHigh.Titles[0].Content = String.Format("{0:F}", lastPacket.gestureControlHigh[lastPacket.gestureControlHigh.Length - 1]);
-                ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", lastPacket.gestureControlLow[lastPacket.gestureControlLow.Length - 1]);
+                ChartHood.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.hood[1]);
+                ChartInsAir.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.insAir[1]);
+                ChartInsWall.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.insWall[1]);
+                ChartAttAir.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.attAir[1]);
+                ChartAttWalls1.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.attWalls[1]);
+                ChartAttWalls2.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.attWalls[3]);
+                ChartAttWalls3.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.attWalls[5]);
+                ChartAttWalls4.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.attWalls[7]);
+                ChartAttWalls5.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.attWalls[9]);
+                ChartAttWalls6.Titles[0].Content = String.Format("{0:F}", lastPacket.temperatureSensor.attWalls[11]);
+                ChartInsPresure.Titles[0].Content = String.Format("{0:F}", lastPacket.pressureSensor.instrument[1]);
+                ChartAttiPresure.Titles[0].Content = String.Format("{0:F}", lastPacket.pressureSensor.attitudeControl[1]);
+                ChartLevel2Transmitter.Titles[0].Content = String.Format("{0:F}", lastPacket.level2Transmitter[1]);
+                ChartGestureControlHigh.Titles[0].Content = String.Format("{0:F}", lastPacket.gestureControlHigh[1]);
+                ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", lastPacket.gestureControlLow[1]);
             }
         }
 
@@ -170,8 +170,8 @@ namespace DataProcess
 
             try
             {
-                udpClient = new UdpClient(int.Parse(editPort.Text));
-                udpClient.JoinMulticastGroup(IPAddress.Parse(editIpAddr.Text));
+                udpClient = new UdpClient(int.Parse(editEnvPort.Text));
+                udpClient.JoinMulticastGroup(IPAddress.Parse(editIpEnvAddr.Text));
             }
             catch(Exception ex)
             {
@@ -180,8 +180,8 @@ namespace DataProcess
             }
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
-            editIpAddr.IsEnabled = false;
-            editPort.IsEnabled = false;
+            editIpEnvAddr.IsEnabled = false;
+            editEnvPort.IsEnabled = false;
             UpdateSyncFireDisplay(Double.NaN);
             ResetDisplay();
             envBuffers.Clear();
@@ -207,15 +207,15 @@ namespace DataProcess
         {
             try
             {
-                udpClient?.DropMulticastGroup(IPAddress.Parse(editIpAddr.Text));
+                udpClient?.DropMulticastGroup(IPAddress.Parse(editIpEnvAddr.Text));
                 udpClient?.Close();
             }
             catch (Exception) { }
             envParser?.Stop();
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
-            editIpAddr.IsEnabled = true;
-            editPort.IsEnabled = true;
+            editIpEnvAddr.IsEnabled = true;
+            editEnvPort.IsEnabled = true;
             uiRefreshTimer.Stop();
             SaveTestInfo();
         }
