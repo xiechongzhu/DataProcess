@@ -147,7 +147,7 @@
                         </dxc:ChartControl.Titles>
                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                             <dxc:XYDiagram2D.AxisY>
-                                <dxc:AxisY2D>
+                                <dxc:AxisY2D GridLinesVisible="True" LabelAlignment="Near" TitlePosition="Outside">
                                     <dxc:AxisY2D.Label>
                                         <dxc:AxisLabel FontSize="12" />
                                     </dxc:AxisY2D.Label>
@@ -462,7 +462,7 @@
                     </dxc:ChartControl>
                     <dxc:ChartControl Grid.Row="5" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartGestureControlLow">
                         <dxc:ChartControl.Titles>
-                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
                         </dxc:ChartControl.Titles>
                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                             <dxc:XYDiagram2D.AxisY>
