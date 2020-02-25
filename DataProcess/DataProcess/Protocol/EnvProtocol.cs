@@ -65,4 +65,14 @@ namespace DataProcess.Protocol
         public byte[] reserve;//保留
     }
     #endregion
+
+    #region 速变参数协议定义
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct FastPacket
+    {
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 203)]
+        public byte[] reserve;//保留
+    }
+
+    #endregion
 }
