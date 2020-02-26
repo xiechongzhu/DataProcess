@@ -63,6 +63,7 @@
     <Reference Include="DevExpress.Xpf.Core.v19.2" />
     <Reference Include="DevExpress.Xpf.Grid.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.LayoutControl.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Printing.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.VS2017Light.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="linq2db, Version=2.9.6.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
@@ -101,6 +102,9 @@
       <DependentUpon>CopyMe.SQLite.tt</DependentUpon>
     </Compile>
     <Compile Include="EnvBuffers.cs" />
+    <Compile Include="HistoryDetailWindow.xaml.cs">
+      <DependentUpon>HistoryDetailWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HistoryWindow.xaml.cs">
       <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
@@ -118,6 +122,10 @@
     </Compile>
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Tools\WinApi.cs" />
+    <Page Include="HistoryDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HistoryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

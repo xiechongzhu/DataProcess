@@ -80,14 +80,36 @@ namespace DataProcess.Log
             writeFastPacketDelegate.BeginInvoke(packet, null, null);
         }
 
-        List<SlowPacket> LoadSlowPacketFile()
+        public List<SlowPacket> LoadSlowPacketFile()
         {
-
+            List<SlowPacket> slowPacketList = new List<SlowPacket>();
+            try
+            {
+                slowPacketFileStream = File.Open(slowPacketFilePath, FileMode.Open);
+                BinaryFormatter formatter = new BinaryFormatter();
+                while (slowPacketFileStream.Position < slowPacketFileStream.Length)
+                {
+                    slowPacketList.Add((SlowPacket)formatter.Deserialize(slowPacketFileStream));
+                }
+            }
+            catch (Exception) { }
+            return slowPacketList;
         }
 
-        List<FastPacket> LoadFastPacketFile()
+        public List<FastPacket> LoadFastPacketFile()
         {
-
+            List<FastPacket> fastPacketList = new List<FastPacket>();
+            try
+            {
+                fastPacketFileStream = File.Open(fastPacketFilePath, FileMode.Open);
+                BinaryFormatter formatter = new BinaryFormatter();
+                while (fastPacketFileStream.Position < fastPacketFileStream.Length)
+                {
+                    fastPacketList.Add((FastPacket)formatter.Deserialize(fastPacketFileStream));
+                }
+            }
+            catch (Exception) { }
+            return fastPacketList;
         }
     }
 }

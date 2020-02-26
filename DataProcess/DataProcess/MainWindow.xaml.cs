@@ -438,7 +438,10 @@ namespace DataProcess
         {
             SettingManager mgr = new SettingManager();
             mgr.SaveNetworkSetting(editIpEnvAddr.Text, int.Parse(editEnvPort.Text), editIpFlyAddr.Text, int.Parse(editFlyPort.Text));
-            btnStop_Click(null, null);
+            if (btnStart.IsEnabled == false)
+            {
+                btnStop_Click(null, null);
+            }
         }
 
         private void ResetDisplay()
@@ -547,16 +550,14 @@ namespace DataProcess
                     MessageBox.Show("保存试验信息失败:" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            testInfo = null;
         }
 
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
             HistoryWindow historyWindow = new HistoryWindow();
             historyWindow.Owner = this;
-            if((bool)historyWindow.ShowDialog())
-            {
-
-            }
+            historyWindow.ShowDialog();
         }
     }
 }

@@ -19,7 +19,7 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <dxg:GridControl AutoGenerateColumns="None" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="10,10,10,10" SelectionMode="Row" x:Name="gridControl">
+        <dxg:GridControl AutoGenerateColumns="None" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Margin="10,10,10,10" SelectionMode="Row" x:Name="gridControl" MouseDoubleClick="gridControl_MouseDoubleClick">
             <dxg:GridControl.View>
                 <dxg:TableView AllowEditing="False" AllowColumnMoving="False" NavigationStyle="Row" ShowCheckBoxSelectorColumn="True" ShowTotalSummary="False" AllowGrouping="False" ShowDataNavigator="False" ShowColumnHeaders="True" ShowSearchPanelMode="Never" ShowGroupPanel="False" ShowFixedTotalSummary="False" SummariesIgnoreNullValues="False" x:Name="tableView" />
             </dxg:GridControl.View>

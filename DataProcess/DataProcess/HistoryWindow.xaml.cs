@@ -1,4 +1,5 @@
-﻿using LinqToDB;
+﻿using DevExpress.Xpf.Grid;
+using LinqToDB;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -104,15 +105,44 @@ namespace DataProcess
                             DelectDir(f);
                         }
                     }
-
                     //删除空文件夹
                     Directory.Delete(srcPath);
                 }
-
             }
             catch (Exception) // 异常处理
             {
 
+            }
+        }
+
+        private void gridControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            TableViewHitInfo hInfo = tableView.CalcHitInfo(e.GetPosition(tableView));
+            if(hInfo.InRow)
+            {
+                int rowNum = hInfo.RowHandle;
+                long id = (long)gridControl.GetCellValue(rowNum, "Id");
+                TestInfo testInfo = null;
+                using (DataModels.DatabaseDB db = new DataModels.DatabaseDB())
+                {
+                    var temp = from c in db.TestInfos where c.Id == id select c;
+                    foreach (DataModels.TestInfo info in temp)
+                    {
+                        testInfo = new TestInfo
+                        {
+                            TestName = info.TestName,
+                            Operator = info.Operator,
+                            TestTime = info.Time,
+                            Comment = info.Comment
+                        };
+                    }
+                }
+                if(testInfo != null)
+                {
+                    HistoryDetailWindow detailWindow = new HistoryDetailWindow(testInfo);
+                    detailWindow.Owner = this;
+                    detailWindow.ShowDialog();
+                }
             }
         }
     }
