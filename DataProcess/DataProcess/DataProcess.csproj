@@ -104,11 +104,14 @@
     <Compile Include="HistoryWindow.xaml.cs">
       <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Parser\Env\DataConvert.cs" />
+    <Compile Include="Log\DataLogger.cs" />
+    <Compile Include="Parser\Env\EnvDataConvert.cs" />
     <Compile Include="Parser\Env\EnvParser.cs" />
     <Compile Include="Parser\Env\FastParser.cs" />
     <Compile Include="Parser\Env\SlowParser.cs" />
     <Compile Include="Protocol\EnvProtocol.cs" />
+    <Compile Include="Setting\NetworkSetting.cs" />
+    <Compile Include="Setting\SettingManager.cs" />
     <Compile Include="TestInfo.cs" />
     <Compile Include="TestInfoWindow.xaml.cs">
       <DependentUpon>TestInfoWindow.xaml</DependentUpon>

@@ -12,13 +12,16 @@ namespace DataProcess
         public EnvBuffers()
         {
             SlowPacketList = new List<SlowPacket>();
+            FastPacketList = new List<FastPacket>();
         }
 
         public void Clear()
         {
             SlowPacketList.Clear();
+            FastPacketList.Clear();
         }
 
         public List<SlowPacket> SlowPacketList { get; }
+        public List<FastPacket> FastPacketList { get; }
     }
 }

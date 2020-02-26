@@ -18,6 +18,7 @@ namespace DataProcess.Protocol
         }
     }
 
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct EnvPacketHeader
     {
@@ -28,6 +29,7 @@ namespace DataProcess.Protocol
 
     #region 缓变参数协议定义
     //压力传感器
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct SlowPressureSensor
     {
@@ -38,6 +40,7 @@ namespace DataProcess.Protocol
     }
 
     //温度传感器
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct SlowTemperatureSensor
     {
@@ -53,6 +56,7 @@ namespace DataProcess.Protocol
         public byte[] attWalls;
     }
 
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct SlowPacket
     {
@@ -72,6 +76,7 @@ namespace DataProcess.Protocol
 
     #region 速变参数协议定义
     //振动信号
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastShakeSignal
     {
@@ -79,6 +84,7 @@ namespace DataProcess.Protocol
         public byte[] signal;
     }
 
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastLashSignal
     {
@@ -86,6 +92,7 @@ namespace DataProcess.Protocol
         public byte[] signal;
     }
 
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastNoiseSignal
     {
@@ -93,6 +100,7 @@ namespace DataProcess.Protocol
         public byte[] signal;
     }
 
+    [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastPacket
     {
@@ -108,7 +116,7 @@ namespace DataProcess.Protocol
         public FastLashSignal lashSignal_2;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public FastNoiseSignal[] noiseSignal;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 203)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 205)]
         public byte[] reserve;//保留
     }
 

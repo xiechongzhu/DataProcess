@@ -23,7 +23,7 @@
             <Label Content="飞控组播地址:" Margin="10,0,0,0" />
             <TextBox Width="100" Margin="10,0,0,0" x:Name="editIpFlyAddr" Text="239.255.255.250" />
             <Label Content="飞控端口:" Margin="10,0,0,0" />
-            <TextBox Width="60" Margin="10,0,0,0" x:Name="editFlyPort" Text="5000" />
+            <TextBox Width="60" Margin="10,0,0,0" x:Name="editFlyPort" Text="6000" />
             <dx:SimpleButton Content="历史数据" x:Name="btnHistory" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Business Objects/BO_Contract.svg}" Click="btnHistory_Click"/>
         </ToolBar>
         <dx:DXTabControl Margin="5,5,5,5" Grid.Row="1" Grid.Column="0">
