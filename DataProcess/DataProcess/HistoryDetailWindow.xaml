@@ -28,7 +28,7 @@
         <TextBox Grid.Row="0" Grid.Column="3" Margin="5, 5, 5, 5" x:Name="editTime" IsEnabled="False"/>
         <TextBlock Text="实验时间:" Grid.Row="0" Grid.Column="4" Margin="5, 5, 5, 5"/>
         <TextBox Grid.Row="0" Grid.Column="5" Margin="5, 5, 5, 5" x:Name="editOperator" IsEnabled="False"/>
-        <TextBlock Text="备注:" Grid.Row="1" Grid.Column="0"/>
+        <TextBlock Text="备注:" Grid.Row="1" Grid.Column="0" Margin="5, 5, 5, 5"/>
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="5, 5, 5, 5" IsEnabled="False" TextWrapping="Wrap"  x:Name="editComment"/>
         <dx:DXTabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7">
             <dx:DXTabItem Header="飞控">
