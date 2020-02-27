@@ -1,4 +1,5 @@
 ﻿using DataProcess.Parser;
+using DataProcess.Parser.Env;
 using DataProcess.Tools;
 using System;
 using System.Collections.Concurrent;
@@ -13,6 +14,7 @@ namespace DataProcess.Protocol
 {
     public class EnvParser
     {
+        private TailParser tailParser;
         public EnvParser(IntPtr mainWindowHandle)
         {
             this.mainWindowHandle = mainWindowHandle;
@@ -31,6 +33,7 @@ namespace DataProcess.Protocol
         public void Start()
         {
             while (queue.TryDequeue(out byte[] dropBuffer)) ;
+            tailParser = new TailParser();
             isRuning = true;
             thread = new Thread(new ThreadStart(ThreadFunction));
             thread.Start();
@@ -92,6 +95,13 @@ namespace DataProcess.Protocol
                     }
                     break;
                 case EnvProtocol.DataType.DataTypeTail:
+                    List<TailPacketRs> tailPacketRs = tailParser.Parse(body);
+                    foreach(TailPacketRs packet in tailPacketRs)
+                    {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(TailPacketRs)));
+                        Marshal.StructureToPtr(packet, ptr, true);
+                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, ptr);
+                    }
                     break;
                 default:
                     break;

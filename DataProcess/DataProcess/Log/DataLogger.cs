@@ -15,12 +15,15 @@ namespace DataProcess.Log
     {
         private readonly String SlowPacketFileName = "慢速.dat";
         private readonly String FastPacketFileName = "快速.dat";
+        private readonly String TailPacketFileName = "尾端.dat";
 
         private String slowPacketFilePath;
         private String fastPacketFilePath;
+        private String tailPacketFilePath;
 
         private FileStream slowPacketFileStream = null;
         private FileStream fastPacketFileStream = null;
+        private FileStream tailPacketFileStream = null;
 
         public DataLogger(DateTime dateTime)
         {
@@ -28,12 +31,14 @@ namespace DataProcess.Log
             Directory.CreateDirectory(Path.Combine("Log", strDateTime));
             slowPacketFilePath = Path.Combine("Log", strDateTime, SlowPacketFileName);
             fastPacketFilePath = Path.Combine("Log", strDateTime, FastPacketFileName);
+            tailPacketFilePath = Path.Combine("Log", strDateTime, TailPacketFileName);
         }
 
         public void Close()
         {
             slowPacketFileStream?.Dispose();
             fastPacketFileStream?.Dispose();
+            tailPacketFileStream?.Dispose();
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -80,6 +85,28 @@ namespace DataProcess.Log
             writeFastPacketDelegate.BeginInvoke(packet, null, null);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private void WriteTailPacketInternal(TailPacketRs packet)
+        {
+            try
+            {
+                if (tailPacketFileStream == null)
+                {
+                    tailPacketFileStream = File.Create(tailPacketFilePath);
+                }
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(tailPacketFileStream, packet);
+            }
+            catch (Exception) { }
+        }
+
+        private delegate void WriteTailPacketDelegate(TailPacketRs packet);
+        public void WriteTailPacket(TailPacketRs packet)
+        {
+            WriteTailPacketDelegate writeTailPacketDelegate = new WriteTailPacketDelegate(WriteTailPacketInternal);
+            writeTailPacketDelegate.BeginInvoke(packet, null, null);
+        }
+
         public List<SlowPacket> LoadSlowPacketFile()
         {
             List<SlowPacket> slowPacketList = new List<SlowPacket>();
@@ -110,6 +137,22 @@ namespace DataProcess.Log
             }
             catch (Exception) { }
             return fastPacketList;
+        }
+
+        public List<TailPacketRs> LoadTailPacketFile()
+        {
+            List<TailPacketRs> tailPacketList = new List<TailPacketRs>();
+            try
+            {
+                tailPacketFileStream = File.Open(tailPacketFilePath, FileMode.Open);
+                BinaryFormatter formatter = new BinaryFormatter();
+                while (tailPacketFileStream.Position < tailPacketFileStream.Length)
+                {
+                    tailPacketList.Add((TailPacketRs)formatter.Deserialize(tailPacketFileStream));
+                }
+            }
+            catch (Exception) { }
+            return tailPacketList;
         }
     }
 }

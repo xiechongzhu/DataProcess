@@ -1,4 +1,5 @@
 ﻿using DataProcess.Protocol;
+using DataProcess.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace DataProcess.Parser
             {
                 return false;
             }
-            packet = Tools.Tool.ByteToStruct<FastPacket>(buffer, 0, buffer.Length);
+            packet = Tool.ByteToStruct<FastPacket>(buffer, 0, buffer.Length);
             return true;
         }
     }

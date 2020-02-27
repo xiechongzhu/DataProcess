@@ -13,15 +13,18 @@ namespace DataProcess
         {
             SlowPacketList = new List<SlowPacket>();
             FastPacketList = new List<FastPacket>();
+            TailPacketList = new List<TailPacketRs>();
         }
 
         public void Clear()
         {
             SlowPacketList.Clear();
             FastPacketList.Clear();
+            TailPacketList.Clear();
         }
 
         public List<SlowPacket> SlowPacketList { get; }
         public List<FastPacket> FastPacketList { get; }
+        public List<TailPacketRs> TailPacketList { get; }
     }
 }

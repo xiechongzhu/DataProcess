@@ -111,8 +111,10 @@
     <Compile Include="Log\DataLogger.cs" />
     <Compile Include="Parser\Env\EnvDataConvert.cs" />
     <Compile Include="Parser\Env\EnvParser.cs" />
+    <Compile Include="Parser\Env\TailParser.cs" />
     <Compile Include="Parser\Env\FastParser.cs" />
     <Compile Include="Parser\Env\SlowParser.cs" />
+    <Compile Include="Protocol\ChannelType.cs" />
     <Compile Include="Protocol\EnvProtocol.cs" />
     <Compile Include="Setting\NetworkSetting.cs" />
     <Compile Include="Setting\SettingManager.cs" />

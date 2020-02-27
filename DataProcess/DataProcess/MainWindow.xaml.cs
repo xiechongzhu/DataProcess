@@ -71,6 +71,11 @@ namespace DataProcess
                 DrawFastPackets(envBuffers.FastPacketList);
             }
 
+            if(envBuffers.TailPacketList.Count > 0)
+            {
+                DrawTailPackets(envBuffers.TailPacketList);
+            }
+
             envBuffers.Clear();
         }
 
@@ -144,21 +149,65 @@ namespace DataProcess
                 slowDataIndex += 2;
             }
 
+            ChartHood.BeginInit();
             SeriesHood.Points.AddRange(hoodSeriesList);
+            ChartHood.EndInit();
+
+            ChartInsAir.BeginInit();
             SeriesInsAir.Points.AddRange(insAirSeriesList);
+            ChartInsAir.EndInit();
+
+            ChartInsWall.BeginInit();
             SeriesInsWall.Points.AddRange(insWallList);
+            ChartInsWall.EndInit();
+
+            ChartAttAir.BeginInit();
             SeriesAttAir.Points.AddRange(attAirList);
+            ChartAttAir.EndInit();
+
+            ChartAttWalls1.BeginInit();
             SeriesAttWall1.Points.AddRange(attWallList1);
+            ChartAttWalls1.EndInit();
+
+            ChartAttWalls2.BeginInit();
             SeriesAttWall2.Points.AddRange(attWallList2);
+            ChartAttWalls2.EndInit();
+
+            ChartAttWalls3.BeginInit();
             SeriesAttWall3.Points.AddRange(attWallList3);
+            ChartAttWalls3.EndInit();
+
+            ChartAttWalls4.BeginInit();
             SeriesAttWall4.Points.AddRange(attWallList4);
+            ChartAttWalls4.EndInit();
+
+            ChartAttWalls5.BeginInit();
             SeriesAttWall5.Points.AddRange(attWallList5);
+            ChartAttWalls5.EndInit();
+
+            ChartAttWalls6.BeginInit();
             SeriesAttWall6.Points.AddRange(attWallList6);
+            ChartAttWalls6.EndInit();
+
+            ChartInsPresure.BeginInit();
             SeriesInsPresure.Points.AddRange(insPresureList);
+            ChartInsPresure.EndInit();
+
+            ChartAttiPresure.BeginInit();
             SeriesAttPresure.Points.AddRange(attPresureList);
+            ChartAttiPresure.EndInit();
+
+            ChartLevel2Transmitter.BeginInit();
             SeriesLevel2Presure.Points.AddRange(level2PresureList);
+            ChartLevel2Transmitter.EndInit();
+
+            ChartGestureControlHigh.BeginInit();
             SeriesAttPresureHigh.Points.AddRange(attPresureHigh);
+            ChartGestureControlHigh.EndInit();
+
+            ChartGestureControlLow.BeginInit();
             SeriesAttPresureLow.Points.AddRange(attPresureLow);
+            ChartGestureControlLow.EndInit();
 
             SlowPacket lastPacket = packets[packets.Count - 1];
             ChartHood.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_20_245(lastPacket.temperatureSensor.hood[1]));
@@ -242,28 +291,93 @@ namespace DataProcess
                 fastDataIndex++;
             }
 
+            ChartShake1.BeginInit();
             SeriesShake1.Points.AddRange(ShakeSeriesLists[0]);
+            ChartShake1.EndInit();
+
+            ChartShake2.BeginInit();
             SeriesShake2.Points.AddRange(ShakeSeriesLists[1]);
+            ChartShake2.EndInit();
+
+            ChartShake3.BeginInit();
             SeriesShake3.Points.AddRange(ShakeSeriesLists[2]);
+            ChartShake3.EndInit();
+
+            ChartShake4.BeginInit();
             SeriesShake4.Points.AddRange(ShakeSeriesLists[3]);
+            ChartShake4.EndInit();
+
+            ChartShake5.BeginInit();
             SeriesShake5.Points.AddRange(ShakeSeriesLists[4]);
+            ChartShake5.EndInit();
+
+            ChartShake6.BeginInit();
             SeriesShake6.Points.AddRange(ShakeSeriesLists[5]);
+            ChartShake6.EndInit();
+
+            ChartShake7.BeginInit();
             SeriesShake7.Points.AddRange(ShakeSeriesLists[6]);
+            ChartShake7.EndInit();
+
+            ChartShake8.BeginInit();
             SeriesShake8.Points.AddRange(ShakeSeriesLists[7]);
+            ChartShake8.EndInit();
+
+            ChartShake9.BeginInit();
             SeriesShake9.Points.AddRange(ShakeSeriesLists[8]);
+            ChartShake9.EndInit();
+
+            ChartShake10.BeginInit();
             SeriesShake10.Points.AddRange(ShakeSeriesLists[9]);
+            ChartShake10.EndInit();
+
+            ChartShake11.BeginInit();
             SeriesShake11.Points.AddRange(ShakeSeriesLists[10]);
+            ChartShake11.EndInit();
+
+            ChartShake12.BeginInit();
             SeriesShake12.Points.AddRange(ShakeSeriesLists[11]);
+            ChartShake12.EndInit();
+
+            ChartLashT3.BeginInit();
             SeriesLashT3.Points.AddRange(lashT3SeriesList);
+            ChartLashT3.EndInit();
+
+            ChartLashT2.BeginInit();
             SeriesLashT2.Points.AddRange(lashT2SeriesList);
+            ChartLashT2.EndInit();
+
+            ChartLashT1.BeginInit();
             SeriesLashT1.Points.AddRange(lashT1SeriesList);
+            ChartLashT1.EndInit();
+
+            ChartLashT0.BeginInit();
             SeriesLashT0.Points.AddRange(lashT0SeriesList);
+            ChartLashT0.EndInit();
+
+            ChartLash1_1.BeginInit();
             SeriesLash1_1.Points.AddRange(fastLashSeriesLists1[0]);
+            ChartLash1_1.EndInit();
+
+            ChartLash1_2.BeginInit();
             SeriesLash1_2.Points.AddRange(fastLashSeriesLists1[1]);
+            ChartLash1_2.EndInit();
+
+            ChartLash1_3.BeginInit();
             SeriesLash1_3.Points.AddRange(fastLashSeriesLists1[2]);
+            ChartLash1_3.EndInit();
+
+            ChartLash2.BeginInit();
             SeriesLash2.Points.AddRange(fastLashSeries2);
+            ChartLash2.EndInit();
+
+            ChartNoise1.BeginInit();
             SeriesNoise1.Points.AddRange(fastNoiseLists[0]);
+            ChartNoise1.EndInit();
+
+            ChartNoise2.BeginInit();
             SeriesNoise2.Points.AddRange(fastNoiseLists[1]);
+            ChartNoise2.EndInit();
 
             FastPacket lastPacket = packets[packets.Count - 1];
             ChartShake1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[0].signal[lastPacket.shakeSignals[0].signal.Length - 1]));
@@ -288,6 +402,166 @@ namespace DataProcess
             ChartLash2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetLash_Nagtive_3000_3000(lastPacket.lashSignal_2.signal[lastPacket.lashSignal_2.signal.Length - 1]));
             ChartNoise1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetNoise_100_140(lastPacket.noiseSignal[0].signal[lastPacket.noiseSignal[0].signal.Length - 1]));
             ChartNoise2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetNoise_120_160(lastPacket.noiseSignal[1].signal[lastPacket.noiseSignal[1].signal.Length - 1]));
+        }
+
+        private void DrawTailPackets(List<TailPacketRs> tailPackets)
+        {
+            List<SeriesPoint>[] seriesPoints = new List<SeriesPoint>[(uint)ChannelType.ChannelMax];
+            for(int i = 0; i < seriesPoints.Length; ++i)
+            {
+                seriesPoints[i] = new List<SeriesPoint>();
+            }
+            int[] seriesLastArgument = new int[(uint)ChannelType.ChannelMax];
+            seriesLastArgument[(int)ChannelType.ChannelPresure] = SeriesPresure.Points.Count > 0 ? (int)SeriesPresure.Points[SeriesPresure.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.ChannelLevel1Presure] = SeriesLevel1.Points.Count > 0 ? (int)SeriesLevel1.Points[SeriesLevel1.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.ChannelTemperature1] = SeriesTemperature1.Points.Count > 0 ? (int)SeriesTemperature1.Points[SeriesTemperature1.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.ChannelTemperature2] = SeriesTemperature2.Points.Count > 0 ? (int)SeriesTemperature2.Points[SeriesTemperature2.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.Channel1LashX] = SeriesLash1X.Points.Count > 0 ? (int)SeriesLash1X.Points[SeriesLash1X.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.Channel1LashY] = SeriesLash1Y.Points.Count > 0 ? (int)SeriesLash1Y.Points[SeriesLash1Y.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.Channel1LashZ] = SeriesLash1Z.Points.Count > 0 ? (int)SeriesLash1Z.Points[SeriesLash1Z.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.Channel2LashX] = SeriesLash2X.Points.Count > 0 ? (int)SeriesLash2X.Points[SeriesLash2X.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.Channel2LashY] = SeriesLash2Y.Points.Count > 0 ? (int)SeriesLash2Y.Points[SeriesLash2Y.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.Channel2LashZ] = SeriesLash2Z.Points.Count > 0 ? (int)SeriesLash2Z.Points[SeriesLash2Z.Points.Count - 1].NumericalArgument : -1;
+            seriesLastArgument[(int)ChannelType.ChannelNoise] = SeriesNoise.Points.Count > 0 ? (int)SeriesNoise.Points[SeriesNoise.Points.Count - 1].NumericalArgument : -1;
+
+            foreach (TailPacketRs packet in tailPackets)
+            {
+                foreach(ushort data in packet.channels)
+                {
+                    uint channel = data.Channel();
+                    if(channel < (uint)ChannelType.ChannelMax)
+                    {
+                        double value = 0;
+                        switch((ChannelType)channel)
+                        {
+                            case ChannelType.ChannelPresure:
+                                value = EnvDataConvert.TailGetPresure_0_120_K(data.Data());
+                                break;
+                            case ChannelType.ChannelLevel1Presure:
+                                value = EnvDataConvert.TailGetPresure_0_12_M(data.Data());
+                                break;
+                            case ChannelType.ChannelTemperature1:
+                            case ChannelType.ChannelTemperature2:
+                                value = EnvDataConvert.GetTemperature_Nagtive_20_150(data.Data());
+                                break;
+                            case ChannelType.Channel1LashX:
+                            case ChannelType.Channel1LashY:
+                            case ChannelType.Channel1LashZ:
+                            case ChannelType.Channel2LashX:
+                            case ChannelType.Channel2LashY:
+                            case ChannelType.Channel2LashZ:
+                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                break;
+                            case ChannelType.ChannelNoise:
+                                value = EnvDataConvert.TailGetNoise_120_160(data.Data());
+                                break;
+                            default:
+                                break;
+                        }
+                        seriesPoints[channel].Add(new SeriesPoint(++seriesLastArgument[channel], value));
+                    }
+                }
+            }
+
+            ChartPresure.BeginInit();
+            SeriesPresure.Points.AddRange(seriesPoints[(int)ChannelType.ChannelPresure]);
+            ChartPresure.EndInit();
+
+            ChartLevel1Presure.BeginInit();
+            SeriesLevel1.Points.AddRange(seriesPoints[(int)ChannelType.ChannelLevel1Presure]);
+            ChartLevel1Presure.EndInit();
+
+            ChartTemperature1.BeginInit();
+            SeriesTemperature1.Points.AddRange(seriesPoints[(int)ChannelType.ChannelTemperature1]);
+            ChartTemperature1.EndInit();
+
+            ChartTemperature2.BeginInit();
+            SeriesTemperature2.Points.AddRange(seriesPoints[(int)ChannelType.ChannelTemperature2]);
+            ChartTemperature2.EndInit();
+
+            ChartLash1X.BeginInit();
+            SeriesLash1X.Points.AddRange(seriesPoints[(int)ChannelType.Channel1LashX]);
+            ChartLash1X.EndInit();
+
+            ChartLash1Y.BeginInit();
+            SeriesLash1Y.Points.AddRange(seriesPoints[(int)ChannelType.Channel1LashY]);
+            ChartLash1Y.EndInit();
+
+            ChartLash1Z.BeginInit();
+            SeriesLash1Z.Points.AddRange(seriesPoints[(int)ChannelType.Channel1LashZ]);
+            ChartLash1Z.EndInit();
+
+            ChartLash2X.BeginInit();
+            SeriesLash2X.Points.AddRange(seriesPoints[(int)ChannelType.Channel2LashX]);
+            ChartLash2X.EndInit();
+
+            ChartLash2Y.BeginInit();
+            SeriesLash2Y.Points.AddRange(seriesPoints[(int)ChannelType.Channel2LashY]);
+            ChartLash2Y.EndInit();
+
+            ChartLash2Z.BeginInit();
+            SeriesLash2Z.Points.AddRange(seriesPoints[(int)ChannelType.Channel2LashZ]);
+            ChartLash2Z.EndInit();
+
+            ChartNoise.BeginInit();
+            SeriesNoise.Points.AddRange(seriesPoints[(int)ChannelType.ChannelNoise]);
+            ChartNoise.EndInit();
+
+            if (seriesPoints[(int)ChannelType.ChannelPresure].Count > 0)
+            {
+                ChartPresure.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.ChannelPresure][seriesPoints[(int)ChannelType.ChannelPresure].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.ChannelLevel1Presure].Count > 0)
+            {
+                ChartLevel1Presure.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.ChannelLevel1Presure][seriesPoints[(int)ChannelType.ChannelLevel1Presure].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.ChannelTemperature1].Count > 0)
+            {
+                ChartTemperature1.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.ChannelTemperature1][seriesPoints[(int)ChannelType.ChannelTemperature1].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.ChannelTemperature2].Count > 0)
+            {
+                ChartTemperature2.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.ChannelTemperature2][seriesPoints[(int)ChannelType.ChannelTemperature2].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.Channel1LashX].Count > 0)
+            {
+                ChartLash1X.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.Channel1LashX][seriesPoints[(int)ChannelType.Channel1LashX].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.Channel1LashY].Count > 0)
+            {
+                ChartLash1Y.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.Channel1LashY][seriesPoints[(int)ChannelType.Channel1LashY].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.Channel1LashZ].Count > 0)
+            {
+                ChartLash1Z.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.Channel1LashZ][seriesPoints[(int)ChannelType.Channel1LashZ].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.Channel2LashX].Count > 0)
+            {
+                ChartLash2X.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.Channel2LashX][seriesPoints[(int)ChannelType.Channel2LashX].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.Channel2LashY].Count > 0)
+            {
+                ChartLash2Y.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.Channel2LashY][seriesPoints[(int)ChannelType.Channel2LashY].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.Channel2LashZ].Count > 0)
+            {
+                ChartLash2Z.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.Channel2LashZ][seriesPoints[(int)ChannelType.Channel2LashZ].Count - 1].Value);
+            }
+            if (seriesPoints[(int)ChannelType.ChannelNoise].Count > 0)
+            {
+                ChartNoise.Titles[0].Content = String.Format("{0:F}",
+                    seriesPoints[(int)ChannelType.ChannelNoise][seriesPoints[(int)ChannelType.ChannelNoise].Count - 1].Value);
+            }
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -410,6 +684,7 @@ namespace DataProcess
                     ProcessFastDataMessage(lParam);
                     break;
                 case WinApi.WM_TAIL_DATA:
+                    ProcessTailDataMessage(lParam);
                     break;
                 default:
                     break;
@@ -431,6 +706,14 @@ namespace DataProcess
             FastPacket packet = Marshal.PtrToStructure<FastPacket>(msg);
             envBuffers.FastPacketList.Add(packet);
             dataLogger.WriteFastPacket(packet);
+            Marshal.FreeHGlobal(msg);
+        }
+
+        protected void ProcessTailDataMessage(IntPtr msg)
+        {
+            TailPacketRs packet = Marshal.PtrToStructure<TailPacketRs>(msg);
+            envBuffers.TailPacketList.Add(packet);
+            dataLogger.WriteTailPacket(packet);
             Marshal.FreeHGlobal(msg);
         }
 
@@ -524,6 +807,30 @@ namespace DataProcess
             ChartLash2.Titles[0].Content = null;
             ChartNoise1.Titles[0].Content = null;
             ChartNoise2.Titles[0].Content = null;
+
+            SeriesPresure.Points.Clear();
+            SeriesLevel1.Points.Clear();
+            SeriesTemperature1.Points.Clear();
+            SeriesTemperature2.Points.Clear();
+            SeriesLash1X.Points.Clear();
+            SeriesLash1Y.Points.Clear();
+            SeriesLash1Z.Points.Clear();
+            SeriesLash2X.Points.Clear();
+            SeriesLash2Y.Points.Clear();
+            SeriesLash2Z.Points.Clear();
+            SeriesNoise.Points.Clear();
+
+            ChartPresure.Titles[0].Content = null;
+            ChartLevel1Presure.Titles[0].Content = null;
+            ChartTemperature1.Titles[0].Content = null;
+            ChartTemperature2.Titles[0].Content = null;
+            ChartLash1X.Titles[0].Content = null;
+            ChartLash1Y.Titles[0].Content = null;
+            ChartLash1Z.Titles[0].Content = null;
+            ChartLash2X.Titles[0].Content = null;
+            ChartLash2Y.Titles[0].Content = null;
+            ChartLash2Z.Titles[0].Content = null;
+            ChartNoise.Titles[0].Content = null;
 
             slowDataIndex = 0;
             fastDataIndex = 0;

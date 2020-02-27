@@ -16,6 +16,7 @@ namespace DataProcess.Protocol
             DataTypeFast = 0x33,
             DataTypeTail = 0x11
         }
+        public static readonly ushort TailRsHeader = 0xC5CA;
     }
 
     [Serializable]
@@ -118,6 +119,28 @@ namespace DataProcess.Protocol
         public FastNoiseSignal[] noiseSignal;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 205)]
         public byte[] reserve;//保留
+    }
+
+    #endregion
+
+    #region 尾端参数
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct TailPacketUdp
+    {
+        public ushort dataLen;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2181)]
+        public byte[] data;
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct TailPacketRs
+    {
+        public ushort header;
+        public byte sequence;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 444)]
+        public ushort[] channels;
     }
 
     #endregion
