@@ -129,7 +129,7 @@ namespace DataProcess.Protocol
     public struct TailPacketUdp
     {
         public ushort dataLen;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2181)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2131)]
         public byte[] data;
     }
 

@@ -27,7 +27,7 @@ namespace DataProcess.Parser.Env
             while (pos >= Marshal.SizeOf(typeof(TailPacketRs)))
             {
                 TailPacketRs tailPacketRs = Tool.ByteToStruct<TailPacketRs>(packetBuffer, 0, Marshal.SizeOf(typeof(TailPacketRs)));
-                if (tailPacketRs.header.SwapUInt16() == EnvProtocol.TailRsHeader)
+                if (tailPacketRs.header == EnvProtocol.TailRsHeader)
                 {
                     for (int i = 0; i < tailPacketRs.channels.Length; ++i)
                     {

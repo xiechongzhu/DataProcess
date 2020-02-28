@@ -1,10 +1,13 @@
-﻿using DataProcess.Protocol;
+﻿using DataProcess.Parser;
+using DataProcess.Parser.Env;
+using DataProcess.Protocol;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +27,11 @@ namespace DataProcess.Log
         private FileStream slowPacketFileStream = null;
         private FileStream fastPacketFileStream = null;
         private FileStream tailPacketFileStream = null;
+
+        public DataLogger()
+        {
+
+        }
 
         public DataLogger(DateTime dateTime)
         {
@@ -153,6 +161,72 @@ namespace DataProcess.Log
             }
             catch (Exception) { }
             return tailPacketList;
+        }
+
+        public List<SlowPacket> LoadSlowBinaryFile(String slowBinFileName)
+        {
+            List<SlowPacket> packetList = new List<SlowPacket>();
+            try
+            {
+                using (FileStream fileStream = File.Open(slowBinFileName, FileMode.Open))
+                {
+                    BinaryReader binaryReader = new BinaryReader(fileStream);
+                    _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                    byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(SlowPacket)));
+                    SlowPacket packet;
+                    if(SlowParser.Parse(buffer, out packet))
+                    {
+                        packetList.Add(packet);
+                    }
+                }
+            }
+            catch(Exception)
+            { }
+            return packetList;
+        }
+
+        public List<FastPacket> LoadFastBinaryFile(String fastBinFileName)
+        {
+            List<FastPacket> packetList = new List<FastPacket>();
+            try
+            {
+                using (FileStream fileStream = File.Open(fastBinFileName, FileMode.Open))
+                {
+                    BinaryReader binaryReader = new BinaryReader(fileStream);
+                    _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                    byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FastPacket)));
+                    FastPacket packet;
+                    if (FastParser.Parse(buffer, out packet))
+                    {
+                        packetList.Add(packet);
+                    }
+                }
+            }
+            catch (Exception)
+            { }
+            return packetList;
+        }
+
+        public List<TailPacketRs> LoadTailBinaryFile(String tailBinFileName)
+        {
+            TailParser tailParser = new TailParser();
+            List<TailPacketRs> packetList = new List<TailPacketRs>();
+            try
+            {
+                using (FileStream fileStream = File.Open(tailBinFileName, FileMode.Open))
+                {
+                    BinaryReader binaryReader = new BinaryReader(fileStream);
+                    while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
+                    {
+                        _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                        byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(TailPacketUdp)));
+                        packetList.AddRange(tailParser.Parse(buffer));
+                    }
+                }
+            }
+            catch (Exception)
+            { }
+            return packetList;
         }
     }
 }

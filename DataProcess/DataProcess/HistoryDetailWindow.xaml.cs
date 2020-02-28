@@ -24,7 +24,8 @@ namespace DataProcess
     /// </summary>
     public partial class HistoryDetailWindow : DevExpress.Xpf.Core.ThemedWindow
     {
-        private TestInfo testInfo;
+        private TestInfo testInfo = null;
+        private String slowBinFile, fastBinFlie, tailBinFile, flyBinFile;
         public HistoryDetailWindow(TestInfo testInfo)
         {
             InitializeComponent();
@@ -33,15 +34,38 @@ namespace DataProcess
             DisplayTestInfo();
         }
 
+        public HistoryDetailWindow(String strFlyBinFile, String strSLowBinFile, String strFastBinFile, String strTailBinFile)
+        {
+            InitializeComponent();
+            flyBinFile = strFlyBinFile;
+            slowBinFile = strSLowBinFile;
+            fastBinFlie = strFastBinFile;
+            tailBinFile = strTailBinFile;
+            LoadTestInfo();
+        }
+
         private void LoadTestInfo()
         {
-            DataLogger dataLogger = new DataLogger(testInfo.TestTime);
-            List<SlowPacket> slowPacketList = dataLogger.LoadSlowPacketFile();
-            List<FastPacket> fastPacketList = dataLogger.LoadFastPacketFile();
-            List<TailPacketRs> tailPacketList = dataLogger.LoadTailPacketFile();
-            DrawSlowPackets(slowPacketList);
-            DrawFastPackets(fastPacketList);
-            DrawTailPackets(tailPacketList);
+            if (testInfo != null)
+            {
+                DataLogger dataLogger = new DataLogger(testInfo.TestTime);
+                List<SlowPacket> slowPacketList = dataLogger.LoadSlowPacketFile();
+                List<FastPacket> fastPacketList = dataLogger.LoadFastPacketFile();
+                List<TailPacketRs> tailPacketList = dataLogger.LoadTailPacketFile();
+                DrawSlowPackets(slowPacketList);
+                DrawFastPackets(fastPacketList);
+                DrawTailPackets(tailPacketList);
+            }
+            else
+            {
+                DataLogger dataLogger = new DataLogger();
+                List<SlowPacket> slowPacketList = dataLogger.LoadSlowBinaryFile(slowBinFile);
+                List<FastPacket> fastPacketList = dataLogger.LoadFastBinaryFile(fastBinFlie);
+                List<TailPacketRs> tailPacketList = dataLogger.LoadTailBinaryFile(tailBinFile);
+                DrawSlowPackets(slowPacketList);
+                DrawFastPackets(fastPacketList);
+                DrawTailPackets(tailPacketList);
+            }
         }
 
         private void DisplayTestInfo()

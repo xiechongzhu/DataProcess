@@ -866,5 +866,18 @@ namespace DataProcess
             historyWindow.Owner = this;
             historyWindow.ShowDialog();
         }
+
+        private void btnVOpenData_Click(object sender, RoutedEventArgs e)
+        {
+            OpenDataWindow openDataWindow = new OpenDataWindow();
+            openDataWindow.Owner = this;
+            if((bool)openDataWindow.ShowDialog())
+            {
+                String flyFileName, slowFileName, fastFileName, tailFileName;
+                openDataWindow.GetFileNames(out flyFileName, out slowFileName, out fastFileName, out tailFileName);
+                HistoryDetailWindow historyDetailWindow = new HistoryDetailWindow(flyFileName, slowFileName, fastFileName, tailFileName);
+                historyDetailWindow.ShowDialog();
+            }
+        }
     }
 }

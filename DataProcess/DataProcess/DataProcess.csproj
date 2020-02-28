@@ -109,6 +109,9 @@
       <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Log\DataLogger.cs" />
+    <Compile Include="OpenDataWindow.xaml.cs">
+      <DependentUpon>OpenDataWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Parser\Env\EnvDataConvert.cs" />
     <Compile Include="Parser\Env\EnvParser.cs" />
     <Compile Include="Parser\Env\TailParser.cs" />
@@ -144,6 +147,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OpenDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TestInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
