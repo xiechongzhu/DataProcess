@@ -9,7 +9,7 @@ namespace DataProcess.Protocol
 {
     public class EnvProtocol
     {
-        public static readonly byte[] SyncHeader = new byte[] { 0x0A, 0x00, 0x55 };
+        public static readonly byte[] SyncHeader = new byte[] { 0xAA, 0x00, 0x55 };
         public enum DataType
         {
             DataTypeSlow = 0x55,

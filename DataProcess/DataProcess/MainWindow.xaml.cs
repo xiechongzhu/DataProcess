@@ -23,6 +23,7 @@ namespace DataProcess
     /// </summary>
     public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
     {
+        private readonly int CHART_MAX_POINTS = 1000;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;
@@ -463,49 +464,117 @@ namespace DataProcess
                 }
             }
 
-            ChartPresure.BeginInit();
-            SeriesPresure.Points.AddRange(seriesPoints[(int)ChannelType.ChannelPresure]);
-            ChartPresure.EndInit();
+            List<SeriesPoint> seriesList = new List<SeriesPoint>();
 
-            ChartLevel1Presure.BeginInit();
-            SeriesLevel1.Points.AddRange(seriesPoints[(int)ChannelType.ChannelLevel1Presure]);
-            ChartLevel1Presure.EndInit();
+            seriesList.AddRange(SeriesPresure.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.ChannelPresure]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesPresure.Points.Clear();
+            SeriesPresure.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartTemperature1.BeginInit();
-            SeriesTemperature1.Points.AddRange(seriesPoints[(int)ChannelType.ChannelTemperature1]);
-            ChartTemperature1.EndInit();
+            seriesList.AddRange(SeriesLevel1.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.ChannelLevel1Presure]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLevel1.Points.Clear();
+            SeriesLevel1.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartTemperature2.BeginInit();
-            SeriesTemperature2.Points.AddRange(seriesPoints[(int)ChannelType.ChannelTemperature2]);
-            ChartTemperature2.EndInit();
+            seriesList.AddRange(SeriesTemperature1.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.ChannelTemperature1]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesTemperature1.Points.Clear();
+            SeriesTemperature1.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash1X.BeginInit();
-            SeriesLash1X.Points.AddRange(seriesPoints[(int)ChannelType.Channel1LashX]);
-            ChartLash1X.EndInit();
+            seriesList.AddRange(SeriesTemperature2.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.ChannelTemperature2]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesTemperature2.Points.Clear();
+            SeriesTemperature2.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash1Y.BeginInit();
-            SeriesLash1Y.Points.AddRange(seriesPoints[(int)ChannelType.Channel1LashY]);
-            ChartLash1Y.EndInit();
+            seriesList.AddRange(SeriesLash1X.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.Channel1LashX]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash1X.Points.Clear();
+            SeriesLash1X.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash1Z.BeginInit();
-            SeriesLash1Z.Points.AddRange(seriesPoints[(int)ChannelType.Channel1LashZ]);
-            ChartLash1Z.EndInit();
+            seriesList.AddRange(SeriesLash1Y.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.Channel1LashY]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash1Y.Points.Clear();
+            SeriesLash1Y.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash2X.BeginInit();
-            SeriesLash2X.Points.AddRange(seriesPoints[(int)ChannelType.Channel2LashX]);
-            ChartLash2X.EndInit();
+            seriesList.AddRange(SeriesLash1Z.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.Channel1LashZ]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash1Z.Points.Clear();
+            SeriesLash1Z.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash2Y.BeginInit();
-            SeriesLash2Y.Points.AddRange(seriesPoints[(int)ChannelType.Channel2LashY]);
-            ChartLash2Y.EndInit();
+            seriesList.AddRange(SeriesLash2X.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.Channel2LashX]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash2X.Points.Clear();
+            SeriesLash2X.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash2Z.BeginInit();
-            SeriesLash2Z.Points.AddRange(seriesPoints[(int)ChannelType.Channel2LashZ]);
-            ChartLash2Z.EndInit();
+            seriesList.AddRange(SeriesLash2Y.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.Channel2LashY]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash2Y.Points.Clear();
+            SeriesLash2Y.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartNoise.BeginInit();
-            SeriesNoise.Points.AddRange(seriesPoints[(int)ChannelType.ChannelNoise]);
-            ChartNoise.EndInit();
+            seriesList.AddRange(SeriesLash2Z.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.Channel2LashZ]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash2Z.Points.Clear();
+            SeriesLash2Z.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNoise.Points);
+            seriesList.AddRange(seriesPoints[(int)ChannelType.ChannelNoise]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNoise.Points.Clear();
+            SeriesNoise.Points.AddRange(seriesList);
+            seriesList.Clear();
 
             if (seriesPoints[(int)ChannelType.ChannelPresure].Count > 0)
             {

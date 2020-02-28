@@ -96,6 +96,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\MyChartControl.xaml.cs">
+      <DependentUpon>MyChartControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\CopyMe.SQLite.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,6 +130,10 @@
     </Compile>
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Tools\WinApi.cs" />
+    <Page Include="Controls\MyChartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="HistoryDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
