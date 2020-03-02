@@ -35,6 +35,7 @@ namespace DataProcess.Parser.Env
                     }
                     tailPacketRsList.Add(tailPacketRs);
                 }
+                Array.Copy(packetBuffer, Marshal.SizeOf(typeof(TailPacketRs)), packetBuffer, 0, pos - Marshal.SizeOf(typeof(TailPacketRs)));
                 pos -= Marshal.SizeOf(typeof(TailPacketRs));
             }
             return tailPacketRsList;

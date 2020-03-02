@@ -118,6 +118,8 @@ namespace DataProcess
                 List<SlowPacket> slowPacketList = dataLogger.LoadSlowBinaryFile(slowBinFile);
                 List<FastPacket> fastPacketList = dataLogger.LoadFastBinaryFile(fastBinFlie);
                 List<TailPacketRs> tailPacketList = dataLogger.LoadTailBinaryFile(tailBinFile);
+                dataLogger.LoadFlyBinaryFile(flyBinFile, out List<NavData> navDataList, out List<AngleData> angleDataList, 
+                    out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
                 DrawSlowPackets(slowPacketList);
                 DrawFastPackets(fastPacketList);
                 DrawTailPackets(tailPacketList);

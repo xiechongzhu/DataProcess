@@ -71,15 +71,15 @@ namespace DataProcess.Controls
                 return pointList;
             }
             int temp = pointList.Count / MAX_DISPLAY_POINTS_COUNT;
-            displayPointList.Add(pointList[0]);
-            for (int i = 1; i < pointList.Count - 1; ++i)
+            //displayPointList.Add(pointList[0]);
+            for (int i = 0; i <= pointList.Count - 1; ++i)
             {
                 if( i % temp == 0)
                 {
                     displayPointList.Add(pointList[i]);
                 }
             }
-            displayPointList.Add(pointList[pointList.Count - 1]);
+            //displayPointList.Add(pointList[pointList.Count - 1]);
             return displayPointList;
         }
 

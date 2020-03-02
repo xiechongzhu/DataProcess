@@ -69,7 +69,7 @@ namespace DataProcess.Protocol
             {
                 return;
             }
-            EnvPacketHeader header = Tools.Tool.ByteToStruct<EnvPacketHeader>(buffer, 0, Marshal.SizeOf(typeof(EnvPacketHeader)));
+            EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(buffer, 0, Marshal.SizeOf(typeof(EnvPacketHeader)));
             if(!Enumerable.SequenceEqual(header.syncHeader, EnvProtocol.SyncHeader))
             {
                 return;

@@ -120,8 +120,10 @@
     <Compile Include="Parser\Env\TailParser.cs" />
     <Compile Include="Parser\Env\FastParser.cs" />
     <Compile Include="Parser\Env\SlowParser.cs" />
+    <Compile Include="Parser\Fly\FlyParser.cs" />
     <Compile Include="Protocol\ChannelType.cs" />
     <Compile Include="Protocol\EnvProtocol.cs" />
+    <Compile Include="Protocol\FlyProtocol.cs" />
     <Compile Include="Setting\NetworkSetting.cs" />
     <Compile Include="Setting\SettingManager.cs" />
     <Compile Include="TestInfo.cs" />

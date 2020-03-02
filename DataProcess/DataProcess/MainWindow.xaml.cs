@@ -1,6 +1,7 @@
 ﻿using DataModels;
 using DataProcess.Log;
 using DataProcess.Parser;
+using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
 using DataProcess.Setting;
 using DataProcess.Tools;
@@ -28,6 +29,7 @@ namespace DataProcess
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;
         private EnvParser envParser = null;
+        private FlyParser flyParser = null;
         private DispatcherTimer uiRefreshTimer = new DispatcherTimer();
         private EnvBuffers envBuffers = new EnvBuffers();
         private int slowDataIndex = 0;
@@ -866,6 +868,10 @@ namespace DataProcess
             {
                 envParser = new EnvParser(new WindowInteropHelper(this).Handle);
             }
+            if(flyParser == null)
+            {
+                flyParser = new FlyParser(new WindowInteropHelper(this).Handle);
+            }
             TestInfoWindow testInfoWindow = new TestInfoWindow();
             testInfoWindow.Owner = this;
             if (!(bool)testInfoWindow.ShowDialog())
@@ -900,8 +906,10 @@ namespace DataProcess
             ResetDisplay();
             envBuffers.Clear();
             envParser.Start();
+            flyParser.Start();
             dataLogger = new DataLogger(testInfo.TestTime);
             envParser.dataLogger = dataLogger;
+            flyParser.dataLogger = dataLogger;
             udpClientEnv.BeginReceive(EndEnvReceive, null);
             udpClientFly.BeginReceive(EndFlyReceive, null);
             uiRefreshTimer.Start();
@@ -929,6 +937,10 @@ namespace DataProcess
             try
             {
                 byte[] recvBuffer = udpClientFly?.EndReceive(ar, ref endPoint);
+                if(recvBuffer != null)
+                {
+                    flyParser.Enqueue(recvBuffer);
+                }
                 udpClientFly.BeginReceive(EndFlyReceive, null);
             }
             catch (Exception)
@@ -948,6 +960,7 @@ namespace DataProcess
             udpClientEnv = null;
             udpClientFly = null;
             envParser?.Stop();
+            flyParser?.Stop();
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
             editIpEnvAddr.IsEnabled = true;

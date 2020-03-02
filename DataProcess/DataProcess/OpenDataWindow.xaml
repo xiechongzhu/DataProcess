@@ -23,10 +23,10 @@
         <TextBlock Text="飞控数据文件:" Grid.Row="0" Grid.Column="0" Margin="10,10,10,10"/>
         <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,10,10,10" x:Name="editFlyFile"/>
         <dx:SimpleButton Grid.Row="0" Grid.Column="4" Margin="10,10,10,10" Content="浏览" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" x:Name="btnChooseFlyFile" Click="btnChooseFlyFile_Click"/>
-        <TextBlock Text="慢速参数文件:" Grid.Row="1" Grid.Column="0" Margin="10,10,10,10"/>
+        <TextBlock Text="缓变参数文件:" Grid.Row="1" Grid.Column="0" Margin="10,10,10,10"/>
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,10,10,10" x:Name="editSlowFile"/>
         <dx:SimpleButton Grid.Row="1" Grid.Column="4" Margin="10,10,10,10" Content="浏览" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" x:Name="btnChooseSlowFile" Click="btnChooseSlowFile_Click"/>
-        <TextBlock Text="快速参数文件:" Grid.Row="2" Grid.Column="0" Margin="10,10,10,10"/>
+        <TextBlock Text="速变参数文件:" Grid.Row="2" Grid.Column="0" Margin="10,10,10,10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,10,10,10" x:Name="editFastFile"/>
         <dx:SimpleButton Grid.Row="2" Grid.Column="4" Margin="10,10,10,10" Content="浏览" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" x:Name="btnChooseFastFile" Click="btnChooseFastFile_Click"/>
         <TextBlock Text="尾端参数文件:" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10"/>
