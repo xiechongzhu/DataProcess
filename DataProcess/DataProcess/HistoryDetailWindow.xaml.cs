@@ -39,8 +39,8 @@ namespace DataProcess
         {
             ChartPresure.SetAxisYLabel("压力(kPa)");
             ChartLevel1Presure.SetAxisYLabel("一级发动机压力(MPa)");
-            ChartTemperature1.SetAxisYLabel("温度1℃");
-            ChartTemperature2.SetAxisYLabel("温度2℃");
+            ChartTemperature1.SetAxisYLabel("温度(级间断)℃");
+            ChartTemperature2.SetAxisYLabel("温度(尾端)℃");
             ChartLash1X.SetAxisYLabel("振动1-X(g)");
             ChartLash1Y.SetAxisYLabel("振动1-Y(g)");
             ChartLash1Z.SetAxisYLabel("振动1-Z(g)");
@@ -48,6 +48,45 @@ namespace DataProcess
             ChartLash2Y.SetAxisYLabel("振动2-Y(g)");
             ChartLash2Z.SetAxisYLabel("振动2-Z(g)");
             ChartNoise.SetAxisYLabel("噪声(dB)");
+
+            ChartShake1.SetAxisYLabel("振动信号1(g)");
+            ChartShake2.SetAxisYLabel("振动信号2(g)");
+            ChartShake3.SetAxisYLabel("振动信号3(g)");
+            ChartShake4.SetAxisYLabel("振动信号4(g)");
+            ChartShake5.SetAxisYLabel("振动信号5(g)");
+            ChartShake6.SetAxisYLabel("振动信号6(g)");
+            ChartShake7.SetAxisYLabel("振动信号7(g)");
+            ChartShake8.SetAxisYLabel("振动信号8(g)");
+            ChartShake9.SetAxisYLabel("振动信号9(g)");
+            ChartShake10.SetAxisYLabel("振动信号10(g)");
+            ChartShake11.SetAxisYLabel("振动信号11(g)");
+            ChartShake12.SetAxisYLabel("振动信号12(g)");
+            ChartLashT3.SetAxisYLabel("冲击信号时统T3");
+            ChartLashT2.SetAxisYLabel("冲击信号时统T2");
+            ChartLashT1.SetAxisYLabel("冲击信号时统T1");
+            ChartLashT0.SetAxisYLabel("冲击信号时统T0");
+            ChartLash1_1.SetAxisYLabel("冲击信号1-1(g)");
+            ChartLash1_2.SetAxisYLabel("冲击信号1-2(g)");
+            ChartLash1_3.SetAxisYLabel("冲击信号1-3(g)");
+            ChartLash2.SetAxisYLabel("冲击信号2(g)");
+            ChartNoise1.SetAxisYLabel("噪声信号1(dB)");
+            ChartNoise2.SetAxisYLabel("噪声信号2(dB)");
+
+            ChartHood.SetAxisYLabel("头罩温度(℃)");
+            ChartInsAir.SetAxisYLabel("仪器仓空温(℃)");
+            ChartInsWall.SetAxisYLabel("仪器仓壁温(℃)");
+            ChartAttAir.SetAxisYLabel("姿控仓空温(℃)");
+            ChartAttWalls1.SetAxisYLabel("姿控仓壁温Ⅰ(℃)");
+            ChartAttWalls2.SetAxisYLabel("姿控仓壁温Ⅱ(℃)");
+            ChartAttWalls3.SetAxisYLabel("姿控仓壁温Ⅲ(℃)");
+            ChartAttWalls4.SetAxisYLabel("姿控仓壁温Ⅳ(℃)");
+            ChartAttWalls5.SetAxisYLabel("姿控仓壁温Ⅴ(℃)");
+            ChartAttWalls6.SetAxisYLabel("姿控仓壁温Ⅵ(℃)");
+            ChartInsPresure.SetAxisYLabel("仪器仓压力(kPa)");
+            ChartAttiPresure.SetAxisYLabel("姿控仓压力(kPa)");
+            ChartLevel2Transmitter.SetAxisYLabel("二级发送机压力(MPa)");
+            ChartGestureControlHigh.SetAxisYLabel("姿控动力高压(MPa)");
+            ChartGestureControlLow.SetAxisYLabel("姿控动力低压(MPa)");
         }
 
         public HistoryDetailWindow(String strFlyBinFile, String strSLowBinFile, String strFastBinFile, String strTailBinFile)
@@ -66,9 +105,9 @@ namespace DataProcess
             if (testInfo != null)
             {
                 DataLogger dataLogger = new DataLogger(testInfo.TestTime);
-                List<SlowPacket> slowPacketList = dataLogger.LoadSlowPacketFile();
-                List<FastPacket> fastPacketList = dataLogger.LoadFastPacketFile();
-                List<TailPacketRs> tailPacketList = dataLogger.LoadTailPacketFile();
+                List<SlowPacket> slowPacketList = dataLogger.LoadSlowBinaryFile(dataLogger.slowPacketFilePath);
+                List<FastPacket> fastPacketList = dataLogger.LoadFastBinaryFile(dataLogger.fastPacketFilePath);
+                List<TailPacketRs> tailPacketList = dataLogger.LoadTailBinaryFile(dataLogger.tailPacketFilePath);
                 DrawSlowPackets(slowPacketList);
                 DrawFastPackets(fastPacketList);
                 DrawTailPackets(tailPacketList);
@@ -95,7 +134,6 @@ namespace DataProcess
 
         private void DrawSlowPackets(List<SlowPacket> packets)
         {
-            int slowDataIndex = 0;
             List<SeriesPoint> hoodSeriesList = new List<SeriesPoint>();
             List<SeriesPoint> insAirSeriesList = new List<SeriesPoint>();
             List<SeriesPoint> insWallList = new List<SeriesPoint>();
@@ -116,256 +154,178 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    hoodSeriesList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_20_245(packet.temperatureSensor.hood[i])));
-                    insAirSeriesList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insAir[i])));
-                    insWallList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insWall[i])));
-                    attAirList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attAir[i])));
-                    attWallList1.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6])));
-                    attWallList2.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 1])));
-                    attWallList3.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 2])));
-                    attWallList4.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 3])));
-                    attWallList5.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 4])));
-                    attWallList6.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 5])));
+                    ChartHood.AddValue(EnvDataConvert.GetTemperature_Nagtive_20_245(packet.temperatureSensor.hood[i]));
+                    ChartInsAir.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insAir[i]));
+                    ChartInsWall.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insWall[i]));
+                    ChartAttAir.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attAir[i]));
+                    ChartAttWalls1.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6]));
+                    ChartAttWalls2.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 1]));
+                    ChartAttWalls3.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 2]));
+                    ChartAttWalls4.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 3]));
+                    ChartAttWalls5.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 4]));
+                    ChartAttWalls6.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 5]));
                 }
 
                 for (int i = 0; i < 2; ++i)
                 {
-                    insPresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_50_K(packet.pressureSensor.instrument[i])));
-                    attPresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_120_K(packet.pressureSensor.attitudeControl[i])));
+                    ChartInsPresure.AddValue(EnvDataConvert.GetPresure_0_50_K(packet.pressureSensor.instrument[i]));
+                    ChartAttiPresure.AddValue(EnvDataConvert.GetPresure_0_120_K(packet.pressureSensor.attitudeControl[i]));
                 }
 
                 for (int i = 0; i < packet.level2Transmitter.Length; ++i)
                 {
-                    level2PresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_12_M(packet.level2Transmitter[i])));
+                    ChartLevel2Transmitter.AddValue(EnvDataConvert.GetPresure_0_12_M(packet.level2Transmitter[i]));
                 }
 
                 for (int i = 0; i < packet.gestureControlHigh.Length; ++i)
                 {
-                    attPresureHigh.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_40_M(packet.gestureControlHigh[i])));
+                    ChartGestureControlHigh.AddValue(EnvDataConvert.GetPresure_0_40_M(packet.gestureControlHigh[i]));
                 }
 
                 for (int i = 0; i < packet.gestureControlLow.Length; ++i)
                 {
-                    attPresureLow.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_6_M(packet.gestureControlLow[i])));
+                    ChartGestureControlLow.AddValue(EnvDataConvert.GetPresure_0_6_M(packet.gestureControlLow[i]));
                 }
-
-                slowDataIndex += 2;
             }
 
-            ChartHood.BeginInit();
-            SeriesHood.Points.AddRange(hoodSeriesList);
-            ChartHood.EndInit();
-
-            ChartInsAir.BeginInit();
-            SeriesInsAir.Points.AddRange(insAirSeriesList);
-            ChartInsAir.EndInit();
-
-            ChartInsWall.BeginInit();
-            SeriesInsWall.Points.AddRange(insWallList);
-            ChartInsWall.EndInit();
-
-            ChartAttAir.BeginInit();
-            SeriesAttAir.Points.AddRange(attAirList);
-            ChartAttAir.EndInit();
-
-            ChartAttWalls1.BeginInit();
-            SeriesAttWall1.Points.AddRange(attWallList1);
-            ChartAttWalls1.EndInit();
-
-            ChartAttWalls2.BeginInit();
-            SeriesAttWall2.Points.AddRange(attWallList2);
-            ChartAttWalls2.EndInit();
-
-            ChartAttWalls3.BeginInit();
-            SeriesAttWall3.Points.AddRange(attWallList3);
-            ChartAttWalls3.EndInit();
-
-            ChartAttWalls4.BeginInit();
-            SeriesAttWall4.Points.AddRange(attWallList4);
-            ChartAttWalls4.EndInit();
-
-            ChartAttWalls5.BeginInit();
-            SeriesAttWall5.Points.AddRange(attWallList5);
-            ChartAttWalls5.EndInit();
-
-            ChartAttWalls6.BeginInit();
-            SeriesAttWall6.Points.AddRange(attWallList6);
-            ChartAttWalls6.EndInit();
-
-            ChartInsPresure.BeginInit();
-            SeriesInsPresure.Points.AddRange(insPresureList);
-            ChartInsPresure.EndInit();
-
-            ChartAttiPresure.BeginInit();
-            SeriesAttPresure.Points.AddRange(attPresureList);
-            ChartAttiPresure.EndInit();
-
-            ChartLevel2Transmitter.BeginInit();
-            SeriesLevel2Presure.Points.AddRange(level2PresureList);
-            ChartLevel2Transmitter.EndInit();
-
-            ChartGestureControlHigh.BeginInit();
-            SeriesAttPresureHigh.Points.AddRange(attPresureHigh);
-            ChartGestureControlHigh.EndInit();
-
-            ChartGestureControlLow.BeginInit();
-            SeriesAttPresureLow.Points.AddRange(attPresureLow);
-            ChartGestureControlLow.EndInit();
+            ChartHood.Update();
+            ChartInsAir.Update();
+            ChartInsWall.Update();
+            ChartAttAir.Update();
+            ChartAttWalls1.Update();
+            ChartAttWalls2.Update();
+            ChartAttWalls3.Update();
+            ChartAttWalls4.Update();
+            ChartAttWalls5.Update();
+            ChartAttWalls6.Update();
+            ChartInsPresure.Update();
+            ChartAttiPresure.Update();
+            ChartLevel2Transmitter.Update();
+            ChartGestureControlHigh.Update();
+            ChartGestureControlLow.Update();
 
         }
 
         private void DrawFastPackets(List<FastPacket> packets)
         {
-            int fastDataIndex = 0;
-            List<SeriesPoint>[] ShakeSeriesLists = new List<SeriesPoint>[12];
-            List<SeriesPoint> lashT3SeriesList = new List<SeriesPoint>();
-            List<SeriesPoint> lashT2SeriesList = new List<SeriesPoint>();
-            List<SeriesPoint> lashT1SeriesList = new List<SeriesPoint>();
-            List<SeriesPoint> lashT0SeriesList = new List<SeriesPoint>();
-            List<SeriesPoint>[] fastLashSeriesLists1 = new List<SeriesPoint>[3];
-            List<SeriesPoint> fastLashSeries2 = new List<SeriesPoint>();
-            List<SeriesPoint>[] fastNoiseLists = new List<SeriesPoint>[2];
-
-            for (int i = 0; i < ShakeSeriesLists.Length; ++i)
-            {
-                ShakeSeriesLists[i] = new List<SeriesPoint>();
-            }
-
-            for (int i = 0; i < fastLashSeriesLists1.Length; ++i)
-            {
-                fastLashSeriesLists1[i] = new List<SeriesPoint>();
-            }
-
-            for (int i = 0; i < fastNoiseLists.Length; ++i)
-            {
-                fastNoiseLists[i] = new List<SeriesPoint>();
-            }
-
             foreach (FastPacket packet in packets)
             {
-                for (int idx = 0; idx < 12; ++idx)
+                FastShakeSignal fastShakeSignal = packet.shakeSignals[0];
+                for(int pos = 0; pos < 80; ++pos)
                 {
-                    FastShakeSignal fastShakeSignal = packet.shakeSignals[idx];
-                    for (int pos = 0; pos < 80; ++pos)
-                    {
-                        ShakeSeriesLists[idx].Add(new SeriesPoint(fastDataIndex * 80 + pos, EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos])));
-                    }
+                    ChartShake1.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
                 }
-                lashT3SeriesList.Add(new SeriesPoint(fastDataIndex, packet.lashT3));
-                lashT2SeriesList.Add(new SeriesPoint(fastDataIndex, packet.lashT2));
-                lashT1SeriesList.Add(new SeriesPoint(fastDataIndex, packet.lashT1));
-                lashT0SeriesList.Add(new SeriesPoint(fastDataIndex, packet.lashT0));
-
-                for (int idx = 0; idx < 3; ++idx)
+                fastShakeSignal = packet.shakeSignals[1];
+                for (int pos = 0; pos < 80; ++pos)
                 {
-                    FastLashSignal lashSignal = packet.lashSignal_1[idx];
-                    for (int pos = 0; pos < 400; ++pos)
-                    {
-                        fastLashSeriesLists1[idx].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos])));
-                    }
+                    ChartShake2.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[2];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake3.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[3];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake4.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[4];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake5.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[5];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake6.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[6];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake7.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[7];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake8.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[8];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake9.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[9];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake10.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[10];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake11.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+                fastShakeSignal = packet.shakeSignals[11];
+                for (int pos = 0; pos < 80; ++pos)
+                {
+                    ChartShake12.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                }
+
+                ChartLashT3.AddValue(packet.lashT3);
+                ChartLashT2.AddValue(packet.lashT2);
+                ChartLashT1.AddValue(packet.lashT1);
+                ChartLashT0.AddValue(packet.lashT0);
+
+                FastLashSignal lashSignal = packet.lashSignal_1[0];
+                for (int pos = 0; pos < 400; ++pos)
+                {
+                    ChartLash1_1.AddValue(EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos]));
+                }
+                lashSignal = packet.lashSignal_1[1];
+                for (int pos = 0; pos < 400; ++pos)
+                {
+                    ChartLash1_2.AddValue(EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos]));
+                }
+                lashSignal = packet.lashSignal_1[2];
+                for (int pos = 0; pos < 400; ++pos)
+                {
+                    ChartLash1_3.AddValue(EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos]));
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    fastLashSeries2.Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetLash_Nagtive_3000_3000(packet.lashSignal_2.signal[pos])));
+                    ChartLash2.AddValue(EnvDataConvert.GetLash_Nagtive_3000_3000(packet.lashSignal_2.signal[pos]));
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    fastNoiseLists[0].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetNoise_100_140(packet.noiseSignal[0].signal[pos])));
-                    fastNoiseLists[1].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetNoise_120_160(packet.noiseSignal[1].signal[pos])));
+                    ChartNoise1.AddValue(EnvDataConvert.GetNoise_100_140(packet.noiseSignal[0].signal[pos]));
+                    ChartNoise2.AddValue(EnvDataConvert.GetNoise_120_160(packet.noiseSignal[1].signal[pos]));
                 }
-
-                fastDataIndex++;
             }
 
-            ChartShake1.BeginInit();
-            SeriesShake1.Points.AddRange(ShakeSeriesLists[0]);
-            ChartShake1.EndInit();
-
-            ChartShake2.BeginInit();
-            SeriesShake2.Points.AddRange(ShakeSeriesLists[1]);
-            ChartShake2.EndInit();
-
-            ChartShake3.BeginInit();
-            SeriesShake3.Points.AddRange(ShakeSeriesLists[2]);
-            ChartShake3.EndInit();
-
-            ChartShake4.BeginInit();
-            SeriesShake4.Points.AddRange(ShakeSeriesLists[3]);
-            ChartShake4.EndInit();
-
-            ChartShake5.BeginInit();
-            SeriesShake5.Points.AddRange(ShakeSeriesLists[4]);
-            ChartShake5.EndInit();
-
-            ChartShake6.BeginInit();
-            SeriesShake6.Points.AddRange(ShakeSeriesLists[5]);
-            ChartShake6.EndInit();
-
-            ChartShake7.BeginInit();
-            SeriesShake7.Points.AddRange(ShakeSeriesLists[6]);
-            ChartShake7.EndInit();
-
-            ChartShake8.BeginInit();
-            SeriesShake8.Points.AddRange(ShakeSeriesLists[7]);
-            ChartShake8.EndInit();
-
-            ChartShake9.BeginInit();
-            SeriesShake9.Points.AddRange(ShakeSeriesLists[8]);
-            ChartShake9.EndInit();
-
-            ChartShake10.BeginInit();
-            SeriesShake10.Points.AddRange(ShakeSeriesLists[9]);
-            ChartShake10.EndInit();
-
-            ChartShake11.BeginInit();
-            SeriesShake11.Points.AddRange(ShakeSeriesLists[10]);
-            ChartShake11.EndInit();
-
-            ChartShake12.BeginInit();
-            SeriesShake12.Points.AddRange(ShakeSeriesLists[11]);
-            ChartShake12.EndInit();
-
-            ChartLashT3.BeginInit();
-            SeriesLashT3.Points.AddRange(lashT3SeriesList);
-            ChartLashT3.EndInit();
-
-            ChartLashT2.BeginInit();
-            SeriesLashT2.Points.AddRange(lashT2SeriesList);
-            ChartLashT2.EndInit();
-
-            ChartLashT1.BeginInit();
-            SeriesLashT1.Points.AddRange(lashT1SeriesList);
-            ChartLashT1.EndInit();
-
-            ChartLashT0.BeginInit();
-            SeriesLashT0.Points.AddRange(lashT0SeriesList);
-            ChartLashT0.EndInit();
-
-            ChartLash1_1.BeginInit();
-            SeriesLash1_1.Points.AddRange(fastLashSeriesLists1[0]);
-            ChartLash1_1.EndInit();
-
-            ChartLash1_2.BeginInit();
-            SeriesLash1_2.Points.AddRange(fastLashSeriesLists1[1]);
-            ChartLash1_2.EndInit();
-
-            ChartLash1_3.BeginInit();
-            SeriesLash1_3.Points.AddRange(fastLashSeriesLists1[2]);
-            ChartLash1_3.EndInit();
-
-            ChartLash2.BeginInit();
-            SeriesLash2.Points.AddRange(fastLashSeries2);
-            ChartLash2.EndInit();
-
-            ChartNoise1.BeginInit();
-            SeriesNoise1.Points.AddRange(fastNoiseLists[0]);
-            ChartNoise1.EndInit();
-
-            ChartNoise2.BeginInit();
-            SeriesNoise2.Points.AddRange(fastNoiseLists[1]);
-            ChartNoise2.EndInit();
+            ChartShake1.Update();
+            ChartShake2.Update();
+            ChartShake3.Update();
+            ChartShake4.Update();
+            ChartShake5.Update();
+            ChartShake6.Update();
+            ChartShake7.Update();
+            ChartShake8.Update();
+            ChartShake9.Update();
+            ChartShake10.Update();
+            ChartShake11.Update();
+            ChartShake12.Update();
+            ChartLashT3.Update();
+            ChartLashT2.Update();
+            ChartLashT1.Update();
+            ChartLashT0.Update();
+            ChartLash1_1.Update();
+            ChartLash1_2.Update();
+            ChartLash1_3.Update();
+            ChartLash2.Update();
+            ChartNoise1.Update();
+            ChartNoise2.Update();
         }
 
         private void DrawTailPackets(List<TailPacketRs> packets)

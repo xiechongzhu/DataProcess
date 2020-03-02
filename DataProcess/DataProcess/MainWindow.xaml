@@ -1230,7 +1230,7 @@
                                             <dxc:AxisLabel FontSize="12" />
                                         </dxc:AxisY2D.Label>
                                         <dxc:AxisY2D.Title>
-                                            <dxc:AxisTitle Content="温度1℃" Visible="True" FontSize="12" />
+                                            <dxc:AxisTitle Content="温度(级间断)℃" Visible="True" FontSize="12" />
                                         </dxc:AxisY2D.Title>
                                     </dxc:AxisY2D>
                                 </dxc:XYDiagram2D.AxisY>
@@ -1259,7 +1259,7 @@
                                             <dxc:AxisLabel FontSize="12" />
                                         </dxc:AxisY2D.Label>
                                         <dxc:AxisY2D.Title>
-                                            <dxc:AxisTitle Content="温度2(℃)" Visible="True" FontSize="12" />
+                                            <dxc:AxisTitle Content="温度(尾端)℃" Visible="True" FontSize="12" />
                                         </dxc:AxisY2D.Title>
                                     </dxc:AxisY2D>
                                 </dxc:XYDiagram2D.AxisY>

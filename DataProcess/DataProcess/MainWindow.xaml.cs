@@ -150,65 +150,157 @@ namespace DataProcess
                 slowDataIndex += 2;
             }
 
-            ChartHood.BeginInit();
-            SeriesHood.Points.AddRange(hoodSeriesList);
-            ChartHood.EndInit();
+            List<SeriesPoint> seriesList = new List<SeriesPoint>();
 
-            ChartInsAir.BeginInit();
-            SeriesInsAir.Points.AddRange(insAirSeriesList);
-            ChartInsAir.EndInit();
+            seriesList.AddRange(SeriesHood.Points);
+            seriesList.AddRange(hoodSeriesList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesHood.Points.Clear();
+            SeriesHood.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartInsWall.BeginInit();
-            SeriesInsWall.Points.AddRange(insWallList);
-            ChartInsWall.EndInit();
+            seriesList.AddRange(SeriesInsAir.Points);
+            seriesList.AddRange(insAirSeriesList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesInsAir.Points.Clear();
+            SeriesInsAir.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttAir.BeginInit();
-            SeriesAttAir.Points.AddRange(attAirList);
-            ChartAttAir.EndInit();
+            seriesList.AddRange(SeriesInsWall.Points);
+            seriesList.AddRange(insWallList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesInsWall.Points.Clear();
+            SeriesInsWall.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttWalls1.BeginInit();
-            SeriesAttWall1.Points.AddRange(attWallList1);
-            ChartAttWalls1.EndInit();
+            seriesList.AddRange(SeriesAttAir.Points);
+            seriesList.AddRange(attAirList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttAir.Points.Clear();
+            SeriesAttAir.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttWalls2.BeginInit();
-            SeriesAttWall2.Points.AddRange(attWallList2);
-            ChartAttWalls2.EndInit();
+            seriesList.AddRange(SeriesAttWall1.Points);
+            seriesList.AddRange(attWallList1);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttWall1.Points.Clear();
+            SeriesAttWall1.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttWalls3.BeginInit();
-            SeriesAttWall3.Points.AddRange(attWallList3);
-            ChartAttWalls3.EndInit();
+            seriesList.AddRange(SeriesAttWall2.Points);
+            seriesList.AddRange(attWallList2);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttWall2.Points.Clear();
+            SeriesAttWall2.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttWalls4.BeginInit();
-            SeriesAttWall4.Points.AddRange(attWallList4);
-            ChartAttWalls4.EndInit();
+            seriesList.AddRange(SeriesAttWall3.Points);
+            seriesList.AddRange(attWallList3);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttWall3.Points.Clear();
+            SeriesAttWall3.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttWalls5.BeginInit();
-            SeriesAttWall5.Points.AddRange(attWallList5);
-            ChartAttWalls5.EndInit();
+            seriesList.AddRange(SeriesAttWall4.Points);
+            seriesList.AddRange(attWallList4);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttWall4.Points.Clear();
+            SeriesAttWall4.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttWalls6.BeginInit();
-            SeriesAttWall6.Points.AddRange(attWallList6);
-            ChartAttWalls6.EndInit();
+            seriesList.AddRange(SeriesAttWall5.Points);
+            seriesList.AddRange(attWallList5);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttWall5.Points.Clear();
+            SeriesAttWall5.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartInsPresure.BeginInit();
-            SeriesInsPresure.Points.AddRange(insPresureList);
-            ChartInsPresure.EndInit();
+            seriesList.AddRange(SeriesAttWall6.Points);
+            seriesList.AddRange(attWallList6);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttWall6.Points.Clear();
+            SeriesAttWall6.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartAttiPresure.BeginInit();
-            SeriesAttPresure.Points.AddRange(attPresureList);
-            ChartAttiPresure.EndInit();
+            seriesList.AddRange(SeriesInsPresure.Points);
+            seriesList.AddRange(insPresureList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesInsPresure.Points.Clear();
+            SeriesInsPresure.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLevel2Transmitter.BeginInit();
-            SeriesLevel2Presure.Points.AddRange(level2PresureList);
-            ChartLevel2Transmitter.EndInit();
+            seriesList.AddRange(SeriesAttPresure.Points);
+            seriesList.AddRange(attPresureList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttPresure.Points.Clear();
+            SeriesInsPresure.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartGestureControlHigh.BeginInit();
-            SeriesAttPresureHigh.Points.AddRange(attPresureHigh);
-            ChartGestureControlHigh.EndInit();
+            seriesList.AddRange(SeriesLevel2Presure.Points);
+            seriesList.AddRange(level2PresureList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLevel2Presure.Points.Clear();
+            SeriesLevel2Presure.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartGestureControlLow.BeginInit();
-            SeriesAttPresureLow.Points.AddRange(attPresureLow);
-            ChartGestureControlLow.EndInit();
+            seriesList.AddRange(SeriesAttPresureHigh.Points);
+            seriesList.AddRange(attPresureHigh);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttPresureHigh.Points.Clear();
+            SeriesAttPresureHigh.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesAttPresureLow.Points);
+            seriesList.AddRange(attPresureLow);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAttPresureLow.Points.Clear();
+            SeriesAttPresureLow.Points.AddRange(seriesList);
+            seriesList.Clear();
 
             SlowPacket lastPacket = packets[packets.Count - 1];
             ChartHood.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_20_245(lastPacket.temperatureSensor.hood[1]));
@@ -292,93 +384,228 @@ namespace DataProcess
                 fastDataIndex++;
             }
 
-            ChartShake1.BeginInit();
-            SeriesShake1.Points.AddRange(ShakeSeriesLists[0]);
-            ChartShake1.EndInit();
+            List<SeriesPoint> seriesList = new List<SeriesPoint>();
 
-            ChartShake2.BeginInit();
-            SeriesShake2.Points.AddRange(ShakeSeriesLists[1]);
-            ChartShake2.EndInit();
+            seriesList.AddRange(SeriesShake1.Points);
+            seriesList.AddRange(ShakeSeriesLists[0]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake1.Points.Clear();
+            SeriesShake1.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake3.BeginInit();
-            SeriesShake3.Points.AddRange(ShakeSeriesLists[2]);
-            ChartShake3.EndInit();
 
-            ChartShake4.BeginInit();
-            SeriesShake4.Points.AddRange(ShakeSeriesLists[3]);
-            ChartShake4.EndInit();
+            seriesList.AddRange(SeriesShake2.Points);
+            seriesList.AddRange(ShakeSeriesLists[1]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake2.Points.Clear();
+            SeriesShake2.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake5.BeginInit();
-            SeriesShake5.Points.AddRange(ShakeSeriesLists[4]);
-            ChartShake5.EndInit();
+            seriesList.AddRange(SeriesShake3.Points);
+            seriesList.AddRange(ShakeSeriesLists[2]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake3.Points.Clear();
+            SeriesShake3.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake6.BeginInit();
-            SeriesShake6.Points.AddRange(ShakeSeriesLists[5]);
-            ChartShake6.EndInit();
+            seriesList.AddRange(SeriesShake4.Points);
+            seriesList.AddRange(ShakeSeriesLists[3]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake4.Points.Clear();
+            SeriesShake4.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake7.BeginInit();
-            SeriesShake7.Points.AddRange(ShakeSeriesLists[6]);
-            ChartShake7.EndInit();
+            seriesList.AddRange(SeriesShake5.Points);
+            seriesList.AddRange(ShakeSeriesLists[4]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake5.Points.Clear();
+            SeriesShake5.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake8.BeginInit();
-            SeriesShake8.Points.AddRange(ShakeSeriesLists[7]);
-            ChartShake8.EndInit();
+            seriesList.AddRange(SeriesShake6.Points);
+            seriesList.AddRange(ShakeSeriesLists[5]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake6.Points.Clear();
+            SeriesShake6.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake9.BeginInit();
-            SeriesShake9.Points.AddRange(ShakeSeriesLists[8]);
-            ChartShake9.EndInit();
+            seriesList.AddRange(SeriesShake7.Points);
+            seriesList.AddRange(ShakeSeriesLists[6]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake7.Points.Clear();
+            SeriesShake7.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake10.BeginInit();
-            SeriesShake10.Points.AddRange(ShakeSeriesLists[9]);
-            ChartShake10.EndInit();
+            seriesList.AddRange(SeriesShake8.Points);
+            seriesList.AddRange(ShakeSeriesLists[7]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake8.Points.Clear();
+            SeriesShake8.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake11.BeginInit();
-            SeriesShake11.Points.AddRange(ShakeSeriesLists[10]);
-            ChartShake11.EndInit();
+            seriesList.AddRange(SeriesShake9.Points);
+            seriesList.AddRange(ShakeSeriesLists[8]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake9.Points.Clear();
+            SeriesShake9.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartShake12.BeginInit();
-            SeriesShake12.Points.AddRange(ShakeSeriesLists[11]);
-            ChartShake12.EndInit();
+            seriesList.AddRange(SeriesShake10.Points);
+            seriesList.AddRange(ShakeSeriesLists[9]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake10.Points.Clear();
+            SeriesShake10.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLashT3.BeginInit();
-            SeriesLashT3.Points.AddRange(lashT3SeriesList);
-            ChartLashT3.EndInit();
+            seriesList.AddRange(SeriesShake11.Points);
+            seriesList.AddRange(ShakeSeriesLists[10]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake11.Points.Clear();
+            SeriesShake11.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLashT2.BeginInit();
-            SeriesLashT2.Points.AddRange(lashT2SeriesList);
-            ChartLashT2.EndInit();
+            seriesList.AddRange(SeriesShake12.Points);
+            seriesList.AddRange(ShakeSeriesLists[11]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesShake12.Points.Clear();
+            SeriesShake12.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLashT1.BeginInit();
-            SeriesLashT1.Points.AddRange(lashT1SeriesList);
-            ChartLashT1.EndInit();
+            seriesList.AddRange(SeriesLashT3.Points);
+            seriesList.AddRange(lashT3SeriesList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLashT3.Points.Clear();
+            SeriesLashT3.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLashT0.BeginInit();
-            SeriesLashT0.Points.AddRange(lashT0SeriesList);
-            ChartLashT0.EndInit();
+            seriesList.AddRange(SeriesLashT2.Points);
+            seriesList.AddRange(lashT2SeriesList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLashT2.Points.Clear();
+            SeriesLashT2.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash1_1.BeginInit();
-            SeriesLash1_1.Points.AddRange(fastLashSeriesLists1[0]);
-            ChartLash1_1.EndInit();
+            seriesList.AddRange(SeriesLashT1.Points);
+            seriesList.AddRange(lashT1SeriesList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLashT1.Points.Clear();
+            SeriesLashT1.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash1_2.BeginInit();
-            SeriesLash1_2.Points.AddRange(fastLashSeriesLists1[1]);
-            ChartLash1_2.EndInit();
+            seriesList.AddRange(SeriesLashT0.Points);
+            seriesList.AddRange(lashT0SeriesList);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLashT0.Points.Clear();
+            SeriesLashT0.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash1_3.BeginInit();
-            SeriesLash1_3.Points.AddRange(fastLashSeriesLists1[2]);
-            ChartLash1_3.EndInit();
+            seriesList.AddRange(SeriesLash1_1.Points);
+            seriesList.AddRange(fastLashSeriesLists1[0]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash1_1.Points.Clear();
+            SeriesLash1_1.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartLash2.BeginInit();
-            SeriesLash2.Points.AddRange(fastLashSeries2);
-            ChartLash2.EndInit();
+            seriesList.AddRange(SeriesLash1_2.Points);
+            seriesList.AddRange(fastLashSeriesLists1[1]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash1_2.Points.Clear();
+            SeriesLash1_2.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartNoise1.BeginInit();
-            SeriesNoise1.Points.AddRange(fastNoiseLists[0]);
-            ChartNoise1.EndInit();
+            seriesList.AddRange(SeriesLash1_3.Points);
+            seriesList.AddRange(fastLashSeriesLists1[2]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash1_3.Points.Clear();
+            SeriesLash1_3.Points.AddRange(seriesList);
+            seriesList.Clear();
 
-            ChartNoise2.BeginInit();
-            SeriesNoise2.Points.AddRange(fastNoiseLists[1]);
-            ChartNoise2.EndInit();
+            seriesList.AddRange(SeriesLash2.Points);
+            seriesList.AddRange(fastLashSeries2);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesLash2.Points.Clear();
+            SeriesLash2.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNoise1.Points);
+            seriesList.AddRange(fastNoiseLists[0]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNoise1.Points.Clear();
+            SeriesNoise1.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNoise2.Points);
+            seriesList.AddRange(fastNoiseLists[1]);
+            while (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNoise2.Points.Clear();
+            SeriesNoise2.Points.AddRange(seriesList);
+            seriesList.Clear();
 
             FastPacket lastPacket = packets[packets.Count - 1];
             ChartShake1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[0].signal[lastPacket.shakeSignals[0].signal.Length - 1]));
@@ -674,6 +901,7 @@ namespace DataProcess
             envBuffers.Clear();
             envParser.Start();
             dataLogger = new DataLogger(testInfo.TestTime);
+            envParser.dataLogger = dataLogger;
             udpClientEnv.BeginReceive(EndEnvReceive, null);
             udpClientFly.BeginReceive(EndFlyReceive, null);
             uiRefreshTimer.Start();
@@ -766,7 +994,6 @@ namespace DataProcess
         {
             SlowPacket packet = Marshal.PtrToStructure<SlowPacket>(msg);
             envBuffers.SlowPacketList.Add(packet);
-            dataLogger.WriteSlowPacket(packet);
             Marshal.FreeHGlobal(msg);
         }
 
@@ -774,7 +1001,6 @@ namespace DataProcess
         {
             FastPacket packet = Marshal.PtrToStructure<FastPacket>(msg);
             envBuffers.FastPacketList.Add(packet);
-            dataLogger.WriteFastPacket(packet);
             Marshal.FreeHGlobal(msg);
         }
 
@@ -782,7 +1008,6 @@ namespace DataProcess
         {
             TailPacketRs packet = Marshal.PtrToStructure<TailPacketRs>(msg);
             envBuffers.TailPacketList.Add(packet);
-            dataLogger.WriteTailPacket(packet);
             Marshal.FreeHGlobal(msg);
         }
 

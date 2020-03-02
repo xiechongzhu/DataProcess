@@ -1,4 +1,5 @@
-﻿using DataProcess.Parser;
+﻿using DataProcess.Log;
+using DataProcess.Parser;
 using DataProcess.Parser.Env;
 using DataProcess.Tools;
 using System;
@@ -14,6 +15,7 @@ namespace DataProcess.Protocol
 {
     public class EnvParser
     {
+        public DataLogger dataLogger { get; set; }
         private TailParser tailParser;
         public EnvParser(IntPtr mainWindowHandle)
         {
@@ -84,6 +86,7 @@ namespace DataProcess.Protocol
                         Marshal.StructureToPtr(slowPacket, ptr, true);
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, ptr);
                     }
+                    dataLogger.WriteSlowPacket(buffer);
                     break;
                 case EnvProtocol.DataType.DataTypeFast:
                     FastPacket fastPacket;
@@ -93,6 +96,7 @@ namespace DataProcess.Protocol
                         Marshal.StructureToPtr(fastPacket, ptr, true);
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, ptr);
                     }
+                    dataLogger.WriteFastPacket(buffer);
                     break;
                 case EnvProtocol.DataType.DataTypeTail:
                     List<TailPacketRs> tailPacketRs = tailParser.Parse(body);
@@ -102,6 +106,7 @@ namespace DataProcess.Protocol
                         Marshal.StructureToPtr(packet, ptr, true);
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, ptr);
                     }
+                    dataLogger.WriteTailPacket(buffer);
                     break;
                 default:
                     break;

@@ -16,17 +16,21 @@ namespace DataProcess.Log
 {
     public class DataLogger
     {
-        private readonly String SlowPacketFileName = "慢速.dat";
-        private readonly String FastPacketFileName = "快速.dat";
-        private readonly String TailPacketFileName = "尾端.dat";
+        private readonly String SlowPacketFileName = "慢速.bin";
+        private readonly String FastPacketFileName = "快速.bin";
+        private readonly String TailPacketFileName = "尾端.bin";
 
-        private String slowPacketFilePath;
-        private String fastPacketFilePath;
-        private String tailPacketFilePath;
+        public String slowPacketFilePath;
+        public String fastPacketFilePath;
+        public String tailPacketFilePath;
 
         private FileStream slowPacketFileStream = null;
         private FileStream fastPacketFileStream = null;
         private FileStream tailPacketFileStream = null;
+
+        private BinaryWriter slowPacketWriter = null;
+        private BinaryWriter fastPacketWriter = null;
+        private BinaryWriter tailPacketWriter = null;
 
         public DataLogger()
         {
@@ -50,117 +54,69 @@ namespace DataProcess.Log
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private void WriteSlowPacketInternal(SlowPacket packet)
+        private void WriteSlowPacketInternal(byte[] packet)
         {
             try
             {
                 if (slowPacketFileStream == null)
                 {
                     slowPacketFileStream = File.Create(slowPacketFilePath);
+                    slowPacketWriter = new BinaryWriter(slowPacketFileStream);
                 }
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(slowPacketFileStream, packet);
+                slowPacketWriter.Write(packet);
             }
             catch (Exception) { }
         }
 
-        private delegate void WriteSlowPacketDelegate(SlowPacket packet);
-        public void WriteSlowPacket(SlowPacket packet)
+        private delegate void WriteSlowPacketDelegate(byte[] packet);
+        public void WriteSlowPacket(byte[] packet)
         {
             WriteSlowPacketDelegate writeSlowPacketDelegate = new WriteSlowPacketDelegate(WriteSlowPacketInternal);
             writeSlowPacketDelegate.BeginInvoke(packet, null, null);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private void WriteFastPacketInternal(FastPacket packet)
+        private void WriteFastPacketInternal(byte[] packet)
         {
             try
             {
                 if (fastPacketFileStream == null)
                 {
                     fastPacketFileStream = File.Create(fastPacketFilePath);
+                    fastPacketWriter = new BinaryWriter(fastPacketFileStream);
                 }
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(fastPacketFileStream, packet);
+                fastPacketWriter.Write(packet);
             }
             catch (Exception) { }
         }
 
-        private delegate void WriteFastPacketDelegate(FastPacket packet);
-        public void WriteFastPacket(FastPacket packet)
+        private delegate void WriteFastPacketDelegate(byte[] packet);
+        public void WriteFastPacket(byte[] packet)
         {
             WriteFastPacketDelegate writeFastPacketDelegate = new WriteFastPacketDelegate(WriteFastPacketInternal);
             writeFastPacketDelegate.BeginInvoke(packet, null, null);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private void WriteTailPacketInternal(TailPacketRs packet)
+        private void WriteTailPacketInternal(byte[] packet)
         {
             try
             {
                 if (tailPacketFileStream == null)
                 {
                     tailPacketFileStream = File.Create(tailPacketFilePath);
+                    tailPacketWriter = new BinaryWriter(tailPacketFileStream);
                 }
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(tailPacketFileStream, packet);
+                tailPacketWriter.Write(packet);
             }
             catch (Exception) { }
         }
 
-        private delegate void WriteTailPacketDelegate(TailPacketRs packet);
-        public void WriteTailPacket(TailPacketRs packet)
+        private delegate void WriteTailPacketDelegate(byte[] packet);
+        public void WriteTailPacket(byte[] packet)
         {
             WriteTailPacketDelegate writeTailPacketDelegate = new WriteTailPacketDelegate(WriteTailPacketInternal);
             writeTailPacketDelegate.BeginInvoke(packet, null, null);
-        }
-
-        public List<SlowPacket> LoadSlowPacketFile()
-        {
-            List<SlowPacket> slowPacketList = new List<SlowPacket>();
-            try
-            {
-                slowPacketFileStream = File.Open(slowPacketFilePath, FileMode.Open);
-                BinaryFormatter formatter = new BinaryFormatter();
-                while (slowPacketFileStream.Position < slowPacketFileStream.Length)
-                {
-                    slowPacketList.Add((SlowPacket)formatter.Deserialize(slowPacketFileStream));
-                }
-            }
-            catch (Exception) { }
-            return slowPacketList;
-        }
-
-        public List<FastPacket> LoadFastPacketFile()
-        {
-            List<FastPacket> fastPacketList = new List<FastPacket>();
-            try
-            {
-                fastPacketFileStream = File.Open(fastPacketFilePath, FileMode.Open);
-                BinaryFormatter formatter = new BinaryFormatter();
-                while (fastPacketFileStream.Position < fastPacketFileStream.Length)
-                {
-                    fastPacketList.Add((FastPacket)formatter.Deserialize(fastPacketFileStream));
-                }
-            }
-            catch (Exception) { }
-            return fastPacketList;
-        }
-
-        public List<TailPacketRs> LoadTailPacketFile()
-        {
-            List<TailPacketRs> tailPacketList = new List<TailPacketRs>();
-            try
-            {
-                tailPacketFileStream = File.Open(tailPacketFilePath, FileMode.Open);
-                BinaryFormatter formatter = new BinaryFormatter();
-                while (tailPacketFileStream.Position < tailPacketFileStream.Length)
-                {
-                    tailPacketList.Add((TailPacketRs)formatter.Deserialize(tailPacketFileStream));
-                }
-            }
-            catch (Exception) { }
-            return tailPacketList;
         }
 
         public List<SlowPacket> LoadSlowBinaryFile(String slowBinFileName)
@@ -171,12 +127,15 @@ namespace DataProcess.Log
                 using (FileStream fileStream = File.Open(slowBinFileName, FileMode.Open))
                 {
                     BinaryReader binaryReader = new BinaryReader(fileStream);
-                    _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
-                    byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(SlowPacket)));
-                    SlowPacket packet;
-                    if(SlowParser.Parse(buffer, out packet))
+                    while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                     {
-                        packetList.Add(packet);
+                        _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                        byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(SlowPacket)));
+                        SlowPacket packet;
+                        if (SlowParser.Parse(buffer, out packet))
+                        {
+                            packetList.Add(packet);
+                        }
                     }
                 }
             }
@@ -193,12 +152,15 @@ namespace DataProcess.Log
                 using (FileStream fileStream = File.Open(fastBinFileName, FileMode.Open))
                 {
                     BinaryReader binaryReader = new BinaryReader(fileStream);
-                    _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
-                    byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FastPacket)));
-                    FastPacket packet;
-                    if (FastParser.Parse(buffer, out packet))
+                    while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                     {
-                        packetList.Add(packet);
+                        _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                        byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FastPacket)));
+                        FastPacket packet;
+                        if (FastParser.Parse(buffer, out packet))
+                        {
+                            packetList.Add(packet);
+                        }
                     }
                 }
             }
