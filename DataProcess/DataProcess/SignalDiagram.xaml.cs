@@ -41,8 +41,6 @@ namespace DataProcess
     public partial class SignalDiagram : UserControl
     {
         private List<SignalPoint> PointsToDraw = new List<SignalPoint>();
-        private Color nonActiveColor = Color.FromRgb(255, 0, 0);
-        private Color activeColor = Color.FromRgb(0, 255, 0);
         private List<Point> linePoints = new List<Point>();
 
 
@@ -60,20 +58,7 @@ namespace DataProcess
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            /*foreach(SignalPoint point in PointsToDraw)
-            {
-                drawingContext.DrawEllipse(new SolidColorBrush(point.IsActive ? activeColor : nonActiveColor), null, point.ToPoint(), 10, 10);
-                FormattedText formattedText = new FormattedText(
-                point.Name,
-                CultureInfo.GetCultureInfo("en-us"),
-                FlowDirection.LeftToRight,
-                new Typeface("Verdana"),
-                12,
-                Brushes.Black, 0);
-                drawingContext.DrawText(formattedText, new Point(point.X + 5, point.Y + 5)); 
-            }*/
-
-
+            drawingContext.DrawRectangle(Brushes.White, null, new Rect(0, 0, ActualWidth, ActualHeight));
             Point[] temp = new Point[linePoints.Count];
             for(int i = 0; i < temp.Length; ++i)
             {
@@ -86,7 +71,7 @@ namespace DataProcess
             {
                 for (int i = 0; i < points.Length - 1; ++i)
                 {
-                    drawingContext.DrawLine(new Pen(new SolidColorBrush(Color.FromRgb(100, 100, 100)), 3), points[i], points[i+1]);
+                    drawingContext.DrawLine(new Pen(Brushes.SlateGray, 3), points[i], points[i+1]);
                 }
             }
 
@@ -109,15 +94,15 @@ namespace DataProcess
 
             foreach (SignalPoint point in PointsToDraw)
             {
-                drawingContext.DrawEllipse(new SolidColorBrush(point.IsActive ? activeColor : nonActiveColor), null, point.ToPoint(), 10, 10);
+                drawingContext.DrawEllipse(point.IsActive ? Brushes.Green : Brushes.Red, null, point.ToPoint(), 10, 10);
                 FormattedText formattedText = new FormattedText(
                 point.Name,
-                CultureInfo.GetCultureInfo("en-us"),
+                CultureInfo.GetCultureInfo("zh-cn"),
                 FlowDirection.LeftToRight,
-                new Typeface("Verdana"),
-                12,
-                Brushes.Black, 0);
-                drawingContext.DrawText(formattedText, new Point(point.X + 5, point.Y + 5));
+                new Typeface("微软雅黑"),
+                14,
+                Brushes.Blue, 0);
+                drawingContext.DrawText(formattedText, new Point(point.X - formattedText.Width / 2, point.Y - formattedText.Height * 2));
             }
         }
 
@@ -126,13 +111,13 @@ namespace DataProcess
             PointsToDraw.Add(new SignalPoint { Name = name});
         }
 
-        public void ActivePoint(String name)
+        public void ActivePoint(String name, bool bActive)
         {
             foreach(SignalPoint point in PointsToDraw)
             {
                 if(point.Name == name)
                 {
-                    point.IsActive = true;
+                    point.IsActive = bActive;
                     InvalidateVisual();
                     return;
                 }

@@ -45,25 +45,26 @@ namespace DataProcess
             uiRefreshTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
             UpdateSyncFireDisplay(Double.NaN);
             LoadNetworkSetting();
+            InitProgramDiagram();
+        }
 
+        private void InitProgramDiagram()
+        {
+            ProgramContrrolStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
             programDigram.SetLinePoints(new System.Windows.Point(0.1, 0.9), new System.Windows.Point(0.5, -0.8), new System.Windows.Point(0.9, 0.9));
-            programDigram.AddPoint("测试1");
-            programDigram.AddPoint("测试2");
-            programDigram.AddPoint("测试3");
-            programDigram.AddPoint("测试4");
-            programDigram.AddPoint("测试5");
-            programDigram.AddPoint("测试6");
-            programDigram.AddPoint("测试7");
+            FlyProtocol.GetProgramStatusTextList().ForEach(text => programDigram.AddPoint(text));
+        }
+
+        private void ResetProgramDiagram()
+        {
+            ProgramContrrolStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
+            FlyProtocol.GetProgramStatusTextList().ForEach(text => programDigram.ActivePoint(text, false));
         }
 
         private void LoadNetworkSetting()
         {
             SettingManager mgr = new SettingManager();
-            String envIpAddr;
-            int envPort;
-            String flyIpAddr;
-            int flyPort;
-            if(mgr.LoadNetworkSetting(out envIpAddr, out envPort, out flyIpAddr, out flyPort))
+            if(mgr.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort))
             {
                 editIpEnvAddr.Text = envIpAddr;
                 editEnvPort.Text = envPort.ToString();
@@ -127,37 +128,37 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    hoodSeriesList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_20_245(packet.temperatureSensor.hood[i])));
-                    insAirSeriesList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insAir[i])));
-                    insWallList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insWall[i])));
-                    attAirList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attAir[i])));
-                    attWallList1.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6])));
-                    attWallList2.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 1])));
-                    attWallList3.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 2])));
-                    attWallList4.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 3])));
-                    attWallList5.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 4])));
-                    attWallList6.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 5])));
+                    hoodSeriesList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-20, 245, 1, 5, packet.temperatureSensor.hood[i])));
+                    insAirSeriesList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insAir[i])));
+                    insWallList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insWall[i])));
+                    attAirList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attAir[i])));
+                    attWallList1.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6])));
+                    attWallList2.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 1])));
+                    attWallList3.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 2])));
+                    attWallList4.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 3])));
+                    attWallList5.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 4])));
+                    attWallList6.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 5])));
                 }
 
                 for(int i = 0; i < 2; ++i)
                 {
-                    insPresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_50_K(packet.pressureSensor.instrument[i])));
-                    attPresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_120_K(packet.pressureSensor.attitudeControl[i])));
+                    insPresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(0, 50, 0, 5, packet.pressureSensor.instrument[i])));
+                    attPresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(0, 120, 0, 5, packet.pressureSensor.attitudeControl[i])));
                 }
 
                 for(int i = 0; i < packet.level2Transmitter.Length; ++i)
                 {
-                    level2PresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_12_M(packet.level2Transmitter[i])));
+                    level2PresureList.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(0, 12, 0.2, 4.8, packet.level2Transmitter[i])));
                 }
 
                 for(int i = 0; i < packet.gestureControlHigh.Length; ++i)
                 {
-                    attPresureHigh.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_40_M(packet.gestureControlHigh[i])));
+                    attPresureHigh.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(0, 40, 0, 5, packet.gestureControlHigh[i])));
                 }
 
                 for (int i = 0; i < packet.gestureControlLow.Length; ++i)
                 {
-                    attPresureLow.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetPresure_0_6_M(packet.gestureControlLow[i])));
+                    attPresureLow.Add(new SeriesPoint(slowDataIndex + i, EnvDataConvert.GetValue(0, 6, 0, 5, packet.gestureControlLow[i])));
                 }
 
                 slowDataIndex += 2;
@@ -316,21 +317,21 @@ namespace DataProcess
             seriesList.Clear();
 
             SlowPacket lastPacket = packets[packets.Count - 1];
-            ChartHood.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_20_245(lastPacket.temperatureSensor.hood[1]));
-            ChartInsAir.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.insAir[1]));
-            ChartInsWall.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.insWall[1]));
-            ChartAttAir.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.attAir[1]));
-            ChartAttWalls1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.attWalls[1]));
-            ChartAttWalls2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.attWalls[3]));
-            ChartAttWalls3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.attWalls[5]));
-            ChartAttWalls4.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.attWalls[7]));
-            ChartAttWalls5.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.attWalls[9]));
-            ChartAttWalls6.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetTemperature_Nagtive_40_150(lastPacket.temperatureSensor.attWalls[11]));
-            ChartInsPresure.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetPresure_0_50_K(lastPacket.pressureSensor.instrument[1]));
-            ChartAttiPresure.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetPresure_0_120_K(lastPacket.pressureSensor.attitudeControl[1]));
-            ChartLevel2Transmitter.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetPresure_0_12_M(lastPacket.level2Transmitter[1]));
-            ChartGestureControlHigh.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetPresure_0_40_M(lastPacket.gestureControlHigh[1]));
-            ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetPresure_0_6_M(lastPacket.gestureControlLow[1]));
+            ChartHood.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-20, 245, 1, 5, lastPacket.temperatureSensor.hood[1]));
+            ChartInsAir.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.insAir[1]));
+            ChartInsWall.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.insWall[1]));
+            ChartAttAir.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attAir[1]));
+            ChartAttWalls1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[1]));
+            ChartAttWalls2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[3]));
+            ChartAttWalls3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[5]));
+            ChartAttWalls4.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[7]));
+            ChartAttWalls5.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[9]));
+            ChartAttWalls6.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[11]));
+            ChartInsPresure.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 50, 0, 5, lastPacket.pressureSensor.instrument[1]));
+            ChartAttiPresure.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 120, 0, 5, lastPacket.pressureSensor.attitudeControl[1]));
+            ChartLevel2Transmitter.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 12, 0.2, 4.8, lastPacket.level2Transmitter[1]));
+            ChartGestureControlHigh.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 40, 0, 5, lastPacket.gestureControlHigh[1]));
+            ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 6, 0, 5, lastPacket.gestureControlLow[1]));
         }
 
         void DrawFastPackets(List<FastPacket> packets)
@@ -366,7 +367,7 @@ namespace DataProcess
                     FastShakeSignal fastShakeSignal = packet.shakeSignals[idx];
                     for (int pos = 0; pos < 80; ++pos)
                     {
-                        ShakeSeriesLists[idx].Add(new SeriesPoint(fastDataIndex * 80 + pos, EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos])));
+                        ShakeSeriesLists[idx].Add(new SeriesPoint(fastDataIndex * 80 + pos, EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos])));
                     }
                 }
                 lashT3SeriesList.Add(new SeriesPoint(fastDataIndex, packet.lashT3));
@@ -379,19 +380,19 @@ namespace DataProcess
                     FastLashSignal lashSignal = packet.lashSignal_1[idx];
                     for (int pos = 0; pos < 400; ++pos)
                     {
-                        fastLashSeriesLists1[idx].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos])));
+                        fastLashSeriesLists1[idx].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos])));
                     }
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    fastLashSeries2.Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetLash_Nagtive_3000_3000(packet.lashSignal_2.signal[pos])));
+                    fastLashSeries2.Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetValue(-3000, 3000, 0, 5, packet.lashSignal_2.signal[pos])));
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    fastNoiseLists[0].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetNoise_100_140(packet.noiseSignal[0].signal[pos])));
-                    fastNoiseLists[1].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetNoise_120_160(packet.noiseSignal[1].signal[pos])));
+                    fastNoiseLists[0].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetValue(100, 140, 0, 5, packet.noiseSignal[0].signal[pos])));
+                    fastNoiseLists[1].Add(new SeriesPoint(fastDataIndex * 400 + pos, EnvDataConvert.GetValue(120, 160, 0, 5, packet.noiseSignal[1].signal[pos])));
                 }
 
                 fastDataIndex++;
@@ -621,28 +622,28 @@ namespace DataProcess
             seriesList.Clear();
 
             FastPacket lastPacket = packets[packets.Count - 1];
-            ChartShake1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[0].signal[lastPacket.shakeSignals[0].signal.Length - 1]));
-            ChartShake2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[1].signal[lastPacket.shakeSignals[1].signal.Length - 1]));
-            ChartShake3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[2].signal[lastPacket.shakeSignals[2].signal.Length - 1]));
-            ChartShake4.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[3].signal[lastPacket.shakeSignals[3].signal.Length - 1]));
-            ChartShake5.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[4].signal[lastPacket.shakeSignals[4].signal.Length - 1]));
-            ChartShake6.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[5].signal[lastPacket.shakeSignals[5].signal.Length - 1]));
-            ChartShake7.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[6].signal[lastPacket.shakeSignals[6].signal.Length - 1]));
-            ChartShake8.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[7].signal[lastPacket.shakeSignals[7].signal.Length - 1]));
-            ChartShake9.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[8].signal[lastPacket.shakeSignals[8].signal.Length - 1]));
-            ChartShake10.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[9].signal[lastPacket.shakeSignals[9].signal.Length - 1]));
-            ChartShake11.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[10].signal[lastPacket.shakeSignals[10].signal.Length - 1]));
-            ChartShake12.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetShake_Nagtive300_300(lastPacket.shakeSignals[11].signal[lastPacket.shakeSignals[11].signal.Length - 1]));
+            ChartShake1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[0].signal[lastPacket.shakeSignals[0].signal.Length - 1]));
+            ChartShake2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[1].signal[lastPacket.shakeSignals[1].signal.Length - 1]));
+            ChartShake3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[2].signal[lastPacket.shakeSignals[2].signal.Length - 1]));
+            ChartShake4.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[3].signal[lastPacket.shakeSignals[3].signal.Length - 1]));
+            ChartShake5.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[4].signal[lastPacket.shakeSignals[4].signal.Length - 1]));
+            ChartShake6.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[5].signal[lastPacket.shakeSignals[5].signal.Length - 1]));
+            ChartShake7.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[6].signal[lastPacket.shakeSignals[6].signal.Length - 1]));
+            ChartShake8.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[7].signal[lastPacket.shakeSignals[7].signal.Length - 1]));
+            ChartShake9.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[8].signal[lastPacket.shakeSignals[8].signal.Length - 1]));
+            ChartShake10.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[9].signal[lastPacket.shakeSignals[9].signal.Length - 1]));
+            ChartShake11.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[10].signal[lastPacket.shakeSignals[10].signal.Length - 1]));
+            ChartShake12.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[11].signal[lastPacket.shakeSignals[11].signal.Length - 1]));
             ChartLashT3.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT3);
             ChartLashT2.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT2);
             ChartLashT1.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT1);
             ChartLashT0.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT0);
-            ChartLash1_1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetLash_Nagtive_6000_6000(lastPacket.lashSignal_1[0].signal[lastPacket.lashSignal_1[0].signal.Length - 1]));
-            ChartLash1_2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetLash_Nagtive_6000_6000(lastPacket.lashSignal_1[1].signal[lastPacket.lashSignal_1[1].signal.Length - 1]));
-            ChartLash1_3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetLash_Nagtive_6000_6000(lastPacket.lashSignal_1[2].signal[lastPacket.lashSignal_1[2].signal.Length - 1]));
-            ChartLash2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetLash_Nagtive_3000_3000(lastPacket.lashSignal_2.signal[lastPacket.lashSignal_2.signal.Length - 1]));
-            ChartNoise1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetNoise_100_140(lastPacket.noiseSignal[0].signal[lastPacket.noiseSignal[0].signal.Length - 1]));
-            ChartNoise2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetNoise_120_160(lastPacket.noiseSignal[1].signal[lastPacket.noiseSignal[1].signal.Length - 1]));
+            ChartLash1_1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-6000, 6000, 0, 5, lastPacket.lashSignal_1[0].signal[lastPacket.lashSignal_1[0].signal.Length - 1]));
+            ChartLash1_2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-6000, 6000, 0, 5, lastPacket.lashSignal_1[1].signal[lastPacket.lashSignal_1[1].signal.Length - 1]));
+            ChartLash1_3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-6000, 6000, 0, 5, lastPacket.lashSignal_1[2].signal[lastPacket.lashSignal_1[2].signal.Length - 1]));
+            ChartLash2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-3000, 3000, 0, 5, lastPacket.lashSignal_2.signal[lastPacket.lashSignal_2.signal.Length - 1]));
+            ChartNoise1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(100, 140, 0, 5, lastPacket.noiseSignal[0].signal[lastPacket.noiseSignal[0].signal.Length - 1]));
+            ChartNoise2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(120, 160, 0, 5, lastPacket.noiseSignal[1].signal[lastPacket.noiseSignal[1].signal.Length - 1]));
         }
 
         private void DrawTailPackets(List<TailPacketRs> tailPackets)
@@ -676,14 +677,14 @@ namespace DataProcess
                         switch((ChannelType)channel)
                         {
                             case ChannelType.ChannelPresure:
-                                value = EnvDataConvert.TailGetPresure_0_120_K(data.Data());
+                                value = EnvDataConvert.GetValue(0, 120, 0, 5, data.Data());
                                 break;
                             case ChannelType.ChannelLevel1Presure:
-                                value = EnvDataConvert.TailGetPresure_0_12_M(data.Data());
+                                value = EnvDataConvert.GetValue(0, 12, 0.2, 4.8, data.Data());
                                 break;
                             case ChannelType.ChannelTemperature1:
                             case ChannelType.ChannelTemperature2:
-                                value = EnvDataConvert.GetTemperature_Nagtive_20_150(data.Data());
+                                value = EnvDataConvert.GetValue(-20, 150, 1, 5, data.Data());
                                 break;
                             case ChannelType.Channel1LashX:
                             case ChannelType.Channel1LashY:
@@ -691,10 +692,10 @@ namespace DataProcess
                             case ChannelType.Channel2LashX:
                             case ChannelType.Channel2LashY:
                             case ChannelType.Channel2LashZ:
-                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
                                 break;
                             case ChannelType.ChannelNoise:
-                                value = EnvDataConvert.TailGetNoise_120_160(data.Data());
+                                value = EnvDataConvert.GetValue(120, 160, 0, 5, data.Data());
                                 break;
                             default:
                                 break;

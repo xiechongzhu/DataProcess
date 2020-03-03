@@ -156,37 +156,37 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartHood.AddValue(EnvDataConvert.GetTemperature_Nagtive_20_245(packet.temperatureSensor.hood[i]));
-                    ChartInsAir.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insAir[i]));
-                    ChartInsWall.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.insWall[i]));
-                    ChartAttAir.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attAir[i]));
-                    ChartAttWalls1.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6]));
-                    ChartAttWalls2.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 1]));
-                    ChartAttWalls3.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 2]));
-                    ChartAttWalls4.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 3]));
-                    ChartAttWalls5.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 4]));
-                    ChartAttWalls6.AddValue(EnvDataConvert.GetTemperature_Nagtive_40_150(packet.temperatureSensor.attWalls[i * 6 + 5]));
+                    ChartHood.AddValue(EnvDataConvert.GetValue(-20, 245, 1, 5, packet.temperatureSensor.hood[i]));
+                    ChartInsAir.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insAir[i]));
+                    ChartInsWall.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insWall[i]));
+                    ChartAttAir.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attAir[i]));
+                    ChartAttWalls1.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6]));
+                    ChartAttWalls2.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 1]));
+                    ChartAttWalls3.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 2]));
+                    ChartAttWalls4.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 3]));
+                    ChartAttWalls5.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 4]));
+                    ChartAttWalls6.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 5]));
                 }
 
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartInsPresure.AddValue(EnvDataConvert.GetPresure_0_50_K(packet.pressureSensor.instrument[i]));
-                    ChartAttiPresure.AddValue(EnvDataConvert.GetPresure_0_120_K(packet.pressureSensor.attitudeControl[i]));
+                    ChartInsPresure.AddValue(EnvDataConvert.GetValue(0, 50, 0, 5, packet.pressureSensor.instrument[i]));
+                    ChartAttiPresure.AddValue(EnvDataConvert.GetValue(0, 120, 0, 5, packet.pressureSensor.attitudeControl[i]));
                 }
 
                 for (int i = 0; i < packet.level2Transmitter.Length; ++i)
                 {
-                    ChartLevel2Transmitter.AddValue(EnvDataConvert.GetPresure_0_12_M(packet.level2Transmitter[i]));
+                    ChartLevel2Transmitter.AddValue(EnvDataConvert.GetValue(0, 12, 0.2, 4.8, packet.level2Transmitter[i]));
                 }
 
                 for (int i = 0; i < packet.gestureControlHigh.Length; ++i)
                 {
-                    ChartGestureControlHigh.AddValue(EnvDataConvert.GetPresure_0_40_M(packet.gestureControlHigh[i]));
+                    ChartGestureControlHigh.AddValue(EnvDataConvert.GetValue(0, 40, 0, 5, packet.gestureControlHigh[i]));
                 }
 
                 for (int i = 0; i < packet.gestureControlLow.Length; ++i)
                 {
-                    ChartGestureControlLow.AddValue(EnvDataConvert.GetPresure_0_6_M(packet.gestureControlLow[i]));
+                    ChartGestureControlLow.AddValue(EnvDataConvert.GetValue(0, 6, 0, 5, packet.gestureControlLow[i]));
                 }
             }
 
@@ -215,62 +215,62 @@ namespace DataProcess
                 FastShakeSignal fastShakeSignal = packet.shakeSignals[0];
                 for(int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake1.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake1.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[1];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake2.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake2.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[2];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake3.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake3.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[3];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake4.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake4.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[4];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake5.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake5.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[5];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake6.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake6.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[6];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake7.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake7.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[7];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake8.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake8.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[8];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake9.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake9.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[9];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake10.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake10.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[10];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake11.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake11.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
                 fastShakeSignal = packet.shakeSignals[11];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake12.AddValue(EnvDataConvert.GetShake_Nagtive300_300(fastShakeSignal.signal[pos]));
+                    ChartShake12.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
 
                 ChartLashT3.AddValue(packet.lashT3);
@@ -281,28 +281,28 @@ namespace DataProcess
                 FastLashSignal lashSignal = packet.lashSignal_1[0];
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash1_1.AddValue(EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos]));
+                    ChartLash1_1.AddValue(EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos]));
                 }
                 lashSignal = packet.lashSignal_1[1];
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash1_2.AddValue(EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos]));
+                    ChartLash1_2.AddValue(EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos]));
                 }
                 lashSignal = packet.lashSignal_1[2];
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash1_3.AddValue(EnvDataConvert.GetLash_Nagtive_6000_6000(lashSignal.signal[pos]));
+                    ChartLash1_3.AddValue(EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos]));
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash2.AddValue(EnvDataConvert.GetLash_Nagtive_3000_3000(packet.lashSignal_2.signal[pos]));
+                    ChartLash2.AddValue(EnvDataConvert.GetValue(-3000, 3000, 0, 5, packet.lashSignal_2.signal[pos]));
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartNoise1.AddValue(EnvDataConvert.GetNoise_100_140(packet.noiseSignal[0].signal[pos]));
-                    ChartNoise2.AddValue(EnvDataConvert.GetNoise_120_160(packet.noiseSignal[1].signal[pos]));
+                    ChartNoise1.AddValue(EnvDataConvert.GetValue(100, 140, 0, 5, packet.noiseSignal[0].signal[pos]));
+                    ChartNoise2.AddValue(EnvDataConvert.GetValue(120, 160, 0, 5, packet.noiseSignal[1].signal[pos]));
                 }
             }
 
@@ -343,47 +343,47 @@ namespace DataProcess
                         switch ((ChannelType)channel)
                         {
                             case ChannelType.ChannelPresure:
-                                value = EnvDataConvert.TailGetPresure_0_120_K(data.Data());
+                                value = EnvDataConvert.GetValue(0, 120, 0, 5, data.Data());
                                 ChartPresure.AddValue(value);
                                 break;
                             case ChannelType.ChannelLevel1Presure:
-                                value = EnvDataConvert.TailGetPresure_0_12_M(data.Data());
+                                value = EnvDataConvert.GetValue(0, 12, 0.2, 4.8, data.Data());
                                 ChartLevel1Presure.AddValue(value);
                                 break;
                             case ChannelType.ChannelTemperature1:
-                                value = EnvDataConvert.GetTemperature_Nagtive_20_150(data.Data());
+                                value = EnvDataConvert.GetValue(-20, 150, 1, 5, data.Data());
                                 ChartTemperature1.AddValue(value);
                                 break;
                             case ChannelType.ChannelTemperature2:
-                                value = EnvDataConvert.GetTemperature_Nagtive_20_150(data.Data());
+                                value = EnvDataConvert.GetValue(-20, 150, 1, 5, data.Data());
                                 ChartTemperature2.AddValue(value);
                                 break;
                             case ChannelType.Channel1LashX:
-                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
                                 ChartLash1X.AddValue(value);
                                 break;
                             case ChannelType.Channel1LashY:
-                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
                                 ChartLash1Y.AddValue(value);
                                 break;
                             case ChannelType.Channel1LashZ:
-                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
                                 ChartLash1Z.AddValue(value);
                                 break;
                             case ChannelType.Channel2LashX:
-                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
                                 ChartLash2X.AddValue(value);
                                 break;
                             case ChannelType.Channel2LashY:
-                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
                                 ChartLash2Y.AddValue(value);
                                 break;
                             case ChannelType.Channel2LashZ:
-                                value = EnvDataConvert.TailGetLash_Nagtive_150_150(data.Data());
+                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
                                 ChartLash2Z.AddValue(value);
                                 break;
                             case ChannelType.ChannelNoise:
-                                value = EnvDataConvert.TailGetNoise_120_160(data.Data());
+                                value = EnvDataConvert.GetValue(120, 160, 0, 5, data.Data());
                                 ChartNoise.AddValue(value);
                                 break;
                             default:

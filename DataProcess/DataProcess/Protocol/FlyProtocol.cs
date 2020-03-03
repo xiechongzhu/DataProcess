@@ -15,32 +15,70 @@ namespace DataProcess.Protocol
         public static readonly ushort angleHeader = 0xEB90;
         public static readonly byte[] programHeader = { Convert.ToByte('$'), Convert.ToByte('J'), Convert.ToByte('C'), Convert.ToByte('K') };
         public static readonly byte[] servoHeader = { 0x55, 0xAA};
-    }
 
-    public class ProgramControlDescription
-    {
-        private static readonly Dictionary<ushort, String> keyValuePairs = new Dictionary<ushort, string> { 
-            { 1, "一级发动机分离" },
-            { 2, "姿控发动机电爆管起爆" },
-            { 3, "二级发动机点火" },
-            { 4, "头罩分离点火" },
-            { 5, "弹头起旋点火" },
-            { 6, "二级发动机解保拔销" },
-            { 7, "二级发动机解保驱动" },
-            { 8, "引控电池激活" },
-            { 9, "弹头载荷脱插分离" },
-            { 10, "头遥脱插分离" },
-            { 11, "弹头安控/慢旋脱插分离" },
-            { 12, "头体分离" }
+        public enum PROGRAM_CONTROL_STATUS
+        {
+            STATUS_LEVEL1_SHUTDOWN = 1,
+            STATUS_ENGINE_LEAVE,
+            STATUS_BOOM,
+            STATUS_TOP,
+            STATUS_HEAD_BODY_LEAVE
+        }
+
+        private static readonly Dictionary<PROGRAM_CONTROL_STATUS, String> ProgramControlStatusText = new Dictionary<PROGRAM_CONTROL_STATUS, string>()
+        {
+            { PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN, "一级发送机关机"},
+            { PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE, "一级发动机分离"},
+            { PROGRAM_CONTROL_STATUS.STATUS_BOOM, "姿控发送机电爆管起爆" },
+            { PROGRAM_CONTROL_STATUS.STATUS_TOP, "顶点"},
+            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE, "头体分离"}
         };
 
-        public static String GetDescription(ushort key)
+        public static String GetProgramStatusText(PROGRAM_CONTROL_STATUS status)
         {
-            if (key >= keyValuePairs.Keys.Min() && key <= keyValuePairs.Keys.Max())
+            if(ProgramControlStatusText.ContainsKey(status))
             {
-                return keyValuePairs[key];
+                return ProgramControlStatusText[status];
             }
             return String.Empty;
+        }
+
+        public static List<String> GetProgramStatusTextList()
+        {
+            return ProgramControlStatusText.Values.ToList();
+        }
+
+        public static String GetProgramControlStatusDescription(int status)
+        {
+            switch(status)
+            {
+                case 1:
+                    return "一级发动机分离";
+                case 2:
+                    return "姿控发送机电爆管起爆";
+                case 3:
+                    return "二级发动机点火";
+                case 4:
+                    return "头罩分离点火";
+                case 5:
+                    return "弹头起旋点火";
+                case 6:
+                    return "二级发动机解保拔销";
+                case 7:
+                    return "二级发动机解保驱动";
+                case 8:
+                    return "引控电池激活";
+                case 9:
+                    return "弹头载荷脱插分离";
+                case 10:
+                    return "头遥脱插分离";
+                case 11:
+                    return "弹头安控/慢旋脱插分离";
+                case 12:
+                    return "头体分离";
+                default:
+                    return "--";
+            }
         }
     }
 
