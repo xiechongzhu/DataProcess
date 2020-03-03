@@ -126,6 +126,9 @@
     <Compile Include="Protocol\FlyProtocol.cs" />
     <Compile Include="Setting\NetworkSetting.cs" />
     <Compile Include="Setting\SettingManager.cs" />
+    <Compile Include="SignalDiagram.xaml.cs">
+      <DependentUpon>SignalDiagram.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestInfo.cs" />
     <Compile Include="TestInfoWindow.xaml.cs">
       <DependentUpon>TestInfoWindow.xaml</DependentUpon>
@@ -157,6 +160,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OpenDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignalDiagram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

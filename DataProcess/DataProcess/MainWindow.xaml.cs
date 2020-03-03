@@ -9,12 +9,14 @@ using DevExpress.Xpf.Charts;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Timers;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace DataProcess
@@ -43,6 +45,15 @@ namespace DataProcess
             uiRefreshTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
             UpdateSyncFireDisplay(Double.NaN);
             LoadNetworkSetting();
+
+            programDigram.SetLinePoints(new System.Windows.Point(0.1, 0.9), new System.Windows.Point(0.5, -0.8), new System.Windows.Point(0.9, 0.9));
+            programDigram.AddPoint("测试1");
+            programDigram.AddPoint("测试2");
+            programDigram.AddPoint("测试3");
+            programDigram.AddPoint("测试4");
+            programDigram.AddPoint("测试5");
+            programDigram.AddPoint("测试6");
+            programDigram.AddPoint("测试7");
         }
 
         private void LoadNetworkSetting()
