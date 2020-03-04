@@ -1125,6 +1125,16 @@ namespace DataProcess
             SeriesNavRollAngle.Points.AddRange(seriesList);
             seriesList.Clear();
 
+            ChartNavLat.Titles[0].Content = navDataList[navDataList.Count - 1].latitude;
+            ChartNavLon.Titles[0].Content = navDataList[navDataList.Count - 1].longitude;
+            ChartNavHeight.Titles[0].Content = navDataList[navDataList.Count - 1].height;
+            ChartNavSpeedNorth.Titles[0].Content = navDataList[navDataList.Count - 1].northSpeed;
+            ChartNavSpeedSky.Titles[0].Content = navDataList[navDataList.Count - 1].skySpeed;
+            ChartNavSpeedEast.Titles[0].Content = navDataList[navDataList.Count - 1].eastSpeed;
+            ChartNavPitchAngle.Titles[0].Content = navDataList[navDataList.Count - 1].pitchAngle;
+            ChartNavCrabAngle.Titles[0].Content = navDataList[navDataList.Count - 1].crabAngle;
+            ChartNavRollAngle.Titles[0].Content = navDataList[navDataList.Count - 1].rollAngle;
+
             ChartNavLat.EndInit();
             ChartNavLon.EndInit();
             ChartNavHeight.EndInit();
