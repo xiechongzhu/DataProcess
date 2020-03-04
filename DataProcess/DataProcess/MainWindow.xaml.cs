@@ -91,6 +91,26 @@ namespace DataProcess
                 DrawTailPackets(envBuffers.TailPacketList);
             }
 
+            if(envBuffers.NavDataList.Count > 0)
+            {
+                DrawNavPackets(envBuffers.NavDataList);
+            }
+
+            if(envBuffers.AngelDataList.Count > 0)
+            {
+                DrawAngelPackets(envBuffers.AngelDataList);
+            }
+
+            if(envBuffers.ProgramControlDataList.Count > 0)
+            {
+                DrawProgramPackets(envBuffers.ProgramControlDataList);
+            }
+
+            if(envBuffers.ServoDataList.Count > 0)
+            {
+                DrawServoPackets(envBuffers.ServoDataList);
+            }
+
             envBuffers.Clear();
         }
 
@@ -108,6 +128,22 @@ namespace DataProcess
 
         protected void DrawSlowPackets(List<SlowPacket> packets)
         {
+            ChartHood.BeginInit();
+            ChartInsAir.BeginInit();
+            ChartInsWall.BeginInit();
+            ChartAttAir.BeginInit();
+            ChartAttWalls1.BeginInit();
+            ChartAttWalls2.BeginInit();
+            ChartAttWalls3.BeginInit();
+            ChartAttWalls4.BeginInit();
+            ChartAttWalls5.BeginInit();
+            ChartAttWalls6.BeginInit();
+            ChartInsPresure.BeginInit();
+            ChartAttiPresure.BeginInit();
+            ChartLevel2Transmitter.BeginInit();
+            ChartGestureControlHigh.BeginInit();
+            ChartGestureControlLow.BeginInit();
+
             List<SeriesPoint> hoodSeriesList = new List<SeriesPoint>();
             List<SeriesPoint> insAirSeriesList = new List<SeriesPoint>();
             List<SeriesPoint> insWallList = new List<SeriesPoint>();
@@ -332,10 +368,49 @@ namespace DataProcess
             ChartLevel2Transmitter.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 12, 0.2, 4.8, lastPacket.level2Transmitter[1]));
             ChartGestureControlHigh.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 40, 0, 5, lastPacket.gestureControlHigh[1]));
             ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 6, 0, 5, lastPacket.gestureControlLow[1]));
+
+            ChartHood.EndInit();
+            ChartInsAir.EndInit();
+            ChartInsWall.EndInit();
+            ChartAttAir.EndInit();
+            ChartAttWalls1.EndInit();
+            ChartAttWalls2.EndInit();
+            ChartAttWalls3.EndInit();
+            ChartAttWalls4.EndInit();
+            ChartAttWalls5.EndInit();
+            ChartAttWalls6.EndInit();
+            ChartInsPresure.EndInit();
+            ChartAttiPresure.EndInit();
+            ChartLevel2Transmitter.EndInit();
+            ChartGestureControlHigh.EndInit();
+            ChartGestureControlLow.EndInit();
         }
 
         void DrawFastPackets(List<FastPacket> packets)
         {
+            ChartShake1.BeginInit();
+            ChartShake2.BeginInit();
+            ChartShake3.BeginInit();
+            ChartShake4.BeginInit();
+            ChartShake5.BeginInit();
+            ChartShake6.BeginInit();
+            ChartShake7.BeginInit();
+            ChartShake8.BeginInit();
+            ChartShake9.BeginInit();
+            ChartShake10.BeginInit();
+            ChartShake11.BeginInit();
+            ChartShake12.BeginInit();
+            ChartLashT3.BeginInit();
+            ChartLashT2.BeginInit();
+            ChartLashT1.BeginInit();
+            ChartLashT0.BeginInit();
+            ChartLash1_1.BeginInit();
+            ChartLash1_2.BeginInit();
+            ChartLash1_3.BeginInit();
+            ChartLash2.BeginInit();
+            ChartNoise1.BeginInit();
+            ChartNoise2.BeginInit();
+
             List<SeriesPoint>[] ShakeSeriesLists = new List<SeriesPoint>[12];
             List<SeriesPoint> lashT3SeriesList = new List<SeriesPoint>();
             List<SeriesPoint> lashT2SeriesList = new List<SeriesPoint>();
@@ -644,10 +719,45 @@ namespace DataProcess
             ChartLash2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-3000, 3000, 0, 5, lastPacket.lashSignal_2.signal[lastPacket.lashSignal_2.signal.Length - 1]));
             ChartNoise1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(100, 140, 0, 5, lastPacket.noiseSignal[0].signal[lastPacket.noiseSignal[0].signal.Length - 1]));
             ChartNoise2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(120, 160, 0, 5, lastPacket.noiseSignal[1].signal[lastPacket.noiseSignal[1].signal.Length - 1]));
+
+            ChartShake1.EndInit();
+            ChartShake2.EndInit();
+            ChartShake3.EndInit();
+            ChartShake4.EndInit();
+            ChartShake5.EndInit();
+            ChartShake6.EndInit();
+            ChartShake7.EndInit();
+            ChartShake8.EndInit();
+            ChartShake9.EndInit();
+            ChartShake10.EndInit();
+            ChartShake11.EndInit();
+            ChartShake12.EndInit();
+            ChartLashT3.EndInit();
+            ChartLashT2.EndInit();
+            ChartLashT1.EndInit();
+            ChartLashT0.EndInit();
+            ChartLash1_1.EndInit();
+            ChartLash1_2.EndInit();
+            ChartLash1_3.EndInit();
+            ChartLash2.EndInit();
+            ChartNoise1.EndInit();
+            ChartNoise2.EndInit();
         }
 
         private void DrawTailPackets(List<TailPacketRs> tailPackets)
         {
+            ChartPresure.BeginInit();
+            ChartLevel1Presure.BeginInit();
+            ChartTemperature1.BeginInit();
+            ChartTemperature2.BeginInit();
+            ChartLash1X.BeginInit();
+            ChartLash1Y.BeginInit();
+            ChartLash1Z.BeginInit();
+            ChartLash2X.BeginInit();
+            ChartLash2Y.BeginInit();
+            ChartLash2Z.BeginInit();
+            ChartNoise.BeginInit();
+
             List<SeriesPoint>[] seriesPoints = new List<SeriesPoint>[(uint)ChannelType.ChannelMax];
             for(int i = 0; i < seriesPoints.Length; ++i)
             {
@@ -872,6 +982,173 @@ namespace DataProcess
                 ChartNoise.Titles[0].Content = String.Format("{0:F}",
                     seriesPoints[(int)ChannelType.ChannelNoise][seriesPoints[(int)ChannelType.ChannelNoise].Count - 1].Value);
             }
+
+            ChartPresure.EndInit();
+            ChartLevel1Presure.EndInit();
+            ChartTemperature1.EndInit();
+            ChartTemperature2.EndInit();
+            ChartLash1X.EndInit();
+            ChartLash1Y.EndInit();
+            ChartLash1Z.EndInit();
+            ChartLash2X.EndInit();
+            ChartLash2Y.EndInit();
+            ChartLash2Z.EndInit();
+            ChartNoise.EndInit();
+        }
+
+        private void DrawNavPackets(List<NavData> navDataList)
+        {
+            ChartNavLat.BeginInit();
+            ChartNavLon.BeginInit();
+            ChartNavHeight.BeginInit();
+            ChartNavSpeedNorth.BeginInit();
+            ChartNavSpeedSky.BeginInit();
+            ChartNavSpeedEast.BeginInit();
+            ChartNavPitchAngle.BeginInit();
+            ChartNavCrabAngle.BeginInit();
+            ChartNavRollAngle.BeginInit();
+
+            List<SeriesPoint> navLatPointList = new List<SeriesPoint>();
+            List<SeriesPoint> navLonPointList = new List<SeriesPoint>();
+            List<SeriesPoint> navHeightPointList = new List<SeriesPoint>();
+            List<SeriesPoint> navSpeedNorthList = new List<SeriesPoint>();
+            List<SeriesPoint> navSpeedSkyList = new List<SeriesPoint>();
+            List<SeriesPoint> navSpeedEastList = new List<SeriesPoint>();
+            List<SeriesPoint> navPichAngelList = new List<SeriesPoint>();
+            List<SeriesPoint> navCrabAngelList = new List<SeriesPoint>();
+            List<SeriesPoint> navRollAngelList = new List<SeriesPoint>();
+
+            navDataList.ForEach(navData =>
+            {
+
+                navLatPointList.Add(new SeriesPoint(SeriesNavLat.Points.Count > 0 ? SeriesNavLat.Points[SeriesNavLat.Points.Count - 1].NumericalArgument : 0));
+                navLonPointList.Add(new SeriesPoint(SeriesNavLon.Points.Count > 0 ? SeriesNavLon.Points[SeriesNavLon.Points.Count - 1].NumericalArgument : 0));
+                navHeightPointList.Add(new SeriesPoint(SeriesNavHeight.Points.Count > 0 ? SeriesNavHeight.Points[SeriesNavHeight.Points.Count - 1].NumericalArgument : 0));
+                navSpeedNorthList.Add(new SeriesPoint(SeriesNavSpeedNorth.Points.Count > 0 ? SeriesNavSpeedNorth.Points[SeriesNavSpeedNorth.Points.Count - 1].NumericalArgument : 0));
+                navSpeedSkyList.Add(new SeriesPoint(SeriesNavSpeedSky.Points.Count > 0 ? SeriesNavSpeedSky.Points[SeriesNavSpeedSky.Points.Count - 1].NumericalArgument : 0));
+                navSpeedEastList.Add(new SeriesPoint(SeriesNavSpeedEast.Points.Count > 0 ? SeriesNavSpeedEast.Points[SeriesNavSpeedEast.Points.Count - 1].NumericalArgument : 0));
+                navPichAngelList.Add(new SeriesPoint(SeriesNavPitchAngle.Points.Count > 0 ? SeriesNavPitchAngle.Points[SeriesNavPitchAngle.Points.Count - 1].NumericalArgument : 0));
+                navCrabAngelList.Add(new SeriesPoint(SeriesNavCrabAngle.Points.Count > 0 ? SeriesNavCrabAngle.Points[SeriesNavCrabAngle.Points.Count - 1].NumericalArgument : 0));
+                navRollAngelList.Add(new SeriesPoint(SeriesNavRollAngle.Points.Count > 0 ? SeriesNavRollAngle.Points[SeriesNavRollAngle.Points.Count - 1].NumericalArgument : 0));
+            });
+
+            List<SeriesPoint> seriesList = new List<SeriesPoint>();
+
+            seriesList.AddRange(SeriesNavLat.Points);
+            seriesList.AddRange(navLatPointList);
+            if(seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavLat.Points.Clear();
+            SeriesNavLat.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNavLon.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavLon.Points.Clear();
+            SeriesNavLon.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNavHeight.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavHeight.Points.Clear();
+            SeriesNavHeight.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNavSpeedNorth.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavSpeedNorth.Points.Clear();
+            SeriesNavSpeedNorth.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+
+            seriesList.AddRange(SeriesNavSpeedSky.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavSpeedSky.Points.Clear();
+            SeriesNavSpeedSky.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNavSpeedEast.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavSpeedEast.Points.Clear();
+            SeriesNavSpeedEast.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNavPitchAngle.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavPitchAngle.Points.Clear();
+            SeriesNavPitchAngle.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNavCrabAngle.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavCrabAngle.Points.Clear();
+            SeriesNavCrabAngle.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesNavRollAngle.Points);
+            seriesList.AddRange(navLatPointList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesNavRollAngle.Points.Clear();
+            SeriesNavRollAngle.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            ChartNavLat.EndInit();
+            ChartNavLon.EndInit();
+            ChartNavHeight.EndInit();
+            ChartNavSpeedNorth.EndInit();
+            ChartNavSpeedSky.EndInit();
+            ChartNavSpeedEast.EndInit();
+            ChartNavPitchAngle.EndInit();
+            ChartNavCrabAngle.EndInit();
+            ChartNavRollAngle.EndInit();
+        }
+
+        private void DrawAngelPackets(List<AngleData> angleDataList)
+        {
+
+        }
+
+        private void DrawProgramPackets(List<ProgramControlData> programDataList)
+        {
+
+        }
+
+        private void DrawServoPackets(List<ServoData> servoDataList)
+        {
+
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -1008,6 +1285,15 @@ namespace DataProcess
                 case WinApi.WM_TAIL_DATA:
                     ProcessTailDataMessage(lParam);
                     break;
+                case WinApi.WM_NAV_DATA:
+                    ProcessNavMessage(lParam);
+                    break;
+                case WinApi.WM_ANGLE_DATA:
+                    break;
+                case WinApi.WM_PROGRAM_DATA:
+                    break;
+                case WinApi.WM_SERVO_DATA:
+                    break;
                 default:
                     break;
             }
@@ -1033,6 +1319,34 @@ namespace DataProcess
         {
             TailPacketRs packet = Marshal.PtrToStructure<TailPacketRs>(msg);
             envBuffers.TailPacketList.Add(packet);
+            Marshal.FreeHGlobal(msg);
+        }
+
+        protected void ProcessNavMessage(IntPtr msg)
+        {
+            NavData data = Marshal.PtrToStructure<NavData>(msg);
+            envBuffers.NavDataList.Add(data);
+            Marshal.FreeHGlobal(msg);
+        }
+
+        protected void ProcessAngelData(IntPtr msg)
+        {
+            AngleData data = Marshal.PtrToStructure<AngleData>(msg);
+            envBuffers.AngelDataList.Add(data);
+            Marshal.FreeHGlobal(msg);
+        }
+
+        protected void ProcessProgramData(IntPtr msg)
+        {
+            ProgramControlData data = Marshal.PtrToStructure<ProgramControlData>(msg);
+            envBuffers.ProgramControlDataList.Add(data);
+            Marshal.FreeHGlobal(msg);
+        }
+
+        protected void ProcessServoData(IntPtr msg)
+        {
+            ServoData data = Marshal.PtrToStructure<ServoData>(msg);
+            envBuffers.ServoDataList.Add(data);
             Marshal.FreeHGlobal(msg);
         }
 

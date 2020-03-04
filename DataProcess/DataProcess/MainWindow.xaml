@@ -180,7 +180,7 @@
                                         </dxc:AxisX2D.Title>
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
-                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesSpeedSky" MarkerSize="10" >
+                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedSky" MarkerSize="10" >
                                     <dxc:LineSeries2D.LineStyle>
                                         <dxc:LineStyle LineJoin="Bevel"/>
                                     </dxc:LineSeries2D.LineStyle>
@@ -209,7 +209,7 @@
                                         </dxc:AxisX2D.Title>
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
-                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesSpeedEast" MarkerSize="10" >
+                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedEast" MarkerSize="10" >
                                     <dxc:LineSeries2D.LineStyle>
                                         <dxc:LineStyle LineJoin="Bevel"/>
                                     </dxc:LineSeries2D.LineStyle>
@@ -238,7 +238,7 @@
                                         </dxc:AxisX2D.Title>
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
-                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesPitchAngle" MarkerSize="10" >
+                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavPitchAngle" MarkerSize="10" >
                                     <dxc:LineSeries2D.LineStyle>
                                         <dxc:LineStyle LineJoin="Bevel"/>
                                     </dxc:LineSeries2D.LineStyle>
@@ -267,7 +267,7 @@
                                         </dxc:AxisX2D.Title>
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
-                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesCrabAngle" MarkerSize="10" >
+                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavCrabAngle" MarkerSize="10" >
                                     <dxc:LineSeries2D.LineStyle>
                                         <dxc:LineStyle LineJoin="Bevel"/>
                                     </dxc:LineSeries2D.LineStyle>
@@ -296,7 +296,7 @@
                                         </dxc:AxisX2D.Title>
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
-                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesRollAngle" MarkerSize="10" >
+                                <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavRollAngle" MarkerSize="10" >
                                     <dxc:LineSeries2D.LineStyle>
                                         <dxc:LineStyle LineJoin="Bevel"/>
                                     </dxc:LineSeries2D.LineStyle>
