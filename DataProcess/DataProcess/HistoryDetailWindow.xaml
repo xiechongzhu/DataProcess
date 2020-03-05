@@ -32,7 +32,46 @@
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="5, 5, 5, 5" IsEnabled="False" TextWrapping="Wrap"  x:Name="editComment"/>
         <dx:DXTabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7">
             <dx:DXTabItem Header="飞控">
-                
+                <Grid Background="Transparent">
+                    <dx:DXTabControl>
+                        <dx:DXTabItem Header="导航数据">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                                <Controls:MyChartControl x:Name="ChartNavLat"/>
+                                <Controls:MyChartControl x:Name="ChartNavLon"/>
+                                <Controls:MyChartControl x:Name="ChartNavHeight"/>
+                                <Controls:MyChartControl x:Name="ChartNavSpeedNorth"/>
+                                <Controls:MyChartControl x:Name="ChartNavSpeedSky"/>
+                                <Controls:MyChartControl x:Name="ChartNavSpeedEast"/>
+                                <Controls:MyChartControl x:Name="ChartNavPitchAngle"/>
+                                <Controls:MyChartControl x:Name="ChartNavCrabAngle"/>
+                                <Controls:MyChartControl x:Name="ChartNavRollAngle"/>
+                            </dxlc:FlowLayoutControl>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="角速度数据">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                                <Controls:MyChartControl x:Name="ChartAccX"/>
+                                <Controls:MyChartControl x:Name="ChartAccY"/>
+                                <Controls:MyChartControl x:Name="ChartAccZ"/>
+                                <Controls:MyChartControl x:Name="ChartAngelX"/>
+                                <Controls:MyChartControl x:Name="ChartAngelY"/>
+                                <Controls:MyChartControl x:Name="ChartAngelZ"/>
+                            </dxlc:FlowLayoutControl>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="程控信号">
+                            <local:SignalDiagram Grid.Row="1" Grid.Column="0" x:Name="programDigram"/>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="伺服信号">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                                <Controls:MyChartControl x:Name="ChartServoVol28"/>
+                                <Controls:MyChartControl x:Name="ChartServoVol160"/>
+                                <Controls:MyChartControl x:Name="ChartServo1Iq"/>
+                                <Controls:MyChartControl x:Name="ChartServo2Iq"/>
+                                <Controls:MyChartControl x:Name="ChartServo3Iq"/>
+                                <Controls:MyChartControl x:Name="ChartServo4Iq"/>
+                            </dxlc:FlowLayoutControl>
+                        </dx:DXTabItem>
+                    </dx:DXTabControl>
+                </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="环境参数">
                 <Grid Background="Transparent">

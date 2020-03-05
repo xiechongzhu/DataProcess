@@ -87,6 +87,32 @@ namespace DataProcess
             ChartLevel2Transmitter.SetAxisYLabel("二级发送机压力(MPa)");
             ChartGestureControlHigh.SetAxisYLabel("姿控动力高压(MPa)");
             ChartGestureControlLow.SetAxisYLabel("姿控动力低压(MPa)");
+
+            ChartNavLat.SetAxisYLabel("纬度(°)");
+            ChartNavLon.SetAxisYLabel("经度(°)");
+            ChartNavHeight.SetAxisYLabel("高度(m)");
+            ChartNavSpeedNorth.SetAxisYLabel("北向速度(m/s)");
+            ChartNavSpeedSky.SetAxisYLabel("天向速度(ms/s)");
+            ChartNavSpeedEast.SetAxisYLabel("东向速度(ms/s)");
+            ChartNavPitchAngle.SetAxisYLabel("俯仰角(°)");
+            ChartNavCrabAngle.SetAxisYLabel("偏航角(°)");
+            ChartNavRollAngle.SetAxisYLabel("滚转角(°)");
+
+            ChartAccX.SetAxisYLabel("AX(m/s2)");
+            ChartAccY.SetAxisYLabel("AY(m/s2)");
+            ChartAccZ.SetAxisYLabel("AZ(m/s2)");
+            ChartAngelX.SetAxisYLabel("ωX(°/s)");
+            ChartAngelY.SetAxisYLabel("ωY(°/s)");
+            ChartAngelZ.SetAxisYLabel("ωZ(°/s)");
+
+            programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
+            FlyProtocol.GetProgramStatusTextList().ForEach(text => programDigram.AddPoint(text));
+            ChartServoVol28.SetAxisYLabel("28V供电电压(V)");
+            ChartServoVol160.SetAxisYLabel("160V供电电压(V)");
+            ChartServo1Iq.SetAxisYLabel("电机1Iq电流(A)");
+            ChartServo2Iq.SetAxisYLabel("电机2Iq电流(A)");
+            ChartServo3Iq.SetAxisYLabel("电机3Iq电流(A)");
+            ChartServo4Iq.SetAxisYLabel("电机4Iq电流(A)");
         }
 
         public HistoryDetailWindow(String strFlyBinFile, String strSLowBinFile, String strFastBinFile, String strTailBinFile)

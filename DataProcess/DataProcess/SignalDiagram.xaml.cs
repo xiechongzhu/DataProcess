@@ -65,6 +65,10 @@ namespace DataProcess
                 temp[i] = new Point(linePoints[i].X * ActualWidth, linePoints[i].Y * ActualHeight);
             }
 
+            if(linePoints.Count == 0)
+            {
+                return;
+            }
 
             Point[] points = draw_bezier_curves(temp, linePoints.Count, 0.02f);
             if(points.Length > 1)
