@@ -33,6 +33,7 @@ namespace DataProcess
         public SignalPoint() { IsActive = false; }
         public double X { get; set; }
         public double Y { get; set; }
+        public double xPercent { get; set; }
         public bool IsActive { get; set; }
         public Point ToPoint() { return new Point { X = this.X, Y = this.Y }; }
         public String Name { get; set; }
@@ -79,24 +80,23 @@ namespace DataProcess
                 }
             }
 
-            double pointWidth = (points[points.Length - 1].X - points[0].X)/(PointsToDraw.Count-1);
-            PointsToDraw[0].X = points[0].X;
-            PointsToDraw[0].Y = points[0].Y;
-            for (int i = 1; i < PointsToDraw.Count - 1; ++i)
+            double pointWidth = points[points.Length - 1].X - points[0].X;
+
+            for (int i = 0; i < PointsToDraw.Count; ++i)
             {
-                PointsToDraw[i].X = points[0].X + i * pointWidth;
-                for(int j = 0; j < points.Length; ++j)
+                PointsToDraw[i].X = points[0].X + PointsToDraw[i].xPercent * pointWidth;
+                for (int j = 0; j < points.Length; ++j)
                 {
-                    if(PointsToDraw[i].X > points[j].X)
+                    if (PointsToDraw[i].X < points[j].X)
                     {
-                        PointsToDraw[i].Y = (points[j].Y + points[j + 1].Y) / 2;
+                        PointsToDraw[i].X = points[j].X;
+                        PointsToDraw[i].Y = points[j].Y;
+                        break;
                     }
                 }
             }
-            PointsToDraw[PointsToDraw.Count - 1].X = points[points.Length - 1].X;
-            PointsToDraw[PointsToDraw.Count - 1].Y = points[points.Length - 1].Y;
 
-            foreach (SignalPoint point in PointsToDraw)
+                foreach (SignalPoint point in PointsToDraw)
             {
                 drawingContext.DrawEllipse(point.IsActive ? Brushes.Green : Brushes.Red, null, point.ToPoint(), 10, 10);
                 FormattedText formattedText = new FormattedText(
@@ -110,9 +110,9 @@ namespace DataProcess
             }
         }
 
-        public void AddPoint(String name)
+        public void AddPoint(String name, double xpersent)
         {
-            PointsToDraw.Add(new SignalPoint { Name = name});
+            PointsToDraw.Add(new SignalPoint { Name = name, xPercent = xpersent});
         }
 
         public void ActivePoint(String name, bool bActive)

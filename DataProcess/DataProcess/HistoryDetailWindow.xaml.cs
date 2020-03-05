@@ -106,7 +106,8 @@ namespace DataProcess
             ChartAngelZ.SetAxisYLabel("ωZ(°/s)");
 
             programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
-            FlyProtocol.GetProgramStatusTextList().ForEach(text => programDigram.AddPoint(text));
+            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
+
             ChartServoVol28.SetAxisYLabel("28V供电电压(V)");
             ChartServoVol160.SetAxisYLabel("160V供电电压(V)");
             ChartServo1Iq.SetAxisYLabel("电机1Iq电流(A)");
