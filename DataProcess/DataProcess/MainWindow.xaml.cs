@@ -1021,15 +1021,15 @@ namespace DataProcess
             navDataList.ForEach(navData =>
             {
 
-                navLatPointList.Add(new SeriesPoint(SeriesNavLat.Points.Count > 0 ? SeriesNavLat.Points[SeriesNavLat.Points.Count - 1].NumericalArgument : 0));
-                navLonPointList.Add(new SeriesPoint(SeriesNavLon.Points.Count > 0 ? SeriesNavLon.Points[SeriesNavLon.Points.Count - 1].NumericalArgument : 0));
-                navHeightPointList.Add(new SeriesPoint(SeriesNavHeight.Points.Count > 0 ? SeriesNavHeight.Points[SeriesNavHeight.Points.Count - 1].NumericalArgument : 0));
-                navSpeedNorthList.Add(new SeriesPoint(SeriesNavSpeedNorth.Points.Count > 0 ? SeriesNavSpeedNorth.Points[SeriesNavSpeedNorth.Points.Count - 1].NumericalArgument : 0));
-                navSpeedSkyList.Add(new SeriesPoint(SeriesNavSpeedSky.Points.Count > 0 ? SeriesNavSpeedSky.Points[SeriesNavSpeedSky.Points.Count - 1].NumericalArgument : 0));
-                navSpeedEastList.Add(new SeriesPoint(SeriesNavSpeedEast.Points.Count > 0 ? SeriesNavSpeedEast.Points[SeriesNavSpeedEast.Points.Count - 1].NumericalArgument : 0));
-                navPichAngelList.Add(new SeriesPoint(SeriesNavPitchAngle.Points.Count > 0 ? SeriesNavPitchAngle.Points[SeriesNavPitchAngle.Points.Count - 1].NumericalArgument : 0));
-                navCrabAngelList.Add(new SeriesPoint(SeriesNavCrabAngle.Points.Count > 0 ? SeriesNavCrabAngle.Points[SeriesNavCrabAngle.Points.Count - 1].NumericalArgument : 0));
-                navRollAngelList.Add(new SeriesPoint(SeriesNavRollAngle.Points.Count > 0 ? SeriesNavRollAngle.Points[SeriesNavRollAngle.Points.Count - 1].NumericalArgument : 0));
+                navLatPointList.Add(new SeriesPoint(SeriesNavLat.Points.Count > 0 ? SeriesNavLat.Points[SeriesNavLat.Points.Count - 1].NumericalArgument + 1 : 0, navData.latitude));
+                navLonPointList.Add(new SeriesPoint(SeriesNavLon.Points.Count > 0 ? SeriesNavLon.Points[SeriesNavLon.Points.Count - 1].NumericalArgument + 1 : 0, navData.longitude));
+                navHeightPointList.Add(new SeriesPoint(SeriesNavHeight.Points.Count > 0 ? SeriesNavHeight.Points[SeriesNavHeight.Points.Count - 1].NumericalArgument + 1 : 0, navData.height));
+                navSpeedNorthList.Add(new SeriesPoint(SeriesNavSpeedNorth.Points.Count > 0 ? SeriesNavSpeedNorth.Points[SeriesNavSpeedNorth.Points.Count - 1].NumericalArgument + 1 : 0, navData.northSpeed));
+                navSpeedSkyList.Add(new SeriesPoint(SeriesNavSpeedSky.Points.Count > 0 ? SeriesNavSpeedSky.Points[SeriesNavSpeedSky.Points.Count - 1].NumericalArgument + 1 : 0, navData.skySpeed));
+                navSpeedEastList.Add(new SeriesPoint(SeriesNavSpeedEast.Points.Count > 0 ? SeriesNavSpeedEast.Points[SeriesNavSpeedEast.Points.Count - 1].NumericalArgument + 1 : 0, navData.eastSpeed));
+                navPichAngelList.Add(new SeriesPoint(SeriesNavPitchAngle.Points.Count > 0 ? SeriesNavPitchAngle.Points[SeriesNavPitchAngle.Points.Count - 1].NumericalArgument + 1 : 0, navData.pitchAngle));
+                navCrabAngelList.Add(new SeriesPoint(SeriesNavCrabAngle.Points.Count > 0 ? SeriesNavCrabAngle.Points[SeriesNavCrabAngle.Points.Count - 1].NumericalArgument + 1 : 0, navData.crabAngle));
+                navRollAngelList.Add(new SeriesPoint(SeriesNavRollAngle.Points.Count > 0 ? SeriesNavRollAngle.Points[SeriesNavRollAngle.Points.Count - 1].NumericalArgument + 1 : 0, navData.rollAngle));
             });
 
             List<SeriesPoint> seriesList = new List<SeriesPoint>();
@@ -1125,15 +1125,15 @@ namespace DataProcess
             SeriesNavRollAngle.Points.AddRange(seriesList);
             seriesList.Clear();
 
-            ChartNavLat.Titles[0].Content = navDataList[navDataList.Count - 1].latitude;
-            ChartNavLon.Titles[0].Content = navDataList[navDataList.Count - 1].longitude;
-            ChartNavHeight.Titles[0].Content = navDataList[navDataList.Count - 1].height;
-            ChartNavSpeedNorth.Titles[0].Content = navDataList[navDataList.Count - 1].northSpeed;
-            ChartNavSpeedSky.Titles[0].Content = navDataList[navDataList.Count - 1].skySpeed;
-            ChartNavSpeedEast.Titles[0].Content = navDataList[navDataList.Count - 1].eastSpeed;
-            ChartNavPitchAngle.Titles[0].Content = navDataList[navDataList.Count - 1].pitchAngle;
-            ChartNavCrabAngle.Titles[0].Content = navDataList[navDataList.Count - 1].crabAngle;
-            ChartNavRollAngle.Titles[0].Content = navDataList[navDataList.Count - 1].rollAngle;
+            ChartNavLat.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].latitude);
+            ChartNavLon.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].longitude);
+            ChartNavHeight.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].height);
+            ChartNavSpeedNorth.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].northSpeed);
+            ChartNavSpeedSky.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].skySpeed);
+            ChartNavSpeedEast.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].eastSpeed);
+            ChartNavPitchAngle.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].pitchAngle);
+            ChartNavCrabAngle.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].crabAngle);
+            ChartNavRollAngle.Titles[0].Content = String.Format("{0:F}", navDataList[navDataList.Count - 1].rollAngle);
 
             ChartNavLat.EndInit();
             ChartNavLon.EndInit();
@@ -1148,7 +1148,106 @@ namespace DataProcess
 
         private void DrawAngelPackets(List<AngleData> angleDataList)
         {
+            ChartAccX.BeginInit();
+            ChartAccY.BeginInit();
+            ChartAccZ.BeginInit();
+            ChartAngelX.BeginInit();
+            ChartAngelY.BeginInit();
+            ChartAngelZ.BeginInit();
 
+            List<SeriesPoint> angleAccXList = new List<SeriesPoint>();
+            List<SeriesPoint> angleAccYList = new List<SeriesPoint>();
+            List<SeriesPoint> angleAccZList = new List<SeriesPoint>();
+            List<SeriesPoint> angleXList = new List<SeriesPoint>();
+            List<SeriesPoint> angleYList = new List<SeriesPoint>();
+            List<SeriesPoint> angleZList = new List<SeriesPoint>();
+
+            angleDataList.ForEach(angelData =>
+            {
+
+                angleAccXList.Add(new SeriesPoint(SeriesAccX.Points.Count > 0 ? SeriesAccX.Points[SeriesAccX.Points.Count - 1].NumericalArgument + 1 : 0, angelData.ax));
+                angleAccYList.Add(new SeriesPoint(SeriesAccY.Points.Count > 0 ? SeriesAccY.Points[SeriesAccY.Points.Count - 1].NumericalArgument + 1 : 0, angelData.ay));
+                angleAccZList.Add(new SeriesPoint(SeriesAccZ.Points.Count > 0 ? SeriesAccZ.Points[SeriesAccZ.Points.Count - 1].NumericalArgument + 1 : 0, angelData.az));
+                angleXList.Add(new SeriesPoint(SeriesAngelX.Points.Count > 0 ? SeriesAngelX.Points[SeriesAngelX.Points.Count - 1].NumericalArgument + 1 : 0, angelData.angleX));
+                angleYList.Add(new SeriesPoint(SeriesAngelY.Points.Count > 0 ? SeriesAngelY.Points[SeriesAngelY.Points.Count - 1].NumericalArgument + 1 : 0, angelData.angleY));
+                angleZList.Add(new SeriesPoint(SeriesAngelZ.Points.Count > 0 ? SeriesAngelZ.Points[SeriesAngelZ.Points.Count - 1].NumericalArgument + 1 : 0, angelData.angleZ));
+            });
+
+            List<SeriesPoint> seriesList = new List<SeriesPoint>();
+
+            seriesList.AddRange(SeriesAccX.Points);
+            seriesList.AddRange(angleAccXList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAccX.Points.Clear();
+            SeriesAccX.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesAccY.Points);
+            seriesList.AddRange(angleAccYList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAccY.Points.Clear();
+            SeriesAccY.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesAccZ.Points);
+            seriesList.AddRange(angleAccZList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAccZ.Points.Clear();
+            SeriesAccZ.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesAngelX.Points);
+            seriesList.AddRange(angleXList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAngelX.Points.Clear();
+            SeriesAngelX.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesAngelY.Points);
+            seriesList.AddRange(angleYList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAngelY.Points.Clear();
+            SeriesAngelY.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesAngelZ.Points);
+            seriesList.AddRange(angleZList);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesAngelZ.Points.Clear();
+            SeriesAngelZ.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            ChartAccX.Titles[0].Content = String.Format("{0:F}", angleDataList[angleDataList.Count - 1].ax);
+            ChartAccY.Titles[0].Content = String.Format("{0:F}", angleDataList[angleDataList.Count - 1].ay);
+            ChartAccZ.Titles[0].Content = String.Format("{0:F}", angleDataList[angleDataList.Count - 1].az);
+            ChartAngelX.Titles[0].Content = String.Format("{0:F}", angleDataList[angleDataList.Count - 1].angleX);
+            ChartAngelY.Titles[0].Content = String.Format("{0:F}", angleDataList[angleDataList.Count - 1].angleY);
+            ChartAngelZ.Titles[0].Content = String.Format("{0:F}", angleDataList[angleDataList.Count - 1].angleZ);
+
+            ChartAccX.EndInit();
+            ChartAccY.EndInit();
+            ChartAccZ.EndInit();
+            ChartAngelX.EndInit();
+            ChartAngelY.EndInit();
+            ChartAngelZ.EndInit();
         }
 
         private void DrawProgramPackets(List<ProgramControlData> programDataList)
@@ -1158,7 +1257,105 @@ namespace DataProcess
 
         private void DrawServoPackets(List<ServoData> servoDataList)
         {
+            ChartServoVol28.BeginInit();
+            ChartServoVol160.BeginInit();
+            ChartServo1Iq.BeginInit();
+            ChartServo2Iq.BeginInit();
+            ChartServo3Iq.BeginInit();
+            ChartServo4Iq.BeginInit();
 
+            List<SeriesPoint> servoVol28List = new List<SeriesPoint>();
+            List<SeriesPoint> servoVol160List = new List<SeriesPoint>();
+            List<SeriesPoint> servoIq1List = new List<SeriesPoint>();
+            List<SeriesPoint> servoIq2List = new List<SeriesPoint>();
+            List<SeriesPoint> servoIq3List = new List<SeriesPoint>();
+            List<SeriesPoint> servoIq4List = new List<SeriesPoint>();
+
+            servoDataList.ForEach(servoData =>
+            {
+                servoVol28List.Add(new SeriesPoint(SeriesServoVol28.Points.Count > 0 ? SeriesServoVol28.Points[SeriesServoVol28.Points.Count - 1].NumericalArgument + 1 : 0, FlyDataConvert.GetVoltage28(servoData.vol28)));
+                servoVol160List.Add(new SeriesPoint(SeriesServoVol160.Points.Count > 0 ? SeriesServoVol160.Points[SeriesServoVol160.Points.Count - 1].NumericalArgument + 1 : 0, FlyDataConvert.GetVoltage160(servoData.vol160)));
+                servoIq1List.Add(new SeriesPoint(SeriesServo1Iq.Points.Count > 0 ? SeriesServo1Iq.Points[SeriesServo1Iq.Points.Count - 1].NumericalArgument + 1 : 0, FlyDataConvert.GetElectricity(servoData.Iq1)));
+                servoIq2List.Add(new SeriesPoint(SeriesServo2Iq.Points.Count > 0 ? SeriesServo2Iq.Points[SeriesServo2Iq.Points.Count - 1].NumericalArgument + 1 : 0, FlyDataConvert.GetElectricity(servoData.Iq2)));
+                servoIq3List.Add(new SeriesPoint(SeriesServo3Iq.Points.Count > 0 ? SeriesServo3Iq.Points[SeriesServo3Iq.Points.Count - 1].NumericalArgument + 1 : 0, FlyDataConvert.GetElectricity(servoData.Iq3)));
+                servoIq4List.Add(new SeriesPoint(SeriesServo4Iq.Points.Count > 0 ? SeriesServo4Iq.Points[SeriesServo4Iq.Points.Count - 1].NumericalArgument + 1 : 0, FlyDataConvert.GetElectricity(servoData.Iq4)));
+            });
+
+            List<SeriesPoint> seriesList = new List<SeriesPoint>();
+
+            seriesList.AddRange(SeriesServoVol28.Points);
+            seriesList.AddRange(servoVol28List);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesServoVol28.Points.Clear();
+            SeriesServoVol28.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesServoVol160.Points);
+            seriesList.AddRange(servoVol160List);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesServoVol160.Points.Clear();
+            SeriesServoVol160.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesServo1Iq.Points);
+            seriesList.AddRange(servoIq1List);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesServo1Iq.Points.Clear();
+            SeriesServo1Iq.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesServo2Iq.Points);
+            seriesList.AddRange(servoIq2List);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesServo2Iq.Points.Clear();
+            SeriesServo2Iq.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesServo3Iq.Points);
+            seriesList.AddRange(servoIq3List);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesServo3Iq.Points.Clear();
+            SeriesServo3Iq.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            seriesList.AddRange(SeriesServo4Iq.Points);
+            seriesList.AddRange(servoIq4List);
+            if (seriesList.Count > CHART_MAX_POINTS)
+            {
+                seriesList.RemoveRange(0, seriesList.Count - CHART_MAX_POINTS);
+            }
+            SeriesServo4Iq.Points.Clear();
+            SeriesServo4Iq.Points.AddRange(seriesList);
+            seriesList.Clear();
+
+            ChartServoVol28.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetVoltage28(servoDataList[servoDataList.Count-1].vol28));
+            ChartServoVol160.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetVoltage160(servoDataList[servoDataList.Count - 1].vol160));
+            ChartServo1Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(servoDataList[servoDataList.Count - 1].Iq1));
+            ChartServo2Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(servoDataList[servoDataList.Count - 1].Iq2));
+            ChartServo3Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(servoDataList[servoDataList.Count - 1].Iq3));
+            ChartServo4Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(servoDataList[servoDataList.Count - 1].Iq4));
+
+            ChartServoVol28.EndInit();
+            ChartServoVol160.EndInit();
+            ChartServo1Iq.EndInit();
+            ChartServo2Iq.EndInit();
+            ChartServo3Iq.EndInit();
+            ChartServo4Iq.EndInit();
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -1372,6 +1569,7 @@ namespace DataProcess
 
         private void ResetDisplay()
         {
+            //清空缓变参数
             UpdateSyncFireDisplay(Double.NaN);
             SeriesHood.Points.Clear();
             SeriesInsAir.Points.Clear();
@@ -1405,6 +1603,7 @@ namespace DataProcess
             ChartGestureControlHigh.Titles[0].Content = null;
             ChartGestureControlLow.Titles[0].Content = null;
 
+            //清空速变参数
             SeriesShake1.Points.Clear();
             SeriesShake2.Points.Clear();
             SeriesShake3.Points.Clear();
@@ -1451,6 +1650,7 @@ namespace DataProcess
             ChartNoise1.Titles[0].Content = null;
             ChartNoise2.Titles[0].Content = null;
 
+            //清空尾端参数
             SeriesPresure.Points.Clear();
             SeriesLevel1.Points.Clear();
             SeriesTemperature1.Points.Clear();
@@ -1475,8 +1675,48 @@ namespace DataProcess
             ChartLash2Z.Titles[0].Content = null;
             ChartNoise.Titles[0].Content = null;
 
+            //索引归零
             slowDataIndex = 0;
             fastDataIndex = 0;
+
+            //清空导航数据
+            SeriesNavLat.Points.Clear();
+            SeriesNavLon.Points.Clear();
+            SeriesNavHeight.Points.Clear();
+            SeriesNavSpeedNorth.Points.Clear();
+            SeriesNavSpeedSky.Points.Clear();
+            SeriesNavSpeedEast.Points.Clear();
+            SeriesNavPitchAngle.Points.Clear();
+            SeriesNavCrabAngle.Points.Clear();
+            SeriesNavRollAngle.Points.Clear();
+
+            ChartNavLat.Titles[0].Content = null;
+            ChartNavLon.Titles[0].Content = null;
+            ChartNavHeight.Titles[0].Content = null;
+            ChartNavSpeedNorth.Titles[0].Content = null;
+            ChartNavSpeedSky.Titles[0].Content = null;
+            ChartNavSpeedEast.Titles[0].Content = null;
+            ChartNavPitchAngle.Titles[0].Content = null;
+            ChartNavCrabAngle.Titles[0].Content = null;
+            ChartNavRollAngle.Titles[0].Content = null;
+
+            //清空程控信号
+            ResetProgramDiagram();
+
+            //清空伺服信号
+            SeriesServoVol28.Points.Clear();
+            SeriesServoVol160.Points.Clear();
+            SeriesServo1Iq.Points.Clear();
+            SeriesServo2Iq.Points.Clear();
+            SeriesServo3Iq.Points.Clear();
+            SeriesServo4Iq.Points.Clear();
+
+            ChartServoVol28.Titles[0].Content = null;
+            ChartServoVol160.Titles[0].Content = null;
+            ChartServo1Iq.Titles[0].Content = null;
+            ChartServo2Iq.Titles[0].Content = null;
+            ChartServo3Iq.Titles[0].Content = null;
+            ChartServo4Iq.Titles[0].Content = null;
         }
 
         private void SaveTestInfo()

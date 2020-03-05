@@ -169,10 +169,10 @@ namespace DataProcess.Protocol
         public ulong other;
         public byte vol28;
         public ushort vol160;
-        public byte Iq1;
-        public byte Iq2;
-        public byte Iq3;
-        public byte Iq4;
+        public sbyte Iq1;
+        public sbyte Iq2;
+        public sbyte Iq3;
+        public sbyte Iq4;
         public ushort selfCheck;
         public byte crc;
         public byte endChar;

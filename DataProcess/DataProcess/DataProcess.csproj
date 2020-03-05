@@ -114,6 +114,7 @@
     <Compile Include="Parser\Env\TailParser.cs" />
     <Compile Include="Parser\Env\FastParser.cs" />
     <Compile Include="Parser\Env\SlowParser.cs" />
+    <Compile Include="Parser\Fly\FlyDataConvert.cs" />
     <Compile Include="Parser\Fly\FlyParser.cs" />
     <Compile Include="Protocol\ChannelType.cs" />
     <Compile Include="Protocol\EnvProtocol.cs" />

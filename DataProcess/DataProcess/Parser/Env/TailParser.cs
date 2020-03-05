@@ -22,6 +22,10 @@ namespace DataProcess.Parser.Env
             }
             TailPacketUdp tailPacketUdp = Tool.ByteToStruct<TailPacketUdp>(buffer, 0, buffer.Length);
             ushort udpDataLen = tailPacketUdp.dataLen.SwapUInt16();
+            if(pos + udpDataLen >= packetBuffer.Length || tailPacketUdp.data.Length < udpDataLen)
+            {
+                return tailPacketRsList;
+            }
             Array.Copy(tailPacketUdp.data, 0, packetBuffer, pos, udpDataLen);
             pos += udpDataLen;
             while (pos >= Marshal.SizeOf(typeof(TailPacketRs)))
