@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataProcess
 {
-    public class EnvBuffers
+    public class DisplayBuffers
     {
-        public EnvBuffers()
+        public DisplayBuffers()
         {
             SlowPacketList = new List<SlowPacket>();
             FastPacketList = new List<FastPacket>();

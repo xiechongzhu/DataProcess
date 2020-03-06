@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChartPointDataSource.cs" />
     <Compile Include="Controls\MyChartControl.xaml.cs">
       <DependentUpon>MyChartControl.xaml</DependentUpon>
     </Compile>
@@ -98,7 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CopyMe.SQLite.tt</DependentUpon>
     </Compile>
-    <Compile Include="EnvBuffers.cs" />
+    <Compile Include="DisplayBuffers.cs" />
     <Compile Include="HistoryDetailWindow.xaml.cs">
       <DependentUpon>HistoryDetailWindow.xaml</DependentUpon>
     </Compile>

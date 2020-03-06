@@ -21,19 +21,79 @@ using System.Windows.Threading;
 
 namespace DataProcess
 {
+    public class ChartDataSource
+    {
+        //缓变参数
+        public ChartPointDataSource SlowHoodList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SlowInsAirList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SlowInsWallList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SLowAttAirList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SLowAttWallList1 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SLowAttWallList2 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SLowAttWallList3 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SLowAttWallList4 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SLowAttWallList5 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SLowAttWallList6 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SlowInsPresureList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SlowAttPresureList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SlowLevel2PresureList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SlowPresureHighList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource SlowPresureLowList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+        //速变参数
+        public List<ChartPointDataSource> FastShakeSeriesLists = new List<ChartPointDataSource>();
+        public ChartPointDataSource FastLashT3SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource FastLashT2SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource FastLashT1SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource FastLashT0SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public List<ChartPointDataSource> FastLashSeriesLists1 = new List<ChartPointDataSource>();
+        public ChartPointDataSource FastLashSeriesList2 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public List<ChartPointDataSource> FastNoiseLists = new List<ChartPointDataSource>();
+
+        //尾端参数
+        public ChartPointDataSource TailPresureList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailLevel1PresureList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailTemperature1List = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailTemperature2List = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailLash1XList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailLash1YList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailLash1ZList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailLash2XList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailLash2YList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailLash2ZList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailNoiseList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+        public ChartDataSource()
+        {
+            for(int i = 0; i < 12; ++i)
+            {
+                FastShakeSeriesLists.Add(new ChartPointDataSource(MainWindow.CHART_MAX_POINTS));
+            }
+            for(int i = 0; i < 3; ++i)
+            {
+                FastLashSeriesLists1.Add(new ChartPointDataSource(MainWindow.CHART_MAX_POINTS));
+            }
+            for (int i = 0; i < 2; ++i)
+            {
+                FastNoiseLists.Add(new ChartPointDataSource(MainWindow.CHART_MAX_POINTS));
+            }
+        }
+    }
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
     {
-        private readonly int CHART_MAX_POINTS = 1000;
+        public static readonly int CHART_MAX_POINTS = 1000;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;
         private EnvParser envParser = null;
         private FlyParser flyParser = null;
         private DispatcherTimer uiRefreshTimer = new DispatcherTimer();
-        private EnvBuffers envBuffers = new EnvBuffers();
+        private DisplayBuffers envBuffers = new DisplayBuffers();
         private int slowDataIndex = 0;
         private int fastDataIndex = 0;
         private DataLogger dataLogger = null;
