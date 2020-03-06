@@ -70,7 +70,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavLat" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavLat" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -99,7 +99,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavLon" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavLon" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -128,7 +128,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavHeight" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavHeight" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -157,7 +157,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedNorth" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedNorth" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -186,7 +186,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedSky" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedSky" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -215,7 +215,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedEast" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSpeedEast" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -244,7 +244,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavPitchAngle" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavPitchAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -273,7 +273,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavCrabAngle" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavCrabAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -302,7 +302,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavRollAngle" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavRollAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -346,7 +346,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAccX" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAccX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -375,7 +375,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAccY" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAccY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -404,7 +404,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAccZ" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAccZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -433,7 +433,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAngelX" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAngelX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -462,7 +462,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAngelY" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAngelY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -491,7 +491,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAngelZ" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAngelZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -535,7 +535,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServoVol28" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServoVol28" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -564,7 +564,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServoVol160" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServoVol160" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -593,7 +593,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo1Iq" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo1Iq" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -622,7 +622,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo2Iq" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo2Iq" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -651,7 +651,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo3Iq" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo3Iq" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -680,7 +680,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo4Iq" MarkerSize="10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServo4Iq" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -755,7 +755,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesHood" MarkerSize="10" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesHood" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -784,7 +784,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesInsAir" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesInsAir" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -813,7 +813,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesInsWall" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesInsWall" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -842,7 +842,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttAir" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttAir" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -871,7 +871,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall1" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall1" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -900,7 +900,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall2" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall2" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -929,7 +929,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall3" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall3" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -958,7 +958,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall4" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall4" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -987,7 +987,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall5" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall5" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1016,7 +1016,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall6" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttWall6" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1045,7 +1045,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesInsPresure" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesInsPresure" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1074,7 +1074,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttPresure" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttPresure" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1103,7 +1103,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLevel2Presure" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLevel2Presure" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1132,7 +1132,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttPresureHigh" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttPresureHigh" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1161,7 +1161,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttPresureLow" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesAttPresureLow" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1212,7 +1212,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake1" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake1" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1241,7 +1241,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake2" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake2" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1270,7 +1270,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake3" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake3" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1299,7 +1299,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake4" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake4" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1328,7 +1328,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake5" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake5" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1357,7 +1357,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake6" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake6" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1386,7 +1386,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake7" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake7" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1415,7 +1415,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake8" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake8" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1444,7 +1444,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake9" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake9" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1473,7 +1473,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake10" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake10" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1502,7 +1502,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake11" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake11" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1531,7 +1531,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake12" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake12" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1560,7 +1560,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT3" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT3" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1589,7 +1589,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT2" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT2" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1618,7 +1618,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT1" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT1" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1647,7 +1647,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT0" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLashT0" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1676,7 +1676,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_1" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_1" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1705,7 +1705,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_2" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_2" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1734,7 +1734,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_3" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1_3" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1763,7 +1763,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1792,7 +1792,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise1" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise1" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1821,7 +1821,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise2" >
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise2" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
@@ -1868,7 +1868,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesPresure" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesPresure" >
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1897,7 +1897,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLevel1" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLevel1" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1926,7 +1926,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature1" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature1" >
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1955,7 +1955,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature2" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature2" >
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1984,7 +1984,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1X" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1X" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -2013,7 +2013,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1Y" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1Y" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -2042,7 +2042,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1Z" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1Z" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -2071,7 +2071,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2X" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2X" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -2100,7 +2100,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2Y" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2Y" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -2129,7 +2129,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2Z" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2Z" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -2158,7 +2158,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D DisplayName="Series 1" LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNoise" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
