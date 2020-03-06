@@ -112,13 +112,13 @@ namespace DataProcess
         {
             ProgramContrrolStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
             programDigram.SetLinePoints(new System.Windows.Point(0.1, 0.9), new System.Windows.Point(0.5, -0.8), new System.Windows.Point(0.9, 0.9));
-            FlyProtocol.GetProgramStatusTextList().ForEach(text => programDigram.AddPoint(text));
+            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
         }
 
         private void ResetProgramDiagram()
         {
             ProgramContrrolStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
-            FlyProtocol.GetProgramStatusTextList().ForEach(text => programDigram.ActivePoint(text, false));
+            FlyProtocol.GetPoints().ForEach(point => programDigram.ActivePoint(point.Value, false));
         }
 
         private void LoadNetworkSetting()

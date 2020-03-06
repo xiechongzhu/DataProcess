@@ -25,25 +25,21 @@ namespace DataProcess.Protocol
             STATUS_HEAD_BODY_LEAVE
         }
 
-        private static readonly Dictionary<PROGRAM_CONTROL_STATUS, String> ProgramControlStatusText = new Dictionary<PROGRAM_CONTROL_STATUS, string>()
+        private static readonly Dictionary<PROGRAM_CONTROL_STATUS, KeyValuePair<double, String>> ProgramControlStatusText = new Dictionary<PROGRAM_CONTROL_STATUS, KeyValuePair<double, String>>()
         {
-            { PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN, "一级发送机关机"},
-            { PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE, "一级发动机分离"},
-            { PROGRAM_CONTROL_STATUS.STATUS_BOOM, "姿控发送机电爆管起爆" },
-            { PROGRAM_CONTROL_STATUS.STATUS_TOP, "顶点"},
-            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE, "头体分离"}
+            { PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN, new KeyValuePair<double, String>(0.1, "一级发送机关机") },
+            { PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE, new KeyValuePair<double, String>(0.2, "一级发动机分离")},
+            { PROGRAM_CONTROL_STATUS.STATUS_BOOM, new KeyValuePair<double, String>(0.3, "姿控发送机电爆管起爆") },
+            { PROGRAM_CONTROL_STATUS.STATUS_TOP, new KeyValuePair<double, String>(0.5, "顶点")},
+            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE, new KeyValuePair<double, String>(0.9, "头体分离")}
         };
 
-        public static String GetProgramStatusText(PROGRAM_CONTROL_STATUS status)
+        public static KeyValuePair<double, String> GetPoint(PROGRAM_CONTROL_STATUS status)
         {
-            if(ProgramControlStatusText.ContainsKey(status))
-            {
-                return ProgramControlStatusText[status];
-            }
-            return String.Empty;
+            return ProgramControlStatusText[status];
         }
 
-        public static List<String> GetProgramStatusTextList()
+        public static List<KeyValuePair<double, String>> GetPoints()
         {
             return ProgramControlStatusText.Values.ToList();
         }
