@@ -1868,7 +1868,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesPresure" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesPresure" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1926,7 +1926,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature1" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature1" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
@@ -1955,7 +1955,7 @@
                                                 </dxc:AxisX2D.Title>
                                             </dxc:AxisX2D>
                                         </dxc:XYDiagram2D.AxisX>
-                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature2" >
+                                        <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesTemperature2" ArgumentDataMember="X" ValueDataMember="Y">
                                             <dxc:LineSeries2D.LineStyle>
                                                 <dxc:LineStyle LineJoin="Bevel"/>
                                             </dxc:LineSeries2D.LineStyle>
