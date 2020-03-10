@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataProcess.Protocol;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -115,7 +116,7 @@ namespace DataProcess
             PointsToDraw.Add(new SignalPoint { Name = name, xPercent = xpersent});
         }
 
-        public void ActivePoint(String name, bool bActive)
+        private void ActivePoint(String name, bool bActive)
         {
             foreach(SignalPoint point in PointsToDraw)
             {
@@ -126,6 +127,15 @@ namespace DataProcess
                     return;
                 }
             }
+        }
+
+        public void Reset()
+        {
+            foreach (SignalPoint point in PointsToDraw)
+            {
+                point.IsActive = false;
+            }
+            InvalidateVisual();
         }
 
         public static Point[] draw_bezier_curves(Point[] points, int count, float step)
@@ -183,6 +193,33 @@ namespace DataProcess
                 result[0] = 1;
             }
             return result[k];
+        }
+
+        public void AddNavData(NavData navData)
+        {
+
+        }
+
+        public void AddAngleData(AngleData angelData)
+        {
+
+        }
+
+        public void AddProgramData(ProgramControlData programData)
+        {
+            switch(programData.controlStatus)
+            {
+                case 1:
+                case 2:
+                case 12:
+                    ActivePoint(FlyProtocol.GetProgramControlStatusDescription(programData.controlStatus), true);
+                    break;
+            }
+        }
+
+        public void AddServoData(ServoData servoData)
+        {
+
         }
     }
 }

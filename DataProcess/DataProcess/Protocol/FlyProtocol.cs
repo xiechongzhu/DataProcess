@@ -12,7 +12,7 @@ namespace DataProcess.Protocol
         public static readonly byte[] syncHeader = { 0xAA, 0x00, 0x55};
         public static readonly byte dataType = 0x88;
         public static readonly byte[] navHeader = { Convert.ToByte('$'), Convert.ToByte('J'), Convert.ToByte('Z'), Convert.ToByte('H') };
-        public static readonly ushort angleHeader = 0xEB90;
+        public static readonly byte[] angleHeader = { 0xEB, 0x90 };
         public static readonly byte[] programHeader = { Convert.ToByte('$'), Convert.ToByte('J'), Convert.ToByte('C'), Convert.ToByte('K') };
         public static readonly byte[] servoHeader = { 0x55, 0xAA};
 
@@ -110,13 +110,13 @@ namespace DataProcess.Protocol
         public float northSpeed;
         public float skySpeed;
         public float eastSpeed;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
-        public float[] other1;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 24)]
+        public byte[] other1;
         public float pitchAngle;
         public float crabAngle;
         public float rollAngle;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
-        public float[] other2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 24)]
+        public byte[] other2;
         public uint sequence;
         public byte crc;
         public byte endChar;

@@ -1,21 +1,11 @@
 ﻿using DataProcess.Log;
 using DataProcess.Parser;
+using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
 using DataProcess.Tools;
-using DevExpress.Xpf.Charts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DataProcess
 {
@@ -138,6 +128,12 @@ namespace DataProcess
                 DrawSlowPackets(slowPacketList);
                 DrawFastPackets(fastPacketList);
                 DrawTailPackets(tailPacketList);
+                dataLogger.LoadFlyBinaryFile(flyBinFile, out List<NavData> navDataList, out List<AngleData> angleDataList,
+                    out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
+                DrawNavData(navDataList);
+                DrawAngelData(angleDataList);
+                DrawProgramData(prgramDataList);
+                DrawServoData(servoDataList);
             }
             else
             {
@@ -145,11 +141,15 @@ namespace DataProcess
                 List<SlowPacket> slowPacketList = dataLogger.LoadSlowBinaryFile(slowBinFile);
                 List<FastPacket> fastPacketList = dataLogger.LoadFastBinaryFile(fastBinFlie);
                 List<TailPacketRs> tailPacketList = dataLogger.LoadTailBinaryFile(tailBinFile);
-                dataLogger.LoadFlyBinaryFile(flyBinFile, out List<NavData> navDataList, out List<AngleData> angleDataList, 
-                    out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
                 DrawSlowPackets(slowPacketList);
                 DrawFastPackets(fastPacketList);
                 DrawTailPackets(tailPacketList);
+                dataLogger.LoadFlyBinaryFile(flyBinFile, out List<NavData> navDataList, out List<AngleData> angleDataList,
+                    out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
+                DrawNavData(navDataList);
+                DrawAngelData(angleDataList);
+                DrawProgramData(prgramDataList);
+                DrawServoData(servoDataList);
             }
         }
 
@@ -163,22 +163,6 @@ namespace DataProcess
 
         private void DrawSlowPackets(List<SlowPacket> packets)
         {
-            List<SeriesPoint> hoodSeriesList = new List<SeriesPoint>();
-            List<SeriesPoint> insAirSeriesList = new List<SeriesPoint>();
-            List<SeriesPoint> insWallList = new List<SeriesPoint>();
-            List<SeriesPoint> attAirList = new List<SeriesPoint>();
-            List<SeriesPoint> attWallList1 = new List<SeriesPoint>();
-            List<SeriesPoint> attWallList2 = new List<SeriesPoint>();
-            List<SeriesPoint> attWallList3 = new List<SeriesPoint>();
-            List<SeriesPoint> attWallList4 = new List<SeriesPoint>();
-            List<SeriesPoint> attWallList5 = new List<SeriesPoint>();
-            List<SeriesPoint> attWallList6 = new List<SeriesPoint>();
-            List<SeriesPoint> insPresureList = new List<SeriesPoint>();
-            List<SeriesPoint> attPresureList = new List<SeriesPoint>();
-            List<SeriesPoint> level2PresureList = new List<SeriesPoint>();
-            List<SeriesPoint> attPresureHigh = new List<SeriesPoint>();
-            List<SeriesPoint> attPresureLow = new List<SeriesPoint>();
-
             foreach (SlowPacket packet in packets)
             {
                 for (int i = 0; i < 2; ++i)
@@ -431,6 +415,80 @@ namespace DataProcess
             ChartLash2Y.Update();
             ChartLash2Z.Update();
             ChartNoise.Update();
+        }
+
+        private void DrawNavData(List<NavData> packets)
+        {
+            packets.ForEach(packet =>
+            {
+                programDigram.AddNavData(packet);
+                ChartNavLat.AddValue(packet.latitude);
+                ChartNavLon.AddValue(packet.longitude);
+                ChartNavHeight.AddValue(packet.height);
+                ChartNavSpeedNorth.AddValue(packet.northSpeed);
+                ChartNavSpeedSky.AddValue(packet.skySpeed);
+                ChartNavSpeedEast.AddValue(packet.eastSpeed);
+                ChartNavPitchAngle.AddValue(packet.pitchAngle);
+                ChartNavCrabAngle.AddValue(packet.crabAngle);
+                ChartNavRollAngle.AddValue(packet.rollAngle);
+            });
+            ChartNavLat.Update();
+            ChartNavLon.Update();
+            ChartNavHeight.Update();
+            ChartNavSpeedNorth.Update();
+            ChartNavSpeedSky.Update();
+            ChartNavSpeedEast.Update();
+            ChartNavPitchAngle.Update();
+            ChartNavCrabAngle.Update();
+            ChartNavRollAngle.Update();
+        }
+
+        private void DrawAngelData(List<AngleData> packets)
+        {
+            packets.ForEach(packet =>
+            {
+                programDigram.AddAngleData(packet);
+                ChartAccX.AddValue(packet.ax);
+                ChartAccY.AddValue(packet.ay);
+                ChartAccZ.AddValue(packet.az);
+                ChartAngelX.AddValue(packet.angleX);
+                ChartAngelY.AddValue(packet.angleY);
+                ChartAngelZ.AddValue(packet.angleZ);
+            });
+            ChartAccX.Update();
+            ChartAccY.Update();
+            ChartAccZ.Update();
+            ChartAngelX.Update();
+            ChartAngelY.Update();
+            ChartAngelZ.Update();
+        }
+
+        private void DrawProgramData(List<ProgramControlData> packets)
+        {
+            packets.ForEach(packet =>
+            {
+                programDigram.AddProgramData(packet);
+            });
+        }
+
+        private void DrawServoData(List<ServoData> packets)
+        {
+            packets.ForEach(packet =>
+            {
+                programDigram.AddServoData(packet);
+                ChartServoVol28.AddValue(FlyDataConvert.GetVoltage28(packet.vol28));
+                ChartServoVol160.AddValue(FlyDataConvert.GetVoltage160(packet.vol160));
+                ChartServo1Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq1));
+                ChartServo2Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq2));
+                ChartServo3Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq3));
+                ChartServo4Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq4));
+            });
+            ChartServoVol28.Update();
+            ChartServoVol160.Update();
+            ChartServo1Iq.Update();
+            ChartServo2Iq.Update();
+            ChartServo3Iq.Update();
+            ChartServo4Iq.Update();
         }
     }
 }

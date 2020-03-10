@@ -14,8 +14,6 @@ namespace DataProcess.Parser.Fly
 {
     public class FlyParser
     {
-        private byte[] dataBuffer = new byte[10000];
-        private int pos = 0;
         public DataLogger dataLogger { get; set; }
         private IntPtr mainWindowHandle;
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
@@ -109,62 +107,53 @@ namespace DataProcess.Parser.Fly
             {
                 return;
             }
-            ushort dataLen = flyHeader.dataLen.SwapUInt16();
-            if(pos + dataLen >= dataBuffer.Length)
+
+            byte[] protocolBuffer;
+            for (int pos = 0; pos < buffer.Length; ++pos)
             {
-                pos = 0;
-                return;
+                if(EqualHeader(FlyProtocol.navHeader, buffer, pos))
+                {
+                    Console.WriteLine(String.Format("Find navHeader {0}", Marshal.SizeOf(typeof(NavData))));
+                }
+                if(EqualHeader(FlyProtocol.angleHeader, buffer, pos))
+                {
+                    //Console.WriteLine("Find angleHeader");
+                }
+                if(EqualHeader(FlyProtocol.programHeader, buffer, pos))
+                {
+                    //Console.WriteLine("Find programHeader");
+                }
+                if(EqualHeader(FlyProtocol.servoHeader, buffer, pos))
+                {
+                    //Console.WriteLine("Find servoHeader");
+                }
             }
-            Array.Copy(buffer, Marshal.SizeOf(typeof(FlyHeader)), dataBuffer, pos, dataLen);
-            pos += dataLen;
-            for(; ; )
+        }
+
+        bool EqualHeader(byte[] header, byte[] buffer, int pos)
+        {
+            if(pos + header.Length > buffer.Length - 1)
             {
-                if(pos >= Marshal.SizeOf(typeof(NavData)))
-                {
-                    NavData navData = Tool.ByteToStruct<NavData>(buffer, 0, Marshal.SizeOf(typeof(NavData)));
-                    if(Enumerable.SequenceEqual(navData.header, FlyProtocol.navHeader))
-                    {
-                        navDataList.Add(navData);
-                        Array.Copy(dataBuffer, Marshal.SizeOf(typeof(NavData)), dataBuffer, 0, pos - Marshal.SizeOf(typeof(NavData)));
-                        pos -= Marshal.SizeOf(typeof(NavData));
-                        continue;
-                    }
-                }
-                if(pos >= Marshal.SizeOf(typeof(AngleData)))
-                {
-                    AngleData angleData = Tool.ByteToStruct<AngleData>(buffer, 0, Marshal.SizeOf(typeof(AngleData)));
-                    if(angleData.header == FlyProtocol.angleHeader)
-                    {
-                        angleDataList.Add(angleData);
-                        Array.Copy(dataBuffer, Marshal.SizeOf(typeof(AngleData)), dataBuffer, 0, pos - Marshal.SizeOf(typeof(AngleData)));
-                        pos -= Marshal.SizeOf(typeof(AngleData));
-                        continue;
-                    }
-                }
-                if(pos >= Marshal.SizeOf(typeof(ProgramControlData)))
-                {
-                    ProgramControlData programControlData = Tool.ByteToStruct<ProgramControlData>(buffer, 0, Marshal.SizeOf(typeof(ProgramControlData)));
-                    if (Enumerable.SequenceEqual(programControlData.header, FlyProtocol.programHeader))
-                    {
-                        programControlDataList.Add(programControlData);
-                        Array.Copy(dataBuffer, Marshal.SizeOf(typeof(ProgramControlData)), dataBuffer, 0, pos - Marshal.SizeOf(typeof(ProgramControlData)));
-                        pos -= Marshal.SizeOf(typeof(ProgramControlData));
-                        continue;
-                    }
-                }
-                if(pos >= Marshal.SizeOf(typeof(ServoData)))
-                {
-                    ServoData servoData = Tool.ByteToStruct<ServoData>(buffer, 0, Marshal.SizeOf(typeof(ServoData)));
-                    if (Enumerable.SequenceEqual(servoData.header, FlyProtocol.servoHeader))
-                    {
-                        servoDataList.Add(servoData);
-                        Array.Copy(dataBuffer, Marshal.SizeOf(typeof(ServoData)), dataBuffer, 0, pos - Marshal.SizeOf(typeof(ServoData)));
-                        pos -= Marshal.SizeOf(typeof(ServoData));
-                        continue;
-                    }
-                }
-                return;
+                return false;
             }
+            for(int i = 0; i < header.Length; ++i)
+            {
+                if(header[i] != buffer[i + pos])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        int GetProtocolSize(Type protocol, int headerSize)
+        {
+            int _size = Marshal.SizeOf(protocol) - headerSize;
+            if(_size % 8 == 0)
+            {
+                return _size + 2 * (_size / 8 - 1);
+            }
+            return _size + 2 * (_size / 8);
         }
     }
 }

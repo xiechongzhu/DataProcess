@@ -708,7 +708,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="控制阶段:" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ProgramContrrolStatus"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ProgramControlStatus"/>
                         </Grid>
                         <dataprocess:SignalDiagram Grid.Row="1" Grid.Column="0" x:Name="programDigram"/>
                     </Grid>

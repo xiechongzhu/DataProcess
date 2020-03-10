@@ -275,15 +275,15 @@ namespace DataProcess
 
         private void InitProgramDiagram()
         {
-            ProgramContrrolStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
+            ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
             programDigram.SetLinePoints(new System.Windows.Point(0.1, 0.9), new System.Windows.Point(0.5, -0.8), new System.Windows.Point(0.9, 0.9));
             FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
         }
 
         private void ResetProgramDiagram()
         {
-            ProgramContrrolStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
-            FlyProtocol.GetPoints().ForEach(point => programDigram.ActivePoint(point.Value, false));
+            ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
+            programDigram.Reset();
         }
 
         private void LoadNetworkSetting()
@@ -609,6 +609,7 @@ namespace DataProcess
         {
             navDataList.ForEach(packet =>
             {
+                programDigram.AddNavData(packet);
                 chartDataSource.NavLat.AddPoint(packet.latitude);
                 chartDataSource.NavLon.AddPoint(packet.longitude);
                 chartDataSource.NavHeight.AddPoint(packet.height);
@@ -646,6 +647,7 @@ namespace DataProcess
         {
             angleDataList.ForEach(packet =>
             {
+                programDigram.AddAngleData(packet);
                 chartDataSource.AngleAccXList.AddPoint(packet.ax);
                 chartDataSource.AngleAccYList.AddPoint(packet.ay);
                 chartDataSource.AngleAccZList.AddPoint(packet.az);
@@ -671,13 +673,18 @@ namespace DataProcess
 
         private void DrawProgramPackets(List<ProgramControlData> programDataList)
         {
-
+            programDataList.ForEach(packet =>
+            {
+                ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(packet.controlStatus);
+                programDigram.AddProgramData(packet);
+            });
         }
 
         private void DrawServoPackets(List<ServoData> servoDataList)
         {
             servoDataList.ForEach(packet =>
             {
+                programDigram.AddServoData(packet);
                 chartDataSource.ServoVol28List.AddPoint(FlyDataConvert.GetVoltage28(packet.vol28));
                 chartDataSource.ServoVol160List.AddPoint(FlyDataConvert.GetVoltage160(packet.vol160));
                 chartDataSource.Servo1IqList.AddPoint(FlyDataConvert.GetElectricity(packet.Iq1));
@@ -840,10 +847,13 @@ namespace DataProcess
                     ProcessNavMessage(lParam);
                     break;
                 case WinApi.WM_ANGLE_DATA:
+                    ProcessAngelData(lParam);
                     break;
                 case WinApi.WM_PROGRAM_DATA:
+                    ProcessProgramData(lParam);
                     break;
                 case WinApi.WM_SERVO_DATA:
+                    ProcessServoData(lParam);
                     break;
                 default:
                     break;
@@ -1049,6 +1059,11 @@ namespace DataProcess
             {
                 String flyFileName, slowFileName, fastFileName, tailFileName;
                 openDataWindow.GetFileNames(out flyFileName, out slowFileName, out fastFileName, out tailFileName);
+                if(flyFileName.Equals(String.Empty) && slowFileName.Equals(String.Empty) && fastFileName.Equals(String.Empty) && tailFileName.Equals(String.Empty))
+                {
+                    MessageBox.Show("请至少选择一个文件", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 HistoryDetailWindow historyDetailWindow = new HistoryDetailWindow(flyFileName, slowFileName, fastFileName, tailFileName);
                 historyDetailWindow.ShowDialog();
             }
