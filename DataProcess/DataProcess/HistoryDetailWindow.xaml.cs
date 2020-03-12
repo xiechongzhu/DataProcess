@@ -134,7 +134,7 @@ namespace DataProcess
                 DrawSlowPackets(slowPacketList);
                 DrawFastPackets(fastPacketList);
                 DrawTailPackets(tailPacketList);
-                dataLogger.LoadFlyBinaryFile(flyBinFile, out List<NavData> navDataList, out List<AngleData> angleDataList,
+                dataLogger.LoadFlyBinaryFile(dataLogger.flyPacketFilePath, out List<NavData> navDataList, out List<AngleData> angleDataList,
                     out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
                 DrawNavData(navDataList);
                 DrawAngelData(angleDataList);
