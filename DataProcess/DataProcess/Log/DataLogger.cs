@@ -238,7 +238,12 @@ namespace DataProcess.Log
                 while(binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                 {
                     byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FlyPacket)));
-                    flyParser.ParseData(buffer, out navDataList, out angleDataList, out programControlDataList, out servoDataList);
+                    flyParser.ParseData(buffer, out List<NavData> _navDataList, out List<AngleData> _angleDataList, 
+                        out List<ProgramControlData> _programControlDataList, out List<ServoData> _servoDataList);
+                    navDataList.AddRange(_navDataList);
+                    angleDataList.AddRange(_angleDataList);
+                    programControlDataList.AddRange(_programControlDataList);
+                    servoDataList.AddRange(_servoDataList);
                 }
             }
         }

@@ -6,9 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DataProcess.Parser.Fly
 {
@@ -19,6 +17,9 @@ namespace DataProcess.Parser.Fly
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
         private bool isRuning = false;
         private Thread thread;
+        private byte[] dataBuffer = new byte[10000000];
+        private int dataLength = 0;
+        private int searchPos = 0;
 
         public FlyParser(IntPtr mainWindowHandle)
         {
@@ -102,30 +103,79 @@ namespace DataProcess.Parser.Fly
             {
                 return;
             }
-            FlyHeader flyHeader = Tool.ByteToStruct<FlyHeader>(buffer, 0, Marshal.SizeOf(typeof(FlyHeader)));
-            if (!Enumerable.SequenceEqual(flyHeader.syncHeader, FlyProtocol.syncHeader) || flyHeader.dataType != FlyProtocol.dataType) 
+
+            FlyPacket flyPacket = Tool.ByteToStruct<FlyPacket>(buffer, 0, Marshal.SizeOf(typeof(FlyPacket)));
+            if (!Enumerable.SequenceEqual(flyPacket.header.syncHeader, FlyProtocol.syncHeader) || flyPacket.header.dataType != FlyProtocol.dataType) 
             {
                 return;
             }
 
-            byte[] protocolBuffer;
-            for (int pos = 0; pos < buffer.Length; ++pos)
+            if(dataLength + flyPacket.header.dataLen.SwapUInt16() > dataBuffer.Length)
             {
-                if(EqualHeader(FlyProtocol.navHeader, buffer, pos))
+                dataLength = 0;
+                return;
+            }
+            Array.Copy(flyPacket.data, 0, dataBuffer, dataLength, flyPacket.header.dataLen.SwapUInt16());
+            dataLength += flyPacket.header.dataLen.SwapUInt16();
+
+
+            for (; searchPos < dataLength; ++searchPos)
+            {
+                if(EqualHeader(FlyProtocol.navHeader, dataBuffer, searchPos))
                 {
-                    Console.WriteLine(String.Format("Find navHeader {0}", Marshal.SizeOf(typeof(NavData))));
+                    if(searchPos + FlyProtocol.NavDataLengthWithPadding >= dataLength)
+                    {
+                        break;
+                    }
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.NavDataLengthWithPadding);
+                    NavData navData = Tool.ByteToStruct<NavData>(packetBuffer, 0, packetBuffer.Length);
+                    navDataList.Add(navData);
+                    searchPos += FlyProtocol.NavDataLengthWithPadding;
+                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
+                    dataLength -= searchPos;
+                    searchPos = 0;
                 }
-                if(EqualHeader(FlyProtocol.angleHeader, buffer, pos))
+                if(EqualHeader(FlyProtocol.angleHeader, dataBuffer, searchPos))
                 {
-                    //Console.WriteLine("Find angleHeader");
+                    if (searchPos + FlyProtocol.AngleDataLengthWithPadding >= dataLength)
+                    {
+                        break;
+                    }
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.AngleDataLengthWithPadding);
+                    AngleData angleData = Tool.ByteToStruct<AngleData>(packetBuffer, 0, packetBuffer.Length);
+                    angleDataList.Add(angleData);
+                    searchPos += FlyProtocol.AngleDataLengthWithPadding;
+                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
+                    dataLength -= searchPos;
+                    searchPos = 0;
                 }
-                if(EqualHeader(FlyProtocol.programHeader, buffer, pos))
+                if(EqualHeader(FlyProtocol.programHeader, dataBuffer, searchPos))
                 {
-                    //Console.WriteLine("Find programHeader");
+                    if (searchPos + FlyProtocol.ProgramDataLengthWithPadding >= dataLength)
+                    {
+                        break;
+                    }
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.ProgramDataLengthWithPadding);
+                    ProgramControlData programControlData = Tool.ByteToStruct<ProgramControlData>(packetBuffer, 0, packetBuffer.Length);
+                    programControlDataList.Add(programControlData);
+                    searchPos += FlyProtocol.ProgramDataLengthWithPadding; 
+                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
+                    dataLength -= searchPos;
+                    searchPos = 0;
                 }
-                if(EqualHeader(FlyProtocol.servoHeader, buffer, pos))
+                if(EqualHeader(FlyProtocol.servoHeader, dataBuffer, searchPos))
                 {
-                    //Console.WriteLine("Find servoHeader");
+                    if (searchPos + FlyProtocol.ServoDataLengthWithPadding >= dataLength)
+                    {
+                        break;
+                    }
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.ServoDataLengthWithPadding);
+                    ServoData servoData = Tool.ByteToStruct<ServoData>(packetBuffer, 0, packetBuffer.Length);
+                    servoDataList.Add(servoData);
+                    searchPos += FlyProtocol.ServoDataLengthWithPadding;
+                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
+                    dataLength -= searchPos;
+                    searchPos = 0;
                 }
             }
         }
@@ -146,14 +196,19 @@ namespace DataProcess.Parser.Fly
             return true;
         }
 
-        int GetProtocolSize(Type protocol, int headerSize)
+        byte[] GetPacketDataWithoutPadding(byte[] buffer, int startPos, int length)
         {
-            int _size = Marshal.SizeOf(protocol) - headerSize;
-            if(_size % 8 == 0)
+            byte[] result = new byte[length - length / 10 * 2];
+            int index = 0;
+            for(int i = 0; i < length; ++i)
             {
-                return _size + 2 * (_size / 8 - 1);
+                if(i % 10 >= 8)
+                {
+                    continue;
+                }
+                result[index++] = buffer[i + startPos];
             }
-            return _size + 2 * (_size / 8);
+            return result;
         }
     }
 }

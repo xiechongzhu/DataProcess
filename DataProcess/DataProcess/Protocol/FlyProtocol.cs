@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataProcess.Protocol
 {
@@ -15,6 +13,11 @@ namespace DataProcess.Protocol
         public static readonly byte[] angleHeader = { 0xEB, 0x90 };
         public static readonly byte[] programHeader = { Convert.ToByte('$'), Convert.ToByte('J'), Convert.ToByte('C'), Convert.ToByte('K') };
         public static readonly byte[] servoHeader = { 0x55, 0xAA};
+
+        public static int NavDataLengthWithPadding = 117;
+        public static int AngleDataLengthWithPadding = 41;
+        public static int ProgramDataLengthWithPadding = 66;
+        public static int ServoDataLengthWithPadding = 27;
 
         public enum PROGRAM_CONTROL_STATUS
         {
@@ -94,11 +97,12 @@ namespace DataProcess.Protocol
     {
         public FlyHeader header;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 625)]
-        byte[] data;
+        public byte[] data;
     }
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    //95+22
     public struct NavData
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
@@ -117,13 +121,14 @@ namespace DataProcess.Protocol
         public float rollAngle;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 24)]
         public byte[] other2;
-        public uint sequence;
+        public byte sequence;
         public byte crc;
         public byte endChar;
     }
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    //33+8
     public struct AngleData
     {
         public ushort header;
@@ -140,6 +145,7 @@ namespace DataProcess.Protocol
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    //54+12
     public struct ProgramControlData
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
@@ -156,6 +162,7 @@ namespace DataProcess.Protocol
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    //23 + 4
     public struct ServoData
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
