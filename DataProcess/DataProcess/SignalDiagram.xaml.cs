@@ -97,7 +97,7 @@ namespace DataProcess
                 }
             }
 
-                foreach (SignalPoint point in PointsToDraw)
+            foreach (SignalPoint point in PointsToDraw)
             {
                 drawingContext.DrawEllipse(point.IsActive ? Brushes.Green : Brushes.Red, null, point.ToPoint(), 10, 10);
                 FormattedText formattedText = new FormattedText(

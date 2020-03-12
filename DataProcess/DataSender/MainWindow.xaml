@@ -1,0 +1,55 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataSender"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataSender.MainWindow"
+        mc:Ignorable="d"
+        Title="数据发送" Height="140" Width="650" ResizeMode="NoResize">
+    <Grid Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="组播地址:" Grid.Column="0" Margin="5,5,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit x:Name="editIpAddr" Grid.Column="1" Margin="5,5,5,5" MaskType="RegEx" Mask="((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)"/>
+            <TextBlock Text="组播端口:" Grid.Column="2" Margin="5,5,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit x:Name="editPort" Grid.Column="3" Margin="5,5,5,5" MaskType="RegEx" Mask="([0-9]|[1-9]\d{1,3}|[1-5]\d{4}|6[0-4]\d{4}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])"/>
+            <TextBlock Text="数据文件类型:" Grid.Column="4" Margin="5,5,5,5" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="5" SelectedIndex="0" Margin="5,5,5,5" x:Name="cbFileType">
+                <ComboBoxItem Content="飞控数据"/>
+                <ComboBoxItem Content="缓变参数"/>
+                <ComboBoxItem Content="速变参数"/>
+                <ComboBoxItem Content="尾端参数"/>
+            </ComboBox>
+            <Button x:Name="btnSendFile" Content="发送文件" Grid.Column="6" Margin="5,5,5,5" Click="btnSendFile_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="起始位置:" Grid.Column="0" Margin="5,5,5,5" VerticalAlignment="Center"/>
+            <Slider Minimum="0" Maximum="100" Grid.Column="1" x:Name="slider" Margin="5,5,5,5" SmallChange="1" LargeChange="10" Value="{Binding ElementName=editStart, Path=Text}"/>
+            <dxe:TextEdit x:Name="editStart" Text="{Binding ElementName=slider, Path=Value}" Grid.Column="2" Margin="5,5,5,5" MaskType="Numeric"/>
+            <TextBlock Text="%" Grid.Column="3" Margin="0,5,5,5" VerticalAlignment="Center"/>
+        </Grid>
+        <StatusBar Grid.Row="2" Background="Transparent">
+            <StatusBarItem x:Name="statusBarItem" Content="就绪"/>
+        </StatusBar>
+    </Grid>
+</Window>

@@ -16,13 +16,33 @@ namespace DataProcess
     {
         private TestInfo testInfo = null;
         private String slowBinFile, fastBinFlie, tailBinFile, flyBinFile;
+
+        public HistoryDetailWindow(String strFlyBinFile, String strSLowBinFile, String strFastBinFile, String strTailBinFile)
+        {
+            InitializeComponent();
+            flyBinFile = strFlyBinFile;
+            slowBinFile = strSLowBinFile;
+            fastBinFlie = strFastBinFile;
+            tailBinFile = strTailBinFile;
+            InitChartTitle();
+            InitProgramDigram();
+            LoadTestInfo();
+        }
+
         public HistoryDetailWindow(TestInfo testInfo)
         {
             InitializeComponent();
             this.testInfo = testInfo;
+            InitChartTitle();
+            InitProgramDigram();
             LoadTestInfo();
             DisplayTestInfo();
-            InitChartTitle();
+        }
+
+        private void InitProgramDigram()
+        {
+            programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
+            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
         }
 
         private void InitChartTitle()
@@ -95,26 +115,12 @@ namespace DataProcess
             ChartAngelY.SetAxisYLabel("ωY(°/s)");
             ChartAngelZ.SetAxisYLabel("ωZ(°/s)");
 
-            programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
-            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
-
             ChartServoVol28.SetAxisYLabel("28V供电电压(V)");
             ChartServoVol160.SetAxisYLabel("160V供电电压(V)");
             ChartServo1Iq.SetAxisYLabel("电机1Iq电流(A)");
             ChartServo2Iq.SetAxisYLabel("电机2Iq电流(A)");
             ChartServo3Iq.SetAxisYLabel("电机3Iq电流(A)");
             ChartServo4Iq.SetAxisYLabel("电机4Iq电流(A)");
-        }
-
-        public HistoryDetailWindow(String strFlyBinFile, String strSLowBinFile, String strFastBinFile, String strTailBinFile)
-        {
-            InitializeComponent();
-            flyBinFile = strFlyBinFile;
-            slowBinFile = strSLowBinFile;
-            fastBinFlie = strFastBinFile;
-            tailBinFile = strTailBinFile;
-            LoadTestInfo();
-            InitChartTitle();
         }
 
         private void LoadTestInfo()
