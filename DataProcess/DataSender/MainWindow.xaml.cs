@@ -12,8 +12,9 @@ namespace DataSender
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
     {
+        private Config config = new Config();
         public readonly Dictionary<String, int> PacketSize = new Dictionary<string, int>
         {
             {"飞控数据", 631},
@@ -28,6 +29,9 @@ namespace DataSender
         public MainWindow()
         {
             InitializeComponent();
+            config.Load();
+            editIpAddr.Text = config.IpAddr;
+            editPort.Text = config.Port.ToString();
             timer.Interval = new TimeSpan(0,0,0,0,10);
             timer.Tick += Timer_Tick;
         }
@@ -82,6 +86,13 @@ namespace DataSender
         private void SendData(byte[] data)
         {
             udpClient.Send(data, data.Length, new IPEndPoint(IPAddress.Parse(editIpAddr.Text), int.Parse(editPort.Text)));
+        }
+
+        private void ThemedWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            config.IpAddr = editIpAddr.Text;
+            config.Port = int.Parse(editPort.Text);
+            config.Save();
         }
     }
 }
