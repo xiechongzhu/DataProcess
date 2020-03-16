@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static DataProcess.Protocol.FlyProtocol;
 
 namespace DataProcess
 {
@@ -44,7 +45,8 @@ namespace DataProcess
     {
         private List<SignalPoint> PointsToDraw = new List<SignalPoint>();
         private List<Point> linePoints = new List<Point>();
-
+        private NavData? lastNavData = null;
+        private AngleData? lastAngleData = null;
 
         public void SetLinePoints(Point buttomLeft, Point top, Point buttomRight)
         {
@@ -131,6 +133,8 @@ namespace DataProcess
 
         public void Reset()
         {
+            lastAngleData = null;
+            lastNavData = null;
             foreach (SignalPoint point in PointsToDraw)
             {
                 point.IsActive = false;
@@ -197,12 +201,26 @@ namespace DataProcess
 
         public void AddNavData(NavData navData)
         {
-
+            if(lastNavData != null)
+            {
+                if(lastNavData.Value.height > navData.height)
+                {
+                    ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_TOP).Value, true);
+                }
+            }
+            lastNavData = navData;
         }
 
         public void AddAngleData(AngleData angelData)
         {
-
+            if(lastAngleData != null)
+            {
+                if(IsAccZero(lastAngleData.Value) && !IsAccZero(angelData))
+                {
+                    ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN).Value, true);
+                }
+            }
+            lastAngleData = angelData;
         }
 
         public void AddProgramData(ProgramControlData programData)
@@ -220,6 +238,15 @@ namespace DataProcess
         public void AddServoData(ServoData servoData)
         {
 
+        }
+
+        private bool IsAccZero(AngleData angleData)
+        {
+            if(angleData.ax == 0 && angleData.ay == 0 && angleData.az == 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
