@@ -99,8 +99,8 @@ namespace DataProcess.Protocol
                     byte[] protocolData = new byte[packetLen];
                     Array.Copy(dataBuffer, pos, protocolData, 0, packetLen);
                     list.Add(protocolData);
-                    pos += packetLen;
                 }
+                pos += packetLen;
             }
             return list;
         }
