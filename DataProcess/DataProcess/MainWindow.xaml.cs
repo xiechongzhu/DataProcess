@@ -8,11 +8,14 @@ using DataProcess.Tools;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace DataProcess
@@ -173,13 +176,42 @@ namespace DataProcess
     /// </summary>
     public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
     {
-        public static readonly int CHART_MAX_POINTS = 1000;
+        private enum LED_STATUS
+        {
+            LED_RED,
+            LED_GREEN,
+            LED_GRAY
+        }
+
+        private enum NETWORK_DATA_TYPE
+        {
+            SLOW,
+            FAST,
+            TAIL,
+            FLY
+        }
+
+        Dictionary<LED_STATUS, BitmapImage> LedImages = new Dictionary<LED_STATUS, BitmapImage> {
+            { LED_STATUS.LED_GRAY, new BitmapImage(new Uri("pack://siteoforigin:,,,/Image/LED_gray.png")) },
+            { LED_STATUS.LED_GREEN, new BitmapImage(new Uri("pack://siteoforigin:,,,/Image/LED_green.png")) },
+            { LED_STATUS.LED_RED, new BitmapImage(new Uri("pack://siteoforigin:,,,/Image/LED_red.png")) }
+        };
+
+        Dictionary<NETWORK_DATA_TYPE, DateTime> NetworkDateRecvTime = new Dictionary<NETWORK_DATA_TYPE, DateTime> {
+            {NETWORK_DATA_TYPE.SLOW, DateTime.MinValue },
+            {NETWORK_DATA_TYPE.FAST, DateTime.MinValue },
+            {NETWORK_DATA_TYPE.TAIL, DateTime.MinValue },
+            {NETWORK_DATA_TYPE.FLY, DateTime.MinValue },
+        };
+
+        public static readonly int CHART_MAX_POINTS = 500;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;
         private EnvParser envParser = null;
         private FlyParser flyParser = null;
         private DispatcherTimer uiRefreshTimer = new DispatcherTimer();
+        private DispatcherTimer ledTimer = new DispatcherTimer();
         private DisplayBuffers envBuffers = new DisplayBuffers();
         private DataLogger dataLogger = null;
         ChartDataSource chartDataSource = new ChartDataSource();
@@ -189,10 +221,50 @@ namespace DataProcess
             InitializeComponent();
             InitSeriesDataSource();
             uiRefreshTimer.Tick += UiRefreshTimer_Tick;
-            uiRefreshTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            uiRefreshTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
+            ledTimer.Tick += LedTimer_Tick;
+            ledTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
             UpdateSyncFireDisplay(Double.NaN);
             LoadNetworkSetting();
             InitProgramDiagram();
+            InitLedStatus();
+        }
+
+        private void LedTimer_Tick(object sender, EventArgs e)
+        {
+            DateTime Now = DateTime.Now;
+            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 20)
+            {
+                SetLedStatus(ImageSlow, LED_STATUS.LED_RED);
+            }
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 20)
+            {
+                SetLedStatus(ImageFast, LED_STATUS.LED_RED);
+            }
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 20)
+            {
+                SetLedStatus(ImageTail, LED_STATUS.LED_RED);
+            }
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 20)
+            {
+                SetLedStatus(ImageFly, LED_STATUS.LED_RED);
+            }
+        }
+
+        private void InitLedStatus()
+        {
+            SetLedStatus(ImageSlow, LED_STATUS.LED_GRAY);
+            SetLedStatus(ImageFast, LED_STATUS.LED_GRAY);
+            SetLedStatus(ImageTail, LED_STATUS.LED_GRAY);
+            SetLedStatus(ImageFly, LED_STATUS.LED_GRAY);
+        }
+
+        private void SetLedStatus(Image imageControl, LED_STATUS status)
+        {
+            if (imageControl.Source != LedImages[status])
+            {
+                imageControl.Source = LedImages[status];
+            }
         }
 
         private void InitSeriesDataSource()
@@ -276,7 +348,7 @@ namespace DataProcess
         private void InitProgramDiagram()
         {
             ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
-            programDigram.SetLinePoints(new System.Windows.Point(0.1, 0.9), new System.Windows.Point(0.5, -0.8), new System.Windows.Point(0.9, 0.9));
+            programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
             FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
         }
 
@@ -711,6 +783,12 @@ namespace DataProcess
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
+            NETWORK_DATA_TYPE[] keys = NetworkDateRecvTime.Keys.ToArray();
+            for (int i = 0; i < keys.Length; ++i)
+            {
+                NetworkDateRecvTime[keys[i]] = DateTime.MinValue;
+            }
+
             if (envParser == null)
             {
                 envParser = new EnvParser(new WindowInteropHelper(this).Handle);
@@ -760,6 +838,7 @@ namespace DataProcess
             udpClientEnv.BeginReceive(EndEnvReceive, null);
             udpClientFly.BeginReceive(EndFlyReceive, null);
             uiRefreshTimer.Start();
+            ledTimer.Start();
         }
 
         private void EndEnvReceive(IAsyncResult ar)
@@ -772,7 +851,7 @@ namespace DataProcess
                 {
                     envParser.Enqueue(recvBuffer);
                 }
-                udpClientEnv.BeginReceive(EndEnvReceive, null);
+                udpClientEnv?.BeginReceive(EndEnvReceive, null);
             }
             catch (Exception)
             { }
@@ -788,7 +867,7 @@ namespace DataProcess
                 {
                     flyParser.Enqueue(recvBuffer);
                 }
-                udpClientFly.BeginReceive(EndFlyReceive, null);
+                udpClientFly?.BeginReceive(EndFlyReceive, null);
             }
             catch (Exception)
             { }
@@ -817,6 +896,8 @@ namespace DataProcess
             uiRefreshTimer.Stop();
             dataLogger?.Close();
             SaveTestInfo();
+            InitLedStatus();
+            ledTimer.Stop();
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -835,24 +916,38 @@ namespace DataProcess
             switch(msg)
             {
                 case WinApi.WM_SLOW_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW] = DateTime.Now;
+                    SetLedStatus(ImageSlow, LED_STATUS.LED_GREEN);
                     ProcessSlowDataMessage(lParam);
                     break;
                 case WinApi.WM_FAST_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST] = DateTime.Now;
+                    SetLedStatus(ImageFast, LED_STATUS.LED_GREEN);
                     ProcessFastDataMessage(lParam);
                     break;
                 case WinApi.WM_TAIL_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL] = DateTime.Now;
+                    SetLedStatus(ImageTail, LED_STATUS.LED_GREEN);
                     ProcessTailDataMessage(lParam);
                     break;
                 case WinApi.WM_NAV_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
+                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessNavMessage(lParam);
                     break;
                 case WinApi.WM_ANGLE_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
+                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessAngelData(lParam);
                     break;
                 case WinApi.WM_PROGRAM_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
+                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessProgramData(lParam);
                     break;
                 case WinApi.WM_SERVO_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
+                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessServoData(lParam);
                     break;
                 default:

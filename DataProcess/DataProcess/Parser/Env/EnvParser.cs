@@ -54,13 +54,55 @@ namespace DataProcess.Protocol
                 byte[] dataBuffer;
                 if (queue.TryDequeue(out dataBuffer))
                 {
-                    ParseData(dataBuffer);
+                    List<byte[]> bufferList = SplitPacketBuffer(dataBuffer);
+                    bufferList.ForEach(buffer => ParseData(buffer));
                 }
                 else
                 {
                     Thread.Sleep(5);
                 }
             }
+        }
+
+        List<byte[]> SplitPacketBuffer(byte[] dataBuffer)
+        {
+            List<byte[]> list = new List<byte[]>();
+            int pos = 0;
+            for(; ; )
+            {
+                if(dataBuffer.Length <= pos + Marshal.SizeOf(typeof(EnvPacketHeader)))
+                {
+                    break;
+                }
+                EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(dataBuffer, pos, Marshal.SizeOf(typeof(EnvPacketHeader)));
+                if (!Enumerable.SequenceEqual(header.syncHeader, EnvProtocol.SyncHeader))
+                {
+                    break;
+                }
+                int packetLen = 0;
+                switch ((EnvProtocol.DataType)header.dataType)
+                {
+                    case EnvProtocol.DataType.DataTypeSlow:
+                        packetLen = Marshal.SizeOf(typeof(EnvPacketHeader)) + Marshal.SizeOf(typeof(SlowPacket));
+                        break;
+                    case EnvProtocol.DataType.DataTypeFast:
+                        packetLen = Marshal.SizeOf(typeof(EnvPacketHeader)) + Marshal.SizeOf(typeof(FastPacket));
+                        break;
+                    case EnvProtocol.DataType.DataTypeTail:
+                        packetLen = Marshal.SizeOf(typeof(EnvPacketHeader)) + Marshal.SizeOf(typeof(TailPacketUdp));
+                        break;
+                    default:
+                        break;
+                }
+                if(packetLen != 0 && pos + packetLen <= dataBuffer.Length)
+                {
+                    byte[] protocolData = new byte[packetLen];
+                    Array.Copy(dataBuffer, pos, protocolData, 0, packetLen);
+                    list.Add(protocolData);
+                    pos += packetLen;
+                }
+            }
+            return list;
         }
 
         private void ParseData(byte[] buffer)
