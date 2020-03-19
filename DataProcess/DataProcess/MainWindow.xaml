@@ -40,7 +40,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="600"/>
                     </Grid.ColumnDefinitions>
                     <dx:DXTabControl Margin="0,0,5,0" Grid.Column="0">
                         <dx:DXTabItem Header="导航数据">
@@ -52,9 +52,9 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="500"/>
-                                        <ColumnDefinition Width="500"/>
-                                        <ColumnDefinition Width="500"/>
+                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="400"/>
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavLat">
                                         <dxc:ChartControl.Titles>
@@ -329,8 +329,8 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="750"/>
-                                        <ColumnDefinition Width="750"/>
+                                        <ColumnDefinition Width="600"/>
+                                        <ColumnDefinition Width="600"/>
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAccX">
                                         <dxc:ChartControl.Titles>
@@ -518,8 +518,8 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="750"/>
-                                        <ColumnDefinition Width="750"/>
+                                        <ColumnDefinition Width="600"/>
+                                        <ColumnDefinition Width="600"/>
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartServoVol28">
                                         <dxc:ChartControl.Titles>
