@@ -465,7 +465,7 @@ namespace DataProcess
             chartDataSource.SlowPresureHighList.NotifyDataChanged();
             chartDataSource.SlowPresureLowList.NotifyDataChanged();
 
-            SlowPacket lastPacket = packets[packets.Count - 1];
+            /*SlowPacket lastPacket = packets[packets.Count - 1];
             ChartHood.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-20, 245, 1, 5, lastPacket.temperatureSensor.hood[1]));
             ChartInsAir.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.insAir[1]));
             ChartInsWall.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.insWall[1]));
@@ -480,7 +480,7 @@ namespace DataProcess
             ChartAttiPresure.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 120, 0, 5, lastPacket.pressureSensor.attitudeControl[1]));
             ChartLevel2Transmitter.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 12, 0.2, 4.8, lastPacket.level2Transmitter[1]));
             ChartGestureControlHigh.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 40, 0, 5, lastPacket.gestureControlHigh[1]));
-            ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 6, 0, 5, lastPacket.gestureControlLow[1]));
+            ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 6, 0, 5, lastPacket.gestureControlLow[1]));*/
         }
 
         void DrawFastPackets(List<FastPacket> packets)
@@ -526,7 +526,7 @@ namespace DataProcess
             chartDataSource.FastLashSeriesList2.NotifyDataChanged();
             chartDataSource.FastNoiseLists.ForEach(source => source.NotifyDataChanged());
 
-            FastPacket lastPacket = packets[packets.Count - 1];
+            /*FastPacket lastPacket = packets[packets.Count - 1];
             ChartShake1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[0].signal[lastPacket.shakeSignals[0].signal.Length - 1]));
             ChartShake2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[1].signal[lastPacket.shakeSignals[1].signal.Length - 1]));
             ChartShake3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[2].signal[lastPacket.shakeSignals[2].signal.Length - 1]));
@@ -548,7 +548,7 @@ namespace DataProcess
             ChartLash1_3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-6000, 6000, 0, 5, lastPacket.lashSignal_1[2].signal[lastPacket.lashSignal_1[2].signal.Length - 1]));
             ChartLash2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-3000, 3000, 0, 5, lastPacket.lashSignal_2.signal[lastPacket.lashSignal_2.signal.Length - 1]));
             ChartNoise1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(100, 140, 0, 5, lastPacket.noiseSignal[0].signal[lastPacket.noiseSignal[0].signal.Length - 1]));
-            ChartNoise2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(120, 160, 0, 5, lastPacket.noiseSignal[1].signal[lastPacket.noiseSignal[1].signal.Length - 1]));
+            ChartNoise2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(120, 160, 0, 5, lastPacket.noiseSignal[1].signal[lastPacket.noiseSignal[1].signal.Length - 1]));*/
         }
 
         private void DrawTailPackets(List<TailPacketRs> tailPackets)
@@ -703,7 +703,7 @@ namespace DataProcess
             chartDataSource.NavCrabAngle.NotifyDataChanged();
             chartDataSource.NavRollAngle.NotifyDataChanged();
 
-            NavData lastNavData = navDataList[navDataList.Count - 1];
+            /*NavData lastNavData = navDataList[navDataList.Count - 1];
             ChartNavLat.Titles[0].Content = String.Format("{0:F}", lastNavData.latitude);
             ChartNavLon.Titles[0].Content = String.Format("{0:F}", lastNavData.longitude);
             ChartNavHeight.Titles[0].Content = String.Format("{0:F}", lastNavData.height);
@@ -712,7 +712,7 @@ namespace DataProcess
             ChartNavSpeedEast.Titles[0].Content = String.Format("{0:F}", lastNavData.eastSpeed);
             ChartNavPitchAngle.Titles[0].Content = String.Format("{0:F}", lastNavData.pitchAngle);
             ChartNavCrabAngle.Titles[0].Content = String.Format("{0:F}", lastNavData.crabAngle);
-            ChartNavRollAngle.Titles[0].Content = String.Format("{0:F}", lastNavData.rollAngle);
+            ChartNavRollAngle.Titles[0].Content = String.Format("{0:F}", lastNavData.rollAngle);*/
         }
 
         private void DrawAngelPackets(List<AngleData> angleDataList)
@@ -734,13 +734,13 @@ namespace DataProcess
             chartDataSource.AngleYList.NotifyDataChanged();
             chartDataSource.AngleZList.NotifyDataChanged();
 
-            AngleData lastPacket = angleDataList[angleDataList.Count - 1];
+            /*AngleData lastPacket = angleDataList[angleDataList.Count - 1];
             ChartAccX.Titles[0].Content = String.Format("{0:F}", lastPacket.ax);
             ChartAccY.Titles[0].Content = String.Format("{0:F}", lastPacket.ay);
             ChartAccZ.Titles[0].Content = String.Format("{0:F}", lastPacket.az);
             ChartAngelX.Titles[0].Content = String.Format("{0:F}", lastPacket.angleX);
             ChartAngelY.Titles[0].Content = String.Format("{0:F}", lastPacket.angleY);
-            ChartAngelZ.Titles[0].Content = String.Format("{0:F}", lastPacket.angleZ);
+            ChartAngelZ.Titles[0].Content = String.Format("{0:F}", lastPacket.angleZ);*/
         }
 
         private void DrawProgramPackets(List<ProgramControlData> programDataList)
@@ -772,13 +772,13 @@ namespace DataProcess
             chartDataSource.Servo3IqList.NotifyDataChanged();
             chartDataSource.Servo4IqList.NotifyDataChanged();
 
-            ServoData lasetPacket = servoDataList[servoDataList.Count - 1];
+            /*ServoData lasetPacket = servoDataList[servoDataList.Count - 1];
             ChartServoVol28.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetVoltage28(lasetPacket.vol28));
             ChartServoVol160.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetVoltage160(lasetPacket.vol160));
             ChartServo1Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq1));
             ChartServo2Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq2));
             ChartServo3Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq3));
-            ChartServo4Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq4));
+            ChartServo4Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq4));*/
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)

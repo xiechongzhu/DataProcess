@@ -8,7 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-
         <dxc:ChartControl HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" x:Name="Chart">
             <dxc:ChartControl.Titles>
                 <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12"/>
