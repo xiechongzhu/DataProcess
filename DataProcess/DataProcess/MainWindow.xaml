@@ -43,22 +43,22 @@
                         <ColumnDefinition Width="600"/>
                     </Grid.ColumnDefinitions>
                     <dx:DXTabControl Margin="0,0,5,0" Grid.Column="0">
-                        <dx:DXTabItem Header="导航数据">
+                        <dx:DXTabItem Header="位置">
                             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
+                                        <RowDefinition Height="290"/>
+                                        <RowDefinition Height="290"/>
+                                        <RowDefinition Height="290"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="400"/>
                                         <ColumnDefinition Width="400"/>
                                         <ColumnDefinition Width="400"/>
                                     </Grid.ColumnDefinitions>
-                                    <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavLat">
+                                    <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavLon">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="经度(°)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -67,36 +67,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="纬度(°)" Visible="True" FontSize="12" />
-                                                    </dxc:AxisY2D.Title>
-                                                </dxc:AxisY2D>
-                                            </dxc:XYDiagram2D.AxisY>
-                                            <dxc:XYDiagram2D.AxisX>
-                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
-                                                    <dxc:AxisX2D.Title>
-                                                        <dxc:AxisTitle Visible="False" />
-                                                    </dxc:AxisX2D.Title>
-                                                </dxc:AxisX2D>
-                                            </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavLat" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
-                                                <dxc:LineSeries2D.LineStyle>
-                                                    <dxc:LineStyle LineJoin="Bevel"/>
-                                                </dxc:LineSeries2D.LineStyle>
-                                            </dxc:LineSeries2D>
-                                        </dxc:XYDiagram2D>
-                                    </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNavLon">
-                                        <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
-                                        </dxc:ChartControl.Titles>
-                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
-                                            <dxc:XYDiagram2D.AxisY>
-                                                <dxc:AxisY2D>
-                                                    <dxc:AxisY2D.Label>
-                                                        <dxc:AxisLabel FontSize="12" />
-                                                    </dxc:AxisY2D.Label>
-                                                    <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="经度(°)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -114,9 +85,9 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNavHeight">
+                                    <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNavLat">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="纬度(°)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -125,7 +96,36 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="高度(m)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
+                                                    </dxc:AxisY2D.Title>
+                                                </dxc:AxisY2D>
+                                            </dxc:XYDiagram2D.AxisY>
+                                            <dxc:XYDiagram2D.AxisX>
+                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
+                                                    <dxc:AxisX2D.Title>
+                                                        <dxc:AxisTitle Visible="False" />
+                                                    </dxc:AxisX2D.Title>
+                                                </dxc:AxisX2D>
+                                            </dxc:XYDiagram2D.AxisX>
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavLat" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                <dxc:LineSeries2D.LineStyle>
+                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                </dxc:LineSeries2D.LineStyle>
+                                            </dxc:LineSeries2D>
+                                        </dxc:XYDiagram2D>
+                                    </dxc:ChartControl>
+                                    <dxc:ChartControl Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNavHeight">
+                                        <dxc:ChartControl.Titles>
+                                            <dxc:Title Content="高度(m)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        </dxc:ChartControl.Titles>
+                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                            <dxc:XYDiagram2D.AxisY>
+                                                <dxc:AxisY2D>
+                                                    <dxc:AxisY2D.Label>
+                                                        <dxc:AxisLabel FontSize="12" />
+                                                    </dxc:AxisY2D.Label>
+                                                    <dxc:AxisY2D.Title>
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -145,7 +145,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavSpeedNorth">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="北向速度(m/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -154,7 +154,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="北向速度(m/s)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -174,7 +174,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNavSpeedSky">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="天向速度(ms/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -183,7 +183,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="天向速度(ms/s)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -203,7 +203,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNavSpeedEast">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="东向速度(ms/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -212,7 +212,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="东向速度(ms/s)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -230,111 +230,9 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavPitchAngle">
+                                    <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAccX">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
-                                        </dxc:ChartControl.Titles>
-                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
-                                            <dxc:XYDiagram2D.AxisY>
-                                                <dxc:AxisY2D>
-                                                    <dxc:AxisY2D.Label>
-                                                        <dxc:AxisLabel FontSize="12" />
-                                                    </dxc:AxisY2D.Label>
-                                                    <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="俯仰角(°)" Visible="True" FontSize="12" />
-                                                    </dxc:AxisY2D.Title>
-                                                </dxc:AxisY2D>
-                                            </dxc:XYDiagram2D.AxisY>
-                                            <dxc:XYDiagram2D.AxisX>
-                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
-                                                    <dxc:AxisX2D.Title>
-                                                        <dxc:AxisTitle Visible="False" />
-                                                    </dxc:AxisX2D.Title>
-                                                </dxc:AxisX2D>
-                                            </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavPitchAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
-                                                <dxc:LineSeries2D.LineStyle>
-                                                    <dxc:LineStyle LineJoin="Bevel"/>
-                                                </dxc:LineSeries2D.LineStyle>
-                                            </dxc:LineSeries2D>
-                                        </dxc:XYDiagram2D>
-                                    </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNavCrabAngle">
-                                        <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
-                                        </dxc:ChartControl.Titles>
-                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
-                                            <dxc:XYDiagram2D.AxisY>
-                                                <dxc:AxisY2D>
-                                                    <dxc:AxisY2D.Label>
-                                                        <dxc:AxisLabel FontSize="12" />
-                                                    </dxc:AxisY2D.Label>
-                                                    <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="偏航角(°)" Visible="True" FontSize="12" />
-                                                    </dxc:AxisY2D.Title>
-                                                </dxc:AxisY2D>
-                                            </dxc:XYDiagram2D.AxisY>
-                                            <dxc:XYDiagram2D.AxisX>
-                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
-                                                    <dxc:AxisX2D.Title>
-                                                        <dxc:AxisTitle Visible="False" />
-                                                    </dxc:AxisX2D.Title>
-                                                </dxc:AxisX2D>
-                                            </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavCrabAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
-                                                <dxc:LineSeries2D.LineStyle>
-                                                    <dxc:LineStyle LineJoin="Bevel"/>
-                                                </dxc:LineSeries2D.LineStyle>
-                                            </dxc:LineSeries2D>
-                                        </dxc:XYDiagram2D>
-                                    </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNavRollAngle">
-                                        <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
-                                        </dxc:ChartControl.Titles>
-                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
-                                            <dxc:XYDiagram2D.AxisY>
-                                                <dxc:AxisY2D>
-                                                    <dxc:AxisY2D.Label>
-                                                        <dxc:AxisLabel FontSize="12" />
-                                                    </dxc:AxisY2D.Label>
-                                                    <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="滚转角(°)" Visible="True" FontSize="12" />
-                                                    </dxc:AxisY2D.Title>
-                                                </dxc:AxisY2D>
-                                            </dxc:XYDiagram2D.AxisY>
-                                            <dxc:XYDiagram2D.AxisX>
-                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
-                                                    <dxc:AxisX2D.Title>
-                                                        <dxc:AxisTitle Visible="False" />
-                                                    </dxc:AxisX2D.Title>
-                                                </dxc:AxisX2D>
-                                            </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavRollAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
-                                                <dxc:LineSeries2D.LineStyle>
-                                                    <dxc:LineStyle LineJoin="Bevel"/>
-                                                </dxc:LineSeries2D.LineStyle>
-                                            </dxc:LineSeries2D>
-                                        </dxc:XYDiagram2D>
-                                    </dxc:ChartControl>
-                                </Grid>
-                            </ScrollViewer>
-                        </dx:DXTabItem>
-                        <dx:DXTabItem Header="角速度数据">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                <Grid Background="Transparent">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="600"/>
-                                        <ColumnDefinition Width="600"/>
-                                    </Grid.ColumnDefinitions>
-                                    <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAccX">
-                                        <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="AX(m/s2)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Horizontal" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -343,7 +241,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="AX(m/s2)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -361,9 +259,9 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAccY">
+                                    <dxc:ChartControl Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAccY">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="AY(m/s2)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -372,7 +270,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="AY(m/s2)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -390,9 +288,9 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAccZ">
+                                    <dxc:ChartControl Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartAccZ">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="AZ(m/s2)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -401,7 +299,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="AZ(m/s2)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -419,9 +317,24 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAngelX">
+                                </Grid>
+                            </ScrollViewer>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="姿态">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                <Grid Background="Transparent">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="400"/>
+                                        <RowDefinition Height="400"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="400"/>
+                                    </Grid.ColumnDefinitions>
+                                    <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavPitchAngle">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="俯仰角(°)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -430,7 +343,94 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="ωX(°/s)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
+                                                    </dxc:AxisY2D.Title>
+                                                </dxc:AxisY2D>
+                                            </dxc:XYDiagram2D.AxisY>
+                                            <dxc:XYDiagram2D.AxisX>
+                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
+                                                    <dxc:AxisX2D.Title>
+                                                        <dxc:AxisTitle Visible="False" />
+                                                    </dxc:AxisX2D.Title>
+                                                </dxc:AxisX2D>
+                                            </dxc:XYDiagram2D.AxisX>
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavPitchAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                <dxc:LineSeries2D.LineStyle>
+                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                </dxc:LineSeries2D.LineStyle>
+                                            </dxc:LineSeries2D>
+                                        </dxc:XYDiagram2D>
+                                    </dxc:ChartControl>
+                                    <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNavCrabAngle">
+                                        <dxc:ChartControl.Titles>
+                                            <dxc:Title Content="偏航角(°)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        </dxc:ChartControl.Titles>
+                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                            <dxc:XYDiagram2D.AxisY>
+                                                <dxc:AxisY2D>
+                                                    <dxc:AxisY2D.Label>
+                                                        <dxc:AxisLabel FontSize="12" />
+                                                    </dxc:AxisY2D.Label>
+                                                    <dxc:AxisY2D.Title>
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
+                                                    </dxc:AxisY2D.Title>
+                                                </dxc:AxisY2D>
+                                            </dxc:XYDiagram2D.AxisY>
+                                            <dxc:XYDiagram2D.AxisX>
+                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
+                                                    <dxc:AxisX2D.Title>
+                                                        <dxc:AxisTitle Visible="False" />
+                                                    </dxc:AxisX2D.Title>
+                                                </dxc:AxisX2D>
+                                            </dxc:XYDiagram2D.AxisX>
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavCrabAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                <dxc:LineSeries2D.LineStyle>
+                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                </dxc:LineSeries2D.LineStyle>
+                                            </dxc:LineSeries2D>
+                                        </dxc:XYDiagram2D>
+                                    </dxc:ChartControl>
+                                    <dxc:ChartControl Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNavRollAngle">
+                                        <dxc:ChartControl.Titles>
+                                            <dxc:Title Content="滚转角(°)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        </dxc:ChartControl.Titles>
+                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                            <dxc:XYDiagram2D.AxisY>
+                                                <dxc:AxisY2D>
+                                                    <dxc:AxisY2D.Label>
+                                                        <dxc:AxisLabel FontSize="12" />
+                                                    </dxc:AxisY2D.Label>
+                                                    <dxc:AxisY2D.Title>
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
+                                                    </dxc:AxisY2D.Title>
+                                                </dxc:AxisY2D>
+                                            </dxc:XYDiagram2D.AxisY>
+                                            <dxc:XYDiagram2D.AxisX>
+                                                <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True" LogarithmicBase="10" Logarithmic="False">
+                                                    <dxc:AxisX2D.Title>
+                                                        <dxc:AxisTitle Visible="False" />
+                                                    </dxc:AxisX2D.Title>
+                                                </dxc:AxisX2D>
+                                            </dxc:XYDiagram2D.AxisX>
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavRollAngle" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                <dxc:LineSeries2D.LineStyle>
+                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                </dxc:LineSeries2D.LineStyle>
+                                            </dxc:LineSeries2D>
+                                        </dxc:XYDiagram2D>
+                                    </dxc:ChartControl>
+                                    <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAngelX">
+                                        <dxc:ChartControl.Titles>
+                                            <dxc:Title Content="ωX(°/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        </dxc:ChartControl.Titles>
+                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                            <dxc:XYDiagram2D.AxisY>
+                                                <dxc:AxisY2D>
+                                                    <dxc:AxisY2D.Label>
+                                                        <dxc:AxisLabel FontSize="12" />
+                                                    </dxc:AxisY2D.Label>
+                                                    <dxc:AxisY2D.Title>
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -448,9 +448,9 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAngelY">
+                                    <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAngelY">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="ωY(°/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -459,7 +459,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="ωY(°/s)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -477,9 +477,9 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAngelZ">
+                                    <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartAngelZ">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="ωZ(°/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -488,7 +488,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="ωZ(°/s)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -513,9 +513,9 @@
                             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
+                                        <RowDefinition Height="290"/>
+                                        <RowDefinition Height="290"/>
+                                        <RowDefinition Height="290"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="600"/>
@@ -523,7 +523,7 @@
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartServoVol28">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="28V供电电压(V)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -532,7 +532,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="28V供电电压(V)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -552,7 +552,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartServoVol160">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="160V供电电压(V)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -561,7 +561,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="160V供电电压(V)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -581,7 +581,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartServo1Iq">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="电机1Iq电流(A)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -590,7 +590,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="电机1Iq电流(A)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -610,7 +610,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartServo2Iq">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="电机2Iq电流(A)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -619,7 +619,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="电机2Iq电流(A)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -639,7 +639,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartServo3Iq">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="电机3Iq电流(A)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -648,7 +648,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="电机3Iq电流(A)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
@@ -668,7 +668,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartServo4Iq">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" />
+                                            <dxc:Title Content="电机4Iq电流(A)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -677,7 +677,7 @@
                                                         <dxc:AxisLabel FontSize="12" />
                                                     </dxc:AxisY2D.Label>
                                                     <dxc:AxisY2D.Title>
-                                                        <dxc:AxisTitle Content="电机4Iq电流(A)" Visible="True" FontSize="12" />
+                                                        <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>

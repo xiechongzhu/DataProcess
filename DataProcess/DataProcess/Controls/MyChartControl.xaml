@@ -11,7 +11,7 @@
 
         <dxc:ChartControl HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" x:Name="Chart">
             <dxc:ChartControl.Titles>
-                <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <dxc:Title Content="{x:Null}" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12"/>
             </dxc:ChartControl.Titles>
             <dxc:XYDiagram2D x:Name="XyDiagram2D" Zoom="XyDiagram2D_Zoom" Scroll="XyDiagram2D_Scroll" EnableAxisXNavigation="True">
                 <dxc:XYDiagram2D.AxisX>
@@ -27,7 +27,7 @@
                 <dxc:XYDiagram2D.AxisY>
                     <dxc:AxisY2D WholeRange="{x:Null}">
                         <dxc:AxisY2D.Title>
-                            <dxc:AxisTitle Content="111" FontSize="12" Visible="True"/>
+                            <dxc:AxisTitle Content="{x:Null}" FontSize="12" Visible="True"/>
                         </dxc:AxisY2D.Title>
                     </dxc:AxisY2D>
                 </dxc:XYDiagram2D.AxisY>

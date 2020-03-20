@@ -1154,11 +1154,11 @@ namespace DataProcess
             {
                 String flyFileName, slowFileName, fastFileName, tailFileName;
                 openDataWindow.GetFileNames(out flyFileName, out slowFileName, out fastFileName, out tailFileName);
-                if(flyFileName.Equals(String.Empty) && slowFileName.Equals(String.Empty) && fastFileName.Equals(String.Empty) && tailFileName.Equals(String.Empty))
+                /*if(flyFileName.Equals(String.Empty) && slowFileName.Equals(String.Empty) && fastFileName.Equals(String.Empty) && tailFileName.Equals(String.Empty))
                 {
                     MessageBox.Show("请至少选择一个文件", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
-                }
+                }*/
                 HistoryDetailWindow historyDetailWindow = new HistoryDetailWindow(flyFileName, slowFileName, fastFileName, tailFileName);
                 historyDetailWindow.ShowDialog();
             }

@@ -34,24 +34,24 @@
             <dx:DXTabItem Header="飞控">
                 <Grid Background="Transparent">
                     <dx:DXTabControl>
-                        <dx:DXTabItem Header="导航数据">
+                        <dx:DXTabItem Header="位置">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartNavLat"/>
                                 <Controls:MyChartControl x:Name="ChartNavLon"/>
+                                <Controls:MyChartControl x:Name="ChartNavLat"/>
                                 <Controls:MyChartControl x:Name="ChartNavHeight"/>
                                 <Controls:MyChartControl x:Name="ChartNavSpeedNorth"/>
                                 <Controls:MyChartControl x:Name="ChartNavSpeedSky"/>
                                 <Controls:MyChartControl x:Name="ChartNavSpeedEast"/>
-                                <Controls:MyChartControl x:Name="ChartNavPitchAngle"/>
-                                <Controls:MyChartControl x:Name="ChartNavCrabAngle"/>
-                                <Controls:MyChartControl x:Name="ChartNavRollAngle"/>
+                                <Controls:MyChartControl x:Name="ChartAccX"/>
+                                <Controls:MyChartControl x:Name="ChartAccY"/>
+                                <Controls:MyChartControl x:Name="ChartAccZ"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="角速度数据">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartAccX"/>
-                                <Controls:MyChartControl x:Name="ChartAccY"/>
-                                <Controls:MyChartControl x:Name="ChartAccZ"/>
+                                <Controls:MyChartControl x:Name="ChartNavPitchAngle"/>
+                                <Controls:MyChartControl x:Name="ChartNavCrabAngle"/>
+                                <Controls:MyChartControl x:Name="ChartNavRollAngle"/>
                                 <Controls:MyChartControl x:Name="ChartAngelX"/>
                                 <Controls:MyChartControl x:Name="ChartAngelY"/>
                                 <Controls:MyChartControl x:Name="ChartAngelZ"/>

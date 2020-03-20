@@ -103,9 +103,9 @@ namespace DataProcess.Controls
             XyDiagram2D.ActualAxisX.VisualRange.SetMinMaxValues(0, DataList.Count - 1);
         }
 
-        public void SetAxisYLabel(String label)
+        public void SetTitle(String label)
         {
-            XyDiagram2D.ActualAxisY.Title.Content = label;
+            Chart.Titles[0].Content = label;
         }
 
         public void AddValue(double value)
