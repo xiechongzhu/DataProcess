@@ -76,26 +76,34 @@
             <dx:DXTabItem Header="环境参数">
                 <Grid Background="Transparent">
                     <dx:DXTabControl>
-                        <dx:DXTabItem Header="缓变参数">
+                        <dx:DXTabItem Header="温度">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
                                 <Controls:MyChartControl x:Name="ChartHood"/>
                                 <Controls:MyChartControl x:Name="ChartInsAir"/>
                                 <Controls:MyChartControl x:Name="ChartInsWall"/>
                                 <Controls:MyChartControl x:Name="ChartAttAir"/>
+                                <Controls:MyChartControl x:Name="ChartTemperature1"/>
+                                <Controls:MyChartControl x:Name="ChartTemperature2"/>
                                 <Controls:MyChartControl x:Name="ChartAttWalls1"/>
                                 <Controls:MyChartControl x:Name="ChartAttWalls2"/>
                                 <Controls:MyChartControl x:Name="ChartAttWalls3"/>
                                 <Controls:MyChartControl x:Name="ChartAttWalls4"/>
                                 <Controls:MyChartControl x:Name="ChartAttWalls5"/>
                                 <Controls:MyChartControl x:Name="ChartAttWalls6"/>
+                            </dxlc:FlowLayoutControl>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="压力">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
                                 <Controls:MyChartControl x:Name="ChartInsPresure"/>
                                 <Controls:MyChartControl x:Name="ChartAttiPresure"/>
+                                <Controls:MyChartControl x:Name="ChartPresure"/>
+                                <Controls:MyChartControl x:Name="ChartLevel1Presure"/>
                                 <Controls:MyChartControl x:Name="ChartLevel2Transmitter"/>
                                 <Controls:MyChartControl x:Name="ChartGestureControlHigh"/>
                                 <Controls:MyChartControl x:Name="ChartGestureControlLow"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
-                        <dx:DXTabItem Header="速变参数">
+                        <dx:DXTabItem Header="振动">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
                                 <Controls:MyChartControl x:Name="ChartShake1"/>
                                 <Controls:MyChartControl x:Name="ChartShake2"/>
@@ -109,30 +117,22 @@
                                 <Controls:MyChartControl x:Name="ChartShake10"/>
                                 <Controls:MyChartControl x:Name="ChartShake11"/>
                                 <Controls:MyChartControl x:Name="ChartShake12"/>
-                                <Controls:MyChartControl x:Name="ChartLashT3"/>
-                                <Controls:MyChartControl x:Name="ChartLashT2"/>
-                                <Controls:MyChartControl x:Name="ChartLashT1"/>
-                                <Controls:MyChartControl x:Name="ChartLashT0"/>
-                                <Controls:MyChartControl x:Name="ChartLash1_1"/>
-                                <Controls:MyChartControl x:Name="ChartLash1_2"/>
-                                <Controls:MyChartControl x:Name="ChartLash1_3"/>
-                                <Controls:MyChartControl x:Name="ChartLash2"/>
-                                <Controls:MyChartControl x:Name="ChartNoise1"/>
-                                <Controls:MyChartControl x:Name="ChartNoise2"/>
-                                 </dxlc:FlowLayoutControl>
-                        </dx:DXTabItem>
-                        <dx:DXTabItem Header="尾端参数">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartPresure"/>
-                                <Controls:MyChartControl x:Name="ChartLevel1Presure"/>
-                                <Controls:MyChartControl x:Name="ChartTemperature1"/>
-                                <Controls:MyChartControl x:Name="ChartTemperature2"/>
                                 <Controls:MyChartControl x:Name="ChartLash1X"/>
                                 <Controls:MyChartControl x:Name="ChartLash1Y"/>
                                 <Controls:MyChartControl x:Name="ChartLash1Z"/>
                                 <Controls:MyChartControl x:Name="ChartLash2X"/>
                                 <Controls:MyChartControl x:Name="ChartLash2Y"/>
                                 <Controls:MyChartControl x:Name="ChartLash2Z"/>
+                            </dxlc:FlowLayoutControl>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="冲击、噪声">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                                <Controls:MyChartControl x:Name="ChartLash1_1"/>
+                                <Controls:MyChartControl x:Name="ChartLash1_2"/>
+                                <Controls:MyChartControl x:Name="ChartLash1_3"/>
+                                <Controls:MyChartControl x:Name="ChartLash2"/>
+                                <Controls:MyChartControl x:Name="ChartNoise1"/>
+                                <Controls:MyChartControl x:Name="ChartNoise2"/>
                                 <Controls:MyChartControl x:Name="ChartNoise"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>

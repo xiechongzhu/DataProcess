@@ -47,56 +47,53 @@ namespace DataProcess
 
         private void InitChartTitle()
         {
-            ChartPresure.SetTitle("压力(kPa)");
-            ChartLevel1Presure.SetTitle("一级发动机压力(MPa)");
-            ChartTemperature1.SetTitle("温度(级间断)℃");
-            ChartTemperature2.SetTitle("温度(尾端)℃");
-            ChartLash1X.SetTitle("振动1-X(g)");
-            ChartLash1Y.SetTitle("振动1-Y(g)");
-            ChartLash1Z.SetTitle("振动1-Z(g)");
-            ChartLash2X.SetTitle("振动2-X(g)");
-            ChartLash2Y.SetTitle("振动2-Y(g)");
-            ChartLash2Z.SetTitle("振动2-Z(g)");
-            ChartNoise.SetTitle("噪声(dB)");
+            ChartHood.SetTitle("头罩内温度传感器T1(℃)");
+            ChartInsAir.SetTitle("仪器仓内接收机附近空腔温度传感器T2(℃)");
+            ChartInsWall.SetTitle("仪器仓内筋条壁面温度传感器T3(℃)");
+            ChartAttAir.SetTitle("姿控仓内空腔温度T4(℃)");
+            ChartTemperature1.SetTitle("级间断内窗口加强筋上温度传感器T5(℃)");
+            ChartTemperature2.SetTitle("尾端内温度传感器T6(℃)");
+            ChartAttWalls1.SetTitle("Ⅱ象限气瓶表面温度TZ1(℃)");
+            ChartAttWalls2.SetTitle("Ⅳ象限气瓶表面温度TZ2(℃)");
+            ChartAttWalls3.SetTitle("Ⅰ象限贮箱表面温度TZ3(℃)");
+            ChartAttWalls4.SetTitle("Ⅰ象限贮箱表面温度TZ4(℃)");
+            ChartAttWalls5.SetTitle("Ⅲ象限贮箱表面温度TZ5(℃)");
+            ChartAttWalls6.SetTitle("Ⅲ象限贮箱表面温度TZ6(℃)");
 
-            ChartShake1.SetTitle("振动信号1(g)");
-            ChartShake2.SetTitle("振动信号2(g)");
-            ChartShake3.SetTitle("振动信号3(g)");
-            ChartShake4.SetTitle("振动信号4(g)");
-            ChartShake5.SetTitle("振动信号5(g)");
-            ChartShake6.SetTitle("振动信号6(g)");
-            ChartShake7.SetTitle("振动信号7(g)");
-            ChartShake8.SetTitle("振动信号8(g)");
-            ChartShake9.SetTitle("振动信号9(g)");
-            ChartShake10.SetTitle("振动信号10(g)");
-            ChartShake11.SetTitle("振动信号11(g)");
-            ChartShake12.SetTitle("振动信号12(g)");
-            ChartLashT3.SetTitle("冲击信号时统T3");
-            ChartLashT2.SetTitle("冲击信号时统T2");
-            ChartLashT1.SetTitle("冲击信号时统T1");
-            ChartLashT0.SetTitle("冲击信号时统T0");
-            ChartLash1_1.SetTitle("冲击信号1-1(g)");
-            ChartLash1_2.SetTitle("冲击信号1-2(g)");
-            ChartLash1_3.SetTitle("冲击信号1-3(g)");
-            ChartLash2.SetTitle("冲击信号2(g)");
-            ChartNoise1.SetTitle("噪声信号1(dB)");
-            ChartNoise2.SetTitle("噪声信号2(dB)");
+            ChartInsPresure.SetTitle("仪器内仓压力传感器P1(kPa)");
+            ChartAttiPresure.SetTitle("姿控仓内空腔压力传感器P2(kPa)");
+            ChartPresure.SetTitle("尾端内压力传感器P3(kPa)");
+            ChartLevel1Presure.SetTitle("级间段一级发动机压力传感器(MPa)");
+            ChartLevel2Transmitter.SetTitle("仪器仓内二级发动机压力传感器PD2(MPa)");
+            ChartGestureControlHigh.SetTitle("姿控高压传感器PZ1(MPa)");
+            ChartGestureControlLow.SetTitle("姿控低压传感器PZ2(MPa)");
 
-            ChartHood.SetTitle("头罩温度(℃)");
-            ChartInsAir.SetTitle("仪器仓空温(℃)");
-            ChartInsWall.SetTitle("仪器仓壁温(℃)");
-            ChartAttAir.SetTitle("姿控仓空温(℃)");
-            ChartAttWalls1.SetTitle("姿控仓壁温Ⅰ(℃)");
-            ChartAttWalls2.SetTitle("姿控仓壁温Ⅱ(℃)");
-            ChartAttWalls3.SetTitle("姿控仓壁温Ⅲ(℃)");
-            ChartAttWalls4.SetTitle("姿控仓壁温Ⅳ(℃)");
-            ChartAttWalls5.SetTitle("姿控仓壁温Ⅴ(℃)");
-            ChartAttWalls6.SetTitle("姿控仓壁温Ⅵ(℃)");
-            ChartInsPresure.SetTitle("仪器仓压力(kPa)");
-            ChartAttiPresure.SetTitle("姿控仓压力(kPa)");
-            ChartLevel2Transmitter.SetTitle("二级发送机压力(MPa)");
-            ChartGestureControlHigh.SetTitle("姿控动力高压(MPa)");
-            ChartGestureControlLow.SetTitle("姿控动力低压(MPa)");
+            ChartShake1.SetTitle("姿控仓内安装板前版面振动传感器V1-X(g)");
+            ChartShake2.SetTitle("姿控仓内安装板前版面振动传感器V1-Y(g)");
+            ChartShake3.SetTitle("姿控仓内安装板前版面振动传感器V1-Z(g)");
+            ChartShake4.SetTitle("仪器仓内十字梁上振动传感器V2-X(g)");
+            ChartShake5.SetTitle("仪器仓内十字梁上振动传感器V2-Y(g)");
+            ChartShake6.SetTitle("仪器仓内十字梁上振动传感器V2-Z(g)");
+            ChartShake7.SetTitle("仪器仓内IMU上振动传感器V3-X(g)");
+            ChartShake8.SetTitle("仪器仓内IMU上振动传感器V3-Y(g)");
+            ChartShake9.SetTitle("仪器仓内IMU上振动传感器V3-Z(g)");
+            ChartShake10.SetTitle("仪器仓内后框上振动传感器V4-X(g)");
+            ChartShake11.SetTitle("仪器仓内后框上振动传感器V4-Y(g)");
+            ChartShake12.SetTitle("仪器仓内后框上振动传感器V4-Z(g)");
+            ChartLash1X.SetTitle("级间段内后法兰振动传感器V5-X(g)");
+            ChartLash1Y.SetTitle("级间段内后法兰振动传感器V5-Y(g)");
+            ChartLash1Z.SetTitle("级间段内后法兰振动传感器V5-Z(g)");
+            ChartLash2X.SetTitle("尾段内振动传感器V6-X(g)");
+            ChartLash2Y.SetTitle("尾段内振动传感器V6-Y(g)");
+            ChartLash2Z.SetTitle("尾段内振动传感器V6-Z(g)");
+
+            ChartLash1_1.SetTitle("仪器仓内前端框冲击传感器SH1-X(g)");
+            ChartLash1_2.SetTitle("仪器仓内前端框冲击传感器SH1-Y(g)");
+            ChartLash1_3.SetTitle("姿控仓后端框x向冲击传感器SH2(轴向)(g)");
+            ChartLash2.SetTitle("姿控仓后端框y向冲击传感器SH3(Ⅱ-Ⅳ)(g)");
+            ChartNoise1.SetTitle("仪器仓内噪声传感器N1(dB)");
+            ChartNoise2.SetTitle("姿控仓内噪声传感器N2(dB)");
+            ChartNoise.SetTitle("尾段内噪声传感器N3(dB)");
 
             ChartNavLat.SetTitle("纬度(°)");
             ChartNavLon.SetTitle("经度(°)");
@@ -290,11 +287,6 @@ namespace DataProcess
                     ChartShake12.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
                 }
 
-                ChartLashT3.AddValue(packet.lashT3);
-                ChartLashT2.AddValue(packet.lashT2);
-                ChartLashT1.AddValue(packet.lashT1);
-                ChartLashT0.AddValue(packet.lashT0);
-
                 FastLashSignal lashSignal = packet.lashSignal_1[0];
                 for (int pos = 0; pos < 400; ++pos)
                 {
@@ -335,10 +327,6 @@ namespace DataProcess
             ChartShake10.Update();
             ChartShake11.Update();
             ChartShake12.Update();
-            ChartLashT3.Update();
-            ChartLashT2.Update();
-            ChartLashT1.Update();
-            ChartLashT0.Update();
             ChartLash1_1.Update();
             ChartLash1_2.Update();
             ChartLash1_3.Update();

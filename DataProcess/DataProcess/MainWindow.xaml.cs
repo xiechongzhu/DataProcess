@@ -233,19 +233,19 @@ namespace DataProcess
         private void LedTimer_Tick(object sender, EventArgs e)
         {
             DateTime Now = DateTime.Now;
-            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 20)
+            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageSlow, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 20)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageFast, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 20)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageTail, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 20)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageFly, LED_STATUS.LED_RED);
             }
@@ -297,10 +297,6 @@ namespace DataProcess
             SeriesShake10.DataSource = chartDataSource.FastShakeSeriesLists[9];
             SeriesShake11.DataSource = chartDataSource.FastShakeSeriesLists[10];
             SeriesShake12.DataSource = chartDataSource.FastShakeSeriesLists[11];
-            SeriesLashT3.DataSource = chartDataSource.FastLashT3SeriesList;
-            SeriesLashT2.DataSource = chartDataSource.FastLashT2SeriesList;
-            SeriesLashT1.DataSource = chartDataSource.FastLashT1SeriesList;
-            SeriesLashT0.DataSource = chartDataSource.FastLashT0SeriesList;
             SeriesLash1_1.DataSource = chartDataSource.FastLashSeriesLists1[0];
             SeriesLash1_2.DataSource = chartDataSource.FastLashSeriesLists1[1];
             SeriesLash1_3.DataSource = chartDataSource.FastLashSeriesLists1[2];
@@ -1049,10 +1045,6 @@ namespace DataProcess
             ChartShake10.Titles[0].Content = null;
             ChartShake11.Titles[0].Content = null;
             ChartShake12.Titles[0].Content = null;
-            ChartLashT3.Titles[0].Content = null;
-            ChartLashT2.Titles[0].Content = null;
-            ChartLashT1.Titles[0].Content = null;
-            ChartLashT0.Titles[0].Content = null;
             ChartLash1_1.Titles[0].Content = null;
             ChartLash1_2.Titles[0].Content = null;
             ChartLash1_3.Titles[0].Content = null;
