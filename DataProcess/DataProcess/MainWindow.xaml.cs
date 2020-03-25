@@ -225,7 +225,6 @@ namespace DataProcess
             ledTimer.Tick += LedTimer_Tick;
             ledTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
             UpdateSyncFireDisplay(Double.NaN);
-            LoadNetworkSetting();
             InitProgramDiagram();
             InitLedStatus();
         }
@@ -352,18 +351,6 @@ namespace DataProcess
         {
             ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
             programDigram.Reset();
-        }
-
-        private void LoadNetworkSetting()
-        {
-            SettingManager mgr = new SettingManager();
-            if(mgr.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort))
-            {
-                editIpEnvAddr.Text = envIpAddr;
-                editEnvPort.Text = envPort.ToString();
-                editIpFlyAddr.Text = flyIpAddr;
-                editFlyPort.Text = flyPort.ToString();
-            }
         }
 
         private void UiRefreshTimer_Tick(object sender, EventArgs e)
@@ -804,26 +791,30 @@ namespace DataProcess
 
             try
             {
-                udpClientEnv = new UdpClient(int.Parse(editEnvPort.Text));
-                udpClientEnv.JoinMulticastGroup(IPAddress.Parse(editIpEnvAddr.Text));
-                udpClientFly = new UdpClient(int.Parse(editFlyPort.Text));
-                udpClientFly.JoinMulticastGroup(IPAddress.Parse(editIpFlyAddr.Text));
+                SettingManager settingManager = new SettingManager();
+                if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort))
+                {
+                    udpClientEnv = new UdpClient(envPort);
+                    udpClientEnv.JoinMulticastGroup(IPAddress.Parse(envIpAddr));
+                    udpClientFly = new UdpClient(flyPort);
+                    udpClientFly.JoinMulticastGroup(IPAddress.Parse(flyIpAddr));
+                }
+                else
+                {
+                    MessageBox.Show("加载配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
             catch(Exception ex)
             {
-                udpClientEnv?.DropMulticastGroup(IPAddress.Parse(editIpEnvAddr.Text));
                 udpClientEnv?.Close();
-                udpClientFly?.DropMulticastGroup(IPAddress.Parse(editIpFlyAddr.Text));
                 udpClientFly?.Close();
                 MessageBox.Show("加入组播组失败:" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
-            editIpEnvAddr.IsEnabled = false;
-            editEnvPort.IsEnabled = false;
-            editIpFlyAddr.IsEnabled = false;
-            editFlyPort.IsEnabled = false;
+            btnSetting.IsEnabled = false;
             ResetDisplay();
             envBuffers.Clear();
             envParser.Start();
@@ -873,9 +864,7 @@ namespace DataProcess
         {
             try
             {
-                udpClientEnv?.DropMulticastGroup(IPAddress.Parse(editIpEnvAddr.Text));
                 udpClientEnv?.Close();
-                udpClientFly?.DropMulticastGroup(IPAddress.Parse(editIpFlyAddr.Text));
                 udpClientFly?.Close();
             }
             catch (Exception) { }
@@ -885,10 +874,7 @@ namespace DataProcess
             flyParser?.Stop();
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
-            editIpEnvAddr.IsEnabled = true;
-            editEnvPort.IsEnabled = true;
-            editIpFlyAddr.IsEnabled = true;
-            editFlyPort.IsEnabled = true;
+            btnSetting.IsEnabled = true;
             uiRefreshTimer.Stop();
             dataLogger?.Close();
             SaveTestInfo();
@@ -1000,16 +986,6 @@ namespace DataProcess
             ServoData data = Marshal.PtrToStructure<ServoData>(msg);
             envBuffers.ServoDataList.Add(data);
             Marshal.FreeHGlobal(msg);
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            SettingManager mgr = new SettingManager();
-            mgr.SaveNetworkSetting(editIpEnvAddr.Text, int.Parse(editEnvPort.Text), editIpFlyAddr.Text, int.Parse(editFlyPort.Text));
-            if (btnStart.IsEnabled == false)
-            {
-                btnStop_Click(null, null);
-            }
         }
 
         private void ResetDisplay()
@@ -1154,6 +1130,13 @@ namespace DataProcess
                 HistoryDetailWindow historyDetailWindow = new HistoryDetailWindow(flyFileName, slowFileName, fastFileName, tailFileName);
                 historyDetailWindow.ShowDialog();
             }
+        }
+
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            SettingWindow settingWindow = new SettingWindow();
+            settingWindow.Owner = this;
+            settingWindow.Show();
         }
     }
 }
