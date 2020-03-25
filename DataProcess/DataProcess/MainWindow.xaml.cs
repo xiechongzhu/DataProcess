@@ -1136,7 +1136,7 @@ namespace DataProcess
         {
             SettingWindow settingWindow = new SettingWindow();
             settingWindow.Owner = this;
-            settingWindow.Show();
+            settingWindow.ShowDialog();
         }
     }
 }
