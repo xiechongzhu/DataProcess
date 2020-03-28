@@ -105,12 +105,12 @@ namespace DataProcess
             ChartNavCrabAngle.SetTitle("偏航角(°)");
             ChartNavRollAngle.SetTitle("滚转角(°)");
 
-            ChartAccX.SetTitle("AX(m/s2)");
-            ChartAccY.SetTitle("AY(m/s2)");
-            ChartAccZ.SetTitle("AZ(m/s2)");
-            ChartAngelX.SetTitle("ωX(°/s)");
-            ChartAngelY.SetTitle("ωY(°/s)");
-            ChartAngelZ.SetTitle("ωZ(°/s)");
+            ChartAccX.SetTitle("加速度X(m/s2)");
+            ChartAccY.SetTitle("加速度Y(m/s2)");
+            ChartAccZ.SetTitle("加速度Z(m/s2)");
+            ChartAngelX.SetTitle("角速度X(°/s)");
+            ChartAngelY.SetTitle("角速度Y(°/s)");
+            ChartAngelZ.SetTitle("角速度Z(°/s)");
 
             ChartServoVol28.SetTitle("28V供电电压(V)");
             ChartServoVol160.SetTitle("160V供电电压(V)");

@@ -343,6 +343,7 @@ namespace DataProcess
         private void InitProgramDiagram()
         {
             ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
+            GpsTime.Text = "--";
             programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
             FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
         }
@@ -350,6 +351,7 @@ namespace DataProcess
         private void ResetProgramDiagram()
         {
             ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
+            GpsTime.Text = "--";
             programDigram.Reset();
         }
 
@@ -686,6 +688,9 @@ namespace DataProcess
             chartDataSource.NavCrabAngle.NotifyDataChanged();
             chartDataSource.NavRollAngle.NotifyDataChanged();
 
+            NavData lastNavData = navDataList[navDataList.Count - 1];
+            GpsTime.Text = String.Format("{0:F}S", lastNavData.gpsTime);
+
             /*NavData lastNavData = navDataList[navDataList.Count - 1];
             ChartNavLat.Titles[0].Content = String.Format("{0:F}", lastNavData.latitude);
             ChartNavLon.Titles[0].Content = String.Format("{0:F}", lastNavData.longitude);
@@ -815,6 +820,8 @@ namespace DataProcess
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
             btnSetting.IsEnabled = false;
+            btnHistory.IsEnabled = false;
+            btnOpenData.IsEnabled = false;
             ResetDisplay();
             envBuffers.Clear();
             envParser.Start();
@@ -875,6 +882,8 @@ namespace DataProcess
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
             btnSetting.IsEnabled = true;
+            btnHistory.IsEnabled = true;
+            btnOpenData.IsEnabled = true;
             uiRefreshTimer.Stop();
             dataLogger?.Close();
             SaveTestInfo();
