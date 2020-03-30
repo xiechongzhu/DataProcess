@@ -131,7 +131,19 @@ namespace DataProcess
             }
         }
 
-        public void Reset()
+        private bool IsActive(String name)
+        {
+            foreach (SignalPoint point in PointsToDraw)
+            {
+                if (point.Name == name)
+                {
+                    return point.IsActive;
+                }
+            }
+            return false;
+        }
+
+    public void Reset()
         {
             lastAngleData = null;
             lastNavData = null;
@@ -203,7 +215,7 @@ namespace DataProcess
         {
             if(lastNavData != null)
             {
-                if(lastNavData.Value.height > navData.height)
+                if(lastNavData.Value.height > navData.height && IsActive(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_BOOM).Value))
                 {
                     ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_TOP).Value, true);
                 }

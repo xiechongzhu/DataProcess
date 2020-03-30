@@ -161,12 +161,12 @@ namespace DataProcess
             AngleYList.ClearPoints();
             AngleZList.ClearPoints();
 
-            ServoVol28List.NotifyDataChanged();
-            ServoVol160List.NotifyDataChanged();
-            Servo1IqList.NotifyDataChanged();
-            Servo2IqList.NotifyDataChanged();
-            Servo3IqList.NotifyDataChanged();
-            Servo4IqList.NotifyDataChanged();
+            ServoVol28List.ClearPoints();
+            ServoVol160List.ClearPoints();
+            Servo1IqList.ClearPoints();
+            Servo2IqList.ClearPoints();
+            Servo3IqList.ClearPoints();
+            Servo4IqList.ClearPoints();
         }
     }
 
@@ -232,19 +232,19 @@ namespace DataProcess
         private void LedTimer_Tick(object sender, EventArgs e)
         {
             DateTime Now = DateTime.Now;
-            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 50)
+            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 1000)
             {
                 SetLedStatus(ImageSlow, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 50)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 1000)
             {
                 SetLedStatus(ImageFast, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 50)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 1000)
             {
                 SetLedStatus(ImageTail, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 50)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 1000)
             {
                 SetLedStatus(ImageFly, LED_STATUS.LED_RED);
             }
@@ -605,7 +605,7 @@ namespace DataProcess
             chartDataSource.TailLash2ZList.NotifyDataChanged();
             chartDataSource.TailNoiseList.NotifyDataChanged();
 
-            if (seriesPoints[(int)ChannelType.ChannelPresure].Count > 0)
+            /*if (seriesPoints[(int)ChannelType.ChannelPresure].Count > 0)
             {
                 ChartPresure.Titles[0].Content = String.Format("{0:F}",
                     seriesPoints[(int)ChannelType.ChannelPresure][seriesPoints[(int)ChannelType.ChannelPresure].Count - 1]);
@@ -659,7 +659,7 @@ namespace DataProcess
             {
                 ChartNoise.Titles[0].Content = String.Format("{0:F}",
                     seriesPoints[(int)ChannelType.ChannelNoise][seriesPoints[(int)ChannelType.ChannelNoise].Count - 1]);
-            }
+            }*/
         }
 
         private void DrawNavPackets(List<NavData> navDataList)
@@ -1002,7 +1002,7 @@ namespace DataProcess
             //清空缓变参数
             UpdateSyncFireDisplay(Double.NaN);
 
-            ChartHood.Titles[0].Content = null;
+            /*ChartHood.Titles[0].Content = null;
             ChartInsAir.Titles[0].Content = null;
             ChartInsWall.Titles[0].Content = null;
             ChartAttAir.Titles[0].Content = null;
@@ -1016,9 +1016,9 @@ namespace DataProcess
             ChartAttiPresure.Titles[0].Content = null;
             ChartLevel2Transmitter.Titles[0].Content = null;
             ChartGestureControlHigh.Titles[0].Content = null;
-            ChartGestureControlLow.Titles[0].Content = null;
+            ChartGestureControlLow.Titles[0].Content = null;*/
 
-            ChartShake1.Titles[0].Content = null;
+            /*ChartShake1.Titles[0].Content = null;
             ChartShake2.Titles[0].Content = null;
             ChartShake3.Titles[0].Content = null;
             ChartShake4.Titles[0].Content = null;
@@ -1035,10 +1035,10 @@ namespace DataProcess
             ChartLash1_3.Titles[0].Content = null;
             ChartLash2.Titles[0].Content = null;
             ChartNoise1.Titles[0].Content = null;
-            ChartNoise2.Titles[0].Content = null;
+            ChartNoise2.Titles[0].Content = null;*/
 
             //清空尾端参数
-            ChartPresure.Titles[0].Content = null;
+            /*ChartPresure.Titles[0].Content = null;
             ChartLevel1Presure.Titles[0].Content = null;
             ChartTemperature1.Titles[0].Content = null;
             ChartTemperature2.Titles[0].Content = null;
@@ -1048,10 +1048,10 @@ namespace DataProcess
             ChartLash2X.Titles[0].Content = null;
             ChartLash2Y.Titles[0].Content = null;
             ChartLash2Z.Titles[0].Content = null;
-            ChartNoise.Titles[0].Content = null;
+            ChartNoise.Titles[0].Content = null;*/
 
             //清空导航数据
-            SeriesNavLat.Points.Clear();
+            /*SeriesNavLat.Points.Clear();
             SeriesNavLon.Points.Clear();
             SeriesNavHeight.Points.Clear();
             SeriesNavSpeedNorth.Points.Clear();
@@ -1059,9 +1059,9 @@ namespace DataProcess
             SeriesNavSpeedEast.Points.Clear();
             SeriesNavPitchAngle.Points.Clear();
             SeriesNavCrabAngle.Points.Clear();
-            SeriesNavRollAngle.Points.Clear();
+            SeriesNavRollAngle.Points.Clear();*/
 
-            ChartNavLat.Titles[0].Content = null;
+            /*ChartNavLat.Titles[0].Content = null;
             ChartNavLon.Titles[0].Content = null;
             ChartNavHeight.Titles[0].Content = null;
             ChartNavSpeedNorth.Titles[0].Content = null;
@@ -1069,25 +1069,25 @@ namespace DataProcess
             ChartNavSpeedEast.Titles[0].Content = null;
             ChartNavPitchAngle.Titles[0].Content = null;
             ChartNavCrabAngle.Titles[0].Content = null;
-            ChartNavRollAngle.Titles[0].Content = null;
+            ChartNavRollAngle.Titles[0].Content = null;*/
 
             //清空程控信号
             ResetProgramDiagram();
 
             //清空伺服信号
-            SeriesServoVol28.Points.Clear();
+            /*SeriesServoVol28.Points.Clear();
             SeriesServoVol160.Points.Clear();
             SeriesServo1Iq.Points.Clear();
             SeriesServo2Iq.Points.Clear();
             SeriesServo3Iq.Points.Clear();
-            SeriesServo4Iq.Points.Clear();
+            SeriesServo4Iq.Points.Clear();*/
 
-            ChartServoVol28.Titles[0].Content = null;
+            /*ChartServoVol28.Titles[0].Content = null;
             ChartServoVol160.Titles[0].Content = null;
             ChartServo1Iq.Titles[0].Content = null;
             ChartServo2Iq.Titles[0].Content = null;
             ChartServo3Iq.Titles[0].Content = null;
-            ChartServo4Iq.Titles[0].Content = null;
+            ChartServo4Iq.Titles[0].Content = null;*/
 
             chartDataSource.Clear();
         }
@@ -1146,6 +1146,11 @@ namespace DataProcess
             SettingWindow settingWindow = new SettingWindow();
             settingWindow.Owner = this;
             settingWindow.ShowDialog();
+        }
+
+        private void ThemedWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            btnStop_Click(this, new RoutedEventArgs());
         }
     }
 }
