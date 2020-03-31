@@ -232,19 +232,19 @@ namespace DataProcess
         private void LedTimer_Tick(object sender, EventArgs e)
         {
             DateTime Now = DateTime.Now;
-            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 1000)
+            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageSlow, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 1000)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageFast, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 1000)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageTail, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 1000)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 50)
             {
                 SetLedStatus(ImageFly, LED_STATUS.LED_RED);
             }
@@ -853,6 +853,7 @@ namespace DataProcess
 
         private void EndFlyReceive(IAsyncResult ar)
         {
+            NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
             try
             {
@@ -922,22 +923,18 @@ namespace DataProcess
                     ProcessTailDataMessage(lParam);
                     break;
                 case WinApi.WM_NAV_DATA:
-                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
                     SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessNavMessage(lParam);
                     break;
                 case WinApi.WM_ANGLE_DATA:
-                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
                     SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessAngelData(lParam);
                     break;
                 case WinApi.WM_PROGRAM_DATA:
-                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
                     SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessProgramData(lParam);
                     break;
                 case WinApi.WM_SERVO_DATA:
-                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
                     SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessServoData(lParam);
                     break;
