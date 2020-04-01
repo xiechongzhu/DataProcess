@@ -854,6 +854,7 @@ namespace DataProcess
         private void EndFlyReceive(IAsyncResult ar)
         {
             NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
+            Dispatcher.Invoke(new Action<Image, LED_STATUS>(SetLedStatus), ImageFly, LED_STATUS.LED_GREEN);
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
             try
             {
@@ -910,32 +911,37 @@ namespace DataProcess
                 case WinApi.WM_SLOW_DATA:
                     NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW] = DateTime.Now;
                     SetLedStatus(ImageSlow, LED_STATUS.LED_GREEN);
-                    ProcessSlowDataMessage(lParam);
+                    if (lParam != IntPtr.Zero)
+                    {
+                        ProcessSlowDataMessage(lParam);
+                    }
                     break;
                 case WinApi.WM_FAST_DATA:
                     NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST] = DateTime.Now;
                     SetLedStatus(ImageFast, LED_STATUS.LED_GREEN);
-                    ProcessFastDataMessage(lParam);
+                    if (lParam != IntPtr.Zero)
+                    {
+                        ProcessFastDataMessage(lParam);
+                    }
                     break;
                 case WinApi.WM_TAIL_DATA:
                     NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL] = DateTime.Now;
                     SetLedStatus(ImageTail, LED_STATUS.LED_GREEN);
-                    ProcessTailDataMessage(lParam);
+                    if (lParam != IntPtr.Zero)
+                    {
+                        ProcessTailDataMessage(lParam);
+                    }
                     break;
                 case WinApi.WM_NAV_DATA:
-                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessNavMessage(lParam);
                     break;
                 case WinApi.WM_ANGLE_DATA:
-                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessAngelData(lParam);
                     break;
                 case WinApi.WM_PROGRAM_DATA:
-                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessProgramData(lParam);
                     break;
                 case WinApi.WM_SERVO_DATA:
-                    SetLedStatus(ImageFly, LED_STATUS.LED_GREEN);
                     ProcessServoData(lParam);
                     break;
                 default:

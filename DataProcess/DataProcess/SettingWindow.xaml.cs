@@ -41,6 +41,11 @@ namespace DataProcess
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            if(editEnvIpAddr.Text.Equals(String.Empty) || editFlyIpAddr.Text.Equals(String.Empty))
+            {
+                MessageBox.Show("IP地址不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text), editFlyIpAddr.Text, int.Parse(editFlyPort.Text));

@@ -128,6 +128,10 @@ namespace DataProcess.Protocol
                         Marshal.StructureToPtr(slowPacket, ptr, true);
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, ptr);
                     }
+                    else
+                    {
+                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, IntPtr.Zero);
+                    }
                     dataLogger.WriteSlowPacket(buffer);
                     break;
                 case EnvProtocol.DataType.DataTypeFast:
@@ -138,15 +142,26 @@ namespace DataProcess.Protocol
                         Marshal.StructureToPtr(fastPacket, ptr, true);
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, ptr);
                     }
+                    else
+                    {
+                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, IntPtr.Zero);
+                    }
                     dataLogger.WriteFastPacket(buffer);
                     break;
                 case EnvProtocol.DataType.DataTypeTail:
                     List<TailPacketRs> tailPacketRs = tailParser.Parse(body);
-                    foreach(TailPacketRs packet in tailPacketRs)
+                    if (tailPacketRs.Count > 0)
                     {
-                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(TailPacketRs)));
-                        Marshal.StructureToPtr(packet, ptr, true);
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, ptr);
+                        foreach (TailPacketRs packet in tailPacketRs)
+                        {
+                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(TailPacketRs)));
+                            Marshal.StructureToPtr(packet, ptr, true);
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, ptr);
+                        }
+                    }
+                    else
+                    {
+                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, IntPtr.Zero);
                     }
                     dataLogger.WriteTailPacket(buffer);
                     break;
