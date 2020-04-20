@@ -2,6 +2,7 @@
 using DataProcess.Parser;
 using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
+using DataProcess.Setting;
 using DataProcess.Tools;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace DataProcess
     {
         private TestInfo testInfo = null;
         private String slowBinFile, fastBinFlie, tailBinFile, flyBinFile;
+        private Ratios ratios = null;
 
         public HistoryDetailWindow(String strFlyBinFile, String strSLowBinFile, String strFastBinFile, String strTailBinFile)
         {
@@ -47,53 +49,97 @@ namespace DataProcess
 
         private void InitChartTitle()
         {
-            ChartHood.SetTitle("头罩内温度传感器T1(℃)");
-            ChartInsAir.SetTitle("仪器仓内接收机附近空腔温度传感器T2(℃)");
-            ChartInsWall.SetTitle("仪器仓内筋条壁面温度传感器T3(℃)");
-            ChartAttAir.SetTitle("姿控仓内空腔温度T4(℃)");
-            ChartTemperature1.SetTitle("级间断内窗口加强筋上温度传感器T5(℃)");
-            ChartTemperature2.SetTitle("尾端内温度传感器T6(℃)");
-            ChartAttWalls1.SetTitle("Ⅱ象限气瓶表面温度TZ1(℃)");
-            ChartAttWalls2.SetTitle("Ⅳ象限气瓶表面温度TZ2(℃)");
-            ChartAttWalls3.SetTitle("Ⅰ象限贮箱表面温度TZ3(℃)");
-            ChartAttWalls4.SetTitle("Ⅰ象限贮箱表面温度TZ4(℃)");
-            ChartAttWalls5.SetTitle("Ⅲ象限贮箱表面温度TZ5(℃)");
-            ChartAttWalls6.SetTitle("Ⅲ象限贮箱表面温度TZ6(℃)");
+            ChartHood.SetTitle("头罩内温度传感器T1");
+            ChartHood.SetYRange(-1, 6);
+            ChartInsAir.SetTitle("仪器仓内接收机附近空腔温度传感器T2");
+            ChartInsAir.SetYRange(-1, 6);
+            ChartInsWall.SetTitle("仪器仓内筋条壁面温度传感器T3");
+            ChartInsWall.SetYRange(-1, 6);
+            ChartAttAir.SetTitle("姿控仓内空腔温度T4");
+            ChartAttAir.SetYRange(-1, 6);
+            ChartTemperature1.SetTitle("级间断内窗口加强筋上温度传感器T5");
+            ChartTemperature1.SetYRange(-1, 6);
+            ChartTemperature2.SetTitle("尾端内温度传感器T6");
+            ChartTemperature2.SetYRange(-1, 6);
+            ChartAttWalls1.SetTitle("Ⅱ象限气瓶表面温度TZ1");
+            ChartAttWalls1.SetYRange(-1, 6);
+            ChartAttWalls2.SetTitle("Ⅳ象限气瓶表面温度TZ2");
+            ChartAttWalls2.SetYRange(-1, 6);
+            ChartAttWalls3.SetTitle("Ⅰ象限贮箱表面温度TZ3");
+            ChartAttWalls3.SetYRange(-1, 6);
+            ChartAttWalls4.SetTitle("Ⅰ象限贮箱表面温度TZ4");
+            ChartAttWalls4.SetYRange(-1, 6);
+            ChartAttWalls5.SetTitle("Ⅲ象限贮箱表面温度TZ5");
+            ChartAttWalls5.SetYRange(-1, 6);
+            ChartAttWalls6.SetTitle("Ⅲ象限贮箱表面温度TZ6");
+            ChartAttWalls6.SetYRange(-1, 6);
 
-            ChartInsPresure.SetTitle("仪器内仓压力传感器P1(kPa)");
-            ChartAttiPresure.SetTitle("姿控仓内空腔压力传感器P2(kPa)");
-            ChartPresure.SetTitle("尾端内压力传感器P3(kPa)");
-            ChartLevel1Presure.SetTitle("级间段一级发动机压力传感器(MPa)");
-            ChartLevel2Transmitter.SetTitle("仪器仓内二级发动机压力传感器PD2(MPa)");
-            ChartGestureControlHigh.SetTitle("姿控高压传感器PZ1(MPa)");
-            ChartGestureControlLow.SetTitle("姿控低压传感器PZ2(MPa)");
+            ChartInsPresure.SetTitle("仪器内仓压力传感器P1");
+            ChartInsPresure.SetYRange(-1, 6);
+            ChartAttiPresure.SetTitle("姿控仓内空腔压力传感器P2");
+            ChartAttiPresure.SetYRange(-1, 6);
+            ChartPresure.SetTitle("尾端内压力传感器P3");
+            ChartPresure.SetYRange(-1, 6);
+            ChartLevel1Presure.SetTitle("级间段一级发动机压力传感器");
+            ChartLevel1Presure.SetYRange(-1, 6);
+            ChartLevel2Transmitter.SetTitle("仪器仓内二级发动机压力传感器PD2");
+            ChartLevel2Transmitter.SetYRange(-1, 6);
+            ChartGestureControlHigh.SetTitle("姿控高压传感器PZ1");
+            ChartGestureControlHigh.SetYRange(-1, 6);
+            ChartGestureControlLow.SetTitle("姿控低压传感器PZ2");
+            ChartGestureControlLow.SetYRange(-1, 6);
 
-            ChartShake1.SetTitle("姿控仓内安装板前版面振动传感器V1-X(g)");
-            ChartShake2.SetTitle("姿控仓内安装板前版面振动传感器V1-Y(g)");
-            ChartShake3.SetTitle("姿控仓内安装板前版面振动传感器V1-Z(g)");
-            ChartShake4.SetTitle("仪器仓内十字梁上振动传感器V2-X(g)");
-            ChartShake5.SetTitle("仪器仓内十字梁上振动传感器V2-Y(g)");
-            ChartShake6.SetTitle("仪器仓内十字梁上振动传感器V2-Z(g)");
-            ChartShake7.SetTitle("仪器仓内IMU上振动传感器V3-X(g)");
-            ChartShake8.SetTitle("仪器仓内IMU上振动传感器V3-Y(g)");
-            ChartShake9.SetTitle("仪器仓内IMU上振动传感器V3-Z(g)");
-            ChartShake10.SetTitle("仪器仓内后框上振动传感器V4-X(g)");
-            ChartShake11.SetTitle("仪器仓内后框上振动传感器V4-Y(g)");
-            ChartShake12.SetTitle("仪器仓内后框上振动传感器V4-Z(g)");
-            ChartLash1X.SetTitle("级间段内后法兰振动传感器V5-X(g)");
-            ChartLash1Y.SetTitle("级间段内后法兰振动传感器V5-Y(g)");
-            ChartLash1Z.SetTitle("级间段内后法兰振动传感器V5-Z(g)");
-            ChartLash2X.SetTitle("尾段内振动传感器V6-X(g)");
-            ChartLash2Y.SetTitle("尾段内振动传感器V6-Y(g)");
-            ChartLash2Z.SetTitle("尾段内振动传感器V6-Z(g)");
+            ChartShake1.SetTitle("姿控仓内安装板前版面振动传感器V1-X");
+            ChartShake1.SetYRange(-1, 6);
+            ChartShake2.SetTitle("姿控仓内安装板前版面振动传感器V1-Y");
+            ChartShake2.SetYRange(-1, 6);
+            ChartShake3.SetTitle("姿控仓内安装板前版面振动传感器V1-Z");
+            ChartShake3.SetYRange(-1, 6);
+            ChartShake4.SetTitle("仪器仓内十字梁上振动传感器V2-X");
+            ChartShake4.SetYRange(-1, 6);
+            ChartShake5.SetTitle("仪器仓内十字梁上振动传感器V2-Y");
+            ChartShake5.SetYRange(-1, 6);
+            ChartShake6.SetTitle("仪器仓内十字梁上振动传感器V2-Z");
+            ChartShake6.SetYRange(-1, 6);
+            ChartShake7.SetTitle("仪器仓内IMU上振动传感器V3-X");
+            ChartShake7.SetYRange(-1, 6);
+            ChartShake8.SetTitle("仪器仓内IMU上振动传感器V3-Y");
+            ChartShake8.SetYRange(-1, 6);
+            ChartShake9.SetTitle("仪器仓内IMU上振动传感器V3-Z");
+            ChartShake9.SetYRange(-1, 6);
+            ChartShake10.SetTitle("仪器仓内后框上振动传感器V4-X");
+            ChartShake10.SetYRange(-1, 6);
+            ChartShake11.SetTitle("仪器仓内后框上振动传感器V4-Y");
+            ChartShake11.SetYRange(-1, 6);
+            ChartShake12.SetTitle("仪器仓内后框上振动传感器V4-Z");
+            ChartShake12.SetYRange(-1, 6);
+            ChartLash1X.SetTitle("级间段内后法兰振动传感器V5-X");
+            ChartLash1X.SetYRange(-1, 6);
+            ChartLash1Y.SetTitle("级间段内后法兰振动传感器V5-Y");
+            ChartLash1Y.SetYRange(-1, 6);
+            ChartLash1Z.SetTitle("级间段内后法兰振动传感器V5-Z");
+            ChartLash1Z.SetYRange(-1, 6);
+            ChartLash2X.SetTitle("尾段内振动传感器V6-X");
+            ChartLash2X.SetYRange(-1, 6);
+            ChartLash2Y.SetTitle("尾段内振动传感器V6-Y");
+            ChartLash2Y.SetYRange(-1, 6);
+            ChartLash2Z.SetTitle("尾段内振动传感器V6-Z");
+            ChartLash2Z.SetYRange(-1, 6);
 
-            ChartLash1_1.SetTitle("仪器仓内前端框冲击传感器SH1-X(g)");
-            ChartLash1_2.SetTitle("仪器仓内前端框冲击传感器SH1-Y(g)");
-            ChartLash1_3.SetTitle("姿控仓后端框x向冲击传感器SH2(轴向)(g)");
-            ChartLash2.SetTitle("姿控仓后端框y向冲击传感器SH3(Ⅱ-Ⅳ)(g)");
+            ChartLash1_1.SetTitle("仪器仓内前端框冲击传感器SH1-X");
+            ChartLash1_1.SetYRange(-1, 6);
+            ChartLash1_2.SetTitle("仪器仓内前端框冲击传感器SH1-Y");
+            ChartLash1_2.SetYRange(-1, 6);
+            ChartLash1_3.SetTitle("姿控仓后端框x向冲击传感器SH2(轴向)");
+            ChartLash1_3.SetYRange(-1, 6);
+            ChartLash2.SetTitle("姿控仓后端框y向冲击传感器SH3(Ⅱ-Ⅳ)");
+            ChartLash2.SetYRange(-1, 6);
             ChartNoise1.SetTitle("仪器仓内噪声传感器N1(dB)");
+            ChartNoise1.SetYRange(-1, 6);
             ChartNoise2.SetTitle("姿控仓内噪声传感器N2(dB)");
+            ChartNoise2.SetYRange(-1, 6);
             ChartNoise.SetTitle("尾段内噪声传感器N3(dB)");
+            ChartNoise.SetYRange(-1, 6);
 
             ChartNavLat.SetTitle("纬度(°)");
             ChartNavLon.SetTitle("经度(°)");
@@ -122,9 +168,15 @@ namespace DataProcess
 
         private void LoadTestInfo()
         {
+            SettingManager settingManager = new SettingManager();
             if (testInfo != null)
             {
                 DataLogger dataLogger = new DataLogger(testInfo.TestTime);
+                if(!settingManager.LoadRatios(dataLogger.ratiosFilePath, out ratios))
+                {
+                    MessageBox.Show("加载系数配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 List<SlowPacket> slowPacketList = dataLogger.LoadSlowBinaryFile(dataLogger.slowPacketFilePath);
                 List<FastPacket> fastPacketList = dataLogger.LoadFastBinaryFile(dataLogger.fastPacketFilePath);
                 List<TailPacketRs> tailPacketList = dataLogger.LoadTailBinaryFile(dataLogger.tailPacketFilePath);
@@ -140,6 +192,11 @@ namespace DataProcess
             }
             else
             {
+                if(!settingManager.LoadRatios(out ratios))
+                {
+                    MessageBox.Show("加载系数配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 DataLogger dataLogger = new DataLogger();
                 List<SlowPacket> slowPacketList = dataLogger.LoadSlowBinaryFile(slowBinFile);
                 List<FastPacket> fastPacketList = dataLogger.LoadFastBinaryFile(fastBinFlie);
@@ -170,37 +227,37 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartHood.AddValue(EnvDataConvert.GetValue(-20, 245, 1, 5, packet.temperatureSensor.hood[i]));
-                    ChartInsAir.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insAir[i]));
-                    ChartInsWall.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insWall[i]));
-                    ChartAttAir.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attAir[i]));
-                    ChartAttWalls1.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6]));
-                    ChartAttWalls2.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 1]));
-                    ChartAttWalls3.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 2]));
-                    ChartAttWalls4.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 3]));
-                    ChartAttWalls5.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 4]));
-                    ChartAttWalls6.AddValue(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 5]));
+                    ChartHood.AddValue(packet.temperatureSensor.hood[i] * ratios.slowTemp);
+                    ChartInsAir.AddValue(packet.temperatureSensor.insAir[i] * ratios.slowTemp);
+                    ChartInsWall.AddValue(packet.temperatureSensor.insWall[i] * ratios.slowTemp);
+                    ChartAttAir.AddValue(packet.temperatureSensor.attAir[i] * ratios.slowTemp);
+                    ChartAttWalls1.AddValue(packet.temperatureSensor.attWalls[i * 6] * ratios.slowTemp);
+                    ChartAttWalls2.AddValue(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp);
+                    ChartAttWalls3.AddValue(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp);
+                    ChartAttWalls4.AddValue(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp);
+                    ChartAttWalls5.AddValue(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp);
+                    ChartAttWalls6.AddValue(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp);
                 }
 
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartInsPresure.AddValue(EnvDataConvert.GetValue(0, 50, 0, 5, packet.pressureSensor.instrument[i]));
-                    ChartAttiPresure.AddValue(EnvDataConvert.GetValue(0, 120, 0, 5, packet.pressureSensor.attitudeControl[i]));
+                    ChartInsPresure.AddValue(packet.pressureSensor.instrument[i] * ratios.slowPress);
+                    ChartAttiPresure.AddValue(packet.pressureSensor.attitudeControl[i] * ratios.slowPress);
                 }
 
                 for (int i = 0; i < packet.level2Transmitter.Length; ++i)
                 {
-                    ChartLevel2Transmitter.AddValue(EnvDataConvert.GetValue(0, 12, 0.2, 4.8, packet.level2Transmitter[i]));
+                    ChartLevel2Transmitter.AddValue(packet.level2Transmitter[i] * ratios.slowPress);
                 }
 
                 for (int i = 0; i < packet.gestureControlHigh.Length; ++i)
                 {
-                    ChartGestureControlHigh.AddValue(EnvDataConvert.GetValue(0, 40, 0, 5, packet.gestureControlHigh[i]));
+                    ChartGestureControlHigh.AddValue(packet.gestureControlHigh[i] * ratios.slowPress);
                 }
 
                 for (int i = 0; i < packet.gestureControlLow.Length; ++i)
                 {
-                    ChartGestureControlLow.AddValue(EnvDataConvert.GetValue(0, 6, 0, 5, packet.gestureControlLow[i]));
+                    ChartGestureControlLow.AddValue(packet.gestureControlLow[i] * ratios.slowPress);
                 }
             }
 
@@ -229,89 +286,89 @@ namespace DataProcess
                 FastShakeSignal fastShakeSignal = packet.shakeSignals[0];
                 for(int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake1.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake1.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[1];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake2.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake2.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[2];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake3.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake3.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[3];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake4.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake4.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[4];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake5.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake5.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[5];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake6.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake6.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[6];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake7.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake7.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[7];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake8.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake8.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[8];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake9.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake9.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[9];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake10.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake10.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[10];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake11.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake11.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
                 fastShakeSignal = packet.shakeSignals[11];
                 for (int pos = 0; pos < 80; ++pos)
                 {
-                    ChartShake12.AddValue(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                    ChartShake12.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
                 }
 
                 FastLashSignal lashSignal = packet.lashSignal_1[0];
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash1_1.AddValue(EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos]));
+                    ChartLash1_1.AddValue(lashSignal.signal[pos] * ratios.fastLash);
                 }
                 lashSignal = packet.lashSignal_1[1];
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash1_2.AddValue(EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos]));
+                    ChartLash1_2.AddValue(lashSignal.signal[pos] * ratios.fastLash);
                 }
                 lashSignal = packet.lashSignal_1[2];
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash1_3.AddValue(EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos]));
+                    ChartLash1_3.AddValue(lashSignal.signal[pos] * ratios.fastLash);
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash2.AddValue(EnvDataConvert.GetValue(-3000, 3000, 0, 5, packet.lashSignal_2.signal[pos]));
+                    ChartLash2.AddValue(packet.lashSignal_2.signal[pos] * ratios.fastLash);
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartNoise1.AddValue(EnvDataConvert.GetValue(100, 140, 0, 5, packet.noiseSignal[0].signal[pos]));
-                    ChartNoise2.AddValue(EnvDataConvert.GetValue(120, 160, 0, 5, packet.noiseSignal[1].signal[pos]));
+                    ChartNoise1.AddValue(packet.noiseSignal[0].signal[pos] * ratios.fastNoise);
+                    ChartNoise2.AddValue(packet.noiseSignal[1].signal[pos] * ratios.fastNoise);
                 }
             }
 
@@ -348,47 +405,47 @@ namespace DataProcess
                         switch ((ChannelType)channel)
                         {
                             case ChannelType.ChannelPresure:
-                                value = EnvDataConvert.GetValue(0, 120, 0, 5, data.Data());
+                                value = data.Data() * ratios.tailPress;
                                 ChartPresure.AddValue(value);
                                 break;
                             case ChannelType.ChannelLevel1Presure:
-                                value = EnvDataConvert.GetValue(0, 12, 0.2, 4.8, data.Data());
+                                value = data.Data() * ratios.tailPress;
                                 ChartLevel1Presure.AddValue(value);
                                 break;
                             case ChannelType.ChannelTemperature1:
-                                value = EnvDataConvert.GetValue(-20, 150, 1, 5, data.Data());
+                                value = data.Data() * ratios.tailTemp;
                                 ChartTemperature1.AddValue(value);
                                 break;
                             case ChannelType.ChannelTemperature2:
-                                value = EnvDataConvert.GetValue(-20, 150, 1, 5, data.Data());
+                                value = data.Data() * ratios.tailTemp;
                                 ChartTemperature2.AddValue(value);
                                 break;
-                            case ChannelType.Channel1LashX:
-                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
+                            case ChannelType.Channel1ShakeX:
+                                value = data.Data() * ratios.tailShake;
                                 ChartLash1X.AddValue(value);
                                 break;
-                            case ChannelType.Channel1LashY:
-                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
+                            case ChannelType.Channel1ShakeY:
+                                value = data.Data() * ratios.tailShake;
                                 ChartLash1Y.AddValue(value);
                                 break;
-                            case ChannelType.Channel1LashZ:
-                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
+                            case ChannelType.Channel1ShakeZ:
+                                value = data.Data() * ratios.tailShake;
                                 ChartLash1Z.AddValue(value);
                                 break;
-                            case ChannelType.Channel2LashX:
-                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
+                            case ChannelType.Channel2ShakeX:
+                                value = data.Data() * ratios.tailShake;
                                 ChartLash2X.AddValue(value);
                                 break;
-                            case ChannelType.Channel2LashY:
-                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
+                            case ChannelType.Channel2ShakeY:
+                                value = data.Data() * ratios.tailShake;
                                 ChartLash2Y.AddValue(value);
                                 break;
-                            case ChannelType.Channel2LashZ:
-                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
+                            case ChannelType.Channel2ShakeZ:
+                                value = data.Data() * ratios.tailShake;
                                 ChartLash2Z.AddValue(value);
                                 break;
                             case ChannelType.ChannelNoise:
-                                value = EnvDataConvert.GetValue(120, 160, 0, 5, data.Data());
+                                value = data.Data() * ratios.tailNoise;
                                 ChartNoise.AddValue(value);
                                 break;
                             default:

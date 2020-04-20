@@ -113,7 +113,6 @@
     <Compile Include="OpenDataWindow.xaml.cs">
       <DependentUpon>OpenDataWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Parser\Env\EnvDataConvert.cs" />
     <Compile Include="Parser\Env\EnvParser.cs" />
     <Compile Include="Parser\Env\TailParser.cs" />
     <Compile Include="Parser\Env\FastParser.cs" />
@@ -127,6 +126,7 @@
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Setting\NetworkSetting.cs" />
+    <Compile Include="Setting\Ratios.cs" />
     <Compile Include="Setting\SettingManager.cs" />
     <Compile Include="SignalDiagram.xaml.cs">
       <DependentUpon>SignalDiagram.xaml</DependentUpon>

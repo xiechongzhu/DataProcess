@@ -1,10 +1,11 @@
-﻿<dx:ThemedWindow x:Class="DataProcess.MainWindow" Title="数据接收解析软件" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
+﻿<dx:ThemedWindow 
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-                 xmlns:dataprocess="clr-namespace:DataProcess" Icon="histroy.ico" Closing="ThemedWindow_Closing">
+                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="DataProcess.MainWindow" Title="数据接收解析软件" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
+    Icon="histroy.ico" Closing="ThemedWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -741,7 +742,7 @@
                                 <Label x:Name="labelSyncFire" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                                 <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartHood">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="头罩内温度传感器T1(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="头罩内温度传感器T1" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -752,6 +753,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -770,7 +781,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartInsAir">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="仪器仓内接收机附近空腔温度传感器T2(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="仪器仓内接收机附近空腔温度传感器T2" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -781,6 +792,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -799,7 +820,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartInsWall">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="仪器仓内筋条壁面温度传感器T3(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="仪器仓内筋条壁面温度传感器T3" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -810,6 +831,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -828,7 +859,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAttAir">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="姿控仓内空腔温度T4(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="姿控仓内空腔温度T4" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -839,6 +870,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -857,7 +898,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartTemperature1">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="级间断内窗口加强筋上温度传感器T5(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="级间断内窗口加强筋上温度传感器T5" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -868,6 +909,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -886,7 +937,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartTemperature2">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="尾端内温度传感器T6(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="尾端内温度传感器T6" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -897,6 +948,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -915,7 +976,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAttWalls1">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="Ⅱ象限气瓶表面温度TZ1(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="Ⅱ象限气瓶表面温度TZ1" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -926,6 +987,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -944,7 +1015,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAttWalls2">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="Ⅳ象限气瓶表面温度TZ2(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="Ⅳ象限气瓶表面温度TZ2" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -955,6 +1026,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -973,7 +1054,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="3" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartAttWalls3">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="Ⅰ象限贮箱表面温度TZ3(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="Ⅰ象限贮箱表面温度TZ3" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -984,6 +1065,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1002,7 +1093,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAttWalls4">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="Ⅰ象限贮箱表面温度TZ4(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="Ⅰ象限贮箱表面温度TZ4" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -1013,6 +1104,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1031,7 +1132,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAttWalls5">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="Ⅲ象限贮箱表面温度TZ5(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="Ⅲ象限贮箱表面温度TZ5" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -1042,6 +1143,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1060,7 +1171,7 @@
                                 </dxc:ChartControl>
                                 <dxc:ChartControl Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartAttWalls6">
                                     <dxc:ChartControl.Titles>
-                                        <dxc:Title Content="Ⅲ象限贮箱表面温度TZ6(℃)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                        <dxc:Title Content="Ⅲ象限贮箱表面温度TZ6" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                     </dxc:ChartControl.Titles>
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
@@ -1071,6 +1182,16 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
+                                                <dxc:AxisY2D.WholeRange>
+                                                    <dxc:Range>
+                                                        <dxc:Range.MaxValue>
+                                                            <System:Double>6</System:Double>
+                                                        </dxc:Range.MaxValue>
+                                                        <dxc:Range.MinValue>
+                                                            <System:Double>-1</System:Double>
+                                                        </dxc:Range.MinValue>
+                                                    </dxc:Range>
+                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1106,7 +1227,7 @@
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartInsPresure">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器内仓压力传感器P1(kPa)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器内仓压力传感器P1" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1117,6 +1238,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1135,7 +1266,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAttiPresure">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控仓内空腔压力传感器P2(kPa)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控仓内空腔压力传感器P2" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1146,6 +1277,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1164,7 +1305,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartPresure">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="尾端内压力传感器P3(kPa)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="尾端内压力传感器P3" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1175,6 +1316,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1193,7 +1344,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLevel1Presure">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="级间段一级发动机压力传感器(MPa)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="级间段一级发动机压力传感器" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1204,6 +1355,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1222,7 +1383,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLevel2Transmitter">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内二级发动机压力传感器PD2(MPa)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内二级发动机压力传感器PD2" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1233,6 +1394,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1251,7 +1422,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartGestureControlHigh">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控高压传感器PZ1(MPa)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控高压传感器PZ1" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1262,6 +1433,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1280,7 +1461,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartGestureControlLow">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控低压传感器PZ2(MPa)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控低压传感器PZ2" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1291,6 +1472,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1330,7 +1521,7 @@
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake1">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控仓内安装板前版面振动传感器V1-X(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控仓内安装板前版面振动传感器V1-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1341,6 +1532,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1359,7 +1560,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake2">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控仓内安装板前版面振动传感器V1-Y(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控仓内安装板前版面振动传感器V1-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1370,6 +1571,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1388,7 +1599,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake3">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控仓内安装板前版面振动传感器V1-Z(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控仓内安装板前版面振动传感器V1-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1399,6 +1610,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1417,7 +1638,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake4">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内十字梁上振动传感器V2-X(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内十字梁上振动传感器V2-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1428,6 +1649,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1446,7 +1677,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake5">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内十字梁上振动传感器V2-Y(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内十字梁上振动传感器V2-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1457,6 +1688,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1475,7 +1716,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake6">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内十字梁上振动传感器V2-Z(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内十字梁上振动传感器V2-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1486,6 +1727,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1504,7 +1755,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake7">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内IMU上振动传感器V3-X(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内IMU上振动传感器V3-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1515,6 +1766,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1533,7 +1794,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake8">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内IMU上振动传感器V3-Y(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内IMU上振动传感器V3-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1544,6 +1805,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1562,7 +1833,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake9">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内IMU上振动传感器V3-Z(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内IMU上振动传感器V3-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1573,6 +1844,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1591,7 +1872,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake10">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内后框上振动传感器V4-X(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内后框上振动传感器V4-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1602,6 +1883,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1620,7 +1911,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake11">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内后框上振动传感器V4-Y(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内后框上振动传感器V4-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1631,6 +1922,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1649,7 +1950,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="3" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake12">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内后框上振动传感器V4-Z(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内后框上振动传感器V4-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1660,6 +1961,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1678,7 +1989,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLash1X">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="级间段内后法兰振动传感器V5-X(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="级间段内后法兰振动传感器V5-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1689,6 +2000,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1707,7 +2028,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLash1Y">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="级间段内后法兰振动传感器V5-Y(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="级间段内后法兰振动传感器V5-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1718,6 +2039,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1736,7 +2067,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartLash1Z">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="级间段内后法兰振动传感器V5-Z(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="级间段内后法兰振动传感器V5-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1747,6 +2078,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1765,7 +2106,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLash2X">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="尾段内振动传感器V6-X(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="尾段内振动传感器V6-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1776,6 +2117,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1794,7 +2145,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLash2Y">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="尾段内振动传感器V6-Y(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="尾段内振动传感器V6-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1805,6 +2156,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1823,7 +2184,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="5" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartLash2Z">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="尾段内振动传感器V6-Z(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="尾段内振动传感器V6-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1834,6 +2195,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1870,7 +2241,7 @@
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLash1_1">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内前端框冲击传感器SH1-X(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内前端框冲击传感器SH1-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1881,6 +2252,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1899,7 +2280,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLash1_2">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内前端框冲击传感器SH1-Y(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内前端框冲击传感器SH1-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1910,6 +2291,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1928,7 +2319,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartLash1_3">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控仓后端框x向冲击传感器SH2(轴向)(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控仓后端框x向冲击传感器SH2(轴向)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1939,6 +2330,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1957,7 +2358,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLash2">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控仓后端框y向冲击传感器SH3(Ⅱ-Ⅳ)(g)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控仓后端框y向冲击传感器SH3(Ⅱ-Ⅳ)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1968,6 +2369,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1986,7 +2397,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNoise1">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="仪器仓内噪声传感器N1(dB)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="仪器仓内噪声传感器N1" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -1997,6 +2408,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2015,7 +2436,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNoise2">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="姿控仓内噪声传感器N2(dB)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="姿控仓内噪声传感器N2" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -2026,6 +2447,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2044,7 +2475,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNoise">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="尾段内噪声传感器N3(dB)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="尾段内噪声传感器N3" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -2055,6 +2486,16 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
+                                                    <dxc:AxisY2D.WholeRange>
+                                                        <dxc:Range>
+                                                            <dxc:Range.MaxValue>
+                                                                <System:Double>6</System:Double>
+                                                            </dxc:Range.MaxValue>
+                                                            <dxc:Range.MinValue>
+                                                                <System:Double>-1</System:Double>
+                                                            </dxc:Range.MinValue>
+                                                        </dxc:Range>
+                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>

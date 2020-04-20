@@ -8,6 +8,7 @@ using DataProcess.Tools;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -215,6 +216,7 @@ namespace DataProcess
         private DisplayBuffers envBuffers = new DisplayBuffers();
         private DataLogger dataLogger = null;
         ChartDataSource chartDataSource = new ChartDataSource();
+        Ratios ratios;
 
         public MainWindow()
         {
@@ -360,7 +362,7 @@ namespace DataProcess
             if (envBuffers.SlowPacketList.Count > 0)
             {
                 DrawSlowPackets(envBuffers.SlowPacketList);
-                UpdateSyncFireDisplay(envBuffers.SlowPacketList[envBuffers.SlowPacketList.Count - 1].syncFire);
+                UpdateSyncFireDisplay(envBuffers.SlowPacketList[envBuffers.SlowPacketList.Count - 1].syncFire * ratios.fire);
             }
 
             if(envBuffers.FastPacketList.Count > 0)
@@ -414,24 +416,24 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    chartDataSource.SlowHoodList.AddPoint(EnvDataConvert.GetValue(-20, 245, 1, 5, packet.temperatureSensor.hood[i]));
-                    chartDataSource.SlowInsAirList.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insAir[i]));
-                    chartDataSource.SlowInsWallList.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.insWall[i]));
-                    chartDataSource.SlowAttAirList.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attAir[i]));
-                    chartDataSource.SlowAttWallList1.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6]));
-                    chartDataSource.SlowAttWallList2.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 1]));
-                    chartDataSource.SlowAttWallList3.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 2]));
-                    chartDataSource.SlowAttWallList4.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 3]));
-                    chartDataSource.SlowAttWallList5.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 4]));
-                    chartDataSource.SlowAttWallList6.AddPoint(EnvDataConvert.GetValue(-40, 150, 1, 5, packet.temperatureSensor.attWalls[i * 6 + 5]));
+                    chartDataSource.SlowHoodList.AddPoint(packet.temperatureSensor.hood[i] * ratios.slowTemp);
+                    chartDataSource.SlowInsAirList.AddPoint(packet.temperatureSensor.insAir[i] * ratios.slowTemp);
+                    chartDataSource.SlowInsWallList.AddPoint(packet.temperatureSensor.insWall[i] * ratios.slowTemp);
+                    chartDataSource.SlowAttAirList.AddPoint(packet.temperatureSensor.attAir[i] * ratios.slowTemp);
+                    chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[i * 6] * ratios.slowTemp);
+                    chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp);
+                    chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp);
+                    chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp);
+                    chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp);
+                    chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp);
                 }
                 for (int i = 0; i < 2; ++i)
                 {
-                    chartDataSource.SlowInsPresureList.AddPoint(EnvDataConvert.GetValue(0, 50, 0, 5, packet.pressureSensor.instrument[i]));
-                    chartDataSource.SlowAttPresureList.AddPoint(EnvDataConvert.GetValue(0, 120, 0, 5, packet.pressureSensor.attitudeControl[i]));
-                    chartDataSource.SlowLevel2PresureList.AddPoint(EnvDataConvert.GetValue(0, 12, 0.2, 4.8, packet.level2Transmitter[i]));
-                    chartDataSource.SlowPresureHighList.AddPoint(EnvDataConvert.GetValue(0, 40, 0, 5, packet.gestureControlHigh[i]));
-                    chartDataSource.SlowPresureLowList.AddPoint(EnvDataConvert.GetValue(0, 6, 0, 5, packet.gestureControlLow[i]));
+                    chartDataSource.SlowInsPresureList.AddPoint(packet.pressureSensor.instrument[i] * ratios.slowPress);
+                    chartDataSource.SlowAttPresureList.AddPoint(packet.pressureSensor.attitudeControl[i] * ratios.slowPress);
+                    chartDataSource.SlowLevel2PresureList.AddPoint(packet.level2Transmitter[i] * ratios.slowPress);
+                    chartDataSource.SlowPresureHighList.AddPoint(packet.gestureControlHigh[i] * ratios.slowPress);
+                    chartDataSource.SlowPresureLowList.AddPoint(packet.gestureControlLow[i] * ratios.slowPress);
                 }
             });
             chartDataSource.SlowHoodList.NotifyDataChanged();
@@ -477,7 +479,7 @@ namespace DataProcess
                     FastShakeSignal fastShakeSignal = packet.shakeSignals[idx];
                     for (int pos = 0; pos < 80; ++pos)
                     {
-                        chartDataSource.FastShakeSeriesLists[idx].AddPoint(EnvDataConvert.GetValue(-300, 300, 0, 5, fastShakeSignal.signal[pos]));
+                        chartDataSource.FastShakeSeriesLists[idx].AddPoint(fastShakeSignal.signal[pos] * ratios.fastShake);
                     }
                 }
                 chartDataSource.FastLashT3SeriesList.AddPoint(packet.lashT3);
@@ -489,17 +491,17 @@ namespace DataProcess
                     FastLashSignal lashSignal = packet.lashSignal_1[idx];
                     for (int pos = 0; pos < 400; ++pos)
                     {
-                        chartDataSource.FastLashSeriesLists1[idx].AddPoint(EnvDataConvert.GetValue(-6000, 6000, 0, 5, lashSignal.signal[pos]));
+                        chartDataSource.FastLashSeriesLists1[idx].AddPoint(lashSignal.signal[pos] * ratios.fastLash);
                     }
                 }
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    chartDataSource.FastLashSeriesList2.AddPoint(EnvDataConvert.GetValue(-3000, 3000, 0, 5, packet.lashSignal_2.signal[pos]));
+                    chartDataSource.FastLashSeriesList2.AddPoint(packet.lashSignal_2.signal[pos] * ratios.fastLash);
                 }
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    chartDataSource.FastNoiseLists[0].AddPoint(EnvDataConvert.GetValue(100, 140, 0, 5, packet.noiseSignal[0].signal[pos]));
-                    chartDataSource.FastNoiseLists[1].AddPoint(EnvDataConvert.GetValue(120, 160, 0, 5, packet.noiseSignal[1].signal[pos]));
+                    chartDataSource.FastNoiseLists[0].AddPoint(packet.noiseSignal[0].signal[pos] * ratios.fastNoise);
+                    chartDataSource.FastNoiseLists[1].AddPoint(packet.noiseSignal[1].signal[pos] * ratios.fastNoise);
                 }
             });
             chartDataSource.FastShakeSeriesLists.ForEach(source => source.NotifyDataChanged());
@@ -554,25 +556,25 @@ namespace DataProcess
                         switch ((ChannelType)channel)
                         {
                             case ChannelType.ChannelPresure:
-                                value = EnvDataConvert.GetValue(0, 120, 0, 5, data.Data());
+                                value = data.Data() * ratios.tailPress;
                                 break;
                             case ChannelType.ChannelLevel1Presure:
-                                value = EnvDataConvert.GetValue(0, 12, 0.2, 4.8, data.Data());
+                                value = data.Data() * ratios.tailPress;
                                 break;
                             case ChannelType.ChannelTemperature1:
                             case ChannelType.ChannelTemperature2:
-                                value = EnvDataConvert.GetValue(-20, 150, 1, 5, data.Data());
+                                value = data.Data() * ratios.tailTemp;
                                 break;
-                            case ChannelType.Channel1LashX:
-                            case ChannelType.Channel1LashY:
-                            case ChannelType.Channel1LashZ:
-                            case ChannelType.Channel2LashX:
-                            case ChannelType.Channel2LashY:
-                            case ChannelType.Channel2LashZ:
-                                value = EnvDataConvert.GetValue(-150, 150, 0, 5, data.Data());
+                            case ChannelType.Channel1ShakeX:
+                            case ChannelType.Channel1ShakeY:
+                            case ChannelType.Channel1ShakeZ:
+                            case ChannelType.Channel2ShakeX:
+                            case ChannelType.Channel2ShakeY:
+                            case ChannelType.Channel2ShakeZ:
+                                value = data.Data() * ratios.tailShake;
                                 break;
                             case ChannelType.ChannelNoise:
-                                value = EnvDataConvert.GetValue(120, 160, 0, 5, data.Data());
+                                value = data.Data() * ratios.tailNoise;
                                 break;
                             default:
                                 break;
@@ -586,12 +588,12 @@ namespace DataProcess
             chartDataSource.TailLevel1PresureList.AddPoints(seriesPoints[(int)ChannelType.ChannelLevel1Presure]);
             chartDataSource.TailTemperature1List.AddPoints(seriesPoints[(int)ChannelType.ChannelTemperature1]);
             chartDataSource.TailTemperature2List.AddPoints(seriesPoints[(int)ChannelType.ChannelTemperature2]);
-            chartDataSource.TailLash1XList.AddPoints(seriesPoints[(int)ChannelType.Channel1LashX]);
-            chartDataSource.TailLash1YList.AddPoints(seriesPoints[(int)ChannelType.Channel1LashY]);
-            chartDataSource.TailLash1ZList.AddPoints(seriesPoints[(int)ChannelType.Channel1LashZ]);
-            chartDataSource.TailLash2XList.AddPoints(seriesPoints[(int)ChannelType.Channel2LashX]);
-            chartDataSource.TailLash2YList.AddPoints(seriesPoints[(int)ChannelType.Channel2LashY]);
-            chartDataSource.TailLash2ZList.AddPoints(seriesPoints[(int)ChannelType.Channel2LashZ]);
+            chartDataSource.TailLash1XList.AddPoints(seriesPoints[(int)ChannelType.Channel1ShakeX]);
+            chartDataSource.TailLash1YList.AddPoints(seriesPoints[(int)ChannelType.Channel1ShakeY]);
+            chartDataSource.TailLash1ZList.AddPoints(seriesPoints[(int)ChannelType.Channel1ShakeZ]);
+            chartDataSource.TailLash2XList.AddPoints(seriesPoints[(int)ChannelType.Channel2ShakeX]);
+            chartDataSource.TailLash2YList.AddPoints(seriesPoints[(int)ChannelType.Channel2ShakeY]);
+            chartDataSource.TailLash2ZList.AddPoints(seriesPoints[(int)ChannelType.Channel2ShakeZ]);
             chartDataSource.TailNoiseList.AddPoints(seriesPoints[(int)ChannelType.ChannelNoise]);
             chartDataSource.TailPresureList.NotifyDataChanged();
             chartDataSource.TailLevel1PresureList.NotifyDataChanged();
@@ -794,9 +796,16 @@ namespace DataProcess
 
             testInfo = testInfoWindow.GetTestInfo();
 
+            SettingManager settingManager = new SettingManager();
+            if(!settingManager.LoadRatios(out ratios))
+            {
+                MessageBox.Show("加载系数配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             try
             {
-                SettingManager settingManager = new SettingManager();
+                
                 if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort))
                 {
                     udpClientEnv = new UdpClient(envPort);
@@ -806,7 +815,7 @@ namespace DataProcess
                 }
                 else
                 {
-                    MessageBox.Show("加载配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("加载网络配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
@@ -853,8 +862,6 @@ namespace DataProcess
 
         private void EndFlyReceive(IAsyncResult ar)
         {
-            NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
-            Dispatcher.Invoke(new Action<Image, LED_STATUS>(SetLedStatus), ImageFly, LED_STATUS.LED_GREEN);
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
             try
             {
@@ -862,6 +869,16 @@ namespace DataProcess
                 if(recvBuffer != null)
                 {
                     flyParser.Enqueue(recvBuffer);
+                    if (recvBuffer.Length == Marshal.SizeOf(typeof(FlyPacket)))
+                    {
+                        byte[] header = recvBuffer.Take(FlyProtocol.syncHeader.Length).ToArray();
+                        byte dataType = recvBuffer[FlyProtocol.syncHeader.Length];
+                        if(Enumerable.SequenceEqual(header, FlyProtocol.syncHeader) && dataType == FlyProtocol.dataType)
+                        {
+                            NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
+                            Dispatcher.Invoke(new Action<Image, LED_STATUS>(SetLedStatus), ImageFly, LED_STATUS.LED_GREEN);
+                        }
+                    }
                 }
                 udpClientFly?.BeginReceive(EndFlyReceive, null);
             }
@@ -891,6 +908,10 @@ namespace DataProcess
             SaveTestInfo();
             InitLedStatus();
             ledTimer.Stop();
+            SetLedStatus(ImageFast, LED_STATUS.LED_GRAY);
+            SetLedStatus(ImageSlow, LED_STATUS.LED_GRAY);
+            SetLedStatus(ImageTail, LED_STATUS.LED_GRAY);
+            SetLedStatus(ImageFly, LED_STATUS.LED_GRAY);
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -1110,6 +1131,7 @@ namespace DataProcess
                         Time = testInfo.TestTime
                     });
                     db.CommitTransaction();
+                    File.Copy("params", Path.Combine("Log", testInfo.TestTime.ToString("yyyyMMddHHmmss"), "params"));
                 }
                 catch (Exception ex)
                 {

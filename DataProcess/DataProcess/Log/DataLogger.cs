@@ -27,6 +27,7 @@ namespace DataProcess.Log
         public String fastPacketFilePath;
         public String tailPacketFilePath;
         public String flyPacketFilePath;
+        public String ratiosFilePath;
 
         private FileStream slowPacketFileStream = null;
         private FileStream fastPacketFileStream = null;
@@ -51,6 +52,7 @@ namespace DataProcess.Log
             fastPacketFilePath = Path.Combine("Log", strDateTime, FastPacketFileName);
             tailPacketFilePath = Path.Combine("Log", strDateTime, TailPacketFileName);
             flyPacketFilePath = Path.Combine("Log", strDateTime, flyPacketFileName);
+            ratiosFilePath = Path.Combine("Log", strDateTime, "params");
         }
 
         public void Close()

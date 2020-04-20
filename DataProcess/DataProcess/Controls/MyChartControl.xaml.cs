@@ -108,6 +108,12 @@ namespace DataProcess.Controls
             Chart.Titles[0].Content = label;
         }
 
+        public void SetYRange(double min, double max)
+        {
+            XyDiagram2D.ActualAxisY.WholeRange = new DevExpress.Xpf.Charts.Range();
+            XyDiagram2D.ActualAxisY.WholeRange.SetMinMaxValues(min, max);
+        }
+
         public void AddValue(double value)
         {
             DataList.Add(new MyPoint(DataList.Count, value));

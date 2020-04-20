@@ -35,7 +35,25 @@ namespace DataProcess
             }
             else
             {
-                MessageBox.Show("加载配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("加载网络配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if(settingManager.LoadRatios(out Ratios ratios))
+            {
+                editSlowFire.Text = ratios.fire.ToString();
+                editSlowTemp.Text = ratios.slowTemp.ToString();
+                editSlowPressure.Text = ratios.slowPress.ToString();
+                editFastShake.Text = ratios.fastShake.ToString();
+                editFastLash.Text = ratios.fastLash.ToString();
+                editFastNoise.Text = ratios.fastNoise.ToString();
+                editTailPressure.Text = ratios.tailPress.ToString();
+                editTailShake.Text = ratios.tailShake.ToString();
+                editTailTemp.Text = ratios.tailTemp.ToString();
+                editTailNoise.Text = ratios.tailNoise.ToString();
+            }
+            else
+            {
+                MessageBox.Show("加载系数配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -46,15 +64,30 @@ namespace DataProcess
                 MessageBox.Show("IP地址不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            try
+
+            if(!settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text), editFlyIpAddr.Text, int.Parse(editFlyPort.Text)))
             {
-                settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text), editFlyIpAddr.Text, int.Parse(editFlyPort.Text));
-                Close();
+                MessageBox.Show("保存网络配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch(Exception ex)
+
+            Ratios ratios = new Ratios
             {
-                MessageBox.Show("保存配置失败:" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                fire = double.Parse(editSlowFire.Text),
+                slowTemp = double.Parse(editSlowTemp.Text),
+                slowPress = double.Parse(editSlowPressure.Text),
+                fastShake = double.Parse(editFastShake.Text),
+                fastLash = double.Parse(editFastLash.Text),
+                fastNoise = double.Parse(editFastNoise.Text),
+                tailPress = double.Parse(editTailPressure.Text),
+                tailShake = double.Parse(editTailShake.Text),
+                tailTemp = double.Parse(editTailTemp.Text),
+                tailNoise = double.Parse(editTailNoise.Text)
+            };  
+            if(!settingManager.SaveRatios(ratios))
+            {
+                MessageBox.Show("保存系数配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Close();
         }
 
         private void btnCancle_Click(object sender, RoutedEventArgs e)
