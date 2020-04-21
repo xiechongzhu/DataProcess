@@ -68,7 +68,7 @@ namespace DataProcess.Parser.Env
                     }
                     else
                     {
-                        if(tailPacketRs.sequence  - sequence != 1)
+                        if((byte)(tailPacketRs.sequence  - sequence) != 1)
                         {
                             if(dataLogger != null)
                             {
