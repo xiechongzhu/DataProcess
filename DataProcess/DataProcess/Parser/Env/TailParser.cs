@@ -11,7 +11,7 @@ namespace DataProcess.Parser.Env
 {
     public class TailParser
     {
-        public byte[] packetBuffer = new byte[10000];
+        public byte[] packetBuffer = new byte[10 * 1024 * 1024];
         public int pos = 0;
         public List<TailPacketRs> Parse(byte[] buffer)
         {
