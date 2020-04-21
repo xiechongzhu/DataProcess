@@ -205,6 +205,7 @@ namespace DataProcess
             {NETWORK_DATA_TYPE.FLY, DateTime.MinValue },
         };
 
+        private bool bRun;
         public static readonly int CHART_MAX_POINTS = 500;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
@@ -833,15 +834,16 @@ namespace DataProcess
             btnOpenData.IsEnabled = false;
             ResetDisplay();
             envBuffers.Clear();
-            envParser.Start();
-            flyParser.Start();
             dataLogger = new DataLogger(testInfo.TestTime);
             envParser.dataLogger = dataLogger;
             flyParser.dataLogger = dataLogger;
+            envParser.Start();
+            flyParser.Start(); 
             udpClientEnv.BeginReceive(EndEnvReceive, null);
             udpClientFly.BeginReceive(EndFlyReceive, null);
             uiRefreshTimer.Start();
             ledTimer.Start();
+            bRun = true;
         }
 
         private void EndEnvReceive(IAsyncResult ar)
@@ -873,7 +875,7 @@ namespace DataProcess
                     {
                         byte[] header = recvBuffer.Take(FlyProtocol.syncHeader.Length).ToArray();
                         byte dataType = recvBuffer[FlyProtocol.syncHeader.Length];
-                        if(Enumerable.SequenceEqual(header, FlyProtocol.syncHeader) && dataType == FlyProtocol.dataType)
+                        if(Enumerable.SequenceEqual(header, FlyProtocol.syncHeader) && dataType == FlyProtocol.dataType && bRun)
                         {
                             NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
                             Dispatcher.Invoke(new Action<Image, LED_STATUS>(SetLedStatus), ImageFly, LED_STATUS.LED_GREEN);
@@ -888,6 +890,7 @@ namespace DataProcess
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
+            bRun = false;
             try
             {
                 udpClientEnv?.Close();
@@ -930,24 +933,33 @@ namespace DataProcess
             switch(msg)
             {
                 case WinApi.WM_SLOW_DATA:
-                    NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW] = DateTime.Now;
-                    SetLedStatus(ImageSlow, LED_STATUS.LED_GREEN);
+                    if (bRun) 
+                    {
+                        NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW] = DateTime.Now;
+                        SetLedStatus(ImageSlow, LED_STATUS.LED_GREEN);
+                    }
                     if (lParam != IntPtr.Zero)
                     {
                         ProcessSlowDataMessage(lParam);
                     }
                     break;
                 case WinApi.WM_FAST_DATA:
-                    NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST] = DateTime.Now;
-                    SetLedStatus(ImageFast, LED_STATUS.LED_GREEN);
+                    if (bRun)
+                    {
+                        NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST] = DateTime.Now;
+                        SetLedStatus(ImageFast, LED_STATUS.LED_GREEN);
+                    }
                     if (lParam != IntPtr.Zero)
                     {
                         ProcessFastDataMessage(lParam);
                     }
                     break;
                 case WinApi.WM_TAIL_DATA:
-                    NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL] = DateTime.Now;
-                    SetLedStatus(ImageTail, LED_STATUS.LED_GREEN);
+                    if (bRun)
+                    {
+                        NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL] = DateTime.Now;
+                        SetLedStatus(ImageTail, LED_STATUS.LED_GREEN);
+                    }
                     if (lParam != IntPtr.Zero)
                     {
                         ProcessTailDataMessage(lParam);

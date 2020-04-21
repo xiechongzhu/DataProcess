@@ -35,7 +35,7 @@ namespace DataProcess.Protocol
         public void Start()
         {
             while (queue.TryDequeue(out byte[] dropBuffer)) ;
-            tailParser = new TailParser();
+            tailParser = new TailParser(dataLogger);
             isRuning = true;
             thread = new Thread(new ThreadStart(ThreadFunction));
             thread.Start();

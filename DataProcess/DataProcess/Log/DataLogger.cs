@@ -22,22 +22,26 @@ namespace DataProcess.Log
         private readonly String FastPacketFileName = "速变参数.bin";
         private readonly String TailPacketFileName = "尾端参数.bin";
         private readonly String flyPacketFileName = "飞控参数.bin";
+        private readonly String tailSequenceFileName = "尾端包序号.txt";
 
         public String slowPacketFilePath;
         public String fastPacketFilePath;
         public String tailPacketFilePath;
         public String flyPacketFilePath;
         public String ratiosFilePath;
+        public String tailSequenceFilePath;
 
         private FileStream slowPacketFileStream = null;
         private FileStream fastPacketFileStream = null;
         private FileStream tailPacketFileStream = null;
         private FileStream flyPacketFileStream = null;
+        private FileStream tailSequenceFileStream = null;
 
         private BinaryWriter slowPacketWriter = null;
         private BinaryWriter fastPacketWriter = null;
         private BinaryWriter tailPacketWriter = null;
         private BinaryWriter flyPacketWriter = null;
+        private StreamWriter tailSequenceWriter = null;
 
         public DataLogger()
         {
@@ -53,6 +57,7 @@ namespace DataProcess.Log
             tailPacketFilePath = Path.Combine("Log", strDateTime, TailPacketFileName);
             flyPacketFilePath = Path.Combine("Log", strDateTime, flyPacketFileName);
             ratiosFilePath = Path.Combine("Log", strDateTime, "params");
+            tailSequenceFilePath = Path.Combine("Log", strDateTime, tailSequenceFileName);
         }
 
         public void Close()
@@ -61,6 +66,22 @@ namespace DataProcess.Log
             fastPacketFileStream?.Dispose();
             tailPacketFileStream?.Dispose();
             flyPacketFileStream?.Dispose();
+            tailSequenceFileStream?.Close();
+        }
+
+        public void WriteTailSequenceFile(String strText)
+        {
+            try
+            {
+                if(tailSequenceFileStream == null)
+                {
+                    tailSequenceFileStream = File.Create(tailSequenceFilePath);
+                    tailSequenceWriter = new StreamWriter(tailSequenceFileStream);
+                }
+                tailSequenceWriter.WriteLine(strText);
+                tailSequenceWriter.Flush();
+            }
+            catch (Exception) { }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
