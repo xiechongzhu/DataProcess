@@ -90,6 +90,11 @@ namespace DataProcess
         public ChartPointDataSource Servo3IqList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
         public ChartPointDataSource Servo4IqList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
 
+        //帧计数
+        public ChartPointDataSource TailSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource AngelSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource ServoSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
         public ChartDataSource()
         {
             for(int i = 0; i < 12; ++i)
@@ -168,6 +173,10 @@ namespace DataProcess
             Servo2IqList.ClearPoints();
             Servo3IqList.ClearPoints();
             Servo4IqList.ClearPoints();
+
+            TailSequenceList.ClearPoints();
+            AngelSequenceList.ClearPoints();
+            ServoSequenceList.ClearPoints();
         }
     }
 
@@ -235,19 +244,19 @@ namespace DataProcess
         private void LedTimer_Tick(object sender, EventArgs e)
         {
             DateTime Now = DateTime.Now;
-            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 50)
+            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 100)
             {
                 SetLedStatus(ImageSlow, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 50)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 100)
             {
                 SetLedStatus(ImageFast, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 50)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 100)
             {
                 SetLedStatus(ImageTail, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 50)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 100)
             {
                 SetLedStatus(ImageFly, LED_STATUS.LED_RED);
             }
@@ -337,10 +346,14 @@ namespace DataProcess
 
             SeriesServoVol28.DataSource = chartDataSource.ServoVol28List;
             SeriesServoVol160.DataSource = chartDataSource.ServoVol160List;
-            ChartServo1Iq.DataSource = chartDataSource.Servo1IqList;
-            ChartServo2Iq.DataSource = chartDataSource.Servo2IqList;
-            ChartServo3Iq.DataSource = chartDataSource.Servo3IqList;
-            ChartServo4Iq.DataSource = chartDataSource.Servo4IqList;
+            SeriesServo1Iq.DataSource = chartDataSource.Servo1IqList;
+            SeriesServo2Iq.DataSource = chartDataSource.Servo2IqList;
+            SeriesServo3Iq.DataSource = chartDataSource.Servo3IqList;
+            SeriesServo4Iq.DataSource = chartDataSource.Servo4IqList;
+
+            SeriesTailSequence.DataSource = chartDataSource.TailSequenceList;
+            SeriesAngelSequence.DataSource = chartDataSource.AngelSequenceList;
+            SeriesServoSequence.DataSource = chartDataSource.ServoSequenceList;
         }
 
         private void InitProgramDiagram()
@@ -548,6 +561,7 @@ namespace DataProcess
             }
             tailPackets.ForEach(packet =>
             {
+                chartDataSource.TailSequenceList.AddPoint(packet.sequence);
                 foreach (ushort data in packet.channels)
                 {
                     uint channel = data.Channel();
@@ -607,6 +621,7 @@ namespace DataProcess
             chartDataSource.TailLash2YList.NotifyDataChanged();
             chartDataSource.TailLash2ZList.NotifyDataChanged();
             chartDataSource.TailNoiseList.NotifyDataChanged();
+            chartDataSource.TailSequenceList.NotifyDataChanged();
 
             /*if (seriesPoints[(int)ChannelType.ChannelPresure].Count > 0)
             {
@@ -717,6 +732,7 @@ namespace DataProcess
                 chartDataSource.AngleXList.AddPoint(packet.angleX);
                 chartDataSource.AngleYList.AddPoint(packet.angleY);
                 chartDataSource.AngleZList.AddPoint(packet.angleZ);
+                chartDataSource.AngelSequenceList.AddPoint(packet.sequence);
             });
             chartDataSource.AngleAccXList.NotifyDataChanged();
             chartDataSource.AngleAccYList.NotifyDataChanged();
@@ -724,6 +740,7 @@ namespace DataProcess
             chartDataSource.AngleXList.NotifyDataChanged();
             chartDataSource.AngleYList.NotifyDataChanged();
             chartDataSource.AngleZList.NotifyDataChanged();
+            chartDataSource.AngelSequenceList.NotifyDataChanged();
 
             /*AngleData lastPacket = angleDataList[angleDataList.Count - 1];
             ChartAccX.Titles[0].Content = String.Format("{0:F}", lastPacket.ax);
@@ -754,6 +771,7 @@ namespace DataProcess
                 chartDataSource.Servo2IqList.AddPoint(FlyDataConvert.GetElectricity(packet.Iq2));
                 chartDataSource.Servo3IqList.AddPoint(FlyDataConvert.GetElectricity(packet.Iq3));
                 chartDataSource.Servo4IqList.AddPoint(FlyDataConvert.GetElectricity(packet.Iq4));
+                chartDataSource.ServoSequenceList.AddPoint(packet.sequence);
             });
 
             chartDataSource.ServoVol28List.NotifyDataChanged();
@@ -762,6 +780,7 @@ namespace DataProcess
             chartDataSource.Servo2IqList.NotifyDataChanged();
             chartDataSource.Servo3IqList.NotifyDataChanged();
             chartDataSource.Servo4IqList.NotifyDataChanged();
+            chartDataSource.ServoSequenceList.NotifyDataChanged();
 
             /*ServoData lasetPacket = servoDataList[servoDataList.Count - 1];
             ChartServoVol28.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetVoltage28(lasetPacket.vol28));
