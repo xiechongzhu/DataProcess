@@ -2522,12 +2522,12 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <Grid Background="Transparent">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="300"/>
-                            <RowDefinition Height="300"/>
-                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="450"/>
+                            <RowDefinition Height="450"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1880"/>
+                            <ColumnDefinition Width="940"/>
+                            <ColumnDefinition Width="940"/>
                         </Grid.ColumnDefinitions>
                         <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartTailSequence">
                             <dxc:ChartControl.Titles>
@@ -2568,7 +2568,7 @@
                                 </dxc:LineSeries2D>
                             </dxc:XYDiagram2D>
                         </dxc:ChartControl>
-                        <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartAngelSequence">
+                        <dxc:ChartControl Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartAngelSequence">
                             <dxc:ChartControl.Titles>
                                 <dxc:Title Content="角速度数据" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                             </dxc:ChartControl.Titles>
@@ -2597,7 +2597,7 @@
                                 </dxc:LineSeries2D>
                             </dxc:XYDiagram2D>
                         </dxc:ChartControl>
-                        <dxc:ChartControl Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartServoSequence">
+                        <dxc:ChartControl Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartServoSequence">
                             <dxc:ChartControl.Titles>
                                 <dxc:Title Content="伺服信号数据" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                             </dxc:ChartControl.Titles>
@@ -2630,6 +2630,45 @@
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
                                 <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesServoSequence" ArgumentDataMember="X" ValueDataMember="Y">
+                                    <dxc:LineSeries2D.LineStyle>
+                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                    </dxc:LineSeries2D.LineStyle>
+                                </dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+                        <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNavSequence">
+                            <dxc:ChartControl.Titles>
+                                <dxc:Title Content="导航数据" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                            </dxc:ChartControl.Titles>
+                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D>
+                                        <dxc:AxisY2D.Label>
+                                            <dxc:AxisLabel FontSize="12" />
+                                        </dxc:AxisY2D.Label>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
+                                        </dxc:AxisY2D.Title>
+                                        <dxc:AxisY2D.WholeRange>
+                                            <dxc:Range>
+                                                <dxc:Range.MaxValue>
+                                                    <System:Double>256</System:Double>
+                                                </dxc:Range.MaxValue>
+                                                <dxc:Range.MinValue>
+                                                    <System:Double>-1</System:Double>
+                                                </dxc:Range.MinValue>
+                                            </dxc:Range>
+                                        </dxc:AxisY2D.WholeRange>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D GridLinesVisible="False" Interlaced="False" Alignment="Near" StickToEdge="True">
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Visible="False" />
+                                        </dxc:AxisX2D.Title>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesNavSequence" ArgumentDataMember="X" ValueDataMember="Y">
                                     <dxc:LineSeries2D.LineStyle>
                                         <dxc:LineStyle LineJoin="Bevel"/>
                                     </dxc:LineSeries2D.LineStyle>

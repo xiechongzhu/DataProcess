@@ -91,9 +91,10 @@ namespace DataProcess
         public ChartPointDataSource Servo4IqList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
 
         //帧计数
-        public ChartPointDataSource TailSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
-        public ChartPointDataSource AngelSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
-        public ChartPointDataSource ServoSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource TailSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
+        public ChartPointDataSource AngelSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
+        public ChartPointDataSource ServoSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
+        public ChartPointDataSource NavSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
 
         public ChartDataSource()
         {
@@ -177,6 +178,7 @@ namespace DataProcess
             TailSequenceList.ClearPoints();
             AngelSequenceList.ClearPoints();
             ServoSequenceList.ClearPoints();
+            NavSequenceList.ClearPoints();
         }
     }
 
@@ -216,6 +218,7 @@ namespace DataProcess
 
         private bool bRun;
         public static readonly int CHART_MAX_POINTS = 500;
+        public static readonly int CHART_SEQ_MAX_POINT = 6000;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;
@@ -354,6 +357,7 @@ namespace DataProcess
             SeriesTailSequence.DataSource = chartDataSource.TailSequenceList;
             SeriesAngelSequence.DataSource = chartDataSource.AngelSequenceList;
             SeriesServoSequence.DataSource = chartDataSource.ServoSequenceList;
+            SeriesNavSequence.DataSource = chartDataSource.NavSequenceList;
         }
 
         private void InitProgramDiagram()
@@ -694,6 +698,7 @@ namespace DataProcess
                 chartDataSource.NavPitchAngle.AddPoint(packet.pitchAngle);
                 chartDataSource.NavCrabAngle.AddPoint(packet.crabAngle);
                 chartDataSource.NavRollAngle.AddPoint(packet.rollAngle);
+                chartDataSource.NavSequenceList.AddPoint(packet.sequence);
             });
 
             chartDataSource.NavLat.NotifyDataChanged();
@@ -705,6 +710,7 @@ namespace DataProcess
             chartDataSource.NavPitchAngle.NotifyDataChanged();
             chartDataSource.NavCrabAngle.NotifyDataChanged();
             chartDataSource.NavRollAngle.NotifyDataChanged();
+            chartDataSource.NavSequenceList.NotifyDataChanged();
 
             NavData lastNavData = navDataList[navDataList.Count - 1];
             GpsTime.Text = String.Format("{0:F}S", lastNavData.gpsTime);
