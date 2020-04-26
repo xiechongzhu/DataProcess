@@ -2,17 +2,11 @@
 using DataProcess.Parser.Env;
 using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
-using DataProcess.Tools;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataProcess.Log
 {
@@ -56,7 +50,7 @@ namespace DataProcess.Log
         {
             String strDateTime = dateTime.ToString("yyyyMMddHHmmss");
             Directory.CreateDirectory(Path.Combine("Log", strDateTime));
-            envPacketFilePath = Path.Combine("Log", strDateTime,EnvPacketFileName);
+            envPacketFilePath = Path.Combine("Log", strDateTime, EnvPacketFileName);
             slowPacketFilePath = Path.Combine("Log", strDateTime, SlowPacketFileName);
             fastPacketFilePath = Path.Combine("Log", strDateTime, FastPacketFileName);
             tailPacketFilePath = Path.Combine("Log", strDateTime, TailPacketFileName);
@@ -79,7 +73,7 @@ namespace DataProcess.Log
         {
             try
             {
-                if(tailSequenceFileStream == null)
+                if (tailSequenceFileStream == null)
                 {
                     tailSequenceFileStream = File.Create(tailSequenceFilePath);
                     tailSequenceWriter = new StreamWriter(tailSequenceFileStream);
@@ -95,7 +89,7 @@ namespace DataProcess.Log
         {
             try
             {
-                if(envPacketFileStream == null)
+                if (envPacketFileStream == null)
                 {
                     envPacketFileStream = File.Create(envPacketFilePath);
                     envPacketWriter = new BinaryWriter(envPacketFileStream);
@@ -203,7 +197,7 @@ namespace DataProcess.Log
         public List<SlowPacket> LoadSlowBinaryFile(String slowBinFileName)
         {
             List<SlowPacket> packetList = new List<SlowPacket>();
-            if(!File.Exists(slowBinFileName))
+            if (!File.Exists(slowBinFileName))
             {
                 return packetList;
             }
@@ -227,7 +221,7 @@ namespace DataProcess.Log
         public List<FastPacket> LoadFastBinaryFile(String fastBinFileName)
         {
             List<FastPacket> packetList = new List<FastPacket>();
-            if(!File.Exists(fastBinFileName))
+            if (!File.Exists(fastBinFileName))
             {
                 return packetList;
             }
@@ -269,7 +263,7 @@ namespace DataProcess.Log
             return packetList;
         }
 
-        public void LoadFlyBinaryFile(String flyBinFileName, out List<NavData> navDataList, out List<AngleData> angleDataList, 
+        public void LoadFlyBinaryFile(String flyBinFileName, out List<NavData> navDataList, out List<AngleData> angleDataList,
             out List<ProgramControlData> programControlDataList, out List<ServoData> servoDataList)
         {
             navDataList = new List<NavData>();
@@ -277,7 +271,7 @@ namespace DataProcess.Log
             programControlDataList = new List<ProgramControlData>();
             servoDataList = new List<ServoData>();
 
-            if(!File.Exists(flyBinFileName))
+            if (!File.Exists(flyBinFileName))
             {
                 return;
             }
@@ -286,10 +280,10 @@ namespace DataProcess.Log
             using (FileStream fileStream = File.Open(flyBinFileName, FileMode.Open))
             {
                 BinaryReader binaryReader = new BinaryReader(fileStream);
-                while(binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
+                while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                 {
                     byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FlyPacket)));
-                    flyParser.ParseData(buffer, out List<NavData> _navDataList, out List<AngleData> _angleDataList, 
+                    flyParser.ParseData(buffer, out List<NavData> _navDataList, out List<AngleData> _angleDataList,
                         out List<ProgramControlData> _programControlDataList, out List<ServoData> _servoDataList);
                     navDataList.AddRange(_navDataList);
                     angleDataList.AddRange(_angleDataList);

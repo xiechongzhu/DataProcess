@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataProcess.Parser.Env
 {
@@ -36,14 +34,14 @@ namespace DataProcess.Parser.Env
             }
             TailPacketUdp tailPacketUdp = Tool.ByteToStruct<TailPacketUdp>(buffer, 0, buffer.Length);
             ushort udpDataLen = tailPacketUdp.dataLen.SwapUInt16();
-            if(pos + udpDataLen >= packetBuffer.Length || tailPacketUdp.data.Length < udpDataLen)
+            if (pos + udpDataLen >= packetBuffer.Length || tailPacketUdp.data.Length < udpDataLen)
             {
                 return tailPacketRsList;
             }
             Array.Copy(tailPacketUdp.data, 0, packetBuffer, pos, udpDataLen);
             pos += udpDataLen;
             int findHeader = FindHeader();
-            if(findHeader >= 0)
+            if (findHeader >= 0)
             {
                 Array.Copy(packetBuffer, findHeader, packetBuffer, 0, pos - findHeader);
                 pos -= findHeader;
@@ -68,9 +66,9 @@ namespace DataProcess.Parser.Env
                     }
                     else
                     {
-                        if((byte)(tailPacketRs.sequence  - sequence) != 1)
+                        if ((byte)(tailPacketRs.sequence - sequence) != 1)
                         {
-                            if(dataLogger != null)
+                            if (dataLogger != null)
                             {
                                 dataLogger.WriteTailSequenceFile(String.Format("LostPacket, preview={0} current={1}", sequence, tailPacketRs.sequence));
                             }
@@ -89,7 +87,7 @@ namespace DataProcess.Parser.Env
             byte[] header = BitConverter.GetBytes(EnvProtocol.TailRsHeader);
             for (int i = 0; i <= pos - header.Length; ++i)
             {
-                if(packetBuffer.Skip(i).Take(header.Length).SequenceEqual(header))
+                if (packetBuffer.Skip(i).Take(header.Length).SequenceEqual(header))
                 {
                     return i;
                 }

@@ -7,9 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DataProcess.Protocol
 {
@@ -57,7 +55,7 @@ namespace DataProcess.Protocol
             {
                 if (queue.TryDequeue(out byte[] _dataBuffer))
                 {
-                    if(pos + _dataBuffer.Length >= dataBuffer.Length)
+                    if (pos + _dataBuffer.Length >= dataBuffer.Length)
                     {
                         pos = 0;
                         continue;
@@ -78,14 +76,14 @@ namespace DataProcess.Protocol
         {
             List<byte[]> list = new List<byte[]>();
             int headerPos = 0;
-            for(; ; )
+            for (; ; )
             {
-                if(pos <= headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)))
+                if (pos <= headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)))
                 {
                     break;
                 }
                 headerPos = FindHeader();
-                if(-1 == headerPos)
+                if (-1 == headerPos)
                 {
                     break;
                 }
@@ -106,7 +104,7 @@ namespace DataProcess.Protocol
                     default:
                         break;
                 }
-                if(packetLen != 0 && headerPos + packetLen <= pos)
+                if (packetLen != 0 && headerPos + packetLen <= pos)
                 {
                     byte[] protocolData = new byte[packetLen];
                     Array.Copy(dataBuffer, headerPos, protocolData, 0, packetLen);
@@ -125,12 +123,12 @@ namespace DataProcess.Protocol
 
         private void ParseData(byte[] buffer)
         {
-            if(buffer.Length <= Marshal.SizeOf(typeof(EnvPacketHeader)))
+            if (buffer.Length <= Marshal.SizeOf(typeof(EnvPacketHeader)))
             {
                 return;
             }
             EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(buffer, 0, Marshal.SizeOf(typeof(EnvPacketHeader)));
-            if(!Enumerable.SequenceEqual(header.syncHeader, EnvProtocol.SyncHeader))
+            if (!Enumerable.SequenceEqual(header.syncHeader, EnvProtocol.SyncHeader))
             {
                 return;
             }
@@ -140,7 +138,7 @@ namespace DataProcess.Protocol
             {
                 case EnvProtocol.DataType.DataTypeSlow:
                     SlowPacket slowPacket;
-                    if(SlowParser.Parse(body, out slowPacket))
+                    if (SlowParser.Parse(body, out slowPacket))
                     {
                         IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SlowPacket)));
                         Marshal.StructureToPtr(slowPacket, ptr, true);
@@ -190,14 +188,14 @@ namespace DataProcess.Protocol
 
         private int FindHeader()
         {
-            if(pos < Marshal.SizeOf(typeof(EnvPacketHeader)))
+            if (pos < Marshal.SizeOf(typeof(EnvPacketHeader)))
             {
                 return -1;
             }
-            for(int i = 0; i <= pos - Marshal.SizeOf(typeof(EnvPacketHeader)); ++i)
+            for (int i = 0; i <= pos - Marshal.SizeOf(typeof(EnvPacketHeader)); ++i)
             {
-                if(dataBuffer[i] == EnvProtocol.SyncHeader[0] && dataBuffer[i+1] == EnvProtocol.SyncHeader[1]
-                    && dataBuffer[i+2] == EnvProtocol.SyncHeader[2])
+                if (dataBuffer[i] == EnvProtocol.SyncHeader[0] && dataBuffer[i + 1] == EnvProtocol.SyncHeader[1]
+                    && dataBuffer[i + 2] == EnvProtocol.SyncHeader[2])
                 {
                     return i;
                 }
