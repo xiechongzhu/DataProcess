@@ -18,12 +18,14 @@ namespace DataProcess.Log
 {
     public class DataLogger
     {
+        private readonly String EnvPacketFileName = "环境参数.bin";
         private readonly String SlowPacketFileName = "缓变参数.bin";
         private readonly String FastPacketFileName = "速变参数.bin";
         private readonly String TailPacketFileName = "尾端参数.bin";
         private readonly String flyPacketFileName = "飞控参数.bin";
         private readonly String tailSequenceFileName = "尾端包序号.txt";
 
+        public String envPacketFilePath;
         public String slowPacketFilePath;
         public String fastPacketFilePath;
         public String tailPacketFilePath;
@@ -31,12 +33,14 @@ namespace DataProcess.Log
         public String ratiosFilePath;
         public String tailSequenceFilePath;
 
+        private FileStream envPacketFileStream = null;
         private FileStream slowPacketFileStream = null;
         private FileStream fastPacketFileStream = null;
         private FileStream tailPacketFileStream = null;
         private FileStream flyPacketFileStream = null;
         private FileStream tailSequenceFileStream = null;
 
+        private BinaryWriter envPacketWriter = null;
         private BinaryWriter slowPacketWriter = null;
         private BinaryWriter fastPacketWriter = null;
         private BinaryWriter tailPacketWriter = null;
@@ -52,6 +56,7 @@ namespace DataProcess.Log
         {
             String strDateTime = dateTime.ToString("yyyyMMddHHmmss");
             Directory.CreateDirectory(Path.Combine("Log", strDateTime));
+            envPacketFilePath = Path.Combine("Log", strDateTime,EnvPacketFileName);
             slowPacketFilePath = Path.Combine("Log", strDateTime, SlowPacketFileName);
             fastPacketFilePath = Path.Combine("Log", strDateTime, FastPacketFileName);
             tailPacketFilePath = Path.Combine("Log", strDateTime, TailPacketFileName);
@@ -62,6 +67,7 @@ namespace DataProcess.Log
 
         public void Close()
         {
+            envPacketFileStream?.Dispose();
             slowPacketFileStream?.Dispose();
             fastPacketFileStream?.Dispose();
             tailPacketFileStream?.Dispose();
@@ -82,6 +88,28 @@ namespace DataProcess.Log
                 tailSequenceWriter.Flush();
             }
             catch (Exception) { }
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private void WriteEnvPacketInternal(byte[] packet)
+        {
+            try
+            {
+                if(envPacketFileStream == null)
+                {
+                    envPacketFileStream = File.Create(envPacketFilePath);
+                    envPacketWriter = new BinaryWriter(envPacketFileStream);
+                }
+                envPacketWriter.Write(packet);
+            }
+            catch (Exception) { }
+        }
+
+        private delegate void WriteEnvPacketDelegate(byte[] packet);
+        public void WriteEnvPacket(byte[] packet)
+        {
+            WriteEnvPacketDelegate writeEnvPacketDelegate = new WriteEnvPacketDelegate(WriteEnvPacketInternal);
+            writeEnvPacketDelegate.BeginInvoke(packet, null, null);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]

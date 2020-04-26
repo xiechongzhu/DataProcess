@@ -87,7 +87,7 @@ namespace DataProcess.Parser.Env
         private int FindHeader()
         {
             byte[] header = BitConverter.GetBytes(EnvProtocol.TailRsHeader);
-            for (int i = 0; i < pos - 1; ++i)
+            for (int i = 0; i <= pos - header.Length; ++i)
             {
                 if(packetBuffer.Skip(i).Take(header.Length).SequenceEqual(header))
                 {

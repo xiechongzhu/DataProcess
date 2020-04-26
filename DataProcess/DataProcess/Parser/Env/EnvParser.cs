@@ -26,14 +26,18 @@ namespace DataProcess.Protocol
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
         private bool isRuning = false;
         private Thread thread;
+        int pos = 0;
+        byte[] dataBuffer = new byte[1024 * 64];
 
         public void Enqueue(byte[] data)
         {
             queue.Enqueue(data);
+            dataLogger.WriteEnvPacket(data);
         }
 
         public void Start()
         {
+            pos = 0;
             while (queue.TryDequeue(out byte[] dropBuffer)) ;
             tailParser = new TailParser(dataLogger);
             isRuning = true;
@@ -51,9 +55,15 @@ namespace DataProcess.Protocol
         {
             while (isRuning)
             {
-                byte[] dataBuffer;
-                if (queue.TryDequeue(out dataBuffer))
+                if (queue.TryDequeue(out byte[] _dataBuffer))
                 {
+                    if(pos + _dataBuffer.Length >= dataBuffer.Length)
+                    {
+                        pos = 0;
+                        continue;
+                    }
+                    Array.Copy(_dataBuffer, 0, dataBuffer, pos, _dataBuffer.Length);
+                    pos += _dataBuffer.Length;
                     List<byte[]> bufferList = SplitPacketBuffer(dataBuffer);
                     bufferList.ForEach(buffer => ParseData(buffer));
                 }
@@ -67,18 +77,20 @@ namespace DataProcess.Protocol
         List<byte[]> SplitPacketBuffer(byte[] dataBuffer)
         {
             List<byte[]> list = new List<byte[]>();
-            int pos = 0;
+            int headerPos = 0;
             for(; ; )
             {
-                if(dataBuffer.Length <= pos + Marshal.SizeOf(typeof(EnvPacketHeader)))
+                if(pos <= headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)))
                 {
                     break;
                 }
-                EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(dataBuffer, pos, Marshal.SizeOf(typeof(EnvPacketHeader)));
-                if (!Enumerable.SequenceEqual(header.syncHeader, EnvProtocol.SyncHeader))
+                headerPos = FindHeader();
+                if(-1 == headerPos)
                 {
                     break;
                 }
+
+                EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(dataBuffer, headerPos, Marshal.SizeOf(typeof(EnvPacketHeader)));
                 int packetLen = 0;
                 switch ((EnvProtocol.DataType)header.dataType)
                 {
@@ -94,13 +106,19 @@ namespace DataProcess.Protocol
                     default:
                         break;
                 }
-                if(packetLen != 0 && pos + packetLen <= dataBuffer.Length)
+                if(packetLen != 0 && headerPos + packetLen <= pos)
                 {
                     byte[] protocolData = new byte[packetLen];
-                    Array.Copy(dataBuffer, pos, protocolData, 0, packetLen);
+                    Array.Copy(dataBuffer, headerPos, protocolData, 0, packetLen);
                     list.Add(protocolData);
+                    Array.Copy(dataBuffer, headerPos + packetLen, dataBuffer, 0, pos - headerPos - 1);
+                    pos -= (headerPos + packetLen);
+                    headerPos = 0;
                 }
-                pos += packetLen;
+                else
+                {
+                    break;
+                }
             }
             return list;
         }
@@ -168,6 +186,23 @@ namespace DataProcess.Protocol
                 default:
                     break;
             }
+        }
+
+        private int FindHeader()
+        {
+            if(pos < Marshal.SizeOf(typeof(EnvPacketHeader)))
+            {
+                return -1;
+            }
+            for(int i = 0; i <= pos - Marshal.SizeOf(typeof(EnvPacketHeader)); ++i)
+            {
+                if(dataBuffer[i] == EnvProtocol.SyncHeader[0] && dataBuffer[i+1] == EnvProtocol.SyncHeader[1]
+                    && dataBuffer[i+2] == EnvProtocol.SyncHeader[2])
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }
