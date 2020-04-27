@@ -17,9 +17,11 @@ namespace DataProcess.Parser.Fly
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
         private bool isRuning = false;
         private Thread thread;
-        private byte[] dataBuffer = new byte[10000000];
-        private int dataLength = 0;
-        private int searchPos = 0;
+        private byte[] dataBuffer1 = new byte[64 * 1024];
+        private int dataLength1 = 0;
+        private byte[] dataBuffer2 = new byte[64*1024];
+        private int dataLength2 = 0;
+        private int searchPos2 = 0;
 
         public FlyParser(IntPtr mainWindowHandle)
         {
@@ -57,31 +59,35 @@ namespace DataProcess.Parser.Fly
                 if (queue.TryDequeue(out byte[] dataBuffer))
                 {
                     dataLogger.WriteFlyPacket(dataBuffer);
-                    ParseData(dataBuffer, out List<NavData> navDataList, out List<AngleData> angleDataList, 
-                        out List<ProgramControlData> programControlDataList, out List<ServoData> servoDataList);
-                    foreach(NavData data in navDataList)
+                    List<byte[]> buffer1 = ParseData1(dataBuffer);
+                    for (int i = 0; i < buffer1.Count; ++i)
                     {
-                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NavData)));
-                        Marshal.StructureToPtr(data, ptr, true);
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_NAV_DATA, 0, ptr);
-                    }
-                    foreach(AngleData data in angleDataList)
-                    {
-                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AngleData)));
-                        Marshal.StructureToPtr(data, ptr, true);
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_ANGLE_DATA, 0, ptr);
-                    }
-                    foreach(ProgramControlData data in programControlDataList)
-                    {
-                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ProgramControlData)));
-                        Marshal.StructureToPtr(data, ptr, true);
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_PROGRAM_DATA, 0, ptr);
-                    }
-                    foreach(ServoData data in servoDataList)
-                    {
-                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ServoData)));
-                        Marshal.StructureToPtr(data, ptr, true);
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_SERVO_DATA, 0, ptr);
+                        ParseData2(buffer1[i], out List<NavData> navDataList, out List<AngleData> angleDataList,
+                            out List<ProgramControlData> programControlDataList, out List<ServoData> servoDataList);
+                        foreach (NavData data in navDataList)
+                        {
+                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NavData)));
+                            Marshal.StructureToPtr(data, ptr, true);
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_NAV_DATA, 0, ptr);
+                        }
+                        foreach (AngleData data in angleDataList)
+                        {
+                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AngleData)));
+                            Marshal.StructureToPtr(data, ptr, true);
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_ANGLE_DATA, 0, ptr);
+                        }
+                        foreach (ProgramControlData data in programControlDataList)
+                        {
+                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ProgramControlData)));
+                            Marshal.StructureToPtr(data, ptr, true);
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_PROGRAM_DATA, 0, ptr);
+                        }
+                        foreach (ServoData data in servoDataList)
+                        {
+                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ServoData)));
+                            Marshal.StructureToPtr(data, ptr, true);
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_SERVO_DATA, 0, ptr);
+                        }
                     }
                 }
                 else
@@ -91,7 +97,56 @@ namespace DataProcess.Parser.Fly
             }
         }
 
-        public void ParseData(byte[] buffer, out List<NavData> navDataList, out List<AngleData> angleDataList,
+        private List<byte[]> ParseData1(byte[] buffer)
+        {
+            List<byte[]> list = new List<byte[]>();
+            if(buffer.Length + dataLength1 <= dataBuffer1.Length)
+            {
+                Array.Copy(buffer, 0, dataBuffer1, dataLength1, buffer.Length);
+                dataLength1 += buffer.Length;
+                for(; ; )
+                {
+                    int searchPos1 = FindFlyHeader();
+                    if(-1 == searchPos1)
+                    {
+                        return list;
+                    }
+                    if(searchPos1 + Marshal.SizeOf(typeof(FlyPacket)) < dataLength1)
+                    {
+                        byte[] packet = new byte[Marshal.SizeOf(typeof(FlyPacket))];
+                        Array.Copy(dataBuffer1, searchPos1, packet, 0, packet.Length);
+                        list.Add(packet);
+                        Array.Copy(dataBuffer1, searchPos1 + Marshal.SizeOf(typeof(FlyPacket)), dataBuffer1, 0,
+                            dataLength1 - (searchPos1 + Marshal.SizeOf(typeof(FlyPacket))));
+                        dataLength1 -= (searchPos1 + Marshal.SizeOf(typeof(FlyPacket)));
+                    }
+                    else
+                    {
+                        return list;
+                    }
+                }
+            }
+            else 
+            {
+                dataLength1 = 0;
+                return list;
+            }
+        }
+
+        int FindFlyHeader()
+        {
+            for(int i = 0; i <= dataLength1 - Marshal.SizeOf(typeof(FlyHeader)); ++i)
+            {
+                if(dataBuffer1[i] == FlyProtocol.syncHeader[0] && dataBuffer1[i+1] == FlyProtocol.syncHeader[1]
+                    && dataBuffer1[i+2] == FlyProtocol.syncHeader[2])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void ParseData2(byte[] buffer, out List<NavData> navDataList, out List<AngleData> angleDataList,
             out List<ProgramControlData> programControlDataList, out List<ServoData> servoDataList)
         {
             navDataList = new List<NavData>();
@@ -99,7 +154,7 @@ namespace DataProcess.Parser.Fly
             programControlDataList = new List<ProgramControlData>();
             servoDataList = new List<ServoData>();
 
-            if (buffer.Length <= Marshal.SizeOf(typeof(FlyHeader)))
+            if (buffer == null ||  buffer.Length <= Marshal.SizeOf(typeof(FlyHeader)))
             {
                 return;
             }
@@ -110,72 +165,78 @@ namespace DataProcess.Parser.Fly
                 return;
             }
 
-            if(dataLength + flyPacket.header.dataLen.SwapUInt16() > dataBuffer.Length)
+            if(dataLength2 + flyPacket.header.dataLen.SwapUInt16() > dataBuffer2.Length)
             {
-                dataLength = 0;
+                dataLength2 = 0;
                 return;
             }
-            Array.Copy(flyPacket.data, 0, dataBuffer, dataLength, flyPacket.header.dataLen.SwapUInt16());
-            dataLength += flyPacket.header.dataLen.SwapUInt16();
 
-
-            for (; searchPos < dataLength; ++searchPos)
+            if(flyPacket.data.Length < flyPacket.header.dataLen.SwapUInt16())
             {
-                if(EqualHeader(FlyProtocol.navHeader, dataBuffer, searchPos))
+                return;
+            }
+
+            Array.Copy(flyPacket.data, 0, dataBuffer2, dataLength2, flyPacket.header.dataLen.SwapUInt16());
+            dataLength2 += flyPacket.header.dataLen.SwapUInt16();
+
+
+            for (; searchPos2 < dataLength2; ++searchPos2)
+            {
+                if(EqualHeader(FlyProtocol.navHeader, dataBuffer2, searchPos2))
                 {
-                    if(searchPos + FlyProtocol.NavDataLengthWithPadding >= dataLength)
+                    if(searchPos2 + FlyProtocol.NavDataLengthWithPadding >= dataLength2)
                     {
                         break;
                     }
-                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.NavDataLengthWithPadding);
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.NavDataLengthWithPadding);
                     NavData navData = Tool.ByteToStruct<NavData>(packetBuffer, 0, packetBuffer.Length);
                     navDataList.Add(navData);
-                    searchPos += FlyProtocol.NavDataLengthWithPadding;
-                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
-                    dataLength -= searchPos;
-                    searchPos = 0;
+                    searchPos2 += FlyProtocol.NavDataLengthWithPadding;
+                    Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
+                    dataLength2 -= searchPos2;
+                    searchPos2 = 0;
                 }
-                if(EqualHeader(FlyProtocol.angleHeader, dataBuffer, searchPos))
+                if(EqualHeader(FlyProtocol.angleHeader, dataBuffer2, searchPos2))
                 {
-                    if (searchPos + FlyProtocol.AngleDataLengthWithPadding >= dataLength)
+                    if (searchPos2 + FlyProtocol.AngleDataLengthWithPadding >= dataLength2)
                     {
                         break;
                     }
-                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.AngleDataLengthWithPadding);
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.AngleDataLengthWithPadding);
                     AngleData angleData = Tool.ByteToStruct<AngleData>(packetBuffer, 0, packetBuffer.Length);
                     angleDataList.Add(angleData);
-                    searchPos += FlyProtocol.AngleDataLengthWithPadding;
-                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
-                    dataLength -= searchPos;
-                    searchPos = 0;
+                    searchPos2 += FlyProtocol.AngleDataLengthWithPadding;
+                    Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
+                    dataLength2 -= searchPos2;
+                    searchPos2 = 0;
                 }
-                if(EqualHeader(FlyProtocol.programHeader, dataBuffer, searchPos))
+                if(EqualHeader(FlyProtocol.programHeader, dataBuffer2, searchPos2))
                 {
-                    if (searchPos + FlyProtocol.ProgramDataLengthWithPadding >= dataLength)
+                    if (searchPos2 + FlyProtocol.ProgramDataLengthWithPadding >= dataLength2)
                     {
                         break;
                     }
-                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.ProgramDataLengthWithPadding);
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.ProgramDataLengthWithPadding);
                     ProgramControlData programControlData = Tool.ByteToStruct<ProgramControlData>(packetBuffer, 0, packetBuffer.Length);
                     programControlDataList.Add(programControlData);
-                    searchPos += FlyProtocol.ProgramDataLengthWithPadding; 
-                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
-                    dataLength -= searchPos;
-                    searchPos = 0;
+                    searchPos2 += FlyProtocol.ProgramDataLengthWithPadding; 
+                    Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
+                    dataLength2 -= searchPos2;
+                    searchPos2 = 0;
                 }
-                if(EqualHeader(FlyProtocol.servoHeader, dataBuffer, searchPos))
+                if(EqualHeader(FlyProtocol.servoHeader, dataBuffer2, searchPos2))
                 {
-                    if (searchPos + FlyProtocol.ServoDataLengthWithPadding >= dataLength)
+                    if (searchPos2 + FlyProtocol.ServoDataLengthWithPadding >= dataLength2)
                     {
                         break;
                     }
-                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer, searchPos, FlyProtocol.ServoDataLengthWithPadding);
+                    byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.ServoDataLengthWithPadding);
                     ServoData servoData = Tool.ByteToStruct<ServoData>(packetBuffer, 0, packetBuffer.Length);
                     servoDataList.Add(servoData);
-                    searchPos += FlyProtocol.ServoDataLengthWithPadding;
-                    Array.Copy(dataBuffer, searchPos, dataBuffer, 0, dataLength - searchPos);
-                    dataLength -= searchPos;
-                    searchPos = 0;
+                    searchPos2 += FlyProtocol.ServoDataLengthWithPadding;
+                    Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
+                    dataLength2 -= searchPos2;
+                    searchPos2 = 0;
                 }
             }
         }

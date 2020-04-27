@@ -896,14 +896,16 @@ namespace DataProcess
                 if(recvBuffer != null)
                 {
                     flyParser.Enqueue(recvBuffer);
-                    if (recvBuffer.Length == Marshal.SizeOf(typeof(FlyPacket)))
+                    if (recvBuffer.Length >= Marshal.SizeOf(typeof(FlyHeader)))
                     {
-                        byte[] header = recvBuffer.Take(FlyProtocol.syncHeader.Length).ToArray();
-                        byte dataType = recvBuffer[FlyProtocol.syncHeader.Length];
-                        if(Enumerable.SequenceEqual(header, FlyProtocol.syncHeader) && dataType == FlyProtocol.dataType && bRun)
+                        for (int i = 0; i < recvBuffer.Length - Marshal.SizeOf(typeof(FlyHeader)); ++i)
                         {
-                            NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
-                            Dispatcher.Invoke(new Action<Image, LED_STATUS>(SetLedStatus), ImageFly, LED_STATUS.LED_GREEN);
+                            if (recvBuffer[i] == FlyProtocol.syncHeader[0] && recvBuffer[i + 1] == FlyProtocol.syncHeader[1]
+                                && recvBuffer[i + 2] == FlyProtocol.syncHeader[2])
+                            {
+                                NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY] = DateTime.Now;
+                                Dispatcher.Invoke(new Action<Image, LED_STATUS>(SetLedStatus), ImageFly, LED_STATUS.LED_GREEN);
+                            }
                         }
                     }
                 }
