@@ -36,7 +36,6 @@ namespace DataProcess.Controls
         {
             int visualRangeMin = (int)(double)e.NewXRange.MinValue;
             int visualRangeMax = (int)(double)e.NewXRange.MaxValue;
-            Console.WriteLine(String.Format("{0} {1}", visualRangeMin, visualRangeMax));
             visualRangeMin = visualRangeMin < 0 ? 0 : visualRangeMin;
             visualRangeMin = visualRangeMin >= DataList.Count ? DataList.Count - 1 : visualRangeMin;
             visualRangeMax = visualRangeMax < 0 ? 0 : visualRangeMax;

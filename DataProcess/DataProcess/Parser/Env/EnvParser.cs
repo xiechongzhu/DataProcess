@@ -25,7 +25,7 @@ namespace DataProcess.Protocol
         private bool isRuning = false;
         private Thread thread;
         int pos = 0;
-        byte[] dataBuffer = new byte[1024 * 64];
+        byte[] dataBuffer = new byte[1024 * 1024 * 64];
 
         public void Enqueue(byte[] data)
         {
@@ -109,7 +109,7 @@ namespace DataProcess.Protocol
                     byte[] protocolData = new byte[packetLen];
                     Array.Copy(dataBuffer, headerPos, protocolData, 0, packetLen);
                     list.Add(protocolData);
-                    Array.Copy(dataBuffer, headerPos + packetLen, dataBuffer, 0, pos - headerPos - 1);
+                    Array.Copy(dataBuffer, headerPos + packetLen, dataBuffer, 0, pos - headerPos - packetLen);
                     pos -= (headerPos + packetLen);
                     headerPos = 0;
                 }

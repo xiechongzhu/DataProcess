@@ -23,8 +23,6 @@ namespace DataProcess.Parser.Env
         private DataLogger dataLogger;
         public byte[] packetBuffer = new byte[10 * 1024 * 1024];
         public int pos = 0;
-        private bool recvPacket = false;
-        private byte sequence;
         public List<TailPacketRs> Parse(byte[] buffer)
         {
             List<TailPacketRs> tailPacketRsList = new List<TailPacketRs>();
@@ -60,21 +58,6 @@ namespace DataProcess.Parser.Env
                         tailPacketRs.channels[i] = tailPacketRs.channels[i].SwapUInt16();
                     }
                     tailPacketRsList.Add(tailPacketRs);
-                    if (!recvPacket)
-                    {
-                        recvPacket = true;
-                    }
-                    else
-                    {
-                        if ((byte)(tailPacketRs.sequence - sequence) != 1)
-                        {
-                            if (dataLogger != null)
-                            {
-                                dataLogger.WriteTailSequenceFile(String.Format("LostPacket, preview={0} current={1}", sequence, tailPacketRs.sequence));
-                            }
-                        }
-                    }
-                    sequence = tailPacketRs.sequence;
                 }
                 Array.Copy(packetBuffer, Marshal.SizeOf(typeof(TailPacketRs)), packetBuffer, 0, pos - Marshal.SizeOf(typeof(TailPacketRs)));
                 pos -= Marshal.SizeOf(typeof(TailPacketRs));

@@ -761,7 +761,7 @@ namespace DataProcess
         {
             programDataList.ForEach(packet =>
             {
-                ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(packet.controlStatus);
+                ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(packet.controlStatus) + String.Format("({0})", packet.controlStatus);
                 programDigram.AddProgramData(packet);
             });
         }
@@ -835,8 +835,10 @@ namespace DataProcess
                 if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort))
                 {
                     udpClientEnv = new UdpClient(envPort);
+                    udpClientEnv.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
                     udpClientEnv.JoinMulticastGroup(IPAddress.Parse(envIpAddr));
                     udpClientFly = new UdpClient(flyPort);
+                    udpClientFly.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
                     udpClientFly.JoinMulticastGroup(IPAddress.Parse(flyIpAddr));
                 }
                 else

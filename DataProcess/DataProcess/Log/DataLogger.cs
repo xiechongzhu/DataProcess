@@ -39,7 +39,6 @@ namespace DataProcess.Log
         private BinaryWriter fastPacketWriter = null;
         private BinaryWriter tailPacketWriter = null;
         private BinaryWriter flyPacketWriter = null;
-        private StreamWriter tailSequenceWriter = null;
 
         public DataLogger()
         {
@@ -69,21 +68,6 @@ namespace DataProcess.Log
             tailSequenceFileStream?.Close();
         }
 
-        public void WriteTailSequenceFile(String strText)
-        {
-            try
-            {
-                if (tailSequenceFileStream == null)
-                {
-                    tailSequenceFileStream = File.Create(tailSequenceFilePath);
-                    tailSequenceWriter = new StreamWriter(tailSequenceFileStream);
-                }
-                tailSequenceWriter.WriteLine(strText);
-                tailSequenceWriter.Flush();
-            }
-            catch (Exception) { }
-        }
-
         [MethodImpl(MethodImplOptions.Synchronized)]
         private void WriteEnvPacketInternal(byte[] packet)
         {
@@ -95,6 +79,7 @@ namespace DataProcess.Log
                     envPacketWriter = new BinaryWriter(envPacketFileStream);
                 }
                 envPacketWriter.Write(packet);
+                envPacketWriter.Flush();
             }
             catch (Exception) { }
         }
@@ -102,8 +87,9 @@ namespace DataProcess.Log
         private delegate void WriteEnvPacketDelegate(byte[] packet);
         public void WriteEnvPacket(byte[] packet)
         {
-            WriteEnvPacketDelegate writeEnvPacketDelegate = new WriteEnvPacketDelegate(WriteEnvPacketInternal);
-            writeEnvPacketDelegate.BeginInvoke(packet, null, null);
+            /*WriteEnvPacketDelegate writeEnvPacketDelegate = new WriteEnvPacketDelegate(WriteEnvPacketInternal);
+            writeEnvPacketDelegate.BeginInvoke(packet, null, null);*/
+            WriteEnvPacketInternal(packet);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -117,6 +103,7 @@ namespace DataProcess.Log
                     slowPacketWriter = new BinaryWriter(slowPacketFileStream);
                 }
                 slowPacketWriter.Write(packet);
+                slowPacketWriter.Flush();
             }
             catch (Exception) { }
         }
@@ -124,8 +111,9 @@ namespace DataProcess.Log
         private delegate void WriteSlowPacketDelegate(byte[] packet);
         public void WriteSlowPacket(byte[] packet)
         {
-            WriteSlowPacketDelegate writeSlowPacketDelegate = new WriteSlowPacketDelegate(WriteSlowPacketInternal);
-            writeSlowPacketDelegate.BeginInvoke(packet, null, null);
+            /*WriteSlowPacketDelegate writeSlowPacketDelegate = new WriteSlowPacketDelegate(WriteSlowPacketInternal);
+            writeSlowPacketDelegate.BeginInvoke(packet, null, null);*/
+            WriteSlowPacketInternal(packet);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -139,6 +127,7 @@ namespace DataProcess.Log
                     fastPacketWriter = new BinaryWriter(fastPacketFileStream);
                 }
                 fastPacketWriter.Write(packet);
+                fastPacketWriter.Flush();
             }
             catch (Exception) { }
         }
@@ -146,8 +135,9 @@ namespace DataProcess.Log
         private delegate void WriteFastPacketDelegate(byte[] packet);
         public void WriteFastPacket(byte[] packet)
         {
-            WriteFastPacketDelegate writeFastPacketDelegate = new WriteFastPacketDelegate(WriteFastPacketInternal);
-            writeFastPacketDelegate.BeginInvoke(packet, null, null);
+            /*WriteFastPacketDelegate writeFastPacketDelegate = new WriteFastPacketDelegate(WriteFastPacketInternal);
+            writeFastPacketDelegate.BeginInvoke(packet, null, null);*/
+            WriteFastPacketInternal(packet);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -161,6 +151,7 @@ namespace DataProcess.Log
                     tailPacketWriter = new BinaryWriter(tailPacketFileStream);
                 }
                 tailPacketWriter.Write(packet);
+                tailPacketWriter.Flush();
             }
             catch (Exception) { }
         }
@@ -168,8 +159,9 @@ namespace DataProcess.Log
         private delegate void WriteTailPacketDelegate(byte[] packet);
         public void WriteTailPacket(byte[] packet)
         {
-            WriteTailPacketDelegate writeTailPacketDelegate = new WriteTailPacketDelegate(WriteTailPacketInternal);
-            writeTailPacketDelegate.BeginInvoke(packet, null, null);
+            /*WriteTailPacketDelegate writeTailPacketDelegate = new WriteTailPacketDelegate(WriteTailPacketInternal);
+            writeTailPacketDelegate.BeginInvoke(packet, null, null);*/
+            WriteTailPacketInternal(packet);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -183,6 +175,7 @@ namespace DataProcess.Log
                     flyPacketWriter = new BinaryWriter(flyPacketFileStream);
                 }
                 flyPacketWriter.Write(packet);
+                flyPacketWriter.Flush();
             }
             catch (Exception) { }
         }
@@ -190,8 +183,9 @@ namespace DataProcess.Log
         private delegate void WriteFlyPacketDelegate(byte[] packet);
         public void WriteFlyPacket(byte[] packet)
         {
-            WriteFlyPacketDelegate writeflyPacketDelegate = new WriteFlyPacketDelegate(WriteFlyPacketInternal);
-            writeflyPacketDelegate.BeginInvoke(packet, null, null);
+            /*WriteFlyPacketDelegate writeflyPacketDelegate = new WriteFlyPacketDelegate(WriteFlyPacketInternal);
+            writeflyPacketDelegate.BeginInvoke(packet, null, null);*/
+            WriteFlyPacketInternal(packet);
         }
 
         public List<SlowPacket> LoadSlowBinaryFile(String slowBinFileName)
@@ -283,12 +277,16 @@ namespace DataProcess.Log
                 while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                 {
                     byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FlyPacket)));
-                    flyParser.ParseData2(buffer, out List<NavData> _navDataList, out List<AngleData> _angleDataList,
-                        out List<ProgramControlData> _programControlDataList, out List<ServoData> _servoDataList);
-                    navDataList.AddRange(_navDataList);
-                    angleDataList.AddRange(_angleDataList);
-                    programControlDataList.AddRange(_programControlDataList);
-                    servoDataList.AddRange(_servoDataList);
+                    List<byte[]> buffer1 = flyParser.ParseData1(buffer);
+                    for (int i = 0; i < buffer1.Count; ++i)
+                    {
+                        flyParser.ParseData2(buffer1[i], out List<NavData> _navDataList, out List<AngleData> _angleDataList,
+                            out List<ProgramControlData> _programControlDataList, out List<ServoData> _servoDataList);
+                        navDataList.AddRange(_navDataList);
+                        angleDataList.AddRange(_angleDataList);
+                        programControlDataList.AddRange(_programControlDataList);
+                        servoDataList.AddRange(_servoDataList);
+                    }
                 }
             }
         }
