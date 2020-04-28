@@ -25,7 +25,7 @@ namespace DataProcess.Protocol
         private bool isRuning = false;
         private Thread thread;
         int pos = 0;
-        byte[] dataBuffer = new byte[1024 * 1024 * 64];
+        byte[] dataBuffer = new byte[1024 * 1024];
 
         public void Enqueue(byte[] data)
         {
@@ -85,7 +85,9 @@ namespace DataProcess.Protocol
                 headerPos = FindHeader();
                 if (-1 == headerPos)
                 {
-                    break;
+                    Array.Copy(dataBuffer, pos - Marshal.SizeOf(typeof(EnvPacketHeader)), dataBuffer, 0, Marshal.SizeOf(typeof(EnvPacketHeader)));
+                    pos = Marshal.SizeOf(typeof(EnvPacketHeader));
+                    break;    
                 }
 
                 EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(dataBuffer, headerPos, Marshal.SizeOf(typeof(EnvPacketHeader)));

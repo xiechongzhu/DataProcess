@@ -21,7 +21,7 @@ namespace DataProcess.Parser.Env
         }
 
         private DataLogger dataLogger;
-        public byte[] packetBuffer = new byte[10 * 1024 * 1024];
+        public byte[] packetBuffer = new byte[1024 * 1024];
         public int pos = 0;
         public List<TailPacketRs> Parse(byte[] buffer)
         {

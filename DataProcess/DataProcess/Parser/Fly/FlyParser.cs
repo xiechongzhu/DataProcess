@@ -17,9 +17,9 @@ namespace DataProcess.Parser.Fly
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
         private bool isRuning = false;
         private Thread thread;
-        private byte[] dataBuffer1 = new byte[64 * 1024 * 1024];
+        private byte[] dataBuffer1 = new byte[1024 * 1024];
         private int dataLength1 = 0;
-        private byte[] dataBuffer2 = new byte[64 * 1024 * 1024];
+        private byte[] dataBuffer2 = new byte[1024 * 1024];
         private int dataLength2 = 0;
         private int searchPos2 = 0;
 
