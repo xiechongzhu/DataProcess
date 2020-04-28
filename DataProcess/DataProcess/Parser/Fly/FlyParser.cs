@@ -190,6 +190,11 @@ namespace DataProcess.Parser.Fly
                     }
                     byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.NavDataLengthWithPadding);
                     NavData navData = Tool.ByteToStruct<NavData>(packetBuffer, 0, packetBuffer.Length);
+                    if(navData.crc != CalcNavCrc(packetBuffer))
+                    {
+                        searchPos2++;
+                        continue;
+                    }
                     navDataList.Add(navData);
                     searchPos2 += FlyProtocol.NavDataLengthWithPadding;
                     Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
@@ -204,6 +209,11 @@ namespace DataProcess.Parser.Fly
                     }
                     byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.AngleDataLengthWithPadding);
                     AngleData angleData = Tool.ByteToStruct<AngleData>(packetBuffer, 0, packetBuffer.Length);
+                    if(angleData.crc != CalcAngelCrc(packetBuffer))
+                    {
+                        searchPos2++;
+                        continue;
+                    }
                     angleDataList.Add(angleData);
                     searchPos2 += FlyProtocol.AngleDataLengthWithPadding;
                     Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
@@ -218,6 +228,11 @@ namespace DataProcess.Parser.Fly
                     }
                     byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.ProgramDataLengthWithPadding);
                     ProgramControlData programControlData = Tool.ByteToStruct<ProgramControlData>(packetBuffer, 0, packetBuffer.Length);
+                    if(programControlData.crc != CalcProgramData(packetBuffer))
+                    {
+                        searchPos2++;
+                        continue;
+                    }
                     programControlDataList.Add(programControlData);
                     searchPos2 += FlyProtocol.ProgramDataLengthWithPadding; 
                     Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
@@ -232,6 +247,11 @@ namespace DataProcess.Parser.Fly
                     }
                     byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.ServoDataLengthWithPadding);
                     ServoData servoData = Tool.ByteToStruct<ServoData>(packetBuffer, 0, packetBuffer.Length);
+                    if(servoData.crc != CalcServoData(packetBuffer))
+                    {
+                        searchPos2++;
+                        continue;
+                    }
                     servoDataList.Add(servoData);
                     searchPos2 += FlyProtocol.ServoDataLengthWithPadding;
                     Array.Copy(dataBuffer2, searchPos2, dataBuffer2, 0, dataLength2 - searchPos2);
@@ -270,6 +290,46 @@ namespace DataProcess.Parser.Fly
                 result[index++] = buffer[i + startPos];
             }
             return result;
+        }
+
+        private byte CalcAngelCrc(byte[] angelData)
+        {
+            byte crc = 0;
+            for(int i = 2; i < angelData.Length - 1; ++i)
+            {
+                crc += angelData[i];
+            }
+            return crc;
+        }
+
+        private byte CalcNavCrc(byte[] navData)
+        {
+            byte crc = 0;
+            for(int i = 0; i < navData.Length - 2; ++i)
+            {
+                crc ^= navData[i];
+            }
+            return crc;
+        }
+
+        private byte CalcProgramData(byte[] progData)
+        {
+            byte crc = 0;
+            for (int i = 0; i < progData.Length - 2; ++i)
+            {
+                crc ^= progData[i];
+            }
+            return crc;
+        }
+
+        private byte CalcServoData(byte[] servoData)
+        {
+            byte crc = 0;
+            for (int i = 0; i < servoData.Length - 2; ++i)
+            {
+                crc ^= servoData[i];
+            }
+            return crc;
         }
     }
 }
