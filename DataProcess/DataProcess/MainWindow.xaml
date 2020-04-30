@@ -753,16 +753,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -792,16 +782,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -831,16 +811,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -870,16 +840,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -909,16 +869,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -948,16 +898,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -987,16 +927,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1026,16 +956,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1065,16 +985,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1104,16 +1014,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1143,16 +1043,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1182,16 +1072,6 @@
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                 </dxc:AxisY2D.Title>
-                                                <dxc:AxisY2D.WholeRange>
-                                                    <dxc:Range>
-                                                        <dxc:Range.MaxValue>
-                                                            <System:Double>6</System:Double>
-                                                        </dxc:Range.MaxValue>
-                                                        <dxc:Range.MinValue>
-                                                            <System:Double>-1</System:Double>
-                                                        </dxc:Range.MinValue>
-                                                    </dxc:Range>
-                                                </dxc:AxisY2D.WholeRange>
                                             </dxc:AxisY2D>
                                         </dxc:XYDiagram2D.AxisY>
                                         <dxc:XYDiagram2D.AxisX>
@@ -1238,16 +1118,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1277,16 +1147,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1316,16 +1176,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1355,16 +1205,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1394,16 +1234,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1433,16 +1263,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1472,16 +1292,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1532,16 +1342,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1571,16 +1371,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1610,16 +1400,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1649,16 +1429,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1688,16 +1458,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1727,16 +1487,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1766,16 +1516,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1805,16 +1545,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1844,16 +1574,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1883,16 +1603,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1922,16 +1632,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -1961,16 +1661,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2000,16 +1690,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2039,16 +1719,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2078,16 +1748,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2117,16 +1777,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2156,16 +1806,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2195,16 +1835,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2252,16 +1882,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2291,16 +1911,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2330,16 +1940,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2369,16 +1969,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2408,16 +1998,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2447,16 +2027,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>
@@ -2486,16 +2056,6 @@
                                                     <dxc:AxisY2D.Title>
                                                         <dxc:AxisTitle Content="{x:Null}" Visible="True" FontSize="12" />
                                                     </dxc:AxisY2D.Title>
-                                                    <dxc:AxisY2D.WholeRange>
-                                                        <dxc:Range>
-                                                            <dxc:Range.MaxValue>
-                                                                <System:Double>6</System:Double>
-                                                            </dxc:Range.MaxValue>
-                                                            <dxc:Range.MinValue>
-                                                                <System:Double>-1</System:Double>
-                                                            </dxc:Range.MinValue>
-                                                        </dxc:Range>
-                                                    </dxc:AxisY2D.WholeRange>
                                                 </dxc:AxisY2D>
                                             </dxc:XYDiagram2D.AxisY>
                                             <dxc:XYDiagram2D.AxisX>

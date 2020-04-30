@@ -78,23 +78,25 @@ namespace DataProcess.Protocol
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastShakeSignal
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 80)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
         public byte[] signal;
     }
 
+    //冲击信号
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastLashSignal
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 400)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public byte[] signal;
     }
 
+    //噪声信号
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastNoiseSignal
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 400)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public byte[] signal;
     }
 
@@ -102,17 +104,16 @@ namespace DataProcess.Protocol
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct FastPacket
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 80)]
         public FastShakeSignal[] shakeSignals;
         public byte lashT3;
         public byte lashT2;
         public byte lashT1;
         public byte lashT0;
         public ushort sequence;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-        public FastLashSignal[] lashSignal_1;
-        public FastLashSignal lashSignal_2;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 400)]
+        public FastLashSignal[] lashSignal;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 400)]
         public FastNoiseSignal[] noiseSignal;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 205)]
         public byte[] reserve;//保留

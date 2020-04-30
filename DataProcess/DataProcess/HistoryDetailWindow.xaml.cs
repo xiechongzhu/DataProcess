@@ -283,92 +283,34 @@ namespace DataProcess
         {
             foreach (FastPacket packet in packets)
             {
-                FastShakeSignal fastShakeSignal = packet.shakeSignals[0];
-                for(int pos = 0; pos < 80; ++pos)
+                foreach(FastShakeSignal fastShakeSignal in packet.shakeSignals)
                 {
-                    ChartShake1.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[1];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake2.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[2];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake3.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[3];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake4.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[4];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake5.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[5];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake6.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[6];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake7.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[7];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake8.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[8];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake9.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[9];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake10.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[10];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake11.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
-                }
-                fastShakeSignal = packet.shakeSignals[11];
-                for (int pos = 0; pos < 80; ++pos)
-                {
-                    ChartShake12.AddValue(fastShakeSignal.signal[pos] * ratios.fastShake);
+                    ChartShake1.AddValue(fastShakeSignal.signal[0] * ratios.fastShake);
+                    ChartShake2.AddValue(fastShakeSignal.signal[1] * ratios.fastShake);
+                    ChartShake3.AddValue(fastShakeSignal.signal[2] * ratios.fastShake);
+                    ChartShake4.AddValue(fastShakeSignal.signal[3] * ratios.fastShake);
+                    ChartShake5.AddValue(fastShakeSignal.signal[4] * ratios.fastShake);
+                    ChartShake6.AddValue(fastShakeSignal.signal[5] * ratios.fastShake);
+                    ChartShake7.AddValue(fastShakeSignal.signal[6] * ratios.fastShake);
+                    ChartShake8.AddValue(fastShakeSignal.signal[7] * ratios.fastShake);
+                    ChartShake9.AddValue(fastShakeSignal.signal[8] * ratios.fastShake);
+                    ChartShake10.AddValue(fastShakeSignal.signal[9] * ratios.fastShake);
+                    ChartShake11.AddValue(fastShakeSignal.signal[10] * ratios.fastShake);
+                    ChartShake12.AddValue(fastShakeSignal.signal[11] * ratios.fastShake);
                 }
 
-                FastLashSignal lashSignal = packet.lashSignal_1[0];
-                for (int pos = 0; pos < 400; ++pos)
+                foreach(FastLashSignal fastLashSignal in packet.lashSignal)
                 {
-                    ChartLash1_1.AddValue(lashSignal.signal[pos] * ratios.fastLash);
-                }
-                lashSignal = packet.lashSignal_1[1];
-                for (int pos = 0; pos < 400; ++pos)
-                {
-                    ChartLash1_2.AddValue(lashSignal.signal[pos] * ratios.fastLash);
-                }
-                lashSignal = packet.lashSignal_1[2];
-                for (int pos = 0; pos < 400; ++pos)
-                {
-                    ChartLash1_3.AddValue(lashSignal.signal[pos] * ratios.fastLash);
+                    ChartLash1_1.AddValue(fastLashSignal.signal[0] * ratios.fastLash);
+                    ChartLash1_2.AddValue(fastLashSignal.signal[1] * ratios.fastLash);
+                    ChartLash1_3.AddValue(fastLashSignal.signal[2] * ratios.fastLash);
+                    ChartLash2.AddValue(fastLashSignal.signal[3] * ratios.fastLash);
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartLash2.AddValue(packet.lashSignal_2.signal[pos] * ratios.fastLash);
-                }
-
-                for (int pos = 0; pos < 400; ++pos)
-                {
-                    ChartNoise1.AddValue(packet.noiseSignal[0].signal[pos] * ratios.fastNoise);
-                    ChartNoise2.AddValue(packet.noiseSignal[1].signal[pos] * ratios.fastNoise);
+                    ChartNoise1.AddValue(packet.noiseSignal[pos].signal[0] * ratios.fastNoise);
+                    ChartNoise2.AddValue(packet.noiseSignal[pos].signal[1] * ratios.fastNoise);
                 }
             }
 

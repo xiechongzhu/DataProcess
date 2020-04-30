@@ -492,34 +492,30 @@ namespace DataProcess
         {
             packets.ForEach(packet =>
             {
-                for (int idx = 0; idx < 12; ++idx)
+                for (int idx = 0; idx < 80; ++idx)
                 {
                     FastShakeSignal fastShakeSignal = packet.shakeSignals[idx];
-                    for (int pos = 0; pos < 80; ++pos)
+                    for (int pos = 0; pos < 12; ++pos)
                     {
-                        chartDataSource.FastShakeSeriesLists[idx].AddPoint(fastShakeSignal.signal[pos] * ratios.fastShake);
+                        chartDataSource.FastShakeSeriesLists[pos].AddPoint(fastShakeSignal.signal[pos] * ratios.fastShake);
                     }
                 }
                 chartDataSource.FastLashT3SeriesList.AddPoint(packet.lashT3);
                 chartDataSource.FastLashT2SeriesList.AddPoint(packet.lashT2);
                 chartDataSource.FastLashT1SeriesList.AddPoint(packet.lashT1);
                 chartDataSource.FastLashT0SeriesList.AddPoint(packet.lashT0);
-                for (int idx = 0; idx < 3; ++idx)
+
+                foreach(FastLashSignal fastLashSignal in packet.lashSignal)
                 {
-                    FastLashSignal lashSignal = packet.lashSignal_1[idx];
-                    for (int pos = 0; pos < 400; ++pos)
-                    {
-                        chartDataSource.FastLashSeriesLists1[idx].AddPoint(lashSignal.signal[pos] * ratios.fastLash);
-                    }
+                    chartDataSource.FastLashSeriesLists1[0].AddPoint(fastLashSignal.signal[0] * ratios.fastLash);
+                    chartDataSource.FastLashSeriesLists1[1].AddPoint(fastLashSignal.signal[1] * ratios.fastLash);
+                    chartDataSource.FastLashSeriesLists1[2].AddPoint(fastLashSignal.signal[2] * ratios.fastLash);
+                    chartDataSource.FastLashSeriesList2.AddPoint(fastLashSignal.signal[3] * ratios.fastLash);
                 }
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    chartDataSource.FastLashSeriesList2.AddPoint(packet.lashSignal_2.signal[pos] * ratios.fastLash);
-                }
-                for (int pos = 0; pos < 400; ++pos)
-                {
-                    chartDataSource.FastNoiseLists[0].AddPoint(packet.noiseSignal[0].signal[pos] * ratios.fastNoise);
-                    chartDataSource.FastNoiseLists[1].AddPoint(packet.noiseSignal[1].signal[pos] * ratios.fastNoise);
+                    chartDataSource.FastNoiseLists[0].AddPoint(packet.noiseSignal[pos].signal[0] * ratios.fastNoise);
+                    chartDataSource.FastNoiseLists[1].AddPoint(packet.noiseSignal[pos].signal[1] * ratios.fastNoise);
                 }
             });
             chartDataSource.FastShakeSeriesLists.ForEach(source => source.NotifyDataChanged());
