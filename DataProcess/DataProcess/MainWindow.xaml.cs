@@ -5,6 +5,8 @@ using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
 using DataProcess.Setting;
 using DataProcess.Tools;
+using DevExpress.Xpf.Charts;
+using DevExpress.Xpf.Editors;
 using LinqToDB;
 using System;
 using System.Collections.Generic;
@@ -1213,6 +1215,167 @@ namespace DataProcess
         private void ThemedWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             btnStop_Click(this, new RoutedEventArgs());
+        }
+
+        private void ToggleSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+            if((bool)toggleSwitch.IsChecked)
+            {
+                HideZeroLevel(ChartNavLon);
+                HideZeroLevel(ChartNavLat);
+                HideZeroLevel(ChartNavHeight);
+                HideZeroLevel(ChartNavSpeedNorth);
+                HideZeroLevel(ChartNavSpeedSky);
+                HideZeroLevel(ChartNavSpeedEast);
+                HideZeroLevel(ChartAccX);
+                HideZeroLevel(ChartAccY);
+                HideZeroLevel(ChartAccZ); 
+                HideZeroLevel(ChartNavPitchAngle);
+                HideZeroLevel(ChartNavCrabAngle);
+                HideZeroLevel(ChartNavRollAngle);
+                HideZeroLevel(ChartAngelX);
+                HideZeroLevel(ChartAngelY);
+                HideZeroLevel(ChartAngelZ);
+                HideZeroLevel(ChartServoVol28);
+                HideZeroLevel(ChartServoVol160);
+                HideZeroLevel(ChartServo1Iq);
+                HideZeroLevel(ChartServo2Iq);
+                HideZeroLevel(ChartServo3Iq);
+                HideZeroLevel(ChartServo4Iq);
+                HideZeroLevel(ChartHood);
+                HideZeroLevel(ChartInsAir);
+                HideZeroLevel(ChartInsWall);
+                HideZeroLevel(ChartAttAir);
+                HideZeroLevel(ChartTemperature1);
+                HideZeroLevel(ChartTemperature2);
+                HideZeroLevel(ChartAttWalls1);
+                HideZeroLevel(ChartAttWalls2);
+                HideZeroLevel(ChartAttWalls3);
+                HideZeroLevel(ChartAttWalls4);
+                HideZeroLevel(ChartAttWalls5);
+                HideZeroLevel(ChartAttWalls6);
+                HideZeroLevel(ChartInsPresure);
+                HideZeroLevel(ChartAttiPresure);
+                HideZeroLevel(ChartPresure);
+                HideZeroLevel(ChartLevel1Presure);
+                HideZeroLevel(ChartLevel2Transmitter);
+                HideZeroLevel(ChartGestureControlHigh);
+                HideZeroLevel(ChartGestureControlLow);
+                HideZeroLevel(ChartShake1);
+                HideZeroLevel(ChartShake2);
+                HideZeroLevel(ChartShake3);
+                HideZeroLevel(ChartShake4);
+                HideZeroLevel(ChartShake5);
+                HideZeroLevel(ChartShake6);
+                HideZeroLevel(ChartShake7);
+                HideZeroLevel(ChartShake8);
+                HideZeroLevel(ChartShake9);
+                HideZeroLevel(ChartShake10);
+                HideZeroLevel(ChartShake11);
+                HideZeroLevel(ChartShake12);
+                HideZeroLevel(ChartLash1X);
+                HideZeroLevel(ChartLash1Y);
+                HideZeroLevel(ChartLash1Z);
+                HideZeroLevel(ChartLash2X);
+                HideZeroLevel(ChartLash2Y);
+                HideZeroLevel(ChartLash2Z);
+                HideZeroLevel(ChartLash1_1);
+                HideZeroLevel(ChartLash1_2);
+                HideZeroLevel(ChartLash1_3);
+                HideZeroLevel(ChartLash2);
+                HideZeroLevel(ChartNoise1);
+                HideZeroLevel(ChartNoise2);
+                HideZeroLevel(ChartNoise);
+            }
+            else
+            {
+                SetFixedRange(ChartNavLon);
+                SetFixedRange(ChartNavLat);
+                SetFixedRange(ChartNavHeight);
+                SetFixedRange(ChartNavSpeedNorth);
+                SetFixedRange(ChartNavSpeedSky);
+                SetFixedRange(ChartNavSpeedEast);
+                SetFixedRange(ChartAccX);
+                SetFixedRange(ChartAccY);
+                SetFixedRange(ChartAccZ);
+                SetFixedRange(ChartNavPitchAngle);
+                SetFixedRange(ChartNavCrabAngle);
+                SetFixedRange(ChartNavRollAngle);
+                SetFixedRange(ChartAngelX);
+                SetFixedRange(ChartAngelY);
+                SetFixedRange(ChartAngelZ);
+                SetFixedRange(ChartServoVol28);
+                SetFixedRange(ChartServoVol160);
+                SetFixedRange(ChartServo1Iq);
+                SetFixedRange(ChartServo2Iq);
+                SetFixedRange(ChartServo3Iq);
+                SetFixedRange(ChartServo4Iq);
+                SetFixedRange(ChartHood);
+                SetFixedRange(ChartInsAir);
+                SetFixedRange(ChartInsWall);
+                SetFixedRange(ChartAttAir);
+                SetFixedRange(ChartTemperature1);
+                SetFixedRange(ChartTemperature2);
+                SetFixedRange(ChartAttWalls1);
+                SetFixedRange(ChartAttWalls2);
+                SetFixedRange(ChartAttWalls3);
+                SetFixedRange(ChartAttWalls4);
+                SetFixedRange(ChartAttWalls5);
+                SetFixedRange(ChartAttWalls6);
+                SetFixedRange(ChartInsPresure);
+                SetFixedRange(ChartAttiPresure);
+                SetFixedRange(ChartPresure);
+                SetFixedRange(ChartLevel1Presure);
+                SetFixedRange(ChartLevel2Transmitter);
+                SetFixedRange(ChartGestureControlHigh);
+                SetFixedRange(ChartGestureControlLow);
+                SetFixedRange(ChartShake1);
+                SetFixedRange(ChartShake2);
+                SetFixedRange(ChartShake3);
+                SetFixedRange(ChartShake4);
+                SetFixedRange(ChartShake5);
+                SetFixedRange(ChartShake6);
+                SetFixedRange(ChartShake7);
+                SetFixedRange(ChartShake8);
+                SetFixedRange(ChartShake9);
+                SetFixedRange(ChartShake10);
+                SetFixedRange(ChartShake11);
+                SetFixedRange(ChartShake12);
+                SetFixedRange(ChartLash1X);
+                SetFixedRange(ChartLash1Y);
+                SetFixedRange(ChartLash1Z);
+                SetFixedRange(ChartLash2X);
+                SetFixedRange(ChartLash2Y);
+                SetFixedRange(ChartLash2Z);
+                SetFixedRange(ChartLash1_1);
+                SetFixedRange(ChartLash1_2);
+                SetFixedRange(ChartLash1_3);
+                SetFixedRange(ChartLash2);
+                SetFixedRange(ChartNoise1);
+                SetFixedRange(ChartNoise2);
+                SetFixedRange(ChartNoise);
+            }
+        }
+
+        private void HideZeroLevel(ChartControl chartControl)
+        {
+            XYDiagram2D diag = (XYDiagram2D)chartControl.Diagram;
+            AxisY2D axis = diag.AxisY as AxisY2D;
+            axis.WholeRange.SetAuto();
+            AxisY2D.SetAlwaysShowZeroLevel(axis.WholeRange, false);
+        }
+
+        private void SetFixedRange(ChartControl chartControl)
+        {
+            XYDiagram2D diag = (XYDiagram2D)chartControl.Diagram;
+            AxisY2D axis = diag.AxisY as AxisY2D;
+            axis.WholeRange = new DevExpress.Xpf.Charts.Range()
+            {
+                MinValue = -1,
+                MaxValue = 6
+            };
+            AxisY2D.SetAlwaysShowZeroLevel(axis.WholeRange, true);
         }
     }
 }

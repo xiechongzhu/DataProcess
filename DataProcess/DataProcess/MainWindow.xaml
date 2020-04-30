@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="DataProcess.MainWindow" Title="数据接收解析软件" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
+                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.MainWindow" Title="数据接收解析软件" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
     Icon="histroy.ico" Closing="ThemedWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,6 +20,8 @@
             <dx:SimpleButton Content="设置" x:Name="btnSetting" Margin="10,0,0,0" IsEnabled="True" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Settings.svg}" Click="btnSetting_Click"/>
             <dx:SimpleButton Content="历史数据" x:Name="btnHistory" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Business Objects/BO_Contract.svg}" Click="btnHistory_Click"/>
             <dx:SimpleButton Content="打开外部数据" x:Name="btnOpenData" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Click="btnVOpenData_Click"/>
+            <TextBlock Text="电压自适应:" Margin="20,0,0,0" VerticalAlignment="Center"/>
+            <dxe:ToggleSwitch Margin="0,0,0,0" IsChecked="True" Click="ToggleSwitch_Click" EnableAnimation="False"/>
             <TextBlock Text="缓变参数:" Margin="25,5,5,5"/>
             <Image x:Name="ImageSlow"/>
             <TextBlock Text="速变参数:" Margin="5,5,5,5"/>

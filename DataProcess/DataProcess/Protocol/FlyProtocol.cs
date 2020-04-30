@@ -31,8 +31,8 @@ namespace DataProcess.Protocol
         private static readonly Dictionary<PROGRAM_CONTROL_STATUS, KeyValuePair<double, String>> ProgramControlStatusText = new Dictionary<PROGRAM_CONTROL_STATUS, KeyValuePair<double, String>>()
         {
             { PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN, new KeyValuePair<double, String>(0.02, "一级发送机关机") },
-            { PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE, new KeyValuePair<double, String>(0.04, "一级发动机分离")},
-            { PROGRAM_CONTROL_STATUS.STATUS_BOOM, new KeyValuePair<double, String>(0.2, "姿控发送机电爆管起爆") },
+            { PROGRAM_CONTROL_STATUS.STATUS_BOOM, new KeyValuePair<double, String>(0.04, "姿控发送机电爆管起爆")},
+            { PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE, new KeyValuePair<double, String>(0.2, "一级发动机分离") },
             { PROGRAM_CONTROL_STATUS.STATUS_TOP, new KeyValuePair<double, String>(0.5, "顶点")},
             { PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE, new KeyValuePair<double, String>(0.96, "头体分离")}
         };
