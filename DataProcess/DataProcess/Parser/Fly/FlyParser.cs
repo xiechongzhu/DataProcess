@@ -22,15 +22,17 @@ namespace DataProcess.Parser.Fly
         private byte[] dataBuffer2 = new byte[1024 * 1024];
         private int dataLength2 = 0;
         private int searchPos2 = 0;
+        public bool IsStartLogData { get; set; }
 
         public FlyParser(IntPtr mainWindowHandle)
         {
             this.mainWindowHandle = mainWindowHandle;
+            IsStartLogData = false;
         }
 
         public FlyParser()
         {
-
+            IsStartLogData = false;
         }
 
         public void Enqueue(byte[] data)
@@ -58,7 +60,10 @@ namespace DataProcess.Parser.Fly
             {
                 if (queue.TryDequeue(out byte[] dataBuffer))
                 {
-                    dataLogger.WriteFlyPacket(dataBuffer);
+                    if (IsStartLogData)
+                    {
+                        dataLogger.WriteFlyPacket(dataBuffer);
+                    }
                     List<byte[]> buffer1 = ParseData1(dataBuffer);
                     for (int i = 0; i < buffer1.Count; ++i)
                     {

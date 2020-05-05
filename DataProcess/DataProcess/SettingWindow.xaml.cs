@@ -26,12 +26,13 @@ namespace DataProcess
         public SettingWindow()
         {
             InitializeComponent();
-            if(settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort))
+            if(settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort, out int maxDisplayPoint))
             {
                 editEnvIpAddr.Text = envIpAddr;
                 editEnvPort.Text = envPort.ToString();
                 editFlyIpAddr.Text = flyIpAddr;
                 editFlyPort.Text = flyPort.ToString();
+                editMaxPoint.Text = maxDisplayPoint.ToString();
             }
             else
             {
@@ -50,6 +51,16 @@ namespace DataProcess
                 editTailShake.Text = ratios.tailShake.ToString();
                 editTailTemp.Text = ratios.tailTemp.ToString();
                 editTailNoise.Text = ratios.tailNoise.ToString();
+                editSlowFireFix.Text = ratios.fireFix.ToString();
+                editSlowTempFix.Text =  ratios.slowTempFix.ToString();
+                editSlowPressureFix.Text = ratios.slowPressFix.ToString();
+                editFastShakeFix.Text = ratios.fastShakeFix.ToString();
+                editFastLashFix.Text = ratios.fastLashFix.ToString();
+                editFastNoiseFix.Text = ratios.fastNoiseFix.ToString();
+                editTailPressureFix.Text = ratios.tailPressFix.ToString();
+                editTailShakeFix.Text = ratios.tailShakeFix.ToString();
+                editTailTempFix.Text = ratios.tailTempFix.ToString();
+                editTailNoiseFix.Text = ratios.tailNoiseFix.ToString();
             }
             else
             {
@@ -65,7 +76,8 @@ namespace DataProcess
                 return;
             }
 
-            if(!settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text), editFlyIpAddr.Text, int.Parse(editFlyPort.Text)))
+            if(!settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text), editFlyIpAddr.Text, int.Parse(editFlyPort.Text),
+                int.Parse(editMaxPoint.Text)))
             {
                 MessageBox.Show("保存网络配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -81,8 +93,18 @@ namespace DataProcess
                 tailPress = double.Parse(editTailPressure.Text),
                 tailShake = double.Parse(editTailShake.Text),
                 tailTemp = double.Parse(editTailTemp.Text),
-                tailNoise = double.Parse(editTailNoise.Text)
-            };  
+                tailNoise = double.Parse(editTailNoise.Text),
+                fireFix = double.Parse(editSlowFireFix.Text),
+                slowTempFix = double.Parse(editSlowTempFix.Text),
+                slowPressFix = double.Parse(editSlowPressureFix.Text),
+                fastShakeFix = double.Parse(editFastShakeFix.Text),
+                fastLashFix = double.Parse(editFastLashFix.Text),
+                fastNoiseFix = double.Parse(editFastNoiseFix.Text),
+                tailPressFix = double.Parse(editTailPressureFix.Text),
+                tailShakeFix = double.Parse(editTailShakeFix.Text),
+                tailTempFix = double.Parse(editTailTempFix.Text),
+                tailNoiseFix = double.Parse(editTailNoiseFix.Text)
+        };  
             if(!settingManager.SaveRatios(ratios))
             {
                 MessageBox.Show("保存系数配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);

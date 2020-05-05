@@ -15,9 +15,9 @@ namespace DataProcess.Log
         private readonly String EnvPacketFileName = "环境参数.bin";
         private readonly String SlowPacketFileName = "缓变参数.bin";
         private readonly String FastPacketFileName = "速变参数.bin";
-        private readonly String TailPacketFileName = "尾端参数.bin";
+        private readonly String TailPacketFileName = "尾段参数.bin";
         private readonly String flyPacketFileName = "飞控参数.bin";
-        private readonly String tailSequenceFileName = "尾端包序号.txt";
+        private readonly String tailSequenceFileName = "尾段包序号.txt";
 
         public String envPacketFilePath;
         public String slowPacketFilePath;

@@ -13,7 +13,7 @@ namespace DataProcess.Setting
         private readonly String NetworkSettingFile = "network";
         private readonly String RatioSettingFile = "params";
 
-        public bool LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort)
+        public bool LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort, out int maxDisplayPoint)
         {
             try
             {
@@ -25,12 +25,14 @@ namespace DataProcess.Setting
                     envPort = networkSetting.EnvPort;
                     flyIpAddr = networkSetting.FlyIpAddress;
                     flyPort = networkSetting.FlyPort;
+                    maxDisplayPoint = networkSetting.MaxDisplayPoint;
                 }
             }
             catch(Exception)
             {
                 envIpAddr = flyIpAddr = String.Empty;
                 envPort = flyPort = 0;
+                maxDisplayPoint = 1000;
                 return false;
             }
             return true;
@@ -72,14 +74,15 @@ namespace DataProcess.Setting
             return true;
         }
 
-        public bool SaveNetworkSetting(String envIpAddr, int envPort, String flyIpAddr, int flyPort)
+        public bool SaveNetworkSetting(String envIpAddr, int envPort, String flyIpAddr, int flyPort, int maxDisplayPoint)
         {
             NetworkSetting networkSetting = new NetworkSetting
             {
                 EnvIpAddress = envIpAddr,
                 EnvPort = envPort,
                 FlyIpAddress = flyIpAddr,
-                FlyPort = flyPort
+                FlyPort = flyPort,
+                MaxDisplayPoint = maxDisplayPoint
             };
 
             try

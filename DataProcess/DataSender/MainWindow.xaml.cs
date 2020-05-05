@@ -20,7 +20,7 @@ namespace DataSender
             {"飞控数据", 631},
             {"缓变参数", 60},
             {"速变参数", 3575},
-            {"尾端参数", 2137}
+            {"尾段参数", 2137}
         };
         List<byte[]> sendList = new List<byte[]>();
         private DispatcherTimer timer = new DispatcherTimer();

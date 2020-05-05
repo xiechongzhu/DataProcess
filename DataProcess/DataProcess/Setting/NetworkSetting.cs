@@ -13,5 +13,6 @@ namespace DataProcess.Setting
         public int EnvPort { get; set; }
         public String FlyIpAddress { get; set; }
         public int FlyPort { get; set; }
+        public int MaxDisplayPoint { get; set; }
     }
 }

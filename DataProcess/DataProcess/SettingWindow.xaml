@@ -4,16 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-    Title="参数设置" Height="320" Width="500" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
+    Title="参数设置" Height="410" Width="500" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
     >
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -32,7 +32,10 @@
         <dxe:TextEdit x:Name="editFlyPort" Grid.Row="1" Grid.Column="3" Margin="5,5,5,5" Mask="\d{1,5}" MaskType="RegEx"/>
         <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="缓变系数" Margin="2,2,2,2">
             <Grid>
-                <Grid.RowDefinitions/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
@@ -41,17 +44,26 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="点火同步:" Grid.Row="0" Grid.Column="0" Margin="2,0,2,0" TextAlignment="Right"/>
-                <dxe:TextEdit x:Name="editSlowFire" Grid.Row="0" Grid.Column="1" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
-                <TextBlock Text="温度:" Grid.Row="0" Grid.Column="2" TextAlignment="Right" Margin="2,0,2,0"/>
-                <dxe:TextEdit x:Name="editSlowTemp" Grid.Row="0" Grid.Column="3" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
-                <TextBlock Text="压力:" Grid.Row="0" Grid.Column="4" TextAlignment="Right" Margin="2,0,2,0"/>
-                <dxe:TextEdit x:Name="editSlowPressure" Grid.Row="0" Grid.Column="5" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="点火同步:" Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" TextAlignment="Right"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" TextAlignment="Right"/>
+                <dxe:TextEdit x:Name="editSlowFire" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editSlowFireFix" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="温度:" Grid.Row="0" Grid.Column="2" TextAlignment="Right" Margin="2,2,2,2"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="2" TextAlignment="Right" Margin="2,2,2,2"/>
+                <dxe:TextEdit x:Name="editSlowTemp" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editSlowTempFix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="压力:" Grid.Row="0" Grid.Column="4" TextAlignment="Right" Margin="2,2,2,2"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="4" TextAlignment="Right" Margin="2,2,2,2"/>
+                <dxe:TextEdit x:Name="editSlowPressure" Grid.Row="0" Grid.Column="5" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editSlowPressureFix" Grid.Row="1" Grid.Column="5" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Header="速变系数" Margin="2,2,2,2">
             <Grid>
-                <Grid.RowDefinitions/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
@@ -60,17 +72,26 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="振动:" Grid.Row="0" Grid.Column="0" Margin="2,0,2,0" TextAlignment="Right"/>
-                <dxe:TextEdit x:Name="editFastShake" Grid.Row="0" Grid.Column="1" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
-                <TextBlock Text="冲击:" Grid.Row="0" Grid.Column="2" TextAlignment="Right" Margin="2,0,2,0"/>
-                <dxe:TextEdit x:Name="editFastLash" Grid.Row="0" Grid.Column="3" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
-                <TextBlock Text="噪声:" Grid.Row="0" Grid.Column="4" TextAlignment="Right" Margin="2,0,2,0"/>
-                <dxe:TextEdit x:Name="editFastNoise" Grid.Row="0" Grid.Column="5" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="振动:" Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" TextAlignment="Right"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" TextAlignment="Right"/>
+                <dxe:TextEdit x:Name="editFastShake" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editFastShakeFix" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="冲击:" Grid.Row="0" Grid.Column="2" TextAlignment="Right" Margin="2,2,2,2"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="2" TextAlignment="Right" Margin="2,2,2,2"/>
+                <dxe:TextEdit x:Name="editFastLash" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editFastLashFix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="噪声:" Grid.Row="0" Grid.Column="4" TextAlignment="Right" Margin="2,2,2,2"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="4" TextAlignment="Right" Margin="2,2,2,2"/>
+                <dxe:TextEdit x:Name="editFastNoise" Grid.Row="0" Grid.Column="5" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editFastNoiseFix" Grid.Row="1" Grid.Column="5" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="尾端系数" Margin="2,2,2,2">
+        <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="尾段系数" Margin="2,2,2,2">
             <Grid>
-                <Grid.RowDefinitions/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition/>
@@ -81,16 +102,26 @@
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="压力:" Grid.Row="0" Grid.Column="0" TextAlignment="Right" Margin="2,0,2,0"/>
-                <dxe:TextEdit x:Name="editTailPressure" Grid.Row="0" Grid.Column="1" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
-                <TextBlock Text="振动:" Grid.Row="0" Grid.Column="2" Margin="2,0,2,0" TextAlignment="Right"/>
-                <dxe:TextEdit x:Name="editTailShake" Grid.Row="0" Grid.Column="3" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
-                <TextBlock Text="温度:" Grid.Row="0" Grid.Column="4" TextAlignment="Right" Margin="2,0,2,0"/>
-                <dxe:TextEdit x:Name="editTailTemp" Grid.Row="0" Grid.Column="5" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
-                <TextBlock Text="噪声:" Grid.Row="0" Grid.Column="6" TextAlignment="Right" Margin="2,0,2,0"/>
-                <dxe:TextEdit x:Name="editTailNoise" Grid.Row="0" Grid.Column="7" Margin="2,0,2,0" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="压力:" Grid.Row="0" Grid.Column="0" TextAlignment="Right" Margin="2,2,2,2"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="0" TextAlignment="Right" Margin="2,2,2,2"/>
+                <dxe:TextEdit x:Name="editTailPressure" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editTailPressureFix" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="振动:" Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" TextAlignment="Right"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" TextAlignment="Right"/>
+                <dxe:TextEdit x:Name="editTailShake" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editTailShakeFix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="温度:" Grid.Row="0" Grid.Column="4" TextAlignment="Right" Margin="2,2,2,2"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="4" TextAlignment="Right" Margin="2,2,2,2"/>
+                <dxe:TextEdit x:Name="editTailTemp" Grid.Row="0" Grid.Column="5" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editTailTempFix" Grid.Row="1" Grid.Column="5" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <TextBlock Text="噪声:" Grid.Row="0" Grid.Column="6" TextAlignment="Right" Margin="2,2,2,2"/>
+                <TextBlock Text="偏置:" Grid.Row="1" Grid.Column="6" TextAlignment="Right" Margin="2,2,2,2"/>
+                <dxe:TextEdit x:Name="editTailNoise" Grid.Row="0" Grid.Column="7" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                <dxe:TextEdit x:Name="editTailNoiseFix" Grid.Row="1" Grid.Column="7" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
             </Grid>
         </GroupBox>
+        <TextBlock Text="最大显示点数:" Grid.Row="5" Grid.Column="0" Margin="2,2,2,2"  VerticalAlignment="Center" TextAlignment="Right"/>
+        <dxe:TextEdit  x:Name ="editMaxPoint" Grid.Row="5" Grid.Column="1"  Margin="2,2,2,2" Height="20" Width="80" Mask="\d{2,4}" MaskType="RegEx"/>
         <dx:SimpleButton Grid.Row="5" Grid.Column="2" Margin="5,5,5,5" Width="100" Content="确定" x:Name="btnOK" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_CheckCircled.svg}" Click="btnOK_Click"/>
         <dx:SimpleButton Grid.Row="5" Grid.Column="3" Margin="5,5,5,5" Width="100" Content="取消" x:Name="btnCancle" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_DeleteCircled.svg}" Click="btnCancle_Click"/>
     </Grid>

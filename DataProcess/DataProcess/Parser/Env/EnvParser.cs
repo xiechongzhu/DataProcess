@@ -18,7 +18,10 @@ namespace DataProcess.Protocol
         public EnvParser(IntPtr mainWindowHandle)
         {
             this.mainWindowHandle = mainWindowHandle;
+            IsStartLogData = false;
         }
+
+        public bool IsStartLogData { get; set; }
 
         private IntPtr mainWindowHandle;
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
@@ -30,7 +33,10 @@ namespace DataProcess.Protocol
         public void Enqueue(byte[] data)
         {
             queue.Enqueue(data);
-            dataLogger.WriteEnvPacket(data);
+            if (IsStartLogData)
+            {
+                dataLogger.WriteEnvPacket(data);
+            }
         }
 
         public void Start()
@@ -150,7 +156,10 @@ namespace DataProcess.Protocol
                     {
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, IntPtr.Zero);
                     }
-                    dataLogger.WriteSlowPacket(buffer);
+                    if (IsStartLogData)
+                    {
+                        dataLogger.WriteSlowPacket(buffer);
+                    }
                     break;
                 case EnvProtocol.DataType.DataTypeFast:
                     FastPacket fastPacket;
@@ -164,7 +173,10 @@ namespace DataProcess.Protocol
                     {
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, IntPtr.Zero);
                     }
-                    dataLogger.WriteFastPacket(buffer);
+                    if (IsStartLogData)
+                    {
+                        dataLogger.WriteFastPacket(buffer);
+                    }
                     break;
                 case EnvProtocol.DataType.DataTypeTail:
                     List<TailPacketRs> tailPacketRs = tailParser.Parse(body);
@@ -181,7 +193,10 @@ namespace DataProcess.Protocol
                     {
                         WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, IntPtr.Zero);
                     }
-                    dataLogger.WriteTailPacket(buffer);
+                    if (IsStartLogData)
+                    {
+                        dataLogger.WriteTailPacket(buffer);
+                    }
                     break;
                 default:
                     break;

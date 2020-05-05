@@ -17,6 +17,11 @@ namespace DataProcess
         {
             this.maxCount = maxCount;
         }
+
+        public void SetMaxCount(int maxCount)
+        {
+            this.maxCount = maxCount;
+        }
         
         public void AddPoints(List<double> values)
         {

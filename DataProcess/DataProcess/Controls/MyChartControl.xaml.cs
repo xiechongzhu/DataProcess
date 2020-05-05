@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Xpf.Charts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -127,6 +128,25 @@ namespace DataProcess.Controls
             }
             public int X { get; set; }
             public double Y { get; set; }
+        }
+
+        public void HideZeroLevel()
+        {
+            AxisY2D axis = XyDiagram2D.AxisY;
+            axis.WholeRange = new Range();
+            axis.WholeRange.SetAuto();
+            AxisY2D.SetAlwaysShowZeroLevel(axis.WholeRange, false);
+        }
+
+        public void SetFixedRange()
+        {
+            AxisY2D axis = XyDiagram2D.AxisY;
+            axis.WholeRange = new Range()
+            {
+                MinValue = 0,
+                MaxValue = 5
+            };
+            AxisY2D.SetAlwaysShowZeroLevel(axis.WholeRange, true);
         }
     }
 

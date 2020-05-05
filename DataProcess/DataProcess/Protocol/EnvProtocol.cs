@@ -32,7 +32,7 @@ namespace DataProcess.Protocol
     public struct SlowPressureSensor
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public byte[] instrument;//仪器仓
+        public byte[] instrument;//仪器舱
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public byte[] attitudeControl;//姿控仓
     }
@@ -45,9 +45,9 @@ namespace DataProcess.Protocol
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public byte[] hood;//头罩(壁温)
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public byte[] insAir;//仪器仓（空温）
+        public byte[] insAir;//仪器舱（空温）
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public byte[] insWall;//仪器仓(壁温)
+        public byte[] insWall;//仪器舱(壁温)
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public byte[] attAir;//姿控仓（空温）
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
@@ -121,7 +121,7 @@ namespace DataProcess.Protocol
 
     #endregion
 
-    #region 尾端参数
+    #region 尾段参数
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct TailPacketUdp

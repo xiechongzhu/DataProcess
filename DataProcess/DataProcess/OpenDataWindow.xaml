@@ -29,7 +29,7 @@
         <TextBlock Text="速变参数文件:" Grid.Row="2" Grid.Column="0" Margin="10,10,10,10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,10,10,10" x:Name="editFastFile"/>
         <dx:SimpleButton Grid.Row="2" Grid.Column="4" Margin="10,10,10,10" Content="浏览" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" x:Name="btnChooseFastFile" Click="btnChooseFastFile_Click"/>
-        <TextBlock Text="尾端参数文件:" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10"/>
+        <TextBlock Text="尾段参数文件:" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10"/>
         <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,10,10,10" x:Name="editTailFile"/>
         <dx:SimpleButton Grid.Row="3" Grid.Column="4" Margin="10,10,10,10" Content="浏览" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" x:Name="btnChooseTailFile" Click="btnChooseTailFile_Click"/>
         <dx:SimpleButton Content="打开" Grid.Row="4" Grid.Column="4" Margin="10,10,10,10" Glyph="{dx:DXImage SvgImages/XAF/State_Validation_Valid.svg}" x:Name="btnOPen" Click="btnOPen_Click"/>

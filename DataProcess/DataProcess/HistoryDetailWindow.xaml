@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:DataProcess" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:Controls="clr-namespace:DataProcess.Controls" x:Class="DataProcess.HistoryDetailWindow" mc:Ignorable="d" Title="历史数据明细" Height="445.042" Width="455.373" 
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:Controls="clr-namespace:DataProcess.Controls" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.HistoryDetailWindow" mc:Ignorable="d" Title="历史数据明细" Height="445.042" Width="455.373" 
     WindowStartupLocation="CenterOwner" WindowState="Normal" WindowStyle="SingleBorderWindow" MinWidth="1000" MinHeight="600">
     <Grid>
         <Grid.RowDefinitions>
@@ -30,6 +30,14 @@
         <TextBox Grid.Row="0" Grid.Column="5" Margin="5, 5, 5, 5" x:Name="editOperator" IsEnabled="False"/>
         <TextBlock Text="备注:" Grid.Row="1" Grid.Column="0" Margin="5, 5, 5, 5"/>
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="5, 5, 5, 5" IsEnabled="False" TextWrapping="Wrap"  x:Name="editComment"/>
+        <Grid Grid.Row="1" Grid.Column="5 ">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="电压自适应:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <dxe:ToggleSwitch  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Click="ToggleSwitch_Click"/>
+        </Grid>
         <dx:DXTabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7">
             <dx:DXTabItem Header="飞控">
                 <Grid Background="Transparent">

@@ -31,7 +31,7 @@
                 <ComboBoxItem Content="飞控数据" />
                 <ComboBoxItem Content="缓变参数" />
                 <ComboBoxItem Content="速变参数" />
-                <ComboBoxItem Content="尾端参数" />
+                <ComboBoxItem Content="尾段参数" />
             </ComboBox>
             <Button x:Name="btnSendFile" Content="发送文件" Grid.Column="6" Margin="5,5,5,5" Click="btnSendFile_Click" />
         </Grid>

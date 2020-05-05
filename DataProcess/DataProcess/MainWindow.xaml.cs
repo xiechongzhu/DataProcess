@@ -52,7 +52,7 @@ namespace DataProcess
         public ChartPointDataSource FastLashSeriesList2 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
         public List<ChartPointDataSource> FastNoiseLists = new List<ChartPointDataSource>();
 
-        //尾端参数
+        //尾段参数
         public ChartPointDataSource TailPresureList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
         public ChartPointDataSource TailLevel1PresureList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
         public ChartPointDataSource TailTemperature1List = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
@@ -93,10 +93,10 @@ namespace DataProcess
         public ChartPointDataSource Servo4IqList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
 
         //帧计数
-        public ChartPointDataSource TailSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
-        public ChartPointDataSource AngelSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
-        public ChartPointDataSource ServoSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
-        public ChartPointDataSource NavSequenceList = new ChartPointDataSource(MainWindow.CHART_SEQ_MAX_POINT);
+        public ChartPointDataSource TailSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource AngelSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource ServoSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+        public ChartPointDataSource NavSequenceList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
 
         public ChartDataSource()
         {
@@ -182,6 +182,75 @@ namespace DataProcess
             ServoSequenceList.ClearPoints();
             NavSequenceList.ClearPoints();
         }
+
+        public void SetMaxDisplayCount(int maxCount)
+        {
+            SlowHoodList.SetMaxCount(maxCount);
+            SlowInsAirList.SetMaxCount(maxCount);
+            SlowInsWallList.SetMaxCount(maxCount);
+            SlowAttAirList.SetMaxCount(maxCount);
+            SlowAttWallList1.SetMaxCount(maxCount);
+            SlowAttWallList2.SetMaxCount(maxCount);
+            SlowAttWallList3.SetMaxCount(maxCount);
+            SlowAttWallList4.SetMaxCount(maxCount);
+            SlowAttWallList5.SetMaxCount(maxCount);
+            SlowAttWallList6.SetMaxCount(maxCount);
+            SlowInsPresureList.SetMaxCount(maxCount);
+            SlowAttPresureList.SetMaxCount(maxCount);
+            SlowLevel2PresureList.SetMaxCount(maxCount);
+            SlowPresureHighList.SetMaxCount(maxCount);
+            SlowPresureLowList.SetMaxCount(maxCount) ;
+
+            FastShakeSeriesLists.ForEach(item => item.SetMaxCount(maxCount));
+            FastLashT3SeriesList.SetMaxCount(maxCount);
+            FastLashT2SeriesList.SetMaxCount(maxCount);
+            FastLashT1SeriesList.SetMaxCount(maxCount);
+            FastLashT0SeriesList.SetMaxCount(maxCount);
+            FastLashSeriesLists1.ForEach(item => item.SetMaxCount(maxCount));
+            FastLashSeriesList2.SetMaxCount(maxCount);
+            FastNoiseLists.ForEach(item => item.SetMaxCount(maxCount));
+
+            TailPresureList.SetMaxCount(maxCount);
+            TailLevel1PresureList.SetMaxCount(maxCount);
+            TailTemperature1List.SetMaxCount(maxCount);
+            TailTemperature2List.SetMaxCount(maxCount);
+            TailLash1XList.SetMaxCount(maxCount);
+            TailLash1YList.SetMaxCount(maxCount);
+            TailLash1ZList.SetMaxCount(maxCount);
+            TailLash2XList.SetMaxCount(maxCount);
+            TailLash2YList.SetMaxCount(maxCount);
+            TailLash2ZList.SetMaxCount(maxCount);
+            TailNoiseList.SetMaxCount(maxCount);
+
+            NavLat.SetMaxCount(maxCount);
+            NavLon.SetMaxCount(maxCount);
+            NavHeight.SetMaxCount(maxCount);
+            NavSpeedNorth.SetMaxCount(maxCount);
+            NavSpeedSky.SetMaxCount(maxCount);
+            NavSpeedEast.SetMaxCount(maxCount);
+            NavPitchAngle.SetMaxCount(maxCount);
+            NavCrabAngle.SetMaxCount(maxCount);
+            NavRollAngle.SetMaxCount(maxCount);
+
+            AngleAccXList.SetMaxCount(maxCount);
+            AngleAccYList.SetMaxCount(maxCount);
+            AngleAccZList.SetMaxCount(maxCount);
+            AngleXList.SetMaxCount(maxCount);
+            AngleYList.SetMaxCount(maxCount);
+            AngleZList.SetMaxCount(maxCount);
+
+            ServoVol28List.SetMaxCount(maxCount);
+            ServoVol160List.SetMaxCount(maxCount);
+            Servo1IqList.SetMaxCount(maxCount);
+            Servo2IqList.SetMaxCount(maxCount);
+            Servo3IqList.SetMaxCount(maxCount);
+            Servo4IqList.SetMaxCount(maxCount);
+
+            TailSequenceList.SetMaxCount(maxCount);
+            AngelSequenceList.SetMaxCount(maxCount);
+            ServoSequenceList.SetMaxCount(maxCount);
+            NavSequenceList.SetMaxCount(maxCount);
+        }
     }
 
 
@@ -220,7 +289,6 @@ namespace DataProcess
 
         private bool bRun;
         public static readonly int CHART_MAX_POINTS = 500;
-        public static readonly int CHART_SEQ_MAX_POINT = 6000;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;
@@ -249,19 +317,19 @@ namespace DataProcess
         private void LedTimer_Tick(object sender, EventArgs e)
         {
             DateTime Now = DateTime.Now;
-            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 100)
+            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 200)
             {
                 SetLedStatus(ImageSlow, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 100)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 200)
             {
                 SetLedStatus(ImageFast, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 100)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 200)
             {
                 SetLedStatus(ImageTail, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 100)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 200)
             {
                 SetLedStatus(ImageFly, LED_STATUS.LED_RED);
             }
@@ -382,7 +450,7 @@ namespace DataProcess
             if (envBuffers.SlowPacketList.Count > 0)
             {
                 DrawSlowPackets(envBuffers.SlowPacketList);
-                UpdateSyncFireDisplay(envBuffers.SlowPacketList[envBuffers.SlowPacketList.Count - 1].syncFire * ratios.fire);
+                UpdateSyncFireDisplay(envBuffers.SlowPacketList[envBuffers.SlowPacketList.Count - 1].syncFire * ratios.fire + ratios.fireFix);
             }
 
             if(envBuffers.FastPacketList.Count > 0)
@@ -436,24 +504,24 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    chartDataSource.SlowHoodList.AddPoint(packet.temperatureSensor.hood[i] * ratios.slowTemp);
-                    chartDataSource.SlowInsAirList.AddPoint(packet.temperatureSensor.insAir[i] * ratios.slowTemp);
-                    chartDataSource.SlowInsWallList.AddPoint(packet.temperatureSensor.insWall[i] * ratios.slowTemp);
-                    chartDataSource.SlowAttAirList.AddPoint(packet.temperatureSensor.attAir[i] * ratios.slowTemp);
+                    chartDataSource.SlowHoodList.AddPoint(packet.temperatureSensor.hood[i] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowInsAirList.AddPoint(packet.temperatureSensor.insAir[i] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowInsWallList.AddPoint(packet.temperatureSensor.insWall[i] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowAttAirList.AddPoint(packet.temperatureSensor.attAir[i] * ratios.slowTemp + ratios.slowTempFix);
                     chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[i * 6] * ratios.slowTemp);
-                    chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp);
-                    chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp);
-                    chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp);
-                    chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp);
-                    chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp);
+                    chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp + ratios.slowTempFix);
                 }
                 for (int i = 0; i < 2; ++i)
                 {
-                    chartDataSource.SlowInsPresureList.AddPoint(packet.pressureSensor.instrument[i] * ratios.slowPress);
-                    chartDataSource.SlowAttPresureList.AddPoint(packet.pressureSensor.attitudeControl[i] * ratios.slowPress);
-                    chartDataSource.SlowLevel2PresureList.AddPoint(packet.level2Transmitter[i] * ratios.slowPress);
-                    chartDataSource.SlowPresureHighList.AddPoint(packet.gestureControlHigh[i] * ratios.slowPress);
-                    chartDataSource.SlowPresureLowList.AddPoint(packet.gestureControlLow[i] * ratios.slowPress);
+                    chartDataSource.SlowInsPresureList.AddPoint(packet.pressureSensor.instrument[i] * ratios.slowPress + ratios.slowPressFix);
+                    chartDataSource.SlowAttPresureList.AddPoint(packet.pressureSensor.attitudeControl[i] * ratios.slowPress + ratios.slowPressFix);
+                    chartDataSource.SlowLevel2PresureList.AddPoint(packet.level2Transmitter[i] * ratios.slowPress + ratios.slowPressFix);
+                    chartDataSource.SlowPresureHighList.AddPoint(packet.gestureControlHigh[i] * ratios.slowPress + ratios.slowPressFix);
+                    chartDataSource.SlowPresureLowList.AddPoint(packet.gestureControlLow[i] * ratios.slowPress + ratios.slowPressFix);
                 }
             });
             chartDataSource.SlowHoodList.NotifyDataChanged();
@@ -499,7 +567,7 @@ namespace DataProcess
                     FastShakeSignal fastShakeSignal = packet.shakeSignals[idx];
                     for (int pos = 0; pos < 12; ++pos)
                     {
-                        chartDataSource.FastShakeSeriesLists[pos].AddPoint(fastShakeSignal.signal[pos] * ratios.fastShake);
+                        chartDataSource.FastShakeSeriesLists[pos].AddPoint(fastShakeSignal.signal[pos] * ratios.fastShake + ratios.fastShakeFix);
                     }
                 }
                 chartDataSource.FastLashT3SeriesList.AddPoint(packet.lashT3);
@@ -509,15 +577,15 @@ namespace DataProcess
 
                 foreach(FastLashSignal fastLashSignal in packet.lashSignal)
                 {
-                    chartDataSource.FastLashSeriesLists1[0].AddPoint(fastLashSignal.signal[0] * ratios.fastLash);
-                    chartDataSource.FastLashSeriesLists1[1].AddPoint(fastLashSignal.signal[1] * ratios.fastLash);
-                    chartDataSource.FastLashSeriesLists1[2].AddPoint(fastLashSignal.signal[2] * ratios.fastLash);
-                    chartDataSource.FastLashSeriesList2.AddPoint(fastLashSignal.signal[3] * ratios.fastLash);
+                    chartDataSource.FastLashSeriesLists1[0].AddPoint(fastLashSignal.signal[0] * ratios.fastLash + ratios.fastLashFix);
+                    chartDataSource.FastLashSeriesLists1[1].AddPoint(fastLashSignal.signal[1] * ratios.fastLash + ratios.fastLashFix);
+                    chartDataSource.FastLashSeriesLists1[2].AddPoint(fastLashSignal.signal[2] * ratios.fastLash + ratios.fastLashFix);
+                    chartDataSource.FastLashSeriesList2.AddPoint(fastLashSignal.signal[3] * ratios.fastLash + ratios.fastLashFix);
                 }
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    chartDataSource.FastNoiseLists[0].AddPoint(packet.noiseSignal[pos].signal[0] * ratios.fastNoise);
-                    chartDataSource.FastNoiseLists[1].AddPoint(packet.noiseSignal[pos].signal[1] * ratios.fastNoise);
+                    chartDataSource.FastNoiseLists[0].AddPoint(packet.noiseSignal[pos].signal[0] * ratios.fastNoise + ratios.fastNoiseFix);
+                    chartDataSource.FastNoiseLists[1].AddPoint(packet.noiseSignal[pos].signal[1] * ratios.fastNoise + ratios.fastNoiseFix);
                 }
             });
             chartDataSource.FastShakeSeriesLists.ForEach(source => source.NotifyDataChanged());
@@ -573,14 +641,14 @@ namespace DataProcess
                         switch ((ChannelType)channel)
                         {
                             case ChannelType.ChannelPresure:
-                                value = data.Data() * ratios.tailPress;
+                                value = data.Data() * ratios.tailPress + ratios.tailPressFix;
                                 break;
                             case ChannelType.ChannelLevel1Presure:
-                                value = data.Data() * ratios.tailPress;
+                                value = data.Data() * ratios.tailPress + ratios.tailPressFix;
                                 break;
                             case ChannelType.ChannelTemperature1:
                             case ChannelType.ChannelTemperature2:
-                                value = data.Data() * ratios.tailTemp;
+                                value = data.Data() * ratios.tailTemp + ratios.tailTempFix;
                                 break;
                             case ChannelType.Channel1ShakeX:
                             case ChannelType.Channel1ShakeY:
@@ -588,10 +656,10 @@ namespace DataProcess
                             case ChannelType.Channel2ShakeX:
                             case ChannelType.Channel2ShakeY:
                             case ChannelType.Channel2ShakeZ:
-                                value = data.Data() * ratios.tailShake;
+                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
                                 break;
                             case ChannelType.ChannelNoise:
-                                value = data.Data() * ratios.tailNoise;
+                                value = data.Data() * ratios.tailNoise + ratios.tailNoiseFix;
                                 break;
                             default:
                                 break;
@@ -811,14 +879,14 @@ namespace DataProcess
             {
                 flyParser = new FlyParser(new WindowInteropHelper(this).Handle);
             }
-            TestInfoWindow testInfoWindow = new TestInfoWindow();
-            testInfoWindow.Owner = this;
-            if (!(bool)testInfoWindow.ShowDialog())
-            {
-                return;
-            }
 
-            testInfo = testInfoWindow.GetTestInfo();
+            testInfo = new TestInfo
+            {
+                TestName = String.Empty,
+                Operator = String.Empty,
+                Comment = String.Empty,
+                TestTime = DateTime.Now
+            };
 
             SettingManager settingManager = new SettingManager();
             if(!settingManager.LoadRatios(out ratios))
@@ -826,11 +894,11 @@ namespace DataProcess
                 MessageBox.Show("加载系数配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
+            int maxDisplayPoint;
             try
             {
                 
-                if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort))
+                if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort, out maxDisplayPoint))
                 {
                     udpClientEnv = new UdpClient(envPort);
                     udpClientEnv.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
@@ -857,7 +925,8 @@ namespace DataProcess
             btnSetting.IsEnabled = false;
             btnHistory.IsEnabled = false;
             btnOpenData.IsEnabled = false;
-            ResetDisplay();
+            btnData.IsEnabled = true;
+            ResetDisplay(maxDisplayPoint);
             envBuffers.Clear();
             dataLogger = new DataLogger(testInfo.TestTime);
             envParser.dataLogger = dataLogger;
@@ -926,13 +995,24 @@ namespace DataProcess
             catch (Exception) { }
             udpClientEnv = null;
             udpClientFly = null;
-            envParser?.Stop();
-            flyParser?.Stop();
+            if(envParser != null)
+            {
+                envParser.IsStartLogData = false;
+                envParser.Stop();
+            }
+            if(flyParser != null)
+            {
+                flyParser.IsStartLogData = false;
+                flyParser.Stop();
+            }
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
             btnSetting.IsEnabled = true;
             btnHistory.IsEnabled = true;
             btnOpenData.IsEnabled = true;
+            btnData.IsChecked = false;
+            btnData.IsEnabled = false;
+            btnData.Content = "开始存储数据";
             uiRefreshTimer.Stop();
             dataLogger?.Close();
             SaveTestInfo();
@@ -1060,99 +1140,12 @@ namespace DataProcess
             Marshal.FreeHGlobal(msg);
         }
 
-        private void ResetDisplay()
+        private void ResetDisplay(int maxDisplayPoint)
         {
-            //清空缓变参数
             UpdateSyncFireDisplay(Double.NaN);
-
-            /*ChartHood.Titles[0].Content = null;
-            ChartInsAir.Titles[0].Content = null;
-            ChartInsWall.Titles[0].Content = null;
-            ChartAttAir.Titles[0].Content = null;
-            ChartAttWalls1.Titles[0].Content = null;
-            ChartAttWalls2.Titles[0].Content = null;
-            ChartAttWalls3.Titles[0].Content = null;
-            ChartAttWalls4.Titles[0].Content = null;
-            ChartAttWalls5.Titles[0].Content = null;
-            ChartAttWalls6.Titles[0].Content = null;
-            ChartInsPresure.Titles[0].Content = null;
-            ChartAttiPresure.Titles[0].Content = null;
-            ChartLevel2Transmitter.Titles[0].Content = null;
-            ChartGestureControlHigh.Titles[0].Content = null;
-            ChartGestureControlLow.Titles[0].Content = null;*/
-
-            /*ChartShake1.Titles[0].Content = null;
-            ChartShake2.Titles[0].Content = null;
-            ChartShake3.Titles[0].Content = null;
-            ChartShake4.Titles[0].Content = null;
-            ChartShake5.Titles[0].Content = null;
-            ChartShake6.Titles[0].Content = null;
-            ChartShake7.Titles[0].Content = null;
-            ChartShake8.Titles[0].Content = null;
-            ChartShake9.Titles[0].Content = null;
-            ChartShake10.Titles[0].Content = null;
-            ChartShake11.Titles[0].Content = null;
-            ChartShake12.Titles[0].Content = null;
-            ChartLash1_1.Titles[0].Content = null;
-            ChartLash1_2.Titles[0].Content = null;
-            ChartLash1_3.Titles[0].Content = null;
-            ChartLash2.Titles[0].Content = null;
-            ChartNoise1.Titles[0].Content = null;
-            ChartNoise2.Titles[0].Content = null;*/
-
-            //清空尾端参数
-            /*ChartPresure.Titles[0].Content = null;
-            ChartLevel1Presure.Titles[0].Content = null;
-            ChartTemperature1.Titles[0].Content = null;
-            ChartTemperature2.Titles[0].Content = null;
-            ChartLash1X.Titles[0].Content = null;
-            ChartLash1Y.Titles[0].Content = null;
-            ChartLash1Z.Titles[0].Content = null;
-            ChartLash2X.Titles[0].Content = null;
-            ChartLash2Y.Titles[0].Content = null;
-            ChartLash2Z.Titles[0].Content = null;
-            ChartNoise.Titles[0].Content = null;*/
-
-            //清空导航数据
-            /*SeriesNavLat.Points.Clear();
-            SeriesNavLon.Points.Clear();
-            SeriesNavHeight.Points.Clear();
-            SeriesNavSpeedNorth.Points.Clear();
-            SeriesNavSpeedSky.Points.Clear();
-            SeriesNavSpeedEast.Points.Clear();
-            SeriesNavPitchAngle.Points.Clear();
-            SeriesNavCrabAngle.Points.Clear();
-            SeriesNavRollAngle.Points.Clear();*/
-
-            /*ChartNavLat.Titles[0].Content = null;
-            ChartNavLon.Titles[0].Content = null;
-            ChartNavHeight.Titles[0].Content = null;
-            ChartNavSpeedNorth.Titles[0].Content = null;
-            ChartNavSpeedSky.Titles[0].Content = null;
-            ChartNavSpeedEast.Titles[0].Content = null;
-            ChartNavPitchAngle.Titles[0].Content = null;
-            ChartNavCrabAngle.Titles[0].Content = null;
-            ChartNavRollAngle.Titles[0].Content = null;*/
-
-            //清空程控信号
             ResetProgramDiagram();
-
-            //清空伺服信号
-            /*SeriesServoVol28.Points.Clear();
-            SeriesServoVol160.Points.Clear();
-            SeriesServo1Iq.Points.Clear();
-            SeriesServo2Iq.Points.Clear();
-            SeriesServo3Iq.Points.Clear();
-            SeriesServo4Iq.Points.Clear();*/
-
-            /*ChartServoVol28.Titles[0].Content = null;
-            ChartServoVol160.Titles[0].Content = null;
-            ChartServo1Iq.Titles[0].Content = null;
-            ChartServo2Iq.Titles[0].Content = null;
-            ChartServo3Iq.Titles[0].Content = null;
-            ChartServo4Iq.Titles[0].Content = null;*/
-
             chartDataSource.Clear();
+            chartDataSource.SetMaxDisplayCount(maxDisplayPoint);
         }
 
         private void SaveTestInfo()
@@ -1361,7 +1354,7 @@ namespace DataProcess
         private void HideZeroLevel(ChartControl chartControl)
         {
             XYDiagram2D diag = (XYDiagram2D)chartControl.Diagram;
-            AxisY2D axis = diag.AxisY as AxisY2D;
+            AxisY2D axis = diag.AxisY;
             axis.WholeRange.SetAuto();
             AxisY2D.SetAlwaysShowZeroLevel(axis.WholeRange, false);
         }
@@ -1369,13 +1362,28 @@ namespace DataProcess
         private void SetFixedRange(ChartControl chartControl)
         {
             XYDiagram2D diag = (XYDiagram2D)chartControl.Diagram;
-            AxisY2D axis = diag.AxisY as AxisY2D;
+            AxisY2D axis = diag.AxisY;
             axis.WholeRange = new DevExpress.Xpf.Charts.Range()
             {
-                MinValue = -1,
-                MaxValue = 6
+                MinValue = 0,
+                MaxValue = 5
             };
             AxisY2D.SetAlwaysShowZeroLevel(axis.WholeRange, true);
+        }
+
+        private void btnData_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(bool)btnData.IsChecked)
+            {
+                envParser.IsStartLogData = flyParser.IsStartLogData = true;
+                btnData.Content = "停止存储数据";
+            }
+            else
+            {
+                envParser.IsStartLogData = flyParser.IsStartLogData = false;
+                btnData.Content = "开始存储数据";
+            }
+            btnData.IsChecked = !btnData.IsChecked;
         }
     }
 }
