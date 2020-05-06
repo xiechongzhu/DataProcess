@@ -1215,27 +1215,6 @@ namespace DataProcess
             ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
             if((bool)toggleSwitch.IsChecked)
             {
-                HideZeroLevel(ChartNavLon);
-                HideZeroLevel(ChartNavLat);
-                HideZeroLevel(ChartNavHeight);
-                HideZeroLevel(ChartNavSpeedNorth);
-                HideZeroLevel(ChartNavSpeedSky);
-                HideZeroLevel(ChartNavSpeedEast);
-                HideZeroLevel(ChartAccX);
-                HideZeroLevel(ChartAccY);
-                HideZeroLevel(ChartAccZ); 
-                HideZeroLevel(ChartNavPitchAngle);
-                HideZeroLevel(ChartNavCrabAngle);
-                HideZeroLevel(ChartNavRollAngle);
-                HideZeroLevel(ChartAngelX);
-                HideZeroLevel(ChartAngelY);
-                HideZeroLevel(ChartAngelZ);
-                HideZeroLevel(ChartServoVol28);
-                HideZeroLevel(ChartServoVol160);
-                HideZeroLevel(ChartServo1Iq);
-                HideZeroLevel(ChartServo2Iq);
-                HideZeroLevel(ChartServo3Iq);
-                HideZeroLevel(ChartServo4Iq);
                 HideZeroLevel(ChartHood);
                 HideZeroLevel(ChartInsAir);
                 HideZeroLevel(ChartInsWall);
@@ -1283,27 +1262,6 @@ namespace DataProcess
             }
             else
             {
-                SetFixedRange(ChartNavLon);
-                SetFixedRange(ChartNavLat);
-                SetFixedRange(ChartNavHeight);
-                SetFixedRange(ChartNavSpeedNorth);
-                SetFixedRange(ChartNavSpeedSky);
-                SetFixedRange(ChartNavSpeedEast);
-                SetFixedRange(ChartAccX);
-                SetFixedRange(ChartAccY);
-                SetFixedRange(ChartAccZ);
-                SetFixedRange(ChartNavPitchAngle);
-                SetFixedRange(ChartNavCrabAngle);
-                SetFixedRange(ChartNavRollAngle);
-                SetFixedRange(ChartAngelX);
-                SetFixedRange(ChartAngelY);
-                SetFixedRange(ChartAngelZ);
-                SetFixedRange(ChartServoVol28);
-                SetFixedRange(ChartServoVol160);
-                SetFixedRange(ChartServo1Iq);
-                SetFixedRange(ChartServo2Iq);
-                SetFixedRange(ChartServo3Iq);
-                SetFixedRange(ChartServo4Iq);
                 SetFixedRange(ChartHood);
                 SetFixedRange(ChartInsAir);
                 SetFixedRange(ChartInsWall);
