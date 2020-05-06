@@ -21,7 +21,7 @@
             <dx:SimpleButton Content="设置" x:Name="btnSetting" Margin="10,0,0,0" IsEnabled="True" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Settings.svg}" Click="btnSetting_Click"/>
             <dx:SimpleButton Visibility="Collapsed" Content="历史数据" x:Name="btnHistory" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Business Objects/BO_Contract.svg}" Click="btnHistory_Click"/>
             <dx:SimpleButton Content="打开外部数据" x:Name="btnOpenData" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Click="btnVOpenData_Click"/>
-            <TextBlock Text="电压自适应:" Margin="20,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Text="幅值自适应:" Margin="20,0,0,0" VerticalAlignment="Center"/>
             <dxe:ToggleSwitch Margin="0,0,0,0" IsChecked="True" Click="ToggleSwitch_Click" EnableAnimation="False"/>
             <TextBlock Text="缓变参数:" Margin="25,5,5,5"/>
             <Image x:Name="ImageSlow"/>

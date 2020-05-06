@@ -49,6 +49,7 @@ namespace DataProcess.Log
         {
             String strDateTime = dateTime.ToString("yyyyMMddHHmmss");
             Directory.CreateDirectory(Path.Combine("Log", strDateTime));
+            Directory.CreateDirectory("tmp");
             envPacketFilePath = Path.Combine("Log", strDateTime, EnvPacketFileName);
             slowPacketFilePath = Path.Combine("Log", strDateTime, SlowPacketFileName);
             fastPacketFilePath = Path.Combine("Log", strDateTime, FastPacketFileName);

@@ -5,37 +5,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:DataProcess" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:Controls="clr-namespace:DataProcess.Controls" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.HistoryDetailWindow" mc:Ignorable="d" Title="历史数据明细" Height="445.042" Width="455.373" 
-    WindowStartupLocation="CenterOwner" WindowState="Normal" WindowStyle="SingleBorderWindow" MinWidth="1000" MinHeight="600">
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:Controls="clr-namespace:DataProcess.Controls" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.HistoryDetailWindow" mc:Ignorable="d" Title="外部数据明细" Height="445.042" Width="455.373" 
+    WindowStartupLocation="CenterOwner" WindowState="Maximized" WindowStyle="SingleBorderWindow" MinWidth="1000" MinHeight="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="实验名称:" Grid.Row="0" Grid.Column="0" Margin="5, 5, 5, 5"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5, 5, 5, 5" x:Name="editName" IsEnabled="False"/>
-        <TextBlock Text="实验时间:" Grid.Row="0" Grid.Column="2" Margin="5, 5, 5, 5"/>
-        <TextBox Grid.Row="0" Grid.Column="3" Margin="5, 5, 5, 5" x:Name="editTime" IsEnabled="False"/>
-        <TextBlock Text="实验时间:" Grid.Row="0" Grid.Column="4" Margin="5, 5, 5, 5"/>
-        <TextBox Grid.Row="0" Grid.Column="5" Margin="5, 5, 5, 5" x:Name="editOperator" IsEnabled="False"/>
-        <TextBlock Text="备注:" Grid.Row="1" Grid.Column="0" Margin="5, 5, 5, 5"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="5, 5, 5, 5" IsEnabled="False" TextWrapping="Wrap"  x:Name="editComment"/>
+        <TextBlock Text="实验名称:" Grid.Row="0" Grid.Column="0" Margin="5, 5, 5, 5" Visibility="Collapsed"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5, 5, 5, 5" x:Name="editName" IsEnabled="False" Visibility="Collapsed"/>
+        <TextBlock Text="实验时间:" Grid.Row="0" Grid.Column="2" Margin="5, 5, 5, 5" Visibility="Collapsed"/>
+        <TextBox Grid.Row="0" Grid.Column="3" Margin="5, 5, 5, 5" x:Name="editTime" IsEnabled="False" Visibility="Collapsed"/>
+        <TextBlock Text="实验时间:" Grid.Row="0" Grid.Column="4" Margin="5, 5, 5, 5" Visibility="Collapsed"/>
+        <TextBox Grid.Row="0" Grid.Column="5" Margin="5, 5, 5, 5" x:Name="editOperator" IsEnabled="False" Visibility="Collapsed"/>
+        <TextBlock Text="备注:" Grid.Row="1" Grid.Column="0" Margin="5, 5, 5, 5" Visibility="Collapsed"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="5, 5, 5, 5" IsEnabled="False" TextWrapping="Wrap"  x:Name="editComment" Visibility="Collapsed"/>
         <Grid Grid.Row="1" Grid.Column="5 ">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="电压自适应:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="幅值自适应:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <dxe:ToggleSwitch  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Click="ToggleSwitch_Click"/>
         </Grid>
         <dx:DXTabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7">
@@ -44,25 +44,25 @@
                     <dx:DXTabControl>
                         <dx:DXTabItem Header="位置">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartNavLon"/>
-                                <Controls:MyChartControl x:Name="ChartNavLat"/>
-                                <Controls:MyChartControl x:Name="ChartNavHeight"/>
-                                <Controls:MyChartControl x:Name="ChartNavSpeedNorth"/>
-                                <Controls:MyChartControl x:Name="ChartNavSpeedSky"/>
-                                <Controls:MyChartControl x:Name="ChartNavSpeedEast"/>
-                                <Controls:MyChartControl x:Name="ChartAccX"/>
-                                <Controls:MyChartControl x:Name="ChartAccY"/>
-                                <Controls:MyChartControl x:Name="ChartAccZ"/>
+                                <Controls:MyChartControl x:Name="ChartNavLon" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNavLat" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNavHeight" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNavSpeedNorth" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNavSpeedSky" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNavSpeedEast" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAccX" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAccY" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAccZ" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="角速度数据">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartNavPitchAngle"/>
-                                <Controls:MyChartControl x:Name="ChartNavCrabAngle"/>
-                                <Controls:MyChartControl x:Name="ChartNavRollAngle"/>
-                                <Controls:MyChartControl x:Name="ChartAngelX"/>
-                                <Controls:MyChartControl x:Name="ChartAngelY"/>
-                                <Controls:MyChartControl x:Name="ChartAngelZ"/>
+                                <Controls:MyChartControl x:Name="ChartNavPitchAngle" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNavCrabAngle" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNavRollAngle" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAngelX" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAngelY" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAngelZ" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="程控信号">
@@ -70,12 +70,12 @@
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="伺服信号">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartServoVol28"/>
-                                <Controls:MyChartControl x:Name="ChartServoVol160"/>
-                                <Controls:MyChartControl x:Name="ChartServo1Iq"/>
-                                <Controls:MyChartControl x:Name="ChartServo2Iq"/>
-                                <Controls:MyChartControl x:Name="ChartServo3Iq"/>
-                                <Controls:MyChartControl x:Name="ChartServo4Iq"/>
+                                <Controls:MyChartControl x:Name="ChartServoVol28" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartServoVol160" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartServo1Iq" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartServo2Iq" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartServo3Iq" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartServo4Iq" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                     </dx:DXTabControl>
@@ -86,62 +86,62 @@
                     <dx:DXTabControl>
                         <dx:DXTabItem Header="温度">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartHood"/>
-                                <Controls:MyChartControl x:Name="ChartInsAir"/>
-                                <Controls:MyChartControl x:Name="ChartInsWall"/>
-                                <Controls:MyChartControl x:Name="ChartAttAir"/>
-                                <Controls:MyChartControl x:Name="ChartTemperature1"/>
-                                <Controls:MyChartControl x:Name="ChartTemperature2"/>
-                                <Controls:MyChartControl x:Name="ChartAttWalls1"/>
-                                <Controls:MyChartControl x:Name="ChartAttWalls2"/>
-                                <Controls:MyChartControl x:Name="ChartAttWalls3"/>
-                                <Controls:MyChartControl x:Name="ChartAttWalls4"/>
-                                <Controls:MyChartControl x:Name="ChartAttWalls5"/>
-                                <Controls:MyChartControl x:Name="ChartAttWalls6"/>
+                                <Controls:MyChartControl x:Name="ChartHood" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartInsAir" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartInsWall" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttAir" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartTemperature1" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartTemperature2" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttWalls1" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttWalls2" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttWalls3" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttWalls4" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttWalls5" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttWalls6" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="压力">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartInsPresure"/>
-                                <Controls:MyChartControl x:Name="ChartAttiPresure"/>
-                                <Controls:MyChartControl x:Name="ChartPresure"/>
-                                <Controls:MyChartControl x:Name="ChartLevel1Presure"/>
-                                <Controls:MyChartControl x:Name="ChartLevel2Transmitter"/>
-                                <Controls:MyChartControl x:Name="ChartGestureControlHigh"/>
-                                <Controls:MyChartControl x:Name="ChartGestureControlLow"/>
+                                <Controls:MyChartControl x:Name="ChartInsPresure" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartAttiPresure" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartPresure" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLevel1Presure" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLevel2Transmitter" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartGestureControlHigh" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartGestureControlLow" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="振动">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartShake1"/>
-                                <Controls:MyChartControl x:Name="ChartShake2"/>
-                                <Controls:MyChartControl x:Name="ChartShake3"/>
-                                <Controls:MyChartControl x:Name="ChartShake4"/>
-                                <Controls:MyChartControl x:Name="ChartShake5"/>
-                                <Controls:MyChartControl x:Name="ChartShake6"/>
-                                <Controls:MyChartControl x:Name="ChartShake7"/>
-                                <Controls:MyChartControl x:Name="ChartShake8"/>
-                                <Controls:MyChartControl x:Name="ChartShake9"/>
-                                <Controls:MyChartControl x:Name="ChartShake10"/>
-                                <Controls:MyChartControl x:Name="ChartShake11"/>
-                                <Controls:MyChartControl x:Name="ChartShake12"/>
-                                <Controls:MyChartControl x:Name="ChartLash1X"/>
-                                <Controls:MyChartControl x:Name="ChartLash1Y"/>
-                                <Controls:MyChartControl x:Name="ChartLash1Z"/>
-                                <Controls:MyChartControl x:Name="ChartLash2X"/>
-                                <Controls:MyChartControl x:Name="ChartLash2Y"/>
-                                <Controls:MyChartControl x:Name="ChartLash2Z"/>
+                                <Controls:MyChartControl x:Name="ChartShake1" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake2" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake3" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake4" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake5" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake6" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake7" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake8" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake9" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake10" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake11" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartShake12" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash1X" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash1Y" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash1Z" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash2X" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash2Y" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash2Z" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="冲击、噪声">
                             <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
-                                <Controls:MyChartControl x:Name="ChartLash1_1"/>
-                                <Controls:MyChartControl x:Name="ChartLash1_2"/>
-                                <Controls:MyChartControl x:Name="ChartLash1_3"/>
-                                <Controls:MyChartControl x:Name="ChartLash2"/>
-                                <Controls:MyChartControl x:Name="ChartNoise1"/>
-                                <Controls:MyChartControl x:Name="ChartNoise2"/>
-                                <Controls:MyChartControl x:Name="ChartNoise"/>
+                                <Controls:MyChartControl x:Name="ChartLash1_1" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash1_2" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash1_3" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartLash2" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNoise1" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNoise2" Width="600"/>
+                                <Controls:MyChartControl x:Name="ChartNoise" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                     </dx:DXTabControl>

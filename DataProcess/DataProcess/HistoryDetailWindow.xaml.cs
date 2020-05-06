@@ -228,56 +228,55 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartHood.AddValue(packet.temperatureSensor.hood[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartInsAir.AddValue(packet.temperatureSensor.insAir[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartInsWall.AddValue(packet.temperatureSensor.insWall[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttAir.AddValue(packet.temperatureSensor.attAir[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls1.AddValue(packet.temperatureSensor.attWalls[i * 6] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls2.AddValue(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls3.AddValue(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls4.AddValue(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls5.AddValue(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls6.AddValue(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartHood.WriteData(packet.temperatureSensor.hood[i] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartInsAir.WriteData(packet.temperatureSensor.insAir[i] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartInsWall.WriteData(packet.temperatureSensor.insWall[i] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartAttAir.WriteData(packet.temperatureSensor.attAir[i] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[i * 6] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp + ratios.slowTempFix);
                 }
 
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartInsPresure.AddValue(packet.pressureSensor.instrument[i] * ratios.slowPress + ratios.slowPressFix);
-                    ChartAttiPresure.AddValue(packet.pressureSensor.attitudeControl[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartInsPresure.WriteData(packet.pressureSensor.instrument[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartAttiPresure.WriteData(packet.pressureSensor.attitudeControl[i] * ratios.slowPress + ratios.slowPressFix);
                 }
 
                 for (int i = 0; i < packet.level2Transmitter.Length; ++i)
                 {
-                    ChartLevel2Transmitter.AddValue(packet.level2Transmitter[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartLevel2Transmitter.WriteData(packet.level2Transmitter[i] * ratios.slowPress + ratios.slowPressFix);
                 }
 
                 for (int i = 0; i < packet.gestureControlHigh.Length; ++i)
                 {
-                    ChartGestureControlHigh.AddValue(packet.gestureControlHigh[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartGestureControlHigh.WriteData(packet.gestureControlHigh[i] * ratios.slowPress + ratios.slowPressFix);
                 }
 
                 for (int i = 0; i < packet.gestureControlLow.Length; ++i)
                 {
-                    ChartGestureControlLow.AddValue(packet.gestureControlLow[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartGestureControlLow.WriteData(packet.gestureControlLow[i] * ratios.slowPress + ratios.slowPressFix);
                 }
             }
 
-            ChartHood.Update();
-            ChartInsAir.Update();
-            ChartInsWall.Update();
-            ChartAttAir.Update();
-            ChartAttWalls1.Update();
-            ChartAttWalls2.Update();
-            ChartAttWalls3.Update();
-            ChartAttWalls4.Update();
-            ChartAttWalls5.Update();
-            ChartAttWalls6.Update();
-            ChartInsPresure.Update();
-            ChartAttiPresure.Update();
-            ChartLevel2Transmitter.Update();
-            ChartGestureControlHigh.Update();
-            ChartGestureControlLow.Update();
-
+            ChartHood.EndWrite();
+            ChartInsAir.EndWrite();
+            ChartInsWall.EndWrite();
+            ChartAttAir.EndWrite();
+            ChartAttWalls1.EndWrite();
+            ChartAttWalls2.EndWrite();
+            ChartAttWalls3.EndWrite();
+            ChartAttWalls4.EndWrite();
+            ChartAttWalls5.EndWrite();
+            ChartAttWalls6.EndWrite();
+            ChartInsPresure.EndWrite();
+            ChartAttiPresure.EndWrite();
+            ChartLevel2Transmitter.EndWrite();
+            ChartGestureControlHigh.EndWrite();
+            ChartGestureControlLow.EndWrite();
         }
 
         private void DrawFastPackets(List<FastPacket> packets)
@@ -286,53 +285,52 @@ namespace DataProcess
             {
                 foreach(FastShakeSignal fastShakeSignal in packet.shakeSignals)
                 {
-                    ChartShake1.AddValue(fastShakeSignal.signal[0] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake2.AddValue(fastShakeSignal.signal[1] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake3.AddValue(fastShakeSignal.signal[2] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake4.AddValue(fastShakeSignal.signal[3] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake5.AddValue(fastShakeSignal.signal[4] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake6.AddValue(fastShakeSignal.signal[5] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake7.AddValue(fastShakeSignal.signal[6] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake8.AddValue(fastShakeSignal.signal[7] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake9.AddValue(fastShakeSignal.signal[8] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake10.AddValue(fastShakeSignal.signal[9] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake11.AddValue(fastShakeSignal.signal[10] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake12.AddValue(fastShakeSignal.signal[11] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake1.WriteData(fastShakeSignal.signal[0] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake2.WriteData(fastShakeSignal.signal[1] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake3.WriteData(fastShakeSignal.signal[2] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake4.WriteData(fastShakeSignal.signal[3] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake5.WriteData(fastShakeSignal.signal[4] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake6.WriteData(fastShakeSignal.signal[5] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake7.WriteData(fastShakeSignal.signal[6] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake8.WriteData(fastShakeSignal.signal[7] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake9.WriteData(fastShakeSignal.signal[8] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake10.WriteData(fastShakeSignal.signal[9] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake11.WriteData(fastShakeSignal.signal[10] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake12.WriteData(fastShakeSignal.signal[11] * ratios.fastShake + ratios.fastShakeFix);
                 }
 
                 foreach(FastLashSignal fastLashSignal in packet.lashSignal)
                 {
-                    ChartLash1_1.AddValue(fastLashSignal.signal[0] * ratios.fastLash + ratios.fastLashFix);
-                    ChartLash1_2.AddValue(fastLashSignal.signal[1] * ratios.fastLash + ratios.fastLashFix);
-                    ChartLash1_3.AddValue(fastLashSignal.signal[2] * ratios.fastLash + ratios.fastLashFix);
-                    ChartLash2.AddValue(fastLashSignal.signal[3] * ratios.fastLash + ratios.fastLashFix);
+                    ChartLash1_1.WriteData(fastLashSignal.signal[0] * ratios.fastLash + ratios.fastLashFix);
+                    ChartLash1_2.WriteData(fastLashSignal.signal[1] * ratios.fastLash + ratios.fastLashFix);
+                    ChartLash1_3.WriteData(fastLashSignal.signal[2] * ratios.fastLash + ratios.fastLashFix);
+                    ChartLash2.WriteData(fastLashSignal.signal[3] * ratios.fastLash + ratios.fastLashFix);
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartNoise1.AddValue(packet.noiseSignal[pos].signal[0] * ratios.fastNoise + ratios.fastNoiseFix);
-                    ChartNoise2.AddValue(packet.noiseSignal[pos].signal[1] * ratios.fastNoise + ratios.fastNoiseFix);
+                    ChartNoise1.WriteData(packet.noiseSignal[pos].signal[0] * ratios.fastNoise + ratios.fastNoiseFix);
+                    ChartNoise2.WriteData(packet.noiseSignal[pos].signal[1] * ratios.fastNoise + ratios.fastNoiseFix);
                 }
             }
-
-            ChartShake1.Update();
-            ChartShake2.Update();
-            ChartShake3.Update();
-            ChartShake4.Update();
-            ChartShake5.Update();
-            ChartShake6.Update();
-            ChartShake7.Update();
-            ChartShake8.Update();
-            ChartShake9.Update();
-            ChartShake10.Update();
-            ChartShake11.Update();
-            ChartShake12.Update();
-            ChartLash1_1.Update();
-            ChartLash1_2.Update();
-            ChartLash1_3.Update();
-            ChartLash2.Update();
-            ChartNoise1.Update();
-            ChartNoise2.Update();
+            ChartShake1.EndWrite();
+            ChartShake2.EndWrite();
+            ChartShake3.EndWrite();
+            ChartShake4.EndWrite();
+            ChartShake5.EndWrite();
+            ChartShake6.EndWrite();
+            ChartShake7.EndWrite();
+            ChartShake8.EndWrite();
+            ChartShake9.EndWrite();
+            ChartShake10.EndWrite();
+            ChartShake11.EndWrite();
+            ChartShake12.EndWrite();
+            ChartLash1_1.EndWrite();
+            ChartLash1_2.EndWrite();
+            ChartLash1_3.EndWrite();
+            ChartLash2.EndWrite();
+            ChartNoise1.EndWrite();
+            ChartNoise2.EndWrite();
         }
 
         private void DrawTailPackets(List<TailPacketRs> packets)
@@ -349,47 +347,47 @@ namespace DataProcess
                         {
                             case ChannelType.ChannelPresure:
                                 value = data.Data() * ratios.tailPress + ratios.tailPressFix;
-                                ChartPresure.AddValue(value);
+                                ChartPresure.WriteData(value);
                                 break;
                             case ChannelType.ChannelLevel1Presure:
                                 value = data.Data() * ratios.tailPress + ratios.tailPressFix;
-                                ChartLevel1Presure.AddValue(value);
+                                ChartLevel1Presure.WriteData(value);
                                 break;
                             case ChannelType.ChannelTemperature1:
                                 value = data.Data() * ratios.tailTemp + ratios.tailTempFix;
-                                ChartTemperature1.AddValue(value);
+                                ChartTemperature1.WriteData(value);
                                 break;
                             case ChannelType.ChannelTemperature2:
                                 value = data.Data() * ratios.tailTemp + ratios.tailTempFix;
-                                ChartTemperature2.AddValue(value);
+                                ChartTemperature2.WriteData(value);
                                 break;
                             case ChannelType.Channel1ShakeX:
                                 value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
-                                ChartLash1X.AddValue(value);
+                                ChartLash1X.WriteData(value);
                                 break;
                             case ChannelType.Channel1ShakeY:
                                 value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
-                                ChartLash1Y.AddValue(value);
+                                ChartLash1Y.WriteData(value);
                                 break;
                             case ChannelType.Channel1ShakeZ:
                                 value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
-                                ChartLash1Z.AddValue(value);
+                                ChartLash1Z.WriteData(value);
                                 break;
                             case ChannelType.Channel2ShakeX:
                                 value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
-                                ChartLash2X.AddValue(value);
+                                ChartLash2X.WriteData(value);
                                 break;
                             case ChannelType.Channel2ShakeY:
                                 value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
-                                ChartLash2Y.AddValue(value);
+                                ChartLash2Y.WriteData(value);
                                 break;
                             case ChannelType.Channel2ShakeZ:
                                 value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
-                                ChartLash2Z.AddValue(value);
+                                ChartLash2Z.WriteData(value);
                                 break;
                             case ChannelType.ChannelNoise:
                                 value = data.Data() * ratios.tailNoise + ratios.tailNoiseFix;
-                                ChartNoise.AddValue(value);
+                                ChartNoise.WriteData(value);
                                 break;
                             default:
                                 break;
@@ -397,18 +395,17 @@ namespace DataProcess
                     }
                 }
             }
-
-            ChartPresure.Update();
-            ChartLevel1Presure.Update();
-            ChartTemperature1.Update();
-            ChartTemperature2.Update();
-            ChartLash1X.Update();
-            ChartLash1Y.Update();
-            ChartLash1Z.Update();
-            ChartLash2X.Update();
-            ChartLash2Y.Update();
-            ChartLash2Z.Update();
-            ChartNoise.Update();
+            ChartPresure.EndWrite();
+            ChartLevel1Presure.EndWrite();
+            ChartTemperature1.EndWrite();
+            ChartTemperature2.EndWrite();
+            ChartLash1X.EndWrite();
+            ChartLash1Y.EndWrite();
+            ChartLash1Z.EndWrite();
+            ChartLash2X.EndWrite();
+            ChartLash2Y.EndWrite();
+            ChartLash2Z.EndWrite();
+            ChartNoise.EndWrite();
         }
 
         private void DrawNavData(List<NavData> packets)
@@ -416,25 +413,25 @@ namespace DataProcess
             packets.ForEach(packet =>
             {
                 programDigram.AddNavData(packet);
-                ChartNavLat.AddValue(packet.latitude);
-                ChartNavLon.AddValue(packet.longitude);
-                ChartNavHeight.AddValue(packet.height);
-                ChartNavSpeedNorth.AddValue(packet.northSpeed);
-                ChartNavSpeedSky.AddValue(packet.skySpeed);
-                ChartNavSpeedEast.AddValue(packet.eastSpeed);
-                ChartNavPitchAngle.AddValue(packet.pitchAngle);
-                ChartNavCrabAngle.AddValue(packet.crabAngle);
-                ChartNavRollAngle.AddValue(packet.rollAngle);
+                ChartNavLat.WriteData(packet.latitude);
+                ChartNavLon.WriteData(packet.longitude);
+                ChartNavHeight.WriteData(packet.height);
+                ChartNavSpeedNorth.WriteData(packet.northSpeed);
+                ChartNavSpeedSky.WriteData(packet.skySpeed);
+                ChartNavSpeedEast.WriteData(packet.eastSpeed);
+                ChartNavPitchAngle.WriteData(packet.pitchAngle);
+                ChartNavCrabAngle.WriteData(packet.crabAngle);
+                ChartNavRollAngle.WriteData(packet.rollAngle);
             });
-            ChartNavLat.Update();
-            ChartNavLon.Update();
-            ChartNavHeight.Update();
-            ChartNavSpeedNorth.Update();
-            ChartNavSpeedSky.Update();
-            ChartNavSpeedEast.Update();
-            ChartNavPitchAngle.Update();
-            ChartNavCrabAngle.Update();
-            ChartNavRollAngle.Update();
+            ChartNavLat.EndWrite();
+            ChartNavLon.EndWrite();
+            ChartNavHeight.EndWrite();
+            ChartNavSpeedNorth.EndWrite();
+            ChartNavSpeedSky.EndWrite();
+            ChartNavSpeedEast.EndWrite();
+            ChartNavPitchAngle.EndWrite();
+            ChartNavCrabAngle.EndWrite();
+            ChartNavRollAngle.EndWrite();
         }
 
         private void ToggleSwitch_Click(object sender, RoutedEventArgs e)
@@ -581,19 +578,19 @@ namespace DataProcess
             packets.ForEach(packet =>
             {
                 programDigram.AddAngleData(packet);
-                ChartAccX.AddValue(packet.ax);
-                ChartAccY.AddValue(packet.ay);
-                ChartAccZ.AddValue(packet.az);
-                ChartAngelX.AddValue(packet.angleX);
-                ChartAngelY.AddValue(packet.angleY);
-                ChartAngelZ.AddValue(packet.angleZ);
+                ChartAccX.WriteData(packet.ax);
+                ChartAccY.WriteData(packet.ay);
+                ChartAccZ.WriteData(packet.az);
+                ChartAngelX.WriteData(packet.angleX);
+                ChartAngelY.WriteData(packet.angleY);
+                ChartAngelZ.WriteData(packet.angleZ);
             });
-            ChartAccX.Update();
-            ChartAccY.Update();
-            ChartAccZ.Update();
-            ChartAngelX.Update();
-            ChartAngelY.Update();
-            ChartAngelZ.Update();
+            ChartAccX.EndWrite();
+            ChartAccY.EndWrite();
+            ChartAccZ.EndWrite();
+            ChartAngelX.EndWrite();
+            ChartAngelY.EndWrite();
+            ChartAngelZ.EndWrite();
         }
 
         private void DrawProgramData(List<ProgramControlData> packets)
@@ -609,19 +606,19 @@ namespace DataProcess
             packets.ForEach(packet =>
             {
                 programDigram.AddServoData(packet);
-                ChartServoVol28.AddValue(FlyDataConvert.GetVoltage28(packet.vol28));
-                ChartServoVol160.AddValue(FlyDataConvert.GetVoltage160(packet.vol160));
-                ChartServo1Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq1));
-                ChartServo2Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq2));
-                ChartServo3Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq3));
-                ChartServo4Iq.AddValue(FlyDataConvert.GetElectricity(packet.Iq4));
+                ChartServoVol28.WriteData(FlyDataConvert.GetVoltage28(packet.vol28));
+                ChartServoVol160.WriteData(FlyDataConvert.GetVoltage160(packet.vol160));
+                ChartServo1Iq.WriteData(FlyDataConvert.GetElectricity(packet.Iq1));
+                ChartServo2Iq.WriteData(FlyDataConvert.GetElectricity(packet.Iq2));
+                ChartServo3Iq.WriteData(FlyDataConvert.GetElectricity(packet.Iq3));
+                ChartServo4Iq.WriteData(FlyDataConvert.GetElectricity(packet.Iq4));
             });
-            ChartServoVol28.Update();
-            ChartServoVol160.Update();
-            ChartServo1Iq.Update();
-            ChartServo2Iq.Update();
-            ChartServo3Iq.Update();
-            ChartServo4Iq.Update();
+            ChartServoVol28.EndWrite();
+            ChartServoVol160.EndWrite();
+            ChartServo1Iq.EndWrite();
+            ChartServo2Iq.EndWrite();
+            ChartServo3Iq.EndWrite();
+            ChartServo4Iq.EndWrite();
         }
     }
 }
