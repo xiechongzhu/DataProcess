@@ -61,11 +61,15 @@ namespace DataProcess.Controls
         private void SetDetail()
         {  
             labelDetail.Content = String.Format("共{0}条记录,每页{1}条,共{2}页", TotalCount, MAX_DISPLAY_POINTS_COUNT, TotalPage);
-        }
-
-        private void SetCurrentPage(int page)
-        {
-            editCurrent.Text = page.ToString();
+            if(TotalPage == 0)
+            {
+                editCurrent.MinValue = editCurrent.MaxValue = 0;
+            }
+            else
+            {
+                editCurrent.MinValue = 1;
+                editCurrent.MaxValue = TotalPage;
+            }
         }
 
         public void SetTitle(String label)

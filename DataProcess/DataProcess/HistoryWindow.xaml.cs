@@ -59,7 +59,7 @@ namespace DataProcess
             {
                 ids.Add((long)gridControl.GetCellValue(rowNum, "Id"));
                 String date = (String)gridControl.GetCellValue(rowNum, "Time");
-                DelectDir(String.Format("./Log/{0}", DateTime.Parse(date).ToString("yyyyMMddHHmmss")));
+                DelectDir(String.Format("./Log/{0}", DateTime.Parse(date).ToString("yyyyMMddHHmmssfff")));
             }
 
             using (DataModels.DatabaseDB db = new DataModels.DatabaseDB())

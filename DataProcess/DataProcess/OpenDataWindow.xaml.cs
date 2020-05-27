@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -28,11 +28,8 @@ namespace DataProcess
         private void btnChooseFlyFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = ".";
             openFileDialog.Filter = "所有文件|*.*";
-            openFileDialog.RestoreDirectory = false;
-            openFileDialog.FilterIndex = 1;
-            if(openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if(openFileDialog.ShowDialog() == true)
             {
                 editFlyFile.Text = openFileDialog.FileName;
             }
@@ -41,11 +38,8 @@ namespace DataProcess
         private void btnChooseSlowFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = ".";
             openFileDialog.Filter = "所有文件|*.*";
-            openFileDialog.RestoreDirectory = false;
-            openFileDialog.FilterIndex = 1;
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == true)
             {
                 editSlowFile.Text = openFileDialog.FileName;
             }
@@ -54,11 +48,8 @@ namespace DataProcess
         private void btnChooseFastFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = ".";
             openFileDialog.Filter = "所有文件|*.*";
-            openFileDialog.RestoreDirectory = false;
-            openFileDialog.FilterIndex = 1;
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == true)
             {
                 editFastFile.Text = openFileDialog.FileName;
             }
@@ -67,11 +58,8 @@ namespace DataProcess
         private void btnChooseTailFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = ".";
             openFileDialog.Filter = "所有文件|*.*";
-            openFileDialog.RestoreDirectory = false;
-            openFileDialog.FilterIndex = 1;
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == true)
             {
                 editTailFile.Text = openFileDialog.FileName;
             }
@@ -87,6 +75,12 @@ namespace DataProcess
 
         private void btnOPen_Click(object sender, RoutedEventArgs e)
         {
+            if(editFlyFile.Text.Equals(String.Empty) && editSlowFile.Text.Equals(String.Empty)
+                && editFastFile.Text.Equals(String.Empty) && editTailFile.Text.Equals(String.Empty))
+            {
+                MessageBox.Show("请选择至少一个文件", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             DialogResult = true;
         }
     }

@@ -76,6 +76,12 @@ namespace DataProcess
                 return;
             }
 
+            if(editEnvPort.Text.Equals(String.Empty) || editFlyPort.Text.Equals(String.Empty))
+            {
+                MessageBox.Show("端口不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if(!settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text), editFlyIpAddr.Text, int.Parse(editFlyPort.Text),
                 int.Parse(editMaxPoint.Text)))
             {

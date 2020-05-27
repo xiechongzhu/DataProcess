@@ -84,6 +84,10 @@ namespace DataProcess.Protocol
             int headerPos = 0;
             for (; ; )
             {
+                if(!isRuning)
+                {
+                   break;
+                }
                 if (pos <= headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)))
                 {
                     break;

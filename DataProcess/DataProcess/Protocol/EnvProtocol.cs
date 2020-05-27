@@ -62,7 +62,7 @@ namespace DataProcess.Protocol
         public SlowTemperatureSensor temperatureSensor;//温度
         public SlowPressureSensor pressureSensor;//压力值
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public byte[] level2Transmitter;//二级发送机压力信号
+        public byte[] level2Transmitter;//二级发动机压力信号
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public byte[] gestureControlHigh;//姿控动力高压信号
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]

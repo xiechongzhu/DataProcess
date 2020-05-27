@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.MainWindow" Title="数据接收解析软件" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
+                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.MainWindow" Title="数据接收解析软件(V1.0.1)" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
     Icon="histroy.ico" Closing="ThemedWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
@@ -183,7 +183,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartNavSpeedSky">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="天向速度(ms/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="天向速度(m/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>
@@ -215,7 +215,7 @@
                                     </dxc:ChartControl>
                                     <dxc:ChartControl Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartNavSpeedEast">
                                         <dxc:ChartControl.Titles>
-                                            <dxc:Title Content="东向速度(ms/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+                                            <dxc:Title Content="东向速度(m/s)" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
                                         <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                             <dxc:XYDiagram2D.AxisY>

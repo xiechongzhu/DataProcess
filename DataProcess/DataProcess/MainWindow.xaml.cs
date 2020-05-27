@@ -296,7 +296,7 @@ namespace DataProcess
         private FlyParser flyParser = null;
         private DispatcherTimer uiRefreshTimer = new DispatcherTimer();
         private DispatcherTimer ledTimer = new DispatcherTimer();
-        private DisplayBuffers envBuffers = new DisplayBuffers();
+        private DisplayBuffers displayBuffers = new DisplayBuffers();
         private DataLogger dataLogger = null;
         ChartDataSource chartDataSource = new ChartDataSource();
         Ratios ratios;
@@ -345,6 +345,11 @@ namespace DataProcess
 
         private void SetLedStatus(Image imageControl, LED_STATUS status)
         {
+            if(!bRun)
+            {
+                imageControl.Source = LedImages[LED_STATUS.LED_GRAY];
+                return;
+            }
             if (imageControl.Source != LedImages[status])
             {
                 imageControl.Source = LedImages[status];
@@ -447,43 +452,43 @@ namespace DataProcess
 
         private void UiRefreshTimer_Tick(object sender, EventArgs e)
         {
-            if (envBuffers.SlowPacketList.Count > 0)
+            if (displayBuffers.SlowPacketList.Count > 0)
             {
-                DrawSlowPackets(envBuffers.SlowPacketList);
-                UpdateSyncFireDisplay(envBuffers.SlowPacketList[envBuffers.SlowPacketList.Count - 1].syncFire * ratios.fire + ratios.fireFix);
+                DrawSlowPackets(displayBuffers.SlowPacketList);
+                UpdateSyncFireDisplay(displayBuffers.SlowPacketList[displayBuffers.SlowPacketList.Count - 1].syncFire * ratios.fire + ratios.fireFix);
             }
 
-            if(envBuffers.FastPacketList.Count > 0)
+            if(displayBuffers.FastPacketList.Count > 0)
             {
-                DrawFastPackets(envBuffers.FastPacketList);
+                DrawFastPackets(displayBuffers.FastPacketList);
             }
 
-            if(envBuffers.TailPacketList.Count > 0)
+            if(displayBuffers.TailPacketList.Count > 0)
             {
-                DrawTailPackets(envBuffers.TailPacketList);
+                DrawTailPackets(displayBuffers.TailPacketList);
             }
 
-            if(envBuffers.NavDataList.Count > 0)
+            if(displayBuffers.NavDataList.Count > 0)
             {
-                DrawNavPackets(envBuffers.NavDataList);
+                DrawNavPackets(displayBuffers.NavDataList);
             }
 
-            if(envBuffers.AngelDataList.Count > 0)
+            if(displayBuffers.AngelDataList.Count > 0)
             {
-                DrawAngelPackets(envBuffers.AngelDataList);
+                DrawAngelPackets(displayBuffers.AngelDataList);
             }
 
-            if(envBuffers.ProgramControlDataList.Count > 0)
+            if(displayBuffers.ProgramControlDataList.Count > 0)
             {
-                DrawProgramPackets(envBuffers.ProgramControlDataList);
+                DrawProgramPackets(displayBuffers.ProgramControlDataList);
             }
 
-            if(envBuffers.ServoDataList.Count > 0)
+            if(displayBuffers.ServoDataList.Count > 0)
             {
-                DrawServoPackets(envBuffers.ServoDataList);
+                DrawServoPackets(displayBuffers.ServoDataList);
             }
 
-            envBuffers.Clear();
+            displayBuffers.Clear();
         }
 
         private void UpdateSyncFireDisplay( double value)
@@ -508,13 +513,19 @@ namespace DataProcess
                     chartDataSource.SlowInsAirList.AddPoint(packet.temperatureSensor.insAir[i] * ratios.slowTemp + ratios.slowTempFix);
                     chartDataSource.SlowInsWallList.AddPoint(packet.temperatureSensor.insWall[i] * ratios.slowTemp + ratios.slowTempFix);
                     chartDataSource.SlowAttAirList.AddPoint(packet.temperatureSensor.attAir[i] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[i * 6] * ratios.slowTemp);
-                    chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp + ratios.slowTempFix);
                 }
+                chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[0] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[1] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[2] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[3] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[4] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[5] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[6] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[7] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[8] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[9] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[10] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[11] * ratios.slowTemp + ratios.slowTempFix);
                 for (int i = 0; i < 2; ++i)
                 {
                     chartDataSource.SlowInsPresureList.AddPoint(packet.pressureSensor.instrument[i] * ratios.slowPress + ratios.slowPressFix);
@@ -540,22 +551,7 @@ namespace DataProcess
             chartDataSource.SlowPresureHighList.NotifyDataChanged();
             chartDataSource.SlowPresureLowList.NotifyDataChanged();
 
-            /*SlowPacket lastPacket = packets[packets.Count - 1];
-            ChartHood.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-20, 245, 1, 5, lastPacket.temperatureSensor.hood[1]));
-            ChartInsAir.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.insAir[1]));
-            ChartInsWall.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.insWall[1]));
-            ChartAttAir.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attAir[1]));
-            ChartAttWalls1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[1]));
-            ChartAttWalls2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[3]));
-            ChartAttWalls3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[5]));
-            ChartAttWalls4.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[7]));
-            ChartAttWalls5.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[9]));
-            ChartAttWalls6.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-40, 150, 1, 5, lastPacket.temperatureSensor.attWalls[11]));
-            ChartInsPresure.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 50, 0, 5, lastPacket.pressureSensor.instrument[1]));
-            ChartAttiPresure.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 120, 0, 5, lastPacket.pressureSensor.attitudeControl[1]));
-            ChartLevel2Transmitter.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 12, 0.2, 4.8, lastPacket.level2Transmitter[1]));
-            ChartGestureControlHigh.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 40, 0, 5, lastPacket.gestureControlHigh[1]));
-            ChartGestureControlLow.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(0, 6, 0, 5, lastPacket.gestureControlLow[1]));*/
+            
         }
 
         void DrawFastPackets(List<FastPacket> packets)
@@ -596,30 +592,6 @@ namespace DataProcess
             chartDataSource.FastLashSeriesLists1.ForEach(source => source.NotifyDataChanged());
             chartDataSource.FastLashSeriesList2.NotifyDataChanged();
             chartDataSource.FastNoiseLists.ForEach(source => source.NotifyDataChanged());
-
-            /*FastPacket lastPacket = packets[packets.Count - 1];
-            ChartShake1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[0].signal[lastPacket.shakeSignals[0].signal.Length - 1]));
-            ChartShake2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[1].signal[lastPacket.shakeSignals[1].signal.Length - 1]));
-            ChartShake3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[2].signal[lastPacket.shakeSignals[2].signal.Length - 1]));
-            ChartShake4.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[3].signal[lastPacket.shakeSignals[3].signal.Length - 1]));
-            ChartShake5.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[4].signal[lastPacket.shakeSignals[4].signal.Length - 1]));
-            ChartShake6.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[5].signal[lastPacket.shakeSignals[5].signal.Length - 1]));
-            ChartShake7.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[6].signal[lastPacket.shakeSignals[6].signal.Length - 1]));
-            ChartShake8.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[7].signal[lastPacket.shakeSignals[7].signal.Length - 1]));
-            ChartShake9.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[8].signal[lastPacket.shakeSignals[8].signal.Length - 1]));
-            ChartShake10.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[9].signal[lastPacket.shakeSignals[9].signal.Length - 1]));
-            ChartShake11.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[10].signal[lastPacket.shakeSignals[10].signal.Length - 1]));
-            ChartShake12.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-300, 300, 0, 5, lastPacket.shakeSignals[11].signal[lastPacket.shakeSignals[11].signal.Length - 1]));
-            ChartLashT3.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT3);
-            ChartLashT2.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT2);
-            ChartLashT1.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT1);
-            ChartLashT0.Titles[0].Content = String.Format("{0:F}", lastPacket.lashT0);
-            ChartLash1_1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-6000, 6000, 0, 5, lastPacket.lashSignal_1[0].signal[lastPacket.lashSignal_1[0].signal.Length - 1]));
-            ChartLash1_2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-6000, 6000, 0, 5, lastPacket.lashSignal_1[1].signal[lastPacket.lashSignal_1[1].signal.Length - 1]));
-            ChartLash1_3.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-6000, 6000, 0, 5, lastPacket.lashSignal_1[2].signal[lastPacket.lashSignal_1[2].signal.Length - 1]));
-            ChartLash2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(-3000, 3000, 0, 5, lastPacket.lashSignal_2.signal[lastPacket.lashSignal_2.signal.Length - 1]));
-            ChartNoise1.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(100, 140, 0, 5, lastPacket.noiseSignal[0].signal[lastPacket.noiseSignal[0].signal.Length - 1]));
-            ChartNoise2.Titles[0].Content = String.Format("{0:F}", EnvDataConvert.GetValue(120, 160, 0, 5, lastPacket.noiseSignal[1].signal[lastPacket.noiseSignal[1].signal.Length - 1]));*/
         }
 
         private void DrawTailPackets(List<TailPacketRs> tailPackets)
@@ -692,62 +664,6 @@ namespace DataProcess
             chartDataSource.TailLash2ZList.NotifyDataChanged();
             chartDataSource.TailNoiseList.NotifyDataChanged();
             chartDataSource.TailSequenceList.NotifyDataChanged();
-
-            /*if (seriesPoints[(int)ChannelType.ChannelPresure].Count > 0)
-            {
-                ChartPresure.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.ChannelPresure][seriesPoints[(int)ChannelType.ChannelPresure].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.ChannelLevel1Presure].Count > 0)
-            {
-                ChartLevel1Presure.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.ChannelLevel1Presure][seriesPoints[(int)ChannelType.ChannelLevel1Presure].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.ChannelTemperature1].Count > 0)
-            {
-                ChartTemperature1.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.ChannelTemperature1][seriesPoints[(int)ChannelType.ChannelTemperature1].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.ChannelTemperature2].Count > 0)
-            {
-                ChartTemperature2.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.ChannelTemperature2][seriesPoints[(int)ChannelType.ChannelTemperature2].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.Channel1LashX].Count > 0)
-            {
-                ChartLash1X.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.Channel1LashX][seriesPoints[(int)ChannelType.Channel1LashX].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.Channel1LashY].Count > 0)
-            {
-                ChartLash1Y.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.Channel1LashY][seriesPoints[(int)ChannelType.Channel1LashY].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.Channel1LashZ].Count > 0)
-            {
-                ChartLash1Z.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.Channel1LashZ][seriesPoints[(int)ChannelType.Channel1LashZ].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.Channel2LashX].Count > 0)
-            {
-                ChartLash2X.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.Channel2LashX][seriesPoints[(int)ChannelType.Channel2LashX].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.Channel2LashY].Count > 0)
-            {
-                ChartLash2Y.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.Channel2LashY][seriesPoints[(int)ChannelType.Channel2LashY].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.Channel2LashZ].Count > 0)
-            {
-                ChartLash2Z.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.Channel2LashZ][seriesPoints[(int)ChannelType.Channel2LashZ].Count - 1]);
-            }
-            if (seriesPoints[(int)ChannelType.ChannelNoise].Count > 0)
-            {
-                ChartNoise.Titles[0].Content = String.Format("{0:F}",
-                    seriesPoints[(int)ChannelType.ChannelNoise][seriesPoints[(int)ChannelType.ChannelNoise].Count - 1]);
-            }*/
         }
 
         private void DrawNavPackets(List<NavData> navDataList)
@@ -780,17 +696,6 @@ namespace DataProcess
 
             NavData lastNavData = navDataList[navDataList.Count - 1];
             GpsTime.Text = String.Format("{0:F}S", lastNavData.gpsTime);
-
-            /*NavData lastNavData = navDataList[navDataList.Count - 1];
-            ChartNavLat.Titles[0].Content = String.Format("{0:F}", lastNavData.latitude);
-            ChartNavLon.Titles[0].Content = String.Format("{0:F}", lastNavData.longitude);
-            ChartNavHeight.Titles[0].Content = String.Format("{0:F}", lastNavData.height);
-            ChartNavSpeedNorth.Titles[0].Content = String.Format("{0:F}", lastNavData.northSpeed);
-            ChartNavSpeedSky.Titles[0].Content = String.Format("{0:F}", lastNavData.skySpeed);
-            ChartNavSpeedEast.Titles[0].Content = String.Format("{0:F}", lastNavData.eastSpeed);
-            ChartNavPitchAngle.Titles[0].Content = String.Format("{0:F}", lastNavData.pitchAngle);
-            ChartNavCrabAngle.Titles[0].Content = String.Format("{0:F}", lastNavData.crabAngle);
-            ChartNavRollAngle.Titles[0].Content = String.Format("{0:F}", lastNavData.rollAngle);*/
         }
 
         private void DrawAngelPackets(List<AngleData> angleDataList)
@@ -813,14 +718,6 @@ namespace DataProcess
             chartDataSource.AngleYList.NotifyDataChanged();
             chartDataSource.AngleZList.NotifyDataChanged();
             chartDataSource.AngelSequenceList.NotifyDataChanged();
-
-            /*AngleData lastPacket = angleDataList[angleDataList.Count - 1];
-            ChartAccX.Titles[0].Content = String.Format("{0:F}", lastPacket.ax);
-            ChartAccY.Titles[0].Content = String.Format("{0:F}", lastPacket.ay);
-            ChartAccZ.Titles[0].Content = String.Format("{0:F}", lastPacket.az);
-            ChartAngelX.Titles[0].Content = String.Format("{0:F}", lastPacket.angleX);
-            ChartAngelY.Titles[0].Content = String.Format("{0:F}", lastPacket.angleY);
-            ChartAngelZ.Titles[0].Content = String.Format("{0:F}", lastPacket.angleZ);*/
         }
 
         private void DrawProgramPackets(List<ProgramControlData> programDataList)
@@ -853,14 +750,6 @@ namespace DataProcess
             chartDataSource.Servo3IqList.NotifyDataChanged();
             chartDataSource.Servo4IqList.NotifyDataChanged();
             chartDataSource.ServoSequenceList.NotifyDataChanged();
-
-            /*ServoData lasetPacket = servoDataList[servoDataList.Count - 1];
-            ChartServoVol28.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetVoltage28(lasetPacket.vol28));
-            ChartServoVol160.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetVoltage160(lasetPacket.vol160));
-            ChartServo1Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq1));
-            ChartServo2Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq2));
-            ChartServo3Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq3));
-            ChartServo4Iq.Titles[0].Content = String.Format("{0:F}", FlyDataConvert.GetElectricity(lasetPacket.Iq4));*/
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -927,7 +816,7 @@ namespace DataProcess
             btnOpenData.IsEnabled = false;
             btnData.IsEnabled = true;
             ResetDisplay(maxDisplayPoint);
-            envBuffers.Clear();
+            displayBuffers.Clear();
             dataLogger = new DataLogger(testInfo.TestTime);
             envParser.dataLogger = dataLogger;
             flyParser.dataLogger = dataLogger;
@@ -1018,10 +907,6 @@ namespace DataProcess
             SaveTestInfo();
             InitLedStatus();
             ledTimer.Stop();
-            SetLedStatus(ImageFast, LED_STATUS.LED_GRAY);
-            SetLedStatus(ImageSlow, LED_STATUS.LED_GRAY);
-            SetLedStatus(ImageTail, LED_STATUS.LED_GRAY);
-            SetLedStatus(ImageFly, LED_STATUS.LED_GRAY);
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -1094,49 +979,49 @@ namespace DataProcess
         protected void ProcessSlowDataMessage(IntPtr msg)
         {
             SlowPacket packet = Marshal.PtrToStructure<SlowPacket>(msg);
-            envBuffers.SlowPacketList.Add(packet);
+            displayBuffers.SlowPacketList.Add(packet);
             Marshal.FreeHGlobal(msg);
         }
 
         protected void ProcessFastDataMessage(IntPtr msg)
         {
             FastPacket packet = Marshal.PtrToStructure<FastPacket>(msg);
-            envBuffers.FastPacketList.Add(packet);
+            displayBuffers.FastPacketList.Add(packet);
             Marshal.FreeHGlobal(msg);
         }
 
         protected void ProcessTailDataMessage(IntPtr msg)
         {
             TailPacketRs packet = Marshal.PtrToStructure<TailPacketRs>(msg);
-            envBuffers.TailPacketList.Add(packet);
+            displayBuffers.TailPacketList.Add(packet);
             Marshal.FreeHGlobal(msg);
         }
 
         protected void ProcessNavMessage(IntPtr msg)
         {
             NavData data = Marshal.PtrToStructure<NavData>(msg);
-            envBuffers.NavDataList.Add(data);
+            displayBuffers.NavDataList.Add(data);
             Marshal.FreeHGlobal(msg);
         }
 
         protected void ProcessAngelData(IntPtr msg)
         {
             AngleData data = Marshal.PtrToStructure<AngleData>(msg);
-            envBuffers.AngelDataList.Add(data);
+            displayBuffers.AngelDataList.Add(data);
             Marshal.FreeHGlobal(msg);
         }
 
         protected void ProcessProgramData(IntPtr msg)
         {
             ProgramControlData data = Marshal.PtrToStructure<ProgramControlData>(msg);
-            envBuffers.ProgramControlDataList.Add(data);
+            displayBuffers.ProgramControlDataList.Add(data);
             Marshal.FreeHGlobal(msg);
         }
 
         protected void ProcessServoData(IntPtr msg)
         {
             ServoData data = Marshal.PtrToStructure<ServoData>(msg);
-            envBuffers.ServoDataList.Add(data);
+            displayBuffers.ServoDataList.Add(data);
             Marshal.FreeHGlobal(msg);
         }
 
@@ -1163,7 +1048,7 @@ namespace DataProcess
                         Time = testInfo.TestTime
                     });
                     db.CommitTransaction();
-                    File.Copy("params", Path.Combine("Log", testInfo.TestTime.ToString("yyyyMMddHHmmss"), "params"));
+                    File.Copy("params", Path.Combine("Log", testInfo.TestTime.ToString("yyyyMMddHHmmssfff"), "params"));
                 }
                 catch (Exception ex)
                 {
@@ -1188,11 +1073,6 @@ namespace DataProcess
             {
                 String flyFileName, slowFileName, fastFileName, tailFileName;
                 openDataWindow.GetFileNames(out flyFileName, out slowFileName, out fastFileName, out tailFileName);
-                /*if(flyFileName.Equals(String.Empty) && slowFileName.Equals(String.Empty) && fastFileName.Equals(String.Empty) && tailFileName.Equals(String.Empty))
-                {
-                    MessageBox.Show("请至少选择一个文件", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }*/
                 HistoryDetailWindow historyDetailWindow = new HistoryDetailWindow(flyFileName, slowFileName, fastFileName, tailFileName);
                 historyDetailWindow.ShowDialog();
             }
@@ -1313,6 +1193,7 @@ namespace DataProcess
         {
             XYDiagram2D diag = (XYDiagram2D)chartControl.Diagram;
             AxisY2D axis = diag.AxisY;
+            axis.WholeRange = new DevExpress.Xpf.Charts.Range();
             axis.WholeRange.SetAuto();
             AxisY2D.SetAlwaysShowZeroLevel(axis.WholeRange, false);
         }

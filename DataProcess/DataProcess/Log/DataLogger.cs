@@ -2,11 +2,14 @@
 using DataProcess.Parser.Env;
 using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
+using DataProcess.Tools;
+using DevExpress.Office.Crypto;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace DataProcess.Log
 {
@@ -47,7 +50,7 @@ namespace DataProcess.Log
 
         public DataLogger(DateTime dateTime)
         {
-            String strDateTime = dateTime.ToString("yyyyMMddHHmmss");
+            String strDateTime = dateTime.ToString("yyyyMMddHHmmssfff");
             Directory.CreateDirectory(Path.Combine("Log", strDateTime));
             Directory.CreateDirectory("tmp");
             envPacketFilePath = Path.Combine("Log", strDateTime, EnvPacketFileName);
@@ -88,8 +91,6 @@ namespace DataProcess.Log
         private delegate void WriteEnvPacketDelegate(byte[] packet);
         public void WriteEnvPacket(byte[] packet)
         {
-            /*WriteEnvPacketDelegate writeEnvPacketDelegate = new WriteEnvPacketDelegate(WriteEnvPacketInternal);
-            writeEnvPacketDelegate.BeginInvoke(packet, null, null);*/
             WriteEnvPacketInternal(packet);
         }
 
@@ -112,8 +113,6 @@ namespace DataProcess.Log
         private delegate void WriteSlowPacketDelegate(byte[] packet);
         public void WriteSlowPacket(byte[] packet)
         {
-            /*WriteSlowPacketDelegate writeSlowPacketDelegate = new WriteSlowPacketDelegate(WriteSlowPacketInternal);
-            writeSlowPacketDelegate.BeginInvoke(packet, null, null);*/
             WriteSlowPacketInternal(packet);
         }
 
@@ -136,8 +135,6 @@ namespace DataProcess.Log
         private delegate void WriteFastPacketDelegate(byte[] packet);
         public void WriteFastPacket(byte[] packet)
         {
-            /*WriteFastPacketDelegate writeFastPacketDelegate = new WriteFastPacketDelegate(WriteFastPacketInternal);
-            writeFastPacketDelegate.BeginInvoke(packet, null, null);*/
             WriteFastPacketInternal(packet);
         }
 
@@ -160,8 +157,6 @@ namespace DataProcess.Log
         private delegate void WriteTailPacketDelegate(byte[] packet);
         public void WriteTailPacket(byte[] packet)
         {
-            /*WriteTailPacketDelegate writeTailPacketDelegate = new WriteTailPacketDelegate(WriteTailPacketInternal);
-            writeTailPacketDelegate.BeginInvoke(packet, null, null);*/
             WriteTailPacketInternal(packet);
         }
 
@@ -184,8 +179,6 @@ namespace DataProcess.Log
         private delegate void WriteFlyPacketDelegate(byte[] packet);
         public void WriteFlyPacket(byte[] packet)
         {
-            /*WriteFlyPacketDelegate writeflyPacketDelegate = new WriteFlyPacketDelegate(WriteFlyPacketInternal);
-            writeflyPacketDelegate.BeginInvoke(packet, null, null);*/
             WriteFlyPacketInternal(packet);
         }
 
@@ -201,12 +194,16 @@ namespace DataProcess.Log
                 BinaryReader binaryReader = new BinaryReader(fileStream);
                 while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                 {
-                    _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
-                    byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(SlowPacket)));
-                    SlowPacket packet;
-                    if (SlowParser.Parse(buffer, out packet))
+                    byte[] headerBytes = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                    EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(headerBytes, 0, headerBytes.Length);
+                    if (header.syncHeader.EqualBytes(EnvProtocol.SyncHeader) && header.dataType == (byte)EnvProtocol.DataType.DataTypeSlow)
                     {
-                        packetList.Add(packet);
+                        byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(SlowPacket)));
+                        SlowPacket packet;
+                        if (SlowParser.Parse(buffer, out packet))
+                        {
+                            packetList.Add(packet);
+                        }
                     }
                 }
             }
@@ -225,12 +222,16 @@ namespace DataProcess.Log
                 BinaryReader binaryReader = new BinaryReader(fileStream);
                 while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                 {
-                    _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
-                    byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FastPacket)));
-                    FastPacket packet;
-                    if (FastParser.Parse(buffer, out packet))
+                    byte[] headerBytes = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                    EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(headerBytes, 0, headerBytes.Length);
+                    if (header.syncHeader.EqualBytes(EnvProtocol.SyncHeader) && header.dataType == (byte)EnvProtocol.DataType.DataTypeFast)
                     {
-                        packetList.Add(packet);
+                        byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(FastPacket)));
+                        FastPacket packet;
+                        if (FastParser.Parse(buffer, out packet))
+                        {
+                            packetList.Add(packet);
+                        }
                     }
                 }
             }
@@ -250,9 +251,13 @@ namespace DataProcess.Log
                 BinaryReader binaryReader = new BinaryReader(fileStream);
                 while (binaryReader.BaseStream.Position <= binaryReader.BaseStream.Length - 1)
                 {
-                    _ = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
-                    byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(TailPacketUdp)));
-                    packetList.AddRange(tailParser.Parse(buffer));
+                    byte[] headerBytes = binaryReader.ReadBytes(Marshal.SizeOf(typeof(EnvPacketHeader)));
+                    EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(headerBytes, 0, headerBytes.Length);
+                    if (header.syncHeader.EqualBytes(EnvProtocol.SyncHeader) && header.dataType == (byte)EnvProtocol.DataType.DataTypeTail)
+                    {
+                        byte[] buffer = binaryReader.ReadBytes(Marshal.SizeOf(typeof(TailPacketUdp)));
+                        packetList.AddRange(tailParser.Parse(buffer));
+                    }
                 }
             }
             return packetList;

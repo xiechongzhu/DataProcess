@@ -43,6 +43,7 @@ namespace DataProcess.Parser.Fly
         public void Start()
         {
             while (queue.TryDequeue(out byte[] dropBuffer)) ;
+            dataLength1 = dataLength2 = searchPos2 = 0;
             isRuning = true;
             thread = new Thread(new ThreadStart(ThreadFunction));
             thread.Start();
@@ -111,6 +112,10 @@ namespace DataProcess.Parser.Fly
                 dataLength1 += buffer.Length;
                 for(; ; )
                 {
+                    if(!isRuning)
+                    {
+                        return list;
+                    }
                     int searchPos1 = FindFlyHeader();
                     if(-1 == searchPos1)
                     {
@@ -195,7 +200,7 @@ namespace DataProcess.Parser.Fly
                     }
                     byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.NavDataLengthWithPadding);
                     NavData navData = Tool.ByteToStruct<NavData>(packetBuffer, 0, packetBuffer.Length);
-                    if(navData.crc != CalcNavCrc(packetBuffer))
+                    if(navData.crc != CalcNavCrc(packetBuffer) || navData.endChar != 0x21)
                     {
                         searchPos2++;
                         continue;
@@ -233,7 +238,7 @@ namespace DataProcess.Parser.Fly
                     }
                     byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.ProgramDataLengthWithPadding);
                     ProgramControlData programControlData = Tool.ByteToStruct<ProgramControlData>(packetBuffer, 0, packetBuffer.Length);
-                    if(programControlData.crc != CalcProgramData(packetBuffer))
+                    if(programControlData.crc != CalcProgramData(packetBuffer) || programControlData.endChar != 0x21)
                     {
                         searchPos2++;
                         continue;
@@ -252,7 +257,7 @@ namespace DataProcess.Parser.Fly
                     }
                     byte[] packetBuffer = GetPacketDataWithoutPadding(dataBuffer2, searchPos2, FlyProtocol.ServoDataLengthWithPadding);
                     ServoData servoData = Tool.ByteToStruct<ServoData>(packetBuffer, 0, packetBuffer.Length);
-                    if(servoData.crc != CalcServoData(packetBuffer))
+                    if(servoData.crc != CalcServoData(packetBuffer) || servoData.endChar != 0x21)
                     {
                         searchPos2++;
                         continue;

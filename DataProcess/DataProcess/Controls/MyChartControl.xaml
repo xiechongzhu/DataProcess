@@ -41,13 +41,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" x:Name="labelDetail"/>
             <dx:SimpleButton Grid.Column="1" Glyph="{dx:DXImage SvgImages/Arrows/Prev.svg}" Margin="2" x:Name="btnPrev" Click="btnPrev_Click"/>
-            <dxe:TextEdit Grid.Column="2" Margin="2" x:Name="editCurrent" KeyDown="editCurrent_KeyDown"/>
+            <dxe:SpinEdit Grid.Column="2" Margin="2" x:Name="editCurrent" KeyDown="editCurrent_KeyDown" Mask="d"/>
             <dx:SimpleButton Grid.Column="3" Glyph="{dx:DXImage SvgImages/Arrows/Next.svg}" Margin="2" x:Name="btnNext" Click="btnNext_Click"/>
             <dx:SimpleButton Grid.Column="4" Margin="2" Content="跳转" x:Name="btnJump" Click="btnJump_Click"/>
         </Grid>

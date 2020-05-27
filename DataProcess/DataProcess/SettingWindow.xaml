@@ -121,7 +121,7 @@
             </Grid>
         </GroupBox>
         <TextBlock Text="最大显示点数:" Grid.Row="5" Grid.Column="0" Margin="2,2,2,2"  VerticalAlignment="Center" TextAlignment="Right"/>
-        <dxe:TextEdit  x:Name ="editMaxPoint" Grid.Row="5" Grid.Column="1"  Margin="2,2,2,2" Height="20" Width="80" Mask="\d{2,4}" MaskType="RegEx"/>
+        <dxe:SpinEdit  x:Name ="editMaxPoint" Grid.Row="5" Grid.Column="1"  Margin="2,2,2,2" Height="20" Width="80" MinValue="100" MaxValue="10000" Mask="d"/>
         <dx:SimpleButton Grid.Row="5" Grid.Column="2" Margin="5,5,5,5" Width="100" Content="确定" x:Name="btnOK" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_CheckCircled.svg}" Click="btnOK_Click"/>
         <dx:SimpleButton Grid.Row="5" Grid.Column="3" Margin="5,5,5,5" Width="100" Content="取消" x:Name="btnCancle" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_DeleteCircled.svg}" Click="btnCancle_Click"/>
     </Grid>

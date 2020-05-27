@@ -7,6 +7,7 @@ using DataProcess.Tools;
 using DevExpress.Xpf.Editors;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 
 namespace DataProcess
@@ -146,8 +147,8 @@ namespace DataProcess
             ChartNavLon.SetTitle("经度(°)");
             ChartNavHeight.SetTitle("高度(m)");
             ChartNavSpeedNorth.SetTitle("北向速度(m/s)");
-            ChartNavSpeedSky.SetTitle("天向速度(ms/s)");
-            ChartNavSpeedEast.SetTitle("东向速度(ms/s)");
+            ChartNavSpeedSky.SetTitle("天向速度(m/s)");
+            ChartNavSpeedEast.SetTitle("东向速度(m/s)");
             ChartNavPitchAngle.SetTitle("俯仰角(°)");
             ChartNavCrabAngle.SetTitle("偏航角(°)");
             ChartNavRollAngle.SetTitle("滚转角(°)");
@@ -200,13 +201,30 @@ namespace DataProcess
                 }
                 DataLogger dataLogger = new DataLogger();
                 List<SlowPacket> slowPacketList = dataLogger.LoadSlowBinaryFile(slowBinFile);
+                if(File.Exists(slowBinFile) && slowPacketList.Count == 0)
+                {
+                    MessageBox.Show("缓变参数文件未能解析出数据，请确认文件格式正确", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 List<FastPacket> fastPacketList = dataLogger.LoadFastBinaryFile(fastBinFlie);
+                if (File.Exists(fastBinFlie) && fastPacketList.Count == 0)
+                {
+                    MessageBox.Show("速变参数文件未能解析出数据，请确认文件格式正确", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 List<TailPacketRs> tailPacketList = dataLogger.LoadTailBinaryFile(tailBinFile);
+                if (File.Exists(tailBinFile) && tailPacketList.Count == 0)
+                {
+                    MessageBox.Show("尾段参数文件未能解析出数据，请确认文件格式正确", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 DrawSlowPackets(slowPacketList);
                 DrawFastPackets(fastPacketList);
                 DrawTailPackets(tailPacketList);
                 dataLogger.LoadFlyBinaryFile(flyBinFile, out List<NavData> navDataList, out List<AngleData> angleDataList,
                     out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
+                if(File.Exists(flyBinFile) && navDataList.Count ==0 && angleDataList.Count == 0 && prgramDataList.Count ==0
+                    && servoDataList.Count == 0)
+                {
+                    MessageBox.Show("飞控数据文件件未能解析出数据，请确认文件格式正确", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 DrawNavData(navDataList);
                 DrawAngelData(angleDataList);
                 DrawProgramData(prgramDataList);
@@ -232,14 +250,19 @@ namespace DataProcess
                     ChartInsAir.WriteData(packet.temperatureSensor.insAir[i] * ratios.slowTemp + ratios.slowTempFix);
                     ChartInsWall.WriteData(packet.temperatureSensor.insWall[i] * ratios.slowTemp + ratios.slowTempFix);
                     ChartAttAir.WriteData(packet.temperatureSensor.attAir[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[i * 6] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[i * 6 + 1] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[i * 6 + 2] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[i * 6 + 3] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[i * 6 + 4] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[i * 6 + 5] * ratios.slowTemp + ratios.slowTempFix);
                 }
-
+                ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[0] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[1] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[2] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[3] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[4] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[5] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[6] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[7] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[8] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[9] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[10] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[11] * ratios.slowTemp + ratios.slowTempFix);
                 for (int i = 0; i < 2; ++i)
                 {
                     ChartInsPresure.WriteData(packet.pressureSensor.instrument[i] * ratios.slowPress + ratios.slowPressFix);
