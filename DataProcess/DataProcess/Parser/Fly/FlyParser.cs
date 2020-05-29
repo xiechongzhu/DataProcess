@@ -117,7 +117,7 @@ namespace DataProcess.Parser.Fly
                     {
                         return list;
                     }
-                    if(searchPos1 + Marshal.SizeOf(typeof(FlyPacket)) < dataLength1)
+                    if(searchPos1 + Marshal.SizeOf(typeof(FlyPacket)) <= dataLength1)
                     {
                         byte[] packet = new byte[Marshal.SizeOf(typeof(FlyPacket))];
                         Array.Copy(dataBuffer1, searchPos1, packet, 0, packet.Length);

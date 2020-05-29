@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.MainWindow" Title="数据接收解析软件--V 1.0.1" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
+                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.MainWindow" Title="数据接收解析软件--V 1.0.2" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
     Icon="histroy.ico" Closing="ThemedWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
