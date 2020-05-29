@@ -112,10 +112,6 @@ namespace DataProcess.Parser.Fly
                 dataLength1 += buffer.Length;
                 for(; ; )
                 {
-                    if(!isRuning)
-                    {
-                        return list;
-                    }
                     int searchPos1 = FindFlyHeader();
                     if(-1 == searchPos1)
                     {

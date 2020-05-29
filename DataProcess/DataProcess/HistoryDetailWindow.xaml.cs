@@ -220,10 +220,10 @@ namespace DataProcess
                 DrawTailPackets(tailPacketList);
                 dataLogger.LoadFlyBinaryFile(flyBinFile, out List<NavData> navDataList, out List<AngleData> angleDataList,
                     out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
-                if(File.Exists(flyBinFile) && navDataList.Count ==0 && angleDataList.Count == 0 && prgramDataList.Count ==0
+                if(File.Exists(flyBinFile) && navDataList.Count == 0 && angleDataList.Count == 0 && prgramDataList.Count ==0
                     && servoDataList.Count == 0)
                 {
-                    MessageBox.Show("飞控数据文件件未能解析出数据，请确认文件格式正确", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("飞控数据文件未能解析出数据，请确认文件格式正确", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 DrawNavData(navDataList);
                 DrawAngelData(angleDataList);

@@ -2,6 +2,7 @@
 using DataProcess.Parser;
 using DataProcess.Parser.Env;
 using DataProcess.Tools;
+using DevExpress.Office.Crypto;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -84,10 +85,6 @@ namespace DataProcess.Protocol
             int headerPos = 0;
             for (; ; )
             {
-                if(!isRuning)
-                {
-                   break;
-                }
                 if (pos <= headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)))
                 {
                     break;
@@ -120,10 +117,20 @@ namespace DataProcess.Protocol
                 {
                     byte[] protocolData = new byte[packetLen];
                     Array.Copy(dataBuffer, headerPos, protocolData, 0, packetLen);
-                    list.Add(protocolData);
-                    Array.Copy(dataBuffer, headerPos + packetLen, dataBuffer, 0, pos - headerPos - packetLen);
-                    pos -= (headerPos + packetLen);
-                    headerPos = 0;
+                    int contentHeaderPos = FindHeader(dataBuffer);
+                    if (contentHeaderPos == 0)
+                    {
+                        list.Add(protocolData);
+                        Array.Copy(dataBuffer, headerPos + packetLen, dataBuffer, 0, pos - headerPos - packetLen);
+                        pos -= (headerPos + packetLen);
+                        headerPos = 0;
+                    }
+                    else
+                    {
+                        Array.Copy(dataBuffer, headerPos + contentHeaderPos, dataBuffer, 0, pos - contentHeaderPos - packetLen);
+                        pos -= (headerPos + contentHeaderPos);
+                        headerPos = 0;
+                    }
                 }
                 else
                 {
@@ -214,6 +221,19 @@ namespace DataProcess.Protocol
                 return -1;
             }
             for (int i = 0; i <= pos - Marshal.SizeOf(typeof(EnvPacketHeader)); ++i)
+            {
+                if (dataBuffer[i] == EnvProtocol.SyncHeader[0] && dataBuffer[i + 1] == EnvProtocol.SyncHeader[1]
+                    && dataBuffer[i + 2] == EnvProtocol.SyncHeader[2])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private int FindHeader(byte[] data)
+        {
+            for(int i = 0; i < data.Length - Marshal.SizeOf(typeof(EnvPacketHeader)); ++i)
             {
                 if (dataBuffer[i] == EnvProtocol.SyncHeader[0] && dataBuffer[i + 1] == EnvProtocol.SyncHeader[1]
                     && dataBuffer[i + 2] == EnvProtocol.SyncHeader[2])
