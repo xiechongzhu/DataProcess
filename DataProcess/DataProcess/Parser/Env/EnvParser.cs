@@ -117,8 +117,8 @@ namespace DataProcess.Protocol
                 {
                     byte[] protocolData = new byte[packetLen];
                     Array.Copy(dataBuffer, headerPos, protocolData, 0, packetLen);
-                    int contentHeaderPos = FindHeader(dataBuffer);
-                    if (contentHeaderPos == 0)
+                    int contentHeaderPos = FindHeader(protocolData.Skip(Marshal.SizeOf(typeof(EnvPacketHeader))).ToArray());
+                    if (contentHeaderPos == -1)
                     {
                         list.Add(protocolData);
                         Array.Copy(dataBuffer, headerPos + packetLen, dataBuffer, 0, pos - headerPos - packetLen);
@@ -127,7 +127,7 @@ namespace DataProcess.Protocol
                     }
                     else
                     {
-                        Array.Copy(dataBuffer, headerPos + contentHeaderPos, dataBuffer, 0, pos - contentHeaderPos - packetLen);
+                        Array.Copy(dataBuffer, headerPos + contentHeaderPos, dataBuffer, 0, pos - headerPos - contentHeaderPos);
                         pos -= (headerPos + contentHeaderPos);
                         headerPos = 0;
                     }
@@ -235,8 +235,8 @@ namespace DataProcess.Protocol
         {
             for(int i = 0; i < data.Length - Marshal.SizeOf(typeof(EnvPacketHeader)); ++i)
             {
-                if (dataBuffer[i] == EnvProtocol.SyncHeader[0] && dataBuffer[i + 1] == EnvProtocol.SyncHeader[1]
-                    && dataBuffer[i + 2] == EnvProtocol.SyncHeader[2])
+                if (data[i] == EnvProtocol.SyncHeader[0] && data[i + 1] == EnvProtocol.SyncHeader[1]
+                    && data[i + 2] == EnvProtocol.SyncHeader[2])
                 {
                     return i;
                 }
