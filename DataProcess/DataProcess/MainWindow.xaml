@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-                 xmlns:dataprocess="clr-namespace:DataProcess" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.MainWindow" Title="数据接收解析软件--V 1.0.2" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
+    xmlns:dataprocess="clr-namespace:DataProcess" 
+    xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:Controls="clr-namespace:DataProcess.Controls" x:Class="DataProcess.MainWindow" Title="数据接收解析软件--V 1.0.2" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
     Icon="histroy.ico" Closing="ThemedWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
@@ -12,9 +13,10 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="44*" />
+            <ColumnDefinition Width="83*"/>
         </Grid.ColumnDefinitions>
-        <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent">
+        <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" Margin="0,0,-0.4,0.4">
             <dx:SimpleButton Content="启动" x:Name="btnStart" Margin="10,0,0,0" Click="btnStart_Click" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Start.svg}" />
             <dx:SimpleButton Content="停止" x:Name="btnStop" Margin="10,0,0,0" IsEnabled="False" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Stop.svg}" Click="btnStop_Click" />
             <dx:SimpleButton Content="开始存储数据" x:Name="btnData" Margin="10,0,0,0" IsEnabled="False" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Database.svg}" Click="btnData_Click"/>
@@ -31,8 +33,10 @@
             <Image x:Name="ImageTail"/>
             <TextBlock Text="飞控数据:" Margin="5,5,5,5"/>
             <Image x:Name="ImageFly"/>
+            <TextBlock Text="UDP包" VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Image x:Name="imageUDP" Source="F:\GitHub\DataProcess\DataProcess\DataProcess\Image\LED_gray.png"/>
         </ToolBar>
-        <dx:DXTabControl Grid.Row="1">
+        <dx:DXTabControl Grid.ColumnSpan="2" Margin="0,30,-0.4,-0.4" Grid.RowSpan="2">
             <dx:DXTabItem Header="飞控">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -2429,6 +2433,9 @@
                         </dxc:ChartControl>
                     </Grid>
                 </ScrollViewer>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="遥测数据">
+                <Controls:YaoCeShuJuXianShi/>
             </dx:DXTabItem>
         </dx:DXTabControl>
     </Grid>
