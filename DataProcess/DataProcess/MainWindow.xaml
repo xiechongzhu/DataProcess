@@ -33,7 +33,7 @@
             <Image x:Name="ImageTail"/>
             <TextBlock Text="飞控数据:" Margin="5,5,5,5"/>
             <Image x:Name="ImageFly"/>
-            <TextBlock Text="UDP包:" VerticalAlignment="Center" Margin="5,5,5,5" />
+            <TextBlock Text="遥测数据:" VerticalAlignment="Center" Margin="5,5,5,5" />
             <Image x:Name="imageUDP" Source="F:\GitHub\DataProcess\DataProcess\DataProcess\Image\LED_gray.png"/>
         </ToolBar>
         <dx:DXTabControl Grid.ColumnSpan="2" Margin="0,30,-0.4,-0.4" Grid.RowSpan="2">
@@ -2434,7 +2434,7 @@
                     </Grid>
                 </ScrollViewer>
             </dx:DXTabItem>
-            <dx:DXTabItem Header="遥测数据">
+            <dx:DXTabItem Header="遥测">
                 <Controls:YaoCeShuJuXianShi/>
             </dx:DXTabItem>
         </dx:DXTabControl>
