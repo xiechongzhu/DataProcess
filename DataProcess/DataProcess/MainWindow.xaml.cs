@@ -341,6 +341,12 @@ namespace DataProcess
             SetLedStatus(ImageFast, LED_STATUS.LED_GRAY);
             SetLedStatus(ImageTail, LED_STATUS.LED_GRAY);
             SetLedStatus(ImageFly, LED_STATUS.LED_GRAY);
+            SetLedStatus(ImageUDP, LED_STATUS.LED_GRAY);
+            SetLedStatus(YAOCE.imageJianCe, LED_STATUS.LED_GRAY);
+            SetLedStatus(YAOCE.imageJiShi, LED_STATUS.LED_GRAY);
+            SetLedStatus(YAOCE.imageKuaiSu, LED_STATUS.LED_GRAY);
+            SetLedStatus(YAOCE.imageManSu, LED_STATUS.LED_GRAY);
+            SetLedStatus(YAOCE.imageZhuangTai, LED_STATUS.LED_GRAY);
         }
 
         private void SetLedStatus(Image imageControl, LED_STATUS status)
