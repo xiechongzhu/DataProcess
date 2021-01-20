@@ -78,6 +78,9 @@
                                 <Controls:MyChartControl x:Name="ChartServo4Iq" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
+                        <dx:DXTabItem Header="轨迹">
+                            <Controls:MapControl x:Name="mapControl"/>
+                        </dx:DXTabItem>
                     </dx:DXTabControl>
                 </Grid>
             </dx:DXTabItem>

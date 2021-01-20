@@ -77,6 +77,12 @@
     <Reference Include="DevExpress.Xpf.RichEdit.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.VS2017Light.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpo.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="GMap.NET.Core">
+      <HintPath>GMap\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsPresentation">
+      <HintPath>GMap\GMap.NET.WindowsPresentation.dll</HintPath>
+    </Reference>
     <Reference Include="linq2db, Version=2.9.6.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
       <HintPath>..\packages\linq2db.2.9.6\lib\net46\linq2db.dll</HintPath>
     </Reference>
@@ -106,6 +112,9 @@
     <Compile Include="Controls\Curve.xaml.cs">
       <DependentUpon>Curve.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MapControl.xaml.cs">
+      <DependentUpon>MapControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MyChartControl.xaml.cs">
       <DependentUpon>MyChartControl.xaml</DependentUpon>
     </Compile>
@@ -119,6 +128,7 @@
       <DependentUpon>CopyMe.SQLite.tt</DependentUpon>
     </Compile>
     <Compile Include="DisplayBuffers.cs" />
+    <Compile Include="GMap\MapControl.cs" />
     <Compile Include="HistoryDetailWindow.xaml.cs">
       <DependentUpon>HistoryDetailWindow.xaml</DependentUpon>
     </Compile>
@@ -154,6 +164,10 @@
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Tools\WinApi.cs" />
     <Page Include="Controls\Curve.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MapControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

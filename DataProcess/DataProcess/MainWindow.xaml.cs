@@ -687,6 +687,7 @@ namespace DataProcess
                 chartDataSource.NavCrabAngle.AddPoint(packet.crabAngle);
                 chartDataSource.NavRollAngle.AddPoint(packet.rollAngle);
                 chartDataSource.NavSequenceList.AddPoint(packet.sequence);
+                mapControl.AddTrackPoint(packet.longitude, packet.latitude);
             });
 
             chartDataSource.NavLat.NotifyDataChanged();
@@ -832,6 +833,7 @@ namespace DataProcess
             udpClientFly.BeginReceive(EndFlyReceive, null);
             uiRefreshTimer.Start();
             ledTimer.Start();
+            mapControl.Clean();
             bRun = true;
         }
 

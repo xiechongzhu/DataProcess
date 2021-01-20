@@ -762,6 +762,9 @@
                                 </Grid>
                             </ScrollViewer>
                         </dx:DXTabItem>
+                        <dx:DXTabItem Header="轨迹">
+                            <Controls:MapControl x:Name="mapControl"/>
+                        </dx:DXTabItem>
                     </dx:DXTabControl>
                     <Grid Background="Transparent" Grid.Column="1">
                         <Grid.RowDefinitions>

@@ -445,6 +445,7 @@ namespace DataProcess
                 ChartNavPitchAngle.WriteData(packet.pitchAngle);
                 ChartNavCrabAngle.WriteData(packet.crabAngle);
                 ChartNavRollAngle.WriteData(packet.rollAngle);
+                mapControl.AddTrackPoint(packet.longitude, packet.latitude);
             });
             ChartNavLat.EndWrite();
             ChartNavLon.EndWrite();

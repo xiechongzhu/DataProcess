@@ -9,7 +9,7 @@
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
             <Label 
-                Content="{Binding Label, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="0" Margin="5" VerticalContentAlignment="Center"/>
+                Content="{Binding Label, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="0" Margin="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
             <dxe:TextEdit Grid.Column="1" Height="20"
                 Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalContentAlignment="{Binding HorizontalContentAlignment,RelativeSource={RelativeSource TemplatedParent}}"
