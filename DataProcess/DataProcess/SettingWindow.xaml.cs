@@ -26,12 +26,17 @@ namespace DataProcess
         public SettingWindow()
         {
             InitializeComponent();
-            if(settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort, out int maxDisplayPoint))
+            if(settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort,
+                                                 out String flyIpAddr, out int flyPort, 
+                                                 out String yaoceIpAddr,out int yaocePort,
+                                                 out int maxDisplayPoint))
             {
                 editEnvIpAddr.Text = envIpAddr;
                 editEnvPort.Text = envPort.ToString();
                 editFlyIpAddr.Text = flyIpAddr;
                 editFlyPort.Text = flyPort.ToString();
+                editYaoCeIpAddr.Text = yaoceIpAddr;
+                editYaoCePort.Text = yaocePort.ToString();
                 editMaxPoint.Text = maxDisplayPoint.ToString();
             }
             else
@@ -70,20 +75,22 @@ namespace DataProcess
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if(editEnvIpAddr.Text.Equals(String.Empty) || editFlyIpAddr.Text.Equals(String.Empty))
+            if(editEnvIpAddr.Text.Equals(String.Empty) || editFlyIpAddr.Text.Equals(String.Empty) || editYaoCeIpAddr.Text.Equals(String.Empty))
             {
                 MessageBox.Show("IP地址不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(editEnvPort.Text.Equals(String.Empty) || editFlyPort.Text.Equals(String.Empty))
+            if(editEnvPort.Text.Equals(String.Empty) || editFlyPort.Text.Equals(String.Empty) || editYaoCePort.Text.Equals(String.Empty))
             {
                 MessageBox.Show("端口不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(!settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text), editFlyIpAddr.Text, int.Parse(editFlyPort.Text),
-                int.Parse(editMaxPoint.Text)))
+            if(!settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text),
+                                                  editFlyIpAddr.Text, int.Parse(editFlyPort.Text),
+                                                  editYaoCeIpAddr.Text,int.Parse(editYaoCePort.Text),
+                                                  int.Parse(editMaxPoint.Text)))
             {
                 MessageBox.Show("保存网络配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }

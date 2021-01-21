@@ -794,7 +794,10 @@ namespace DataProcess
             try
             {
                 
-                if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, out String flyIpAddr, out int flyPort, out maxDisplayPoint))
+                if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, 
+                                                      out String flyIpAddr, out int flyPort, 
+                                                      out String yaoceIpAddr,out int yaocePort,
+                                                      out maxDisplayPoint))
                 {
                     udpClientEnv = new UdpClient(envPort);
                     udpClientEnv.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
