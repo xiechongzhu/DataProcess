@@ -21,11 +21,12 @@ namespace DataProcess.GMap
         public MapControl()
         {
             Manager.Mode = AccessMode.ServerAndCache;
-            MapProvider = GMapProviders.BingHybridMap;
+            MapProvider = GMapProviders.AMap;
             Position = new PointLatLng(31.48, 104.69);
             NeedRefresh = false;
             RefreshTimer.Tick += RefreshTimer_Tick;
             RefreshTimer.Interval = TimeSpan.FromMilliseconds(500);
+            RefreshTimer.Start();
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
