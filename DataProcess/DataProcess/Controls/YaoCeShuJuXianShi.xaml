@@ -13,7 +13,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="8*"/>
-            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <ToolBar Background="Transparent" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
             <dx:SimpleButton  x:Name="btnLoad" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}"/>
@@ -1415,12 +1414,6 @@
                 </UniformGrid>
             </dx:DXTabItem>
         </dx:DXTabControl>
-        <DataGrid Grid.Row="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="时间"/>
-                <DataGridTextColumn Header="等级"/>
-                <DataGridTextColumn Header="内容"/>
-            </DataGrid.Columns>
-        </DataGrid>
+       
     </Grid>
 </UserControl>

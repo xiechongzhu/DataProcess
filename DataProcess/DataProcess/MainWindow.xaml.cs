@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using YaoCeProcess;
 
 namespace DataProcess
 {
@@ -254,11 +255,113 @@ namespace DataProcess
     }
 
 
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
     {
+
+#if true
+        /// <summary>
+        // 
+        /// 每一个UDP帧固定长度651
+        // 
+        /// </summary>
+        // 
+        private const int UDPLENGTH = 651; //
+                                           // 
+        /// <summary>
+        // 
+        /// 自定义消息
+        // 
+        /// </summary>
+        // 
+        private const int WM_USER = 0x400; //
+                                           // 
+        /// <summary>
+        // 
+        /// 系统判决状态数据标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_SystemStatus_DATA = WM_USER + 102; //
+                                                                     // 
+        /// <summary>
+        // 
+        /// 导航数据（快速——弹体）标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_daoHangKuaiSu_Ti_DATA = WM_USER + 103; //
+                                                                         // 
+        /// <summary>
+        // 
+        /// 导航数据（快速——弹头）标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_daoHangKuaiSu_Tou_DATA = WM_USER + 104; //
+                                                                          // 
+        /// <summary>
+        // 
+        /// 导航数据（慢速——弹体）标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_daoHangManSu_Ti_DATA = WM_USER + 105; //
+                                                                        // 
+        /// <summary>
+        // 
+        /// 导航数据（慢速——弹头）标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_daoHangManSu_Tou_DATA = WM_USER + 106; //
+                                                                         // 
+        /// <summary>
+        // 
+        /// 回路检测数据标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_HuiLuJianCe_DATA = WM_USER + 107; //
+                                                                    // 
+                                                                    // TODO 20200219 新增
+                                                                    // 
+        /// <summary>
+        // 
+        /// 系统状态即时反馈数据（弹体）标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_XiTongJiShi_Ti_DATA = WM_USER + 108; //
+                                                                       // 
+        /// <summary>
+        // 
+        /// 系统状态即时反馈（弹头）标识
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_XiTongJiShi_Tou_DATA = WM_USER + 109; //
+                                                                        // 
+        /// <summary>
+        // 
+        /// 数据帧信息
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_FRAMEPROPERTY_DATA = WM_USER + 110; //
+                                                                      // 
+        /// <summary>
+        // 
+        /// UDP包状态
+        // 
+        /// </summary>
+        // 
+        public const int WM_YAOCE_UDPPROPERTY_DATA = WM_USER + 111; //
+#endif
+
         private enum LED_STATUS
         {
             LED_RED,
@@ -300,6 +403,10 @@ namespace DataProcess
         private DataLogger dataLogger = null;
         ChartDataSource chartDataSource = new ChartDataSource();
         Ratios ratios;
+
+        //
+        private UdpClient udpClientYaoCe = null;
+        private DataParser yaoceParser = null;
 
         public MainWindow()
         {
@@ -775,6 +882,10 @@ namespace DataProcess
             {
                 flyParser = new FlyParser(new WindowInteropHelper(this).Handle);
             }
+            if (yaoceParser == null)
+            {
+                yaoceParser = new DataParser(new WindowInteropHelper(this).Handle);
+            }
 
             testInfo = new TestInfo
             {
@@ -805,6 +916,11 @@ namespace DataProcess
                     udpClientFly = new UdpClient(flyPort);
                     udpClientFly.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
                     udpClientFly.JoinMulticastGroup(IPAddress.Parse(flyIpAddr));
+
+                    //
+                    udpClientYaoCe = new UdpClient(yaocePort);
+                    udpClientYaoCe.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+                    udpClientYaoCe.JoinMulticastGroup(IPAddress.Parse(yaoceIpAddr));
                 }
                 else
                 {
@@ -830,10 +946,15 @@ namespace DataProcess
             dataLogger = new DataLogger(testInfo.TestTime);
             envParser.dataLogger = dataLogger;
             flyParser.dataLogger = dataLogger;
+
             envParser.Start();
-            flyParser.Start(); 
+            flyParser.Start();
+
+            yaoceParser.Start();
+
             udpClientEnv.BeginReceive(EndEnvReceive, null);
             udpClientFly.BeginReceive(EndFlyReceive, null);
+            udpClientYaoCe.BeginReceive(EndYaoCeReceive, null);
             uiRefreshTimer.Start();
             ledTimer.Start();
             mapControl.Clean();
@@ -884,6 +1005,33 @@ namespace DataProcess
             { }
         }
 
+        private void EndYaoCeReceive(IAsyncResult ar)
+        {
+            // 
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0); //
+                                                                    // 
+            try
+            // 
+            {
+                // 
+                byte[] recvBuffer = udpClientYaoCe?.EndReceive(ar, ref endPoint); //
+                                                                             // 
+                yaoceParser.Enqueue(recvBuffer); //
+                                                // 
+                //dataLogger.Enqueue(recvBuffer); //
+                                                // 
+                udpClientYaoCe.BeginReceive(EndYaoCeReceive, null); //
+                                                          // 
+            }
+            // 
+            catch (Exception)
+            // 
+            {
+                // 
+            }
+            // 
+        }
+
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             bRun = false;
@@ -891,10 +1039,12 @@ namespace DataProcess
             {
                 udpClientEnv?.Close();
                 udpClientFly?.Close();
+                udpClientYaoCe?.Close();
             }
             catch (Exception) { }
             udpClientEnv = null;
             udpClientFly = null;
+            udpClientYaoCe = null;
             if(envParser != null)
             {
                 envParser.IsStartLogData = false;
@@ -904,6 +1054,10 @@ namespace DataProcess
             {
                 flyParser.IsStartLogData = false;
                 flyParser.Stop();
+            }
+            if(yaoceParser != null)
+            {
+                yaoceParser.Stop();
             }
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
