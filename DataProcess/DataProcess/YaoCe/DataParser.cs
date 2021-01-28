@@ -872,7 +872,8 @@ namespace YaoCeProcess
                 // 
                 byte[] dataBuffer; //
                                    // 
-                if (queue.TryDequeue(out dataBuffer))
+                           
+                    if (queue.TryDequeue(out dataBuffer))
                 // 
                 {
                     // 
@@ -1003,6 +1004,7 @@ namespace YaoCeProcess
             // 拼接上一次剩余的包
             // 
             UDPBuffer = UDPBuffer.Concat(buffer).ToArray(); //
+            Console.WriteLine(UDPBuffer);
                                                             // 
 
             // 
@@ -1149,9 +1151,6 @@ namespace YaoCeProcess
         {
             // 
             //--------------------------------------------------------------------------------//
-            // 
-
-            // 
             String errMsg; //
                            // 
             UInt16 dataLength; //
@@ -1922,7 +1921,6 @@ namespace YaoCeProcess
                 {
                     // 
                     SYSTEMPARSE_STATUS sObject = new SYSTEMPARSE_STATUS
-                    // 
                     {
                         // 
                         // NOTE 20200506 协议弄反

@@ -949,7 +949,6 @@ namespace DataProcess
 
             envParser.Start();
             flyParser.Start();
-
             yaoceParser.Start();
 
             udpClientEnv.BeginReceive(EndEnvReceive, null);
