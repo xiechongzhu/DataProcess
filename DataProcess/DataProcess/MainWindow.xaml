@@ -23,7 +23,8 @@
             <dx:SimpleButton Content="开始存储数据" x:Name="btnData" Margin="10,0,0,0" IsEnabled="False" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Database.svg}" Click="btnData_Click"/>
             <dx:SimpleButton Content="设置" x:Name="btnSetting" Margin="10,0,0,0" IsEnabled="True" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Settings.svg}" Click="btnSetting_Click" VerticalAlignment="Bottom"/>
             <dx:SimpleButton Visibility="Collapsed" Content="历史数据" x:Name="btnHistory" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Business Objects/BO_Contract.svg}" Click="btnHistory_Click"/>
-            <dx:SimpleButton Content="打开外部数据" x:Name="btnOpenData" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Click="btnVOpenData_Click"/>
+            <dx:SimpleButton Content="打开外部数据" x:Name="btnOpenData" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Click="btnOpenData_Click"/>
+            <dx:SimpleButton Content="打开视频软件" x:Name="btnVideo" Margin="10,0,0,0" Click="btnVideo_Click" Glyph="{dx:DXImage Images/Miscellaneous/Video_32x32.png}"/>
             <TextBlock Text="幅值自适应:" Margin="20,0,0,0" VerticalAlignment="Center"/>
             <dxe:ToggleSwitch Margin="0,0,0,0" IsChecked="True" Click="ToggleSwitch_Click" EnableAnimation="False"/>
             <TextBlock Text="缓变参数:" Margin="25,5,5,5"/>

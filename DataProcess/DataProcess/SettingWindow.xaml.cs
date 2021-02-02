@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataProcess.Setting;
 using DevExpress.Xpf.Core;
-
+using Microsoft.Win32;
 
 namespace DataProcess
 {
@@ -185,6 +185,16 @@ namespace DataProcess
             {
                 MessageBox.Show("加载系数配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            if(settingManager.LoadVideoSetting(out VideoSetting videoSetting))
+            {
+                editVideoExePath.Text = videoSetting.ExePath;
+                editVideoExeParam.Text = videoSetting.ExeParam;
+            }
+            else
+            {
+                MessageBox.Show("加载视频软件配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
@@ -350,12 +360,31 @@ namespace DataProcess
             {
                 MessageBox.Show("保存系数配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            VideoSetting videoSetting = new VideoSetting
+            {
+                ExePath = editVideoExePath.Text,
+                ExeParam = editVideoExeParam.Text
+            };
+            if(!settingManager.SaveVideoSetting(videoSetting))
+            {
+                MessageBox.Show("保存视频软件配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             Close();
         }
 
         private void btnCancle_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void BtnVideoBrowseClicked(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "可执行文件|*.exe";
+            if(openFileDialog.ShowDialog() == true)
+            {
+                editVideoExePath.Text = openFileDialog.FileName;
+            }
         }
     }
 }

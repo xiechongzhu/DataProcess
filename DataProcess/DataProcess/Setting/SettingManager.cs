@@ -12,6 +12,25 @@ namespace DataProcess.Setting
     {
         private readonly String NetworkSettingFile = "network";
         private readonly String RatioSettingFile = "params";
+        private readonly String VideoSettingFile = "video";
+
+        public bool LoadVideoSetting(out VideoSetting videoSetting)
+        {
+            try
+            {
+                using(FileStream file = File.Open(VideoSettingFile, FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    videoSetting = (VideoSetting)formatter.Deserialize(file);
+                }
+            }
+            catch(Exception)
+            {
+                videoSetting = null;
+                return false;
+            }
+            return true;
+        }
 
         public bool LoadNetworkSetting(out String envIpAddr, out int envPort,
                                        out String flyIpAddr, out int flyPort,
@@ -74,6 +93,23 @@ namespace DataProcess.Setting
             catch (Exception)
             {
                 ratios = new Ratios();
+                return false;
+            }
+            return true;
+        }
+
+        public bool SaveVideoSetting(VideoSetting videoSetting)
+        {
+            try
+            {
+                using (FileStream file = File.Create(VideoSettingFile))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(file, videoSetting);
+                }
+            }
+            catch(Exception)
+            {
                 return false;
             }
             return true;

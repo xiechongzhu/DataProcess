@@ -26,6 +26,7 @@ using DataProcess.YaoCe;
 using DataProcess.Controls;
 using System.Timers;
 using System.Threading;
+using System.Diagnostics;
 
 namespace DataProcess
 {
@@ -792,48 +793,6 @@ namespace DataProcess
             UpdateSyncFireDisplay(Double.NaN);
             InitProgramDiagram();
             InitLedStatus();
-
-             //load.setPlayStatus = setOffLineFilePlayStatus;
-    
-            if (!File.Exists("F:\\TestTxt.txt"))
-                {
-                    FileStream fs1 = new FileStream("F:\\TestTxt.txt", FileMode.Create, FileAccess.Write);//创建写入文件 
-                    StreamWriter sw = new StreamWriter(fs1);
-                foreach(UIElement element in  XiTong.Children)
-                {
-
-
-                    if (element is LabelTextBox)
-                    {
-                        n++;
-                        sw.WriteLine("{0}", n);//开始写入值
-                    }
-                }
-                    //sw.WriteLine("+");//开始写入值
-                    sw.Close();
-                    fs1.Close();
-                }
-            else
-                {
-                    FileStream fs = new FileStream("F:\\TestTxt.txt", FileMode.Open, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs);  
-                fs.Seek(0, SeekOrigin.Begin);
-                fs.SetLength(0);
-
-                foreach (UIElement element in  XiTong.Children)
-                {
-                    if(element is LabelTextBox)
-                    {
-                        n++;
-                        sw.WriteLine("{0},{1}",(element as LabelTextBox).Label.ToString(),n);//开始写入值
-                    }
-
-                }
-                sw.Close();
-                    fs.Close();
-                }
-
-
         }
 
         delegate void OnReadFileTimedEventCallBack(Object source, ElapsedEventArgs e); //
@@ -2926,7 +2885,7 @@ namespace DataProcess
             historyWindow.ShowDialog();
         }
 
-        private void btnVOpenData_Click(object sender, RoutedEventArgs e)
+        private void btnOpenData_Click(object sender, RoutedEventArgs e)
         {
             OpenDataWindow openDataWindow = new OpenDataWindow();
             openDataWindow.Owner = this;
@@ -3095,6 +3054,32 @@ namespace DataProcess
             }
             load.Show(); 
             return; 
+        }
+
+        private void btnVideo_Click(object sender, RoutedEventArgs e)
+        {
+            SettingManager settingManager = new SettingManager();
+            if(!settingManager.LoadVideoSetting(out VideoSetting videoSetting))
+            {
+                MessageBox.Show("读取视频软件配置文件失败!", "错误", MessageBoxButton.OK);
+            }
+            else
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo(videoSetting.ExePath, videoSetting.ExeParam);
+                processStartInfo.WorkingDirectory = Path.GetDirectoryName(videoSetting.ExePath);
+                Process process = new Process
+                {
+                    StartInfo = processStartInfo
+                };
+                try
+                {
+                    process.Start();
+                }
+                catch(Exception exception)
+                {
+                    MessageBox.Show("视频软件启动失败:" + exception.Message, "错误", MessageBoxButton.OK);
+                }
+            }
         }
     }
 }
