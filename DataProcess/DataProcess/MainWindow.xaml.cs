@@ -418,6 +418,9 @@ namespace DataProcess
         /// 网络消息处理
         //private DataParser dataParser;
 
+        /// 码流记录
+        private _DataLogger yaoceDataLogger = new _DataLogger(); //
+
 
         //-----------------------------------------------------//
         /// E_STATUSTYPE_XiTong
@@ -735,8 +738,6 @@ namespace DataProcess
 
             yaoceParser = new DataParser(new WindowInteropHelper(this).Handle);
 
-
-
             //文件加载
             UpdateLoadFileProgressTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
             UpdateLoadFileProgressTimer.Tick += timerUpdateLoadFileProgress_Tick;
@@ -780,63 +781,27 @@ namespace DataProcess
             timerUpdateChart_DHM.Interval = new TimeSpan(0, 0, 0, 0, 500);
             //this.timerUpdateChart_DHK.Tick += timerUpdateChart_Tick_DHK;
 
-
-
             timerUpdateUDP.Interval = new TimeSpan(0, 0, 0, 0, 500);
             timerUpdateUDP.Tick += timerUpdateUDP_Tick;
 
             timerOffLineUDP.Interval = new TimeSpan(0, 0, 0, 0, 1000);
             timerOffLineUDP.Tick += timerOffLineUDP_Tick;
 
-
             UpdateSyncFireDisplay(Double.NaN);
             InitProgramDiagram();
             InitLedStatus();
 
-             //load.setPlayStatus = setOffLineFilePlayStatus;
-    
-            if (!File.Exists("F:\\TestTxt.txt"))
-                {
-                    FileStream fs1 = new FileStream("F:\\TestTxt.txt", FileMode.Create, FileAccess.Write);//创建写入文件 
-                    StreamWriter sw = new StreamWriter(fs1);
-                foreach(UIElement element in  XiTong.Children)
-                {
+            // 读取文件定时器
+            readFileTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnReadFileTimedEvent);
+            readFileTimer.Interval = 1;
+            readFileTimer.Enabled = true;
 
-
-                    if (element is LabelTextBox)
-                    {
-                        n++;
-                        sw.WriteLine("{0}", n);//开始写入值
-                    }
-                }
-                    //sw.WriteLine("+");//开始写入值
-                    sw.Close();
-                    fs1.Close();
-                }
-            else
-                {
-                    FileStream fs = new FileStream("F:\\TestTxt.txt", FileMode.Open, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs);  
-                fs.Seek(0, SeekOrigin.Begin);
-                fs.SetLength(0);
-
-                foreach (UIElement element in  XiTong.Children)
-                {
-                    if(element is LabelTextBox)
-                    {
-                        n++;
-                        sw.WriteLine("{0},{1}",(element as LabelTextBox).Label.ToString(),n);//开始写入值
-                    }
-
-                }
-                sw.Close();
-                    fs.Close();
-                }
-
-
+            // 创建新的日志文件
+            Logger.GetInstance().NewFile();
+            Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "程序开始启动！");
         }
 
-        delegate void OnReadFileTimedEventCallBack(Object source, ElapsedEventArgs e); //
+        delegate void OnReadFileTimedEventCallBack(Object source, ElapsedEventArgs e);
         private void MainForm_Load(object sender, EventArgs e)
         {
             // 读取文件定时器
@@ -900,7 +865,7 @@ namespace DataProcess
                          load.loadFileFinish();
 
                         // 日志打印
-                        //Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "历史数据加载完成！"); 
+                        Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "历史数据加载完成！"); 
 
                         MessageBox.Show("文件读取完成！");
 
@@ -968,7 +933,7 @@ namespace DataProcess
                      load.loadFileFinish();
 
                     // 日志打印
-                    //Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "历史数据加载完成！"); 
+                    Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "历史数据加载完成！"); 
 
                     MessageBox.Show("文件读取完成！");
 
@@ -992,9 +957,9 @@ namespace DataProcess
             double percent = (double)alreadReadFileLength / (double)loadFileLength; 
             percent *= 100;
             // 日志打印
-            // Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + ((UInt32)percent).ToString() + "%"); //
+             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + ((UInt32)percent).ToString() + "%"); //
             // 
-            //Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + percent.ToString("f2") + "%");
+            Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + percent.ToString("f2") + "%");
 
             // 更新进度条
              load.setProgressBarValue(0, loadFileLength, alreadReadFileLength);  
@@ -2235,6 +2200,7 @@ namespace DataProcess
             {
                 udpClientEnv?.Close();
                 udpClientFly?.Close();
+                udpClientYaoCe?.Close();
                 MessageBox.Show("加入组播组失败:" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -2250,6 +2216,7 @@ namespace DataProcess
             envParser.dataLogger = dataLogger;
             flyParser.dataLogger = dataLogger;
 
+            yaoceDataLogger.Start();
             envParser.Start();
             flyParser.Start();
             yaoceParser.Start();
@@ -2320,7 +2287,7 @@ namespace DataProcess
                                                                              // 
                 yaoceParser.Enqueue(recvBuffer); //
                                                 // 
-                //dataLogger.Enqueue(recvBuffer); //
+                yaoceDataLogger.Enqueue(recvBuffer); //
                                                 // 
                 udpClientYaoCe.BeginReceive(EndYaoCeReceive, null); //
                                                           // 
@@ -2371,6 +2338,8 @@ namespace DataProcess
             btnData.Content = "开始存储数据";
             uiRefreshTimer.Stop();
             dataLogger?.Close();
+            yaoceDataLogger.Stop();//
+
             SaveTestInfo();
             InitLedStatus();
             ledTimer.Stop();
@@ -2401,10 +2370,10 @@ namespace DataProcess
                 readFileTimer.Stop();
                 
                 // 关闭日志文件
-                //Logger.GetInstance().closeFile();  
+                Logger.GetInstance().closeFile();  
 
                 // 关闭码流记录
-                //dataLogger.Stop();  
+                yaoceDataLogger.Stop();  
 
                 // 关闭消息处理
                 yaoceParser.Stop();  
@@ -2488,205 +2457,121 @@ namespace DataProcess
                         timerOffLineXiTongStatus.Start();
 
                         // 是否收到数据
-                        bRecvStatusData_XiTong = true; //
-                       //----------------------------------------------------------//
-                       // 
+                        bRecvStatusData_XiTong = true;
+
                        // 填充实时数据(更改成通过定时器来刷新实时数据)
-                       // 
-                       // showSystemTimeStatus(ref sObject); //
-                       // 
-                       //----------------------------------------------------------//
-                       // 
+                       // showSystemTimeStatus(ref sObject); 
+
                        // 绘图
                         xiTong_CHART_ITEM_INDEX++; 
 
-                        // 
                         // 添加系统坐标点集
-                        //AddXiTongZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
-                                                                                             // 
-                                                                                             // 添加系统速度点集
-                                                                                             // 
-                        //AddXiTongSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
-                                                                                                           // 
-                                                                                                           // 添加系统角速度点集
-                                                                                                           // 
-                        //AddXiTongJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); //
-                                                                                                       // 
-                                                                                                       // 添加系统发射系点集
-                                                                                                       // 
-                        //AddXiTongFaSheXi(sObject.zhouXiangGuoZai, sObject.curFaSheXi_X, sObject.curFaSheXi_Y, sObject.curFaSheXi_Z); //
-                                                                                                                                     // 
-                                                                                                                                     // 添加系统预示落点点集
-                                                                                                                                     // 
-                        //AddXiTongYuShiLuoDian(sObject.yuShiLuoDianSheCheng, sObject.yuShiLuoDianZ); //
-                                                                                                    // 
+                        //AddXiTongZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
+
+                        // 添加系统速度点集
+                        //AddXiTongSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); 
+
+                        // 添加系统角速度点集
+                        //AddXiTongJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); 
+                        
+                        // 添加系统发射系点集                                                          
+                        //AddXiTongFaSheXi(sObject.zhouXiangGuoZai, sObject.curFaSheXi_X, sObject.curFaSheXi_Y, sObject.curFaSheXi_Z);
+
+                        // 添加系统预示落点点集                                                                                      
+                        //AddXiTongYuShiLuoDian(sObject.yuShiLuoDianSheCheng, sObject.yuShiLuoDianZ); 
  
                         Marshal.FreeHGlobal(ptr); 
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                     }
-              
                     break; 
                 case WM_YAOCE_daoHangKuaiSu_Ti_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
- 
                         IntPtr ptr = lParam; 
-                        DAOHANGSHUJU_KuaiSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_KuaiSu>(ptr); //
-                                                                                                        // 
+                        DAOHANGSHUJU_KuaiSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_KuaiSu>(ptr);
 
                         // 缓存状态数据
-                       // dHKSubForm_Ti.SetDHKStatus(ref sObject); //
-                                                                 // 
-                                                                 // 绘图
-                                                                 // 
-                       // dHKSubForm_Ti.setCHARTITEMINDEXAdd(); //
-                                                              // 
+                       //dHKSubForm_Ti.SetDHKStatus(ref sObject);
 
-                        // 
+                        // 绘图 
+                       //dHKSubForm_Ti.setCHARTITEMINDEXAdd();
+
                         // 添加导航数据快速坐标点集
-                        //dHKSubForm_Ti.AddDHKuaiSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
-                                                                                                             // 
-                                                                                                             // 添加导航数据快速速度点集
-                                                                                                             // 
-                        //dHKSubForm_Ti.AddDHKuaiSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
-                                                                                                                           // 
+                        //dHKSubForm_Ti.AddDHKuaiSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
 
-                         
+                        // 添加导航数据快速速度点集
+                        //dHKSubForm_Ti.AddDHKuaiSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu);
+                       
                         Marshal.FreeHGlobal(ptr);  
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                     } 
                     break; 
                 case WM_YAOCE_daoHangKuaiSu_Tou_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
-
-                        // 
                         IntPtr ptr = lParam;  
                         DAOHANGSHUJU_KuaiSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_KuaiSu>(ptr); 
 
                         // 缓存状态数据
-                        //dHKSubForm_Tou.SetDHKStatus(ref sObject); //
-                                                                  // 
-                                                                  // 绘图
-                                                                  // 
-                        //dHKSubForm_Tou.setCHARTITEMINDEXAdd(); //
-                                                               // 
+                        //dHKSubForm_Tou.SetDHKStatus(ref sObject); 
 
-                        // 
+                       // 绘图 
+                        //dHKSubForm_Tou.setCHARTITEMINDEXAdd();
+
                         // 添加导航数据快速坐标点集
-                       // dHKSubForm_Tou.AddDHKuaiSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
-                                                                                                              // 
-                                                                                                              // 添加导航数据快速速度点集
-                                                                                                              // 
-                        //dHKSubForm_Tou.AddDHKuaiSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
-                                                                                                                            // 
+                       // dHKSubForm_Tou.AddDHKuaiSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
 
-                        // 
-                        Marshal.FreeHGlobal(ptr); 
-                        // 
-                        //----------------------------------------------------------//
-                        // 
+                         // 添加导航数据快速速度点集
+                        //dHKSubForm_Tou.AddDHKuaiSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu);  
+
+                        Marshal.FreeHGlobal(ptr);  
                     }
                     break; 
                 case WM_YAOCE_daoHangManSu_Ti_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
-
-                        // 
                         IntPtr ptr = lParam;  
-                        DAOHANGSHUJU_ManSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_ManSu>(ptr); //
-                                                                                                      // 
+                        DAOHANGSHUJU_ManSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_ManSu>(ptr);  
 
-                        // 
                         // 缓存状态数据
                         //dHMSubForm_Ti.SetDHMStatus(ref sObject); 
 
-                        // 
                         // 绘图
                         //dHMSubForm_Ti.setCHARTITEMINDEXAdd(); 
 
-                        // 
                         // 添加导航数据慢速坐标点集
-                        //dHMSubForm_Ti.AddDHManSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
-                                                                                                            // 
-                                                                                                            // 添加导航数据慢速速度点集
-                                                                                                            // 
-                        //dHMSubForm_Ti.AddDHManSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
-                                                                                                                          // 
+                        //dHMSubForm_Ti.AddDHManSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
 
-                        // 
+                        // 添加导航数据慢速速度点集
+                        //dHMSubForm_Ti.AddDHManSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu);
+                        
                         Marshal.FreeHGlobal(ptr); 
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                     }
                     break;  
                 case WM_YAOCE_daoHangManSu_Tou_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
-
-                        // 
                         IntPtr ptr = lParam;  
-                        DAOHANGSHUJU_ManSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_ManSu>(ptr); //
-                                                                                                      // 
+                        DAOHANGSHUJU_ManSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_ManSu>(ptr); 
 
-                        // 
                         // 缓存状态数据
                         //dHMSubForm_Tou.SetDHMStatus(ref sObject);
 
-                        // 
                         // 绘图
                         //dHMSubForm_Tou.setCHARTITEMINDEXAdd(); 
 
-                        // 
                         // 添加导航数据慢速坐标点集
-                        //dHMSubForm_Tou.AddDHManSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
-                                                                                                             // 
-                                                                                                             // 添加导航数据慢速速度点集
-                                                                                                             // 
-                        //dHMSubForm_Tou.AddDHManSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
-                                                                                                                           // 
+                        //dHMSubForm_Tou.AddDHManSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
 
-                       
+                         // 添加导航数据慢速速度点集                                                         
+                        //dHMSubForm_Tou.AddDHManSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); 
+
                         Marshal.FreeHGlobal(ptr); 
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                     }
                     break; 
                 case WM_YAOCE_HuiLuJianCe_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                         IntPtr ptr = lParam; 
-                        HUILUJIANCE_STATUS sObject = Marshal.PtrToStructure<HUILUJIANCE_STATUS>(ptr); //
-                                                                                                      // 
+                        HUILUJIANCE_STATUS sObject = Marshal.PtrToStructure<HUILUJIANCE_STATUS>(ptr); 
 
-                        // 
                         // 缓存状态数据
-                        // 
                         sObject_huiLuJianCe = sObject; 
 
-                        // 
                         // 重新启动离线定时器
-                        // 
                         UpdateHuiLuJianCeTimer.Stop(); 
                         UpdateHuiLuJianCeTimer.Start(); 
 
@@ -2695,36 +2580,21 @@ namespace DataProcess
 
                         
                         Marshal.FreeHGlobal(ptr);  
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                     } 
                     break; 
-                    // 
+
                     // TODO 20200219 新增
-                    // 
                 case WM_YAOCE_XiTongJiShi_Ti_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
-
-                       
                         IntPtr ptr = lParam; 
-                        SYSTEMImmediate_STATUS sObject = Marshal.PtrToStructure<SYSTEMImmediate_STATUS>(ptr); //
-                                                                                                              // 
+                        SYSTEMImmediate_STATUS sObject = Marshal.PtrToStructure<SYSTEMImmediate_STATUS>(ptr); 
 
-                        // 
                         // 缓存状态数据
-                        // 
                         //xiTongJiShiSubForm_Ti.SetXiTongJiShiStatus(ref sObject); 
-
-                        // 
+ 
                         // 绘图
                         //xiTongJiShiSubForm_Ti.setCHARTITEMINDEXAdd();  
 
-                        // 
                        // xiTongJiShiSubForm_Ti.AddXiTongJiShiZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
                                                                                                                         // 
                        // xiTongJiShiSubForm_Ti.AddXiTongJiShiSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
@@ -2732,35 +2602,19 @@ namespace DataProcess
                         //xiTongJiShiSubForm_Ti.AddXiTongJiShiJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); //
                                                                                                                                   // 
                        // xiTongJiShiSubForm_Ti.AddXiTongJiShiGuoZai(sObject.zhouXiangGuoZai, sObject.faXiangGuoZai, sObject.ceXiangGuoZai); //
-                                                                                                                                           // 
-
-                        // 
+                                                                                                                                           
                         Marshal.FreeHGlobal(ptr);  
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                     }
                     break; 
                 case WM_YAOCE_XiTongJiShi_Tou_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
-
-                        // 
                         IntPtr ptr = lParam; 
-                        SYSTEMImmediate_STATUS sObject = Marshal.PtrToStructure<SYSTEMImmediate_STATUS>(ptr); //
-                                                                                                              // 
+                        SYSTEMImmediate_STATUS sObject = Marshal.PtrToStructure<SYSTEMImmediate_STATUS>(ptr); 
 
-                        // 
                         // 缓存状态数据
-                        // 
                        // xiTongJiShiSubForm_Tou.SetXiTongJiShiStatus(ref sObject); 
 
-                        // 
                         // 绘图
-                        // 
                         //xiTongJiShiSubForm_Tou.setCHARTITEMINDEXAdd(); 
 
                          
@@ -2770,70 +2624,39 @@ namespace DataProcess
                         //                                                                                                               // 
                         //xiTongJiShiSubForm_Tou.AddXiTongJiShiJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); //
                         //                                                                                                           // 
-                        //xiTongJiShiSubForm_Tou.AddXiTongJiShiGuoZai(sObject.zhouXiangGuoZai, sObject.faXiangGuoZai, sObject.ceXiangGuoZai); //
-                                                                                                                                            // 
-
+                        //xiTongJiShiSubForm_Tou.AddXiTongJiShiGuoZai(sObject.zhouXiangGuoZai, sObject.faXiangGuoZai, sObject.ceXiangGuoZai); 
                         
                         Marshal.FreeHGlobal(ptr);  
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
                     }
                     break; 
                 case WM_YAOCE_FRAMEPROPERTY_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
-
-                      
                         IntPtr ptr = lParam;  
                         FRAME_PROPERTY sObject = Marshal.PtrToStructure<FRAME_PROPERTY>(ptr);  
 
-                        // 
                         // 缓存状态数据
-                        // 
                         //frameInfoForm.addFrameInfo(ref sObject); 
 
-                        // 
-                        Marshal.FreeHGlobal(ptr); 
-
-                        // 
-                        //----------------------------------------------------------//
-                        // 
+                        Marshal.FreeHGlobal(ptr);  
                     }
                     break; 
                 case WM_YAOCE_UDPPROPERTY_DATA:
                     {
-                        // 
-                        //----------------------------------------------------------//
-                        // 
-
-                       
                         IntPtr ptr = lParam; 
                         UDP_PROPERTY sObject = Marshal.PtrToStructure<UDP_PROPERTY>(ptr); 
 
-                        // 
                         // 重新启动离线定时器
-                        // 
                         timerOffLineUDP.Stop(); 
                         timerOffLineUDP.Start(); 
 
-                        // 
                         // 更改状态灯颜色 
                         bRecvStatusData_UDP = true;
-
                         Marshal.FreeHGlobal(ptr); 
                     }
                     break;  
                 default:
                     return hwnd;
-
-
             }
-
-
             return hwnd;
         }
 

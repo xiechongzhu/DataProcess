@@ -39,6 +39,7 @@ namespace DataProcess.Controls
         {
             InitializeComponent();
             setBtnsEnable(true);
+            setProgressBarValue(0, 100, 0);
         }
 
         private void SimpleButton_Click(object sender, RoutedEventArgs e)
