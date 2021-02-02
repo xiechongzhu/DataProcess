@@ -357,6 +357,34 @@
                     <dxe:TextEdit x:Name="editNoiseFix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
                 </Grid>
             </dx:DXTabItem>
+            <dx:DXTabItem Header="视频软件">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="可执行文件:" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <dxe:TextEdit x:Name="editVideoExePath" Grid.Column="1" Margin="20,2,2,2"/>
+                        <dx:SimpleButton Grid.Column="2" Content="浏览" Height="20" Margin="15,2,2,2" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Click="BtnVideoBrowseClicked"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="0, 20, 0, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="运行参数:" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <dxe:TextEdit x:Name="editVideoExeParam" Grid.Column="1" Margin="20,2,2,2"/>
+                    </Grid>
+                </Grid>
+            </dx:DXTabItem>
         </dx:DXTabControl>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

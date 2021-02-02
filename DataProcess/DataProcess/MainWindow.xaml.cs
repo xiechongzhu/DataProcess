@@ -26,6 +26,7 @@ using DataProcess.YaoCe;
 using DataProcess.Controls;
 using System.Timers;
 using System.Threading;
+using System.Diagnostics;
 
 namespace DataProcess
 {
@@ -2749,7 +2750,7 @@ namespace DataProcess
             historyWindow.ShowDialog();
         }
 
-        private void btnVOpenData_Click(object sender, RoutedEventArgs e)
+        private void btnOpenData_Click(object sender, RoutedEventArgs e)
         {
             OpenDataWindow openDataWindow = new OpenDataWindow();
             openDataWindow.Owner = this;
@@ -2918,6 +2919,32 @@ namespace DataProcess
             }
             load.Show(); 
             return; 
+        }
+
+        private void btnVideo_Click(object sender, RoutedEventArgs e)
+        {
+            SettingManager settingManager = new SettingManager();
+            if(!settingManager.LoadVideoSetting(out VideoSetting videoSetting))
+            {
+                MessageBox.Show("读取视频软件配置文件失败!", "错误", MessageBoxButton.OK);
+            }
+            else
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo(videoSetting.ExePath, videoSetting.ExeParam);
+                processStartInfo.WorkingDirectory = Path.GetDirectoryName(videoSetting.ExePath);
+                Process process = new Process
+                {
+                    StartInfo = processStartInfo
+                };
+                try
+                {
+                    process.Start();
+                }
+                catch(Exception exception)
+                {
+                    MessageBox.Show("视频软件启动失败:" + exception.Message, "错误", MessageBoxButton.OK);
+                }
+            }
         }
     }
 }
