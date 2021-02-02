@@ -13,7 +13,7 @@
              x:Class="DataProcess.Controls.YaoCeShuJuXianShi"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="800">
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="8*"/>
@@ -40,92 +40,92 @@
                         <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
                     <ScrollViewer>
-                        <UniformGrid Rows="27" Columns="3">
+                        <UniformGrid Rows="27" Columns="3" x:Name="XiTong">
                             <!--<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
                                 <TextBlock Text="GNSS时间："/>
                                 <TextBlock Text="GNSS时间："/>
                             </StackPanel>-->
-                            <cust:LabelTextBox Label="GNSS时间：" />
-                            <cust:LabelTextBox Label="总飞行时间："/>
-                            <cust:LabelTextBox Label="策略阶段："/>
-                            <cust:LabelTextBox Label="弹头状态："/>
-                            <cust:LabelTextBox Label="导航数据选择："/>
-                            <cust:LabelTextBox Label="陀螺数据融合："/>
-                            <cust:LabelTextBox Label="数据未更新："/>
-                            <cust:LabelTextBox Label="优选结果："/>
+                            <cust:LabelTextBox Label="GNSS时间："  x:Name="XiTong_GNSSTime"/>
+                            <cust:LabelTextBox Label="总飞行时间：" x:Name="XiTong_ZongFeiXingTime"/>
+                            <cust:LabelTextBox Label="策略阶段：" x:Name="XiTong_CeLueJieDuan"/>
+                            <cust:LabelTextBox Label="弹头状态：" x:Name="XiTong_DanTouZhuangTai"/>
+                            <cust:LabelTextBox Label="导航数据选择：" x:Name="XiTong_DaoHangShuJuXuanZe"/>
+                            <cust:LabelTextBox Label="陀螺数据融合：" x:Name="XiTong_TuoLuoShuJuRongHe"/>
+                            <cust:LabelTextBox Label="数据未更新：" x:Name="XiTong_ShuJuWeiGengXin"/>
+                            <cust:LabelTextBox Label="优选结果：" x:Name="XiTong_ShiJianJianGeYiChang"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="弹头组合："/>
-                            <cust:LabelTextBox Label="弹体组合："/>
-                            <cust:LabelTextBox Label="参试状态："/>
-                            <cust:LabelTextBox Label="1号数据经度："/>
-                            <cust:LabelTextBox Label="1号数据纬度："/>
-                            <cust:LabelTextBox Label="1号数据高度："/>
-                            <cust:LabelTextBox Label="1号数据东速："/>
-                            <cust:LabelTextBox Label="1号数据北速："/>
-                            <cust:LabelTextBox Label="1号数据天速："/>
-                            <cust:LabelTextBox Label="2号数据经度："/>
-                            <cust:LabelTextBox Label="2号数据纬度："/>
-                            <cust:LabelTextBox Label="2号数据高度："/>
-                            <cust:LabelTextBox Label="2号数据东速："/>
-                            <cust:LabelTextBox Label="2号数据北速："/>
-                            <cust:LabelTextBox Label="2号数据天速："/>
-                            <cust:LabelTextBox Label="功率输出闭合："/>
-                            <cust:LabelTextBox Label="解保指令发出："/>
-                            <cust:LabelTextBox Label="自毁指令发出："/>
-                            <cust:LabelTextBox Label="复位信号："/>
-                            <cust:LabelTextBox Label="对外供电："/>
-                            <cust:LabelTextBox Label="模拟自毁指令："/>
-                            <cust:LabelTextBox Label="模拟自毁指令2："/>
-                            <cust:LabelTextBox Label="加计数据融合结果："/>
-                            <cust:LabelTextBox Label="起飞分离脱插："/>
-                            <cust:LabelTextBox Label="一级分离脱插："/>
-                            <cust:LabelTextBox Label="安控接收机预令："/>
-                            <cust:LabelTextBox Label="安控接收机动令："/>
-                            <cust:LabelTextBox Label="一级自毁状态A："/>
-                            <cust:LabelTextBox Label="一级自毁状态B："/>
+                            <cust:LabelTextBox Label="弹头组合：" x:Name="XiTong_DanTouZuHe"/>
+                            <cust:LabelTextBox Label="弹体组合：" x:Name="XiTong_DanTiZuHe"/>
+                            <cust:LabelTextBox Label="参试状态：" x:Name="XiTong_CanShiZhuangTai"/>
+                            <cust:LabelTextBox Label="1号数据经度：" x:Name="XiTong_1HaoShuJuJingDu"/>
+                            <cust:LabelTextBox Label="1号数据纬度：" x:Name="XiTong_1HaoShuJuWeiDu"/>
+                            <cust:LabelTextBox Label="1号数据高度：" x:Name="XiTong_1HaoShuJuGaoDu"/>
+                            <cust:LabelTextBox Label="1号数据东速：" x:Name="XiTong_1HaoShuJuDongXiangSuDu"/>
+                            <cust:LabelTextBox Label="1号数据北速：" x:Name="XiTong_1HaoShuJuBeiXiangSuDu"/>
+                            <cust:LabelTextBox Label="1号数据天速：" x:Name="XiTong_1HaoShuJuTianXiangSuDu"/>
+                            <cust:LabelTextBox Label="2号数据经度：" x:Name="XiTong_2HaoShuJuJingDu"/>
+                            <cust:LabelTextBox Label="2号数据纬度：" x:Name="XiTong_2HaoShuJuWeiDu"/>
+                            <cust:LabelTextBox Label="2号数据高度：" x:Name="XiTong_2HaoShuJuGaoDu"/>
+                            <cust:LabelTextBox Label="2号数据东速：" x:Name="XiTong_2HaoShuJuDongXiangSuDu"/>
+                            <cust:LabelTextBox Label="2号数据北速：" x:Name="XiTong_2HaoShuJuBeiXiangSuDu"/>
+                            <cust:LabelTextBox Label="2号数据天速：" x:Name="XiTong_2HaoShuJuTianXiangSuDu"/>
+                            <cust:LabelTextBox Label="功率输出闭合：" x:Name="XiTong_GongLvShuChuBiHe"/>
+                            <cust:LabelTextBox Label="解保指令发出：" x:Name="XiTong_JieBaoZhiLingFaChu"/>
+                            <cust:LabelTextBox Label="自毁指令发出：" x:Name="XiTong_ZiHuiZhiLingFaChu"/>
+                            <cust:LabelTextBox Label="复位信号：" x:Name="XiTong_FuWeiXinHao"/>
+                            <cust:LabelTextBox Label="对外供电：" x:Name="XiTong_DuiWaiGongDian"/>
+                            <cust:LabelTextBox Label="模拟自毁指令：" x:Name="XiTong_MoNiZiHui1"/>
+                            <cust:LabelTextBox Label="模拟自毁指令2：" x:Name="XiTong_MoNiZiHui2"/>
+                            <cust:LabelTextBox Label="加计数据融合结果：" x:Name="XiTong_HuiLuJianCe"/>
+                            <cust:LabelTextBox Label="起飞分离脱插：" x:Name="XiTong_QiFeiFenLiTuoCha"/>
+                            <cust:LabelTextBox Label="一级分离脱插：" x:Name="XiTong_YiJiFenLiTuoCha"/>
+                            <cust:LabelTextBox Label="安控接收机预令：" x:Name="XiTong_AnKongJieShouJiYuLing"/>
+                            <cust:LabelTextBox Label="安控接收机动令：" x:Name="XiTong_AnKongJieShouJiDongLing"/>
+                            <cust:LabelTextBox Label="一级自毁状态A：" x:Name="XiTong_1ZiHuiWorkA"/>
+                            <cust:LabelTextBox Label="一级自毁状态B：" x:Name="XiTong_1ZiHuiWorkB"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="二级自毁状态A："/>
-                            <cust:LabelTextBox Label="二级自毁状态B："/>
+                            <cust:LabelTextBox Label="二级自毁状态A：" x:Name="XiTong_2ZiHuiWorkA"/>
+                            <cust:LabelTextBox Label="二级自毁状态B：" x:Name="XiTong_2ZiHuiWorkB"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="总飞行时间状态："/>
-                            <cust:LabelTextBox Label="侧向："/>
-                            <cust:LabelTextBox Label="后向："/>
-                            <cust:LabelTextBox Label="Wx角速度状态："/>
-                            <cust:LabelTextBox Label="Wy角速度状态："/>
-                            <cust:LabelTextBox Label="Wz角速度状态："/>
-                            <cust:LabelTextBox Label="坠落："/>
-                            <cust:LabelTextBox Label="分离时间："/>
+                            <cust:LabelTextBox Label="总飞行时间状态：" x:Name="XiTong_ZongFeiXingShiJian"/>
+                            <cust:LabelTextBox Label="侧向：" x:Name="XiTong_CeXiang"/>
+                            <cust:LabelTextBox Label="后向：" x:Name="XiTong_HouXiang"/>
+                            <cust:LabelTextBox Label="Wx角速度状态：" x:Name="XiTong_WxJiaoSuDuStatus"/>
+                            <cust:LabelTextBox Label="Wy角速度状态：" x:Name="XiTong_WyJiaoSuDuStatus"/>
+                            <cust:LabelTextBox Label="Wz角速度状态：" x:Name="XiTong_WzJiaoSuDuStatus"/>
+                            <cust:LabelTextBox Label="坠落：" x:Name="XiTong_ZhuiLuo"/>
+                            <cust:LabelTextBox Label="分离时间：" x:Name="XiTong_FenLiShiTian"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="控制区上限："/>
-                            <cust:LabelTextBox Label="控制区下限："/>
+                            <cust:LabelTextBox Label="控制区上限：" x:Name="XiTong_KongZhiQuXiaXian"/>
+                            <cust:LabelTextBox Label="控制区下限：" x:Name="XiTong_KongZhiQuShangXian"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="弹头保险："/>
-                            <cust:LabelTextBox Label="一级保险1："/>
-                            <cust:LabelTextBox Label="一级保险2："/>
-                            <cust:LabelTextBox Label="二级保险1："/>
-                            <cust:LabelTextBox Label="二级保险2："/>
+                            <cust:LabelTextBox Label="弹头保险：" x:Name="XiTong_DanTouBaoXian"/>
+                            <cust:LabelTextBox Label="一级保险1：" x:Name="XiTong_1JiBaoXian1"/>
+                            <cust:LabelTextBox Label="一级保险2：" x:Name="XiTong_1JiBaoXian2"/>
+                            <cust:LabelTextBox Label="二级保险1：" x:Name="XiTong_2JiBaoXian1"/>
+                            <cust:LabelTextBox Label="二级保险2：" x:Name="XiTong_2JiBaoXian2"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="弹头起爆："/>
-                            <cust:LabelTextBox Label="一级起爆1："/>
-                            <cust:LabelTextBox Label="一级起爆2："/>
-                            <cust:LabelTextBox Label="二级起爆1："/>
-                            <cust:LabelTextBox Label="二级起爆2："/>
+                            <cust:LabelTextBox Label="弹头起爆：" x:Name="XiTong_DanTouQiBao"/>
+                            <cust:LabelTextBox Label="一级起爆1：" x:Name="XiTong_1JiQiBao1"/>
+                            <cust:LabelTextBox Label="一级起爆2：" x:Name="XiTong_1JiQiBao2"/>
+                            <cust:LabelTextBox Label="二级起爆1：" x:Name="XiTong_2JiQiBao1"/>
+                            <cust:LabelTextBox Label="二级起爆2：" x:Name="XiTong_2JiQiBao2"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="经度："/>
-                            <cust:LabelTextBox Label="纬度："/>
-                            <cust:LabelTextBox Label="海拔高度："/>
-                            <cust:LabelTextBox Label="东向速度："/>
-                            <cust:LabelTextBox Label="北向速度："/>
-                            <cust:LabelTextBox Label="天向速度："/>
-                            <cust:LabelTextBox Label="Wx角速度："/>
-                            <cust:LabelTextBox Label="Wy角速度："/>
-                            <cust:LabelTextBox Label="Wz角速度："/>
-                            <cust:LabelTextBox Label="当前发射系X："/>
-                            <cust:LabelTextBox Label="当前发射系Y："/>
-                            <cust:LabelTextBox Label="当前发射系Z："/>
-                            <cust:LabelTextBox Label="预示落点Z："/>
-                            <cust:LabelTextBox Label="预示落点射程："/>
-                            <cust:LabelTextBox Label="轴向过载："/>
+                            <cust:LabelTextBox Label="经度：" x:Name="XiTong_JingDu"/>
+                            <cust:LabelTextBox Label="纬度：" x:Name="XiTong_WeiDu"/>
+                            <cust:LabelTextBox Label="海拔高度：" x:Name="XiTong_GaoDu"/>
+                            <cust:LabelTextBox Label="东向速度：" x:Name="XiTong_DongXiangSuDu"/>
+                            <cust:LabelTextBox Label="北向速度：" x:Name="XiTong_BeiXiangSuDu"/>
+                            <cust:LabelTextBox Label="天向速度：" x:Name="XiTong_TianXiangSuDu"/>
+                            <cust:LabelTextBox Label="Wx角速度：" x:Name="XiTong_WxJiaoSuDuValue"/>
+                            <cust:LabelTextBox Label="Wy角速度：" x:Name="XiTong_WyJiaoSuDuValue"/>
+                            <cust:LabelTextBox Label="Wz角速度：" x:Name="XiTong_WzJiaoSuDuValue"/>
+                            <cust:LabelTextBox Label="当前发射系X：" x:Name="XiTong_XFaSheXi"/>
+                            <cust:LabelTextBox Label="当前发射系Y：" x:Name="XiTong_YFaSheXi"/>
+                            <cust:LabelTextBox Label="当前发射系Z：" x:Name="XiTong_ZFaSheXi"/>
+                            <cust:LabelTextBox Label="预示落点Z：" x:Name="XiTong_YuShiLuoDianZ"/>
+                            <cust:LabelTextBox Label="预示落点射程：" x:Name="XiTong_YuShiLuoDianSheCheng"/>
+                            <cust:LabelTextBox Label="轴向过载：" x:Name="XiTong_ZhouXiangGuoZai"/>
                         </UniformGrid>
                     </ScrollViewer>
                     <dx:DXTabControl Grid.Column="1">
@@ -318,7 +318,7 @@
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <UniformGrid Rows="11" Columns="3">
+                            <UniformGrid Rows="11" Columns="3" x:Name="DaoHangKuai_Ti">
                                 <cust:LabelTextBox Label="导航系统时间："/>
                                 <cust:LabelTextBox Label="GNSS时间："/>
                                 <cust:LabelTextBox Label="点火标志："/>
@@ -435,7 +435,7 @@
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <UniformGrid Rows="11" Columns="3">
+                            <UniformGrid Rows="11" Columns="3" x:Name="DaoHangKuai_Tou">
                                 <cust:LabelTextBox Label="导航系统时间："/>
                                 <cust:LabelTextBox Label="GNSS时间："/>
                                 <cust:LabelTextBox Label="点火标志："/>
@@ -562,7 +562,7 @@
                                         <RowDefinition Height="15*"></RowDefinition>
                                         <RowDefinition Height="4*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <UniformGrid Grid.Row="0" Rows="15" Columns="3">
+                                    <UniformGrid Grid.Row="0" Rows="15" Columns="3" x:Name="DaoHangMan_Ti">
                                         <cust:LabelTextBox Label="GPS时间："/>
                                         <cust:LabelTextBox Label="GPS SV可用："/>
                                         <cust:LabelTextBox Label="GPS参与定位："/>
@@ -723,7 +723,7 @@
                                         <RowDefinition Height="15*"></RowDefinition>
                                         <RowDefinition Height="4*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <UniformGrid Grid.Row="0" Rows="15" Columns="3">
+                                    <UniformGrid Grid.Row="0" Rows="15" Columns="3" x:Name="DaoHangMan_Tou">
                                         <cust:LabelTextBox Label="GPS时间："/>
                                         <cust:LabelTextBox Label="GPS SV可用："/>
                                         <cust:LabelTextBox Label="GPS参与定位："/>
@@ -875,13 +875,13 @@
                 </dx:DXTabControl>
             </dx:DXTabItem>
             <dx:DXTabItem Header="回路检测">
-                <UniformGrid Columns="2" Rows="15">
-                    <cust:LabelTextBox Label="电机驱动输出1回路电阻：" Margin="10,0,10,0"/>
-                    <cust:LabelTextBox Label="电机驱动输出2回路电阻：" Margin="10,0,10,0"/>
-                    <cust:LabelTextBox Label="起爆点火1A回路电阻：" Margin="10,0,10,0"/>
-                    <cust:LabelTextBox Label="起爆点火1B回路电阻：" Margin="10,0,10,0"/>
-                    <cust:LabelTextBox Label="起爆点火2A回路电阻：" Margin="10,0,10,0"/>
-                    <cust:LabelTextBox Label="起爆点火2B回路电阻：" Margin="10,0,10,0"/>
+                <UniformGrid Columns="2" Rows="15" x:Name="HuiLu">
+                    <cust:LabelTextBox x:Name="HuiLu_ShuChuHuiLuDianZu1" Label="电机驱动输出1回路电阻：" Margin="10,0,10,0"/>
+                    <cust:LabelTextBox x:Name="HuiLu_ShuChuHuiLuDianZu2" Label="电机驱动输出2回路电阻：" Margin="10,0,10,0"/>
+                    <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu1A" Label="起爆点火1A回路电阻：" Margin="10,0,10,0"/>
+                    <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu1B" Label="起爆点火1B回路电阻：" Margin="10,0,10,0"/>
+                    <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu2A" Label="起爆点火2A回路电阻：" Margin="10,0,10,0"/>
+                    <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu2B" Label="起爆点火2B回路电阻：" Margin="10,0,10,0"/>
                 </UniformGrid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="系统状态即时反馈">
@@ -897,7 +897,7 @@
                                     <RowDefinition Height="9*"></RowDefinition>
                                     <RowDefinition Height="4*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <UniformGrid Grid.Row="0" Rows="9" Columns="3">
+                                <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Ti">
                                     <cust:LabelTextBox Label="陀螺X故障标志："/>
                                     <cust:LabelTextBox Label="GPS SV："/>
                                     <cust:LabelTextBox Label="GPS参与定位："/>
@@ -1120,7 +1120,7 @@
                                         <RowDefinition Height="9*"></RowDefinition>
                                         <RowDefinition Height="4*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <UniformGrid Grid.Row="0" Rows="9" Columns="3">
+                                    <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Tou">
                                         <cust:LabelTextBox Label="陀螺X故障标志："/>
                                         <cust:LabelTextBox Label="GPS SV："/>
                                         <cust:LabelTextBox Label="GPS参与定位："/>

@@ -19,6 +19,9 @@ namespace DataProcess.Controls
     /// </summary>
     public partial class YaoCeShuJuXianShi : UserControl
     {
+        public LoadDataForm load;
+        public MainWindow main_window;
+
         public YaoCeShuJuXianShi()
         {
             InitializeComponent();
@@ -26,8 +29,13 @@ namespace DataProcess.Controls
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
-            LoadDataForm load = new LoadDataForm();
-            load.Show();
+            if (load == null)
+            {
+                load = new LoadDataForm(); 
+                load.setPlayStatus = main_window.setOffLineFilePlayStatus;  
+            } 
+            load.Show(); 
+            return; 
         }
     }
 }

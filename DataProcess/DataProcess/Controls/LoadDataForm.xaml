@@ -1,4 +1,4 @@
-﻿<dx:ThemedWindow x:Class="DataProcess.Controls.LoadDataForm"
+﻿<Window x:Class="DataProcess.Controls.LoadDataForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -31,13 +31,13 @@
         </Grid>
         <Grid Grid.Row="1" Margin="5,5,4.8,5" Grid.ColumnSpan="2">
             <UniformGrid Columns="3">
-                <dx:SimpleButton  x:Name="btnStart" Content="开始" HorizontalAlignment="Center" FontSize="20" Glyph="{dx:DXImage SvgImages/Arrows/Next.svg}"/>
-                <dx:SimpleButton  x:Name="btnStop" Content="停止" HorizontalAlignment="Center" FontSize="20" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Stop.svg}"/>
-                <dx:SimpleButton  x:Name="btnPause" Content="暂停" HorizontalAlignment="Center" FontSize="20" Glyph="{dx:DXImage SvgImages/Snap/HighlightActiveElement.svg}"/>
+                <dx:SimpleButton  x:Name="btnStart" Content="开始" HorizontalAlignment="Center" FontSize="20" Glyph="{dx:DXImage SvgImages/Arrows/Next.svg}" Click="btnStart_Click"/>
+                <dx:SimpleButton  x:Name="btnStop" Content="停止" HorizontalAlignment="Center" FontSize="20" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Stop.svg}" Click="btnStop_Click"/>
+                <dx:SimpleButton  x:Name="btnPause" Content="暂停" HorizontalAlignment="Center" FontSize="20" Glyph="{dx:DXImage SvgImages/Snap/HighlightActiveElement.svg}" Click="btnPause_Click"/>
             </UniformGrid>
         </Grid>
         <Grid Grid.Row="2" Margin="5,5,4.8,5">
-            <ProgressBar/>
+            <ProgressBar x:Name="progressBar1"/>
         </Grid>
         <Grid Grid.Row="3" Margin="5,5,4.8,5">
             <Grid.ColumnDefinitions>
@@ -49,8 +49,8 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="进度跳转:" VerticalAlignment="Center" FontSize="20"/>
             <dxe:SpinEdit  x:Name="spinEdit" Grid.Column="1" FontSize="20" MaxValue="100" MinValue="0" IsReadOnly="False" EditValue="0" ShowEditorButtons="True" AllowRoundOutOfRangeValue="False" Height="50" VerticalAlignment="Top" />
-            <dx:SimpleButton x:Name="btnSkip" Grid.Column="2" Content="跳转" FontSize="20" Glyph="{dx:DXImage SvgImages/History/Undo.svg}" HorizontalAlignment="Center"/>
+            <dx:SimpleButton x:Name="btnSkip" Grid.Column="2" Content="跳转" FontSize="20" Glyph="{dx:DXImage SvgImages/History/Undo.svg}" HorizontalAlignment="Center" Click="btnSkip_Click"/>
             <dx:SimpleButton Grid.Column="4" Content="关闭" FontSize="20" HorizontalAlignment="Center" Glyph="{dx:DXImage SvgImages/HybridDemoIcons/BottomPanel/HybridDemo_Close.svg}" Click="SimpleButton_Click" />
         </Grid>
     </Grid>
-</dx:ThemedWindow>
+</Window>

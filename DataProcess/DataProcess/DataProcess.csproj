@@ -112,9 +112,6 @@
     <Compile Include="Controls\Curve.xaml.cs">
       <DependentUpon>Curve.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LoadData.xaml.cs">
-      <DependentUpon>LoadData.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LoadDataForm.xaml.cs">
       <DependentUpon>LoadDataForm.xaml</DependentUpon>
     </Compile>
@@ -172,13 +169,11 @@
     <Compile Include="YaoCe\CRC16.cs" />
     <Compile Include="YaoCe\DataLogger.cs" />
     <Compile Include="YaoCe\DataParser.cs" />
+    <Compile Include="YaoCe\GenericFunction.cs" />
+    <Compile Include="YaoCe\HanziToPinyin.cs" />
     <Compile Include="YaoCe\Logger.cs" />
     <Compile Include="YaoCe\Protocol.cs" />
     <Page Include="Controls\Curve.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\LoadData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

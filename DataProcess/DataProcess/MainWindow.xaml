@@ -2438,7 +2438,7 @@
                 </ScrollViewer>
             </dx:DXTabItem>
             <dx:DXTabItem Header="遥测">
-                <Controls:YaoCeShuJuXianShi x:Name="YAOCE"/>
+                <Controls:YaoCeShuJuXianShi x:Name="YAOCE" />
             </dx:DXTabItem>
         </dx:DXTabControl>
     </Grid>
