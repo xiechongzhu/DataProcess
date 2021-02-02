@@ -246,42 +246,42 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartHood.WriteData(packet.temperatureSensor.hood[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartInsAir.WriteData(packet.temperatureSensor.insAir[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartInsWall.WriteData(packet.temperatureSensor.insWall[i] * ratios.slowTemp + ratios.slowTempFix);
-                    ChartAttAir.WriteData(packet.temperatureSensor.attAir[i] * ratios.slowTemp + ratios.slowTempFix);
+                    ChartHood.WriteData(packet.temperatureSensor.hood[i] * ratios.HoodTemp + ratios.HoodTempFix);
+                    ChartInsAir.WriteData(packet.temperatureSensor.insAir[i] * ratios.InsAirTemp + ratios.InsAirTempFix);
+                    ChartInsWall.WriteData(packet.temperatureSensor.insWall[i] * ratios.InsWallTemp + ratios.InsWallTempFix);
+                    ChartAttAir.WriteData(packet.temperatureSensor.attAir[i] * ratios.AttAirTemp + ratios.AttAirTempFix);
                 }
-                ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[0] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[1] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[2] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[3] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[4] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[5] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[6] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[7] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[8] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[9] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[10] * ratios.slowTemp + ratios.slowTempFix);
-                ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[11] * ratios.slowTemp + ratios.slowTempFix);
+                ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[0] * ratios.AttWalls1Temp + ratios.AttWalls1TempFix);
+                ChartAttWalls1.WriteData(packet.temperatureSensor.attWalls[1] * ratios.AttWalls1Temp + ratios.AttWalls1TempFix);
+                ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[2] * ratios.AttWalls2Temp + ratios.AttWalls2TempFix);
+                ChartAttWalls2.WriteData(packet.temperatureSensor.attWalls[3] * ratios.AttWalls2Temp + ratios.AttWalls2TempFix);
+                ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[4] * ratios.AttWalls3Temp + ratios.AttWalls3TempFix);
+                ChartAttWalls3.WriteData(packet.temperatureSensor.attWalls[5] * ratios.AttWalls3Temp + ratios.AttWalls3TempFix);
+                ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[6] * ratios.AttWalls4Temp + ratios.AttWalls4TempFix);
+                ChartAttWalls4.WriteData(packet.temperatureSensor.attWalls[7] * ratios.AttWalls4Temp + ratios.AttWalls4TempFix);
+                ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[8] * ratios.AttWalls5Temp + ratios.AttWalls5TempFix);
+                ChartAttWalls5.WriteData(packet.temperatureSensor.attWalls[9] * ratios.AttWalls5Temp + ratios.AttWalls5TempFix);
+                ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[10] * ratios.AttWalls6Temp + ratios.AttWalls6TempFix);
+                ChartAttWalls6.WriteData(packet.temperatureSensor.attWalls[11] * ratios.AttWalls6Temp + ratios.AttWalls6TempFix);
                 for (int i = 0; i < 2; ++i)
                 {
-                    ChartInsPresure.WriteData(packet.pressureSensor.instrument[i] * ratios.slowPress + ratios.slowPressFix);
-                    ChartAttiPresure.WriteData(packet.pressureSensor.attitudeControl[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartInsPresure.WriteData(packet.pressureSensor.instrument[i] * ratios.InsPresure + ratios.InsPresureFix);
+                    ChartAttiPresure.WriteData(packet.pressureSensor.attitudeControl[i] * ratios.AttiPresure + ratios.AttiPresureFix);
                 }
 
                 for (int i = 0; i < packet.level2Transmitter.Length; ++i)
                 {
-                    ChartLevel2Transmitter.WriteData(packet.level2Transmitter[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartLevel2Transmitter.WriteData(packet.level2Transmitter[i] * ratios.Level2TransmitterPresure + ratios.Level2TransmitterPresureFix);
                 }
 
                 for (int i = 0; i < packet.gestureControlHigh.Length; ++i)
                 {
-                    ChartGestureControlHigh.WriteData(packet.gestureControlHigh[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartGestureControlHigh.WriteData(packet.gestureControlHigh[i] * ratios.GestureControlHighPresure + ratios.GestureControlHighPresureFix);
                 }
 
                 for (int i = 0; i < packet.gestureControlLow.Length; ++i)
                 {
-                    ChartGestureControlLow.WriteData(packet.gestureControlLow[i] * ratios.slowPress + ratios.slowPressFix);
+                    ChartGestureControlLow.WriteData(packet.gestureControlLow[i] * ratios.GestureControlLowPresure + ratios.GestureControlLowPresureFix);
                 }
             }
 
@@ -308,32 +308,32 @@ namespace DataProcess
             {
                 foreach(FastShakeSignal fastShakeSignal in packet.shakeSignals)
                 {
-                    ChartShake1.WriteData(fastShakeSignal.signal[0] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake2.WriteData(fastShakeSignal.signal[1] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake3.WriteData(fastShakeSignal.signal[2] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake4.WriteData(fastShakeSignal.signal[3] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake5.WriteData(fastShakeSignal.signal[4] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake6.WriteData(fastShakeSignal.signal[5] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake7.WriteData(fastShakeSignal.signal[6] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake8.WriteData(fastShakeSignal.signal[7] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake9.WriteData(fastShakeSignal.signal[8] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake10.WriteData(fastShakeSignal.signal[9] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake11.WriteData(fastShakeSignal.signal[10] * ratios.fastShake + ratios.fastShakeFix);
-                    ChartShake12.WriteData(fastShakeSignal.signal[11] * ratios.fastShake + ratios.fastShakeFix);
+                    ChartShake1.WriteData(fastShakeSignal.signal[0] * ratios.Shake1 + ratios.Shake1Fix);
+                    ChartShake2.WriteData(fastShakeSignal.signal[1] * ratios.Shake2 + ratios.Shake2Fix);
+                    ChartShake3.WriteData(fastShakeSignal.signal[2] * ratios.Shake3 + ratios.Shake3Fix);
+                    ChartShake4.WriteData(fastShakeSignal.signal[3] * ratios.Shake4 + ratios.Shake4Fix);
+                    ChartShake5.WriteData(fastShakeSignal.signal[4] * ratios.Shake5 + ratios.Shake5Fix);
+                    ChartShake6.WriteData(fastShakeSignal.signal[5] * ratios.Shake6 + ratios.Shake6Fix);
+                    ChartShake7.WriteData(fastShakeSignal.signal[6] * ratios.Shake7 + ratios.Shake7Fix);
+                    ChartShake8.WriteData(fastShakeSignal.signal[7] * ratios.Shake8 + ratios.Shake8Fix);
+                    ChartShake9.WriteData(fastShakeSignal.signal[8] * ratios.Shake9 + ratios.Shake9Fix);
+                    ChartShake10.WriteData(fastShakeSignal.signal[9] * ratios.Shake10 + ratios.Shake10Fix);
+                    ChartShake11.WriteData(fastShakeSignal.signal[10] * ratios.Shake11 + ratios.Shake11Fix);
+                    ChartShake12.WriteData(fastShakeSignal.signal[11] * ratios.Shake12 + ratios.Shake12Fix);
                 }
 
                 foreach(FastLashSignal fastLashSignal in packet.lashSignal)
                 {
-                    ChartLash1_1.WriteData(fastLashSignal.signal[0] * ratios.fastLash + ratios.fastLashFix);
-                    ChartLash1_2.WriteData(fastLashSignal.signal[1] * ratios.fastLash + ratios.fastLashFix);
-                    ChartLash1_3.WriteData(fastLashSignal.signal[2] * ratios.fastLash + ratios.fastLashFix);
-                    ChartLash2.WriteData(fastLashSignal.signal[3] * ratios.fastLash + ratios.fastLashFix);
+                    ChartLash1_1.WriteData(fastLashSignal.signal[0] * ratios.Lash1_1 + ratios.Lash1_1Fix);
+                    ChartLash1_2.WriteData(fastLashSignal.signal[1] * ratios.Lash1_2 + ratios.Lash1_2Fix);
+                    ChartLash1_3.WriteData(fastLashSignal.signal[2] * ratios.Lash1_3 + ratios.Lash1_3Fix);
+                    ChartLash2.WriteData(fastLashSignal.signal[3] * ratios.Lash2 + ratios.Lash2Fix);
                 }
 
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    ChartNoise1.WriteData(packet.noiseSignal[pos].signal[0] * ratios.fastNoise + ratios.fastNoiseFix);
-                    ChartNoise2.WriteData(packet.noiseSignal[pos].signal[1] * ratios.fastNoise + ratios.fastNoiseFix);
+                    ChartNoise1.WriteData(packet.noiseSignal[pos].signal[0] * ratios.Noise1 + ratios.Noise1Fix);
+                    ChartNoise2.WriteData(packet.noiseSignal[pos].signal[1] * ratios.Noise2 + ratios.Noise2Fix);
                 }
             }
             ChartShake1.EndWrite();
@@ -369,47 +369,47 @@ namespace DataProcess
                         switch ((ChannelType)channel)
                         {
                             case ChannelType.ChannelPresure:
-                                value = data.Data() * ratios.tailPress + ratios.tailPressFix;
+                                value = data.Data() * ratios.TailPresure + ratios.TailPresureFix;
                                 ChartPresure.WriteData(value);
                                 break;
                             case ChannelType.ChannelLevel1Presure:
-                                value = data.Data() * ratios.tailPress + ratios.tailPressFix;
+                                value = data.Data() * ratios.Level1Presure + ratios.Level1PresureFix;
                                 ChartLevel1Presure.WriteData(value);
                                 break;
                             case ChannelType.ChannelTemperature1:
-                                value = data.Data() * ratios.tailTemp + ratios.tailTempFix;
+                                value = data.Data() * ratios.Temperature1Temp + ratios.Temperature1TempFix;
                                 ChartTemperature1.WriteData(value);
                                 break;
                             case ChannelType.ChannelTemperature2:
-                                value = data.Data() * ratios.tailTemp + ratios.tailTempFix;
+                                value = data.Data() * ratios.Temperature2Temp + ratios.Temperature2TempFix;
                                 ChartTemperature2.WriteData(value);
                                 break;
                             case ChannelType.Channel1ShakeX:
-                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
+                                value = data.Data() * ratios.Shake1X + ratios.Shake1XFix;
                                 ChartLash1X.WriteData(value);
                                 break;
                             case ChannelType.Channel1ShakeY:
-                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
+                                value = data.Data() * ratios.Shake1Y + ratios.Shake1YFix;
                                 ChartLash1Y.WriteData(value);
                                 break;
                             case ChannelType.Channel1ShakeZ:
-                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
+                                value = data.Data() * ratios.Shake1Z + ratios.Shake1ZFix;
                                 ChartLash1Z.WriteData(value);
                                 break;
                             case ChannelType.Channel2ShakeX:
-                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
+                                value = data.Data() * ratios.Shake2X + ratios.Shake2XFix;
                                 ChartLash2X.WriteData(value);
                                 break;
                             case ChannelType.Channel2ShakeY:
-                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
+                                value = data.Data() * ratios.Shake2Y + ratios.Shake2YFix;
                                 ChartLash2Y.WriteData(value);
                                 break;
                             case ChannelType.Channel2ShakeZ:
-                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
+                                value = data.Data() * ratios.Shake2Z + ratios.Shake2ZFix;
                                 ChartLash2Z.WriteData(value);
                                 break;
                             case ChannelType.ChannelNoise:
-                                value = data.Data() * ratios.tailNoise + ratios.tailNoiseFix;
+                                value = data.Data() * ratios.Noise + ratios.NoiseFix;
                                 ChartNoise.WriteData(value);
                                 break;
                             default:

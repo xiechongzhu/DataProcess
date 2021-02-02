@@ -1837,7 +1837,7 @@
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLash1X">
+                                    <dxc:ChartControl Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake1X">
                                         <dxc:ChartControl.Titles>
                                             <dxc:Title Content="级间段内后法兰振动传感器V5-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
@@ -1862,14 +1862,14 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1X" ArgumentDataMember="X" ValueDataMember="Y">
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake1X" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLash1Y">
+                                    <dxc:ChartControl Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake1Y">
                                         <dxc:ChartControl.Titles>
                                             <dxc:Title Content="级间段内后法兰振动传感器V5-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
@@ -1894,14 +1894,14 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1Y" ArgumentDataMember="X" ValueDataMember="Y">
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake1Y" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartLash1Z">
+                                    <dxc:ChartControl Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake1Z">
                                         <dxc:ChartControl.Titles>
                                             <dxc:Title Content="级间段内后法兰振动传感器V5-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
@@ -1926,14 +1926,14 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash1Z" ArgumentDataMember="X" ValueDataMember="Y">
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake1Z" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartLash2X">
+                                    <dxc:ChartControl Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartShake2X">
                                         <dxc:ChartControl.Titles>
                                             <dxc:Title Content="尾段内振动传感器V6-X" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
@@ -1958,14 +1958,14 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2X" ArgumentDataMember="X" ValueDataMember="Y">
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake2X" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartLash2Y">
+                                    <dxc:ChartControl Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" x:Name="ChartShake2Y">
                                         <dxc:ChartControl.Titles>
                                             <dxc:Title Content="尾段内振动传感器V6-Y" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
@@ -1990,14 +1990,14 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2Y" ArgumentDataMember="X" ValueDataMember="Y">
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake2Y" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
                                             </dxc:LineSeries2D>
                                         </dxc:XYDiagram2D>
                                     </dxc:ChartControl>
-                                    <dxc:ChartControl Grid.Row="5" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartLash2Z">
+                                    <dxc:ChartControl Grid.Row="5" Grid.Column="2" Margin="2,2,2,2" x:Name="ChartShake2Z">
                                         <dxc:ChartControl.Titles>
                                             <dxc:Title Content="尾段内振动传感器V6-Z" Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
                                         </dxc:ChartControl.Titles>
@@ -2022,7 +2022,7 @@
                                                     </dxc:AxisX2D.Title>
                                                 </dxc:AxisX2D>
                                             </dxc:XYDiagram2D.AxisX>
-                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesLash2Z" ArgumentDataMember="X" ValueDataMember="Y">
+                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="SeriesShake2Z" ArgumentDataMember="X" ValueDataMember="Y">
                                                 <dxc:LineSeries2D.LineStyle>
                                                     <dxc:LineStyle LineJoin="Bevel"/>
                                                 </dxc:LineSeries2D.LineStyle>
