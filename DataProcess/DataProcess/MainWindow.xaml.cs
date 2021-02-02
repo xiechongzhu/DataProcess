@@ -1789,12 +1789,12 @@ namespace DataProcess
             SeriesLevel1.DataSource = chartDataSource.TailLevel1PresureList;
             SeriesTemperature1.DataSource = chartDataSource.TailTemperature1List;
             SeriesTemperature2.DataSource = chartDataSource.TailTemperature2List;
-            SeriesLash1X.DataSource = chartDataSource.TailLash1XList;
-            SeriesLash1Y.DataSource = chartDataSource.TailLash1YList;
-            SeriesLash1Z.DataSource = chartDataSource.TailLash1ZList;
-            SeriesLash2X.DataSource = chartDataSource.TailLash2XList;
-            SeriesLash2Y.DataSource = chartDataSource.TailLash2YList;
-            SeriesLash2Z.DataSource = chartDataSource.TailLash2ZList;
+            SeriesShake1X.DataSource = chartDataSource.TailLash1XList;
+            SeriesShake1Y.DataSource = chartDataSource.TailLash1YList;
+            SeriesShake1Z.DataSource = chartDataSource.TailLash1ZList;
+            SeriesShake2X.DataSource = chartDataSource.TailLash2XList;
+            SeriesShake2Y.DataSource = chartDataSource.TailLash2YList;
+            SeriesShake2Z.DataSource = chartDataSource.TailLash2ZList;
             SeriesNoise.DataSource = chartDataSource.TailNoiseList;
 
             SeriesNavLat.DataSource = chartDataSource.NavLat;
@@ -1847,7 +1847,7 @@ namespace DataProcess
             if (displayBuffers.SlowPacketList.Count > 0)
             {
                 DrawSlowPackets(displayBuffers.SlowPacketList);
-                UpdateSyncFireDisplay(displayBuffers.SlowPacketList[displayBuffers.SlowPacketList.Count - 1].syncFire * ratios.fire + ratios.fireFix);
+                UpdateSyncFireDisplay(displayBuffers.SlowPacketList[displayBuffers.SlowPacketList.Count - 1].syncFire * ratios.Fire + ratios.FireFix);
             }
 
             if(displayBuffers.FastPacketList.Count > 0)
@@ -1901,30 +1901,30 @@ namespace DataProcess
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    chartDataSource.SlowHoodList.AddPoint(packet.temperatureSensor.hood[i] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowInsAirList.AddPoint(packet.temperatureSensor.insAir[i] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowInsWallList.AddPoint(packet.temperatureSensor.insWall[i] * ratios.slowTemp + ratios.slowTempFix);
-                    chartDataSource.SlowAttAirList.AddPoint(packet.temperatureSensor.attAir[i] * ratios.slowTemp + ratios.slowTempFix);
+                    chartDataSource.SlowHoodList.AddPoint(packet.temperatureSensor.hood[i] * ratios.HoodTemp + ratios.HoodTempFix);
+                    chartDataSource.SlowInsAirList.AddPoint(packet.temperatureSensor.insAir[i] * ratios.InsAirTemp + ratios.InsAirTempFix);
+                    chartDataSource.SlowInsWallList.AddPoint(packet.temperatureSensor.insWall[i] * ratios.InsWallTemp + ratios.InsWallTempFix);
+                    chartDataSource.SlowAttAirList.AddPoint(packet.temperatureSensor.attAir[i] * ratios.AttAirTemp + ratios.AttAirTempFix);
                 }
-                chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[0] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[1] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[2] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[3] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[4] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[5] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[6] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[7] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[8] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[9] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[10] * ratios.slowTemp + ratios.slowTempFix);
-                chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[11] * ratios.slowTemp + ratios.slowTempFix);
+                chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[0] * ratios.AttWalls1Temp + ratios.AttWalls1TempFix);
+                chartDataSource.SlowAttWallList1.AddPoint(packet.temperatureSensor.attWalls[1] * ratios.AttWalls1Temp + ratios.AttWalls1TempFix);
+                chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[2] * ratios.AttWalls2Temp + ratios.AttWalls2TempFix);
+                chartDataSource.SlowAttWallList2.AddPoint(packet.temperatureSensor.attWalls[3] * ratios.AttWalls2Temp + ratios.AttWalls2TempFix);
+                chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[4] * ratios.AttWalls3Temp + ratios.AttWalls3TempFix);
+                chartDataSource.SlowAttWallList3.AddPoint(packet.temperatureSensor.attWalls[5] * ratios.AttWalls3Temp + ratios.AttWalls3TempFix);
+                chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[6] * ratios.AttWalls4Temp + ratios.AttWalls4TempFix);
+                chartDataSource.SlowAttWallList4.AddPoint(packet.temperatureSensor.attWalls[7] * ratios.AttWalls4Temp + ratios.AttWalls4TempFix);
+                chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[8] * ratios.AttWalls5Temp + ratios.AttWalls5TempFix);
+                chartDataSource.SlowAttWallList5.AddPoint(packet.temperatureSensor.attWalls[9] * ratios.AttWalls5Temp + ratios.AttWalls5TempFix);
+                chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[10] * ratios.AttWalls6Temp + ratios.AttWalls6TempFix);
+                chartDataSource.SlowAttWallList6.AddPoint(packet.temperatureSensor.attWalls[11] * ratios.AttWalls6Temp + ratios.AttWalls6TempFix);
                 for (int i = 0; i < 2; ++i)
                 {
-                    chartDataSource.SlowInsPresureList.AddPoint(packet.pressureSensor.instrument[i] * ratios.slowPress + ratios.slowPressFix);
-                    chartDataSource.SlowAttPresureList.AddPoint(packet.pressureSensor.attitudeControl[i] * ratios.slowPress + ratios.slowPressFix);
-                    chartDataSource.SlowLevel2PresureList.AddPoint(packet.level2Transmitter[i] * ratios.slowPress + ratios.slowPressFix);
-                    chartDataSource.SlowPresureHighList.AddPoint(packet.gestureControlHigh[i] * ratios.slowPress + ratios.slowPressFix);
-                    chartDataSource.SlowPresureLowList.AddPoint(packet.gestureControlLow[i] * ratios.slowPress + ratios.slowPressFix);
+                    chartDataSource.SlowInsPresureList.AddPoint(packet.pressureSensor.instrument[i] * ratios.InsPresure + ratios.InsPresureFix);
+                    chartDataSource.SlowAttPresureList.AddPoint(packet.pressureSensor.attitudeControl[i] * ratios.AttiPresure + ratios.AttiPresureFix);
+                    chartDataSource.SlowLevel2PresureList.AddPoint(packet.level2Transmitter[i] * ratios.Level2TransmitterPresure + ratios.Level2TransmitterPresureFix);
+                    chartDataSource.SlowPresureHighList.AddPoint(packet.gestureControlHigh[i] * ratios.GestureControlHighPresure + ratios.GestureControlHighPresureFix);
+                    chartDataSource.SlowPresureLowList.AddPoint(packet.gestureControlLow[i] * ratios.GestureControlLowPresure + ratios.GestureControlLowPresureFix);
                 }
             });
             chartDataSource.SlowHoodList.NotifyDataChanged();
@@ -1953,10 +1953,22 @@ namespace DataProcess
                 for (int idx = 0; idx < 80; ++idx)
                 {
                     FastShakeSignal fastShakeSignal = packet.shakeSignals[idx];
-                    for (int pos = 0; pos < 12; ++pos)
+                    /*for (int pos = 0; pos < 12; ++pos)
                     {
                         chartDataSource.FastShakeSeriesLists[pos].AddPoint(fastShakeSignal.signal[pos] * ratios.fastShake + ratios.fastShakeFix);
-                    }
+                    }*/
+                    chartDataSource.FastShakeSeriesLists[0].AddPoint(fastShakeSignal.signal[0] * ratios.Shake1 + ratios.Shake1Fix);
+                    chartDataSource.FastShakeSeriesLists[1].AddPoint(fastShakeSignal.signal[1] * ratios.Shake2 + ratios.Shake2Fix);
+                    chartDataSource.FastShakeSeriesLists[2].AddPoint(fastShakeSignal.signal[2] * ratios.Shake3 + ratios.Shake3Fix);
+                    chartDataSource.FastShakeSeriesLists[3].AddPoint(fastShakeSignal.signal[3] * ratios.Shake4 + ratios.Shake4Fix);
+                    chartDataSource.FastShakeSeriesLists[4].AddPoint(fastShakeSignal.signal[4] * ratios.Shake5 + ratios.Shake5Fix);
+                    chartDataSource.FastShakeSeriesLists[5].AddPoint(fastShakeSignal.signal[5] * ratios.Shake6 + ratios.Shake6Fix);
+                    chartDataSource.FastShakeSeriesLists[6].AddPoint(fastShakeSignal.signal[6] * ratios.Shake7 + ratios.Shake7Fix);
+                    chartDataSource.FastShakeSeriesLists[7].AddPoint(fastShakeSignal.signal[7] * ratios.Shake8 + ratios.Shake8Fix);
+                    chartDataSource.FastShakeSeriesLists[8].AddPoint(fastShakeSignal.signal[8] * ratios.Shake9 + ratios.Shake9Fix);
+                    chartDataSource.FastShakeSeriesLists[9].AddPoint(fastShakeSignal.signal[9] * ratios.Shake10 + ratios.Shake10Fix);
+                    chartDataSource.FastShakeSeriesLists[10].AddPoint(fastShakeSignal.signal[10] * ratios.Shake11 + ratios.Shake11Fix);
+                    chartDataSource.FastShakeSeriesLists[11].AddPoint(fastShakeSignal.signal[11] * ratios.Shake12 + ratios.Shake12Fix);
                 }
                 chartDataSource.FastLashT3SeriesList.AddPoint(packet.lashT3);
                 chartDataSource.FastLashT2SeriesList.AddPoint(packet.lashT2);
@@ -1965,15 +1977,15 @@ namespace DataProcess
 
                 foreach(FastLashSignal fastLashSignal in packet.lashSignal)
                 {
-                    chartDataSource.FastLashSeriesLists1[0].AddPoint(fastLashSignal.signal[0] * ratios.fastLash + ratios.fastLashFix);
-                    chartDataSource.FastLashSeriesLists1[1].AddPoint(fastLashSignal.signal[1] * ratios.fastLash + ratios.fastLashFix);
-                    chartDataSource.FastLashSeriesLists1[2].AddPoint(fastLashSignal.signal[2] * ratios.fastLash + ratios.fastLashFix);
-                    chartDataSource.FastLashSeriesList2.AddPoint(fastLashSignal.signal[3] * ratios.fastLash + ratios.fastLashFix);
+                    chartDataSource.FastLashSeriesLists1[0].AddPoint(fastLashSignal.signal[0] * ratios.Lash1_1 + ratios.Lash1_1Fix);
+                    chartDataSource.FastLashSeriesLists1[1].AddPoint(fastLashSignal.signal[1] * ratios.Lash1_2 + ratios.Lash1_2Fix);
+                    chartDataSource.FastLashSeriesLists1[2].AddPoint(fastLashSignal.signal[2] * ratios.Lash1_3 + ratios.Lash1_3Fix);
+                    chartDataSource.FastLashSeriesList2.AddPoint(fastLashSignal.signal[3] * ratios.Lash2 + ratios.Lash2Fix);
                 }
                 for (int pos = 0; pos < 400; ++pos)
                 {
-                    chartDataSource.FastNoiseLists[0].AddPoint(packet.noiseSignal[pos].signal[0] * ratios.fastNoise + ratios.fastNoiseFix);
-                    chartDataSource.FastNoiseLists[1].AddPoint(packet.noiseSignal[pos].signal[1] * ratios.fastNoise + ratios.fastNoiseFix);
+                    chartDataSource.FastNoiseLists[0].AddPoint(packet.noiseSignal[pos].signal[0] * ratios.Noise1 + ratios.Noise1Fix);
+                    chartDataSource.FastNoiseLists[1].AddPoint(packet.noiseSignal[pos].signal[1] * ratios.Noise2 + ratios.Noise2Fix);
                 }
             });
             chartDataSource.FastShakeSeriesLists.ForEach(source => source.NotifyDataChanged());
@@ -2005,25 +2017,37 @@ namespace DataProcess
                         switch ((ChannelType)channel)
                         {
                             case ChannelType.ChannelPresure:
-                                value = data.Data() * ratios.tailPress + ratios.tailPressFix;
+                                value = data.Data() * ratios.TailPresure + ratios.TailPresureFix;
                                 break;
                             case ChannelType.ChannelLevel1Presure:
-                                value = data.Data() * ratios.tailPress + ratios.tailPressFix;
+                                value = data.Data() * ratios.Level1Presure + ratios.Level1PresureFix;
                                 break;
                             case ChannelType.ChannelTemperature1:
+                                value = data.Data() * ratios.Temperature1Temp + ratios.Temperature1TempFix;
+                                break;
                             case ChannelType.ChannelTemperature2:
-                                value = data.Data() * ratios.tailTemp + ratios.tailTempFix;
+                                value = data.Data() * ratios.Temperature2Temp + ratios.Temperature2TempFix;
                                 break;
                             case ChannelType.Channel1ShakeX:
+                                value = data.Data() * ratios.Shake1X + ratios.Shake1XFix;
+                                break;
                             case ChannelType.Channel1ShakeY:
+                                value = data.Data() * ratios.Shake1Y + ratios.Shake1YFix;
+                                break;
                             case ChannelType.Channel1ShakeZ:
+                                value = data.Data() * ratios.Shake1Z + ratios.Shake1ZFix;
+                                break;
                             case ChannelType.Channel2ShakeX:
+                                value = data.Data() * ratios.Shake2X + ratios.Shake2XFix;
+                                break;
                             case ChannelType.Channel2ShakeY:
+                                value = data.Data() * ratios.Shake2Y + ratios.Shake2YFix;
+                                break;
                             case ChannelType.Channel2ShakeZ:
-                                value = data.Data() * ratios.tailShake + ratios.tailShakeFix;
+                                value = data.Data() * ratios.Shake2Z + ratios.Shake2ZFix;
                                 break;
                             case ChannelType.ChannelNoise:
-                                value = data.Data() * ratios.tailNoise + ratios.tailNoiseFix;
+                                value = data.Data() * ratios.Noise + ratios.NoiseFix;
                                 break;
                             default:
                                 break;
@@ -2963,12 +2987,12 @@ namespace DataProcess
                 HideZeroLevel(ChartShake10);
                 HideZeroLevel(ChartShake11);
                 HideZeroLevel(ChartShake12);
-                HideZeroLevel(ChartLash1X);
-                HideZeroLevel(ChartLash1Y);
-                HideZeroLevel(ChartLash1Z);
-                HideZeroLevel(ChartLash2X);
-                HideZeroLevel(ChartLash2Y);
-                HideZeroLevel(ChartLash2Z);
+                HideZeroLevel(ChartShake1X);
+                HideZeroLevel(ChartShake1Y);
+                HideZeroLevel(ChartShake1Z);
+                HideZeroLevel(ChartShake2X);
+                HideZeroLevel(ChartShake2Y);
+                HideZeroLevel(ChartShake2Z);
                 HideZeroLevel(ChartLash1_1);
                 HideZeroLevel(ChartLash1_2);
                 HideZeroLevel(ChartLash1_3);
@@ -3010,12 +3034,12 @@ namespace DataProcess
                 SetFixedRange(ChartShake10);
                 SetFixedRange(ChartShake11);
                 SetFixedRange(ChartShake12);
-                SetFixedRange(ChartLash1X);
-                SetFixedRange(ChartLash1Y);
-                SetFixedRange(ChartLash1Z);
-                SetFixedRange(ChartLash2X);
-                SetFixedRange(ChartLash2Y);
-                SetFixedRange(ChartLash2Z);
+                SetFixedRange(ChartShake1X);
+                SetFixedRange(ChartShake1Y);
+                SetFixedRange(ChartShake1Z);
+                SetFixedRange(ChartShake2X);
+                SetFixedRange(ChartShake2Y);
+                SetFixedRange(ChartShake2Z);
                 SetFixedRange(ChartLash1_1);
                 SetFixedRange(ChartLash1_2);
                 SetFixedRange(ChartLash1_3);
