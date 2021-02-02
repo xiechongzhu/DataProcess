@@ -23,9 +23,9 @@ using System.Windows.Threading;
 using YaoCeProcess;
 using ScoreTools.CustomControl;
 using DataProcess.YaoCe;
+using DataProcess.Controls;
 using System.Timers;
 using System.Threading;
-
 
 namespace DataProcess
 {
@@ -332,6 +332,8 @@ namespace DataProcess
         /// 是否开启Socket接收网络数据
         bool bStartRecvNetworkData = false;
 
+        public LoadDataForm load;//
+
 
         /// 直接读取二进制文件
         FileStream srFileRead = null;
@@ -465,8 +467,6 @@ namespace DataProcess
 
 
         /// setDaoHangStatusOnOffLine
-        /// <param name="statusType"></param>
-        /// <param name="bOn"></param>
         public void setDaoHangStatusOnOffLine(uint statusType, bool bOn)
         {
             switch (statusType)
@@ -502,12 +502,9 @@ namespace DataProcess
             }
         }
 
-        public void setStatusOnOffLine(uint statusType, bool bOn)
-        // 
+        public void setStatusOnOffLine(uint statusType, bool bOn) 
         {
-            // 
             switch (statusType)
-            // 
             {
                 // 
                 case E_STATUSTYPE_XiTong:
@@ -517,7 +514,7 @@ namespace DataProcess
                     {
                         // 
                         // pictureEdit_XiTong.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_green.png"); //
-                        SetLedStatus(YAOCE.imageZhuangTai, LED_STATUS.LED_GREEN);
+                        SetLedStatus( imageZhuangTai, LED_STATUS.LED_GREEN);
                     }
                     // 
                     else
@@ -525,7 +522,7 @@ namespace DataProcess
                     {
                         // 
                         //pictureEdit_XiTong.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_gray.png"); //
-                        SetLedStatus(YAOCE.imageZhuangTai, LED_STATUS.LED_GRAY);
+                        SetLedStatus( imageZhuangTai, LED_STATUS.LED_GRAY);
                     }
                     // 
                     break; //
@@ -537,7 +534,7 @@ namespace DataProcess
                     {
                         // 
                         //pictureEdit_HuiLu.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_green.png"); //
-                        SetLedStatus(YAOCE.imageJianCe, LED_STATUS.LED_GREEN);
+                        SetLedStatus( imageJianCe, LED_STATUS.LED_GREEN);
                     }
                     // 
                     else
@@ -545,7 +542,7 @@ namespace DataProcess
                     {
                         // 
                         //pictureEdit_HuiLu.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_gray.png"); //
-                        SetLedStatus(YAOCE.imageJianCe, LED_STATUS.LED_GRAY);
+                        SetLedStatus( imageJianCe, LED_STATUS.LED_GRAY);
                     }
                     // 
                     break; //
@@ -559,7 +556,7 @@ namespace DataProcess
                     {
                         // 
                         //pictureEdit_DHK.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_green.png"); //
-                        SetLedStatus(YAOCE.imageKuaiSu, LED_STATUS.LED_GREEN);
+                        SetLedStatus( imageKuaiSu, LED_STATUS.LED_GREEN);
                     }
                     // 
                     else
@@ -567,7 +564,7 @@ namespace DataProcess
                     {
                         // 
                         //pictureEdit_DHK.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_gray.png"); //
-                        SetLedStatus(YAOCE.imageKuaiSu, LED_STATUS.LED_GRAY);
+                        SetLedStatus( imageKuaiSu, LED_STATUS.LED_GRAY);
                     }
                     // 
                     break; //
@@ -581,7 +578,7 @@ namespace DataProcess
                     {
                         // 
                         //pictureEdit_DHM.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_green.png"); //
-                        SetLedStatus(YAOCE.imageManSu, LED_STATUS.LED_GREEN);
+                        SetLedStatus( imageManSu, LED_STATUS.LED_GREEN);
                     }
                     // 
                     else
@@ -589,7 +586,7 @@ namespace DataProcess
                     {
                         // 
                        // pictureEdit_DHM.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_gray.png"); //
-                        SetLedStatus(YAOCE.imageManSu, LED_STATUS.LED_GRAY);
+                        SetLedStatus( imageManSu, LED_STATUS.LED_GRAY);
                     }
                     // 
                     break; //
@@ -605,7 +602,7 @@ namespace DataProcess
                     {
                         // 
                         //pictureEdit_XiTongJiShi.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_green.png"); //
-                        SetLedStatus(YAOCE.imageJiShi, LED_STATUS.LED_GREEN);
+                        SetLedStatus( imageJiShi, LED_STATUS.LED_GREEN);
                     }
                     // 
                     else
@@ -613,7 +610,7 @@ namespace DataProcess
                     {
                         // 
                         // pictureEdit_XiTongJiShi.Image = Image.FromFile(Application.StartupPath + @"\Image\LED_gray.png"); //
-                        SetLedStatus(YAOCE.imageJiShi, LED_STATUS.LED_GRAY);
+                        SetLedStatus( imageJiShi, LED_STATUS.LED_GRAY);
                     }
                     // 
                     break; //
@@ -736,6 +733,8 @@ namespace DataProcess
             ledTimer.Tick += LedTimer_Tick;
             ledTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
 
+            yaoceParser = new DataParser(new WindowInteropHelper(this).Handle);
+
 
 
             //文件加载
@@ -794,13 +793,13 @@ namespace DataProcess
             InitProgramDiagram();
             InitLedStatus();
 
-            YAOCE.load.setPlayStatus = setOffLineFilePlayStatus;
+             //load.setPlayStatus = setOffLineFilePlayStatus;
     
             if (!File.Exists("F:\\TestTxt.txt"))
                 {
                     FileStream fs1 = new FileStream("F:\\TestTxt.txt", FileMode.Create, FileAccess.Write);//创建写入文件 
                     StreamWriter sw = new StreamWriter(fs1);
-                foreach(UIElement element in YAOCE.XiTong.Children)
+                foreach(UIElement element in  XiTong.Children)
                 {
 
 
@@ -821,7 +820,7 @@ namespace DataProcess
                 fs.Seek(0, SeekOrigin.Begin);
                 fs.SetLength(0);
 
-                foreach (UIElement element in YAOCE.XiTong.Children)
+                foreach (UIElement element in  XiTong.Children)
                 {
                     if(element is LabelTextBox)
                     {
@@ -897,8 +896,8 @@ namespace DataProcess
                         UpdateLoadFileProgressTimer.Stop();
 
                         // 更新进度条
-                        YAOCE.load.setProgressBarValue(0, loadFileLength, loadFileLength);
-                        YAOCE.load.loadFileFinish();
+                         load.setProgressBarValue(0, loadFileLength, loadFileLength);
+                         load.loadFileFinish();
 
                         // 日志打印
                         //Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "历史数据加载完成！"); 
@@ -965,8 +964,8 @@ namespace DataProcess
                     UpdateLoadFileProgressTimer.Stop();
 
                     // 更新进度条
-                    YAOCE.load.setProgressBarValue(0, loadFileLength, loadFileLength);
-                    YAOCE.load.loadFileFinish();
+                     load.setProgressBarValue(0, loadFileLength, loadFileLength);
+                     load.loadFileFinish();
 
                     // 日志打印
                     //Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "历史数据加载完成！"); 
@@ -998,7 +997,7 @@ namespace DataProcess
             //Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + percent.ToString("f2") + "%");
 
             // 更新进度条
-            YAOCE.load.setProgressBarValue(0, loadFileLength, alreadReadFileLength);  
+             load.setProgressBarValue(0, loadFileLength, alreadReadFileLength);  
                                                                                        
         }
 
@@ -1085,7 +1084,7 @@ namespace DataProcess
             {
                 case E_LOADFILE_START:
                     {
-                        string fileName = YAOCE.load.getLoadFileName();  
+                        string fileName =  load.getLoadFileName();  
                         if (System.IO.File.Exists(fileName))
                         {
                             startLoadOffLineFile(fileName); 
@@ -1227,17 +1226,17 @@ namespace DataProcess
         //回路检测反馈数据显示
         private void showHuiLuJianCeStatus(ref HUILUJIANCE_STATUS sObject)
         {
-            YAOCE.HuiLu_ShuChuHuiLuDianZu1.Text = sObject.shuChu1HuiLuDianZu.ToString("2f"); //    // 电机驱动输出1回路电阻
+             HuiLu_ShuChuHuiLuDianZu1.Text = sObject.shuChu1HuiLuDianZu.ToString("2f"); //    // 电机驱动输出1回路电阻
                                                                                              // 
-            YAOCE.HuiLu_ShuChuHuiLuDianZu2.Text = sObject.shuChu2HuiLuDianZu.ToString("2f"); //    // 电机驱动输出2回路电阻
+             HuiLu_ShuChuHuiLuDianZu2.Text = sObject.shuChu2HuiLuDianZu.ToString("2f"); //    // 电机驱动输出2回路电阻
                                                                                       // 
-            YAOCE.HuiLu_QiHuoHuiLuDianZu1A.Text = sObject.QBDH1AHuiLuDianZu.ToString("2f"); //      // 起爆点火1A回路电阻
+             HuiLu_QiHuoHuiLuDianZu1A.Text = sObject.QBDH1AHuiLuDianZu.ToString("2f"); //      // 起爆点火1A回路电阻
                                                                                             // 
-            YAOCE.HuiLu_QiHuoHuiLuDianZu1B.Text = sObject.QBDH1BHuiLuDianZu.ToString("2f"); //      // 起爆点火1B回路电阻
+             HuiLu_QiHuoHuiLuDianZu1B.Text = sObject.QBDH1BHuiLuDianZu.ToString("2f"); //      // 起爆点火1B回路电阻
                                                                                             // 
-            YAOCE.HuiLu_QiHuoHuiLuDianZu2A.Text = sObject.QBDH2AHuiLuDianZu.ToString("2f"); //      // 起爆点火2A回路电阻
+             HuiLu_QiHuoHuiLuDianZu2A.Text = sObject.QBDH2AHuiLuDianZu.ToString("2f"); //      // 起爆点火2A回路电阻
                                                                                            // 
-            YAOCE.HuiLu_QiHuoHuiLuDianZu2B.Text = sObject.QBDH2BHuiLuDianZu.ToString("2f"); //      // 起爆点火2B回路电阻
+             HuiLu_QiHuoHuiLuDianZu2B.Text = sObject.QBDH2BHuiLuDianZu.ToString("2f"); //      // 起爆点火2B回路电阻
                                                                                     // 
         }
 
@@ -1246,46 +1245,46 @@ namespace DataProcess
         private void showSystemTimeStatus(ref SYSTEMPARSE_STATUS sObject)
         {
             // 经度
-            YAOCE.XiTong_JingDu.Text = sObject.jingDu.ToString();
+             XiTong_JingDu.Text = sObject.jingDu.ToString();
 
             // 纬度
-            YAOCE.XiTong_WeiDu.Text = sObject.weiDu.ToString();
+             XiTong_WeiDu.Text = sObject.weiDu.ToString();
 
             // 海拔高度
-            YAOCE.XiTong_GaoDu.Text = sObject.haiBaGaoDu.ToString();
+             XiTong_GaoDu.Text = sObject.haiBaGaoDu.ToString();
 
             // 东向速度
-            YAOCE.XiTong_DongXiangSuDu.Text = sObject.dongXiangSuDu.ToString();
+             XiTong_DongXiangSuDu.Text = sObject.dongXiangSuDu.ToString();
 
             // 北向速度
-            YAOCE.XiTong_BeiXiangSuDu.Text = sObject.beiXiangSuDu.ToString();
+             XiTong_BeiXiangSuDu.Text = sObject.beiXiangSuDu.ToString();
 
             // 天向速度
-            YAOCE.XiTong_TianXiangSuDu.Text = sObject.tianXiangSuDu.ToString();
+             XiTong_TianXiangSuDu.Text = sObject.tianXiangSuDu.ToString();
 
             // Wx角速度
-            YAOCE.XiTong_WxJiaoSuDuValue.Text = sObject.WxJiaoSuDu.ToString();
+             XiTong_WxJiaoSuDuValue.Text = sObject.WxJiaoSuDu.ToString();
 
             // Wy角速度
-            YAOCE.XiTong_WyJiaoSuDuValue.Text = sObject.WyJiaoSuDu.ToString();
+             XiTong_WyJiaoSuDuValue.Text = sObject.WyJiaoSuDu.ToString();
 
             // Wz角速度
-            YAOCE.XiTong_WzJiaoSuDuValue.Text = sObject.WzJiaoSuDu.ToString();
+             XiTong_WzJiaoSuDuValue.Text = sObject.WzJiaoSuDu.ToString();
 
             // 当前发射系X
-            YAOCE.XiTong_XFaSheXi.Text = sObject.curFaSheXi_X.ToString();
+             XiTong_XFaSheXi.Text = sObject.curFaSheXi_X.ToString();
 
             // 当前发射系Y
-            YAOCE.XiTong_YFaSheXi.Text = sObject.curFaSheXi_Y.ToString();
+             XiTong_YFaSheXi.Text = sObject.curFaSheXi_Y.ToString();
 
             // 当前发射系Z
-            YAOCE.XiTong_ZFaSheXi.Text = sObject.curFaSheXi_Z.ToString();
+             XiTong_ZFaSheXi.Text = sObject.curFaSheXi_Z.ToString();
 
             // GNSS时间
-            YAOCE.XiTong_GNSSTime.Text = sObject.GNSSTime.ToString();
+             XiTong_GNSSTime.Text = sObject.GNSSTime.ToString();
 
             // 飞行总时间
-            YAOCE.XiTong_ZongFeiXingTime.Text = sObject.feiXingZongShiJian.ToString(); 
+             XiTong_ZongFeiXingTime.Text = sObject.feiXingZongShiJian.ToString(); 
             
             // 策略阶段(0-准备 1-起飞 2-一级 3-二级 4-结束)
             string ceLueJieDuanValue = ""; 
@@ -1309,7 +1308,7 @@ namespace DataProcess
                 default:
                     break;  
             }
-            YAOCE.XiTong_CeLueJieDuan.Text = ceLueJieDuanValue; 
+             XiTong_CeLueJieDuan.Text = ceLueJieDuanValue; 
 
             // 弹头状态(0-状态异常 1-产品遥测上电正常 2-初始化正常 3-一级保险解除
             // 4-二级保险解除 5-收到保险解除信号 6-三级保险解除 7-充电 8-起爆
@@ -1347,16 +1346,16 @@ namespace DataProcess
                     danTouZhuangTaiValue = "未知"; 
                     break; 
             }
-            YAOCE.XiTong_DanTouZhuangTai.Text = danTouZhuangTaiValue;  
+             XiTong_DanTouZhuangTai.Text = danTouZhuangTaiValue;  
          
             // 导航状态指示1
             byte daoHangTip1 = sObject.daoHangTip1;
 
             // 导航数据选择                        // 
-            YAOCE.XiTong_DaoHangShuJuXuanZe.Text = (daoHangTip1 & 0x1) == 0 ? "数据不可用" : "数据可用";
+             XiTong_DaoHangShuJuXuanZe.Text = (daoHangTip1 & 0x1) == 0 ? "数据不可用" : "数据可用";
 
             // 陀螺数据融合结果（0：所有数据不可用 1：数据可用） 
-            YAOCE.XiTong_TuoLuoShuJuRongHe.Text = ((daoHangTip1 >> 1) & 0x1) == 0 ? "所有数据不可用" : "数据可用";
+             XiTong_TuoLuoShuJuRongHe.Text = ((daoHangTip1 >> 1) & 0x1) == 0 ? "所有数据不可用" : "数据可用";
 
            // bit2 bit3 数据未更新标志（00：均无数据; // 01：1号输入无数据，2号输入有数据; // 10：1号输入有数据，2号输入无数据; // 11：均有数据）
             byte tempValue = (byte)((daoHangTip1 >> 2) & 0x3); 
@@ -1380,7 +1379,7 @@ namespace DataProcess
                 default:
                     break;  
             }
-            YAOCE.XiTong_ShuJuWeiGengXin.Text = tempSTR;  
+             XiTong_ShuJuWeiGengXin.Text = tempSTR;  
 
             // bit4 bit5 时间间隔异常标志（00：时间间隔均正常; // 01：1号时间间隔异常，2号时间间隔正常； 10：1号时间间隔正常，2号时间间隔异常； 00：时间间隔均不正常） 
             tempValue = (byte)((daoHangTip1 >> 4) & 0x3); 
@@ -1406,13 +1405,13 @@ namespace DataProcess
                 default:
                     break;  
             }
-            YAOCE.XiTong_ShiJianJianGeYiChang.Text = tempSTR;
+             XiTong_ShiJianJianGeYiChang.Text = tempSTR;
 
             // bit6 弹头组合无效标志（1表示无效）
-            YAOCE.XiTong_DanTouZuHe.Text = (daoHangTip1 >> 6 & 0x1) == 1 ? "无效" : "有效";
+             XiTong_DanTouZuHe.Text = (daoHangTip1 >> 6 & 0x1) == 1 ? "无效" : "有效";
 
             // bit7 弹体组合无效标志（1表示无效）
-            YAOCE.XiTong_DanTiZuHe.Text = (daoHangTip1 >> 7 & 0x1) == 1 ? "无效" : "有效"; 
+             XiTong_DanTiZuHe.Text = (daoHangTip1 >> 7 & 0x1) == 1 ? "无效" : "有效"; 
 
             // 导航状态指示2
             byte daoHangTip2 = sObject.daoHangTip2; 
@@ -1423,105 +1422,105 @@ namespace DataProcess
             dicTip.Add(3, "是野值");
 
             // bit0 bit1 1号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_1HaoShuJuJingDu.Text = dicTip[(byte)(daoHangTip2 & 0x2)];
+             XiTong_1HaoShuJuJingDu.Text = dicTip[(byte)(daoHangTip2 & 0x2)];
 
             // bit2 bit3 1号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）// 
-            YAOCE.XiTong_1HaoShuJuWeiDu.Text = dicTip[(byte)(daoHangTip2 >> 2 & 0x2)];
+             XiTong_1HaoShuJuWeiDu.Text = dicTip[(byte)(daoHangTip2 >> 2 & 0x2)];
 
             // bit4 bit5 1号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_1HaoShuJuGaoDu.Text = dicTip[(byte)(daoHangTip2 >> 4 & 0x2)];
+             XiTong_1HaoShuJuGaoDu.Text = dicTip[(byte)(daoHangTip2 >> 4 & 0x2)];
 
             // bit6 bit7 1号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_1HaoShuJuDongXiangSuDu.Text = dicTip[(byte)(daoHangTip2 >> 6 & 0x2)];  
+             XiTong_1HaoShuJuDongXiangSuDu.Text = dicTip[(byte)(daoHangTip2 >> 6 & 0x2)];  
 
             // 导航状态指示3
             byte daoHangTip3 = sObject.daoHangTip3;
 
             // bit0 bit1 1号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_1HaoShuJuBeiXiangSuDu.Text = dicTip[(byte)(daoHangTip3 & 0x2)];
+             XiTong_1HaoShuJuBeiXiangSuDu.Text = dicTip[(byte)(daoHangTip3 & 0x2)];
 
             // bit2 bit3 1号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_1HaoShuJuTianXiangSuDu.Text = dicTip[(byte)(daoHangTip3 >> 2 & 0x2)];
+             XiTong_1HaoShuJuTianXiangSuDu.Text = dicTip[(byte)(daoHangTip3 >> 2 & 0x2)];
 
             // bit4 bit5 2号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值） 
-            YAOCE.XiTong_2HaoShuJuJingDu.Text = dicTip[(byte)(daoHangTip3 >> 4 & 0x2)];
+             XiTong_2HaoShuJuJingDu.Text = dicTip[(byte)(daoHangTip3 >> 4 & 0x2)];
 
             // bit6 bit7 2号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_2HaoShuJuWeiDu.Text = dicTip[(byte)(daoHangTip3 >> 6 & 0x2)];  
+             XiTong_2HaoShuJuWeiDu.Text = dicTip[(byte)(daoHangTip3 >> 6 & 0x2)];  
 
             // 导航状态指示3
             byte daoHangTip4 = sObject.daoHangTip4;
 
             // bit0 bit1 2号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_2HaoShuJuGaoDu.Text = dicTip[(byte)(daoHangTip4 & 0x2)];
+             XiTong_2HaoShuJuGaoDu.Text = dicTip[(byte)(daoHangTip4 & 0x2)];
 
             // bit2 bit3 2号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_2HaoShuJuDongXiangSuDu.Text = dicTip[(byte)(daoHangTip4 >> 2 & 0x2)];
+             XiTong_2HaoShuJuDongXiangSuDu.Text = dicTip[(byte)(daoHangTip4 >> 2 & 0x2)];
 
             // bit4 bit5 2号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_2HaoShuJuBeiXiangSuDu.Text = dicTip[(byte)(daoHangTip4 >> 4 & 0x2)];
+             XiTong_2HaoShuJuBeiXiangSuDu.Text = dicTip[(byte)(daoHangTip4 >> 4 & 0x2)];
 
             // bit6 bit7 2号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-            YAOCE.XiTong_2HaoShuJuTianXiangSuDu.Text = dicTip[(byte)(daoHangTip4 >> 6 & 0x2)];
+             XiTong_2HaoShuJuTianXiangSuDu.Text = dicTip[(byte)(daoHangTip4 >> 6 & 0x2)];
 
             // 系统状态指示
             byte sysyemStatusTip = sObject.sysyemStatusTip;
 
             // bit0 功率输出闭合（1有效）
-            YAOCE.XiTong_GongLvShuChuBiHe.Text = (sysyemStatusTip & 0x1) == 1 ? "有效" : "无效";
+             XiTong_GongLvShuChuBiHe.Text = (sysyemStatusTip & 0x1) == 1 ? "有效" : "无效";
 
             // bit1 解保指令发出（1有效）
-            YAOCE.XiTong_JieBaoZhiLingFaChu.Text = (sysyemStatusTip >> 1 & 0x1) == 1 ? "有效" : "无效";
+             XiTong_JieBaoZhiLingFaChu.Text = (sysyemStatusTip >> 1 & 0x1) == 1 ? "有效" : "无效";
 
             // bit2 自毁指令发出（1有效）                                      
-            YAOCE.XiTong_ZiHuiZhiLingFaChu.Text = (sysyemStatusTip >> 2 & 0x1) == 1 ? "有效" : "无效";
+             XiTong_ZiHuiZhiLingFaChu.Text = (sysyemStatusTip >> 2 & 0x1) == 1 ? "有效" : "无效";
 
             // bit3 复位信号（1有效）
-            YAOCE.XiTong_FuWeiXinHao.Text = (sysyemStatusTip >> 3 & 0x1) == 1 ? "有效" : "无效";
+             XiTong_FuWeiXinHao.Text = (sysyemStatusTip >> 3 & 0x1) == 1 ? "有效" : "无效";
 
             // bit4 对外供电（1有效）                                             
-            YAOCE.XiTong_DuiWaiGongDian.Text = (sysyemStatusTip >> 4 & 0x1) == 1 ? "有效" : "无效";
+             XiTong_DuiWaiGongDian.Text = (sysyemStatusTip >> 4 & 0x1) == 1 ? "有效" : "无效";
 
             // bit5 模拟自毁指令1（1有效）                                                  
-            YAOCE.XiTong_MoNiZiHui1.Text = (sysyemStatusTip >> 5 & 0x1) == 1 ? "有效" : "无效";
+             XiTong_MoNiZiHui1.Text = (sysyemStatusTip >> 5 & 0x1) == 1 ? "有效" : "无效";
 
             // bit6 模拟自毁指令2（1有效）                                             
-            YAOCE.XiTong_MoNiZiHui2.Text = (sysyemStatusTip >> 6 & 0x1) == 1 ? "有效" : "无效";
+             XiTong_MoNiZiHui2.Text = (sysyemStatusTip >> 6 & 0x1) == 1 ? "有效" : "无效";
 
             // bit7 回路检测 ?? 待定
-            YAOCE.XiTong_HuiLuJianCe.Text = (sysyemStatusTip >> 7 & 0x1) == 1 ? "数据可用" : "数据不可用"; 
+             XiTong_HuiLuJianCe.Text = (sysyemStatusTip >> 7 & 0x1) == 1 ? "数据可用" : "数据不可用"; 
 
             // 触点状态指示
             byte chuDianZhuangTai = sObject.chuDianZhuangTai;
 
             // bit0 起飞分离脱插信号（0有效）
-            YAOCE.XiTong_QiFeiFenLiTuoCha.Text = (chuDianZhuangTai >> 0 & 0x1) == 0 ? "有效" : "无效";
+             XiTong_QiFeiFenLiTuoCha.Text = (chuDianZhuangTai >> 0 & 0x1) == 0 ? "有效" : "无效";
 
             // bit1 一级分离脱插信号（0有效）                                           // 
-            YAOCE.XiTong_YiJiFenLiTuoCha.Text = (chuDianZhuangTai >> 1 & 0x1) == 0 ? "有效" : "无效";
+             XiTong_YiJiFenLiTuoCha.Text = (chuDianZhuangTai >> 1 & 0x1) == 0 ? "有效" : "无效";
 
             // bit2 安控接收机预令（1有效）
-            YAOCE.XiTong_AnKongJieShouJiYuLing.Text = (chuDianZhuangTai >> 2 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_AnKongJieShouJiYuLing.Text = (chuDianZhuangTai >> 2 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                               // 
                                                                                                               // bit3 安控接收机动令（1有效）
                                                                                                               // 
-            YAOCE.XiTong_AnKongJieShouJiDongLing.Text = (chuDianZhuangTai >> 3 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_AnKongJieShouJiDongLing.Text = (chuDianZhuangTai >> 3 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                           // 
                                                                                                           // bit4 一级自毁工作状态A（1有效）
                                                                                                           // 
-            YAOCE.XiTong_1ZiHuiWorkA.Text = (chuDianZhuangTai >> 4 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_1ZiHuiWorkA.Text = (chuDianZhuangTai >> 4 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                               // 
                                                                                               // bit5 一级自毁工作状态B（1有效）
                                                                                               // 
-            YAOCE.XiTong_1ZiHuiWorkB.Text = (chuDianZhuangTai >> 5 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_1ZiHuiWorkB.Text = (chuDianZhuangTai >> 5 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                               // 
                                                                                               // bit6 二级自毁工作状态A（1有效）
                                                                                               // 
-            YAOCE.XiTong_2ZiHuiWorkA.Text = (chuDianZhuangTai >> 6 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_2ZiHuiWorkA.Text = (chuDianZhuangTai >> 6 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                               // 
                                                                                               // bit7 二级自毁工作状态B（1有效）
                                                                                               // 
-            YAOCE.XiTong_2ZiHuiWorkB.Text = (chuDianZhuangTai >> 7 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_2ZiHuiWorkB.Text = (chuDianZhuangTai >> 7 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                         // 
 
             // 
@@ -1535,35 +1534,35 @@ namespace DataProcess
                                                                   // 
                                                                   // bit0 总飞行时间（1：有效
                                                                   // 
-            YAOCE.XiTong_ZongFeiXingShiJian.Text = (jueCePanJueJieGuo1 >> 0 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_ZongFeiXingShiJian.Text = (jueCePanJueJieGuo1 >> 0 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                        // 
                                                                                                        // bit1 侧向（1：有效）
                                                                                                        // 
-            YAOCE.XiTong_CeXiang.Text = (jueCePanJueJieGuo1 >> 1 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_CeXiang.Text = (jueCePanJueJieGuo1 >> 1 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                             // 
                                                                                             // bit2 Wx角速度（1：有效）
                                                                                             // 
-            YAOCE.XiTong_WxJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 2 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_WxJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 2 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                      // 
                                                                                                      // bit3 Wy角速度（1：有效）
                                                                                                      // 
-            YAOCE.XiTong_WyJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 3 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_WyJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 3 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                      // 
                                                                                                      // bit4 Wz角速度（1：有效）
                                                                                                      // 
-            YAOCE.XiTong_WzJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 4 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_WzJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 4 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                      // 
                                                                                                      // bit5 后向（1：有效）
                                                                                                      // 
-            YAOCE.XiTong_HouXiang.Text = (jueCePanJueJieGuo1 >> 5 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_HouXiang.Text = (jueCePanJueJieGuo1 >> 5 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                              // 
                                                                                              // bit6 坠落（1：有效）
                                                                                              // 
-            YAOCE.XiTong_ZhuiLuo.Text = (jueCePanJueJieGuo1 >> 6 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_ZhuiLuo.Text = (jueCePanJueJieGuo1 >> 6 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                             // 
                                                                                             // bit7 分离时间（1：有效）
                                                                                             // 
-            YAOCE.XiTong_FenLiShiTian.Text = (jueCePanJueJieGuo1 >> 7 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_FenLiShiTian.Text = (jueCePanJueJieGuo1 >> 7 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                            // 
 
             // 
@@ -1577,11 +1576,11 @@ namespace DataProcess
                                                                   // 
                                                                   // bit0 控制区下限（1：有效）
                                                                   // 
-            YAOCE.XiTong_KongZhiQuXiaXian.Text = (jueCePanJueJieGuo2 >> 0 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_KongZhiQuXiaXian.Text = (jueCePanJueJieGuo2 >> 0 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                      // 
                                                                                                      // bit1 控制区上限（1：有效）
                                                                                                      // 
-            YAOCE.XiTong_KongZhiQuShangXian.Text = (jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? "有效" : "无效"; //
+             XiTong_KongZhiQuShangXian.Text = (jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? "有效" : "无效"; //
                                                                                                  // 
 
             // 
@@ -1595,35 +1594,35 @@ namespace DataProcess
                                                                       // 
                                                                       // bit0 弹头保险（1：闭合）
                                                                       // 
-            YAOCE.XiTong_DanTouBaoXian.Text = (jueCePanJueJieGuo2 >> 0 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_DanTouBaoXian.Text = (jueCePanJueJieGuo2 >> 0 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                                   // 
                                                                                                   // bit1 弹头起爆（1：闭合）
                                                                                                   // 
-            YAOCE.XiTong_DanTouQiBao.Text = (jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_DanTouQiBao.Text = (jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                                 // 
                                                                                                 // bit2 一级保险1（1：闭合）
                                                                                                 // 
-            YAOCE.XiTong_1JiBaoXian1.Text = (jueCePanJueJieGuo2 >> 2 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_1JiBaoXian1.Text = (jueCePanJueJieGuo2 >> 2 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                                 // 
                                                                                                 // bit3 一级保险2（1：闭合）
                                                                                                 // 
-            YAOCE.XiTong_1JiBaoXian2.Text = (jueCePanJueJieGuo2 >> 3 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_1JiBaoXian2.Text = (jueCePanJueJieGuo2 >> 3 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                                 // 
                                                                                                 // bit4 一级起爆1（1：闭合）
                                                                                                 // 
-            YAOCE.XiTong_1JiQiBao1.Text = (jueCePanJueJieGuo2 >> 4 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_1JiQiBao1.Text = (jueCePanJueJieGuo2 >> 4 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                               // 
                                                                                               // bit5 一级起爆2（1：闭合）
                                                                                               // 
-            YAOCE.XiTong_1JiQiBao2.Text = (jueCePanJueJieGuo2 >> 5 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_1JiQiBao2.Text = (jueCePanJueJieGuo2 >> 5 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                               // 
                                                                                               // bit6 二级保险1（1：闭合）
                                                                                               // 
-            YAOCE.XiTong_2JiBaoXian1.Text = (jueCePanJueJieGuo2 >> 6 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_2JiBaoXian1.Text = (jueCePanJueJieGuo2 >> 6 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                                 // 
                                                                                                 // bit7 二级保险2（1：闭合）
                                                                                                 // 
-            YAOCE.XiTong_2JiBaoXian2.Text = (jueCePanJueJieGuo2 >> 7 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_2JiBaoXian2.Text = (jueCePanJueJieGuo2 >> 7 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                           // 
 
             // 
@@ -1637,11 +1636,11 @@ namespace DataProcess
                                                                       // 
                                                                       // bit0 二级起爆1（1：闭合）
                                                                       // 
-            YAOCE.XiTong_2JiQiBao1.Text = (shuChuKaiGuanStatus2 >> 0 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_2JiQiBao1.Text = (shuChuKaiGuanStatus2 >> 0 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                                 // 
                                                                                                 // bit1 二级起爆2（1：闭合）
                                                                                                 // 
-            YAOCE.XiTong_2JiQiBao2.Text = (shuChuKaiGuanStatus2 >> 1 & 0x1) == 1 ? "闭合" : "断开"; //
+             XiTong_2JiQiBao2.Text = (shuChuKaiGuanStatus2 >> 1 & 0x1) == 1 ? "闭合" : "断开"; //
                                                                                           // 
                                                                                           // bit2 bit3 参试状态（00：测试1，数据输出状态；01：测试2，低压输出状态；10：保留状态；11：正式实验）
                                                                                           // 
@@ -1683,21 +1682,21 @@ namespace DataProcess
                            // 
             }
             // 
-            YAOCE.XiTong_CanShiZhuangTai.Text = tempSTR; //
+             XiTong_CanShiZhuangTai.Text = tempSTR; //
                                                          // 
 
             // 
             // 预示落点Z
             // 
-            YAOCE.XiTong_YuShiLuoDianZ.Text = sObject.yuShiLuoDianZ.ToString(); //
+             XiTong_YuShiLuoDianZ.Text = sObject.yuShiLuoDianZ.ToString(); //
                                                                                 // 
                                                                                 // 预示落点射程
                                                                                 // 
-            YAOCE.XiTong_YuShiLuoDianSheCheng.Text = sObject.yuShiLuoDianSheCheng.ToString(); //
+             XiTong_YuShiLuoDianSheCheng.Text = sObject.yuShiLuoDianSheCheng.ToString(); //
                                                                                                     // 
                                                                                                     // 轴向过载
                                                                                                     // 
-            YAOCE.XiTong_ZhouXiangGuoZai.Text = sObject.zhouXiangGuoZai.ToString(); //
+             XiTong_ZhouXiangGuoZai.Text = sObject.zhouXiangGuoZai.ToString(); //
                                                                               // 
         }
 
@@ -1729,11 +1728,11 @@ namespace DataProcess
             SetLedStatus(ImageTail, LED_STATUS.LED_GRAY);
             SetLedStatus(ImageFly, LED_STATUS.LED_GRAY);
             SetLedStatus(ImageUDP, LED_STATUS.LED_GRAY);
-            SetLedStatus(YAOCE.imageJianCe, LED_STATUS.LED_GRAY);
-            SetLedStatus(YAOCE.imageJiShi, LED_STATUS.LED_GRAY);
-            SetLedStatus(YAOCE.imageKuaiSu, LED_STATUS.LED_GRAY);
-            SetLedStatus(YAOCE.imageManSu, LED_STATUS.LED_GRAY);
-            SetLedStatus(YAOCE.imageZhuangTai, LED_STATUS.LED_GRAY);
+            SetLedStatus( imageJianCe, LED_STATUS.LED_GRAY);
+            SetLedStatus( imageJiShi, LED_STATUS.LED_GRAY);
+            SetLedStatus( imageKuaiSu, LED_STATUS.LED_GRAY);
+            SetLedStatus( imageManSu, LED_STATUS.LED_GRAY);
+            SetLedStatus( imageZhuangTai, LED_STATUS.LED_GRAY);
         }
 
         private void SetLedStatus(Image imageControl, LED_STATUS status)
@@ -3063,5 +3062,15 @@ namespace DataProcess
             btnData.IsChecked = !btnData.IsChecked;
         }
 
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if (load == null)
+            {
+                load = new LoadDataForm(); 
+                load.setPlayStatus = setOffLineFilePlayStatus; 
+            }
+            load.Show(); 
+            return; 
+        }
     }
 }

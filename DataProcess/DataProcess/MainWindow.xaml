@@ -1,5 +1,6 @@
 ﻿<dx:ThemedWindow 
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+    xmlns:cust="clr-namespace:ScoreTools.CustomControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
@@ -2438,7 +2439,1409 @@
                 </ScrollViewer>
             </dx:DXTabItem>
             <dx:DXTabItem Header="遥测">
-                <Controls:YaoCeShuJuXianShi x:Name="YAOCE" />
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="8*"/>
+                    </Grid.RowDefinitions>
+                    <ToolBar Background="Transparent" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
+                        <dx:SimpleButton  x:Name="btnLoad" Margin="0,0,0,4" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Click="btnLoad_Click"/>
+                        <TextBlock Text="系统判决状态" VerticalAlignment="Center" Margin="20,0,0,0" />
+                        <Image x:Name="imageZhuangTai"/>
+                        <TextBlock Text="回路检测" VerticalAlignment="Center" Margin="10,0,0,0" />
+                        <Image x:Name="imageJianCe" />
+                        <TextBlock Text="导航快速" VerticalAlignment="Center" Margin="10,0,0,0" />
+                        <Image x:Name="imageKuaiSu" />
+                        <TextBlock Text="导航慢速" VerticalAlignment="Center" Margin="10,0,0,0" />
+                        <Image x:Name="imageManSu" />
+                        <TextBlock Text="系统状态即时" VerticalAlignment="Center" Margin="10,0,0,0" />
+                        <Image x:Name="imageJiShi" />
+
+                    </ToolBar>
+                    <dx:DXTabControl Grid.Row="1">
+                        <dx:DXTabItem Header="系统判决状态">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <ScrollViewer>
+                                    <UniformGrid Rows="27" Columns="3" x:Name="XiTong">
+                                        <cust:LabelTextBox Label="GNSS时间："  x:Name="XiTong_GNSSTime"/>
+                                        <cust:LabelTextBox Label="总飞行时间：" x:Name="XiTong_ZongFeiXingTime"/>
+                                        <cust:LabelTextBox Label="策略阶段：" x:Name="XiTong_CeLueJieDuan"/>
+                                        <cust:LabelTextBox Label="弹头状态：" x:Name="XiTong_DanTouZhuangTai"/>
+                                        <cust:LabelTextBox Label="导航数据选择：" x:Name="XiTong_DaoHangShuJuXuanZe"/>
+                                        <cust:LabelTextBox Label="陀螺数据融合：" x:Name="XiTong_TuoLuoShuJuRongHe"/>
+                                        <cust:LabelTextBox Label="数据未更新：" x:Name="XiTong_ShuJuWeiGengXin"/>
+                                        <cust:LabelTextBox Label="优选结果：" x:Name="XiTong_ShiJianJianGeYiChang"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="弹头组合：" x:Name="XiTong_DanTouZuHe"/>
+                                        <cust:LabelTextBox Label="弹体组合：" x:Name="XiTong_DanTiZuHe"/>
+                                        <cust:LabelTextBox Label="参试状态：" x:Name="XiTong_CanShiZhuangTai"/>
+                                        <cust:LabelTextBox Label="1号数据经度：" x:Name="XiTong_1HaoShuJuJingDu"/>
+                                        <cust:LabelTextBox Label="1号数据纬度：" x:Name="XiTong_1HaoShuJuWeiDu"/>
+                                        <cust:LabelTextBox Label="1号数据高度：" x:Name="XiTong_1HaoShuJuGaoDu"/>
+                                        <cust:LabelTextBox Label="1号数据东速：" x:Name="XiTong_1HaoShuJuDongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="1号数据北速：" x:Name="XiTong_1HaoShuJuBeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="1号数据天速：" x:Name="XiTong_1HaoShuJuTianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="2号数据经度：" x:Name="XiTong_2HaoShuJuJingDu"/>
+                                        <cust:LabelTextBox Label="2号数据纬度：" x:Name="XiTong_2HaoShuJuWeiDu"/>
+                                        <cust:LabelTextBox Label="2号数据高度：" x:Name="XiTong_2HaoShuJuGaoDu"/>
+                                        <cust:LabelTextBox Label="2号数据东速：" x:Name="XiTong_2HaoShuJuDongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="2号数据北速：" x:Name="XiTong_2HaoShuJuBeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="2号数据天速：" x:Name="XiTong_2HaoShuJuTianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="功率输出闭合：" x:Name="XiTong_GongLvShuChuBiHe"/>
+                                        <cust:LabelTextBox Label="解保指令发出：" x:Name="XiTong_JieBaoZhiLingFaChu"/>
+                                        <cust:LabelTextBox Label="自毁指令发出：" x:Name="XiTong_ZiHuiZhiLingFaChu"/>
+                                        <cust:LabelTextBox Label="复位信号：" x:Name="XiTong_FuWeiXinHao"/>
+                                        <cust:LabelTextBox Label="对外供电：" x:Name="XiTong_DuiWaiGongDian"/>
+                                        <cust:LabelTextBox Label="模拟自毁指令：" x:Name="XiTong_MoNiZiHui1"/>
+                                        <cust:LabelTextBox Label="模拟自毁指令2：" x:Name="XiTong_MoNiZiHui2"/>
+                                        <cust:LabelTextBox Label="加计数据融合结果：" x:Name="XiTong_HuiLuJianCe"/>
+                                        <cust:LabelTextBox Label="起飞分离脱插：" x:Name="XiTong_QiFeiFenLiTuoCha"/>
+                                        <cust:LabelTextBox Label="一级分离脱插：" x:Name="XiTong_YiJiFenLiTuoCha"/>
+                                        <cust:LabelTextBox Label="安控接收机预令：" x:Name="XiTong_AnKongJieShouJiYuLing"/>
+                                        <cust:LabelTextBox Label="安控接收机动令：" x:Name="XiTong_AnKongJieShouJiDongLing"/>
+                                        <cust:LabelTextBox Label="一级自毁状态A：" x:Name="XiTong_1ZiHuiWorkA"/>
+                                        <cust:LabelTextBox Label="一级自毁状态B：" x:Name="XiTong_1ZiHuiWorkB"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="二级自毁状态A：" x:Name="XiTong_2ZiHuiWorkA"/>
+                                        <cust:LabelTextBox Label="二级自毁状态B：" x:Name="XiTong_2ZiHuiWorkB"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="总飞行时间状态：" x:Name="XiTong_ZongFeiXingShiJian"/>
+                                        <cust:LabelTextBox Label="侧向：" x:Name="XiTong_CeXiang"/>
+                                        <cust:LabelTextBox Label="后向：" x:Name="XiTong_HouXiang"/>
+                                        <cust:LabelTextBox Label="Wx角速度状态：" x:Name="XiTong_WxJiaoSuDuStatus"/>
+                                        <cust:LabelTextBox Label="Wy角速度状态：" x:Name="XiTong_WyJiaoSuDuStatus"/>
+                                        <cust:LabelTextBox Label="Wz角速度状态：" x:Name="XiTong_WzJiaoSuDuStatus"/>
+                                        <cust:LabelTextBox Label="坠落：" x:Name="XiTong_ZhuiLuo"/>
+                                        <cust:LabelTextBox Label="分离时间：" x:Name="XiTong_FenLiShiTian"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="控制区上限：" x:Name="XiTong_KongZhiQuXiaXian"/>
+                                        <cust:LabelTextBox Label="控制区下限：" x:Name="XiTong_KongZhiQuShangXian"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="弹头保险：" x:Name="XiTong_DanTouBaoXian"/>
+                                        <cust:LabelTextBox Label="一级保险1：" x:Name="XiTong_1JiBaoXian1"/>
+                                        <cust:LabelTextBox Label="一级保险2：" x:Name="XiTong_1JiBaoXian2"/>
+                                        <cust:LabelTextBox Label="二级保险1：" x:Name="XiTong_2JiBaoXian1"/>
+                                        <cust:LabelTextBox Label="二级保险2：" x:Name="XiTong_2JiBaoXian2"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="弹头起爆：" x:Name="XiTong_DanTouQiBao"/>
+                                        <cust:LabelTextBox Label="一级起爆1：" x:Name="XiTong_1JiQiBao1"/>
+                                        <cust:LabelTextBox Label="一级起爆2：" x:Name="XiTong_1JiQiBao2"/>
+                                        <cust:LabelTextBox Label="二级起爆1：" x:Name="XiTong_2JiQiBao1"/>
+                                        <cust:LabelTextBox Label="二级起爆2：" x:Name="XiTong_2JiQiBao2"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="经度：" x:Name="XiTong_JingDu"/>
+                                        <cust:LabelTextBox Label="纬度：" x:Name="XiTong_WeiDu"/>
+                                        <cust:LabelTextBox Label="海拔高度：" x:Name="XiTong_GaoDu"/>
+                                        <cust:LabelTextBox Label="东向速度：" x:Name="XiTong_DongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="北向速度：" x:Name="XiTong_BeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="天向速度：" x:Name="XiTong_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="Wx角速度：" x:Name="XiTong_WxJiaoSuDuValue"/>
+                                        <cust:LabelTextBox Label="Wy角速度：" x:Name="XiTong_WyJiaoSuDuValue"/>
+                                        <cust:LabelTextBox Label="Wz角速度：" x:Name="XiTong_WzJiaoSuDuValue"/>
+                                        <cust:LabelTextBox Label="当前发射系X：" x:Name="XiTong_XFaSheXi"/>
+                                        <cust:LabelTextBox Label="当前发射系Y：" x:Name="XiTong_YFaSheXi"/>
+                                        <cust:LabelTextBox Label="当前发射系Z：" x:Name="XiTong_ZFaSheXi"/>
+                                        <cust:LabelTextBox Label="预示落点Z：" x:Name="XiTong_YuShiLuoDianZ"/>
+                                        <cust:LabelTextBox Label="预示落点射程：" x:Name="XiTong_YuShiLuoDianSheCheng"/>
+                                        <cust:LabelTextBox Label="轴向过载：" x:Name="XiTong_ZhouXiangGuoZai"/>
+                                    </UniformGrid>
+                                </ScrollViewer>
+                                <dx:DXTabControl Grid.Column="1">
+                                    <dx:DXTabItem Header="坐标">
+                                        <UniformGrid Rows="3">
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                        </UniformGrid>
+                                    </dx:DXTabItem>
+                                    <dx:DXTabItem Header="速度">
+                                        <UniformGrid Rows="3">
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                        </UniformGrid>
+                                    </dx:DXTabItem>
+                                    <dx:DXTabItem Header="角速度">
+                                        <UniformGrid Rows="3">
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="True" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="Wx角速度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="Wy角速度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="Wz角速度" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                        </UniformGrid>
+                                    </dx:DXTabItem>
+                                    <dx:DXTabItem Header="当前发射系">
+                                        <UniformGrid Rows="2" Columns="2">
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="轴向过载" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="当前发射系X" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="当前发射系Y" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                            <dxc:ChartControl Margin="2,2,2,2">
+                                                <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                    <dxc:XYDiagram2D.AxisY>
+                                                        <dxc:AxisY2D>
+                                                            <dxc:AxisY2D.Title>
+                                                                <dxc:AxisTitle Content="当前发射系Z" Visible="True" FontSize="15" />
+                                                            </dxc:AxisY2D.Title>
+                                                        </dxc:AxisY2D>
+                                                    </dxc:XYDiagram2D.AxisY>
+                                                </dxc:XYDiagram2D>
+                                            </dxc:ChartControl>
+                                        </UniformGrid>
+                                    </dx:DXTabItem>
+                                    <dx:DXTabItem Header="预示落点">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:ChartControl.Legend>
+                                                <dxc:Legend/>
+                                            </dxc:ChartControl.Legend>
+                                            <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="True" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.WholeRange>
+                                                            <dxc:Range MaxValue="1"  MinValue="0"/>
+                                                        </dxc:AxisY2D.WholeRange>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:BarSideBySideSeries2D DisplayName="预示落点射程"/>
+                                                <dxc:BarSideBySideSeries2D DisplayName="预示落点Z"/>
+                                            </dxc:XYDiagram2D>
+
+                                        </dxc:ChartControl>
+                                    </dx:DXTabItem>
+                                </dx:DXTabControl>
+                            </Grid>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="导航数据（快速）">
+                            <dx:DXTabControl>
+                                <dx:DXTabItem Header="弹体">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <UniformGrid Rows="11" Columns="3" x:Name="DaoHangKuai_Ti">
+                                            <cust:LabelTextBox Label="导航系统时间："/>
+                                            <cust:LabelTextBox Label="GNSS时间："/>
+                                            <cust:LabelTextBox Label="点火标志："/>
+                                            <cust:LabelTextBox Label="俯仰角："/>
+                                            <cust:LabelTextBox Label="滚转角："/>
+                                            <cust:LabelTextBox Label="偏航角："/>
+                                            <cust:LabelTextBox Label="陀螺X数据（本）："/>
+                                            <cust:LabelTextBox Label="陀螺Y数据（本）："/>
+                                            <cust:LabelTextBox Label="陀螺Z数据（本）："/>
+                                            <cust:LabelTextBox Label="陀螺X数据（上）："/>
+                                            <cust:LabelTextBox Label="陀螺Y数据（上）："/>
+                                            <cust:LabelTextBox Label="陀螺Z数据（上）："/>
+                                            <cust:LabelTextBox Label="加速度计X（本）："/>
+                                            <cust:LabelTextBox Label="加速度计Y（本）："/>
+                                            <cust:LabelTextBox Label="加速度计Z（本）："/>
+                                            <cust:LabelTextBox Label="加速度计X（上）："/>
+                                            <cust:LabelTextBox Label="加速度计Y（上）："/>
+                                            <cust:LabelTextBox Label="加速度计Z（上）："/>
+                                            <cust:LabelTextBox Label="工作阶段："/>
+                                            <cust:LabelTextBox Label="分离标志："/>
+                                            <cust:LabelTextBox Label="GPS数据更新："/>
+                                            <cust:LabelTextBox Label="陀螺X故障："/>
+                                            <cust:LabelTextBox Label="陀螺Y故障："/>
+                                            <cust:LabelTextBox Label="陀螺Z故障："/>
+                                            <cust:LabelTextBox Label="GPS组合："/>
+                                            <cust:LabelTextBox Label="经度："/>
+                                            <cust:LabelTextBox Label="纬度："/>
+                                            <cust:LabelTextBox Label="海拔高度："/>
+                                            <cust:LabelTextBox Label="东向速度："/>
+                                            <cust:LabelTextBox Label="北向速度："/>
+                                            <cust:LabelTextBox Label="天向速度："/>
+                                        </UniformGrid>
+                                        <dx:DXTabControl Grid.Column="1">
+                                            <dx:DXTabItem Header="坐标">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                        </dx:DXTabControl>
+                                    </Grid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="弹头">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <UniformGrid Rows="11" Columns="3" x:Name="DaoHangKuai_Tou">
+                                            <cust:LabelTextBox Label="导航系统时间："/>
+                                            <cust:LabelTextBox Label="GNSS时间："/>
+                                            <cust:LabelTextBox Label="点火标志："/>
+                                            <cust:LabelTextBox Label="俯仰角："/>
+                                            <cust:LabelTextBox Label="滚转角："/>
+                                            <cust:LabelTextBox Label="偏航角："/>
+                                            <cust:LabelTextBox Label="陀螺X数据（本）："/>
+                                            <cust:LabelTextBox Label="陀螺Y数据（本）："/>
+                                            <cust:LabelTextBox Label="陀螺Z数据（本）："/>
+                                            <cust:LabelTextBox Label="陀螺X数据（上）："/>
+                                            <cust:LabelTextBox Label="陀螺Y数据（上）："/>
+                                            <cust:LabelTextBox Label="陀螺Z数据（上）："/>
+                                            <cust:LabelTextBox Label="加速度计X（本）："/>
+                                            <cust:LabelTextBox Label="加速度计Y（本）："/>
+                                            <cust:LabelTextBox Label="加速度计Z（本）："/>
+                                            <cust:LabelTextBox Label="加速度计X（上）："/>
+                                            <cust:LabelTextBox Label="加速度计Y（上）："/>
+                                            <cust:LabelTextBox Label="加速度计Z（上）："/>
+                                            <cust:LabelTextBox Label="工作阶段："/>
+                                            <cust:LabelTextBox Label="分离标志："/>
+                                            <cust:LabelTextBox Label="GPS数据更新："/>
+                                            <cust:LabelTextBox Label="陀螺X故障："/>
+                                            <cust:LabelTextBox Label="陀螺Y故障："/>
+                                            <cust:LabelTextBox Label="陀螺Z故障："/>
+                                            <cust:LabelTextBox Label="GPS组合："/>
+                                            <cust:LabelTextBox Label="经度："/>
+                                            <cust:LabelTextBox Label="纬度："/>
+                                            <cust:LabelTextBox Label="海拔高度："/>
+                                            <cust:LabelTextBox Label="东向速度："/>
+                                            <cust:LabelTextBox Label="北向速度："/>
+                                            <cust:LabelTextBox Label="天向速度："/>
+                                        </UniformGrid>
+                                        <dx:DXTabControl Grid.Column="1">
+                                            <dx:DXTabItem Header="坐标">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                        </dx:DXTabControl>
+                                    </Grid>
+                                </dx:DXTabItem>
+                            </dx:DXTabControl>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="导航数据（慢速）">
+                            <dx:DXTabControl>
+                                <dx:DXTabItem Header="弹体">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <ScrollViewer>
+                                            <Grid Grid.Column="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="15*"></RowDefinition>
+                                                    <RowDefinition Height="4*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <UniformGrid Grid.Row="0" Rows="15" Columns="3" x:Name="DaoHangMan_Ti">
+                                                    <cust:LabelTextBox Label="GPS时间："/>
+                                                    <cust:LabelTextBox Label="GPS SV可用："/>
+                                                    <cust:LabelTextBox Label="GPS参与定位："/>
+                                                    <cust:LabelTextBox Label="BD2 SV可用："/>
+                                                    <cust:LabelTextBox Label="BD2参与定位："/>
+                                                    <cust:LabelTextBox Label="PDOP："/>
+                                                    <cust:LabelTextBox Label="X陀螺+5V电压："/>
+                                                    <cust:LabelTextBox Label="X陀螺-5V电压："/>
+                                                    <cust:LabelTextBox Label="HDOP："/>
+                                                    <cust:LabelTextBox Label="Y陀螺+5V电压："/>
+                                                    <cust:LabelTextBox Label="Y陀螺-5V电压："/>
+                                                    <cust:LabelTextBox Label="VDOP："/>
+                                                    <cust:LabelTextBox Label="Z陀螺+5V电压："/>
+                                                    <cust:LabelTextBox Label="Z陀螺-5V电压："/>
+                                                    <cust:LabelTextBox Label="与GPS JSJ错误："/>
+                                                    <cust:LabelTextBox Label="与X陀螺错误："/>
+                                                    <cust:LabelTextBox Label="与Y陀螺错误："/>
+                                                    <cust:LabelTextBox Label="与Z陀螺错误："/>
+                                                    <cust:LabelTextBox Label="IMU进入中断："/>
+                                                    <cust:LabelTextBox Label="GPS中断次数："/>
+                                                    <cust:LabelTextBox Label="导航初值装订："/>
+                                                    <cust:LabelTextBox Label="X陀螺温度："/>
+                                                    <cust:LabelTextBox Label="Y陀螺温度："/>
+                                                    <cust:LabelTextBox Label="Z陀螺温度："/>
+                                                    <cust:LabelTextBox Label="+5V电压值："/>
+                                                    <cust:LabelTextBox Label="-5V电压值："/>
+                                                    <cust:LabelTextBox Label="发送1553数据："/>
+                                                    <cust:LabelTextBox Label="+15V电压值："/>
+                                                    <cust:LabelTextBox Label="-15V电压值："/>
+                                                    <cust:LabelTextBox Label="导航标志："/>
+                                                    <cust:LabelTextBox Label="对准完成标志："/>
+                                                    <cust:LabelTextBox Label="装订参数读取："/>
+                                                    <cust:LabelTextBox Label="工作模式："/>
+                                                    <cust:LabelTextBox Label="GPS组合："/>
+                                                    <cust:LabelTextBox Label="点火标志："/>
+                                                    <cust:LabelTextBox Label="分离标志："/>
+                                                    <cust:LabelTextBox Label="X加计温度："/>
+                                                    <cust:LabelTextBox Label="Y加计温度："/>
+                                                    <cust:LabelTextBox Label="Z加计温度："/>
+                                                    <cust:LabelTextBox Label="经度："/>
+                                                    <cust:LabelTextBox Label="纬度："/>
+                                                    <cust:LabelTextBox Label="海拔高度："/>
+                                                    <cust:LabelTextBox Label="东向速度："/>
+                                                    <cust:LabelTextBox Label="北向速度："/>
+                                                    <cust:LabelTextBox Label="天向速度："/>
+                                                </UniformGrid>
+                                                <Grid Grid.Row="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="GPS定位/状态："/>
+                                                    <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                </Grid>
+                                            </Grid>
+                                        </ScrollViewer>
+
+                                        <dx:DXTabControl Grid.Column="1">
+                                            <dx:DXTabItem Header="坐标">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                        </dx:DXTabControl>
+                                    </Grid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="弹头">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <ScrollViewer>
+                                            <Grid Grid.Column="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="15*"></RowDefinition>
+                                                    <RowDefinition Height="4*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <UniformGrid Grid.Row="0" Rows="15" Columns="3" x:Name="DaoHangMan_Tou">
+                                                    <cust:LabelTextBox Label="GPS时间："/>
+                                                    <cust:LabelTextBox Label="GPS SV可用："/>
+                                                    <cust:LabelTextBox Label="GPS参与定位："/>
+                                                    <cust:LabelTextBox Label="BD2 SV可用："/>
+                                                    <cust:LabelTextBox Label="BD2参与定位："/>
+                                                    <cust:LabelTextBox Label="PDOP："/>
+                                                    <cust:LabelTextBox Label="X陀螺+5V电压："/>
+                                                    <cust:LabelTextBox Label="X陀螺-5V电压："/>
+                                                    <cust:LabelTextBox Label="HDOP："/>
+                                                    <cust:LabelTextBox Label="Y陀螺+5V电压："/>
+                                                    <cust:LabelTextBox Label="Y陀螺-5V电压："/>
+                                                    <cust:LabelTextBox Label="VDOP："/>
+                                                    <cust:LabelTextBox Label="Z陀螺+5V电压："/>
+                                                    <cust:LabelTextBox Label="Z陀螺-5V电压："/>
+                                                    <cust:LabelTextBox Label="与GPS JSJ错误："/>
+                                                    <cust:LabelTextBox Label="与X陀螺错误："/>
+                                                    <cust:LabelTextBox Label="与Y陀螺错误："/>
+                                                    <cust:LabelTextBox Label="与Z陀螺错误："/>
+                                                    <cust:LabelTextBox Label="IMU进入中断："/>
+                                                    <cust:LabelTextBox Label="GPS中断次数："/>
+                                                    <cust:LabelTextBox Label="导航初值装订："/>
+                                                    <cust:LabelTextBox Label="X陀螺温度："/>
+                                                    <cust:LabelTextBox Label="Y陀螺温度："/>
+                                                    <cust:LabelTextBox Label="Z陀螺温度："/>
+                                                    <cust:LabelTextBox Label="+5V电压值："/>
+                                                    <cust:LabelTextBox Label="-5V电压值："/>
+                                                    <cust:LabelTextBox Label="发送1553数据："/>
+                                                    <cust:LabelTextBox Label="+15V电压值："/>
+                                                    <cust:LabelTextBox Label="-15V电压值："/>
+                                                    <cust:LabelTextBox Label="导航标志："/>
+                                                    <cust:LabelTextBox Label="对准完成标志："/>
+                                                    <cust:LabelTextBox Label="装订参数读取："/>
+                                                    <cust:LabelTextBox Label="工作模式："/>
+                                                    <cust:LabelTextBox Label="GPS组合："/>
+                                                    <cust:LabelTextBox Label="点火标志："/>
+                                                    <cust:LabelTextBox Label="分离标志："/>
+                                                    <cust:LabelTextBox Label="X加计温度："/>
+                                                    <cust:LabelTextBox Label="Y加计温度："/>
+                                                    <cust:LabelTextBox Label="Z加计温度："/>
+                                                    <cust:LabelTextBox Label="经度："/>
+                                                    <cust:LabelTextBox Label="纬度："/>
+                                                    <cust:LabelTextBox Label="海拔高度："/>
+                                                    <cust:LabelTextBox Label="东向速度："/>
+                                                    <cust:LabelTextBox Label="北向速度："/>
+                                                    <cust:LabelTextBox Label="天向速度："/>
+                                                </UniformGrid>
+                                                <Grid Grid.Row="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="GPS定位/状态："/>
+                                                    <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                    <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1"/>
+                                                </Grid>
+                                            </Grid>
+                                        </ScrollViewer>
+
+                                        <dx:DXTabControl Grid.Column="1">
+                                            <dx:DXTabItem Header="坐标">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                        </dx:DXTabControl>
+                                    </Grid>
+                                </dx:DXTabItem>
+                            </dx:DXTabControl>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="回路检测">
+                            <UniformGrid Columns="2" Rows="15" x:Name="HuiLu">
+                                <cust:LabelTextBox x:Name="HuiLu_ShuChuHuiLuDianZu1" Label="电机驱动输出1回路电阻：" Margin="10,0,10,0"/>
+                                <cust:LabelTextBox x:Name="HuiLu_ShuChuHuiLuDianZu2" Label="电机驱动输出2回路电阻：" Margin="10,0,10,0"/>
+                                <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu1A" Label="起爆点火1A回路电阻：" Margin="10,0,10,0"/>
+                                <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu1B" Label="起爆点火1B回路电阻：" Margin="10,0,10,0"/>
+                                <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu2A" Label="起爆点火2A回路电阻：" Margin="10,0,10,0"/>
+                                <cust:LabelTextBox x:Name="HuiLu_QiHuoHuiLuDianZu2B" Label="起爆点火2B回路电阻：" Margin="10,0,10,0"/>
+                            </UniformGrid>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="系统状态即时反馈">
+                            <dx:DXTabControl>
+                                <dx:DXTabItem Header="弹体">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="9*"></RowDefinition>
+                                                <RowDefinition Height="4*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Ti">
+                                                <cust:LabelTextBox Label="陀螺X故障标志："/>
+                                                <cust:LabelTextBox Label="GPS SV："/>
+                                                <cust:LabelTextBox Label="GPS参与定位："/>
+                                                <cust:LabelTextBox Label="陀螺Y故障标志："/>
+                                                <cust:LabelTextBox Label="GPS时间："/>
+                                                <cust:LabelTextBox Label="PDOP："/>
+                                                <cust:LabelTextBox Label="陀螺Z故障标志："/>
+                                                <cust:LabelTextBox Label="X陀螺温度："/>
+                                                <cust:LabelTextBox Label="HDOP："/>
+                                                <cust:LabelTextBox Label="RS422通信状态："/>
+                                                <cust:LabelTextBox Label="Y陀螺温度："/>
+                                                <cust:LabelTextBox Label="VDOP："/>
+                                                <cust:LabelTextBox Label="1553B通信标志："/>
+                                                <cust:LabelTextBox Label="Z陀螺温度："/>
+                                                <Grid/>
+                                                <cust:LabelTextBox Label="经度："/>
+                                                <cust:LabelTextBox Label="纬度："/>
+                                                <cust:LabelTextBox Label="海拔高度："/>
+                                                <cust:LabelTextBox Label="东向速度："/>
+                                                <cust:LabelTextBox Label="北向速度："/>
+                                                <cust:LabelTextBox Label="天向速度："/>
+                                                <cust:LabelTextBox Label="轴向过载："/>
+                                                <cust:LabelTextBox Label="法向过载："/>
+                                                <cust:LabelTextBox Label="侧向过载："/>
+                                                <cust:LabelTextBox Label="x轴角速度："/>
+                                                <cust:LabelTextBox Label="Y轴角速度："/>
+                                                <cust:LabelTextBox Label="Z轴角速度："/>
+                                            </UniformGrid>
+                                            <Grid Grid.Row="1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="GPS定位/状态："/>
+                                                <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                            </Grid>
+                                        </Grid>
+                                        <dx:DXTabControl Grid.Column="1">
+                                            <dx:DXTabItem Header="坐标">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="角速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="X轴角速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                    <dxc:AxisY2D.WholeRange>
+                                                                        <dxc:Range MaxValue="0.9"  MinValue="0"/>
+                                                                    </dxc:AxisY2D.WholeRange>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="Y轴角速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                    <dxc:AxisY2D.WholeRange>
+                                                                        <dxc:Range MaxValue="0.9"  MinValue="0"/>
+                                                                    </dxc:AxisY2D.WholeRange>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="Z轴角速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                    <dxc:AxisY2D.WholeRange>
+                                                                        <dxc:Range MaxValue="0.9"  MinValue="0"/>
+                                                                    </dxc:AxisY2D.WholeRange>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="过载">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="轴向过载" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="法向过载" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="侧向过载" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                        </dx:DXTabControl>
+                                    </Grid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="弹头">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="9*"></RowDefinition>
+                                                <RowDefinition Height="4*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Tou">
+                                                <cust:LabelTextBox Label="陀螺X故障标志："/>
+                                                <cust:LabelTextBox Label="GPS SV："/>
+                                                <cust:LabelTextBox Label="GPS参与定位："/>
+                                                <cust:LabelTextBox Label="陀螺Y故障标志："/>
+                                                <cust:LabelTextBox Label="GPS时间："/>
+                                                <cust:LabelTextBox Label="PDOP："/>
+                                                <cust:LabelTextBox Label="陀螺Z故障标志："/>
+                                                <cust:LabelTextBox Label="X陀螺温度："/>
+                                                <cust:LabelTextBox Label="HDOP："/>
+                                                <cust:LabelTextBox Label="RS422通信状态："/>
+                                                <cust:LabelTextBox Label="Y陀螺温度："/>
+                                                <cust:LabelTextBox Label="VDOP："/>
+                                                <cust:LabelTextBox Label="1553B通信标志："/>
+                                                <cust:LabelTextBox Label="Z陀螺温度："/>
+                                                <Grid/>
+                                                <cust:LabelTextBox Label="经度："/>
+                                                <cust:LabelTextBox Label="纬度："/>
+                                                <cust:LabelTextBox Label="海拔高度："/>
+                                                <cust:LabelTextBox Label="东向速度："/>
+                                                <cust:LabelTextBox Label="北向速度："/>
+                                                <cust:LabelTextBox Label="天向速度："/>
+                                                <cust:LabelTextBox Label="轴向过载："/>
+                                                <cust:LabelTextBox Label="法向过载："/>
+                                                <cust:LabelTextBox Label="侧向过载："/>
+                                                <cust:LabelTextBox Label="x轴角速度："/>
+                                                <cust:LabelTextBox Label="Y轴角速度："/>
+                                                <cust:LabelTextBox Label="Z轴角速度："/>
+                                            </UniformGrid>
+                                            <Grid Grid.Row="1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="GPS定位/状态："/>
+                                                <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                                <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20"/>
+                                            </Grid>
+                                        </Grid>
+                                        <dx:DXTabControl Grid.Column="1">
+                                            <dx:DXTabItem Header="坐标">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:XYDiagram2D.AxisY>
+                                                                <dxc:AxisY2D>
+                                                                    <dxc:AxisY2D.Title>
+                                                                        <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                                    </dxc:AxisY2D.Title>
+                                                                </dxc:AxisY2D>
+                                                            </dxc:XYDiagram2D.AxisY>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="角速度">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False"  MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                                <dxc:LineSeries2D.LineStyle>
+                                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                                </dxc:LineSeries2D.LineStyle>
+                                                            </dxc:LineSeries2D>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False"  MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                                <dxc:LineSeries2D.LineStyle>
+                                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                                </dxc:LineSeries2D.LineStyle>
+                                                            </dxc:LineSeries2D>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False"  MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                                <dxc:LineSeries2D.LineStyle>
+                                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                                </dxc:LineSeries2D.LineStyle>
+                                                            </dxc:LineSeries2D>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                            <dx:DXTabItem Header="过载">
+                                                <UniformGrid Rows="3">
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False"  MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                                <dxc:LineSeries2D.LineStyle>
+                                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                                </dxc:LineSeries2D.LineStyle>
+                                                            </dxc:LineSeries2D>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False"  MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                                <dxc:LineSeries2D.LineStyle>
+                                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                                </dxc:LineSeries2D.LineStyle>
+                                                            </dxc:LineSeries2D>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                    <dxc:ChartControl Margin="2,2,2,2">
+                                                        <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                            <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False"  MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
+                                                                <dxc:LineSeries2D.LineStyle>
+                                                                    <dxc:LineStyle LineJoin="Bevel"/>
+                                                                </dxc:LineSeries2D.LineStyle>
+                                                            </dxc:LineSeries2D>
+                                                        </dxc:XYDiagram2D>
+                                                    </dxc:ChartControl>
+                                                </UniformGrid>
+                                            </dx:DXTabItem>
+                                        </dx:DXTabControl>
+                                    </Grid>
+
+                                </dx:DXTabItem>
+                            </dx:DXTabControl>
+                        </dx:DXTabItem>
+                        <dx:DXTabItem Header="帧序号">
+                            <UniformGrid Rows="3" Columns="3">
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="系统判据状态" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="系统状态判据查询" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="回路检测数据" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="导航快速（弹体）" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="导航慢速（弹体）" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="系统即时（弹体）" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="导航快速（弹头）" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="导航慢速（弹头）" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                                <dxc:ChartControl Margin="2,2,2,2">
+                                    <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                        <dxc:XYDiagram2D.AxisY>
+                                            <dxc:AxisY2D>
+                                                <dxc:AxisY2D.Title>
+                                                    <dxc:AxisTitle Content="系统即时（弹头）" Visible="True" FontSize="15" />
+                                                </dxc:AxisY2D.Title>
+                                            </dxc:AxisY2D>
+                                        </dxc:XYDiagram2D.AxisY>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl>
+                            </UniformGrid>
+                        </dx:DXTabItem>
+                    </dx:DXTabControl>
+
+                </Grid>
             </dx:DXTabItem>
         </dx:DXTabControl>
     </Grid>
