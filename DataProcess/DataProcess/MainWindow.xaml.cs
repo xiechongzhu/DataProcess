@@ -2208,7 +2208,7 @@ namespace DataProcess
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
             btnSetting.IsEnabled = false;
-            btnHistory.IsEnabled = false;
+            btnDataConvert.IsEnabled = false;
             btnOpenData.IsEnabled = false;
             btnData.IsEnabled = true;
             ResetDisplay(maxDisplayPoint);
@@ -2332,7 +2332,7 @@ namespace DataProcess
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
             btnSetting.IsEnabled = true;
-            btnHistory.IsEnabled = true;
+            btnDataConvert.IsEnabled = true;
             btnOpenData.IsEnabled = true;
             btnData.IsChecked = false;
             btnData.IsEnabled = false;
@@ -2745,9 +2745,11 @@ namespace DataProcess
 
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
-            HistoryWindow historyWindow = new HistoryWindow();
-            historyWindow.Owner = this;
-            historyWindow.ShowDialog();
+            DataConvertSelectWindow dataConvertSelectWindow = new DataConvertSelectWindow
+            {
+                Owner = this
+            };
+            dataConvertSelectWindow.ShowDialog();
         }
 
         private void btnOpenData_Click(object sender, RoutedEventArgs e)

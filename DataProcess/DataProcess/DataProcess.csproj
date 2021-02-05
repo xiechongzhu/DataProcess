@@ -130,13 +130,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CopyMe.SQLite.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataConvertSelectWindow.xaml.cs">
+      <DependentUpon>DataConvertSelectWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DisplayBuffers.cs" />
     <Compile Include="GMap\MapControl.cs" />
     <Compile Include="HistoryDetailWindow.xaml.cs">
       <DependentUpon>HistoryDetailWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HistoryWindow.xaml.cs">
-      <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Log\DataLogger.cs" />
     <Compile Include="OpenDataWindow.xaml.cs">
@@ -198,11 +198,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HistoryDetailWindow.xaml">
+    <Page Include="DataConvertSelectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HistoryWindow.xaml">
+    <Page Include="HistoryDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
