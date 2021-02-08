@@ -1,4 +1,5 @@
 ﻿using DataProcess.Log;
+using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
 using DevExpress.Xpf.Core;
 using System;
@@ -114,7 +115,29 @@ namespace DataProcess
                 return false;
             }
 
+            if(!WriteFlyNavFile(navDataList, out errMsg))
+            {
+                errMsg = "创建导航数据文件失败," + errMsg;
+                return false;
+            }
 
+            if(!WriteFlyAngleFile(angleDataList, out errMsg))
+            {
+                errMsg = "创建角速度数据文件失败，" + errMsg;
+                return false;
+            }
+
+            if(!WriteFlyProgramControlData(prgramDataList, out errMsg))
+            {
+                errMsg = "创建程控数据文件失败，" + errMsg;
+                return false;
+            }
+
+            if(!WriteFlyServoData(servoDataList, out errMsg))
+            {
+                errMsg = "创建伺服数据文件失败，" + errMsg;
+                return false;
+            }
 
             return true;
         }
@@ -122,24 +145,122 @@ namespace DataProcess
         private bool WriteFlyNavFile(List<NavData> navDataList, out String errMsg)
         {
             errMsg = String.Empty;
+            StreamWriter streamWriter = null;
+            try
+            {
+                String fileName = Path.Combine(editFolderPath.Text, "导航数据.csv");
+                using (FileStream fs = File.Open(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
+                {
+                    streamWriter = new StreamWriter(fs);
+                    String strHeader = "包序号,GPS时间,纬度,经度,高度,北向速度,天向速度,东向速度,俯仰角,偏航角,滚转角";
+                    streamWriter.WriteLine(strHeader);
+                    foreach(NavData navData in navDataList)
+                    {
+                        String strLine = String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}",
+                            navData.sequence, navData.gpsTime, navData.latitude, navData.longitude, navData.height,
+                            navData.northSpeed, navData.skySpeed, navData.eastSpeed, navData.pitchAngle, navData.crabAngle, navData.rollAngle);
+                        streamWriter.WriteLine(strLine);
+                    }
+                    streamWriter.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                errMsg = ex.Message;
+                streamWriter?.Close();
+                return false;
+            }
             return true;
         }
 
         private bool WriteFlyAngleFile(List<AngleData> angleDataList, out String errMsg)
         {
             errMsg = String.Empty;
+            StreamWriter streamWriter = null;
+            try
+            {
+                String fileName = Path.Combine(editFolderPath.Text, "角速度数据.csv");
+                using (FileStream fs = File.Open(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
+                {
+                    streamWriter = new StreamWriter(fs);
+                    String strHeader = "包序号,加速度X,加速度Y,加速度Z,角速度X,角速度Y,角速度Z";
+                    streamWriter.WriteLine(strHeader);
+                    foreach (AngleData angleData in angleDataList)
+                    {
+                        String strLine = String.Format("{0},{1},{2},{3},{4},{5},{6}",
+                            angleData.sequence ,angleData.ax, angleData.ay, angleData.az, angleData.angleX, angleData.angleY, angleData.angleZ);
+                        streamWriter.WriteLine(strLine);
+                    }
+                    streamWriter.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+                streamWriter?.Close();
+                return false;
+            }
             return true;
         }
 
         private bool WriteFlyProgramControlData(List<ProgramControlData> prgramDataList, out String errMsg)
         {
             errMsg = String.Empty;
+            StreamWriter streamWriter = null;
+            try
+            {
+                String fileName = Path.Combine(editFolderPath.Text, "程控数据.csv");
+                using (FileStream fs = File.Open(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
+                {
+                    streamWriter = new StreamWriter(fs);
+                    String strHeader = "控制阶段,制导阶段";
+                    streamWriter.WriteLine(strHeader);
+                    foreach (ProgramControlData programControlData in prgramDataList)
+                    {
+                        String strLine = String.Format("{0},{1}", programControlData.controlStatus, programControlData.guideStatus);
+                        streamWriter.WriteLine(strLine);
+                    }
+                    streamWriter.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+                streamWriter?.Close();
+                return false;
+            }
             return true;
         }
 
         private bool WriteFlyServoData(List<ServoData> servoDataList, out String errMsg)
         {
             errMsg = String.Empty;
+            StreamWriter streamWriter = null;
+            try
+            {
+                String fileName = Path.Combine(editFolderPath.Text, "伺服数据.csv");
+                using (FileStream fs = File.Open(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
+                {
+                    streamWriter = new StreamWriter(fs);
+                    String strHeader = "帧序号,控制驱动器+28V供电电压反馈,控制驱动器+160V供电电压反馈,电机1Iq电流反馈信号," +
+                        "电机2Iq电流反馈信号,电机3Iq电流反馈信号,电机4Iq电流反馈信号";
+                    streamWriter.WriteLine(strHeader);
+                    foreach (ServoData servoData in servoDataList)
+                    {
+                        String strLine = String.Format("{0},{1},{2},{3},{4},{5},{6}", servoData.sequence, FlyDataConvert.GetVoltage28(servoData.vol28),
+                            FlyDataConvert.GetVoltage160(servoData.vol160), FlyDataConvert.GetElectricity(servoData.Iq1), FlyDataConvert.GetElectricity(servoData.Iq2),
+                            FlyDataConvert.GetElectricity(servoData.Iq3), FlyDataConvert.GetElectricity(servoData.Iq4));
+                        streamWriter.WriteLine(strLine);
+                    }
+                    streamWriter.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+                streamWriter?.Close();
+                return false;
+            }
             return true;
         }
 
