@@ -97,7 +97,8 @@ namespace DataProcess.Controls
                 else
                 {
                     System.Windows.Forms.MessageBox.Show("正在加载离线文件，不能关闭窗口!", "错误", MessageBoxButtons.OK);
-                    return IntPtr.Zero;
+                    handled = true;
+                    return hwnd;
                 }
             }
             else
@@ -152,7 +153,7 @@ namespace DataProcess.Controls
                 return; 
             }
             // 
-            setPlayStatus(MainWindow.E_LOADFILE_START); 
+             setPlayStatus(MainWindow.E_LOADFILE_START); 
             // 是否正在加载                                            
             bLoadFileing = true;  
             setBtnsEnable(false); 

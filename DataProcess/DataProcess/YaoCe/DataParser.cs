@@ -1,37 +1,18 @@
-﻿// 
-using System; //
-// 
-using System.Collections.Concurrent; //
-// 
-using System.Collections.Generic; //
-// 
-using System.IO; //
-// 
-using System.Linq; //
-// 
-using System.Runtime.InteropServices; //
-// 
-using System.Text; //
-// 
-using System.Threading; //
-// 
-using System.Threading.Tasks; //
-// 
+﻿using System; 
+using System.Collections.Concurrent; 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq; 
+using System.Runtime.InteropServices; 
+using System.Text; 
+using System.Threading; 
+using System.Threading.Tasks; 
 using DataProcess;
 
-// 
-/// <summary>
-// 
 /// YaoCeProcess
-// 
-/// </summary>
-// 
 namespace YaoCeProcess
 // 
 {
-    // 
-    /// <summary>
-    // 
     /// 文件名:DataParser/
     // 
     /// 文件功能描述:数据分析/
@@ -43,999 +24,355 @@ namespace YaoCeProcess
     /// 创建标识:2020.03.12/     
     // 
     /// 修改描述:/
-    // 
-    /// </summary>
-    // 
     public class DataParser
-    // 
     {
-        // 
         [DllImport("User32.dll", EntryPoint = "PostMessage")]
-        // 
 
-        // 
-        /// <summary>
-        // 
         /// PostMessage
-        // 
-        /// </summary>
-        // 
-        private static extern int PostMessage(IntPtr hwnd, int Msg, int wParam, IntPtr lParam); //
-                                                                                                // 
+        private static extern int PostMessage(IntPtr hwnd, int Msg, int wParam, IntPtr lParam); 
 
-        // 
-        /// <summary>
-        // 
-        /// DataParser
-        // 
-        /// </summary>
-        // 
-        /// <param name="MainWindowHandle"></param>
-        // 
+        //DataParser
         public DataParser(IntPtr MainWindowHandle)
-        // 
         {
-            // 
-            this.MainWindowHandle = MainWindowHandle; //
-                                                  // 
+            this.MainWindowHandle = MainWindowHandle; 
         }
-        // 
+ 
+        private IntPtr MainWindowHandle;
 
-        // 
-        //------------------------------------------------------------------------------------//
-        // 
-        /// <summary>
-        // 
-        /// MainWindowHandle
-        // 
-        /// </summary>
-        // 
-        private IntPtr MainWindowHandle; //
-                                       // 
-
-        // 
-        /// <summary>
-        // 
         /// queue
-        // 
-        /// </summary>
-        // 
-        private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>(); //
-                                                                               // 
+        private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
 
-        // 
-        /// <summary>
-        // 
         /// isRuning
-        // 
-        /// </summary>
-        // 
-        private bool isRuning = false; //
-                                       // 
+        private bool isRuning = false; 
 
-        // 
-        /// <summary>
-        // 
         /// thread
-        // 
-        /// </summary>
-        // 
-        Thread thread; //
-                       // 
+        Thread thread; 
 
-        // 
-        /// <summary>
-        // 
         /// 每一个UDP帧固定长度651
-        // 
-        /// </summary>
-        // 
-        private const int UDPLENGTH = 651; //
-                                           // 
+        private const int UDPLENGTH = 651; 
 
-        // 
-        /// <summary>
-        // 
         /// 每一个状态长帧结尾的校验
-        // 
-        /// </summary>
-        // 
-        private const int CRCLENGTH = 2; //
-                                         // 
-                                         //------------------------------------------------------------------------------------//
-                                         // 
-                                         //---------------缓存的CAN长帧数据---------------//
-                                         // 
-        /// <summary>
-        // 
-        /// 系统判据状态
-        // 
-        /// </summary>
-        // 
+        private const int CRCLENGTH = 2; 
+
+       //---------------缓存的CAN长帧数据---------------//
+       /// 系统判据状态
         const byte frameType_systemStatus_1 = 0x15; //       // 系统判据状态
-                                                    // 
 
-        // 
-        /// <summary>
-        // 
         /// 系统判据状态
-        // 
-        /// </summary>
-        // 
-        const byte frameType_systemStatus_2 = 0x16; //       // 系统判据状态
-                                                    // 
+        const byte frameType_systemStatus_2 = 0x16; //       // 系统判据状态 
 
-        // 
-        /// <summary>
-        // 
         /// 回路检测反馈状态
-        // 
-        /// </summary>
-        // 
         const byte frameType_HuiLuJianCe = 0x16; //          // 回路检测反馈状态
-                                                 // 
-
-        // 
-        /// <summary>
-        // 
+ 
         /// 导航快速（弹体）
-        // 
-        /// </summary>
-        // 
         const byte frameType_daoHangKuaiSu_Ti = 0x21; //     // 导航快速（弹体）
-                                                      // 
 
-        // 
-        /// <summary>
-        // 
         /// 导航快速（弹头）
-        // 
-        /// </summary>
-        // 
         const byte frameType_daoHangKuaiSu_Tou = 0x31; //    // 导航快速（弹头）
-                                                       // 
 
-        // 
-        /// <summary>
-        // 
         /// 导航慢速（弹体）
-        // 
-        /// </summary>
-        // 
         const byte frameType_daoHangManSu_Ti = 0x25; //      // 导航慢速（弹体）
-                                                     // 
 
-        // 
-        /// <summary>
-        // 
         /// 导航慢速（弹头）
-        // 
-        /// </summary>
-        // 
-        const byte frameType_daoHangManSu_Tou = 0x35; //     // 导航慢速（弹头）
-                                                      // 
+        const byte frameType_daoHangManSu_Tou = 0x35; //     // 导航慢速（弹头） 
 
-        // 
-        /// <summary>
-        // 
         /// 系统状态即时反馈（弹体）
-        // 
-        /// </summary>
-        // 
         const byte frameType_XiTongJiShi_Ti = 0x26; //       // 系统状态即时反馈（弹体）   帧总长11  数据段总长度64 帧类型0x0B
-                                                    // 
 
-        // 
-        /// <summary>
-        // 
         /// 系统状态即时反馈（弹头）
-        // 
-        /// </summary>
-        // 
         const byte frameType_XiTongJiShi_Tou = 0x36; //      // 系统状态即时反馈（弹头）
-                                                     // 
 
-        // 
         // 系统判决状态15
-        // 
-        /// <summary>
-        // 
         /// bRecvHeader_XiTong15
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_XiTong15 = false; //
-                                           // 
+        bool bRecvHeader_XiTong15 = false; 
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_XiTong15 = null; //     // 状态数据
-                                             // 
-
-        // 
-        /// <summary>
-        // 
+        
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_XiTong15 = 0; //         // 帧总长度
-                                         // 
 
-        // 
-        /// <summary>
-        // 
-        /// 数据段总长度
-        // 
-        /// </summary>
-        // 
+        /// 数据段总长度 
         byte frameLength_XiTong15 = 0; //           // 数据段总长度
-                                       // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_XiTong15 = 0; //             // 帧编号
-                                     // 
 
-        // 
         // 系统判决状态16
-        // 
-
-        // 
-        /// <summary>
-        // 
         /// bRecvHeader_XiTong16
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_XiTong16 = false; //
-                                           // 
+        bool bRecvHeader_XiTong16 = false;  
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_XiTong16 = null; //     // 状态数据
-                                             // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_XiTong16 = 0; //         // 帧总长度
-                                         // 
 
-        // 
-        /// <summary>
-        // 
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
         byte frameLength_XiTong16 = 0; //           // 数据段总长度
-                                       // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_XiTong16 = 0; //             // 帧编号
-                                     // 
 
-        // 
         // 回路检测反馈数据16
-        // 
-        /// <summary>
-        // 
         /// bRecvHeader_HuiLuJianCe16
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_HuiLuJianCe16 = false; //
-                                                // 
+        bool bRecvHeader_HuiLuJianCe16 = false; 
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_HuiLuJianCe16 = null; //     // 状态数据
-                                                  // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_HuiLuJianCe16 = 0; //         // 帧总长度
-                                              // 
 
-        // 
-        /// <summary>
-        // 
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
         byte frameLength_HuiLuJianCe16 = 0; //           // 数据段总长度
-                                            // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_HuiLuJianCe16 = 0; //             // 帧编号
-                                          // 
 
-        // 
         // 当前帧类型（针对Id为0x16时，需要用到帧类型来区分）
-        // 
         // 系统判决状态 0x15->0x01
-        // 
         // 系统判决状态查询反馈 0x16->0x05
-        // 
         // 回路检测反馈数据 0x16->0x06
-        // 
 
-        // 
-        /// <summary>
-        // 
         /// curFrameType
-        // 
-        /// </summary>
-        // 
-        byte curFrameType = 0; //
-                               // 
+        byte curFrameType = 0; 
 
-        // 
-        /// <summary>
-        // 
         /// frameType_XTPJZT
-        // 
-        /// </summary>
-        // 
-        const byte frameType_XTPJZT = 0x01; //
-                                            // 
+        const byte frameType_XTPJZT = 0x01; 
 
-        // 
-        /// <summary>
-        // 
         /// frameType_XTPJFK
-        // 
-        /// </summary>
-        // 
-        const byte frameType_XTPJFK = 0x05; //
-                                            // 
+        const byte frameType_XTPJFK = 0x05;
 
-        // 
-        /// <summary>
-        // 
         /// frameType_HLJCFK
-        // 
-        /// </summary>
-        // 
-        const byte frameType_HLJCFK = 0x06; //
-                                            // 
+        const byte frameType_HLJCFK = 0x06;
 
-        // 
         // 导航快速 弹体
-        // 
-
-        // 
-        /// <summary>
-        // 
         /// bRecvHeader_DHK21
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_DHK21 = false; //
-                                        // 
+        bool bRecvHeader_DHK21 = false;
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_DHK21 = null; //        // 状态数据
-                                          // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_DHK21 = 0; //            // 帧总长度
-                                      // 
 
-        // 
-        /// <summary>
-        // 
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
         byte frameLength_DHK21 = 0; //              // 数据段总长度
-                                    // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_DHK21 = 0; //                // 帧编号
-                                  // 
 
-        // 
         // 导航快速 弹头
-        // 
-
-        // 
-        /// <summary>
-        // 
         /// bRecvHeader_DHK31
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_DHK31 = false; //
-                                        // 
+        bool bRecvHeader_DHK31 = false;
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_DHK31 = null; //        // 状态数据
-                                          // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_DHK31 = 0; //            // 帧总长度
-                                      // 
 
-        // 
-        /// <summary>
-        // 
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
         byte frameLength_DHK31 = 0; //              // 数据段总长度
-                                    // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_DHK31 = 0; //                // 帧编号
-                                  // 
 
-        // 
         // 导航慢速 弹体
-        // 
-
-        // 
-        /// <summary>
-        // 
         /// bRecvHeader_DHM25
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_DHM25 = false; //
-                                        // 
+        bool bRecvHeader_DHM25 = false;
 
-        // 
-        /// <summary>
-        // 
-        /// 状态数据
-        // 
-        /// </summary>
-        // 
+        /// 状态数据 
         byte[] statusBuffer_DHM25 = null; //        // 状态数据
-                                          // 
 
-        // 
-        /// <summary>
-        // 
+
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_DHM25 = 0; //            // 帧总长度
-                                      // 
 
-        // 
-        /// <summary>
-        // 
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
         byte frameLength_DHM25 = 0; //              // 数据段总长度
-                                    // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_DHM25 = 0; //                // 帧编号
-                                  // 
 
-        // 
+
         // 导航慢速 弹头
-        // 
-
-        // 
-        /// <summary>
-        // 
         /// bRecvHeader_DHM35
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_DHM35 = false; //
-                                        // 
+        bool bRecvHeader_DHM35 = false; 
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_DHM35 = null; //        // 状态数据
-                                          // 
-
-        // 
-        /// <summary>
-        // 
+                                          
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_DHM35 = 0; //            // 帧总长度
-                                      // 
-
-        // 
-        /// <summary>
-        // 
+                                      
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
-        byte frameLength_DHM35 = 0; //              // 数据段总长度
-                                    // 
+        byte frameLength_DHM35 = 0; //              // 数据段总长du
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_DHM35 = 0; //                // 帧编号
-                                  // 
 
-        // 
         // TODO 20200219 新增
-        // 
         // 系统即时状态反馈 弹体
-        // 
 
-        // 
-        /// <summary>
-        // 
-        /// bRecvHeader_XiTongJiShi26
-        // 
-        /// </summary>
-        // 
-        bool bRecvHeader_XiTongJiShi26 = false; //
-                                                // 
+        /// bRecvHeader_XiTongJiShi26 
+        bool bRecvHeader_XiTongJiShi26 = false; 
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_XiTongJiShi26 = null; //        // 状态数据
-                                                  // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
         byte totalCountCan_XiTongJiShi26 = 0; //            // 帧总长度
-                                              // 
 
-        // 
-        /// <summary>
-        // 
+
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
         byte frameLength_XiTongJiShi26 = 0; //              // 数据段总长度
-                                            // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_XiTongJiShi26 = 0; //                // 帧编号
-                                          // 
 
-        // 
-        // 系统即时状态反馈 弹头
-        // 
-
-        // 
-        /// <summary>
-        // 
+        // 系统即时状态反馈 弹头 
         /// bRecvHeader_XiTongJiShi36
-        // 
-        /// </summary>
-        // 
         bool bRecvHeader_XiTongJiShi36 = false; //
-                                                // 
 
-        // 
-        /// <summary>
-        // 
         /// 状态数据
-        // 
-        /// </summary>
-        // 
         byte[] statusBuffer_XiTongJiShi36 = null; //        // 状态数据
-                                                  // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧总长度
-        // 
-        /// </summary>
-        // 
+
         byte totalCountCan_XiTongJiShi36 = 0; //            // 帧总长度
-                                              // 
 
-        // 
-        /// <summary>
-        // 
         /// 数据段总长度
-        // 
-        /// </summary>
-        // 
         byte frameLength_XiTongJiShi36 = 0; //              // 数据段总长度
-                                            // 
 
-        // 
-        /// <summary>
-        // 
         /// 帧编号
-        // 
-        /// </summary>
-        // 
         UInt16 frameNO_XiTongJiShi36 = 0; //                // 帧编号
                                           // 
                                           //------------------------------------------------------------------------------------//
                                           // 
 
-        // 
-        /// <summary>
-        // 
         /// UDP 缓存buffer
-        // 
-        /// </summary>
-        // 
-        byte[] UDPBuffer = null; //
-                                 // 
+        byte[] UDPBuffer = null; 
 
         // 
         //------------------------------------------------------------------------------------//
         // 
 
-        // 
-        /// <summary>
-        // 
         /// Enqueue
-        // 
-        /// </summary>
-        // 
-        /// <param name="data"></param>
-        // 
         public void Enqueue(byte[] data)
-        // 
-        {
-            // 
-            queue.Enqueue(data); //
-                                 // 
+        { 
+            queue.Enqueue(data); 
         }
-        // 
 
-        // 
-        /// <summary>
-        // 
         /// Start
-        // 
-        /// </summary>
-        // 
         public void Start()
-        // 
-        {
-            // 
-            while (queue.TryDequeue(out byte[] dropBuffer)) ; //
-                                                              // 
-            isRuning = true; //
-                             // 
-            thread = new Thread(new ThreadStart(ThreadFunction)); //
-                                                                  // 
-            thread.Start(); //
-                            // 
-
-            // 
-            UDPBuffer = null; //
-                              // 
-            UDPBuffer = new byte[0]; //
-                                     // 
+        { 
+            while (queue.TryDequeue(out byte[] dropBuffer)) ; 
+            isRuning = true;
+            thread = new Thread(new ThreadStart(ThreadFunction));  
+            thread.Start(); 
+            UDPBuffer = null;  
+            UDPBuffer = new byte[0];  
         }
-        // 
 
-        // 
-        /// <summary>
-        // 
         /// Stop
-        // 
-        /// </summary>
-        // 
         public void Stop()
-        // 
         {
-            // 
-            isRuning = false; //
-                              // 
-            thread?.Join(); //
-                            // 
-
-            // 
-            UDPBuffer = null; //
-                              // 
-            UDPBuffer = new byte[0]; //
-                                     // 
+            isRuning = false;
+            thread?.Join(); 
+            UDPBuffer = null;
+            UDPBuffer = new byte[0]; 
         }
-        // 
 
-        // 
-        /// <summary>
-        // 
         /// ThreadFunction
-        // 
-        /// </summary>
-        // 
         private void ThreadFunction()
-        // 
-        {
-            // 
+        { 
             while (isRuning)
-            // 
             {
-                // 
-                byte[] dataBuffer; //
-                                   // 
-                           
+                byte[] dataBuffer; 
                     if (queue.TryDequeue(out dataBuffer))
-                // 
-                {
-                    // 
-                    ParseDatas(dataBuffer); //
-                                            // 
+                { 
+                    ParseDatas(dataBuffer); 
                 }
-                // 
                 else
-                // 
-                {
-                    // 
-                    Thread.Sleep(5); //
-                                     // 
+                { 
+                    Thread.Sleep(5); 
                 }
-                // 
             }
-            // 
         }
-        // 
 
-        // 
-        /// <summary>
-        // 
         /// 报告指定的 System.Byte[] 在此实例中的第一个匹配项的索引。
-        // 
-        /// </summary>
-        // 
         /// <param name="srcBytes">被执行查找的 System.Byte[]。</param>
-        // 
         /// <param name="searchBytes">要查找的 System.Byte[]。</param>
-        // 
         /// <returns>如果找到该字节数组，则为 searchBytes 的索引位置；如果未找到该字节数组，则为 -1。如果 searchBytes 为 null 或者长度为0，则返回值为 -1。</returns>
-        // 
         internal int IndexOf(byte[] srcBytes, byte[] searchBytes)
-        // 
-        {
-            // 
+        { 
             if (srcBytes == null) { return -1; }
-            // 
             if (searchBytes == null) { return -1; }
-            // 
             if (srcBytes.Length == 0) { return -1; }
-            // 
             if (searchBytes.Length == 0) { return -1; }
-            // 
             if (srcBytes.Length < searchBytes.Length) { return -1; }
-            // 
             for (int i = 0; i < srcBytes.Length - searchBytes.Length; i++)
-            // 
-            {
-                // 
+            { 
                 if (srcBytes[i] == searchBytes[0])
-                // 
                 {
-                    // 
                     if (searchBytes.Length == 1) { return i; }
-                    // 
-                    bool flag = true; //
-                                      // 
+                    bool flag = true; 
                     for (int j = 1; j < searchBytes.Length; j++)
-                    // 
                     {
-                        // 
                         if (srcBytes[i + j] != searchBytes[j])
-                        // 
                         {
-                            // 
-                            flag = false; //
-                                          // 
-                            break; //
-                                   // 
+                            flag = false; 
+                            break; 
                         }
-                        // 
                     }
-                    // 
                     if (flag) { return i; }
-                    // 
-                }
-                // 
+                } 
             }
-            // 
-            return -1; //
-                       // 
+            return -1; 
         }
-        // 
 
-        // 
-        /// <summary>
-        // 
-        /// ParseDatas
-        // 
-        /// </summary>
-        // 
-        /// <param name="buffer"></param>
-        // 
+        /// ParseDatas 
         private void ParseDatas(byte[] buffer)
-        // 
         {
-            // 
             if (UDPBuffer == null)
-            // 
             {
-                // 
-                UDPBuffer = new byte[0]; //
-                                         // 
+                UDPBuffer = new byte[0];  
             }
-            // 
 
-            // 
             // 帧头标识
-            // 
-            byte[] searchBytes = new byte[4]; //
-                                              // 
-            searchBytes[0] = 0xAA; //
-                                   // 
-            searchBytes[1] = 0x00; //
-                                   // 
-            searchBytes[2] = 0x55; //
-                                   // 
-            searchBytes[3] = 0x77; //
-                                   // 
+            byte[] searchBytes = new byte[4];  
+            searchBytes[0] = 0xAA;
+            searchBytes[1] = 0x00;  
+            searchBytes[2] = 0x55; 
+            searchBytes[3] = 0x77;  
 
             // 
             //--------------------------------------------------------------------------------//
             // 
 
-            // 
             // 拼接上一次剩余的包
-            // 
-            UDPBuffer = UDPBuffer.Concat(buffer).ToArray(); //
+            UDPBuffer = UDPBuffer.Concat(buffer).ToArray(); 
             Console.WriteLine(UDPBuffer);
-                                                            // 
 
             // 
             //--------------------------------------------------------------------------------//
             // 
 
-            // 
             while (true)
-            // 
             {
-                // 
-                int findPos = IndexOf(UDPBuffer, searchBytes); //
-                                                               // 
+                int findPos = IndexOf(UDPBuffer, searchBytes); 
                 if (findPos == -1)
-                // 
-                {
-                    // 
-                    break; //
-                           // 
+                { 
+                    break; 
                 }
-                // 
+
                 // 判断数据长度是否足够
-                // 
                 if (UDPBuffer.Length < findPos + UDPLENGTH)
-                // 
-                {
-                    // 
-                    break; //
-                           // 
+                { 
+                    break; 
                 }
-                // 
                 byte[] findBuffer = UDPBuffer.Skip(findPos).Take(UDPLENGTH).ToArray(); // 返回接收到的完整数据帧
                                                                                        // 
                                                                                        // 二次判断，判断数据帧中是否存在标识，若存在则直接定义为当前帧不完整，第二帧数据补充进来了
@@ -1043,140 +380,68 @@ namespace YaoCeProcess
                 byte[] findDataBuffer = findBuffer.Skip(searchBytes.Length).Take(UDPLENGTH - searchBytes.Length).ToArray(); //
                                                                                                                             // 
                 int findPos2 = IndexOf(findDataBuffer, searchBytes); ///找到不完整帧数据补充进来的第二帧数据开头
-// 
+
                 if (findPos2 != -1)
-                // 
                 {
-                    // 
-                    int skipLength = findPos + searchBytes.Length + findPos2; //
-                                                                              // 
-                    UDPBuffer = UDPBuffer.Skip(skipLength).Take(UDPBuffer.Length - skipLength).ToArray(); //
-                                                                                                          // 
-                    continue; //
-                              // 
+                    int skipLength = findPos + searchBytes.Length + findPos2; 
+                    UDPBuffer = UDPBuffer.Skip(skipLength).Take(UDPBuffer.Length - skipLength).ToArray(); 
+                    continue; 
                 }
-                // 
 
-                // 
                 // 进行数据解析
-                // 
-                handleData(findBuffer); //
-                                        // 
+                handleData(findBuffer);
 
-                // 
                 // 正常的数据偏移
-                // 
-                int skipLengthNormal = findPos + UDPLENGTH; //
-                                                            // 
+                int skipLengthNormal = findPos + UDPLENGTH;  
                 UDPBuffer = UDPBuffer.Skip(skipLengthNormal).Take(UDPBuffer.Length - skipLengthNormal).ToArray(); //
                                                                                                                   // 
-            }
-            // 
+            } 
         }
-        // 
 
-        // 
-        /// <summary>
-        // 
         /// handleData
-        // 
-        /// </summary>
-        // 
-        /// <param name="buffer"></param>
-        // 
         private void handleData(byte[] buffer)
-        // 
         {
-            // 
-            //--------------------------------------------------------------------------------//
-            // 
-
-            // 
             if (buffer.Length < UDPLENGTH)
-            // 
             {
-                // 
-                return; //
-                        // 
+                return; 
             }
-            // 
-            //--------------------------------------------------------------------------------//
-            // 
-            // TODO 针对粘包的情况进行处理（几个UDP包粘在了一起）
-            // 
-            int alreadRead = 0; //
-                                // 
-            while (true)
-            // 
-            {
-                // 
-                if (buffer.Length - alreadRead >= UDPLENGTH)
-                // 
-                {
-                    // 
-                    byte[] subBuffer = buffer.Skip(alreadRead).Take(UDPLENGTH).ToArray(); //
-                                                                                          // 
-                    alreadRead += subBuffer.Length; //
-                                                    // 
-                    ParseData(subBuffer); //
-                                          // 
-                }
-                // 
-                else
-                // 
-                {
-                    // 
-                    break; //
-                           // 
-                }
-                // 
-            }
-            // 
-            //--------------------------------------------------------------------------------//
-            // 
-        }
-        // 
 
-        // 
-        /// <summary>
-        // 
+            // TODO 针对粘包的情况进行处理（几个UDP包粘在了一起）
+            int alreadRead = 0; 
+            while (true)
+            { 
+                if (buffer.Length - alreadRead >= UDPLENGTH)
+                {
+                    byte[] subBuffer = buffer.Skip(alreadRead).Take(UDPLENGTH).ToArray(); 
+                    alreadRead += subBuffer.Length; 
+                    ParseData(subBuffer);
+                }
+                else
+                {
+                    break; 
+                }
+            }
+        }
+
         /// ParseData
-        // 
-        /// </summary>
-        // 
-        /// <param name="buffer"></param>
-        // 
         private void ParseData(byte[] buffer)
-        // 
         {
-            // 
-            //--------------------------------------------------------------------------------//
-            String errMsg; //
-                           // 
-            UInt16 dataLength; //
-                               // 
+            String errMsg; 
+            UInt16 dataLength; 
             if (!CheckPacket(buffer, out errMsg, out dataLength))
-            // 
             {
                 // 
                 // TODO 20200218 错误数据太多，影响界面刷新，卡顿
                 // 
                 // Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_ERROR, "数据包错误:" + errMsg); //
                 // 
-                return; //
-                        // 
+                return; 
             }
-            // 
-            // 如果dataLength长度等于0，直接不进行下面数据的处理
-            // 
-            if (dataLength == 0)
-                // 
-                return; //
-                        // 
 
-            // 
+            // 如果dataLength长度等于0，直接不进行下面数据的处理
+            if (dataLength == 0)
+                return;
             using (MemoryStream stream = new MemoryStream(buffer))
-            // 
             {
                 // 
                 // 位置偏移到CAN数据域
@@ -1186,25 +451,17 @@ namespace YaoCeProcess
                                                                  // 解析CAN数据帧
                                                                  // 
                 using (BinaryReader br = new BinaryReader(stream))
-                // 
-                {
-                    // 
-                    UInt16 dataReadPos = 0; //
-                                            // 
+                { 
+                    UInt16 dataReadPos = 0; 
                     while (stream.Position < stream.Length - 1 && dataReadPos < dataLength)
-                    // 
                     {
                         // 
                         // 解析CAN帧头
                         // 
                         CANHead packHead = new CANHead
-                        // 
-                        {
-                            // 
+                        { 
                             frameInfo1 = br.ReadByte(),
-                            // 
                             frameInfo2 = br.ReadByte()
-                            // 
                         }; //
                            // 
                            // TODO 这里的CAN帧头是大端字节序
@@ -1213,8 +470,7 @@ namespace YaoCeProcess
                                                                                                                // 
                                                                                                                // 3bit占位 8bit 帧id(仲裁场) 1bitRTR(0) 4bit数据场(数据长度)
                                                                                                                // 
-                        byte canDataId = (byte)(frameInfo >> 5 & 0xFF); //
-                                                                        // 
+                        byte canDataId = (byte)(frameInfo >> 5 & 0xFF); 
 
                         // 
                         // 偏移
@@ -2010,7 +1266,8 @@ namespace YaoCeProcess
                     Marshal.StructureToPtr(sObject, ptr, true); //
                                                                 // 
                     PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_SystemStatus_DATA, 0, ptr); //
-                                                                                              // 
+                                                                                                  // 
+                    Console.WriteLine("PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_SystemStatus_DATA, 0, ptr);{0}", sObject.weiDu);
 
                     // 
                     // 发送帧序号信息

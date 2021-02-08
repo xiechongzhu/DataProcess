@@ -260,53 +260,154 @@ namespace DataProcess
         }
     }
 
+    public class YaoCeChartDataSource
+    {
+        //系统
+            public ChartPointDataSource chart_XiTong_ZuoBiao_JingDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_ZuoBiao_WeiDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_ZuoBiao_GaoDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
 
+            public ChartPointDataSource chart_XiTong_SuDu_DongList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_SuDu_BeiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_SuDu_TianList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XiTong_JiaoSuDu_WxList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_JiaoSuDu_WyList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_JiaoSuDu_WzList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XiTong_FaSheXi_ZXGZList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_FaSheXi_XList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_FaSheXi_YList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_FaSheXi_ZList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XiTong_YuShiLuoDian_SheChengList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTong_YuShiLuoDian_ZList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+//导航快
+            public ChartPointDataSource chart_DHKuaiSu_Ti_ZuoBiao_JingDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Ti_ZuoBiao_WeiDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Ti_ZuoBiao_GaoDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_DHKuaiSu_Ti_SuDu_DongList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Ti_SuDu_BeiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Ti_SuDu_TianList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+
+            public ChartPointDataSource chart_DHKuaiSu_Tou_ZuoBiao_JingDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Tou_ZuoBiao_WeiDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Tou_ZuoBiao_GaoDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_DHKuaiSu_Tou_SuDu_DongList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Tou_SuDu_BeiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHKuaiSu_Tou_SuDu_TianList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+//导航慢
+            public ChartPointDataSource chart_DHManSu_Ti_ZuoBiao_JingDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Ti_ZuoBiao_WeiDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Ti_ZuoBiao_GaoDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_DHManSu_Ti_SuDu_DongList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Ti_SuDu_BeiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Ti_SuDu_TianList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+
+            public ChartPointDataSource chart_DHManSu_Tou_ZuoBiao_JingDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Tou_ZuoBiao_WeiDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Tou_ZuoBiao_GaoDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_DHManSu_Tou_SuDu_DongList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Tou_SuDu_BeiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHManSu_Tou_SuDu_TianList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+//系统即时
+            public ChartPointDataSource chart_XTJS_Tou_ZuoBiao_JingDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_ZuoBiao_WeiDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_ZuoBiao_GaoDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XTJS_Tou_SuDu_DongList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_SuDu_BeiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_SuDu_TianList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XTJS_Tou_JiaoSuDu_WxList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_JiaoSuDu_WyList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_JiaoSuDu_WzList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XTJS_Tou_GuoZai_ZhouXiangList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_GuoZai_FaXiangList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Tou_GuoZai_CeXiangList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XTJS_Ti_ZuoBiao_JingDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_ZuoBiao_WeiDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_ZuoBiao_GaoDuList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XTJS_Ti_SuDu_DongList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_SuDu_BeiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_SuDu_TianList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XTJS_Ti_JiaoSuDu_WxList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_JiaoSuDu_WyList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_JiaoSuDu_WzList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+            public ChartPointDataSource chart_XTJS_Ti_GuoZai_ZhouXiangList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_GuoZai_FaXiangList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_Ti_GuoZai_CeXiangList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+
+
+//帧序号
+            public ChartPointDataSource chart_XiTongPanJu15List = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XiTongPanJu16List = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_HuiLuJianCeList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHK_TiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHM_TiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_TiList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHK_TouList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_DHM_TouList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+            public ChartPointDataSource chart_XTJS_TouList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
+    }
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
     {
-
 #if true
         /// 每一个UDP帧固定长度651
         private const int UDPLENGTH = 651; 
                                           
         /// 自定义消息
-        private const int WM_USER = 0x400; 
+       // private const int WM_USER = WinApi.WinApi.WM_USER; 
                                             
         /// 系统判决状态数据标识
-        public const int WM_YAOCE_SystemStatus_DATA = WM_USER + 102; 
+        public const int WM_YAOCE_SystemStatus_DATA = WinApi.WM_USER + 107; 
                                                                     
         /// 导航数据（快速——弹体）标识
-        public const int WM_YAOCE_daoHangKuaiSu_Ti_DATA = WM_USER + 103; 
+        public const int WM_YAOCE_daoHangKuaiSu_Ti_DATA = WinApi.WM_USER + 108; 
                                                                          
         /// 导航数据（快速——弹头）标识
-        public const int WM_YAOCE_daoHangKuaiSu_Tou_DATA = WM_USER + 104; 
+        public const int WM_YAOCE_daoHangKuaiSu_Tou_DATA = WinApi.WM_USER + 109; 
                                                                           
         /// 导航数据（慢速——弹体）标识 
-        public const int WM_YAOCE_daoHangManSu_Ti_DATA = WM_USER + 105; 
+        public const int WM_YAOCE_daoHangManSu_Ti_DATA = WinApi.WM_USER + 110; 
                                                                         
-
         /// 导航数据（慢速——弹头）标识
-        public const int WM_YAOCE_daoHangManSu_Tou_DATA = WM_USER + 106; 
+        public const int WM_YAOCE_daoHangManSu_Tou_DATA = WinApi.WM_USER + 111; 
                                                                          
         /// 回路检测数据标识
-        public const int WM_YAOCE_HuiLuJianCe_DATA = WM_USER + 107; 
+        public const int WM_YAOCE_HuiLuJianCe_DATA = WinApi.WM_USER + 112; 
         // 
        // TODO 20200219 新增
        // 
         /// 系统状态即时反馈数据（弹体）标识
-        public const int WM_YAOCE_XiTongJiShi_Ti_DATA = WM_USER + 108; 
+        public const int WM_YAOCE_XiTongJiShi_Ti_DATA = WinApi.WM_USER + 113; 
                                                                       
         /// 系统状态即时反馈（弹头）标识
-        public const int WM_YAOCE_XiTongJiShi_Tou_DATA = WM_USER + 109; 
+        public const int WM_YAOCE_XiTongJiShi_Tou_DATA = WinApi.WM_USER + 114; 
                                                                         
         /// 数据帧信息
-        public const int WM_YAOCE_FRAMEPROPERTY_DATA = WM_USER + 110; 
+        public const int WM_YAOCE_FRAMEPROPERTY_DATA = WinApi.WM_USER + 115; 
                                                                       
         /// UDP包状态
-        public const int WM_YAOCE_UDPPROPERTY_DATA = WM_USER + 111; 
+        public const int WM_YAOCE_UDPPROPERTY_DATA = WinApi.WM_USER + 116; 
 
         /// 读取完成后休眠时间
         private static readonly TimeSpan Interval = TimeSpan.FromMilliseconds(500);
@@ -327,14 +428,11 @@ namespace DataProcess
         /// E_LOADFILE_SKIPPROGRAM
         public const int E_LOADFILE_SKIPPROGRAM = 4;
 
-
-
         //--------成员变量-----------------//
         /// 是否开启Socket接收网络数据
         bool bStartRecvNetworkData = false;
 
         public LoadDataForm load;//
-
 
         /// 直接读取二进制文件
         FileStream srFileRead = null;
@@ -348,64 +446,27 @@ namespace DataProcess
         /// 创建曲线X轴索引值
         private int xiTong_CHART_ITEM_INDEX = 0;
 
-
-
-        //----------------系统判决状态绘图数据缓存--------------------//
-        /// 经度
-        private List<SeriesPoint> xiTong_ZuoBiao_JingDu_Buffer = new List<SeriesPoint>(); 
-                                                                                           
-        /// 纬度
-        private List<SeriesPoint> xiTong_ZuoBiao_WeiDu_Buffer = new List<SeriesPoint>(); 
- 
-        /// 海拔高度
-        private List<SeriesPoint> xiTong_ZuoBiao_GaoDu_Buffer = new List<SeriesPoint>(); 
-
-        /// 东向速度
-        private List<SeriesPoint> xiTong_SuDu_DongXiang_Buffer = new List<SeriesPoint>(); 
-
-        /// 北向速度
-        private List<SeriesPoint> xiTong_SuDu_BeiXiang_Buffer = new List<SeriesPoint>(); 
-
-        /// 天向速度
-        private List<SeriesPoint> xiTong_SuDu_TianXiang_Buffer = new List<SeriesPoint>(); 
-
-        /// Wx角速度 
-        private List<SeriesPoint> xiTong_JiaoSuDu_Wx_Buffer = new List<SeriesPoint>();
-
-        /// Wy角速度
-        private List<SeriesPoint> xiTong_JiaoSuDu_Wy_Buffer = new List<SeriesPoint>(); 
-
-        /// Wz角速度
-        private List<SeriesPoint> xiTong_JiaoSuDu_Wz_Buffer = new List<SeriesPoint>(); 
-
-        /// 轴向过载
-        private List<SeriesPoint> xiTong_ZhouXiangGuoZai_Buffer = new List<SeriesPoint>();
-
-        /// 发射系X
-        private List<SeriesPoint> xiTong_FaSheXi_x_Buffer = new List<SeriesPoint>(); 
-
-        /// 发射系Y
-        private List<SeriesPoint> xiTong_FaSheXi_y_Buffer = new List<SeriesPoint>(); 
-
-        /// 发射系Z
-        private List<SeriesPoint> xiTong_FaSheXi_z_Buffer = new List<SeriesPoint>();  
-
-        /// 预示落点射程
-        private List<SeriesPoint> xiTong_YuShiLuoDian_SheCheng_Buffer = new List<SeriesPoint>(); 
-
-        /// 预示落点Z
-        private List<SeriesPoint> xiTong_YuShiLuoDian_Z_Buffer = new List<SeriesPoint>();
-
-
-
         //------------------------状态数据缓存-----------------------------//
-        /// sObject_XiTong
         //      系统判决状态
         SYSTEMPARSE_STATUS sObject_XiTong; 
                                          
-        /// sObject_huiLuJianCe
         //      回路检测
         HUILUJIANCE_STATUS sObject_huiLuJianCe;
+
+        //导航快
+        DAOHANGSHUJU_KuaiSu sObject_DHK_Ti;
+        DAOHANGSHUJU_KuaiSu sObject_DHK_Tou;
+
+        //导航慢
+        DAOHANGSHUJU_ManSu sObject_DHM_Ti;
+        DAOHANGSHUJU_ManSu sObject_DHM_Tou;
+
+        //系统即时
+        SYSTEMImmediate_STATUS sObject_XTJS_Ti;
+        SYSTEMImmediate_STATUS sObject_XTJS_Tou;
+
+        //帧序号
+
 
         // 是否收到数据
         bool bRecvStatusData_XiTong = false; //系统判决
@@ -415,6 +476,9 @@ namespace DataProcess
        
         /// bRecvStatusData_UDP 
         bool bRecvStatusData_UDP = false;
+
+        bool bRecvStatusData_DHK = false; //
+        bool bRecvStatusData_DHM = false; //
 
         /// 网络消息处理
         //private DataParser dataParser;
@@ -692,6 +756,7 @@ namespace DataProcess
         private DisplayBuffers displayBuffers = new DisplayBuffers();
         private DataLogger dataLogger = null;
         ChartDataSource chartDataSource = new ChartDataSource();
+        YaoCeChartDataSource yaoCeChartDataSource = new YaoCeChartDataSource();
         Ratios ratios;
 
         //
@@ -700,11 +765,10 @@ namespace DataProcess
 
         private DispatcherTimer UpdateLoadFileProgressTimer = new DispatcherTimer(); //文件加载进度定时器
 
+        //系统判决
         private DispatcherTimer UpdateXiTongStatusTimer = new DispatcherTimer();//系统判决数据定时器    
         private DispatcherTimer timerOffLineXiTongStatus = new DispatcherTimer();//系统判决状态离线
-
-        private DispatcherTimer UpdateHuiLuJianCeTimer = new DispatcherTimer();//回路检测数据定时器
-        private DispatcherTimer timerOffLineHuiLuJianCe = new DispatcherTimer();
+        private DispatcherTimer timerUpdateChart = new DispatcherTimer(); // 更新曲线
 
         //导航快速
         private DispatcherTimer timerUpdateDHKStatus = new DispatcherTimer();
@@ -716,100 +780,134 @@ namespace DataProcess
         private DispatcherTimer timerUpdateDHMStatus = new DispatcherTimer();
         private DispatcherTimer timerOfflineDHMStatus = new DispatcherTimer();
 
+        //回路检测
+        private DispatcherTimer UpdateHuiLuJianCeTimer = new DispatcherTimer();//回路检测数据定时器
+        private DispatcherTimer timerOffLineHuiLuJianCe = new DispatcherTimer();
+
+        //系统即时反馈
+        private DispatcherTimer timerUpdateChart_XiTongJiShi = new DispatcherTimer();
+        private DispatcherTimer timerUpdateXiTongJiShiStatus = new DispatcherTimer();
+        private DispatcherTimer timerOfflineXiTongJiShiStatus = new DispatcherTimer();
+
         //帧序号
         private DispatcherTimer timerChartUpdate_ZXH = new DispatcherTimer();
 
-        private DispatcherTimer timerUpdateChart = new DispatcherTimer(); // 更新曲线
-
+        //UDP
         private DispatcherTimer timerUpdateUDP = new DispatcherTimer();//
         private DispatcherTimer timerOffLineUDP = new DispatcherTimer();
 
         System.Timers.Timer readFileTimer = new System.Timers.Timer(); //读取文件定时器
 
-        static int n = 0;
-
         public MainWindow()
         {
             InitializeComponent();
             InitSeriesDataSource();
+            InitYaoCeChartDataSource();
             uiRefreshTimer.Tick += UiRefreshTimer_Tick;
             uiRefreshTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
             ledTimer.Tick += LedTimer_Tick;
             ledTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
 
-            yaoceParser = new DataParser(new WindowInteropHelper(this).Handle);
-
-            //文件加载
-            UpdateLoadFileProgressTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
-            UpdateLoadFileProgressTimer.Tick += timerUpdateLoadFileProgress_Tick;
-
-            //系统判决状态
-            UpdateXiTongStatusTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
-            UpdateXiTongStatusTimer.Tick += timerUpdateXiTongStatus_Tick;
-
-            //系统判决离线状态
-            timerOffLineXiTongStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
-            timerOffLineXiTongStatus.Tick += timerOffLineXiTongStatus_Tick;
-
-            //回路检测状态
-            UpdateHuiLuJianCeTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
-            UpdateHuiLuJianCeTimer.Tick += timerUpdateHuiLuJianCe_Tick;
-
-            //回路检测离线状态
-            timerOffLineHuiLuJianCe.Tick += timerOffLineHuiLuJianCe_Tick;
-
-            //导航快速
-            timerUpdateDHKStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //timerUpdateDHKStatus.Tick += timerUpdateDHKStatus_Tick;
-
-            //导航快速离线
-            timerOfflineDHKStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
-            //this.timerOfflineDHKStatus.Tick += timerOfflineDHKStatus_Tick;
-
-            //导航快速曲线
-            timerUpdateChart_DHK.Interval = new TimeSpan(0,0,0,0,500);
-            //this.timerUpdateChart_DHK.Tick += timerUpdateChart_DHK_Tick;
-
-            //导航慢速
-            timerUpdateDHMStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //timerUpdateDHMStatus.Tick += timerUpdateDHKStatus_Tick;
-
-            //导航慢速离线
-            timerOfflineDHMStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
-            //this.timerOfflineDHMStatus.Tick += timerOfflineDHKStatus_Tick;
-
-            //导航慢速曲线
-            timerUpdateChart_DHM.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //this.timerUpdateChart_DHK.Tick += timerUpdateChart_Tick_DHK;
-
-            timerUpdateUDP.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            timerUpdateUDP.Tick += timerUpdateUDP_Tick;
-
-            timerOffLineUDP.Interval = new TimeSpan(0, 0, 0, 0, 1000);
-            timerOffLineUDP.Tick += timerOffLineUDP_Tick;
-
             UpdateSyncFireDisplay(Double.NaN);
             InitProgramDiagram();
             InitLedStatus();
-
-            // 读取文件定时器
-            readFileTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnReadFileTimedEvent);
-            readFileTimer.Interval = 1;
-            readFileTimer.Enabled = true;
+            
+            InitTimer_YaoCe();
 
             // 创建新的日志文件
             Logger.GetInstance().NewFile();
             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "程序开始启动！");
         }
 
-        delegate void OnReadFileTimedEventCallBack(Object source, ElapsedEventArgs e);
-        private void MainForm_Load(object sender, EventArgs e)
+        private void InitTimer_YaoCe()
         {
+            //文件加载
+            UpdateLoadFileProgressTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
+            UpdateLoadFileProgressTimer.Tick += timerUpdateLoadFileProgress_Tick;
+
+            /*-------系统判决状态定时器--------------------------------------*/
+            UpdateXiTongStatusTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            UpdateXiTongStatusTimer.Tick += timerUpdateXiTongStatus_Tick;
+
+            timerOffLineXiTongStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
+            timerOffLineXiTongStatus.Tick += timerOffLineXiTongStatus_Tick;
+
+            timerUpdateChart.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            timerUpdateChart.Tick += timerUpdateChart_Tick;
+            /*---------------------------------------------------------*/
+
+            /*--------系统导航快速定时器-------------------------------------*/
+            timerUpdateDHKStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //timerUpdateDHKStatus.Tick += timerUpdateDHKStatus_Tick;
+
+            timerOfflineDHKStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
+            //this.timerOfflineDHKStatus.Tick += timerOfflineDHKStatus_Tick;
+
+            timerUpdateChart_DHK.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //this.timerUpdateChart_DHK.Tick += timerUpdateChart_DHK_Tick;
+            /*---------------------------------------------------------*/
+
+
+
+            /*--------系统导航慢速定时器--------------------------------------*/
+            timerUpdateDHMStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //timerUpdateDHMStatus.Tick += timerUpdateDHKStatus_Tick;
+
+            timerOfflineDHMStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
+            //this.timerOfflineDHMStatus.Tick += timerOfflineDHKStatus_Tick;
+
+            timerUpdateChart_DHM.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //this.timerUpdateChart_DHK.Tick += timerUpdateChart_Tick_DHK;
+            /*---------------------------------------------------------*/
+
+
+            /*------------回路检测定时器-------------------------------------*/
+            UpdateHuiLuJianCeTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
+            UpdateHuiLuJianCeTimer.Tick += timerUpdateHuiLuJianCe_Tick;
+
+            timerOffLineHuiLuJianCe.Tick += timerOffLineHuiLuJianCe_Tick;
+            /*---------------------------------------------------------*/
+
+
+            /*-------------系统状态即时反馈定时器------------------------------*/
+            timerUpdateXiTongJiShiStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //timerUpdateXiTongJiShiStatus.Tick += timerUpdateXiTongJiShiStatus_Tick;
+
+            timerUpdateChart_XiTongJiShi.Interval = new TimeSpan(0, 0, 0, 0, 3000);
+            //this.timerUpdateChart_XiTongJiShi.Tick += timerUpdateChart_XiTongJiShi_Tick;
+
+            timerOfflineXiTongJiShiStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //this.timerOfflineXiTongJiShiStatus.Tick += timerOfflineXiTongJiShiStatus_Tick;
+            /*---------------------------------------------------------*/
+
+
+            /*-------------------帧序号--------------------*/
+            timerChartUpdate_ZXH.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            /*---------------------------------------------------------*/
+
+
+            /*-------UDP--------------------------*/
+            timerUpdateUDP.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            timerUpdateUDP.Tick += timerUpdateUDP_Tick;
+
+            timerOffLineUDP.Interval = new TimeSpan(0, 0, 0, 0, 1000);
+            timerOffLineUDP.Tick += timerOffLineUDP_Tick;
+            /*--------------------------------------------------
+             */
+
+
             // 读取文件定时器
-            readFileTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnReadFileTimedEvent);  
-            readFileTimer.Interval = 1; 
-            readFileTimer.Enabled = true; 
+            readFileTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnReadFileTimedEvent);
+            readFileTimer.Interval = 1;
+            readFileTimer.Enabled = true;
         }
+
+        private void timerUpdateChart_Tick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        delegate void OnReadFileTimedEventCallBack(Object source, ElapsedEventArgs e);
 
         public void OnReadFileTimedEvent(Object source, ElapsedEventArgs e)
         {
@@ -835,7 +933,6 @@ namespace DataProcess
                             byte[] byteArray = new byte[readLength];
                             Array.Copy(heByte, 0, byteArray, 0, readLength);
                             yaoceParser.Enqueue(byteArray);
-
                         }
                         else
                         {
@@ -957,9 +1054,8 @@ namespace DataProcess
         {
             double percent = (double)alreadReadFileLength / (double)loadFileLength; 
             percent *= 100;
+
             // 日志打印
-             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + ((UInt32)percent).ToString() + "%"); //
-            // 
             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + percent.ToString("f2") + "%");
 
             // 更新进度条
@@ -1040,6 +1136,19 @@ namespace DataProcess
                 UpdateXiTongStatusTimer.Stop();  
                 UpdateHuiLuJianCeTimer.Stop();  
                 timerUpdateUDP.Stop();  
+            }
+        }
+
+        //更新曲线定时器
+        private void setTimerUpdateChartStatus(bool bOpen)
+        {
+            if (bOpen)
+            {
+                timerUpdateChart.Start();  
+            }
+            else
+            { 
+                timerUpdateChart.Stop(); 
             }
         }
 
@@ -1129,7 +1238,6 @@ namespace DataProcess
                         readFileTimer.Start();
                     }
                     break; 
-
                 default:
                     break; 
             }
@@ -1164,7 +1272,8 @@ namespace DataProcess
             UpdateLoadFileProgressTimer.Start();  
 
             // 开启状态刷新定时器
-            setUpdateTimerStatus(true); 
+            setUpdateTimerStatus(true);
+
 
             // NOTE 20200525 每次重新回放重置数据显示界面
            // GenericFunction.reSetAllTextEdit(TabPage_XiTongPanJue); 
@@ -1207,7 +1316,7 @@ namespace DataProcess
         }
 
 
-        //系统实时状态显示
+        //系统判决实时状态显示
         private void showSystemTimeStatus(ref SYSTEMPARSE_STATUS sObject)
         {
             // 经度
@@ -1793,6 +1902,92 @@ namespace DataProcess
             SeriesNavSequence.DataSource = chartDataSource.NavSequenceList;
         }
 
+        private void InitYaoCeChartDataSource()
+        {
+            //系统
+            chart_XiTong_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_XiTong_ZuoBiao_WeiDuList;
+            chart_XiTong_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_XiTong_ZuoBiao_JingDuList;
+            chart_XiTong_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_XiTong_ZuoBiao_GaoDuList;
+
+            chart_XiTong_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_DongList;
+            chart_XiTong_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_DongList;
+            chart_XiTong_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_DongList;
+
+            chart_XiTong_JiaoSuDu_Wx.DataSource = yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WxList;
+            chart_XiTong_JiaoSuDu_Wy.DataSource = yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WyList;
+            chart_XiTong_JiaoSuDu_Wz.DataSource = yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WzList;
+
+            chart_XiTong_FaSheXi_X.DataSource = yaoCeChartDataSource.chart_XiTong_FaSheXi_XList;
+            chart_XiTong_FaSheXi_Y.DataSource = yaoCeChartDataSource.chart_XiTong_FaSheXi_YList;
+            chart_XiTong_FaSheXi_Z.DataSource = yaoCeChartDataSource.chart_XiTong_FaSheXi_ZList;
+            chart_XiTong_FaSheXi_ZXGZ.DataSource = yaoCeChartDataSource.chart_XiTong_FaSheXi_ZXGZList;
+
+            chart_XiTong_YuShiLuoDian_SheCheng.DataSource = yaoCeChartDataSource.chart_XiTong_YuShiLuoDian_SheChengList;
+            chart_XiTong_YuShiLuoDian_Z.DataSource = yaoCeChartDataSource.chart_XiTong_YuShiLuoDian_ZList;
+
+            //导航快
+            chart_DHKuaiSu_Ti_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_WeiDuList;
+            chart_DHKuaiSu_Ti_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_JingDuList;
+            chart_DHKuaiSu_Ti_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_GaoDuList;
+
+            chart_DHKuaiSu_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_DongList;
+            chart_DHKuaiSu_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_BeiList;
+            chart_DHKuaiSu_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_TianList;
+
+            chart_DHKuaiSu_Tou_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_WeiDuList;
+            chart_DHKuaiSu_Tou_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_JingDuList;
+            chart_DHKuaiSu_Tou_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_GaoDuList;
+
+            chart_DHKuaiSu_Tou_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_DongList;
+            chart_DHKuaiSu_Tou_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_BeiList;
+            chart_DHKuaiSu_Tou_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_TianList;
+
+            //导航慢
+            chart_DHManSu_Ti_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_WeiDuList;
+            chart_DHManSu_Ti_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_JingDuList;
+            chart_DHManSu_Ti_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_GaoDuList;
+
+            chart_DHManSu_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_DongList;
+            chart_DHManSu_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_BeiList;
+            chart_DHManSu_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_TianList;
+
+            chart_DHManSu_Tou_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_WeiDuList;
+            chart_DHManSu_Tou_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_JingDuList;
+            chart_DHManSu_Tou_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_GaoDuList;
+
+            chart_DHManSu_Tou_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_DongList;
+            chart_DHManSu_Tou_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_BeiList;
+            chart_DHManSu_Tou_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_TianList;
+
+            //系统状态即时
+            chart_XTJS_Ti_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_WeiDuList;
+            chart_XTJS_Ti_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_JingDuList;
+            chart_XTJS_Ti_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_GaoDuList;
+
+            chart_XTJS_Ti_JiaoSuDu_Wx.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WxList;
+            chart_XTJS_Ti_JiaoSuDu_Wy.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WyList;
+            chart_XTJS_Ti_JiaoSuDu_Wz.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WzList;
+
+            chart_XTJS_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_DongList;
+            chart_XTJS_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_BeiList;
+            chart_XTJS_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_TianList;
+
+            chart_XTJS_Tou_GuoZai_ZhouXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_ZhouXiangList;
+            chart_XTJS_Tou_GuoZai_FaXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_FaXiangList;
+            chart_XTJS_Tou_GuoZai_CeXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_CeXiangList;
+
+            //帧序号
+            chart_XiTongPanJu15.DataSource = yaoCeChartDataSource.chart_XiTongPanJu15List;
+            chart_XiTongPanJu16.DataSource = yaoCeChartDataSource.chart_XiTongPanJu16List;
+            chart_HuiLuJianCe.DataSource = yaoCeChartDataSource.chart_HuiLuJianCeList;
+            chart_DHK_Ti.DataSource = yaoCeChartDataSource.chart_DHK_TiList;
+            chart_DHM_Ti.DataSource = yaoCeChartDataSource.chart_DHM_TiList;
+            chart_XTJS_Ti.DataSource = yaoCeChartDataSource.chart_XTJS_TiList;
+            chart_DHK_Tou.DataSource = yaoCeChartDataSource.chart_DHK_TouList;
+            chart_DHM_Tou.DataSource = yaoCeChartDataSource.chart_DHM_TouList;
+            chart_XTJS_Tou.DataSource = yaoCeChartDataSource.chart_XTJS_TouList;
+        }
+
         private void InitProgramDiagram()
         {
             ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
@@ -2354,6 +2549,7 @@ namespace DataProcess
             {
                 IntPtr handle = hwndSource.Handle;
                 hwndSource.AddHook(new HwndSourceHook(WndProc));
+                hwndSource.AddHook(new HwndSourceHook(DefWndProc));
             }
         }
 
@@ -2377,8 +2573,10 @@ namespace DataProcess
                 yaoceDataLogger.Stop();  
 
                 // 关闭消息处理
-                yaoceParser.Stop();  
-
+                if(yaoceParser != null)
+                {
+                    yaoceParser.Stop();
+                }
                 // 关闭绘图定时器刷新数据
                 //setTimerUpdateChartStatus(false); 
 
@@ -2443,6 +2641,7 @@ namespace DataProcess
 
         protected IntPtr DefWndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
+#if true
             switch (msg)
             { 
                 case WM_YAOCE_SystemStatus_DATA:
@@ -2451,7 +2650,7 @@ namespace DataProcess
                         SYSTEMPARSE_STATUS sObject = Marshal.PtrToStructure<SYSTEMPARSE_STATUS>(ptr);  
 
                         // 缓存状态数据
-                        sObject_XiTong = sObject;  
+                        sObject_XiTong = sObject;
 
                         // 重新启动离线定时器
                         timerOffLineXiTongStatus.Stop(); 
@@ -2459,9 +2658,6 @@ namespace DataProcess
 
                         // 是否收到数据
                         bRecvStatusData_XiTong = true;
-
-                       // 填充实时数据(更改成通过定时器来刷新实时数据)
-                       // showSystemTimeStatus(ref sObject); 
 
                        // 绘图
                         xiTong_CHART_ITEM_INDEX++; 
@@ -2658,6 +2854,7 @@ namespace DataProcess
                 default:
                     return hwnd;
             }
+#endif
             return hwnd;
         }
 
@@ -2912,6 +3109,7 @@ namespace DataProcess
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
+            yaoceParser = new DataParser(new WindowInteropHelper(this).Handle);
             if (load == null)
             {
                 load = new LoadDataForm(); 
@@ -2945,6 +3143,11 @@ namespace DataProcess
                     MessageBox.Show("视频软件启动失败:" + exception.Message, "错误", MessageBoxButton.OK);
                 }
             }
+        }
+
+        private void clearAllChart()
+        {
+            xiTong_CHART_ITEM_INDEX = 0; //
         }
     }
 }
