@@ -25,8 +25,8 @@
             <dx:SimpleButton Content="停止" x:Name="btnStop" Margin="10,0,0,0" IsEnabled="False" Glyph="{dx:DXImage SvgImages/XAF/Action_Debug_Stop.svg}" Click="btnStop_Click" />
             <dx:SimpleButton Content="开始存储数据" x:Name="btnData" Margin="10,0,0,0" IsEnabled="False" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Database.svg}" Click="btnData_Click"/>
             <dx:SimpleButton Content="设置" x:Name="btnSetting" Margin="10,0,0,0" IsEnabled="True" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Settings.svg}" Click="btnSetting_Click" VerticalAlignment="Bottom"/>
-            <dx:SimpleButton Visibility="Collapsed" Content="历史数据" x:Name="btnHistory" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Business Objects/BO_Contract.svg}" Click="btnHistory_Click"/>
             <dx:SimpleButton Content="打开外部数据" x:Name="btnOpenData" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Click="btnOpenData_Click"/>
+            <dx:SimpleButton Content="数据转换" x:Name="btnDataConvert" Margin="10,0,0,0" Glyph="{dx:DXImage SvgImages/Business Objects/BO_Contract.svg}" Click="btnHistory_Click"/>
             <dx:SimpleButton Content="打开视频软件" x:Name="btnVideo" Margin="10,0,0,0" Click="btnVideo_Click" Glyph="{dx:DXImage Images/Miscellaneous/Video_32x32.png}"/>
             <TextBlock Text="幅值自适应:" Margin="20,0,0,0" VerticalAlignment="Center"/>
             <dxe:ToggleSwitch Margin="0,0,0,0" IsChecked="True" Click="ToggleSwitch_Click" EnableAnimation="False"/>
@@ -50,7 +50,7 @@
                     </Grid.ColumnDefinitions>
                     <dx:DXTabControl Margin="0,0,5,0" Grid.Column="0">
                         <dx:DXTabItem Header="位置">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="290"/>
@@ -354,7 +354,7 @@
                             </ScrollViewer>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="姿态">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="400"/>
@@ -561,7 +561,7 @@
                             </ScrollViewer>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="伺服信号">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="290"/>
@@ -801,7 +801,7 @@
             <dx:DXTabItem Header="环境参数">
                 <dx:DXTabControl Margin="0,0,0,0" Grid.Row="1" Grid.Column="1">
                     <dx:DXTabItem Header="温度">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                             <Grid Background="Transparent">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20" />
@@ -1204,7 +1204,7 @@
                     </dx:DXTabItem>
                     <dx:DXTabItem Header="压力">
                         <Grid Background="Transparent">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="290"/>
@@ -1446,7 +1446,7 @@
                     </dx:DXTabItem>
                     <dx:DXTabItem Header="振动">
                         <Grid Background="Transparent">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -2040,7 +2040,7 @@
                     </dx:DXTabItem>
                     <dx:DXTabItem Header="冲击、噪声">
                         <Grid Background="Transparent">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Grid Background="Transparent">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -2283,7 +2283,7 @@
                 </dx:DXTabControl>
             </dx:DXTabItem>
             <dx:DXTabItem Header="帧序号">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                     <Grid Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="450"/>
