@@ -118,8 +118,8 @@
     <Compile Include="Controls\LoadDataForm.xaml.cs">
       <DependentUpon>LoadDataForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MapControl.xaml.cs">
-      <DependentUpon>MapControl.xaml</DependentUpon>
+    <Compile Include="Controls\MainInfoControl.xaml.cs">
+      <DependentUpon>MainInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MyChartControl.xaml.cs">
       <DependentUpon>MyChartControl.xaml</DependentUpon>
@@ -133,8 +133,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CopyMe.SQLite.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataConvertSelectWindow.xaml.cs">
-      <DependentUpon>DataConvertSelectWindow.xaml</DependentUpon>
+    <Compile Include="DataConvertWindow.xaml.cs">
+      <DependentUpon>DataConvertWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DisplayBuffers.cs" />
     <Compile Include="GMap\MapControl.cs" />
@@ -157,6 +157,7 @@
     <Compile Include="SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Setting\MainSetting.cs" />
     <Compile Include="Setting\NetworkSetting.cs" />
     <Compile Include="Setting\Ratios.cs" />
     <Compile Include="Setting\SettingManager.cs" />
@@ -185,7 +186,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MapControl.xaml">
+    <Page Include="Controls\MainInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,7 +202,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataConvertSelectWindow.xaml">
+    <Page Include="DataConvertWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

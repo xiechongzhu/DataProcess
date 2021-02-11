@@ -26,6 +26,18 @@ namespace DataProcess
         public SettingWindow()
         {
             InitializeComponent();
+            settingManager.LoadMainSetting(out MainSetting mainSetting);
+            editStartLng.Text = mainSetting.StartLng.ToString();
+            editStartLat.Text = mainSetting.StartLat.ToString();
+            editEndLng.Text = mainSetting.EndLng.ToString();
+            editEndLat.Text = mainSetting.EndLat.ToString();
+            editInfo.Text = mainSetting.MainText;
+            editBoomLineFront.Text = mainSetting.BoomLineFront.ToString();
+            editBoomLineBack.Text = mainSetting.BoomLineBack.ToString();
+            editBoomLineSide.Text = mainSetting.BoomLineSide.ToString();
+            editPipeLength.Text = mainSetting.PipeLength.ToString();
+            editPipeWidth.Text = mainSetting.PipeWidth.ToString();
+
             if(settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort,
                                                  out String flyIpAddr, out int flyPort, 
                                                  out String yaoceIpAddr,out int yaocePort,
@@ -39,161 +51,103 @@ namespace DataProcess
                 editYaoCePort.Text = yaocePort.ToString();
                 editMaxPoint.Text = maxDisplayPoint.ToString();
             }
-            else
-            {
-                MessageBox.Show("加载网络配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
 
-            if(settingManager.LoadRatios(out Ratios ratios))
-            {
-                editFire.Text = ratios.Fire.ToString();
-                editFireFix.Text = ratios.FireFix.ToString();
-
-                editHoodTemp.Text = ratios.HoodTemp.ToString();
-                editHoodTempFix.Text = ratios.HoodTempFix.ToString();
-
-                editInsAirTemp.Text = ratios.InsAirTemp.ToString();
-                editInsAirTempFix.Text = ratios.InsAirTempFix.ToString();
-
-                editInsWallTemp.Text = ratios.InsWallTemp.ToString();
-                editInsWallTempFix.Text = ratios.InsWallTempFix.ToString();
-
-                editAttAirTemp.Text = ratios.AttAirTemp.ToString();
-                editAttAirTempFix.Text = ratios.AttAirTempFix.ToString();
-
-                editTemperature1Temp.Text = ratios.Temperature1Temp.ToString();
-                editTemperature1TempFix.Text = ratios.Temperature1TempFix.ToString();
-
-                editTemperature2Temp.Text = ratios.Temperature2Temp.ToString();
-                editTemperature2TempFix.Text = ratios.Temperature2TempFix.ToString();
-
-                editAttWalls1Temp.Text = ratios.AttWalls1Temp.ToString();
-                editAttWalls1TempFix.Text = ratios.AttWalls1TempFix.ToString();
-
-                editAttWalls2Temp.Text = ratios.AttWalls2Temp.ToString();
-                editAttWalls2TempFix.Text = ratios.AttWalls2TempFix.ToString();
-
-                editAttWalls3Temp.Text = ratios.AttWalls3Temp.ToString();
-                editAttWalls3TempFix.Text = ratios.AttWalls3TempFix.ToString();
-
-                editAttWalls4Temp.Text = ratios.AttWalls4Temp.ToString();
-                editAttWalls4TempFix.Text = ratios.AttWalls4TempFix.ToString();
-
-                editAttWalls5Temp.Text = ratios.AttWalls5Temp.ToString();
-                editAttWalls5TempFix.Text = ratios.AttWalls5TempFix.ToString();
-
-                editAttWalls6Temp.Text = ratios.AttWalls6Temp.ToString();
-                editAttWalls6TempFix.Text = ratios.AttWalls6TempFix.ToString();
-
-                editInsPresure.Text = ratios.InsPresure.ToString();
-                editInsPresureFix.Text = ratios.InsPresureFix.ToString();
-
-                editAttiPresure.Text = ratios.AttiPresure.ToString();
-                editAttiPresureFix.Text = ratios.AttiPresureFix.ToString();
-
-                editTailPresure.Text = ratios.TailPresure.ToString();
-                editTailPresureFix.Text = ratios.TailPresureFix.ToString();
-
-                editLevel1Presure.Text = ratios.Level1Presure.ToString();
-                editLevel1PresureFix.Text = ratios.Level1PresureFix.ToString();
-
-                editLevel2TransmitterPresure.Text = ratios.Level2TransmitterPresure.ToString();
-                editLevel2TransmitterPresureFix.Text = ratios.Level2TransmitterPresureFix.ToString();
-
-                editGestureControlHighPresure.Text = ratios.GestureControlHighPresure.ToString();
-                editGestureControlHighPresureFix.Text = ratios.GestureControlHighPresureFix.ToString();
-
-                editGestureControlLowPresure.Text = ratios.GestureControlLowPresure.ToString();
-                editGestureControlLowPresureFix.Text = ratios.GestureControlLowPresureFix.ToString();
-
-                editShake1.Text = ratios.Shake1.ToString();
-                editShake1Fix.Text = ratios.Shake1Fix.ToString();
-
-                editShake2.Text = ratios.Shake2.ToString();
-                editShake2Fix.Text = ratios.Shake2Fix.ToString();
-
-                editShake3.Text = ratios.Shake3.ToString();
-                editShake3Fix.Text = ratios.Shake3Fix.ToString();
-
-                editShake4.Text = ratios.Shake4.ToString();
-                editShake4Fix.Text = ratios.Shake4Fix.ToString();
-
-                editShake5.Text = ratios.Shake5.ToString();
-                editShake5Fix.Text = ratios.Shake5Fix.ToString();
-
-                editShake6.Text = ratios.Shake6.ToString();
-                editShake6Fix.Text = ratios.Shake6Fix.ToString();
-
-                editShake7.Text = ratios.Shake7.ToString();
-                editShake7Fix.Text = ratios.Shake7Fix.ToString();
-
-                editShake8.Text = ratios.Shake8.ToString();
-                editShake8Fix.Text = ratios.Shake8Fix.ToString();
-
-                editShake9.Text = ratios.Shake9.ToString();
-                editShake9Fix.Text = ratios.Shake9Fix.ToString();
-
-                editShake10.Text = ratios.Shake10.ToString();
-                editShake10Fix.Text = ratios.Shake10Fix.ToString();
-
-                editShake11.Text = ratios.Shake11.ToString();
-                editShake11Fix.Text = ratios.Shake11Fix.ToString();
-
-                editShake12.Text = ratios.Shake12.ToString();
-                editShake12Fix.Text = ratios.Shake12Fix.ToString();
-
-                editShake1X.Text = ratios.Shake1X.ToString();
-                editShake1XFix.Text = ratios.Shake1XFix.ToString();
-
-                editShake1Y.Text = ratios.Shake1Y.ToString();
-                editShake1YFix.Text = ratios.Shake1YFix.ToString();
-
-                editShake1Z.Text = ratios.Shake1Z.ToString();
-                editShake1ZFix.Text = ratios.Shake1ZFix.ToString();
-
-                editShake2X.Text = ratios.Shake2X.ToString();
-                editShake2XFix.Text = ratios.Shake2XFix.ToString();
-
-                editShake2Y.Text = ratios.Shake2Y.ToString();
-                editShake2YFix.Text = ratios.Shake2YFix.ToString();
-
-                editShake2Z.Text = ratios.Shake2Z.ToString();
-                editShake2ZFix.Text = ratios.Shake2ZFix.ToString();
-
-                editLash1_1.Text = ratios.Lash1_1.ToString();
-                editLash1_1Fix.Text = ratios.Lash1_1Fix.ToString();
-
-                editLash1_2.Text = ratios.Lash1_2.ToString();
-                editLash1_2Fix.Text = ratios.Lash1_2Fix.ToString();
-
-                editLash1_3.Text = ratios.Lash1_3.ToString();
-                editLash1_3Fix.Text = ratios.Lash1_3Fix.ToString();
-
-                editLash2.Text = ratios.Lash2.ToString();
-                editLash2Fix.Text = ratios.Lash2Fix.ToString();
-
-                editNoise1.Text = ratios.Noise1.ToString();
-                editNoise1Fix.Text = ratios.Noise1Fix.ToString();
-
-                editNoise2.Text = ratios.Noise2.ToString();
-                editNoise2Fix.Text = ratios.Noise2Fix.ToString();
-
-                editNoise.Text = ratios.Noise.ToString();
-                editNoiseFix.Text = ratios.NoiseFix.ToString();
-            }
-            else
-            {
-                MessageBox.Show("加载系数配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
+            settingManager.LoadRatios(out Ratios ratios);
+            editFire.Text = ratios.Fire.ToString();
+            editFireFix.Text = ratios.FireFix.ToString();
+            editHoodTemp.Text = ratios.HoodTemp.ToString();
+            editHoodTempFix.Text = ratios.HoodTempFix.ToString();
+            editInsAirTemp.Text = ratios.InsAirTemp.ToString();
+            editInsAirTempFix.Text = ratios.InsAirTempFix.ToString();
+            editInsWallTemp.Text = ratios.InsWallTemp.ToString();
+            editInsWallTempFix.Text = ratios.InsWallTempFix.ToString();
+            editAttAirTemp.Text = ratios.AttAirTemp.ToString();
+            editAttAirTempFix.Text = ratios.AttAirTempFix.ToString();
+            editTemperature1Temp.Text = ratios.Temperature1Temp.ToString();
+            editTemperature1TempFix.Text = ratios.Temperature1TempFix.ToString();
+            editTemperature2Temp.Text = ratios.Temperature2Temp.ToString();
+            editTemperature2TempFix.Text = ratios.Temperature2TempFix.ToString();
+            editAttWalls1Temp.Text = ratios.AttWalls1Temp.ToString();
+            editAttWalls1TempFix.Text = ratios.AttWalls1TempFix.ToString();
+            editAttWalls2Temp.Text = ratios.AttWalls2Temp.ToString();
+            editAttWalls2TempFix.Text = ratios.AttWalls2TempFix.ToString();
+            editAttWalls3Temp.Text = ratios.AttWalls3Temp.ToString();
+            editAttWalls3TempFix.Text = ratios.AttWalls3TempFix.ToString();
+            editAttWalls4Temp.Text = ratios.AttWalls4Temp.ToString();
+            editAttWalls4TempFix.Text = ratios.AttWalls4TempFix.ToString();
+            editAttWalls5Temp.Text = ratios.AttWalls5Temp.ToString();
+            editAttWalls5TempFix.Text = ratios.AttWalls5TempFix.ToString();
+            editAttWalls6Temp.Text = ratios.AttWalls6Temp.ToString();
+            editAttWalls6TempFix.Text = ratios.AttWalls6TempFix.ToString();
+            editInsPresure.Text = ratios.InsPresure.ToString();
+            editInsPresureFix.Text = ratios.InsPresureFix.ToString();
+            editAttiPresure.Text = ratios.AttiPresure.ToString();
+            editAttiPresureFix.Text = ratios.AttiPresureFix.ToString();
+            editTailPresure.Text = ratios.TailPresure.ToString();
+            editTailPresureFix.Text = ratios.TailPresureFix.ToString();
+            editLevel1Presure.Text = ratios.Level1Presure.ToString();
+            editLevel1PresureFix.Text = ratios.Level1PresureFix.ToString();
+            editLevel2TransmitterPresure.Text = ratios.Level2TransmitterPresure.ToString();
+            editLevel2TransmitterPresureFix.Text = ratios.Level2TransmitterPresureFix.ToString();
+            editGestureControlHighPresure.Text = ratios.GestureControlHighPresure.ToString();
+            editGestureControlHighPresureFix.Text = ratios.GestureControlHighPresureFix.ToString();
+            editGestureControlLowPresure.Text = ratios.GestureControlLowPresure.ToString();
+            editGestureControlLowPresureFix.Text = ratios.GestureControlLowPresureFix.ToString();
+            editShake1.Text = ratios.Shake1.ToString();
+            editShake1Fix.Text = ratios.Shake1Fix.ToString();
+            editShake2.Text = ratios.Shake2.ToString();
+            editShake2Fix.Text = ratios.Shake2Fix.ToString();
+            editShake3.Text = ratios.Shake3.ToString();
+            editShake3Fix.Text = ratios.Shake3Fix.ToString();
+            editShake4.Text = ratios.Shake4.ToString();
+            editShake4Fix.Text = ratios.Shake4Fix.ToString();
+            editShake5.Text = ratios.Shake5.ToString();
+            editShake5Fix.Text = ratios.Shake5Fix.ToString();
+            editShake6.Text = ratios.Shake6.ToString();
+            editShake6Fix.Text = ratios.Shake6Fix.ToString();
+            editShake7.Text = ratios.Shake7.ToString();
+            editShake7Fix.Text = ratios.Shake7Fix.ToString();
+            editShake8.Text = ratios.Shake8.ToString();
+            editShake8Fix.Text = ratios.Shake8Fix.ToString();
+            editShake9.Text = ratios.Shake9.ToString();
+            editShake9Fix.Text = ratios.Shake9Fix.ToString();
+            editShake10.Text = ratios.Shake10.ToString();
+            editShake10Fix.Text = ratios.Shake10Fix.ToString();
+            editShake11.Text = ratios.Shake11.ToString();
+            editShake11Fix.Text = ratios.Shake11Fix.ToString();
+            editShake12.Text = ratios.Shake12.ToString();
+            editShake12Fix.Text = ratios.Shake12Fix.ToString();
+            editShake1X.Text = ratios.Shake1X.ToString();
+            editShake1XFix.Text = ratios.Shake1XFix.ToString();
+            editShake1Y.Text = ratios.Shake1Y.ToString();
+            editShake1YFix.Text = ratios.Shake1YFix.ToString();
+            editShake1Z.Text = ratios.Shake1Z.ToString();
+            editShake1ZFix.Text = ratios.Shake1ZFix.ToString();
+            editShake2X.Text = ratios.Shake2X.ToString();
+            editShake2XFix.Text = ratios.Shake2XFix.ToString();
+            editShake2Y.Text = ratios.Shake2Y.ToString();
+            editShake2YFix.Text = ratios.Shake2YFix.ToString();
+            editShake2Z.Text = ratios.Shake2Z.ToString();
+            editShake2ZFix.Text = ratios.Shake2ZFix.ToString();
+            editLash1_1.Text = ratios.Lash1_1.ToString();
+            editLash1_1Fix.Text = ratios.Lash1_1Fix.ToString();
+            editLash1_2.Text = ratios.Lash1_2.ToString();
+            editLash1_2Fix.Text = ratios.Lash1_2Fix.ToString();
+            editLash1_3.Text = ratios.Lash1_3.ToString();
+            editLash1_3Fix.Text = ratios.Lash1_3Fix.ToString();
+            editLash2.Text = ratios.Lash2.ToString();
+            editLash2Fix.Text = ratios.Lash2Fix.ToString();
+            editNoise1.Text = ratios.Noise1.ToString();
+            editNoise1Fix.Text = ratios.Noise1Fix.ToString();
+            editNoise2.Text = ratios.Noise2.ToString();
+            editNoise2Fix.Text = ratios.Noise2Fix.ToString();
+            editNoise.Text = ratios.Noise.ToString();
+            editNoiseFix.Text = ratios.NoiseFix.ToString();
+    
             if(settingManager.LoadVideoSetting(out VideoSetting videoSetting))
             {
                 editVideoExePath.Text = videoSetting.ExePath;
                 editVideoExeParam.Text = videoSetting.ExeParam;
-            }
-            else
-            {
-                MessageBox.Show("加载视频软件配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -369,6 +323,24 @@ namespace DataProcess
             {
                 MessageBox.Show("保存视频软件配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            if(!settingManager.SaveMainSetting(new MainSetting
+            {
+                StartLng = double.Parse(editStartLng.Text),
+                StartLat = double.Parse(editStartLat.Text),
+                EndLng = double.Parse(editEndLng.Text),
+                EndLat = double.Parse(editEndLat.Text),
+                MainText = editInfo.Text,
+                BoomLineFront = double.Parse(editBoomLineFront.Text),
+                BoomLineBack = double.Parse(editBoomLineBack.Text),
+                BoomLineSide = double.Parse(editBoomLineSide.Text),
+                PipeLength = double.Parse(editPipeLength.Text),
+                PipeWidth = double.Parse(editPipeWidth.Text)
+            }))
+            {
+                MessageBox.Show("保存主界面配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            DialogResult = true;
             Close();
         }
 

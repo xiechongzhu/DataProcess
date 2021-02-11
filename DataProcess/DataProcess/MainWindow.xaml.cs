@@ -27,6 +27,7 @@ using DataProcess.Controls;
 using System.Timers;
 using System.Threading;
 using System.Diagnostics;
+using GMap.NET;
 
 namespace DataProcess
 {
@@ -51,10 +52,6 @@ namespace DataProcess
 
         //速变参数
         public List<ChartPointDataSource> FastShakeSeriesLists = new List<ChartPointDataSource>();
-        public ChartPointDataSource FastLashT3SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
-        public ChartPointDataSource FastLashT2SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
-        public ChartPointDataSource FastLashT1SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
-        public ChartPointDataSource FastLashT0SeriesList = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
         public List<ChartPointDataSource> FastLashSeriesLists1 = new List<ChartPointDataSource>();
         public ChartPointDataSource FastLashSeriesList2 = new ChartPointDataSource(MainWindow.CHART_MAX_POINTS);
         public List<ChartPointDataSource> FastNoiseLists = new List<ChartPointDataSource>();
@@ -140,10 +137,6 @@ namespace DataProcess
             SlowPresureLowList.ClearPoints(); ;
 
             FastShakeSeriesLists.ForEach(item => item.ClearPoints());
-            FastLashT3SeriesList.ClearPoints();
-            FastLashT2SeriesList.ClearPoints();
-            FastLashT1SeriesList.ClearPoints();
-            FastLashT0SeriesList.ClearPoints();
             FastLashSeriesLists1.ForEach(item => item.ClearPoints());
             FastLashSeriesList2.ClearPoints();
             FastNoiseLists.ForEach(item => item.ClearPoints());
@@ -209,10 +202,6 @@ namespace DataProcess
             SlowPresureLowList.SetMaxCount(maxCount) ;
 
             FastShakeSeriesLists.ForEach(item => item.SetMaxCount(maxCount));
-            FastLashT3SeriesList.SetMaxCount(maxCount);
-            FastLashT2SeriesList.SetMaxCount(maxCount);
-            FastLashT1SeriesList.SetMaxCount(maxCount);
-            FastLashT0SeriesList.SetMaxCount(maxCount);
             FastLashSeriesLists1.ForEach(item => item.SetMaxCount(maxCount));
             FastLashSeriesList2.SetMaxCount(maxCount);
             FastNoiseLists.ForEach(item => item.SetMaxCount(maxCount));
@@ -758,7 +747,8 @@ namespace DataProcess
         ChartDataSource chartDataSource = new ChartDataSource();
         YaoCeChartDataSource yaoCeChartDataSource = new YaoCeChartDataSource();
         Ratios ratios;
-
+        String MainText;
+        private DispatcherTimer MainTimer = new DispatcherTimer();
         //
         private UdpClient udpClientYaoCe = null;
         private DataParser yaoceParser = null;
@@ -814,9 +804,22 @@ namespace DataProcess
             
             InitTimer_YaoCe();
 
+            SettingManager settingManager = new SettingManager();
+            settingManager.LoadMainSetting(out MainSetting mainSetting);
+            MainText = mainSetting.MainText;
+
+            MainTimer.Tick += MainTimer_Tick;
+            MainTimer.Interval = new TimeSpan(0, 0, 0, 1);
+            MainTimer.Start();
+
             // 创建新的日志文件
             Logger.GetInstance().NewFile();
             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "程序开始启动！");
+        }
+
+        private void MainTimer_Tick(object sender, EventArgs e)
+        {
+            textTime.Text = String.Format("{0}  {1}", MainText, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
         }
 
         private void InitTimer_YaoCe()
@@ -1992,8 +1995,7 @@ namespace DataProcess
         {
             ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
             GpsTime.Text = "--";
-            programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
-            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
+            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point));
         }
 
         private void ResetProgramDiagram()
@@ -2114,10 +2116,6 @@ namespace DataProcess
                 for (int idx = 0; idx < 80; ++idx)
                 {
                     FastShakeSignal fastShakeSignal = packet.shakeSignals[idx];
-                    /*for (int pos = 0; pos < 12; ++pos)
-                    {
-                        chartDataSource.FastShakeSeriesLists[pos].AddPoint(fastShakeSignal.signal[pos] * ratios.fastShake + ratios.fastShakeFix);
-                    }*/
                     chartDataSource.FastShakeSeriesLists[0].AddPoint(fastShakeSignal.signal[0] * ratios.Shake1 + ratios.Shake1Fix);
                     chartDataSource.FastShakeSeriesLists[1].AddPoint(fastShakeSignal.signal[1] * ratios.Shake2 + ratios.Shake2Fix);
                     chartDataSource.FastShakeSeriesLists[2].AddPoint(fastShakeSignal.signal[2] * ratios.Shake3 + ratios.Shake3Fix);
@@ -2131,10 +2129,6 @@ namespace DataProcess
                     chartDataSource.FastShakeSeriesLists[10].AddPoint(fastShakeSignal.signal[10] * ratios.Shake11 + ratios.Shake11Fix);
                     chartDataSource.FastShakeSeriesLists[11].AddPoint(fastShakeSignal.signal[11] * ratios.Shake12 + ratios.Shake12Fix);
                 }
-                chartDataSource.FastLashT3SeriesList.AddPoint(packet.lashT3);
-                chartDataSource.FastLashT2SeriesList.AddPoint(packet.lashT2);
-                chartDataSource.FastLashT1SeriesList.AddPoint(packet.lashT1);
-                chartDataSource.FastLashT0SeriesList.AddPoint(packet.lashT0);
 
                 foreach(FastLashSignal fastLashSignal in packet.lashSignal)
                 {
@@ -2150,10 +2144,6 @@ namespace DataProcess
                 }
             });
             chartDataSource.FastShakeSeriesLists.ForEach(source => source.NotifyDataChanged());
-            chartDataSource.FastLashT3SeriesList.NotifyDataChanged();
-            chartDataSource.FastLashT2SeriesList.NotifyDataChanged();
-            chartDataSource.FastLashT1SeriesList.NotifyDataChanged();
-            chartDataSource.FastLashT0SeriesList.NotifyDataChanged();
             chartDataSource.FastLashSeriesLists1.ForEach(source => source.NotifyDataChanged());
             chartDataSource.FastLashSeriesList2.NotifyDataChanged();
             chartDataSource.FastNoiseLists.ForEach(source => source.NotifyDataChanged());
@@ -2258,7 +2248,6 @@ namespace DataProcess
                 chartDataSource.NavCrabAngle.AddPoint(packet.crabAngle);
                 chartDataSource.NavRollAngle.AddPoint(packet.rollAngle);
                 chartDataSource.NavSequenceList.AddPoint(packet.sequence);
-                mapControl.AddTrackPoint(packet.longitude, packet.latitude);
             });
 
             chartDataSource.NavLat.NotifyDataChanged();
@@ -2311,7 +2300,6 @@ namespace DataProcess
         {
             servoDataList.ForEach(packet =>
             {
-                programDigram.AddServoData(packet);
                 chartDataSource.ServoVol28List.AddPoint(FlyDataConvert.GetVoltage28(packet.vol28));
                 chartDataSource.ServoVol160List.AddPoint(FlyDataConvert.GetVoltage160(packet.vol160));
                 chartDataSource.Servo1IqList.AddPoint(FlyDataConvert.GetElectricity(packet.Iq1));
@@ -2422,7 +2410,8 @@ namespace DataProcess
             udpClientYaoCe.BeginReceive(EndYaoCeReceive, null);
             uiRefreshTimer.Start();
             ledTimer.Start();
-            mapControl.Clean();
+            mapControl.Clear();
+            mainInfoControl.Clear();
             bRun = true;
         }
 
@@ -2485,7 +2474,7 @@ namespace DataProcess
                                                 // 
                 yaoceDataLogger.Enqueue(recvBuffer); //
                                                 // 
-                udpClientYaoCe.BeginReceive(EndYaoCeReceive, null); //
+                udpClientYaoCe?.BeginReceive(EndYaoCeReceive, null); //
                                                           // 
             }
             // 
@@ -2883,6 +2872,9 @@ namespace DataProcess
         {
             NavData data = Marshal.PtrToStructure<NavData>(msg);
             displayBuffers.NavDataList.Add(data);
+            mapControl.AddPoint(new PointLatLng(data.latitude, data.longitude));
+            mapControl.FlyHeight = data.height;
+            mainInfoControl.SetNavData(data);
             Marshal.FreeHGlobal(msg);
         }
 
@@ -2966,7 +2958,19 @@ namespace DataProcess
         {
             SettingWindow settingWindow = new SettingWindow();
             settingWindow.Owner = this;
-            settingWindow.ShowDialog();
+            if(settingWindow.ShowDialog() == true)
+            {
+                SettingManager settingManager = new SettingManager();
+                settingManager.LoadMainSetting(out MainSetting mainSetting);
+                MainText = mainSetting.MainText;
+                mapControl.StartPoint = new PointLatLng(mainSetting.StartLng, mainSetting.StartLat);
+                mapControl.EndPoint = new PointLatLng(mainSetting.EndLng, mainSetting.EndLat);
+                mapControl.BoomLineFront = mainSetting.BoomLineFront;
+                mapControl.BoomLineBack = mainSetting.BoomLineBack;
+                mapControl.BoomLineSide = mainSetting.BoomLineSide;
+                mapControl.PipeLineLength = mainSetting.PipeLength;
+                mapControl.PipeLineWidth = mainSetting.PipeWidth;
+            }
         }
 
         private void ThemedWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

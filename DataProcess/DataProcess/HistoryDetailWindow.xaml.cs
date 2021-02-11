@@ -5,6 +5,7 @@ using DataProcess.Protocol;
 using DataProcess.Setting;
 using DataProcess.Tools;
 using DevExpress.Xpf.Editors;
+using GMap.NET;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,8 +46,7 @@ namespace DataProcess
 
         private void InitProgramDigram()
         {
-            programDigram.SetLinePoints(new Point(0.1, 0.9), new Point(0.5, -0.8), new Point(0.9, 0.9));
-            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point.Value, point.Key));
+            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point));
         }
 
         private void InitChartTitle()
@@ -188,6 +188,11 @@ namespace DataProcess
                 dataLogger.LoadFlyBinaryFile(dataLogger.flyPacketFilePath, out List<NavData> navDataList, out List<AngleData> angleDataList,
                     out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
                 DrawNavData(navDataList);
+                foreach (NavData navData in navDataList)
+                {
+                    mapControl.AddPoint(new PointLatLng(navData.latitude, navData.longitude));
+                    mapControl.FlyHeight = navData.height;
+                }
                 DrawAngelData(angleDataList);
                 DrawProgramData(prgramDataList);
                 DrawServoData(servoDataList);
@@ -445,7 +450,6 @@ namespace DataProcess
                 ChartNavPitchAngle.WriteData(packet.pitchAngle);
                 ChartNavCrabAngle.WriteData(packet.crabAngle);
                 ChartNavRollAngle.WriteData(packet.rollAngle);
-                mapControl.AddTrackPoint(packet.longitude, packet.latitude);
             });
             ChartNavLat.EndWrite();
             ChartNavLon.EndWrite();
@@ -589,7 +593,6 @@ namespace DataProcess
         {
             packets.ForEach(packet =>
             {
-                programDigram.AddServoData(packet);
                 ChartServoVol28.WriteData(FlyDataConvert.GetVoltage28(packet.vol28));
                 ChartServoVol160.WriteData(FlyDataConvert.GetVoltage160(packet.vol160));
                 ChartServo1Iq.WriteData(FlyDataConvert.GetElectricity(packet.Iq1));

@@ -8,7 +8,7 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
     xmlns:dataprocess="clr-namespace:DataProcess" 
     xmlns:System="clr-namespace:System;assembly=mscorlib"    
-    xmlns:Controls="clr-namespace:DataProcess.Controls" 
+    xmlns:Controls="clr-namespace:DataProcess.Controls" xmlns:gmap="clr-namespace:DataProcess.GMap"
     x:Class="DataProcess.MainWindow" Title="数据接收解析软件--V 1.0.2" MinHeight="768" MinWidth="1024" WindowState="Maximized" 
     Icon="histroy.ico" Closing="ThemedWindow_Closing">
     <Grid>
@@ -42,11 +42,35 @@
             <Image x:Name="ImageUDP"/>
         </ToolBar>
         <dx:DXTabControl Grid.ColumnSpan="2" Margin="0,30,-0.4,-0.4" Grid.RowSpan="2">
-            <dx:DXTabItem Header="飞控">
+            <dx:DXTabItem Header="主界面">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="textTime" FontSize="40"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="400"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+                            <gmap:MapControl Grid.Row="0" x:Name="mapControl"/>
+                            <dataprocess:SignalDiagram Grid.Row="1" x:Name="programDigram"/>
+                        </Grid>
+                        <Controls:MainInfoControl Grid.Column="1" x:Name="mainInfoControl"/>
+                    </Grid>
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="飞控系统">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="600"/>
                     </Grid.ColumnDefinitions>
                     <dx:DXTabControl Margin="0,0,5,0" Grid.Column="0">
                         <dx:DXTabItem Header="位置">
@@ -58,9 +82,9 @@
                                         <RowDefinition Height="290"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="400"/>
-                                        <ColumnDefinition Width="400"/>
-                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="600"/>
+                                        <ColumnDefinition Width="600"/>
+                                        <ColumnDefinition Width="600"/>
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavLon">
                                         <dxc:ChartControl.Titles>
@@ -361,9 +385,9 @@
                                         <RowDefinition Height="400"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="400"/>
-                                        <ColumnDefinition Width="400"/>
-                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="600"/>
+                                        <ColumnDefinition Width="600"/>
+                                        <ColumnDefinition Width="600"/>
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartNavPitchAngle">
                                         <dxc:ChartControl.Titles>
@@ -569,8 +593,8 @@
                                         <RowDefinition Height="290"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="600"/>
-                                        <ColumnDefinition Width="600"/>
+                                        <ColumnDefinition Width="900"/>
+                                        <ColumnDefinition Width="900"/>
                                     </Grid.ColumnDefinitions>
                                     <dxc:ChartControl Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" x:Name="ChartServoVol28">
                                         <dxc:ChartControl.Titles>
@@ -767,9 +791,6 @@
                                 </Grid>
                             </ScrollViewer>
                         </dx:DXTabItem>
-                        <dx:DXTabItem Header="轨迹">
-                            <Controls:MapControl x:Name="mapControl"/>
-                        </dx:DXTabItem>
                     </dx:DXTabControl>
                     <Grid Background="Transparent" Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -789,16 +810,15 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="控制阶段:" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ProgramControlStatus"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="GPS时间:" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-                            <TextBlock Grid.Row="0" Grid.Column="3" x:Name="GpsTime"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="控制阶段:" HorizontalAlignment="Right" Margin="0,0,10,0" Visibility="Collapsed"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ProgramControlStatus" Visibility="Collapsed"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="GPS时间:" HorizontalAlignment="Right" Margin="0,0,10,0" Visibility="Collapsed"/>
+                            <TextBlock Grid.Row="0" Grid.Column="3" x:Name="GpsTime" Visibility="Collapsed"/>
                         </Grid>
-                        <dataprocess:SignalDiagram Grid.Row="1" Grid.Column="0" x:Name="programDigram"/>
                     </Grid>
                 </Grid>
             </dx:DXTabItem>
-            <dx:DXTabItem Header="环境参数">
+            <dx:DXTabItem Header="测量系统">
                 <dx:DXTabControl Margin="0,0,0,0" Grid.Row="1" Grid.Column="1">
                     <dx:DXTabItem Header="温度">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" dx:ScrollBarExtensions.AllowMouseScrolling="False">
@@ -2442,7 +2462,7 @@
                     </Grid>
                 </ScrollViewer>
             </dx:DXTabItem>
-            <dx:DXTabItem Header="遥测">
+            <dx:DXTabItem Header="安控系统">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>

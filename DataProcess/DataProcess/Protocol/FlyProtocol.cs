@@ -21,28 +21,48 @@ namespace DataProcess.Protocol
 
         public enum PROGRAM_CONTROL_STATUS
         {
-            STATUS_LEVEL1_SHUTDOWN = 1,
-            STATUS_ENGINE_LEAVE,
-            STATUS_BOOM,
-            STATUS_TOP,
-            STATUS_HEAD_BODY_LEAVE
+            STATUS_FLY_START = 0,       //起飞
+            STATUS_LEVEL1_SHUTDOWN,     //姿控发动机电爆管起爆
+            STATUS_ENGINE_LEAVE,        //一级发动机分离
+            STATUS_BOOM,                //一级发动机关机
+            STATUS_TOP,                 //顶点
+            STATUS_HEAD_BODY_LEAVE,     //头体分离
+            STATUS_LEVEL2_FIRE,         //二级发动机点火
+            STATUS_HOOD_FIRE,           //头罩分离点火
+            STATUS_HEAD_FIRE,           //弹头起旋点火
+            STATUS_LEVEL2_RELIEVE,      //二级发动机解保拔销
+            STATUS_LEVLE2_DRIVE,        //二级发动机解保驱动
+            STATUS_BUTERRY_ACTIVE,      //引控电池激活
+            STATUS_HEAD_PAYLOAD_LEAVE,  //弹头载荷脱插分离
+            STATUS_HEAD_LEAVE,          //头遥脱插分离
+            STATUS_HEAD_SAFE_LEAVE      //弹头安控/慢旋脱插分离
         }
 
-        private static readonly Dictionary<PROGRAM_CONTROL_STATUS, KeyValuePair<double, String>> ProgramControlStatusText = new Dictionary<PROGRAM_CONTROL_STATUS, KeyValuePair<double, String>>()
+        private static readonly Dictionary<PROGRAM_CONTROL_STATUS, String> ProgramControlStatusText = new Dictionary<PROGRAM_CONTROL_STATUS, String>()
         {
-            { PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN, new KeyValuePair<double, String>(0.02, "姿控发动机电爆管起爆") },
-            { PROGRAM_CONTROL_STATUS.STATUS_BOOM, new KeyValuePair<double, String>(0.04, "一级发动机关机")},
-            { PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE, new KeyValuePair<double, String>(0.07, "一级发动机分离") },
-            { PROGRAM_CONTROL_STATUS.STATUS_TOP, new KeyValuePair<double, String>(0.5, "顶点")},
-            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE, new KeyValuePair<double, String>(0.91, "头体分离")}
+            { PROGRAM_CONTROL_STATUS.STATUS_FLY_START, "起飞" },
+            { PROGRAM_CONTROL_STATUS.STATUS_BOOM, "姿控发动机电爆管起爆" },
+            { PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN, "一级发动机关机" },
+            { PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE, "一级发动机分离" },
+            { PROGRAM_CONTROL_STATUS.STATUS_LEVEL2_FIRE, "二级发动机点火" },
+            { PROGRAM_CONTROL_STATUS.STATUS_HOOD_FIRE, "头罩分离点火" },
+            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_FIRE, "弹头起旋点火" },
+            { PROGRAM_CONTROL_STATUS.STATUS_LEVEL2_RELIEVE, "二级发动机解保拔销" },
+            { PROGRAM_CONTROL_STATUS.STATUS_LEVLE2_DRIVE, "二级发动机解保驱动" },
+            { PROGRAM_CONTROL_STATUS.STATUS_BUTERRY_ACTIVE, "引控电池激活" },
+            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_PAYLOAD_LEAVE, "弹头载荷脱插分离" },
+            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_LEAVE, "头遥脱插分离" },
+            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_SAFE_LEAVE, "弹头安控/慢旋脱插分离" },
+            { PROGRAM_CONTROL_STATUS.STATUS_TOP, "顶点"},
+            { PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE, "头体分离"}
         };
 
-        public static KeyValuePair<double, String> GetPoint(PROGRAM_CONTROL_STATUS status)
+        public static String GetPoint(PROGRAM_CONTROL_STATUS status)
         {
             return ProgramControlStatusText[status];
         }
 
-        public static List<KeyValuePair<double, String>> GetPoints()
+        public static List<String> GetPoints()
         {
             return ProgramControlStatusText.Values.ToList();
         }
