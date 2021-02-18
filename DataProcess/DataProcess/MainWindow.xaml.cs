@@ -1275,9 +1275,11 @@ namespace DataProcess
             setUpdateTimerStatus(true);
 
 
-            // NOTE 20200525 每次重新回放重置数据显示界面
-           // GenericFunction.reSetAllTextEdit(TabPage_XiTongPanJue); 
-            //GenericFunction.reSetAllTextEdit(xtraTabPage_HuiLuJianCe);  
+            // NOTE 20200525 每次重新回放重置数据显示界面 
+            GenericFunction.reSetAllTextEdit(this.XiTong);
+            GenericFunction.reSetAllTextEdit(this.HuiLu);
+
+
 
             // 是否收到数据
             bRecvStatusData_XiTong = false; 
