@@ -16,7 +16,7 @@ namespace DataProcess.Setting
         public double HoodTempFix;                  //头罩内温度传感器T1偏置
 
         public double InsAirTemp;                   //仪器舱内接收机附近空腔温度传感器T2系数
-        public double InsAirTempFix;          //仪器舱内接收机附近空腔温度传感器T2偏置
+        public double InsAirTempFix;                //仪器舱内接收机附近空腔温度传感器T2偏置
 
         public double InsWallTemp;                  //仪器舱内筋条壁面温度传感器T3系数
         public double InsWallTempFix;               //仪器舱内筋条壁面温度传感器T3偏置
@@ -143,12 +143,5 @@ namespace DataProcess.Setting
 
         public double Noise;                       //尾段内噪声传感器N3系数
         public double NoiseFix;                    //尾段内噪声传感器N3偏置
-
-        /*public double fastLash;
-        public double fastNoise;
-        public double tailNoise;
-        public double fastLashFix;
-        public double fastNoiseFix;
-        public double tailNoiseFix;*/
     }
 }

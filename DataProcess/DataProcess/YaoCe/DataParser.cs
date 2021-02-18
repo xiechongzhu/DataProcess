@@ -261,8 +261,11 @@ namespace YaoCeProcess
 
         /// Enqueue
         public void Enqueue(byte[] data)
-        { 
-            queue.Enqueue(data); 
+        {
+            if (data != null)
+            {
+                queue.Enqueue(data);
+            }
         }
 
         /// Start
@@ -291,7 +294,7 @@ namespace YaoCeProcess
             while (isRuning)
             {
                 byte[] dataBuffer; 
-                    if (queue.TryDequeue(out dataBuffer))
+                if (queue.TryDequeue(out dataBuffer))
                 { 
                     ParseDatas(dataBuffer); 
                 }

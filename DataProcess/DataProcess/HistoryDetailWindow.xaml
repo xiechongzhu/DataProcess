@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:DataProcess" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:Controls="clr-namespace:DataProcess.Controls" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="DataProcess.HistoryDetailWindow" mc:Ignorable="d" Title="外部数据明细" Height="445.042" Width="455.373" 
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:Controls="clr-namespace:DataProcess.Controls" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:gmap="clr-namespace:DataProcess.GMap" x:Class="DataProcess.HistoryDetailWindow" mc:Ignorable="d" Title="外部数据明细" Height="445.042" Width="455.373" 
     WindowStartupLocation="CenterOwner" WindowState="Maximized" WindowStyle="SingleBorderWindow" MinWidth="1000" MinHeight="600">
     <Grid>
         <Grid.RowDefinitions>
@@ -79,7 +79,7 @@
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="轨迹">
-                            <Controls:MapControl x:Name="mapControl"/>
+                            <gmap:MapControl x:Name="mapControl"/>
                         </dx:DXTabItem>
                     </dx:DXTabControl>
                 </Grid>

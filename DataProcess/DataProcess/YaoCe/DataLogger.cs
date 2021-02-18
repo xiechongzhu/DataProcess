@@ -339,9 +339,11 @@ namespace YaoCeProcess
             // 
             // 20200207 直接原数据存储
             // 
-            logWriter.Write(buffer, 0, buffer.Length); //
-                                                       // 
-            logWriter.Flush(); //
+            if (buffer != null && buffer.Length > 0)
+            {
+                logWriter.Write(buffer, 0, buffer.Length); //                                      // 
+                logWriter.Flush(); //
+            }
                                // 
         }
         // 

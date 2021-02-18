@@ -13,6 +13,25 @@ namespace DataProcess.Setting
         private readonly String NetworkSettingFile = "network";
         private readonly String RatioSettingFile = "params";
         private readonly String VideoSettingFile = "video";
+        private readonly String MainSettingFile = "main";
+
+        public bool LoadMainSetting(out MainSetting mainSetting)
+        {
+            try
+            {
+                using (FileStream file = File.Open(MainSettingFile, FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    mainSetting = (MainSetting)formatter.Deserialize(file);
+                }
+            }
+            catch(Exception)
+            {
+                mainSetting = new MainSetting();
+                return false;
+            }
+            return true;
+        }
 
         public bool LoadVideoSetting(out VideoSetting videoSetting)
         {
@@ -93,6 +112,23 @@ namespace DataProcess.Setting
             catch (Exception)
             {
                 ratios = new Ratios();
+                return false;
+            }
+            return true;
+        }
+
+        public bool SaveMainSetting(MainSetting mainSetting)
+        {
+            try
+            {
+                using(FileStream file = File.Create(MainSettingFile))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(file, mainSetting);
+                }
+            }
+            catch(Exception)
+            {
                 return false;
             }
             return true;
