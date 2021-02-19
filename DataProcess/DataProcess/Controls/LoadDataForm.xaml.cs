@@ -153,7 +153,8 @@ namespace DataProcess.Controls
                 return; 
             }
             // 
-             setPlayStatus(MainWindow.E_LOADFILE_START); 
+            // setPlayStatus(MainWindow.E_LOADFILE_START);
+            setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_START);
             // 是否正在加载                                            
             bLoadFileing = true;  
             setBtnsEnable(false); 
@@ -164,7 +165,7 @@ namespace DataProcess.Controls
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-            setPlayStatus(MainWindow.E_LOADFILE_STOP); 
+            setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_STOP); 
             // 是否正在加载
 
             bLoadFileing = false; 
@@ -176,7 +177,7 @@ namespace DataProcess.Controls
             // 是否正在加载
             if (bLoadFileing)
             {
-                setPlayStatus(MainWindow.E_LOADFILE_PAUSE);
+                setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_PAUSE);
                 bLoadFileing = false; 
                 btnPause.Content = "启动"; 
                 btnSkip.IsEnabled = false;
@@ -184,7 +185,7 @@ namespace DataProcess.Controls
             }
             else
             {
-                setPlayStatus(MainWindow.E_LOADFILE_CONTINUE); 
+                setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_CONTINUE); 
                 bLoadFileing = true;  
                 btnPause.Content = "暂停";
                 btnSkip.IsEnabled = true; 
@@ -195,7 +196,7 @@ namespace DataProcess.Controls
         private void btnSkip_Click(object sender, RoutedEventArgs e)
         {
             int progress = (int)spinEdit.Value; 
-           setPlayStatus(MainWindow.E_LOADFILE_SKIPPROGRAM, progress);
+           setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_SKIPPROGRAM, progress);
         }
     }
 }

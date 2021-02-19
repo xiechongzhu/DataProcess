@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading; 
 using System.Threading.Tasks; 
 using DataProcess;
+using DataProcess.Controls;
 
 /// YaoCeProcess
 namespace YaoCeProcess
@@ -646,7 +647,7 @@ namespace YaoCeProcess
                                                                                      // 
             Marshal.StructureToPtr(udpPocket, ptr, true); //
                                                           // 
-            PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_UDPPROPERTY_DATA, 0, ptr); //
+            PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_UDPPROPERTY_DATA, 0, ptr); //
                                                                                      // 
                                                                                      //-------------------------------------------------------------------------------------//
                                                                                      // 
@@ -1268,7 +1269,7 @@ namespace YaoCeProcess
                                                                                                    // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
                                                                 // 
-                    PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_SystemStatus_DATA, 0, ptr); //
+                    PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_SystemStatus_DATA, 0, ptr); //
                                                                                                   // 
                     Console.WriteLine("PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_SystemStatus_DATA, 0, ptr);{0}", sObject.weiDu);
 
@@ -1405,7 +1406,7 @@ namespace YaoCeProcess
                     // 
                     {
                         // 
-                        PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_daoHangKuaiSu_Ti_DATA, 0, ptr); //
+                        PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA, 0, ptr); //
                                                                                                       // 
                     }
                     // 
@@ -1413,7 +1414,7 @@ namespace YaoCeProcess
                     // 
                     {
                         // 
-                        PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_daoHangKuaiSu_Tou_DATA, 0, ptr); //
+                        PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Tou_DATA, 0, ptr); //
                                                                                                        // 
                     }
                     // 
@@ -1581,7 +1582,7 @@ namespace YaoCeProcess
                     // 
                     {
                         // 
-                        PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_daoHangManSu_Ti_DATA, 0, ptr); //
+                        PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Ti_DATA, 0, ptr); //
                                                                                                      // 
                     }
                     // 
@@ -1589,7 +1590,7 @@ namespace YaoCeProcess
                     // 
                     {
                         // 
-                        PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_daoHangManSu_Tou_DATA, 0, ptr); //
+                        PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Tou_DATA, 0, ptr); //
                                                                                                       // 
                     }
                     // 
@@ -1695,7 +1696,7 @@ namespace YaoCeProcess
                                                                                                    // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
                                                                 // 
-                    PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_HuiLuJianCe_DATA, 0, ptr); //
+                    PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_HuiLuJianCe_DATA, 0, ptr); //
                                                                                              // 
                                                                                              //-------------------------------------------------------------------------------//
                                                                                              // 
@@ -1889,7 +1890,7 @@ namespace YaoCeProcess
                     // 
                     {
                         // 
-                        PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_XiTongJiShi_Ti_DATA, 0, ptr); //
+                        PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Ti_DATA, 0, ptr); //
                                                                                                     // 
                                                                                                     // System.Diagnostics.Debug.WriteLine("XiTongJiShi_Ti frameNO:" + frameNO.ToString()); //
                                                                                                     // 
@@ -1899,7 +1900,7 @@ namespace YaoCeProcess
                     // 
                     {
                         // 
-                        PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_XiTongJiShi_Tou_DATA, 0, ptr); //
+                        PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Tou_DATA, 0, ptr); //
                                                                                                      // 
                     }
                     // 
@@ -1949,7 +1950,7 @@ namespace YaoCeProcess
                                                                                             // 
             Marshal.StructureToPtr(frameObject, ptrFrame, true); //
                                                                  // 
-            PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_FRAMEPROPERTY_DATA, 0, ptrFrame); //
+            PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_FRAMEPROPERTY_DATA, 0, ptrFrame); //
                                                                                             // 
         }
         // 
