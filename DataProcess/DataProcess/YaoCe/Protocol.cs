@@ -23,7 +23,7 @@ namespace YaoCeProcess
     // 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     // 
-    struct UDPHead
+    public struct UDPHead
     // 
     {
         // 
@@ -53,7 +53,7 @@ namespace YaoCeProcess
     // 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     // 
-    struct CANHead
+    public struct CANHead
     // 
     {
         // 
@@ -75,7 +75,7 @@ namespace YaoCeProcess
     // 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     // 
-    struct CANFirst
+    public struct CANFirst
     // 
     {
         // 
@@ -99,7 +99,7 @@ namespace YaoCeProcess
     // 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     // 
-    struct CANCenter
+    public struct CANCenter
     // 
     {
         // 
@@ -121,7 +121,7 @@ namespace YaoCeProcess
     // 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     // 
-    struct CANEnd
+    public struct CANEnd
     // 
     {
         // 
@@ -145,7 +145,7 @@ namespace YaoCeProcess
     // 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     // 
-    struct SYSTEMPARSE_STATUS
+    public struct SYSTEMPARSE_STATUS
     // 
     {
         // 

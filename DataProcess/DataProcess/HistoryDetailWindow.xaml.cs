@@ -188,11 +188,6 @@ namespace DataProcess
                 dataLogger.LoadFlyBinaryFile(dataLogger.flyPacketFilePath, out List<NavData> navDataList, out List<AngleData> angleDataList,
                     out List<ProgramControlData> prgramDataList, out List<ServoData> servoDataList);
                 DrawNavData(navDataList);
-                foreach (NavData navData in navDataList)
-                {
-                    mapControl.AddPoint(new PointLatLng(navData.latitude, navData.longitude));
-                    mapControl.FlyHeight = navData.height;
-                }
                 DrawAngelData(angleDataList);
                 DrawProgramData(prgramDataList);
                 DrawServoData(servoDataList);
