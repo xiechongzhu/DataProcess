@@ -40,7 +40,6 @@ namespace DataProcess
                 if(uI is LabelTextBox)
                 {
                     LabelTextBox lab = uI as LabelTextBox;
-                    Console.WriteLine("{0}", lab.Name);
                     lab.Clear();
                 }
             }

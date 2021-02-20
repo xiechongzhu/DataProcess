@@ -434,26 +434,36 @@ namespace DataProcess.Controls
         private DispatcherTimer timerOffLineXiTongStatus = new DispatcherTimer();//系统判决状态离线
         private DispatcherTimer timerUpdateChart = new DispatcherTimer(); // 更新曲线
 
-        //导航快速
+        //导航快速弹体
         private DispatcherTimer timerUpdateDHKStatus = new DispatcherTimer();
         private DispatcherTimer timerOfflineDHKStatus = new DispatcherTimer();
         private DispatcherTimer timerUpdateChart_DHK = new DispatcherTimer();
 
-        //导航慢速
+        //导航快速弹头
+        private DispatcherTimer timerUpdateDHKStatus_Tou = new DispatcherTimer();
+        private DispatcherTimer timerOfflineDHKStatus_Tou = new DispatcherTimer();
+        private DispatcherTimer timerUpdateChart_DHK_Tou = new DispatcherTimer();
+
+        //导航慢速弹体
         private DispatcherTimer timerUpdateChart_DHM = new DispatcherTimer();
         private DispatcherTimer timerUpdateDHMStatus = new DispatcherTimer();
         private DispatcherTimer timerOfflineDHMStatus = new DispatcherTimer();
+
+        //导航慢速弹头
+        private DispatcherTimer timerUpdateChart_DHM_Tou = new DispatcherTimer();
+        private DispatcherTimer timerUpdateDHMStatus_Tou = new DispatcherTimer();
+        private DispatcherTimer timerOfflineDHMStatus_Tou = new DispatcherTimer();
 
         //回路检测
         private DispatcherTimer UpdateHuiLuJianCeTimer = new DispatcherTimer();//回路检测数据定时器
         private DispatcherTimer timerOffLineHuiLuJianCe = new DispatcherTimer();
 
-        //系统即时反馈
+        //系统即时反馈弹体
         private DispatcherTimer timerUpdateChart_XiTongJiShi = new DispatcherTimer();
         private DispatcherTimer timerUpdateXiTongJiShiStatus = new DispatcherTimer();
         private DispatcherTimer timerOfflineXiTongJiShiStatus = new DispatcherTimer();
 
-        //系统即时反馈
+        //系统即时反馈弹头
         private DispatcherTimer timerUpdateChart_XiTongJiShi_Tou = new DispatcherTimer();
         private DispatcherTimer timerUpdateXiTongJiShiStatus_Tou = new DispatcherTimer();
         private DispatcherTimer timerOfflineXiTongJiShiStatus_Tou = new DispatcherTimer();
@@ -525,28 +535,48 @@ namespace DataProcess.Controls
             timerUpdateChart.Tick += timerUpdateChart_Tick;
             /*---------------------------------------------------------*/
 
-            /*--------系统导航快速定时器-------------------------------------*/
+            /*--------系统导航快速弹体定时器-------------------------------------*/
             timerUpdateDHKStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //timerUpdateDHKStatus.Tick += timerUpdateDHKStatus_Tick;
+            timerUpdateDHKStatus.Tick += timerUpdateDHKStatus_Tick;
 
             timerOfflineDHKStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
-            //this.timerOfflineDHKStatus.Tick += timerOfflineDHKStatus_Tick;
+            this.timerOfflineDHKStatus.Tick += timerOfflineDHKStatus_Tick;
 
             timerUpdateChart_DHK.Interval = new TimeSpan(0, 0, 0, 0, 500);
             //this.timerUpdateChart_DHK.Tick += timerUpdateChart_DHK_Tick;
+
+            /*--------系统导航快速弹头定时器-------------------------------------*/
+            timerUpdateDHKStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            timerUpdateDHKStatus_Tou.Tick += timerUpdateDHKStatus_Tou_Tick;
+
+            timerOfflineDHKStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 3000);
+            this.timerOfflineDHKStatus_Tou.Tick += timerOfflineDHKStatus_Tou_Tick;
+
+            timerUpdateChart_DHK_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //this.timerUpdateChart_DHK_Tou.Tick += timerUpdateChart_DHK_Tou_Tick;
             /*---------------------------------------------------------*/
 
 
 
-            /*--------系统导航慢速定时器--------------------------------------*/
+            /*--------系统导航慢速弹体定时器--------------------------------------*/
             timerUpdateDHMStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //timerUpdateDHMStatus.Tick += timerUpdateDHKStatus_Tick;
+            timerUpdateDHMStatus.Tick += timerUpdateDHMStatus_Tick;
 
             timerOfflineDHMStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
-            //this.timerOfflineDHMStatus.Tick += timerOfflineDHKStatus_Tick;
+            this.timerOfflineDHMStatus.Tick += timerOfflineDHMStatus_Tick;
 
             timerUpdateChart_DHM.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //this.timerUpdateChart_DHK.Tick += timerUpdateChart_Tick_DHK;
+            //this.timerUpdateChart_DHM.Tick += timerUpdateChart_DHM_Tick;
+
+            /*--------系统导航慢速弹头定时器--------------------------------------*/
+            timerUpdateDHMStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            this.timerUpdateDHMStatus_Tou.Tick += timerUpdateDHMStatus_Tou_Tick;
+
+            timerOfflineDHMStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 3000);
+            this.timerOfflineDHMStatus_Tou.Tick += timerOfflineDHMStatus_Tou_Tick;
+
+            timerUpdateChart_DHM_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            //this.timerUpdateChart_DHM_Tou.Tick += timerUpdateChart_DHM_Tick;
             /*---------------------------------------------------------*/
 
 
@@ -558,7 +588,7 @@ namespace DataProcess.Controls
             /*---------------------------------------------------------*/
 
 
-            /*-------------系统状态即时反馈定时器------------------------------*/
+            /*-------------系统状态即时反馈弹体定时器------------------------------*/
             timerUpdateXiTongJiShiStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
             this.timerUpdateXiTongJiShiStatus.Tick += timerUpdateXiTongJiShiStatus_Tick;
 
@@ -569,6 +599,7 @@ namespace DataProcess.Controls
             this.timerOfflineXiTongJiShiStatus.Tick += timerOfflineXiTongJiShiStatus_Tick;
 
 
+            /*-------------系统状态即时反馈弹头定时器------------------------------*/
             timerUpdateXiTongJiShiStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
             this.timerUpdateXiTongJiShiStatus_Tou.Tick += timerUpdateXiTongJiShiStatus_Tou_Tick;
 
@@ -842,6 +873,7 @@ namespace DataProcess.Controls
 
             // 日志打印
             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + percent.ToString("f2") + "%");
+            Console.WriteLine("{0}", percent.ToString("f2"));
 
             // 更新进度条
             load.setProgressBarValue(0, loadFileLength, alreadReadFileLength);
@@ -870,8 +902,93 @@ namespace DataProcess.Controls
             setStatusOnOffLine(E_STATUSTYPE_XiTong, false);
         }
 
-        /*----------------------------------------------------------------------*/
+        /*--------------------------------导航快速--------------------------------------*/
+        //导航快速弹体数据
+        private void timerUpdateDHKStatus_Tick(object sender,EventArgs e)
+        {
+            // 是否收到数据
+            if (bRecvStatusData_DHK)
+            {
+                // 填充实时数据
+                showDHKuaiSuTimeStatus_Ti(ref sObject_DHK_Ti);
+                setStatusOnOffLine(E_STATUSTYPE_DaoHangKuaiSu_Ti, true);
+            }
+        }
 
+        //导航快速弹体离线状态
+        private void timerOfflineDHKStatus_Tick(object sender,EventArgs e)
+        {
+            // 是否收到数据
+            bRecvStatusData_DHK = false;
+            setStatusOnOffLine(E_STATUSTYPE_DaoHangKuaiSu_Ti, false);
+        }
+
+        //导航快速弹头数据
+        private void timerUpdateDHKStatus_Tou_Tick(object sender, EventArgs e)
+        {
+            // 是否收到数据
+            if (bRecvStatusData_DHK)
+            {
+                // 填充实时数据
+                showDHKuaiSuTimeStatus_Tou(ref sObject_DHK_Tou);
+                setStatusOnOffLine(E_STATUSTYPE_DaoHangKuaiSu_Tou, true);
+            }
+        }
+
+        //导航快速弹头离线状态
+        private void timerOfflineDHKStatus_Tou_Tick(object sender, EventArgs e)
+        {
+            // 是否收到数据
+            bRecvStatusData_XiTong = false;
+            setStatusOnOffLine(E_STATUSTYPE_DaoHangKuaiSu_Tou, false);
+        }
+        /*------------------------------------------------------------------*/
+
+
+        /*-------------------------------导航慢速-----------------------------------*/
+        //导航慢速弹体数据
+        private void timerUpdateDHMStatus_Tick(object sender,EventArgs e)
+        {
+            // 是否收到数据
+            if (bRecvStatusData_DHM)
+            {
+                // 填充实时数据
+                showDHManSuTimeStatus_Ti(ref sObject_DHM_Ti);
+                setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Ti, true);
+            }
+        }
+
+        //导航慢速弹体离线状态
+        private void timerOfflineDHMStatus_Tick(object sender,EventArgs e)
+        {
+            // 是否收到数据
+            bRecvStatusData_DHM = false;
+            setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Ti, false);
+        }
+
+        //导航慢速弹头数据
+        private void timerUpdateDHMStatus_Tou_Tick(object sender, EventArgs e)
+        {
+            // 是否收到数据
+            if (bRecvStatusData_DHM)
+            {
+                // 填充实时数据
+                showDHManSuTimeStatus_Tou(ref sObject_DHM_Tou);
+                setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Tou, true);
+            }
+        }
+
+        //导航慢速弹头离线状态
+        private void timerOfflineDHMStatus_Tou_Tick(object sender, EventArgs e)
+        {
+            // 是否收到数据
+            bRecvStatusData_DHM = false;
+            setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Tou, false);
+        }
+        /*------------------------------------------------------------------*/
+
+
+        /*----------------------------------回路检测--------------------------------*/
         //回路检测数据
         private void timerUpdateHuiLuJianCe_Tick(object sender, EventArgs e)
         {
@@ -891,10 +1008,10 @@ namespace DataProcess.Controls
             bRecvStatusData_HuiLuJianCe = false;
             setStatusOnOffLine(E_STATUSTYPE_HuiLuJianCe, false);
         }
-
         /*----------------------------------------------------------------------*/
 
 
+        /*------------------------------------------------------------------*/
         //更新UDP状态
         private void timerUpdateUDP_Tick(object sender, EventArgs e)
         {
@@ -911,10 +1028,10 @@ namespace DataProcess.Controls
             bRecvStatusData_UDP = false;
             setStatusOnOffLine(E_STATUSTYPE_dataConnect, false);
         }
+        /*------------------------------------------------------------------*/
 
 
-        /*----------------------------------------------------------------------*/
-
+        /*-----------------------------------系统即时反馈-----------------------------------*/
         //系统即时反馈数据弹体
         private void timerUpdateXiTongJiShiStatus_Tick(object sender,EventArgs e)
         {
@@ -935,8 +1052,6 @@ namespace DataProcess.Controls
             setStatusOnOffLine(E_STATUSTYPE_XiTongJiShi_Ti, false);
         }
 
-        /*------------------------------------------------------------------------*/
-
         //系统即时反馈数据弹头
         private void timerUpdateXiTongJiShiStatus_Tou_Tick(object sender, EventArgs e)
         {
@@ -956,7 +1071,6 @@ namespace DataProcess.Controls
             bRecvStatusData_XTJS = false;
             setStatusOnOffLine(E_STATUSTYPE_XiTongJiShi_Ti, false);
         }
-
         /*------------------------------------------------------------------------*/
 
 
@@ -966,11 +1080,15 @@ namespace DataProcess.Controls
         {
             if (bOpen)
             {
-                UpdateXiTongStatusTimer.Start();
-                UpdateHuiLuJianCeTimer.Start();
-                timerUpdateXiTongJiShiStatus.Start();
-                timerUpdateXiTongJiShiStatus_Tou.Start();
-                timerUpdateUDP.Start();
+                UpdateXiTongStatusTimer.Start();//系统判决数据
+                UpdateHuiLuJianCeTimer.Start();//回路检测数据
+                timerUpdateXiTongJiShiStatus.Start();//系统即时反馈弹体数据
+                timerUpdateXiTongJiShiStatus_Tou.Start();//系统即时反馈弹头数据
+                timerUpdateDHKStatus.Start();//导航快速弹体数据
+                timerUpdateDHKStatus_Tou.Start();//导航快速弹头数据
+                timerUpdateDHMStatus.Start();//导航慢速弹体数据
+                timerUpdateDHMStatus_Tou.Start();//导航慢速弹头数据
+                timerUpdateUDP.Start();//UDP
             }
             else
             {
@@ -978,6 +1096,10 @@ namespace DataProcess.Controls
                 UpdateHuiLuJianCeTimer.Stop();
                 timerUpdateXiTongJiShiStatus.Stop();
                 timerUpdateXiTongJiShiStatus_Tou.Stop();
+                timerUpdateDHKStatus.Stop();
+                timerUpdateDHKStatus_Tou.Stop();
+                timerUpdateDHMStatus.Stop();
+                timerUpdateDHMStatus_Tou.Stop();
                 timerUpdateUDP.Stop();
             }
         }
@@ -1123,6 +1245,8 @@ namespace DataProcess.Controls
             GenericFunction.reSetAllTextEdit(this.HuiLu);
             GenericFunction.reSetAllTextEdit(this.FanKui_Ti);
             GenericFunction.reSetAllTextEdit(this.FanKui_Tou);
+            GenericFunction.reSetAllTextEdit(this.DaoHangKuai_Ti);
+            GenericFunction.reSetAllTextEdit(this.DaoHangKuai_Tou);
 
 
 
@@ -1130,6 +1254,7 @@ namespace DataProcess.Controls
             bRecvStatusData_XiTong = false;
             bRecvStatusData_HuiLuJianCe = false;
             bRecvStatusData_XTJS = false;
+            bRecvStatusData_DHK = false;
         }
 
         //字符串转16进制字节数组
@@ -1622,6 +1747,1166 @@ namespace DataProcess.Controls
                                                                               // 
         }
 
+        //系统快速弹体数据显示
+        private void showDHKuaiSuTimeStatus_Ti(ref DAOHANGSHUJU_KuaiSu sObject)
+        // 
+        {
+            // 
+            // 导航系统时间
+            // 
+            DHKuaiSu_Ti_DaoHangXiTongShiJian.Text = sObject.daoHangXiTongShiJian.ToString(); //
+                                                                                             // 
+
+            // 
+            // sObject.jingDu; //              // 经度（组合结果）当量：1e-7
+            // 
+            DHKuaiSu_Ti_JingDu.Text = ((double)(sObject.jingDu * Math.Pow(10, -7))).ToString(); //
+                                                                                                // 
+                                                                                                // sObject.weiDu; //               // 纬度（组合结果）当量：1e-7
+                                                                                                // 
+            DHKuaiSu_Ti_WeiDu.Text = ((double)(sObject.weiDu * Math.Pow(10, -7))).ToString(); //
+                                                                                              // 
+                                                                                              // sObject.haiBaGaoDu; //          // 海拔高度（组合结果）当量：1e-2
+                                                                                              // 
+            DHKuaiSu_Ti_GaoDu.Text = ((double)(sObject.haiBaGaoDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                   // 
+
+            // 
+            //sObject.dongXiangSuDu; //        // 东向速度（组合结果）当量：1e-2
+            // 
+            DHKuaiSu_Ti_DongXiangSuDu.Text = ((double)(sObject.dongXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                              // 
+                                                                                                              //sObject.beiXiangSuDu; //         // 北向速度（组合结果）当量：1e-2
+                                                                                                              // 
+            DHKuaiSu_Ti_BeiXiangSuDu.Text = ((double)(sObject.beiXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                            // 
+                                                                                                            //sObject.tianXiangSuDu; //        // 天向速度（组合结果）当量：1e-2
+                                                                                                            // 
+            DHKuaiSu_Ti_TianXiangSuDu.Text = ((double)(sObject.tianXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                              // 
+
+            // 
+            // GNSS时间 单位s,UTC秒部
+            // 
+            DHKuaiSu_Ti_GNSSTime.Text = sObject.GNSSTime.ToString(); //
+                                                                     // 
+                                                                     // 俯仰角
+                                                                     // 
+            DHKuaiSu_Ti_FuYangJiao.Text = sObject.fuYangJiao.ToString(); //
+                                                                         // 
+                                                                         // 滚转角
+                                                                         // 
+            DHKuaiSu_Ti_GunZhuanJiao.Text = sObject.gunZhuanJiao.ToString(); //
+                                                                             // 
+                                                                             // 偏航角
+                                                                             // 
+            DHKuaiSu_Ti_PianHangJiao.Text = sObject.pianHangJiao.ToString(); //
+                                                                             // 
+
+            // 
+            // 陀螺X数据
+            // 
+            DHKuaiSu_Ti_TuoLuoXShuJuShang.Text = sObject.tuoLuoShuJu_X.ToString(); //
+                                                                                   // 
+                                                                                   // 陀螺Y数据
+                                                                                   // 
+            DHKuaiSu_Ti_TuoLuoYShuJuShang.Text = sObject.tuoLuoShuJu_Y.ToString(); //
+                                                                                   // 
+                                                                                   // 陀螺Z数据
+                                                                                   // 
+            DHKuaiSu_Ti_TuoLuoZShuJuShang.Text = sObject.tuoLuoShuJu_Z.ToString(); //
+                                                                                   // 
+
+            // 
+            // 加速度计X数据
+            // 
+            DHKuaiSu_Ti_JiaSuDuJiXShang.Text = sObject.jiaSuDuJiShuJu_X.ToString(); //
+                                                                                    // 
+                                                                                    // 加速度计Y数据
+                                                                                    // 
+            DHKuaiSu_Ti_JiaSuDuJiYShang.Text = sObject.jiaSuDuJiShuJu_Y.ToString(); //
+                                                                                    // 
+                                                                                    // 加速度计Z数据
+                                                                                    // 
+            DHKuaiSu_Ti_JiaSuDuJiZShang.Text = sObject.jiaSuDuJiShuJu_Z.ToString(); //
+                                                                                    // 
+
+            // 
+            // 陀螺X数据2
+            // 
+            DHKuaiSu_Ti_TuoLuoXShuJuBen.Text = sObject.tuoLuoShuJu_X2.ToString(); //
+                                                                                  // 
+                                                                                  // 陀螺Y数据2
+                                                                                  // 
+            DHKuaiSu_Ti_TuoLuoYShuJuBen.Text = sObject.tuoLuoShuJu_Y2.ToString(); //
+                                                                                  // 
+                                                                                  // 陀螺Z数据2
+                                                                                  // 
+            DHKuaiSu_Ti_TuoLuoZShuJuBen.Text = sObject.tuoLuoShuJu_Z2.ToString(); //
+                                                                                  // 
+
+            // 
+            // 加速度计X数据2
+            // 
+            DHKuaiSu_Ti_JiaSuDuJiXBen.Text = sObject.jiaSuDuJiShuJu_X2.ToString(); //
+                                                                                   // 
+                                                                                   // 加速度计Y数据2
+                                                                                   // 
+            DHKuaiSu_Ti_JiaSuDuJiYBen.Text = sObject.jiaSuDuJiShuJu_Y2.ToString(); //
+                                                                                   // 
+                                                                                   // 加速度计Z数据2
+                                                                                   // 
+            DHKuaiSu_Ti_JiaSuDuJiZBen.Text = sObject.jiaSuDuJiShuJu_Z2.ToString(); //
+                                                                                   // 
+
+            // 
+            // 状态标志位
+            // 
+            byte zhuangTaiBiaoZhiWei = sObject.zhuangTaiBiaoZhiWei; //
+                                                                    // 
+                                                                    // bit0 点火标志（0：未点火 1：已点火）
+                                                                    // 
+            DHKuaiSu_Ti_DianHuo.Text = (zhuangTaiBiaoZhiWei >> 0 & 0x1) == 1 ? "已点火" : "未点火"; //
+                                                                                              // 
+                                                                                              // bit1 分离标志（0：已分离 1：未分离）
+                                                                                              // 
+            DHKuaiSu_Ti_FenLi.Text = (zhuangTaiBiaoZhiWei >> 1 & 0x1) == 1 ? "未分离" : "已分离"; //
+                                                                                            // 
+                                                                                            // bit2 bit3 00:准备阶段 01：对准阶段 10：导航阶段
+                                                                                            // 
+            byte tempValue = (byte)(zhuangTaiBiaoZhiWei >> 2 & 0x3); //
+                                                                     // 
+            string tempSTR = ""; //
+                                 // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "准备阶段"; //
+                                      // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "对准阶段"; //
+                                      // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "导航阶段"; //
+                                      // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHKuaiSu_Ti_GongZuoJieDuan.Text = tempSTR; //
+                                                       // 
+                                                       // bit4 bit5 00:GPS无更新 01：GPS有更新 10：GPS更新过
+                                                       // 
+            tempValue = (byte)(zhuangTaiBiaoZhiWei >> 4 & 0x3); //
+                                                                // 
+            tempSTR = ""; //
+                          // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "GPS无更新"; //
+                                        // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "GPS有更新"; //
+                                        // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "GPS更新过"; //
+                                        // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHKuaiSu_Ti_GPSShuJuGengXin.Text = tempSTR; //
+                                                        // 
+                                                        // GPS组合标志 (00：上5ms惯导，本5ms惯导; // 01：上5ms惯导，本5ms组合; // 10：上5ms组合，本5ms组合; // 11：上5ms组合，本5ms惯导; //)
+                                                        // 
+            tempValue = (byte)(zhuangTaiBiaoZhiWei >> 6 & 0x3); //
+                                                                // 
+            tempSTR = ""; //
+                          // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "上5ms惯导，本5ms惯导"; //
+                                               // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "上5ms惯导，本5ms组合"; //
+                                               // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "上5ms组合，本5ms组合"; //
+                                               // 
+                    break; //
+                           // 
+                case 3:
+                    // 
+                    tempSTR = "上5ms组合，本5ms惯导"; //
+                                               // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHKuaiSu_Ti_GPSZuHe.Text = tempSTR; //
+                                                // 
+
+            // 
+            // 陀螺故障标志
+            // 
+            byte tuoLuoGuZhangBiaoZhi = sObject.tuoLuoGuZhangBiaoZhi; //
+                                                                      // 
+                                                                      // bit5 陀螺x故障标志（0：正常）
+                                                                      // 
+            DHKuaiSu_Ti_TuoLuoXGuZhang.Text = (tuoLuoGuZhangBiaoZhi >> 5 & 0x1) == 0 ? "正常" : "异常"; //
+                                                                                                    // 
+                                                                                                    // bit6 陀螺y故障标志（0：正常）
+                                                                                                    // 
+            DHKuaiSu_Ti_TuoLuoYGuZhang.Text = (tuoLuoGuZhangBiaoZhi >> 6 & 0x1) == 0 ? "正常" : "异常"; //
+                                                                                                    // 
+                                                                                                    // bit7 陀螺z故障标志（0：正常）
+                                                                                                    // 
+            DHKuaiSu_Ti_TuoLuoZGuZhang.Text = (tuoLuoGuZhangBiaoZhi >> 7 & 0x1) == 0 ? "正常" : "异常"; //
+                                                                                                    // 
+        }
+
+        //系统快速弹头数据显示
+        private void showDHKuaiSuTimeStatus_Tou(ref DAOHANGSHUJU_KuaiSu sObject)
+        // 
+        {
+            // 
+            // 导航系统时间
+            // 
+            DHKuaiSu_Tou_DaoHangXiTongShiJian.Text = sObject.daoHangXiTongShiJian.ToString(); //
+                                                                                              // 
+
+            // 
+            // sObject.jingDu; //              // 经度（组合结果）当量：1e-7
+            // 
+            DHKuaiSu_Tou_JingDu.Text = ((double)(sObject.jingDu * Math.Pow(10, -7))).ToString(); //
+                                                                                                 // 
+                                                                                                 // sObject.weiDu; //               // 纬度（组合结果）当量：1e-7
+                                                                                                 // 
+            DHKuaiSu_Tou_WeiDu.Text = ((double)(sObject.weiDu * Math.Pow(10, -7))).ToString(); //
+                                                                                               // 
+                                                                                               // sObject.haiBaGaoDu; //          // 海拔高度（组合结果）当量：1e-2
+                                                                                               // 
+            DHKuaiSu_Tou_GaoDu.Text = ((double)(sObject.haiBaGaoDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                    // 
+
+            // 
+            //sObject.dongXiangSuDu; //        // 东向速度（组合结果）当量：1e-2
+            // 
+            DHKuaiSu_Tou_DongXiangSuDu.Text = ((double)(sObject.dongXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                               // 
+                                                                                                               //sObject.beiXiangSuDu; //         // 北向速度（组合结果）当量：1e-2
+                                                                                                               // 
+            DHKuaiSu_Tou_BeiXiangSuDu.Text = ((double)(sObject.beiXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                             // 
+                                                                                                             //sObject.tianXiangSuDu; //        // 天向速度（组合结果）当量：1e-2
+                                                                                                             // 
+            DHKuaiSu_Tou_TianXiangSuDu.Text = ((double)(sObject.tianXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                               // 
+
+            // 
+            // GNSS时间 单位s,UTC秒部
+            // 
+            DHKuaiSu_Tou_GNSSTime.Text = sObject.GNSSTime.ToString(); //
+                                                                      // 
+                                                                      // 俯仰角
+                                                                      // 
+            DHKuaiSu_Tou_FuYangJiao.Text = sObject.fuYangJiao.ToString(); //
+                                                                          // 
+                                                                          // 滚转角
+                                                                          // 
+            DHKuaiSu_Tou_GunZhuanJiao.Text = sObject.gunZhuanJiao.ToString(); //
+                                                                              // 
+                                                                              // 偏航角
+                                                                              // 
+            DHKuaiSu_Tou_PianHangJiao.Text = sObject.pianHangJiao.ToString(); //
+                                                                              // 
+
+            // 
+            // 陀螺X数据
+            // 
+            DHKuaiSu_Tou_TuoLuoXShuJuShang.Text = sObject.tuoLuoShuJu_X.ToString(); //
+                                                                                    // 
+                                                                                    // 陀螺Y数据
+                                                                                    // 
+            DHKuaiSu_Tou_TuoLuoYShuJuShang.Text = sObject.tuoLuoShuJu_Y.ToString(); //
+                                                                                    // 
+                                                                                    // 陀螺Z数据
+                                                                                    // 
+            DHKuaiSu_Tou_TuoLuoZShuJuShang.Text = sObject.tuoLuoShuJu_Z.ToString(); //
+                                                                                    // 
+
+            // 
+            // 加速度计X数据
+            // 
+            DHKuaiSu_Tou_JiaSuDuJiXShang.Text = sObject.jiaSuDuJiShuJu_X.ToString(); //
+                                                                                     // 
+                                                                                     // 加速度计Y数据
+                                                                                     // 
+            DHKuaiSu_Tou_JiaSuDuJiYShang.Text = sObject.jiaSuDuJiShuJu_Y.ToString(); //
+                                                                                     // 
+                                                                                     // 加速度计Z数据
+                                                                                     // 
+            DHKuaiSu_Tou_JiaSuDuJiZShang.Text = sObject.jiaSuDuJiShuJu_Z.ToString(); //
+                                                                                     // 
+
+            // 
+            // 陀螺X数据2
+            // 
+            DHKuaiSu_Tou_TuoLuoXShuJuBen.Text = sObject.tuoLuoShuJu_X2.ToString(); //
+                                                                                   // 
+                                                                                   // 陀螺Y数据2
+                                                                                   // 
+            DHKuaiSu_Tou_TuoLuoYShuJuBen.Text = sObject.tuoLuoShuJu_Y2.ToString(); //
+                                                                                   // 
+                                                                                   // 陀螺Z数据2
+                                                                                   // 
+            DHKuaiSu_Tou_TuoLuoZShuJuBen.Text = sObject.tuoLuoShuJu_Z2.ToString(); //
+                                                                                   // 
+
+            // 
+            // 加速度计X数据2
+            // 
+            DHKuaiSu_Tou_JiaSuDuJiXBen.Text = sObject.jiaSuDuJiShuJu_X2.ToString(); //
+                                                                                    // 
+                                                                                    // 加速度计Y数据2
+                                                                                    // 
+            DHKuaiSu_Tou_JiaSuDuJiYBen.Text = sObject.jiaSuDuJiShuJu_Y2.ToString(); //
+                                                                                    // 
+                                                                                    // 加速度计Z数据2
+                                                                                    // 
+            DHKuaiSu_Tou_JiaSuDuJiZBen.Text = sObject.jiaSuDuJiShuJu_Z2.ToString(); //
+                                                                                    // 
+
+            // 
+            // 状态标志位
+            // 
+            byte zhuangTaiBiaoZhiWei = sObject.zhuangTaiBiaoZhiWei; //
+                                                                    // 
+                                                                    // bit0 点火标志（0：未点火 1：已点火）
+                                                                    // 
+            DHKuaiSu_Tou_DianHuo.Text = (zhuangTaiBiaoZhiWei >> 0 & 0x1) == 1 ? "已点火" : "未点火"; //
+                                                                                               // 
+                                                                                               // bit1 分离标志（0：已分离 1：未分离）
+                                                                                               // 
+            DHKuaiSu_Tou_FenLi.Text = (zhuangTaiBiaoZhiWei >> 1 & 0x1) == 1 ? "未分离" : "已分离"; //
+                                                                                             // 
+                                                                                             // bit2 bit3 00:准备阶段 01：对准阶段 10：导航阶段
+                                                                                             // 
+            byte tempValue = (byte)(zhuangTaiBiaoZhiWei >> 2 & 0x3); //
+                                                                     // 
+            string tempSTR = ""; //
+                                 // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "准备阶段"; //
+                                      // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "对准阶段"; //
+                                      // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "导航阶段"; //
+                                      // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHKuaiSu_Tou_GongZuoJieDuan.Text = tempSTR; //
+                                                        // 
+                                                        // bit4 bit5 00:GPS无更新 01：GPS有更新 10：GPS更新过
+                                                        // 
+            tempValue = (byte)(zhuangTaiBiaoZhiWei >> 4 & 0x3); //
+                                                                // 
+            tempSTR = ""; //
+                          // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "GPS无更新"; //
+                                        // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "GPS有更新"; //
+                                        // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "GPS更新过"; //
+                                        // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHKuaiSu_Tou_GPSShuJuGengXin.Text = tempSTR; //
+                                                         // 
+                                                         // GPS组合标志 (00：上5ms惯导，本5ms惯导; // 01：上5ms惯导，本5ms组合; // 10：上5ms组合，本5ms组合; // 11：上5ms组合，本5ms惯导; //)
+                                                         // 
+            tempValue = (byte)(zhuangTaiBiaoZhiWei >> 6 & 0x3); //
+                                                                // 
+            tempSTR = ""; //
+                          // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "上5ms惯导，本5ms惯导"; //
+                                               // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "上5ms惯导，本5ms组合"; //
+                                               // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "上5ms组合，本5ms组合"; //
+                                               // 
+                    break; //
+                           // 
+                case 3:
+                    // 
+                    tempSTR = "上5ms组合，本5ms惯导"; //
+                                               // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHKuaiSu_Tou_GPSZuHe.Text = tempSTR; //
+                                                 // 
+
+            // 
+            // 陀螺故障标志
+            // 
+            byte tuoLuoGuZhangBiaoZhi = sObject.tuoLuoGuZhangBiaoZhi; //
+                                                                      // 
+                                                                      // bit5 陀螺x故障标志（0：正常）
+                                                                      // 
+            DHKuaiSu_Tou_TuoLuoXGuZhang.Text = (tuoLuoGuZhangBiaoZhi >> 5 & 0x1) == 0 ? "正常" : "异常"; //
+                                                                                                     // 
+                                                                                                     // bit6 陀螺y故障标志（0：正常）
+                                                                                                     // 
+            DHKuaiSu_Tou_TuoLuoYGuZhang.Text = (tuoLuoGuZhangBiaoZhi >> 6 & 0x1) == 0 ? "正常" : "异常"; //
+                                                                                                     // 
+                                                                                                     // bit7 陀螺z故障标志（0：正常）
+                                                                                                     // 
+            DHKuaiSu_Tou_TuoLuoZGuZhang.Text = (tuoLuoGuZhangBiaoZhi >> 7 & 0x1) == 0 ? "正常" : "异常"; //
+                                                                                                     // 
+        }
+
+        //系统慢速弹体数据显示
+        private void showDHManSuTimeStatus_Ti(ref DAOHANGSHUJU_ManSu sObject)
+        // 
+        {
+            // 
+            // GPS时间 单位s,UTC秒部
+            // 
+            DHManSu_Ti_GPSTime.Text = /*ConvertIntDatetime(sObject.GPSTime).ToString()*/sObject.GPSTime.ToString(); //
+                                                                                                                    // 
+                                                                                                                    // GPS定位模式
+                                                                                                                    // 
+            byte GPSDingWeiMoShi = sObject.GPSDingWeiMoShi; //
+                                                            // 
+            string tempValueSTR = ""; //
+                                      // 
+
+            // 
+            // bit0 (1:采用GPS定位 0:没有采用GPS定位)
+            // 
+            tempValueSTR = (GPSDingWeiMoShi >> 0 & 0x01) == 1 ? "采用GPS定位" : "没有采用GPS定位"; //
+                                                                                         // 
+            DHManSu_Ti_GPSDingWeiZhuangTai_GPS.Text = tempValueSTR; //
+                                                                    // 
+                                                                    // bit1 (1:采用BD2定位 0:没有采用BD2定位)
+                                                                    // 
+            tempValueSTR = (GPSDingWeiMoShi >> 1 & 0x01) == 1 ? "采用BD2定位" : "没有采用BD2定位"; //
+                                                                                         // 
+            DHManSu_Ti_GPSDingWeiZhuangTai_BD2.Text = tempValueSTR; //
+                                                                    // 
+                                                                    // bit2 1：采用GLONASS定位 0：没有采用GLONASS定位
+                                                                    // 
+            tempValueSTR = (GPSDingWeiMoShi >> 2 & 0x01) == 1 ? "采用GLONASS定位" : "没有采用GLONASS定位"; //
+                                                                                                 // 
+            DHManSu_Ti_GPSDingWeiZhuangTai_GLONASS.Text = tempValueSTR; //
+                                                                        // 
+                                                                        // bit3 0:没有DGNSS可用 1：DGNSS可用
+                                                                        // 
+            tempValueSTR = (GPSDingWeiMoShi >> 3 & 0x01) == 1 ? "DGNSS可用" : "没有DGNSS可用"; //
+                                                                                         // 
+            DHManSu_Ti_GPSDingWeiZhuangTai_DGNSS.Text = tempValueSTR; //
+                                                                      // 
+                                                                      // bit4 bit5 (00:No Fix 01:2DFix 11:3D Fix)
+                                                                      // 
+            byte tempValue = (byte)(GPSDingWeiMoShi >> 4 & 0x03); //
+                                                                  // 
+            tempValueSTR = tempValue == 0 ? "No Fix" : (tempValue == 1 ? "2DFix" : (tempValue == 3 ? "3D Fix" : "")); //
+                                                                                                                      // 
+            DHManSu_Ti_GPSDingWeiZhuangTai_Fix.Text = tempValueSTR; //
+                                                                    // 
+                                                                    // bit6 0:GNSS修正无效 1：GNSS修正有效
+                                                                    // 
+            tempValueSTR = (GPSDingWeiMoShi >> 6 & 0x01) == 1 ? "GNSS修正有效" : "GNSS修正无效"; //
+                                                                                         // 
+            DHManSu_Ti_GPSDingWeiZhuangTai_GNSSXiuZheng.Text = tempValueSTR; //
+                                                                             // 
+                                                                             // bit7 0:BD2修正无效 1：BD2修正有效
+                                                                             // 
+            tempValueSTR = (GPSDingWeiMoShi >> 7 & 0x01) == 1 ? "BD2修正有效" : "BD2修正无效"; //
+                                                                                       // 
+            DHManSu_Ti_GPSDingWeiZhuangTai_BD2XiuZheng.Text = tempValueSTR; //
+                                                                            // 
+                                                                            // DHManSu_Ti_GPSDingWeiZhuangTai.Text = tempValueSTR; //
+                                                                            // 
+
+            // 
+
+            // 
+            // GPS SV可用/参与定位数（低4位为可用数，高4位为参与定位数）
+            // 
+            tempValue = sObject.GPS_SV; //
+                                        // 
+            DHManSu_Ti_GPSSVKeYong.Text = ((byte)(tempValue & 0xF)).ToString(); //
+                                                                                // 
+            DHManSu_Ti_GPSCanYuDingWei.Text = ((byte)(tempValue >> 4 & 0xF)).ToString(); //
+                                                                                         // 
+                                                                                         // BD2 SV可用/参与定位数（低4位为可用数，高4位为参与定位数）
+                                                                                         // 
+            tempValue = sObject.BD2_SV; //
+                                        // 
+            DHManSu_Ti_BD2KeYong.Text = ((byte)(tempValue & 0xF)).ToString(); //
+                                                                              // 
+            DHManSu_Ti_BD2CanYuDingWei.Text = ((byte)(tempValue >> 4 & 0xF)).ToString(); //
+                                                                                         // 
+
+            // 
+            // sObject.jingDu; //              // 经度（组合结果）当量：1e-7
+            // 
+            DHManSu_Ti_JingDu.Text = ((double)(sObject.jingDu * Math.Pow(10, -7))).ToString(); //
+                                                                                               // 
+                                                                                               // sObject.weiDu; //               // 纬度（组合结果）当量：1e-7
+                                                                                               // 
+            DHManSu_Ti_WeiDu.Text = ((double)(sObject.weiDu * Math.Pow(10, -7))).ToString(); //
+                                                                                             // 
+                                                                                             // sObject.haiBaGaoDu; //          // 海拔高度（组合结果）当量：1e-2
+                                                                                             // 
+            DHManSu_Ti_GaoDu.Text = ((double)(sObject.haiBaGaoDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                  // 
+
+            // 
+            //sObject.dongXiangSuDu; //        // 东向速度（组合结果）当量：1e-2
+            // 
+            DHManSu_Ti_DongXiangSuDu.Text = ((double)(sObject.dongXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                             // 
+                                                                                                             //sObject.beiXiangSuDu; //         // 北向速度（组合结果）当量：1e-2
+                                                                                                             // 
+            DHManSu_Ti_BeiXiangSuDu.Text = ((double)(sObject.beiXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                           // 
+                                                                                                           //sObject.tianXiangSuDu; //        // 天向速度（组合结果）当量：1e-2
+                                                                                                           // 
+            DHManSu_Ti_TianXiangSuDu.Text = ((double)(sObject.tianXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                             // 
+
+            // 
+            // PDOP 当量0.01
+            // 
+            DHManSu_Ti_PDOP.Text = ((double)(sObject.PDOP * 0.01)).ToString(); //
+                                                                               // 
+                                                                               // HDOP 当量0.01
+                                                                               // 
+            DHManSu_Ti_HDOP.Text = ((double)(sObject.HDOP * 0.01)).ToString(); //
+                                                                               // 
+                                                                               // VDOP 当量0.01
+                                                                               // 
+            DHManSu_Ti_VDOP.Text = ((double)(sObject.VDOP * 0.01)).ToString(); //
+                                                                               // 
+
+            // 
+            // X陀螺温度
+            // 
+            DHManSu_Ti_XTuoLuoWenDu.Text = sObject.tuoLuoWenDu_X.ToString(); //
+                                                                             // 
+                                                                             // Y陀螺温度
+                                                                             // 
+            DHManSu_Ti_YTuoLuoWenDu.Text = sObject.tuoLuoWenDu_Y.ToString(); //
+                                                                             // 
+                                                                             // Z陀螺温度
+                                                                             // 
+            DHManSu_Ti_ZTuoLuoWenDu.Text = sObject.tuoLuoWenDu_Z.ToString(); //
+                                                                             // 
+
+            // 
+            // X加计温度
+            // 
+            DHManSu_Ti_XJiaJiWenDu.Text = sObject.jiaJiWenDu_X.ToString(); //
+                                                                           // 
+                                                                           // Y加计温度
+                                                                           // 
+            DHManSu_Ti_YJiaJiWenDu.Text = sObject.jiaJiWenDu_Y.ToString(); //
+                                                                           // 
+                                                                           // Z加计温度
+                                                                           // 
+            DHManSu_Ti_ZJiaJiWenDu.Text = sObject.jiaJiWenDu_Z.ToString(); //
+                                                                           // 
+
+            // 
+            // +5V电压值     当量0.05
+            // 
+            DHManSu_Ti_Zheng5VDianYa.Text = ((double)(sObject.dianYaZhi_zheng5V * 0.05)).ToString(); //
+                                                                                                     // 
+                                                                                                     // -5V电压值     当量0.05
+                                                                                                     // 
+            DHManSu_Ti_Fu5VDianYa.Text = ((double)(sObject.dianYaZhi_fu5V * 0.05)).ToString(); //
+                                                                                               // 
+
+            // 
+            // +15V电压值    当量0.02
+            // 
+            DHManSu_Ti_Zheng15VDianYa.Text = ((double)(sObject.dianYaZhi_zheng15V * 0.2)).ToString(); //
+                                                                                                      // 
+                                                                                                      // -15V电压值    当量0.02
+                                                                                                      // 
+            DHManSu_Ti_Fu15VDianYa.Text = ((double)(sObject.dianYaZhi_fu15V * 0.2)).ToString(); //
+                                                                                                // 
+
+            // 
+            // X陀螺+5V电压值     当量0.05
+            // 
+            DHManSu_Ti_XTuoLuoZheng5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_X_zheng5V * 0.05)).ToString(); //
+                                                                                                                    // 
+                                                                                                                    // X陀螺-5V电压值     当量0.05
+                                                                                                                    // 
+            DHManSu_Ti_XTuoLuoFu5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_X_fu5V * 0.05)).ToString(); //
+                                                                                                              // 
+
+            // 
+            // Y陀螺+5V电压值     当量0.05
+            // 
+            DHManSu_Ti_YTuoLuoZheng5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Y_zheng5V * 0.05)).ToString(); //
+                                                                                                                    // 
+                                                                                                                    // Y陀螺-5V电压值     当量0.05
+                                                                                                                    // 
+            DHManSu_Ti_YTuoLuoFu5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Y_fu5V * 0.05)).ToString(); //
+                                                                                                              // 
+
+            // 
+            // Z陀螺+5V电压值     当量0.05
+            // 
+            DHManSu_Ti_ZTuoLuoZheng5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Z_zheng5V * 0.05)).ToString(); //
+                                                                                                                    // 
+                                                                                                                    // Z陀螺-5V电压值     当量0.05
+                                                                                                                    // 
+            DHManSu_Ti_ZTuoLuoFu5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Z_fu5V * 0.05)).ToString(); //
+                                                                                                              // 
+
+            // 
+            // 与X陀螺通信错误计数（一直循环计数）
+            // 
+            DHManSu_Ti_XTuoLuoTongXinError.Text = sObject.yuTuoLuoTongXingCuoWuJiShu_X.ToString(); //
+                                                                                                   // 
+                                                                                                   // 与Y陀螺通信错误计数（一直循环计数）
+                                                                                                   // 
+            DHManSu_Ti_YTuoLuoTongXinError.Text = sObject.yuTuoLuoTongXingCuoWuJiShu_Y.ToString(); //
+                                                                                                   // 
+                                                                                                   // 与Z陀螺通信错误计数（一直循环计数）
+                                                                                                   // 
+            DHManSu_Ti_ZTuoLuoTongXinError.Text = sObject.yuTuoLuoTongXingCuoWuJiShu_Z.ToString(); //
+                                                                                                   // 
+                                                                                                   // 与GPS接收机通信错误计数（一直循环计数）
+                                                                                                   // 
+            DHManSu_Ti_GPSJieShouJiTongXinError.Text = sObject.yuGPSJieShouJiTongXingCuoWuJiShu.ToString(); //
+                                                                                                            // 
+
+            // 
+            // IMU进入中断次数（每800次+1 循环计数）
+            // 
+            DHManSu_Ti_IMUZhongDuan.Text = sObject.IMUJinRuZhongDuanCiShu.ToString(); //
+                                                                                      // 
+                                                                                      // GPS中断次数（每10次+1 循环计数）
+                                                                                      // 
+            DHManSu_Ti_GPSZhongDuan.Text = sObject.GPSZhongDuanCiShu.ToString(); //
+                                                                                 // 
+
+            // 
+            // 标志位1
+            // 
+            byte biaoZhiWei1 = sObject.biaoZhiWei1; //
+                                                    // 
+                                                    // bit0 导航初始值装订标志（0:未装订 1：已装订）
+                                                    // 
+            DHManSu_Ti_DaoHangChuZhiZhuangDing.Text = (biaoZhiWei1 >> 0 & 0x1) == 0 ? "未装订" : "已装订"; //
+                                                                                                     // 
+                                                                                                     // bit1 发送1553数据标志（0：未发送 1：已发送）
+                                                                                                     // 
+            DHManSu_Ti_1553ShuJuFaSong.Text = (biaoZhiWei1 >> 1 & 0x1) == 0 ? "未发送" : "已发送"; //
+                                                                                             // 
+                                                                                             // bit2 导航标志（0：未导航 1：已导航）
+                                                                                             // 
+            DHManSu_Ti_DaoHangBiaoZhi.Text = (biaoZhiWei1 >> 2 & 0x1) == 0 ? "未导航" : "已导航"; //
+                                                                                            // 
+                                                                                            // bit3 对准完成标志(0:未对准 1：已对准)
+                                                                                            // 
+            DHManSu_Ti_DuiZhunWanCheng.Text = (biaoZhiWei1 >> 3 & 0x1) == 0 ? "未对准" : "已对准"; //
+                                                                                             // 
+                                                                                             // bit4 装订参数读取标志(0:未装订 1：已装订)
+                                                                                             // 
+            DHManSu_Ti_ZhuangDingCanShuDuQu.Text = (biaoZhiWei1 >> 4 & 0x1) == 0 ? "未装订" : "已装订"; //
+                                                                                                  // 
+
+            // 
+            // 标志位2
+            // 
+            byte biaoZhiWei2 = sObject.biaoZhiWei2; //
+                                                    // 
+                                                    // bit0 bit1 工作模式（00：飞行模式 01：仿真模式1 10：仿真模式2 11：调试模式）
+                                                    // 
+            tempValue = (byte)(biaoZhiWei2 >> 0 & 0x3); //
+                                                        // 
+            string tempSTR = ""; //
+                                 // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "飞行模式"; //
+                                      // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "仿真模式1"; //
+                                       // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "仿真模式2"; //
+                                       // 
+                    break; //
+                           // 
+                case 3:
+                    // 
+                    tempSTR = "调试模式"; //
+                                      // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHManSu_Ti_GongZuoMoShi.Text = tempSTR; //
+                                                    // 
+
+            // 
+            // bit5 GPS组合标志（0：惯性 1：组合）
+            // 
+            DHManSu_Ti_GPSZuHe.Text = (biaoZhiWei2 >> 5 & 0x1) == 0 ? "惯性" : "组合"; //
+                                                                                   // 
+                                                                                   // bit6 点火标志(0：未点火 1：已点火)
+                                                                                   // 
+            DHManSu_Ti_DianHuo.Text = (biaoZhiWei2 >> 6 & 0x1) == 0 ? "未点火" : "已点火"; //
+                                                                                     // 
+                                                                                     // bit7 分离标志（0：已分离 1：未分离）
+                                                                                     // 
+            DHManSu_Ti_FenLi.Text = (biaoZhiWei2 >> 7 & 0x1) == 0 ? "已分离" : "未分离"; //
+                                                                                   // 
+
+        }
+
+        //系统慢速弹头数据显示
+        private void showDHManSuTimeStatus_Tou(ref DAOHANGSHUJU_ManSu sObject)
+        // 
+        {
+            // 
+            // GPS时间 单位s,UTC秒部
+            // 
+            DHManSu_Tou_GPSTime.Text = /*ConvertIntDatetime(sObject.GPSTime).ToString()*/sObject.GPSTime.ToString(); //
+                                                                                                                     // 
+                                                                                                                     // GPS定位模式
+                                                                                                                     // 
+            byte GPSDingWeiMoShi = sObject.GPSDingWeiMoShi; //
+                                                            // 
+            string tempValueSTR = ""; //
+                                      // 
+
+            // 
+            // bit0 (1:采用GPS定位 0:没有采用GPS定位)
+            // 
+            tempValueSTR = (GPSDingWeiMoShi >> 0 & 0x01) == 1 ? "采用GPS定位" : "没有采用GPS定位"; //
+                                                                                         // 
+            DHManSu_Tou_GPSDingWeiZhuangTai_GPS.Text = tempValueSTR; //
+                                                                     // 
+                                                                     // bit1 (1:采用BD2定位 0:没有采用BD2定位)
+                                                                     // 
+            tempValueSTR = (GPSDingWeiMoShi >> 1 & 0x01) == 1 ? "采用BD2定位" : "没有采用BD2定位"; //
+                                                                                         // 
+            DHManSu_Tou_GPSDingWeiZhuangTai_BD2.Text = tempValueSTR; //
+                                                                     // 
+                                                                     // bit2 1：采用GLONASS定位 0：没有采用GLONASS定位
+                                                                     // 
+            tempValueSTR = (GPSDingWeiMoShi >> 2 & 0x01) == 1 ? "采用GLONASS定位" : "没有采用GLONASS定位"; //
+                                                                                                 // 
+            DHManSu_Tou_GPSDingWeiZhuangTai_GLONASS.Text = tempValueSTR; //
+                                                                         // 
+                                                                         // bit3 0:没有DGNSS可用 1：DGNSS可用
+                                                                         // 
+            tempValueSTR = (GPSDingWeiMoShi >> 3 & 0x01) == 1 ? "DGNSS可用" : "没有DGNSS可用"; //
+                                                                                         // 
+            DHManSu_Tou_GPSDingWeiZhuangTai_DGNSS.Text = tempValueSTR; //
+                                                                       // 
+                                                                       // bit4 bit5 (00:No Fix 01:2DFix 11:3D Fix)
+                                                                       // 
+            byte tempValue = (byte)(GPSDingWeiMoShi >> 4 & 0x03); //
+                                                                  // 
+            tempValueSTR = tempValue == 0 ? "No Fix" : (tempValue == 1 ? "2DFix" : (tempValue == 3 ? "3D Fix" : "")); //
+                                                                                                                      // 
+            DHManSu_Tou_GPSDingWeiZhuangTai_Fix.Text = tempValueSTR; //
+                                                                     // 
+                                                                     // bit6 0:GNSS修正无效 1：GNSS修正有效
+                                                                     // 
+            tempValueSTR = (GPSDingWeiMoShi >> 6 & 0x01) == 1 ? "GNSS修正有效" : "GNSS修正无效"; //
+                                                                                         // 
+            DHManSu_Tou_GPSDingWeiZhuangTai_GNSSXiuZheng.Text = tempValueSTR; //
+                                                                              // 
+                                                                              // bit7 0:BD2修正无效 1：BD2修正有效
+                                                                              // 
+            tempValueSTR = (GPSDingWeiMoShi >> 7 & 0x01) == 1 ? "BD2修正有效" : "BD2修正无效"; //
+                                                                                       // 
+            DHManSu_Tou_GPSDingWeiZhuangTai_BD2XiuZheng.Text = tempValueSTR; //
+                                                                             // 
+                                                                             // DHManSu_Tou_GPSDingWeiZhuangTai.Text = tempValueSTR; //
+                                                                             // 
+
+            // 
+
+            // 
+            // GPS SV可用/参与定位数（低4位为可用数，高4位为参与定位数）
+            // 
+            tempValue = sObject.GPS_SV; //
+                                        // 
+            DHManSu_Tou_GPSSVKeYong.Text = ((byte)(tempValue & 0xF)).ToString(); //
+                                                                                 // 
+            DHManSu_Tou_GPSCanYuDingWei.Text = ((byte)(tempValue >> 4 & 0xF)).ToString(); //
+                                                                                          // 
+                                                                                          // BD2 SV可用/参与定位数（低4位为可用数，高4位为参与定位数）
+                                                                                          // 
+            tempValue = sObject.BD2_SV; //
+                                        // 
+            DHManSu_Tou_BD2KeYong.Text = ((byte)(tempValue & 0xF)).ToString(); //
+                                                                               // 
+            DHManSu_Tou_BD2CanYuDingWei.Text = ((byte)(tempValue >> 4 & 0xF)).ToString(); //
+                                                                                          // 
+
+            // 
+            // sObject.jingDu; //              // 经度（组合结果）当量：1e-7
+            // 
+            DHManSu_Tou_JingDu.Text = ((double)(sObject.jingDu * Math.Pow(10, -7))).ToString(); //
+                                                                                                // 
+                                                                                                // sObject.weiDu; //               // 纬度（组合结果）当量：1e-7
+                                                                                                // 
+            DHManSu_Tou_WeiDu.Text = ((double)(sObject.weiDu * Math.Pow(10, -7))).ToString(); //
+                                                                                              // 
+                                                                                              // sObject.haiBaGaoDu; //          // 海拔高度（组合结果）当量：1e-2
+                                                                                              // 
+            DHManSu_Tou_GaoDu.Text = ((double)(sObject.haiBaGaoDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                   // 
+
+            // 
+            //sObject.dongXiangSuDu; //        // 东向速度（组合结果）当量：1e-2
+            // 
+            DHManSu_Tou_DongXiangSuDu.Text = ((double)(sObject.dongXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                              // 
+                                                                                                              //sObject.beiXiangSuDu; //         // 北向速度（组合结果）当量：1e-2
+                                                                                                              // 
+            DHManSu_Tou_BeiXiangSuDu.Text = ((double)(sObject.beiXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                            // 
+                                                                                                            //sObject.tianXiangSuDu; //        // 天向速度（组合结果）当量：1e-2
+                                                                                                            // 
+            DHManSu_Tou_TianXiangSuDu.Text = ((double)(sObject.tianXiangSuDu * Math.Pow(10, -2))).ToString(); //
+                                                                                                              // 
+
+            // 
+            // PDOP 当量0.01
+            // 
+            DHManSu_Tou_PDOP.Text = ((double)(sObject.PDOP * 0.01)).ToString(); //
+                                                                                // 
+                                                                                // HDOP 当量0.01
+                                                                                // 
+            DHManSu_Tou_HDOP.Text = ((double)(sObject.HDOP * 0.01)).ToString(); //
+                                                                                // 
+                                                                                // VDOP 当量0.01
+                                                                                // 
+            DHManSu_Tou_VDOP.Text = ((double)(sObject.VDOP * 0.01)).ToString(); //
+                                                                                // 
+
+            // 
+            // X陀螺温度
+            // 
+            DHManSu_Tou_XTuoLuoWenDu.Text = sObject.tuoLuoWenDu_X.ToString(); //
+                                                                              // 
+                                                                              // Y陀螺温度
+                                                                              // 
+            DHManSu_Tou_YTuoLuoWenDu.Text = sObject.tuoLuoWenDu_Y.ToString(); //
+                                                                              // 
+                                                                              // Z陀螺温度
+                                                                              // 
+            DHManSu_Tou_ZTuoLuoWenDu.Text = sObject.tuoLuoWenDu_Z.ToString(); //
+                                                                              // 
+
+            // 
+            // X加计温度
+            // 
+            DHManSu_Tou_XJiaJiWenDu.Text = sObject.jiaJiWenDu_X.ToString(); //
+                                                                            // 
+                                                                            // Y加计温度
+                                                                            // 
+            DHManSu_Tou_YJiaJiWenDu.Text = sObject.jiaJiWenDu_Y.ToString(); //
+                                                                            // 
+                                                                            // Z加计温度
+                                                                            // 
+            DHManSu_Tou_ZJiaJiWenDu.Text = sObject.jiaJiWenDu_Z.ToString(); //
+                                                                            // 
+
+            // 
+            // +5V电压值     当量0.05
+            // 
+            DHManSu_Tou_Zheng5VDianYa.Text = ((double)(sObject.dianYaZhi_zheng5V * 0.05)).ToString(); //
+                                                                                                      // 
+                                                                                                      // -5V电压值     当量0.05
+                                                                                                      // 
+            DHManSu_Tou_Fu5VDianYa.Text = ((double)(sObject.dianYaZhi_fu5V * 0.05)).ToString(); //
+                                                                                                // 
+
+            // 
+            // +15V电压值    当量0.02
+            // 
+            DHManSu_Tou_Zheng15VDianYa.Text = ((double)(sObject.dianYaZhi_zheng15V * 0.2)).ToString(); //
+                                                                                                       // 
+                                                                                                       // -15V电压值    当量0.02
+                                                                                                       // 
+            DHManSu_Tou_Fu15VDianYa.Text = ((double)(sObject.dianYaZhi_fu15V * 0.2)).ToString(); //
+                                                                                                 // 
+
+            // 
+            // X陀螺+5V电压值     当量0.05
+            // 
+            DHManSu_Tou_XTuoLuoZheng5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_X_zheng5V * 0.05)).ToString(); //
+                                                                                                                     // 
+                                                                                                                     // X陀螺-5V电压值     当量0.05
+                                                                                                                     // 
+            DHManSu_Tou_XTuoLuoFu5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_X_fu5V * 0.05)).ToString(); //
+                                                                                                               // 
+
+            // 
+            // Y陀螺+5V电压值     当量0.05
+            // 
+            DHManSu_Tou_YTuoLuoZheng5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Y_zheng5V * 0.05)).ToString(); //
+                                                                                                                     // 
+                                                                                                                     // Y陀螺-5V电压值     当量0.05
+                                                                                                                     // 
+            DHManSu_Tou_YTuoLuoFu5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Y_fu5V * 0.05)).ToString(); //
+                                                                                                               // 
+
+            // 
+            // Z陀螺+5V电压值     当量0.05
+            // 
+            DHManSu_Tou_ZTuoLuoZheng5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Z_zheng5V * 0.05)).ToString(); //
+                                                                                                                     // 
+                                                                                                                     // Z陀螺-5V电压值     当量0.05
+                                                                                                                     // 
+            DHManSu_Tou_ZTuoLuoFu5VDianYa.Text = ((double)(sObject.tuoLuoDianYaZhi_Z_fu5V * 0.05)).ToString(); //
+                                                                                                               // 
+
+            // 
+            // 与X陀螺通信错误计数（一直循环计数）
+            // 
+            DHManSu_Tou_XTuoLuoTongXinError.Text = sObject.yuTuoLuoTongXingCuoWuJiShu_X.ToString(); //
+                                                                                                    // 
+                                                                                                    // 与Y陀螺通信错误计数（一直循环计数）
+                                                                                                    // 
+            DHManSu_Tou_YTuoLuoTongXinError.Text = sObject.yuTuoLuoTongXingCuoWuJiShu_Y.ToString(); //
+                                                                                                    // 
+                                                                                                    // 与Z陀螺通信错误计数（一直循环计数）
+                                                                                                    // 
+            DHManSu_Tou_ZTuoLuoTongXinError.Text = sObject.yuTuoLuoTongXingCuoWuJiShu_Z.ToString(); //
+                                                                                                    // 
+                                                                                                    // 与GPS接收机通信错误计数（一直循环计数）
+                                                                                                    // 
+            DHManSu_Tou_GPSJieShouJiTongXinError.Text = sObject.yuGPSJieShouJiTongXingCuoWuJiShu.ToString(); //
+                                                                                                             // 
+
+            // 
+            // IMU进入中断次数（每800次+1 循环计数）
+            // 
+            DHManSu_Tou_IMUZhongDuan.Text = sObject.IMUJinRuZhongDuanCiShu.ToString(); //
+                                                                                       // 
+                                                                                       // GPS中断次数（每10次+1 循环计数）
+                                                                                       // 
+            DHManSu_Tou_GPSZhongDuan.Text = sObject.GPSZhongDuanCiShu.ToString(); //
+                                                                                  // 
+
+            // 
+            // 标志位1
+            // 
+            byte biaoZhiWei1 = sObject.biaoZhiWei1; //
+                                                    // 
+                                                    // bit0 导航初始值装订标志（0:未装订 1：已装订）
+                                                    // 
+            DHManSu_Tou_DaoHangChuZhiZhuangDing.Text = (biaoZhiWei1 >> 0 & 0x1) == 0 ? "未装订" : "已装订"; //
+                                                                                                      // 
+                                                                                                      // bit1 发送1553数据标志（0：未发送 1：已发送）
+                                                                                                      // 
+            DHManSu_Tou_1553ShuJuFaSong.Text = (biaoZhiWei1 >> 1 & 0x1) == 0 ? "未发送" : "已发送"; //
+                                                                                              // 
+                                                                                              // bit2 导航标志（0：未导航 1：已导航）
+                                                                                              // 
+            DHManSu_Tou_DaoHangBiaoZhi.Text = (biaoZhiWei1 >> 2 & 0x1) == 0 ? "未导航" : "已导航"; //
+                                                                                             // 
+                                                                                             // bit3 对准完成标志(0:未对准 1：已对准)
+                                                                                             // 
+            DHManSu_Tou_DuiZhunWanCheng.Text = (biaoZhiWei1 >> 3 & 0x1) == 0 ? "未对准" : "已对准"; //
+                                                                                              // 
+                                                                                              // bit4 装订参数读取标志(0:未装订 1：已装订)
+                                                                                              // 
+            DHManSu_Tou_ZhuangDingCanShuDuQu.Text = (biaoZhiWei1 >> 4 & 0x1) == 0 ? "未装订" : "已装订"; //
+                                                                                                   // 
+
+            // 
+            // 标志位2
+            // 
+            byte biaoZhiWei2 = sObject.biaoZhiWei2; //
+                                                    // 
+                                                    // bit0 bit1 工作模式（00：飞行模式 01：仿真模式1 10：仿真模式2 11：调试模式）
+                                                    // 
+            tempValue = (byte)(biaoZhiWei2 >> 0 & 0x3); //
+                                                        // 
+            string tempSTR = ""; //
+                                 // 
+            switch (tempValue)
+            // 
+            {
+                // 
+                case 0:
+                    // 
+                    tempSTR = "飞行模式"; //
+                                      // 
+                    break; //
+                           // 
+                case 1:
+                    // 
+                    tempSTR = "仿真模式1"; //
+                                       // 
+                    break; //
+                           // 
+                case 2:
+                    // 
+                    tempSTR = "仿真模式2"; //
+                                       // 
+                    break; //
+                           // 
+                case 3:
+                    // 
+                    tempSTR = "调试模式"; //
+                                      // 
+                    break; //
+                           // 
+                default:
+                    // 
+                    break; //
+                           // 
+            }
+            // 
+            DHManSu_Tou_GongZuoMoShi.Text = tempSTR; //
+                                                     // 
+
+            // 
+            // bit5 GPS组合标志（0：惯性 1：组合）
+            // 
+            DHManSu_Tou_GPSZuHe.Text = (biaoZhiWei2 >> 5 & 0x1) == 0 ? "惯性" : "组合"; //
+                                                                                    // 
+                                                                                    // bit6 点火标志(0：未点火 1：已点火)
+                                                                                    // 
+            DHManSu_Tou_DianHuo.Text = (biaoZhiWei2 >> 6 & 0x1) == 0 ? "未点火" : "已点火"; //
+                                                                                      // 
+                                                                                      // bit7 分离标志（0：已分离 1：未分离）
+                                                                                      // 
+            DHManSu_Tou_FenLi.Text = (biaoZhiWei2 >> 7 & 0x1) == 0 ? "已分离" : "未分离"; //
+        }
+
         //系统即时反馈弹体数据显示
         private void showXiTongJiShiTimeStatus_Ti(ref SYSTEMImmediate_STATUS sObject)
         {
@@ -1995,17 +3280,14 @@ namespace DataProcess.Controls
         //加载文件按钮
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
-            //yaoceParser = new DataParser(new WindowInteropHelper(m).Handle);
             initYaoCeParser();
             if (load == null)
             {
                 load = new LoadDataForm();
                 load.setPlayStatus = setOffLineFilePlayStatus;
             }
-
-            //LoadDataForm.Instance().setPlayStatus = setOffLineFilePlayStatus;
-            //LoadDataForm.Instance().Show();
             load.Show();
+            load.Activate();
             return;
         }
 
@@ -2073,29 +3355,16 @@ namespace DataProcess.Controls
 
         private void EndYaoCeReceive(IAsyncResult ar)
         {
-            // 
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0); //
-                                                                    // 
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0); 
             try
-            // 
             {
-                // 
-                byte[] recvBuffer = udpClientYaoCe?.EndReceive(ar, ref endPoint); //
-                                                                                  // 
-                yaoceParser.Enqueue(recvBuffer); //
-                                                 // 
-                yaoceDataLogger.Enqueue(recvBuffer); //
-                                                     // 
-                udpClientYaoCe?.BeginReceive(EndYaoCeReceive, null); //
-                                                                     // 
+                byte[] recvBuffer = udpClientYaoCe?.EndReceive(ar, ref endPoint);  
+                yaoceParser.Enqueue(recvBuffer);  
+                yaoceDataLogger.Enqueue(recvBuffer); 
+                udpClientYaoCe?.BeginReceive(EndYaoCeReceive, null);  
             }
-            // 
             catch (Exception)
-            // 
-            {
-                // 
-            }
-            // 
+            { } 
         }
 
         //窗口关闭处理
@@ -2176,7 +3445,14 @@ namespace DataProcess.Controls
                         DAOHANGSHUJU_KuaiSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_KuaiSu>(ptr);
 
                         // 缓存状态数据
-                        //dHKSubForm_Ti.SetDHKStatus(ref sObject);
+                        sObject_DHK_Ti = sObject;
+
+                        // 重新启动离线定时器
+                        timerOfflineDHKStatus.Stop();
+                        timerOfflineDHKStatus.Start();
+
+                        // 是否收到数据
+                        bRecvStatusData_DHK = true;
 
                         // 绘图 
                         //dHKSubForm_Ti.setCHARTITEMINDEXAdd();
@@ -2196,7 +3472,14 @@ namespace DataProcess.Controls
                         DAOHANGSHUJU_KuaiSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_KuaiSu>(ptr);
 
                         // 缓存状态数据
-                        //dHKSubForm_Tou.SetDHKStatus(ref sObject); 
+                        sObject_DHK_Tou = sObject;
+
+                        // 重新启动离线定时器
+                        timerOfflineDHKStatus.Stop();
+                        timerOfflineDHKStatus_Tou.Start();
+
+                        // 是否收到数据
+                        bRecvStatusData_DHK = true;
 
                         // 绘图 
                         //dHKSubForm_Tou.setCHARTITEMINDEXAdd();
@@ -2216,7 +3499,14 @@ namespace DataProcess.Controls
                         DAOHANGSHUJU_ManSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_ManSu>(ptr);
 
                         // 缓存状态数据
-                        //dHMSubForm_Ti.SetDHMStatus(ref sObject); 
+                        sObject_DHM_Ti = sObject;
+
+                        // 重新启动离线定时器
+                        timerOfflineDHMStatus.Stop();
+                        timerOfflineDHMStatus.Start();
+
+                        // 是否收到数据
+                        bRecvStatusData_DHM = true;
 
                         // 绘图
                         //dHMSubForm_Ti.setCHARTITEMINDEXAdd(); 
@@ -2236,7 +3526,14 @@ namespace DataProcess.Controls
                         DAOHANGSHUJU_ManSu sObject = Marshal.PtrToStructure<DAOHANGSHUJU_ManSu>(ptr);
 
                         // 缓存状态数据
-                        //dHMSubForm_Tou.SetDHMStatus(ref sObject);
+                        sObject_DHM_Tou = sObject;
+
+                        // 重新启动离线定时器
+                        timerOfflineDHMStatus_Tou.Stop();
+                        timerOfflineDHMStatus_Tou.Start();
+
+                        // 是否收到数据
+                        bRecvStatusData_DHM = true;
 
                         // 绘图
                         //dHMSubForm_Tou.setCHARTITEMINDEXAdd(); 

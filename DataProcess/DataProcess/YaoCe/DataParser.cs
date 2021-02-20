@@ -358,7 +358,6 @@ namespace YaoCeProcess
 
             // 拼接上一次剩余的包
             UDPBuffer = UDPBuffer.Concat(buffer).ToArray(); 
-            Console.WriteLine(UDPBuffer);
 
             // 
             //--------------------------------------------------------------------------------//
@@ -1271,7 +1270,7 @@ namespace YaoCeProcess
                                                                 // 
                     PostMessage(MainWindowHandle, YaoCeShuJuXianShi.WM_YAOCE_SystemStatus_DATA, 0, ptr); //
                                                                                                   // 
-                    Console.WriteLine("PostMessage(MainWindowHandle, MainWindow.WM_YAOCE_SystemStatus_DATA, 0, ptr);{0}", sObject.weiDu);
+                  
 
                     // 
                     // 发送帧序号信息
