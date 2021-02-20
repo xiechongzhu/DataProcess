@@ -26,6 +26,19 @@ namespace DataProcess.Controls
         /// 向主界面传输动作控制
         public delegate void setOffLineFilePlayStatus(int action, int param1 = 0);
 
+#if false
+        private static LoadDataForm _instance = null;
+
+        public static LoadDataForm Instance()
+        {
+            if(_instance == null)
+            {
+                _instance = new LoadDataForm();
+            }
+            return _instance;
+        }
+#endif
+
         /// setPlayStatus
         public setOffLineFilePlayStatus setPlayStatus;
 
@@ -108,6 +121,11 @@ namespace DataProcess.Controls
         
         }
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+            e.Cancel = true;
+        }
 
         //选择文件
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)

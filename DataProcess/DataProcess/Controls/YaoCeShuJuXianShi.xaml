@@ -1081,62 +1081,66 @@
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="9*"></RowDefinition>
-                                    <RowDefinition Height="4*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Ti">
-                                    <cust:LabelTextBox Label="陀螺X故障标志：" x:Name="XTJS_Ti_XTuoLuoGuZhang"/>
-                                    <cust:LabelTextBox Label="GPS SV可用：" x:Name="XTJS_Ti_GPSSVKeYong"/>
-                                    <cust:LabelTextBox Label="GPS参与定位：" x:Name="XTJS_Ti_GPSCanYuDingWei"/>
-                                    <cust:LabelTextBox Label="陀螺Y故障标志：" x:Name="XTJS_Ti_YTuoLuoGuZhang"/>
-                                    <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Ti_GPSTime"/>
-                                    <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Ti_PDOP"/>
-                                    <cust:LabelTextBox Label="陀螺Z故障标志：" x:Name="XTJS_Ti_ZTuoLuoGuZhang"/>
-                                    <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Ti_XTuoLuoWenDu"/>
-                                    <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Ti_HDOP"/>
-                                    <cust:LabelTextBox Label="RS422通信状态：" x:Name="XTJS_Ti_RS422GuZhang"/>
-                                    <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Ti_YTuoLuoWenDu"/>
-                                    <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Ti_VDOP"/>
-                                    <cust:LabelTextBox Label="1553B通信标志：" x:Name="XTJS_Ti_1553BGuZhang"/>
-                                    <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Ti_ZTuoLuoWenDu"/>
-                                    <Grid/>
-                                    <cust:LabelTextBox Label="经度：" x:Name="XTJS_Ti_JingDu"/>
-                                    <cust:LabelTextBox Label="纬度：" x:Name="XTJS_Ti_WeiDu"/>
-                                    <cust:LabelTextBox Label="海拔高度：" x:Name="XTJS_Ti_GaoDu"/>
-                                    <cust:LabelTextBox Label="东向速度：" x:Name="XTJS_Ti_DongXiangSuDu"/>
-                                    <cust:LabelTextBox Label="北向速度：" x:Name="XTJS_Ti_BeiXiangSuDu"/>
-                                    <cust:LabelTextBox Label="天向速度：" x:Name="XTJS_Ti_TianXiangSuDu"/>
-                                    <cust:LabelTextBox Label="轴向过载：" x:Name="XTJS_Ti_GuoZhai_ZhouXiang"/>
-                                    <cust:LabelTextBox Label="法向过载：" x:Name="XTJS_Ti_GuoZhai_FaXiang"/>
-                                    <cust:LabelTextBox Label="侧向过载：" x:Name="XTJS_Ti_GuoZhai_CeXiang"/>
-                                    <cust:LabelTextBox Label="x轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_X"/>
-                                    <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Y"/>
-                                    <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Z"/>
-                                </UniformGrid>
-                                <Grid Grid.Row="1">
+                            <ScrollViewer>
+                                <Grid Grid.Column="0">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="9*"></RowDefinition>
+                                        <RowDefinition Height="4*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="GPS定位/状态："/>
-                                    <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GPS"/>
-                                    <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_BD2"/>
-                                    <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GLONASS"/>
-                                    <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_BD2XiuZheng"/>
-                                    <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_Fix"/>
-                                    <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
-                                    <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_DGNSS"/>
+                                    <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Ti">
+                                        <cust:LabelTextBox Label="陀螺X故障标志：" x:Name="XTJS_Ti_XTuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="GPS SV可用：" x:Name="XTJS_Ti_GPSSVKeYong"/>
+                                        <cust:LabelTextBox Label="GPS参与定位：" x:Name="XTJS_Ti_GPSCanYuDingWei"/>
+                                        <cust:LabelTextBox Label="陀螺Y故障标志：" x:Name="XTJS_Ti_YTuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Ti_GPSTime"/>
+                                        <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Ti_PDOP"/>
+                                        <cust:LabelTextBox Label="陀螺Z故障标志：" x:Name="XTJS_Ti_ZTuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Ti_XTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Ti_HDOP"/>
+                                        <cust:LabelTextBox Label="RS422通信状态：" x:Name="XTJS_Ti_RS422GuZhang"/>
+                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Ti_YTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Ti_VDOP"/>
+                                        <cust:LabelTextBox Label="1553B通信标志：" x:Name="XTJS_Ti_1553BGuZhang"/>
+                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Ti_ZTuoLuoWenDu"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="经度：" x:Name="XTJS_Ti_JingDu"/>
+                                        <cust:LabelTextBox Label="纬度：" x:Name="XTJS_Ti_WeiDu"/>
+                                        <cust:LabelTextBox Label="海拔高度：" x:Name="XTJS_Ti_GaoDu"/>
+                                        <cust:LabelTextBox Label="东向速度：" x:Name="XTJS_Ti_DongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="北向速度：" x:Name="XTJS_Ti_BeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="天向速度：" x:Name="XTJS_Ti_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="轴向过载：" x:Name="XTJS_Ti_GuoZhai_ZhouXiang"/>
+                                        <cust:LabelTextBox Label="法向过载：" x:Name="XTJS_Ti_GuoZhai_FaXiang"/>
+                                        <cust:LabelTextBox Label="侧向过载：" x:Name="XTJS_Ti_GuoZhai_CeXiang"/>
+                                        <cust:LabelTextBox Label="x轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_X"/>
+                                        <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Y"/>
+                                        <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Z"/>
+                                    </UniformGrid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="GPS定位/状态："/>
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GPS"/>
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_BD2"/>
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GLONASS"/>
+                                        <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_BD2XiuZheng"/>
+                                        <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_Fix"/>
+                                        <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
+                                        <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_DGNSS"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
+                            </ScrollViewer>
+                            
+                            
                             <dx:DXTabControl Grid.Column="1">
                                 <dx:DXTabItem Header="坐标">
                                     <UniformGrid Rows="3">
@@ -1364,62 +1368,64 @@
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="9*"></RowDefinition>
-                                    <RowDefinition Height="4*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Tou">
-                                    <cust:LabelTextBox Label="陀螺X故障标志：" x:Name="XTJS_Tou_XTuoLuoGuZhang"/>
-                                    <cust:LabelTextBox Label="GPS SV可用：" x:Name="XTJS_Tou_GPSSVKeYong"/>
-                                    <cust:LabelTextBox Label="GPS参与定位：" x:Name="XTJS_Tou_GPSCanYuDingWei"/>
-                                    <cust:LabelTextBox Label="陀螺Y故障标志：" x:Name="XTJS_Tou_YTuoLuoGuZhang"/>
-                                    <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Tou_GPSTime"/>
-                                    <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Tou_PDOP"/>
-                                    <cust:LabelTextBox Label="陀螺Z故障标志：" x:Name="XTJS_Tou_ZTuoLuoGuZhang"/>
-                                    <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Tou_XTuoLuoWenDu"/>
-                                    <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Tou_HDOP"/>
-                                    <cust:LabelTextBox Label="RS422通信状态：" x:Name="XTJS_Tou_RS422GuZhang"/>
-                                    <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Tou_YTuoLuoWenDu"/>
-                                    <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Tou_VDOP"/>
-                                    <cust:LabelTextBox Label="1553B通信标志：" x:Name="XTJS_Tou_1553BGuZhang"/>
-                                    <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Tou_ZTuoLuoWenDu"/>
-                                    <Grid/>
-                                    <cust:LabelTextBox Label="经度：" x:Name="XTJS_Tou_JingDu"/>
-                                    <cust:LabelTextBox Label="纬度：" x:Name="XTJS_Tou_WeiDu"/>
-                                    <cust:LabelTextBox Label="海拔高度：" x:Name="XTJS_Tou_GaoDu"/>
-                                    <cust:LabelTextBox Label="东向速度：" x:Name="XTJS_Tou_DongXiangSuDu"/>
-                                    <cust:LabelTextBox Label="北向速度：" x:Name="XTJS_Tou_BeiXiangSuDu"/>
-                                    <cust:LabelTextBox Label="天向速度：" x:Name="XTJS_Tou_TouanXiangSuDu"/>
-                                    <cust:LabelTextBox Label="轴向过载：" x:Name="XTJS_Tou_GuoZhai_ZhouXiang"/>
-                                    <cust:LabelTextBox Label="法向过载：" x:Name="XTJS_Tou_GuoZhai_FaXiang"/>
-                                    <cust:LabelTextBox Label="侧向过载：" x:Name="XTJS_Tou_GuoZhai_CeXiang"/>
-                                    <cust:LabelTextBox Label="x轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_X"/>
-                                    <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Y"/>
-                                    <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Z"/>
-                                </UniformGrid>
-                                <Grid Grid.Row="1">
+                            <ScrollViewer>
+                                <Grid Grid.Column="0">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="9*"></RowDefinition>
+                                        <RowDefinition Height="4*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="GPS定位/状态："/>
-                                    <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GPS"/>
-                                    <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_BD2"/>
-                                    <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GLONASS"/>
-                                    <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_BD2XiuZheng"/>
-                                    <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_Fix"/>
-                                    <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
-                                    <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_DGNSS"/>
+                                    <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Tou">
+                                        <cust:LabelTextBox Label="陀螺X故障标志：" x:Name="XTJS_Tou_XTuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="GPS SV可用：" x:Name="XTJS_Tou_GPSSVKeYong"/>
+                                        <cust:LabelTextBox Label="GPS参与定位：" x:Name="XTJS_Tou_GPSCanYuDingWei"/>
+                                        <cust:LabelTextBox Label="陀螺Y故障标志：" x:Name="XTJS_Tou_YTuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Tou_GPSTime"/>
+                                        <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Tou_PDOP"/>
+                                        <cust:LabelTextBox Label="陀螺Z故障标志：" x:Name="XTJS_Tou_ZTuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Tou_XTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Tou_HDOP"/>
+                                        <cust:LabelTextBox Label="RS422通信状态：" x:Name="XTJS_Tou_RS422GuZhang"/>
+                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Tou_YTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Tou_VDOP"/>
+                                        <cust:LabelTextBox Label="1553B通信标志：" x:Name="XTJS_Tou_1553BGuZhang"/>
+                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Tou_ZTuoLuoWenDu"/>
+                                        <Grid/>
+                                        <cust:LabelTextBox Label="经度：" x:Name="XTJS_Tou_JingDu"/>
+                                        <cust:LabelTextBox Label="纬度：" x:Name="XTJS_Tou_WeiDu"/>
+                                        <cust:LabelTextBox Label="海拔高度：" x:Name="XTJS_Tou_GaoDu"/>
+                                        <cust:LabelTextBox Label="东向速度：" x:Name="XTJS_Tou_DongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="北向速度：" x:Name="XTJS_Tou_BeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="天向速度：" x:Name="XTJS_Tou_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="轴向过载：" x:Name="XTJS_Tou_GuoZhai_ZhouXiang"/>
+                                        <cust:LabelTextBox Label="法向过载：" x:Name="XTJS_Tou_GuoZhai_FaXiang"/>
+                                        <cust:LabelTextBox Label="侧向过载：" x:Name="XTJS_Tou_GuoZhai_CeXiang"/>
+                                        <cust:LabelTextBox Label="x轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_X"/>
+                                        <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Y"/>
+                                        <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Z"/>
+                                    </UniformGrid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="GPS定位/状态："/>
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GPS"/>
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_BD2"/>
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GLONASS"/>
+                                        <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_BD2XiuZheng"/>
+                                        <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_Fix"/>
+                                        <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
+                                        <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_DGNSS"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
+                            </ScrollViewer>
                             <dx:DXTabControl Grid.Column="1">
                                 <dx:DXTabItem Header="坐标">
                                     <UniformGrid Rows="3">

@@ -916,35 +916,6 @@ namespace DataProcess
             { }
         }
 
-#if false
-        private void EndYaoCeReceive(IAsyncResult ar)
-        {
-            // 
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0); //
-                                                                    // 
-            try
-            // 
-            {
-                // 
-                byte[] recvBuffer = udpClientYaoCe?.EndReceive(ar, ref endPoint); //
-                                                                             // 
-                yaoceParser.Enqueue(recvBuffer); //
-                                                // 
-                yaoceDataLogger.Enqueue(recvBuffer); //
-                                                // 
-                udpClientYaoCe?.BeginReceive(EndYaoCeReceive, null); //
-                                                          // 
-            }
-            // 
-            catch (Exception)
-            // 
-            {
-                // 
-            }
-            // 
-        }
-#endif
-
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             bRun = false;
