@@ -43,7 +43,7 @@
                 <Grid Background="Transparent">
                     <dx:DXTabControl>
                         <dx:DXTabItem Header="位置">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Controls:MyChartControl x:Name="ChartNavLon" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartNavLat" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartNavHeight" Width="600"/>
@@ -56,7 +56,7 @@
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="角速度数据">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Controls:MyChartControl x:Name="ChartNavPitchAngle" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartNavCrabAngle" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartNavRollAngle" Width="600"/>
@@ -69,7 +69,7 @@
                             <local:SignalDiagram Grid.Row="1" Grid.Column="0" x:Name="programDigram"/>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="伺服信号">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Controls:MyChartControl x:Name="ChartServoVol28" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartServoVol160" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartServo1Iq" Width="600"/>
@@ -78,9 +78,6 @@
                                 <Controls:MyChartControl x:Name="ChartServo4Iq" Width="600"/>
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
-                        <dx:DXTabItem Header="轨迹">
-                            <gmap:MapControl x:Name="mapControl"/>
-                        </dx:DXTabItem>
                     </dx:DXTabControl>
                 </Grid>
             </dx:DXTabItem>
@@ -88,7 +85,7 @@
                 <Grid Background="Transparent">
                     <dx:DXTabControl>
                         <dx:DXTabItem Header="温度">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Controls:MyChartControl x:Name="ChartHood" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartInsAir" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartInsWall" Width="600"/>
@@ -104,7 +101,7 @@
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="压力">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Controls:MyChartControl x:Name="ChartInsPresure" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartAttiPresure" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartPresure" Width="600"/>
@@ -115,7 +112,7 @@
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="振动">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Controls:MyChartControl x:Name="ChartShake1" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartShake2" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartShake3" Width="600"/>
@@ -137,7 +134,7 @@
                             </dxlc:FlowLayoutControl>
                         </dx:DXTabItem>
                         <dx:DXTabItem Header="冲击、噪声">
-                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top">
+                            <dxlc:FlowLayoutControl Margin="0,0,0,0" Padding="0" Orientation="Horizontal" MaximizedElementPosition="Top" dx:ScrollBarExtensions.AllowMouseScrolling="False">
                                 <Controls:MyChartControl x:Name="ChartLash1_1" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartLash1_2" Width="600"/>
                                 <Controls:MyChartControl x:Name="ChartLash1_3" Width="600"/>

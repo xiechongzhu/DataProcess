@@ -31,7 +31,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" Content="飞控数据" x:Name="radioFly"/>
+                <RadioButton Grid.Column="0" Content="飞控数据" x:Name="radioFly" IsChecked="True"/>
                 <RadioButton Grid.Column="1" Content="安控数据" x:Name="radioYc"/>
             </Grid>
         </GroupBox>

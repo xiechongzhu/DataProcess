@@ -45,7 +45,9 @@ namespace DataProcess.GMap
 
             Manager.Mode = AccessMode.ServerAndCache;
             MapProvider = GMapProviders.AMap;
-            Position = new PointLatLng(31.48, 104.69);
+            MinZoom = 5;
+            MaxZoom = 10;
+            Zoom = 5;
             NeedRefresh = false;
             RefreshTimer.Tick += RefreshTimer_Tick;
             RefreshTimer.Interval = TimeSpan.FromMilliseconds(500);
@@ -57,6 +59,7 @@ namespace DataProcess.GMap
             if(NeedRefresh)
             {
                 InvalidateVisual();
+                Position = StartPoint;
                 NeedRefresh = false;
             }
         }
@@ -212,6 +215,11 @@ namespace DataProcess.GMap
         private double Rad(double d)
         {
             return (double)d * Math.PI / 180d;
+        }
+
+        public void Refresh()
+        {
+            NeedRefresh = true;
         }
     }
 }

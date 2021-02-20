@@ -324,6 +324,15 @@ namespace DataProcess
             MainTimer.Tick += MainTimer_Tick;
             MainTimer.Interval = new TimeSpan(0, 0, 0, 1);
             MainTimer.Start();
+
+            mapControl.StartPoint = new PointLatLng(mainSetting.StartLat, mainSetting.StartLng);
+            mapControl.EndPoint = new PointLatLng(mainSetting.EndLat, mainSetting.EndLng);
+            mapControl.BoomLineFront = mainSetting.BoomLineFront;
+            mapControl.BoomLineBack = mainSetting.BoomLineBack;
+            mapControl.BoomLineSide = mainSetting.BoomLineSide;
+            mapControl.PipeLineLength = mainSetting.PipeLength;
+            mapControl.PipeLineWidth = mainSetting.PipeWidth;
+            mapControl.Refresh();
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
@@ -1029,7 +1038,19 @@ namespace DataProcess
 
         protected IntPtr DefWndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
+            switch (msg)
+            {
+                case YaoCeShuJuXianShi.WM_YAOCE_SystemStatus_DATA:
+                    SYSTEMPARSE_STATUS systemStatus = Marshal.PtrToStructure<SYSTEMPARSE_STATUS>(lParam);
+                    mainInfoControl.SetJudgmentStatus(systemStatus);
+                    break;
+                case YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA:
+                    DAOHANGSHUJU_KuaiSu navData = Marshal.PtrToStructure<DAOHANGSHUJU_KuaiSu>(lParam);
+                    mainInfoControl.SetNavDataFast(navData);
+                    break;
+            }
             YaoCe.handleMessage(hwnd, msg, wParam, lParam);
+            
             return hwnd;
         }
 
@@ -1149,13 +1170,14 @@ namespace DataProcess
                 SettingManager settingManager = new SettingManager();
                 settingManager.LoadMainSetting(out MainSetting mainSetting);
                 MainText = mainSetting.MainText;
-                mapControl.StartPoint = new PointLatLng(mainSetting.StartLng, mainSetting.StartLat);
-                mapControl.EndPoint = new PointLatLng(mainSetting.EndLng, mainSetting.EndLat);
+                mapControl.StartPoint = new PointLatLng(mainSetting.StartLat, mainSetting.StartLng);
+                mapControl.EndPoint = new PointLatLng(mainSetting.EndLat, mainSetting.EndLng);
                 mapControl.BoomLineFront = mainSetting.BoomLineFront;
                 mapControl.BoomLineBack = mainSetting.BoomLineBack;
                 mapControl.BoomLineSide = mainSetting.BoomLineSide;
                 mapControl.PipeLineLength = mainSetting.PipeLength;
                 mapControl.PipeLineWidth = mainSetting.PipeWidth;
+                mapControl.Refresh();
             }
         }
 

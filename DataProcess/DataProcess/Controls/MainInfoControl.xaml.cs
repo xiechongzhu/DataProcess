@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using YaoCeProcess;
 
 namespace DataProcess.Controls
 {
@@ -68,13 +69,7 @@ namespace DataProcess.Controls
         {
             if(radioFly.IsChecked == true)
             {
-                int gpsTime = (int)navData.gpsTime;
-                gpsTime %= (24 * 3600);
-                int gpsHour = gpsTime / 3600;
-                gpsTime %= 3600;
-                int gpsMinutes = gpsTime / 60;
-                int gpsSecends = gpsTime % 60;
-                GpsTime = String.Format("{0}时{1}分{2}秒", gpsHour, gpsMinutes, gpsSecends);
+                GpsTime = GpsTimeToString(navData.gpsTime);
                 Lat = LngLatToString(navData.latitude);
                 Lng = LngLatToString(navData.longitude);
                 FlyHeight = String.Format("{0}km", navData.height / 1000);
@@ -87,6 +82,31 @@ namespace DataProcess.Controls
             }
         }
 
+        public void SetJudgmentStatus(SYSTEMPARSE_STATUS status)
+        {
+            FlyTime = String.Format("{0}s", status.feiXingZongShiJian);
+            if (radioYc.IsChecked == true)
+            {
+                GpsTime = GpsTimeToString((float)(status.GNSSTime * 1e-3));
+                NorthSpeed = String.Format("{0}m/s", status.beiXiangSuDu);
+                SkySpeed = String.Format("{0}m/s", status.tianXiangSuDu);
+                EastSpeed = String.Format("{0}m/s", status.dongXiangSuDu);
+                Lng = LngLatToString((float)((status.jingDu) * 1e-2));
+                Lat = LngLatToString((float)((status.weiDu) * 1e-2));
+                FlyHeight = String.Format("{0}km", status.haiBaGaoDu * 1e-2);
+            }
+        }
+
+        public void SetNavDataFast(DAOHANGSHUJU_KuaiSu navData)
+        {
+            if (radioYc.IsChecked == true)
+            {
+                Pitch = String.Format("{0}°", navData.fuYangJiao);
+                Grab = String.Format("{0}°", navData.pianHangJiao);
+                Roll = String.Format("{0}°", navData.gunZhuanJiao);
+            }
+        }
+
         private String LngLatToString(float value)
         {
             int d1 = (int)value;
@@ -95,6 +115,16 @@ namespace DataProcess.Controls
             value = (value - d2) * 60;
             int d3 = (int)value;
             return String.Format("{0}度{1}分{2}秒", d1 ,d2 ,d3);
+        }
+
+        private String GpsTimeToString(float gpsTime)
+        {
+            int _gpsTime = (int)gpsTime;
+            int gpsHour = _gpsTime / 3600;
+            _gpsTime %= 3600;
+            int gpsMinutes = _gpsTime / 60;
+            int gpsSecends = _gpsTime % 60;
+            return String.Format("{0}时{1}分{2}秒", gpsHour, gpsMinutes, gpsSecends);
         }
     }
 }
