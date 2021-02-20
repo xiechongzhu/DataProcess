@@ -84,21 +84,27 @@ namespace DataProcess.Controls
 
         public void SetJudgmentStatus(SYSTEMPARSE_STATUS status)
         {
-            GpsTime = GpsTimeToString((float)(status.GNSSTime * 1e-3));
             FlyTime = String.Format("{0}s", status.feiXingZongShiJian);
-            NorthSpeed = String.Format("{0}m/s", status.beiXiangSuDu);
-            SkySpeed = String.Format("{0}m/s", status.tianXiangSuDu);
-            EastSpeed = String.Format("{0}m/s", status.dongXiangSuDu);
-            Lng = LngLatToString((float)((status.jingDu) * 1e-2));
-            Lat = LngLatToString((float)((status.weiDu) * 1e-2));
-            FlyHeight = String.Format("{0}km", status.haiBaGaoDu * 1e-2);
+            if (radioYc.IsChecked == true)
+            {
+                GpsTime = GpsTimeToString((float)(status.GNSSTime * 1e-3));
+                NorthSpeed = String.Format("{0}m/s", status.beiXiangSuDu);
+                SkySpeed = String.Format("{0}m/s", status.tianXiangSuDu);
+                EastSpeed = String.Format("{0}m/s", status.dongXiangSuDu);
+                Lng = LngLatToString((float)((status.jingDu) * 1e-2));
+                Lat = LngLatToString((float)((status.weiDu) * 1e-2));
+                FlyHeight = String.Format("{0}km", status.haiBaGaoDu * 1e-2);
+            }
         }
 
         public void SetNavDataFast(DAOHANGSHUJU_KuaiSu navData)
         {
-            Pitch = String.Format("{0}°", navData.fuYangJiao);
-            Grab = String.Format("{0}°", navData.pianHangJiao);
-            Roll = String.Format("{0}°", navData.gunZhuanJiao);
+            if (radioYc.IsChecked == true)
+            {
+                Pitch = String.Format("{0}°", navData.fuYangJiao);
+                Grab = String.Format("{0}°", navData.pianHangJiao);
+                Roll = String.Format("{0}°", navData.gunZhuanJiao);
+            }
         }
 
         private String LngLatToString(float value)
