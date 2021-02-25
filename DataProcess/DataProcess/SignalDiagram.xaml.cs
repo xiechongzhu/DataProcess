@@ -63,7 +63,7 @@ namespace DataProcess
                 CultureInfo.GetCultureInfo("zh-cn"),
                 FlowDirection.LeftToRight,
                 new Typeface("微软雅黑"),
-                8,
+                12,
                 Brushes.Black, 0);
                 if (i % 2 == 0)
                 {

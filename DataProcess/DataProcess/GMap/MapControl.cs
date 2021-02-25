@@ -12,6 +12,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Globalization;
+using System.Windows.Media.Imaging;
+using DevExpress.Xpf.Core;
 
 namespace DataProcess.GMap
 {
@@ -29,21 +31,20 @@ namespace DataProcess.GMap
         public double FlyHeight { get; set; }
         private bool NeedRefresh;
         private const double EARTH_RADIUS = 6378137;
+        private readonly BitmapImage RockBitmap = new BitmapImage(new Uri("pack://siteoforigin:,,,/Image/rock.jfif"));
 
         public MapControl()
         {
-            /*StartPoint = new PointLatLng(29.59, 106.54);
-            EndPoint = new PointLatLng(30.67, 104.06);
-            BoomLineFront = 30000;
-            BoomLineBack = 120000;
-            BoomLineSide = 10000;
-            PipeLineLength = 500000;
-            PipeLineWidth = 5000;
-            FlyHeight = 8000;
-            AddPoint(new PointLatLng(29.59, 106.54));
-            AddPoint(new PointLatLng(30.59, 107.54));*/
-
-            Manager.Mode = AccessMode.ServerAndCache;
+            if(!Manager.ImportFromGMDB(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data.gmdb")))
+            {
+                DXMessageBox.Show(this, "加载离线地图失败,将使用在线地图", "错误");
+                Manager.Mode = AccessMode.ServerAndCache;
+            }
+            else
+            {
+                Manager.Mode = AccessMode.CacheOnly;
+            }
+            Manager.Mode = AccessMode.CacheOnly;
             MapProvider = GMapProviders.AMap;
             MinZoom = 5;
             MaxZoom = 10;
@@ -59,7 +60,6 @@ namespace DataProcess.GMap
             if(NeedRefresh)
             {
                 InvalidateVisual();
-                Position = StartPoint;
                 NeedRefresh = false;
             }
         }
@@ -187,8 +187,8 @@ namespace DataProcess.GMap
                         new Point(controlPoints[i].X, controlPoints[i].Y),
                         new Point(controlPoints[i + 1].X, controlPoints[i + 1].Y));
                 }
-                drawingContext.DrawEllipse(Brushes.Red, null, new Point(controlPoints.Last().X, controlPoints.Last().Y), 5, 5);
-                String strText = String.Format("坐标:{0},{1}\n高度:{2}米", Points.Last().Lng, Points.Last().Lat, FlyHeight);
+                drawingContext.DrawImage(RockBitmap, new Rect(new Point(controlPoints.Last().X - 10, controlPoints.Last().Y - 15), new Size(20, 30)));
+                String strText = String.Format("坐标:{0:F},{1:F}\n高度:{2:F}米", Points.Last().Lng, Points.Last().Lat, FlyHeight);
                 FormattedText formattedText = new FormattedText(
                 strText,
                 CultureInfo.GetCultureInfo("zh-cn"),
