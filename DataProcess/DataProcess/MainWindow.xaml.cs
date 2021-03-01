@@ -328,6 +328,7 @@ namespace DataProcess
             MainTimer.Start();
 
             mapControl.StartPoint = new PointLatLng(mainSetting.StartLat, mainSetting.StartLng);
+            mapControl.Position = mapControl.StartPoint;
             mapControl.EndPoint = new PointLatLng(mainSetting.EndLat, mainSetting.EndLng);
             mapControl.BoomLineFront = mainSetting.BoomLineFront;
             mapControl.BoomLineBack = mainSetting.BoomLineBack;
@@ -1186,6 +1187,7 @@ namespace DataProcess
                 settingManager.LoadMainSetting(out MainSetting mainSetting);
                 MainText = mainSetting.MainText;
                 mapControl.StartPoint = new PointLatLng(mainSetting.StartLat, mainSetting.StartLng);
+                mapControl.Position = mapControl.StartPoint;
                 mapControl.EndPoint = new PointLatLng(mainSetting.EndLat, mainSetting.EndLng);
                 mapControl.BoomLineFront = mainSetting.BoomLineFront;
                 mapControl.BoomLineBack = mainSetting.BoomLineBack;
