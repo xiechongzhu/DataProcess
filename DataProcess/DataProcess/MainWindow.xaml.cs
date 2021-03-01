@@ -267,7 +267,8 @@ namespace DataProcess
             SLOW,
             FAST,
             TAIL,
-            FLY
+            FLY,
+            YAOCE
         }
 
         Dictionary<LED_STATUS, BitmapImage> LedImages = new Dictionary<LED_STATUS, BitmapImage> {
@@ -281,10 +282,11 @@ namespace DataProcess
             {NETWORK_DATA_TYPE.FAST, DateTime.MinValue },
             {NETWORK_DATA_TYPE.TAIL, DateTime.MinValue },
             {NETWORK_DATA_TYPE.FLY, DateTime.MinValue },
+            {NETWORK_DATA_TYPE.YAOCE, DateTime.MinValue },
         };
 
         private bool bRun;
-        public static readonly int CHART_MAX_POINTS = 500;
+        public static readonly int CHART_MAX_POINTS = 10000;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;
@@ -358,6 +360,10 @@ namespace DataProcess
             if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 200)
             {
                 SetLedStatus(ImageFly, LED_STATUS.LED_RED);
+            }
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.YAOCE]).TotalMilliseconds > 200)
+            {
+                SetLedStatus(ImageUDP, LED_STATUS.LED_RED);
             }
         }
 
@@ -873,7 +879,13 @@ namespace DataProcess
 
             udpClientEnv.BeginReceive(EndEnvReceive, null);
             udpClientFly.BeginReceive(EndFlyReceive, null);
+
             YaoCe.startUDPReceive();
+            YaoCe.ClearChart();
+            YaoCe.EnableLoadButton(false);//禁用加载文件按钮
+            YaoCe.setTimerUpdateChartStatus(true);//启动绘图定时器
+            YaoCe.setUpdateTimerStatus(true);//启动状态刷新定时器
+
             uiRefreshTimer.Start();
             ledTimer.Start();
             mapControl.Clear();
@@ -950,6 +962,9 @@ namespace DataProcess
             }
 
             YaoCe.stopYaoCeParser();
+            YaoCe.EnableLoadButton(true);
+            YaoCe.setTimerUpdateChartStatus(false);
+            YaoCe.setUpdateTimerStatus(false);
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
             btnSetting.IsEnabled = true;
@@ -1285,7 +1300,7 @@ namespace DataProcess
             }
         }
 
-        private void HideZeroLevel(ChartControl chartControl)
+        public void HideZeroLevel(ChartControl chartControl)
         {
             XYDiagram2D diag = (XYDiagram2D)chartControl.Diagram;
             AxisY2D axis = diag.AxisY;

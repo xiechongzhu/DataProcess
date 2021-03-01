@@ -18,6 +18,7 @@ using System.Timers;
 using System.Threading;
 using System.Diagnostics;
 using YaoCeProcess;
+using System.Reflection;
 
 namespace DataProcess.Controls
 {
@@ -236,12 +237,46 @@ namespace DataProcess.Controls
 
         bool bRecvStatusData_XTJS = false; //系统即时反馈
 
-        /// 网络消息处理
-        //private DataParser dataParser;
-
         /// 码流记录
         private _DataLogger yaoceDataLogger = new _DataLogger(); //
 
+
+        //-----------------------------------------------------//
+
+        const byte frameType_systemStatus_1 = 0x15; //       // 系统判据状态
+        /// 系统判据状态
+        const byte frameType_systemStatus_2 = 0x16; //       // 系统判据状态
+                                                   
+        /// 回路检测反馈状态
+        const byte frameType_HuiLuJianCe = 0x16; //          // 回路检测反馈状态
+
+        /// 导航快速（弹体）
+        const byte frameType_daoHangKuaiSu_Ti = 0x21; //     // 导航快速（弹体）
+
+        /// 导航快速（弹头）
+        const byte frameType_daoHangKuaiSu_Tou = 0x31; //    // 导航快速（弹头）
+
+        /// 导航慢速（弹体）
+        const byte frameType_daoHangManSu_Ti = 0x25; //      // 导航慢速（弹体）
+
+        /// 导航慢速（弹头）
+        const byte frameType_daoHangManSu_Tou = 0x35; //     // 导航慢速（弹头）
+
+        /// 系统状态即时反馈（弹体）
+        const byte frameType_XiTongJiShi_Ti = 0x26; //       // 系统状态即时反馈（弹体）   帧总长11  数据段总长度64 帧类型0x0B
+                                                   
+        /// 系统状态即时反馈（弹头）
+        const byte frameType_XiTongJiShi_Tou = 0x36; //      // 系统状态即时反馈（弹头）
+
+        
+        /// frameType_XTPJZT
+        const byte frameType_XTPJZT = 0x01; 
+
+        /// frameType_XTPJFK
+        const byte frameType_XTPJFK = 0x05;
+        
+        /// frameType_HLJCFK
+        const byte frameType_HLJCFK = 0x06; //
 
         //-----------------------------------------------------//
         /// E_STATUSTYPE_XiTong
@@ -422,10 +457,12 @@ namespace DataProcess.Controls
         public LoadDataForm loadWindow;
         public MainWindow m = null;
         public Image ImageUDP = null;
+        public int maxDisplayPoint = 0;
 
         private UdpClient udpClientYaoCe = null;
         private DataParser yaoceParser = null;
-        YaoCeChartDataSource yaoCeChartDataSource = new YaoCeChartDataSource();
+        private YaoCeChartDataSource yaoCeChartDataSource = new YaoCeChartDataSource();
+        private yaoceDisplayBuffers yaoceDisplay = new yaoceDisplayBuffers();
 
         private DispatcherTimer UpdateLoadFileProgressTimer = new DispatcherTimer(); //文件加载进度定时器
 
@@ -437,20 +474,16 @@ namespace DataProcess.Controls
         //导航快速弹体
         private DispatcherTimer timerUpdateDHKStatus = new DispatcherTimer();
         private DispatcherTimer timerOfflineDHKStatus = new DispatcherTimer();
-        private DispatcherTimer timerUpdateChart_DHK = new DispatcherTimer();
 
         //导航快速弹头
         private DispatcherTimer timerUpdateDHKStatus_Tou = new DispatcherTimer();
         private DispatcherTimer timerOfflineDHKStatus_Tou = new DispatcherTimer();
-        private DispatcherTimer timerUpdateChart_DHK_Tou = new DispatcherTimer();
 
         //导航慢速弹体
-        private DispatcherTimer timerUpdateChart_DHM = new DispatcherTimer();
         private DispatcherTimer timerUpdateDHMStatus = new DispatcherTimer();
         private DispatcherTimer timerOfflineDHMStatus = new DispatcherTimer();
 
         //导航慢速弹头
-        private DispatcherTimer timerUpdateChart_DHM_Tou = new DispatcherTimer();
         private DispatcherTimer timerUpdateDHMStatus_Tou = new DispatcherTimer();
         private DispatcherTimer timerOfflineDHMStatus_Tou = new DispatcherTimer();
 
@@ -459,17 +492,15 @@ namespace DataProcess.Controls
         private DispatcherTimer timerOffLineHuiLuJianCe = new DispatcherTimer();
 
         //系统即时反馈弹体
-        private DispatcherTimer timerUpdateChart_XiTongJiShi = new DispatcherTimer();
         private DispatcherTimer timerUpdateXiTongJiShiStatus = new DispatcherTimer();
         private DispatcherTimer timerOfflineXiTongJiShiStatus = new DispatcherTimer();
 
         //系统即时反馈弹头
-        private DispatcherTimer timerUpdateChart_XiTongJiShi_Tou = new DispatcherTimer();
         private DispatcherTimer timerUpdateXiTongJiShiStatus_Tou = new DispatcherTimer();
         private DispatcherTimer timerOfflineXiTongJiShiStatus_Tou = new DispatcherTimer();
 
         //帧序号
-        private DispatcherTimer timerChartUpdate_ZXH = new DispatcherTimer();
+
 
         //UDP
         private DispatcherTimer timerUpdateUDP = new DispatcherTimer();//
@@ -477,10 +508,12 @@ namespace DataProcess.Controls
 
         System.Timers.Timer readFileTimer = new System.Timers.Timer(); //读取文件定时器
 
+        public List<ChartPointDataSource> chartPointDataSources = new List<ChartPointDataSource>();
+        public List<List<double>> buffers = new List<List<double>>();
+
         public YaoCeShuJuXianShi()
         {
             InitializeComponent();
-
             InitLedStatus();
             InitTimer_YaoCe();
             InitYaoCeChartDataSource();
@@ -488,6 +521,44 @@ namespace DataProcess.Controls
             // 创建新的日志文件
             Logger.GetInstance().NewFile();
             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "程序开始启动！");
+
+            AddVariable();
+            ResetAllTextEdit();
+        }
+
+        private void ResetAllTextEdit()
+        {
+            GenericFunction.reSetAllTextEdit(this.XiTong);
+            GenericFunction.reSetAllTextEdit(this.HuiLu);
+            GenericFunction.reSetAllTextEdit(this.FanKui_Ti);
+            GenericFunction.reSetAllTextEdit(this.FanKui_Tou);
+            GenericFunction.reSetAllTextEdit(this.DaoHangKuai_Ti);
+            GenericFunction.reSetAllTextEdit(this.DaoHangKuai_Tou);
+            GenericFunction.reSetAllTextEdit(this.DaoHangMan_Tou);
+            GenericFunction.reSetAllTextEdit(this.DaoHangMan_Tou);
+        }
+
+        private void ClearAllChart()
+        {
+            for(int i = 0; i < chartPointDataSources.Count(); i++)
+            {
+                chartPointDataSources[i].ClearPoints();
+            }
+
+            for (int i = 0; i < chartPointDataSources.Count(); i++)
+            {
+                chartPointDataSources[i].SetMaxCount(MainWindow.CHART_MAX_POINTS);
+            }
+        }
+
+        public void EnableLoadButton(bool e)
+        {
+            btnLoad.IsEnabled = e;
+        }
+
+        public void ClearChart()
+        {
+            this.ClearAllChart();
         }
 
         public void setImageUDP(ref Image image)
@@ -508,6 +579,174 @@ namespace DataProcess.Controls
             }
         }
 
+        private void AddVariable()
+        {
+            //系统
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_ZuoBiao_JingDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_ZuoBiao_WeiDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_ZuoBiao_GaoDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_SuDu_DongList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_SuDu_BeiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_SuDu_TianList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WxList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WyList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WzList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_FaSheXi_ZXGZList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_FaSheXi_XList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_FaSheXi_YList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_FaSheXi_ZList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_YuShiLuoDian_SheChengList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTong_YuShiLuoDian_ZList);
+
+            //DHK
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_JingDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_WeiDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_GaoDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Ti_SuDu_DongList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Ti_SuDu_BeiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Ti_SuDu_TianList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_JingDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_WeiDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_GaoDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_DongList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_BeiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_TianList);
+
+            //DHM
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_JingDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_WeiDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_GaoDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_DongList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_BeiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_TianList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_JingDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_WeiDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_GaoDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_DongList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_BeiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_TianList);
+
+            //系统即时
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_ZuoBiao_JingDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_ZuoBiao_WeiDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_ZuoBiao_GaoDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_SuDu_DongList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_SuDu_BeiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_SuDu_TianList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WxList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WyList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WzList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_GuoZai_ZhouXiangList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_GuoZai_FaXiangList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Tou_GuoZai_CeXiangList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_JingDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_WeiDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_GaoDuList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_SuDu_DongList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_SuDu_BeiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_SuDu_TianList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_JiaoSuDu_WxList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_JiaoSuDu_WyList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_JiaoSuDu_WzList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_ZhouXiangList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_FaXiangList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_CeXiangList);
+
+            //帧序号
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTongPanJu15List);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XiTongPanJu16List);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_HuiLuJianCeList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHK_TiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHM_TiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_TiList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHK_TouList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_DHM_TouList);
+            chartPointDataSources.Add(yaoCeChartDataSource.chart_XTJS_TouList);
+
+            //系统
+            buffers.Add(yaoceDisplay.XiTong_ZuoBiao_JingDu_buffer);
+            buffers.Add(yaoceDisplay.XiTong_ZuoBiao_WeiDu_buffer);
+            buffers.Add(yaoceDisplay.XiTong_ZuoBiao_GaoDu_buffer);
+            buffers.Add(yaoceDisplay.XiTong_SuDu_Dong_buffer);
+            buffers.Add(yaoceDisplay.XiTong_SuDu_Bei_buffer);
+            buffers.Add(yaoceDisplay.XiTong_SuDu_Tian_buffer);
+            buffers.Add(yaoceDisplay.XiTong_JiaoSuDu_Wx_buffer);
+            buffers.Add(yaoceDisplay.XiTong_JiaoSuDu_Wy_buffer);
+            buffers.Add(yaoceDisplay.XiTong_JiaoSuDu_Wz_buffer);
+            buffers.Add(yaoceDisplay.XiTong_FaSheXi_ZXGZ_buffer);
+            buffers.Add(yaoceDisplay.XiTong_FaSheXi_X_buffer);
+            buffers.Add(yaoceDisplay.XiTong_FaSheXi_Y_buffer);
+            buffers.Add(yaoceDisplay.XiTong_FaSheXi_Z_buffer);
+            buffers.Add(yaoceDisplay.XiTong_YuShiLuoDian_SheCheng_buffer);
+            buffers.Add(yaoceDisplay.XiTong_YuShiLuoDian_Z_buffer);
+
+            //DHK
+            buffers.Add(yaoceDisplay.DHKuaiSu_Ti_ZuoBiao_JingDu_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Ti_ZuoBiao_WeiDu_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Ti_ZuoBiao_GaoDu_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Ti_SuDu_Dong_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Ti_SuDu_Bei_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Ti_SuDu_Tian_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Tou_ZuoBiao_JingDu_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Tou_ZuoBiao_WeiDu_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Tou_ZuoBiao_GaoDu_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Tou_SuDu_Dong_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Tou_SuDu_Bei_buffer);
+            buffers.Add(yaoceDisplay.DHKuaiSu_Tou_SuDu_Tian_buffer);
+
+            //DHM
+            buffers.Add(yaoceDisplay.DHManSu_Ti_ZuoBiao_JingDu_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Ti_ZuoBiao_WeiDu_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Ti_ZuoBiao_GaoDu_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Ti_SuDu_Dong_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Ti_SuDu_Bei_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Ti_SuDu_Tian_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Tou_ZuoBiao_JingDu_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Tou_ZuoBiao_WeiDu_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Tou_ZuoBiao_GaoDu_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Tou_SuDu_Dong_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Tou_SuDu_Bei_buffer);
+            buffers.Add(yaoceDisplay.DHManSu_Tou_SuDu_Tian_buffer);
+
+            //系统即时
+            buffers.Add(yaoceDisplay.XTJS_Tou_ZuoBiao_JingDu_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_ZuoBiao_WeiDu_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_ZuoBiao_GaoDu_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_SuDu_Dong_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_SuDu_Bei_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_SuDu_Tian_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_JiaoSuDu_Wx_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_JiaoSuDu_Wy_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_JiaoSuDu_Wz_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_GuoZai_ZhouXiang_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_GuoZai_FaXiang_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_GuoZai_CeXiang_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_ZuoBiao_JingDu_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_ZuoBiao_WeiDu_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_ZuoBiao_GaoDu_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_SuDu_Dong_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_SuDu_Bei_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_SuDu_Tian_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_JiaoSuDu_Wx_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_JiaoSuDu_Wy_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_JiaoSuDu_Wz_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_GuoZai_ZhouXiang_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_GuoZai_FaXiang_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_GuoZai_CeXiang_buffer);
+
+            //帧序号
+            buffers.Add(yaoceDisplay.XiTongPanJu15_buffer);
+            buffers.Add(yaoceDisplay.XiTongPanJu16_buffer);
+            buffers.Add(yaoceDisplay.HuiLuJianCe_buffer);
+            buffers.Add(yaoceDisplay.DHK_Ti_buffer);
+            buffers.Add(yaoceDisplay.DHM_Ti_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Ti_buffer);
+            buffers.Add(yaoceDisplay.DHK_Tou_buffer);
+            buffers.Add(yaoceDisplay.DHM_Tou_buffer);
+            buffers.Add(yaoceDisplay.XTJS_Tou_buffer);
+
+        }
+
         private void InitLedStatus()
         {
             //SetLedStatus(ImageUDP, LED_STATUS.LED_GRAY);
@@ -525,13 +764,13 @@ namespace DataProcess.Controls
             UpdateLoadFileProgressTimer.Tick += timerUpdateLoadFileProgress_Tick;
 
             /*-------系统判决状态定时器--------------------------------------*/
-            UpdateXiTongStatusTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            UpdateXiTongStatusTimer.Interval = TimeSpan.FromMilliseconds(500);
             UpdateXiTongStatusTimer.Tick += timerUpdateXiTongStatus_Tick;
 
             timerOffLineXiTongStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
             timerOffLineXiTongStatus.Tick += timerOffLineXiTongStatus_Tick;
 
-            timerUpdateChart.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            timerUpdateChart.Interval = new TimeSpan(0, 0, 0, 0, 1000);
             timerUpdateChart.Tick += timerUpdateChart_Tick;
             /*---------------------------------------------------------*/
 
@@ -542,9 +781,6 @@ namespace DataProcess.Controls
             timerOfflineDHKStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
             this.timerOfflineDHKStatus.Tick += timerOfflineDHKStatus_Tick;
 
-            timerUpdateChart_DHK.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //this.timerUpdateChart_DHK.Tick += timerUpdateChart_DHK_Tick;
-
             /*--------系统导航快速弹头定时器-------------------------------------*/
             timerUpdateDHKStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
             timerUpdateDHKStatus_Tou.Tick += timerUpdateDHKStatus_Tou_Tick;
@@ -552,8 +788,6 @@ namespace DataProcess.Controls
             timerOfflineDHKStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 3000);
             this.timerOfflineDHKStatus_Tou.Tick += timerOfflineDHKStatus_Tou_Tick;
 
-            timerUpdateChart_DHK_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //this.timerUpdateChart_DHK_Tou.Tick += timerUpdateChart_DHK_Tou_Tick;
             /*---------------------------------------------------------*/
 
 
@@ -565,8 +799,6 @@ namespace DataProcess.Controls
             timerOfflineDHMStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
             this.timerOfflineDHMStatus.Tick += timerOfflineDHMStatus_Tick;
 
-            timerUpdateChart_DHM.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //this.timerUpdateChart_DHM.Tick += timerUpdateChart_DHM_Tick;
 
             /*--------系统导航慢速弹头定时器--------------------------------------*/
             timerUpdateDHMStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
@@ -575,8 +807,6 @@ namespace DataProcess.Controls
             timerOfflineDHMStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 3000);
             this.timerOfflineDHMStatus_Tou.Tick += timerOfflineDHMStatus_Tou_Tick;
 
-            timerUpdateChart_DHM_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            //this.timerUpdateChart_DHM_Tou.Tick += timerUpdateChart_DHM_Tick;
             /*---------------------------------------------------------*/
 
 
@@ -592,10 +822,7 @@ namespace DataProcess.Controls
             timerUpdateXiTongJiShiStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
             this.timerUpdateXiTongJiShiStatus.Tick += timerUpdateXiTongJiShiStatus_Tick;
 
-            timerUpdateChart_XiTongJiShi.Interval = new TimeSpan(0, 0, 0, 0, 3000);
-            //this.timerUpdateChart_XiTongJiShi.Tick += timerUpdateChart_XiTongJiShi_Tick;
-
-            timerOfflineXiTongJiShiStatus.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            timerOfflineXiTongJiShiStatus.Interval = new TimeSpan(0, 0, 0, 0, 3000);
             this.timerOfflineXiTongJiShiStatus.Tick += timerOfflineXiTongJiShiStatus_Tick;
 
 
@@ -603,16 +830,13 @@ namespace DataProcess.Controls
             timerUpdateXiTongJiShiStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
             this.timerUpdateXiTongJiShiStatus_Tou.Tick += timerUpdateXiTongJiShiStatus_Tou_Tick;
 
-            timerUpdateChart_XiTongJiShi_Tou.Interval = new TimeSpan(0, 0, 0, 0, 3000);
-            //this.timerUpdateChart_XiTongJiShi_Tou.Tick += timerUpdateChart_XiTongJiShi_Tou_Tick;
 
-            timerOfflineXiTongJiShiStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            timerOfflineXiTongJiShiStatus_Tou.Interval = new TimeSpan(0, 0, 0, 0, 3000);
             this.timerOfflineXiTongJiShiStatus_Tou.Tick += timerOfflineXiTongJiShiStatus_Tou_Tick;
             /*---------------------------------------------------------*/
 
 
             /*-------------------帧序号--------------------*/
-            timerChartUpdate_ZXH.Interval = new TimeSpan(0, 0, 0, 0, 100);
             /*---------------------------------------------------------*/
 
 
@@ -660,9 +884,9 @@ namespace DataProcess.Controls
             chart_DHKuaiSu_Ti_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_JingDuList;
             chart_DHKuaiSu_Ti_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_ZuoBiao_GaoDuList;
 
-            chart_DHKuaiSu_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_DongList;
-            chart_DHKuaiSu_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_BeiList;
-            chart_DHKuaiSu_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_SuDu_TianList;
+            chart_DHKuaiSu_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_SuDu_DongList;
+            chart_DHKuaiSu_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_SuDu_BeiList;
+            chart_DHKuaiSu_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_SuDu_TianList;
 
             chart_DHKuaiSu_Tou_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_WeiDuList;
             chart_DHKuaiSu_Tou_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Tou_ZuoBiao_JingDuList;
@@ -677,9 +901,9 @@ namespace DataProcess.Controls
             chart_DHManSu_Ti_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_JingDuList;
             chart_DHManSu_Ti_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_GaoDuList;
 
-            chart_DHManSu_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_DongList;
-            chart_DHManSu_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_BeiList;
-            chart_DHManSu_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_SuDu_TianList;
+            chart_DHManSu_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_DongList;
+            chart_DHManSu_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_BeiList;
+            chart_DHManSu_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_TianList;
 
             chart_DHManSu_Tou_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_WeiDuList;
             chart_DHManSu_Tou_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Tou_ZuoBiao_JingDuList;
@@ -694,17 +918,33 @@ namespace DataProcess.Controls
             chart_XTJS_Ti_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_JingDuList;
             chart_XTJS_Ti_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_ZuoBiao_GaoDuList;
 
-            chart_XTJS_Ti_JiaoSuDu_Wx.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WxList;
-            chart_XTJS_Ti_JiaoSuDu_Wy.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WyList;
-            chart_XTJS_Ti_JiaoSuDu_Wz.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WzList;
+            chart_XTJS_Ti_JiaoSuDu_Wx.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_JiaoSuDu_WxList;
+            chart_XTJS_Ti_JiaoSuDu_Wy.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_JiaoSuDu_WyList;
+            chart_XTJS_Ti_JiaoSuDu_Wz.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_JiaoSuDu_WzList;
 
-            chart_XTJS_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_DongList;
-            chart_XTJS_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_BeiList;
-            chart_XTJS_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_TianList;
+            chart_XTJS_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_SuDu_DongList;
+            chart_XTJS_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_SuDu_BeiList;
+            chart_XTJS_Ti_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_SuDu_TianList;
 
-            chart_XTJS_Tou_GuoZai_ZhouXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_ZhouXiangList;
-            chart_XTJS_Tou_GuoZai_FaXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_FaXiangList;
-            chart_XTJS_Tou_GuoZai_CeXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_CeXiangList;
+            chart_XTJS_Ti_GuoZai_ZhouXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_ZhouXiangList;
+            chart_XTJS_Ti_GuoZai_FaXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_FaXiangList;
+            chart_XTJS_Ti_GuoZai_CeXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Ti_GuoZai_CeXiangList;
+
+            chart_XTJS_Tou_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_ZuoBiao_WeiDuList;
+            chart_XTJS_Tou_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_ZuoBiao_JingDuList;
+            chart_XTJS_Tou_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_ZuoBiao_GaoDuList;
+
+            chart_XTJS_Tou_JiaoSuDu_Wx.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WxList;
+            chart_XTJS_Tou_JiaoSuDu_Wy.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WyList;
+            chart_XTJS_Tou_JiaoSuDu_Wz.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_JiaoSuDu_WzList;
+
+            chart_XTJS_Tou_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_DongList;
+            chart_XTJS_Tou_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_BeiList;
+            chart_XTJS_Tou_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_SuDu_TianList;
+
+            chart_XTJS_Tou_GuoZai_ZhouXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_GuoZai_ZhouXiangList;
+            chart_XTJS_Tou_GuoZai_FaXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_GuoZai_FaXiangList;
+            chart_XTJS_Tou_GuoZai_CeXiang.DataSource = yaoCeChartDataSource.chart_XTJS_Tou_GuoZai_CeXiangList;
 
             //帧序号
             chart_XiTongPanJu15.DataSource = yaoCeChartDataSource.chart_XiTongPanJu15List;
@@ -718,9 +958,28 @@ namespace DataProcess.Controls
             chart_XTJS_Tou.DataSource = yaoCeChartDataSource.chart_XTJS_TouList;
         }
 
+        //曲线定时器
         private void timerUpdateChart_Tick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            for(int i=0; i<buffers.Count(); i++)
+            {
+                if(buffers[i].Count > 0)
+                {
+                    //TemplateDraw(buffers.ElementAt(i), chartPointDataSources.ElementAt(i));
+                    buffers[i].ForEach(packet =>
+                    {
+                        chartPointDataSources[i].AddPoint(packet);
+                    });
+
+                }
+            }
+
+            for (int i = 0; i < chartPointDataSources.Count(); i++)
+            {
+                chartPointDataSources[i].NotifyDataChanged();
+            }
+
+            yaoceDisplay.Clear();
         }
 
         delegate void OnReadFileTimedEventCallBack(Object source, ElapsedEventArgs e);
@@ -775,7 +1034,7 @@ namespace DataProcess.Controls
                         UpdateLoadFileProgressTimer.Stop();
 
                         // 更新进度条
-                        load.setProgressBarValue(0, loadFileLength, loadFileLength);
+                        load.setProgressBarValue(0, loadFileLength, loadFileLength, "100%");
                         load.loadFileFinish();
 
                         // 日志打印
@@ -790,7 +1049,7 @@ namespace DataProcess.Controls
                         yaoceParser.Stop();
 
                         // 停止绘图定时器刷新数据
-                        // setTimerUpdateChartStatus(false);  
+                        setTimerUpdateChartStatus(false);  
 
                         // 关闭状态刷新定时器
                         setUpdateTimerStatus(false);
@@ -843,7 +1102,7 @@ namespace DataProcess.Controls
                     UpdateLoadFileProgressTimer.Stop();
 
                     // 更新进度条
-                    load.setProgressBarValue(0, loadFileLength, loadFileLength);
+                    load.setProgressBarValue(0, loadFileLength, loadFileLength, "100%");
                     load.loadFileFinish();
 
                     // 日志打印
@@ -858,7 +1117,7 @@ namespace DataProcess.Controls
                     yaoceParser.Stop();
 
                     // 停止绘图定时器刷新数据
-                    // setTimerUpdateChartStatus(false);  
+                     setTimerUpdateChartStatus(false);  
 
                     // 关闭状态刷新定时器
                     setUpdateTimerStatus(false);
@@ -873,11 +1132,9 @@ namespace DataProcess.Controls
 
             // 日志打印
             Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_INFO, "数据加载：" + percent.ToString("f2") + "%");
-            Console.WriteLine("{0}", percent.ToString("f2"));
 
             // 更新进度条
-            load.setProgressBarValue(0, loadFileLength, alreadReadFileLength);
-
+            load.setProgressBarValue(0, loadFileLength, alreadReadFileLength, percent.ToString("f2") + "%");
         }
 
 
@@ -891,6 +1148,7 @@ namespace DataProcess.Controls
                 // 填充实时数据
                 showSystemTimeStatus(ref sObject_XiTong);
                 setStatusOnOffLine(E_STATUSTYPE_XiTong, true);
+                GenericFunction.changeAllTextEditColor(this.XiTong);
             }
         }
 
@@ -912,6 +1170,8 @@ namespace DataProcess.Controls
                 // 填充实时数据
                 showDHKuaiSuTimeStatus_Ti(ref sObject_DHK_Ti);
                 setStatusOnOffLine(E_STATUSTYPE_DaoHangKuaiSu_Ti, true);
+
+                GenericFunction.changeAllTextEditColor(this.DaoHangKuai_Ti);
             }
         }
 
@@ -932,6 +1192,9 @@ namespace DataProcess.Controls
                 // 填充实时数据
                 showDHKuaiSuTimeStatus_Tou(ref sObject_DHK_Tou);
                 setStatusOnOffLine(E_STATUSTYPE_DaoHangKuaiSu_Tou, true);
+
+                GenericFunction.changeAllTextEditColor(this.DaoHangKuai_Tou);
+               // GenericFunction.changeAllTextEditColor(this.DaoHangKuai_Tou);
             }
         }
 
@@ -939,7 +1202,7 @@ namespace DataProcess.Controls
         private void timerOfflineDHKStatus_Tou_Tick(object sender, EventArgs e)
         {
             // 是否收到数据
-            bRecvStatusData_XiTong = false;
+            bRecvStatusData_DHK = false;
             setStatusOnOffLine(E_STATUSTYPE_DaoHangKuaiSu_Tou, false);
         }
         /*------------------------------------------------------------------*/
@@ -955,6 +1218,8 @@ namespace DataProcess.Controls
                 // 填充实时数据
                 showDHManSuTimeStatus_Ti(ref sObject_DHM_Ti);
                 setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Ti, true);
+                GenericFunction.changeAllTextEditColor(this.DaoHangMan_Ti);
+                GenericFunction.changeAllTextEditColor(this.DaoHangMan_Ti2);
             }
         }
 
@@ -975,6 +1240,8 @@ namespace DataProcess.Controls
                 // 填充实时数据
                 showDHManSuTimeStatus_Tou(ref sObject_DHM_Tou);
                 setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Tou, true);
+                GenericFunction.changeAllTextEditColor(this.DaoHangMan_Tou);
+                GenericFunction.changeAllTextEditColor(this.DaoHangMan_Tou2);
             }
         }
 
@@ -1041,6 +1308,8 @@ namespace DataProcess.Controls
                 // 填充实时数据
                 showXiTongJiShiTimeStatus_Ti(ref sObject_XTJS_Ti);
                 setStatusOnOffLine(E_STATUSTYPE_XiTongJiShi_Ti, true);
+                GenericFunction.changeAllTextEditColor(this.FanKui_Ti);
+                GenericFunction.changeAllTextEditColor(this.FanKui_Ti2);
             }
         }
 
@@ -1061,6 +1330,8 @@ namespace DataProcess.Controls
                 // 填充实时数据
                 showXiTongJiShiTimeStatus_Tou(ref sObject_XTJS_Tou);
                 setStatusOnOffLine(E_STATUSTYPE_XiTongJiShi_Ti, true);
+                GenericFunction.changeAllTextEditColor(this.FanKui_Tou);
+                GenericFunction.changeAllTextEditColor(this.FanKui_Tou2);
             }
         }
 
@@ -1076,7 +1347,7 @@ namespace DataProcess.Controls
 
 
         //更新定时器状态
-        private void setUpdateTimerStatus(bool bOpen)
+        public void setUpdateTimerStatus(bool bOpen)
         {
             if (bOpen)
             {
@@ -1105,7 +1376,7 @@ namespace DataProcess.Controls
         }
 
         //更新曲线定时器
-        private void setTimerUpdateChartStatus(bool bOpen)
+        public void setTimerUpdateChartStatus(bool bOpen)
         {
             if (bOpen)
             {
@@ -1177,7 +1448,7 @@ namespace DataProcess.Controls
                         yaoceParser.Stop();
 
                         // 关闭绘图定时器刷新数据
-                        //setTimerUpdateChartStatus(false); 
+                        setTimerUpdateChartStatus(false); 
 
                         // 关闭状态刷新定时器
                         setUpdateTimerStatus(false);
@@ -1228,10 +1499,10 @@ namespace DataProcess.Controls
             yaoceParser.Start();
 
             //清空所有的曲线
-            //clearAllChart(); 
+            ClearAllChart();
 
             // 启动绘图定时器刷新数据
-            //setTimerUpdateChartStatus(true);  
+            setTimerUpdateChartStatus(true);  
 
             // 刷新加载文件进度
             UpdateLoadFileProgressTimer.Start();
@@ -1241,20 +1512,14 @@ namespace DataProcess.Controls
 
 
             // NOTE 20200525 每次重新回放重置数据显示界面 
-            GenericFunction.reSetAllTextEdit(this.XiTong);
-            GenericFunction.reSetAllTextEdit(this.HuiLu);
-            GenericFunction.reSetAllTextEdit(this.FanKui_Ti);
-            GenericFunction.reSetAllTextEdit(this.FanKui_Tou);
-            GenericFunction.reSetAllTextEdit(this.DaoHangKuai_Ti);
-            GenericFunction.reSetAllTextEdit(this.DaoHangKuai_Tou);
-
-
+            ResetAllTextEdit();
 
             // 是否收到数据
             bRecvStatusData_XiTong = false;
             bRecvStatusData_HuiLuJianCe = false;
             bRecvStatusData_XTJS = false;
             bRecvStatusData_DHK = false;
+            bRecvStatusData_DHM = false;
         }
 
         //字符串转16进制字节数组
@@ -1688,10 +1953,10 @@ namespace DataProcess.Controls
                                                                                           // bit1 二级起爆2（1：闭合）
                                                                                           // 
             XiTong_2JiQiBao2.Text = (shuChuKaiGuanStatus2 >> 1 & 0x1) == 1 ? "闭合" : "断开"; //
-                                                                                          // 
-                                                                                          // bit2 bit3 参试状态（00：测试1，数据输出状态；01：测试2，低压输出状态；10：保留状态；11：正式实验）
-                                                                                          // 
-            tempValue = (byte)(shuChuKaiGuanStatus2 >> 2 & 0x3); //
+             // 
+            // bit2 bit3 参试状态（00：测试1，数据输出状态；01：测试2，低压输出状态；10：保留状态；11：正式实验）
+           // 
+            tempValue = (byte)(shuChuKaiGuanStatus2 >> 2 & 0x3); // ***
                                                                  // 
             tempSTR = ""; //
                           // 
@@ -3418,23 +3683,20 @@ namespace DataProcess.Controls
                         // 是否收到数据
                         bRecvStatusData_XiTong = true;
 
-                        // 绘图
-                        xiTong_CHART_ITEM_INDEX++;
-
                         // 添加系统坐标点集
-                        //AddXiTongZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
+                        AddXiTongZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
 
                         // 添加系统速度点集
-                        //AddXiTongSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); 
+                        AddXiTongSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); 
 
                         // 添加系统角速度点集
-                        //AddXiTongJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); 
+                        AddXiTongJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); 
 
                         // 添加系统发射系点集                                                          
-                        //AddXiTongFaSheXi(sObject.zhouXiangGuoZai, sObject.curFaSheXi_X, sObject.curFaSheXi_Y, sObject.curFaSheXi_Z);
+                        AddXiTongFaSheXi(sObject.zhouXiangGuoZai, sObject.curFaSheXi_X, sObject.curFaSheXi_Y, sObject.curFaSheXi_Z);
 
                         // 添加系统预示落点点集                                                                                      
-                        //AddXiTongYuShiLuoDian(sObject.yuShiLuoDianSheCheng, sObject.yuShiLuoDianZ); 
+                        AddXiTongYuShiLuoDian(sObject.yuShiLuoDianSheCheng, sObject.yuShiLuoDianZ); 
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3454,14 +3716,19 @@ namespace DataProcess.Controls
                         // 是否收到数据
                         bRecvStatusData_DHK = true;
 
-                        // 绘图 
-                        //dHKSubForm_Ti.setCHARTITEMINDEXAdd();
 
                         // 添加导航数据快速坐标点集
-                        //dHKSubForm_Ti.AddDHKuaiSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
+                        double jingDu = Convert.ToDouble(sObject.jingDu * Math.Pow(10, -7));
+                        double WeiDu = Convert.ToDouble(sObject.weiDu * Math.Pow(10, -7));
+                        double GaoDu = Convert.ToDouble(sObject.haiBaGaoDu * Math.Pow(10, -2));
+                        AddDHKTiZuoBiao(jingDu, WeiDu, GaoDu);
+
 
                         // 添加导航数据快速速度点集
-                        //dHKSubForm_Ti.AddDHKuaiSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu);
+                        double dong = Convert.ToDouble(sObject.dongXiangSuDu * Math.Pow(10, -2));
+                        double bei = Convert.ToDouble(sObject.beiXiangSuDu * Math.Pow(10, -2));
+                        double tian = Convert.ToDouble(sObject.tianXiangSuDu * Math.Pow(10, -2));
+                        AddDHKTiSuDu(dong, bei, tian);
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3481,14 +3748,17 @@ namespace DataProcess.Controls
                         // 是否收到数据
                         bRecvStatusData_DHK = true;
 
-                        // 绘图 
-                        //dHKSubForm_Tou.setCHARTITEMINDEXAdd();
-
                         // 添加导航数据快速坐标点集
-                        // dHKSubForm_Tou.AddDHKuaiSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
+                        double jingDu = Convert.ToDouble(sObject.jingDu * Math.Pow(10, -7));
+                        double WeiDu = Convert.ToDouble(sObject.weiDu * Math.Pow(10, -7));
+                        double GaoDu = Convert.ToDouble(sObject.haiBaGaoDu * Math.Pow(10, -2));
+                        AddDHKTouZuoBiao(jingDu, WeiDu, GaoDu);
 
                         // 添加导航数据快速速度点集
-                        //dHKSubForm_Tou.AddDHKuaiSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu);  
+                        double dong = Convert.ToDouble(sObject.dongXiangSuDu * Math.Pow(10, -2));
+                        double bei = Convert.ToDouble(sObject.beiXiangSuDu * Math.Pow(10, -2));
+                        double tian = Convert.ToDouble(sObject.tianXiangSuDu * Math.Pow(10, -2));
+                        AddDHKTouSuDu(dong, bei, tian);
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3508,14 +3778,17 @@ namespace DataProcess.Controls
                         // 是否收到数据
                         bRecvStatusData_DHM = true;
 
-                        // 绘图
-                        //dHMSubForm_Ti.setCHARTITEMINDEXAdd(); 
-
                         // 添加导航数据慢速坐标点集
-                        //dHMSubForm_Ti.AddDHManSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
+                        double jingDu = Convert.ToDouble(sObject.jingDu * Math.Pow(10, -7));
+                        double WeiDu = Convert.ToDouble(sObject.weiDu * Math.Pow(10, -7));
+                        double GaoDu = Convert.ToDouble(sObject.haiBaGaoDu * Math.Pow(10, -2));
+                        AddDHMTiZuoBiao(jingDu, WeiDu, GaoDu);
 
                         // 添加导航数据慢速速度点集
-                        //dHMSubForm_Ti.AddDHManSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu);
+                        double dong = Convert.ToDouble(sObject.dongXiangSuDu * Math.Pow(10, -2));
+                        double bei = Convert.ToDouble(sObject.beiXiangSuDu * Math.Pow(10, -2));
+                        double tian = Convert.ToDouble(sObject.tianXiangSuDu * Math.Pow(10, -2));
+                        AddDHMTiSuDu(dong, bei, tian);
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3535,14 +3808,17 @@ namespace DataProcess.Controls
                         // 是否收到数据
                         bRecvStatusData_DHM = true;
 
-                        // 绘图
-                        //dHMSubForm_Tou.setCHARTITEMINDEXAdd(); 
-
                         // 添加导航数据慢速坐标点集
-                        //dHMSubForm_Tou.AddDHManSuZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); 
+                        double jingDu = Convert.ToDouble(sObject.jingDu * Math.Pow(10, -7));
+                        double WeiDu = Convert.ToDouble(sObject.weiDu * Math.Pow(10, -7));
+                        double GaoDu = Convert.ToDouble(sObject.haiBaGaoDu * Math.Pow(10, -2));
+                        AddDHMTouZuoBiao(jingDu, WeiDu, GaoDu);
 
                         // 添加导航数据慢速速度点集                                                         
-                        //dHMSubForm_Tou.AddDHManSuSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); 
+                        double dong = Convert.ToDouble(sObject.dongXiangSuDu * Math.Pow(10, -2));
+                        double bei = Convert.ToDouble(sObject.beiXiangSuDu * Math.Pow(10, -2));
+                        double tian = Convert.ToDouble(sObject.tianXiangSuDu * Math.Pow(10, -2));
+                        AddDHMTouSuDu(dong, bei, tian);
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3583,16 +3859,17 @@ namespace DataProcess.Controls
                         //是否接收数据
                         bRecvStatusData_XTJS = true;
 
-                        // 绘图
-                        //xiTongJiShiSubForm_Ti.setCHARTITEMINDEXAdd();  
+                        double jingDu = Convert.ToDouble(sObject.jingDu * Math.Pow(10, -7));
+                        double WeiDu = Convert.ToDouble(sObject.weiDu * Math.Pow(10, -7));
+                        double GaoDu = Convert.ToDouble(sObject.haiBaGaoDu * Math.Pow(10, -2));
+                        double dong = Convert.ToDouble(sObject.dongXiangSuDu * Math.Pow(10, -2));
+                        double bei = Convert.ToDouble(sObject.beiXiangSuDu * Math.Pow(10, -2));
+                        double tian = Convert.ToDouble(sObject.tianXiangSuDu * Math.Pow(10, -2));
 
-                        // xiTongJiShiSubForm_Ti.AddXiTongJiShiZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
-                        // 
-                        // xiTongJiShiSubForm_Ti.AddXiTongJiShiSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
-                        // 
-                        //xiTongJiShiSubForm_Ti.AddXiTongJiShiJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); //
-                        // 
-                        // xiTongJiShiSubForm_Ti.AddXiTongJiShiGuoZai(sObject.zhouXiangGuoZai, sObject.faXiangGuoZai, sObject.ceXiangGuoZai); //
+                        AddXTJSTiZuoBiao(jingDu, WeiDu, GaoDu); //
+                        AddXTJSTiSuDu(dong, bei, tian); //
+                        AddXTJSTiJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); //
+                        AddXTJSTiGuoZai(sObject.zhouXiangGuoZai, sObject.faXiangGuoZai, sObject.ceXiangGuoZai); //
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3612,17 +3889,17 @@ namespace DataProcess.Controls
                         //是否接收数据
                         bRecvStatusData_XTJS = true;
 
-                        // 绘图
-                        //xiTongJiShiSubForm_Tou.setCHARTITEMINDEXAdd(); 
+                        double jingDu = Convert.ToDouble(sObject.jingDu * Math.Pow(10, -7));
+                        double WeiDu = Convert.ToDouble(sObject.weiDu * Math.Pow(10, -7));
+                        double GaoDu = Convert.ToDouble(sObject.haiBaGaoDu * Math.Pow(10, -2));
+                        double dong = Convert.ToDouble(sObject.dongXiangSuDu * Math.Pow(10, -2));
+                        double bei = Convert.ToDouble(sObject.beiXiangSuDu * Math.Pow(10, -2));
+                        double tian = Convert.ToDouble(sObject.tianXiangSuDu * Math.Pow(10, -2));
 
-
-                        //xiTongJiShiSubForm_Tou.AddXiTongJiShiZuoBiao(sObject.jingDu, sObject.weiDu, sObject.haiBaGaoDu); //
-                        //                                                                                                 // 
-                        //xiTongJiShiSubForm_Tou.AddXiTongJiShiSuDu(sObject.dongXiangSuDu, sObject.beiXiangSuDu, sObject.tianXiangSuDu); //
-                        //                                                                                                               // 
-                        //xiTongJiShiSubForm_Tou.AddXiTongJiShiJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); //
-                        //                                                                                                           // 
-                        //xiTongJiShiSubForm_Tou.AddXiTongJiShiGuoZai(sObject.zhouXiangGuoZai, sObject.faXiangGuoZai, sObject.ceXiangGuoZai); 
+                        AddXTJSTouZuoBiao(jingDu, WeiDu, GaoDu); //
+                        AddXTJSTouSuDu(dong, bei, tian); //
+                        AddXTJSTouJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu); //
+                        AddXTJSTouGuoZai(sObject.zhouXiangGuoZai, sObject.faXiangGuoZai, sObject.ceXiangGuoZai); //
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3633,7 +3910,7 @@ namespace DataProcess.Controls
                         FRAME_PROPERTY sObject = Marshal.PtrToStructure<FRAME_PROPERTY>(ptr);
 
                         // 缓存状态数据
-                        //frameInfoForm.addFrameInfo(ref sObject); 
+                        this.AddFRAMEINFO(ref sObject);
 
                         Marshal.FreeHGlobal(ptr);
                     }
@@ -3658,11 +3935,215 @@ namespace DataProcess.Controls
             return hwnd;
         }
 
-        //清除曲线内容
-        private void clearAllChart()
+        private void AddXiTongZuoBiao(double JingDu,double WeiDu,double GaoDu)
         {
-            xiTong_CHART_ITEM_INDEX = 0; //
+            yaoceDisplay.XiTong_ZuoBiao_JingDu_buffer.Add(JingDu);
+            yaoceDisplay.XiTong_ZuoBiao_WeiDu_buffer.Add(WeiDu);
+            yaoceDisplay.XiTong_ZuoBiao_GaoDu_buffer.Add(GaoDu);
         }
 
+        private void AddXiTongSuDu(double Dong,double Bei,double Tian)
+        {
+            yaoceDisplay.XiTong_SuDu_Dong_buffer.Add(Dong);
+            yaoceDisplay.XiTong_SuDu_Bei_buffer.Add(Bei);
+            yaoceDisplay.XiTong_SuDu_Tian_buffer.Add(Tian);
+        }
+
+        private void AddXiTongJiaoSuDu(double Wx,double Wy,double Wz)
+        {
+            yaoceDisplay.XiTong_JiaoSuDu_Wx_buffer.Add(Wx);
+            yaoceDisplay.XiTong_JiaoSuDu_Wy_buffer.Add(Wy);
+            yaoceDisplay.XiTong_JiaoSuDu_Wz_buffer.Add(Wz);
+
+        }
+
+        private void AddXiTongFaSheXi(double ZXGZ,double X,double Y,double Z)
+        {
+            yaoceDisplay.XiTong_FaSheXi_ZXGZ_buffer.Add(ZXGZ);
+            yaoceDisplay.XiTong_FaSheXi_X_buffer.Add(X);
+            yaoceDisplay.XiTong_FaSheXi_Y_buffer.Add(Y);
+            yaoceDisplay.XiTong_FaSheXi_Z_buffer.Add(Z);
+        }
+
+        private void AddXiTongYuShiLuoDian(double SheCheng,double Z)
+        {
+            yaoceDisplay.XiTong_YuShiLuoDian_SheCheng_buffer.Add(SheCheng);
+            yaoceDisplay.XiTong_YuShiLuoDian_Z_buffer.Add(Z);
+
+        }
+
+        private void AddDHKTiZuoBiao(double JingDu,double WeiDu,double GaoDu)
+        {
+            yaoceDisplay.DHKuaiSu_Ti_ZuoBiao_JingDu_buffer.Add(JingDu);
+            yaoceDisplay.DHKuaiSu_Ti_ZuoBiao_WeiDu_buffer.Add(WeiDu);
+            yaoceDisplay.DHKuaiSu_Ti_ZuoBiao_GaoDu_buffer.Add(GaoDu);
+        }
+
+        private void AddDHKTiSuDu(double Dong,double Bei,double Tian)
+        {
+            yaoceDisplay.DHKuaiSu_Ti_SuDu_Dong_buffer.Add(Dong);
+            yaoceDisplay.DHKuaiSu_Ti_SuDu_Bei_buffer.Add(Bei);
+            yaoceDisplay.DHKuaiSu_Ti_SuDu_Tian_buffer.Add(Tian);
+        }
+
+        private void AddDHKTouZuoBiao(double JingDu, double WeiDu, double GaoDu)
+        {
+            yaoceDisplay.DHKuaiSu_Tou_ZuoBiao_JingDu_buffer.Add(JingDu);
+            yaoceDisplay.DHKuaiSu_Tou_ZuoBiao_WeiDu_buffer.Add(WeiDu);
+            yaoceDisplay.DHKuaiSu_Tou_ZuoBiao_GaoDu_buffer.Add(GaoDu);
+        }
+
+        private void AddDHKTouSuDu(double Dong, double Bei, double Tian)
+        {
+            yaoceDisplay.DHKuaiSu_Tou_SuDu_Dong_buffer.Add(Dong);
+            yaoceDisplay.DHKuaiSu_Tou_SuDu_Bei_buffer.Add(Bei);
+            yaoceDisplay.DHKuaiSu_Tou_SuDu_Tian_buffer.Add(Tian);
+        }
+
+        private void AddDHMTiZuoBiao(double JingDu, double WeiDu, double GaoDu)
+        {
+            yaoceDisplay.DHManSu_Ti_ZuoBiao_JingDu_buffer.Add(JingDu);
+            yaoceDisplay.DHManSu_Ti_ZuoBiao_WeiDu_buffer.Add(WeiDu);
+            yaoceDisplay.DHManSu_Ti_ZuoBiao_GaoDu_buffer.Add(GaoDu);
+        }
+
+        private void AddDHMTiSuDu(double Dong, double Bei, double Tian)
+        {
+            yaoceDisplay.DHManSu_Ti_SuDu_Dong_buffer.Add(Dong);
+            yaoceDisplay.DHManSu_Ti_SuDu_Bei_buffer.Add(Bei);
+            yaoceDisplay.DHManSu_Ti_SuDu_Tian_buffer.Add(Tian);
+        }
+
+        private void AddDHMTouZuoBiao(double JingDu, double WeiDu, double GaoDu)
+        {
+            yaoceDisplay.DHManSu_Tou_ZuoBiao_JingDu_buffer.Add(JingDu);
+            yaoceDisplay.DHManSu_Tou_ZuoBiao_WeiDu_buffer.Add(WeiDu);
+            yaoceDisplay.DHManSu_Tou_ZuoBiao_GaoDu_buffer.Add(GaoDu);
+        }
+
+        private void AddDHMTouSuDu(double Dong, double Bei, double Tian)
+        {
+            yaoceDisplay.DHManSu_Tou_SuDu_Dong_buffer.Add(Dong);
+            yaoceDisplay.DHManSu_Tou_SuDu_Bei_buffer.Add(Bei);
+            yaoceDisplay.DHManSu_Tou_SuDu_Tian_buffer.Add(Tian);
+        }
+
+        private void AddXTJSTiZuoBiao(double JingDu, double WeiDu, double GaoDu)
+        {
+            yaoceDisplay.XTJS_Ti_ZuoBiao_JingDu_buffer.Add(JingDu);
+            yaoceDisplay.XTJS_Ti_ZuoBiao_WeiDu_buffer.Add(WeiDu);
+            yaoceDisplay.XTJS_Ti_ZuoBiao_GaoDu_buffer.Add(GaoDu);
+        }
+
+        private void AddXTJSTiSuDu(double Dong,double Bei,double Tian)
+        {
+            yaoceDisplay.XTJS_Ti_SuDu_Dong_buffer.Add(Dong);
+            yaoceDisplay.XTJS_Ti_SuDu_Bei_buffer.Add(Bei);
+            yaoceDisplay.XTJS_Ti_SuDu_Tian_buffer.Add(Tian);
+        }
+
+        private void AddXTJSTiJiaoSuDu(double Wx,double Wy,double Wz)
+        {
+            yaoceDisplay.XTJS_Ti_JiaoSuDu_Wx_buffer.Add(Wx);
+            yaoceDisplay.XTJS_Ti_JiaoSuDu_Wy_buffer.Add(Wy);
+            yaoceDisplay.XTJS_Ti_JiaoSuDu_Wz_buffer.Add(Wz);
+        }
+
+        private void AddXTJSTiGuoZai(double ZX,double FX,double CX)
+        {
+            yaoceDisplay.XTJS_Ti_GuoZai_ZhouXiang_buffer.Add(ZX);
+            yaoceDisplay.XTJS_Ti_GuoZai_FaXiang_buffer.Add(FX);
+            yaoceDisplay.XTJS_Ti_GuoZai_CeXiang_buffer.Add(CX);
+        }
+
+        private void AddXTJSTouZuoBiao(double JingDu, double WeiDu, double GaoDu)
+        {
+            yaoceDisplay.XTJS_Tou_ZuoBiao_JingDu_buffer.Add(JingDu);
+            yaoceDisplay.XTJS_Tou_ZuoBiao_WeiDu_buffer.Add(WeiDu);
+            yaoceDisplay.XTJS_Tou_ZuoBiao_GaoDu_buffer.Add(GaoDu);
+        }
+
+        private void AddXTJSTouSuDu(double Dong, double Bei, double Tian)
+        {
+            yaoceDisplay.XTJS_Tou_SuDu_Dong_buffer.Add(Dong);
+            yaoceDisplay.XTJS_Tou_SuDu_Bei_buffer.Add(Bei);
+            yaoceDisplay.XTJS_Tou_SuDu_Tian_buffer.Add(Tian);
+        }
+
+        private void AddXTJSTouJiaoSuDu(double Wx, double Wy, double Wz)
+        {
+            yaoceDisplay.XTJS_Tou_JiaoSuDu_Wx_buffer.Add(Wx);
+            yaoceDisplay.XTJS_Tou_JiaoSuDu_Wy_buffer.Add(Wy);
+            yaoceDisplay.XTJS_Tou_JiaoSuDu_Wz_buffer.Add(Wz);
+        }
+
+        private void AddXTJSTouGuoZai(double ZX, double FX, double CX)
+        {
+            yaoceDisplay.XTJS_Tou_GuoZai_ZhouXiang_buffer.Add(ZX);
+            yaoceDisplay.XTJS_Tou_GuoZai_FaXiang_buffer.Add(FX);
+            yaoceDisplay.XTJS_Tou_GuoZai_CeXiang_buffer.Add(CX);
+        }
+
+        private void AddFRAMEINFO(ref FRAME_PROPERTY sObject)
+        {
+            switch (sObject.CanId)
+            {
+                // 系统判据状态
+                case frameType_systemStatus_1:
+                    {
+                        yaoceDisplay.XiTongPanJu15_buffer.Add(sObject.frameNo); 
+                    }
+                    break; 
+
+            // 系统判据状态 0x16(中间存在两种情况，需要通过帧类型来做进一步的区分)
+                case frameType_systemStatus_2:
+                    {
+                        if (sObject.frameType == frameType_XTPJFK)
+                        {
+                            yaoceDisplay.XiTongPanJu16_buffer.Add(sObject.frameNo); //
+                                                                                                                       // 
+                        }
+                        else if (sObject.frameType == frameType_HLJCFK)
+                        {
+                            yaoceDisplay.HuiLuJianCe_buffer.Add(sObject.frameNo); //                                                                                        // 
+                        }
+                    }
+                    break; 
+                case frameType_daoHangKuaiSu_Ti:
+                    yaoceDisplay.DHK_Ti_buffer.Add(sObject.frameNo);
+                    break; 
+
+                case frameType_daoHangKuaiSu_Tou:
+                    yaoceDisplay.DHK_Tou_buffer.Add(sObject.frameNo); 
+                    break; 
+
+                case frameType_daoHangManSu_Ti:
+                    yaoceDisplay.DHM_Ti_buffer.Add(sObject.frameNo); 
+                    break;  
+
+                case frameType_daoHangManSu_Tou:
+                    yaoceDisplay.DHM_Tou_buffer.Add(sObject.frameNo);
+                    break; 
+
+                case frameType_XiTongJiShi_Ti:
+                    yaoceDisplay.XTJS_Ti_buffer.Add(sObject.frameNo); 
+                    break; 
+
+                case frameType_XiTongJiShi_Tou:
+                    yaoceDisplay.XTJS_Tou_buffer.Add(sObject.frameNo);
+                    break; 
+
+                default:
+                    break;
+            }
+        }
+
+        private void TemplateDraw(List<double> packets, ChartPointDataSource Points)
+        {
+            packets.ForEach(packet =>
+            {
+                Points.AddPoint(packet);
+            });
+        }
     }
 }

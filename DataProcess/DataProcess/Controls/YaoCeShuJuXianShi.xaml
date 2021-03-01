@@ -286,7 +286,7 @@
                                 <dxc:ChartControl Margin="2,2,2,2">
                                     <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
                                         <dxc:XYDiagram2D.AxisY>
-                                            <dxc:AxisY2D>
+                                            <dxc:AxisY2D WholeRange="{x:Null}">
                                                 <dxc:AxisY2D.Title>
                                                     <dxc:AxisTitle Content="轴向过载" Visible="True" FontSize="15" />
                                                 </dxc:AxisY2D.Title>
@@ -355,12 +355,11 @@
                                     <dxc:Legend/>
                                 </dxc:ChartControl.Legend>
                                 <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="True" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D WholeRange="{x:Null}" VisualRange="{x:Null}" GridLinesVisible="False" GridLinesMinorVisible="False" Interlaced="False"/>
+                                    </dxc:XYDiagram2D.AxisX>
                                     <dxc:XYDiagram2D.AxisY>
-                                        <dxc:AxisY2D>
-                                            <dxc:AxisY2D.WholeRange>
-                                                <dxc:Range MaxValue="1"  MinValue="0"/>
-                                            </dxc:AxisY2D.WholeRange>
-                                        </dxc:AxisY2D>
+                                        <dxc:AxisY2D WholeRange="{x:Null}"/>
                                     </dxc:XYDiagram2D.AxisY>
                                     <dxc:LineSeries2D  DisplayName="预示落点射程" LabelsVisibility="False" MarkerVisible="False" x:Name="chart_XiTong_YuShiLuoDian_SheCheng" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y">
                                         <dxc:LineSeries2D.LineStyle>
@@ -426,7 +425,7 @@
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
                                                 <dxc:XYDiagram2D.AxisY>
-                                                    <dxc:AxisY2D>
+                                                    <dxc:AxisY2D WholeRange="{x:Null}">
                                                         <dxc:AxisY2D.Title>
                                                             <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
                                                         </dxc:AxisY2D.Title>
@@ -738,7 +737,7 @@
                                         <cust:LabelTextBox Label="北向速度：" x:Name="DHManSu_Ti_BeiXiangSuDu"/>
                                         <cust:LabelTextBox Label="天向速度：" x:Name="DHManSu_Ti_TianXiangSuDu"/>
                                     </UniformGrid>
-                                    <Grid Grid.Row="1">
+                                    <Grid Grid.Row="1" x:Name="DaoHangMan_Ti2">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
@@ -929,7 +928,7 @@
                                         <cust:LabelTextBox Label="北向速度：" x:Name="DHManSu_Tou_BeiXiangSuDu"/>
                                         <cust:LabelTextBox Label="天向速度：" x:Name="DHManSu_Tou_TianXiangSuDu"/>
                                     </UniformGrid>
-                                    <Grid Grid.Row="1">
+                                    <Grid Grid.Row="1" x:Name="DaoHangMan_Tou2">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
@@ -1116,7 +1115,7 @@
                                         <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Y"/>
                                         <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Z"/>
                                     </UniformGrid>
-                                    <Grid Grid.Row="1">
+                                    <Grid Grid.Row="1" x:Name="FanKui_Ti2">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
@@ -1139,8 +1138,8 @@
                                     </Grid>
                                 </Grid>
                             </ScrollViewer>
-                            
-                            
+
+
                             <dx:DXTabControl Grid.Column="1">
                                 <dx:DXTabItem Header="坐标">
                                     <UniformGrid Rows="3">
@@ -1250,14 +1249,14 @@
                                     <UniformGrid Rows="3">
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                <dxc:XYDiagram2D.AxisX>
+                                                    <dxc:AxisX2D VisualRange="{x:Null}" WholeRange="{x:Null}"/>
+                                                </dxc:XYDiagram2D.AxisX>
                                                 <dxc:XYDiagram2D.AxisY>
-                                                    <dxc:AxisY2D>
+                                                    <dxc:AxisY2D WholeRange="{x:Null}">
                                                         <dxc:AxisY2D.Title>
                                                             <dxc:AxisTitle Content="X轴角速度" Visible="True" FontSize="15" />
                                                         </dxc:AxisY2D.Title>
-                                                        <dxc:AxisY2D.WholeRange>
-                                                            <dxc:Range MaxValue="0.9"  MinValue="0"/>
-                                                        </dxc:AxisY2D.WholeRange>
                                                     </dxc:AxisY2D>
                                                 </dxc:XYDiagram2D.AxisY>
                                                 <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_XTJS_Ti_JiaoSuDu_Wx" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
@@ -1270,13 +1269,10 @@
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
                                                 <dxc:XYDiagram2D.AxisY>
-                                                    <dxc:AxisY2D>
+                                                    <dxc:AxisY2D WholeRange="{x:Null}">
                                                         <dxc:AxisY2D.Title>
                                                             <dxc:AxisTitle Content="Y轴角速度" Visible="True" FontSize="15" />
                                                         </dxc:AxisY2D.Title>
-                                                        <dxc:AxisY2D.WholeRange>
-                                                            <dxc:Range MaxValue="0.9"  MinValue="0"/>
-                                                        </dxc:AxisY2D.WholeRange>
                                                     </dxc:AxisY2D>
                                                 </dxc:XYDiagram2D.AxisY>
                                                 <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_XTJS_Ti_JiaoSuDu_Wy" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
@@ -1289,13 +1285,10 @@
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
                                                 <dxc:XYDiagram2D.AxisY>
-                                                    <dxc:AxisY2D>
+                                                    <dxc:AxisY2D WholeRange="{x:Null}">
                                                         <dxc:AxisY2D.Title>
                                                             <dxc:AxisTitle Content="Z轴角速度" Visible="True" FontSize="15" />
                                                         </dxc:AxisY2D.Title>
-                                                        <dxc:AxisY2D.WholeRange>
-                                                            <dxc:Range MaxValue="0.9"  MinValue="0"/>
-                                                        </dxc:AxisY2D.WholeRange>
                                                     </dxc:AxisY2D>
                                                 </dxc:XYDiagram2D.AxisY>
                                                 <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_XTJS_Ti_JiaoSuDu_Wz" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
@@ -1403,7 +1396,7 @@
                                         <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Y"/>
                                         <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Z"/>
                                     </UniformGrid>
-                                    <Grid Grid.Row="1">
+                                    <Grid Grid.Row="1" x:Name="FanKui_Tou2">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
@@ -1522,7 +1515,7 @@
                                                         </dxc:AxisY2D.Title>
                                                     </dxc:AxisY2D>
                                                 </dxc:XYDiagram2D.AxisY>
-                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_XTJS_Tou_SuDu_Touan" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_XTJS_Tou_SuDu_Tian" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
                                                     <dxc:LineSeries2D.LineStyle>
                                                         <dxc:LineStyle LineJoin="Bevel"/>
                                                     </dxc:LineSeries2D.LineStyle>

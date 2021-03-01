@@ -128,6 +128,7 @@
       <DependentUpon>YaoCeShuJuXianShi.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControl\LabelTextBox.cs" />
+    <Compile Include="CustomControl\ProgressbarToNumber.cs" />
     <Compile Include="DataBase\CopyMe.SQLite.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +202,10 @@
     <Page Include="CustomControl\LabelTextBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControl\ProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DataConvertWindow.xaml">
       <SubType>Designer</SubType>

@@ -17,6 +17,7 @@
                 VerticalContentAlignment="Center"
                    
                 Foreground="{Binding Foreground,RelativeSource={RelativeSource TemplatedParent}}"
+                Background="{Binding Background,RelativeSource={RelativeSource TemplatedParent}}"
                 TextWrapping="{Binding TextWrapping,RelativeSource={RelativeSource TemplatedParent}}"
                 
                 HorizontalScrollBarVisibility="{Binding HorizontalScrollBarVisibility,RelativeSource={RelativeSource TemplatedParent}}"

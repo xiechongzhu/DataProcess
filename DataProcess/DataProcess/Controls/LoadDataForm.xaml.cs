@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using System.Drawing;
+using DevExpress.Emf;
 
 namespace DataProcess.Controls
 {
@@ -52,7 +54,7 @@ namespace DataProcess.Controls
         {
             InitializeComponent();
             setBtnsEnable(true);
-            setProgressBarValue(0, 100, 0);
+            setProgressBarValue(0, 100, 0,"0");
         }
 
         private void SimpleButton_Click(object sender, RoutedEventArgs e)
@@ -75,11 +77,13 @@ namespace DataProcess.Controls
         }
  
         /// setProgressBarValue
-        public void setProgressBarValue(double minValue, double maxValue, double curValue)
+        public void setProgressBarValue(double minValue, double maxValue, double curValue,string p)
         {
             progressBar1.Minimum = (int)minValue;  
             progressBar1.Maximum = (int)maxValue;  
-            progressBar1.Value = (int)curValue; 
+            progressBar1.Value = (int)curValue;
+            textBlock.Text = p;
+            
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -178,7 +182,7 @@ namespace DataProcess.Controls
             setBtnsEnable(false); 
 
             // 更新进度 
-            setProgressBarValue(0, 100, 0); 
+            setProgressBarValue(0, 100, 0,"0"); 
         }
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
