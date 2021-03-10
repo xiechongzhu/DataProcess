@@ -426,7 +426,7 @@ namespace DataProcess
                                     break;
                                 case ChannelType.ChannelTemperature1:
                                     value = channelData.Data() * ratios.Temperature1Temp + ratios.Temperature1TempFix;
-                                    strChannelName = "级间断内窗口加强筋上温度传感器";
+                                    strChannelName = "级间断内窗口加强筋上温度传感器T5";
                                     break;
                                 case ChannelType.ChannelTemperature2:
                                     value = channelData.Data() * ratios.Temperature2Temp + ratios.Temperature2TempFix;

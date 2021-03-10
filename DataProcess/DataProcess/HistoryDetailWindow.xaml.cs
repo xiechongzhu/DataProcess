@@ -556,6 +556,16 @@ namespace DataProcess
             }
         }
 
+        private void FlowLayoutControl_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            
+        }
+
+        private void DXTabItem_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+
+        }
+
         private void DrawAngelData(List<AngleData> packets)
         {
             packets.ForEach(packet =>
