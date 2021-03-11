@@ -53,6 +53,10 @@ namespace DataProcess.GMap
             RefreshTimer.Tick += RefreshTimer_Tick;
             RefreshTimer.Interval = TimeSpan.FromMilliseconds(500);
             RefreshTimer.Start();
+
+            //AddPoint(new PointLatLng(30.67, 104.07));
+            //AddPoint(new PointLatLng(29.57, 106.55));
+            //AddPoint(new PointLatLng(34.45, 107.4));
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
@@ -188,15 +192,15 @@ namespace DataProcess.GMap
                         new Point(controlPoints[i + 1].X, controlPoints[i + 1].Y));
                 }
                 drawingContext.DrawImage(RockBitmap, new Rect(new Point(controlPoints.Last().X - 10, controlPoints.Last().Y - 15), new Size(20, 30)));
-                String strText = String.Format("坐标:{0:F},{1:F}\n高度:{2:F}米", Points.Last().Lng, Points.Last().Lat, FlyHeight);
+                String strText = String.Format("经度:{0:F}\n纬度:{1:F}\n高度:{2:F}米", Points.Last().Lng, Points.Last().Lat, FlyHeight);
                 FormattedText formattedText = new FormattedText(
                 strText,
                 CultureInfo.GetCultureInfo("zh-cn"),
                 FlowDirection.LeftToRight,
                 new Typeface("微软雅黑"),
-                12,
+                14,
                 Brushes.Black, 0);
-                drawingContext.DrawText(formattedText, new Point(controlPoints.Last().X - formattedText.Width / 2, controlPoints.Last().Y - formattedText.Height));
+                drawingContext.DrawText(formattedText, new Point(controlPoints.Last().X - formattedText.Width / 2, controlPoints.Last().Y - formattedText.Height - 20));
             }
         }
 

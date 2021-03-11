@@ -236,40 +236,40 @@ namespace DataProcess
                 GestureControlLowPresureFix = double.Parse(editGestureControlLowPresureFix.Text),
 
                 Shake1 = double.Parse(editShake1.Text),
-                Shake1Fix = double.Parse(editShake1.Text),
+                Shake1Fix = double.Parse(editShake1Fix.Text),
 
                 Shake2 = double.Parse(editShake2.Text),
-                Shake2Fix = double.Parse(editShake2.Text),
+                Shake2Fix = double.Parse(editShake2Fix.Text),
 
                 Shake3 = double.Parse(editShake3.Text),
-                Shake3Fix = double.Parse(editShake3.Text),
+                Shake3Fix = double.Parse(editShake3Fix.Text),
 
                 Shake4 = double.Parse(editShake4.Text),
-                Shake4Fix = double.Parse(editShake4.Text),
+                Shake4Fix = double.Parse(editShake4Fix.Text),
 
                 Shake5 = double.Parse(editShake5.Text),
-                Shake5Fix = double.Parse(editShake5.Text),
+                Shake5Fix = double.Parse(editShake5Fix.Text),
 
                 Shake6 = double.Parse(editShake6.Text),
-                Shake6Fix = double.Parse(editShake6.Text),
+                Shake6Fix = double.Parse(editShake6Fix.Text),
 
                 Shake7 = double.Parse(editShake7.Text),
-                Shake7Fix = double.Parse(editShake7.Text),
+                Shake7Fix = double.Parse(editShake7Fix.Text),
 
                 Shake8 = double.Parse(editShake8.Text),
-                Shake8Fix = double.Parse(editShake8.Text),
+                Shake8Fix = double.Parse(editShake8Fix.Text),
 
                 Shake9 = double.Parse(editShake9.Text),
-                Shake9Fix = double.Parse(editShake9.Text),
+                Shake9Fix = double.Parse(editShake9Fix.Text),
 
                 Shake10 = double.Parse(editShake10.Text),
-                Shake10Fix = double.Parse(editShake10.Text),
+                Shake10Fix = double.Parse(editShake10Fix.Text),
 
                 Shake11 = double.Parse(editShake11.Text),
-                Shake11Fix = double.Parse(editShake11.Text),
+                Shake11Fix = double.Parse(editShake11Fix.Text),
 
                 Shake12 = double.Parse(editShake12.Text),
-                Shake12Fix = double.Parse(editShake12.Text),
+                Shake12Fix = double.Parse(editShake12Fix.Text),
 
                 Shake1X = double.Parse(editShake1X.Text),
                 Shake1XFix = double.Parse(editShake1XFix.Text),
