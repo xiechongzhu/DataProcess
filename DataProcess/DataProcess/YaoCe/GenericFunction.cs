@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using ScoreTools.CustomControl;
+using DataProcess.CustomControl;
 using DevExpress.Xpf.Editors;
+using DataProcess.Controls;
 
 namespace DataProcess
 {
@@ -64,29 +65,33 @@ namespace DataProcess
         public static void textEditColorChange(UIElement ctls)
         {
             if (ctls is LabelTextBox)
-            {
+            {         
                 LabelTextBox lab = (LabelTextBox)ctls;
-                if (lab.Text.Contains("正常") || lab.Text.Contains("有效"))
+                if ((lab.Name != "XiTong_NeiBuKongZhiDian") && (lab.Name != "XiTong_GongLvDian"))
                 {
-                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 0, 255, 0);
-                    System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
-                    System.Windows.Media.Brush brushes = solidColorBrush;
-                    lab.Background = brushes; //     // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
+                    if (lab.Text.Contains("正常") || lab.Text.Contains("有效"))
+                    {
+                        System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 0, 255, 0);
+                        System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
+                        System.Windows.Media.Brush brushes = solidColorBrush;
+                        lab.Background = brushes; //     // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
+                    }
+                    else if (lab.Text.Contains("异常") || lab.Text.Contains("无效"))
+                    {
+                        System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 0, 0);
+                        System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
+                        System.Windows.Media.Brush brushes = solidColorBrush;
+                        lab.Background = brushes; //     // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
+                    }
+                    else
+                    {
+                        System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 255, 255);
+                        System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
+                        System.Windows.Media.Brush brushes = solidColorBrush;
+                        lab.Background = brushes; // // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
+                    }
                 }
-                else if (lab.Text.Contains("异常") || lab.Text.Contains("无效"))
-                {
-                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 0, 0);
-                    System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
-                    System.Windows.Media.Brush brushes = solidColorBrush;
-                    lab.Background = brushes; //     // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
-                }
-                else
-                {
-                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 255, 255);
-                    System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
-                    System.Windows.Media.Brush brushes = solidColorBrush;
-                    lab.Background = brushes; // // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
-                }
+               
             }
 
             if(ctls is TextEdit)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ScoreTools.CustomControl
+namespace DataProcess.CustomControl
 {
     public class LabelTextBox : TextBox
     {

@@ -21,7 +21,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using YaoCeProcess;
-using ScoreTools.CustomControl;
+using DataProcess.CustomControl;
 using DataProcess.YaoCe;
 using DataProcess.Controls;
 using System.Timers;
@@ -301,6 +301,8 @@ namespace DataProcess
         Ratios ratios;
         String MainText;
         private DispatcherTimer MainTimer = new DispatcherTimer();
+
+
 
         public MainWindow()
         {

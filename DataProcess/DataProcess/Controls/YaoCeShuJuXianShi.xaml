@@ -2,16 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:cust="clr-namespace:ScoreTools.CustomControl"
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cust="clr-namespace:DataProcess.CustomControl"
+
              xmlns:local="clr-namespace:DataProcess.Controls" 
              x:Class="DataProcess.Controls.YaoCeShuJuXianShi"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1200">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -39,72 +40,9 @@
                         <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
                     <ScrollViewer>
-                        <UniformGrid Rows="27" Columns="3" x:Name="XiTong">
+                        <UniformGrid Rows="18" Columns="3" x:Name="XiTong">
                             <cust:LabelTextBox Label="GNSS时间："  x:Name="XiTong_GNSSTime"/>
                             <cust:LabelTextBox Label="总飞行时间：" x:Name="XiTong_ZongFeiXingTime"/>
-                            <cust:LabelTextBox Label="策略阶段：" x:Name="XiTong_CeLueJieDuan"/>
-                            <cust:LabelTextBox Label="弹头状态：" x:Name="XiTong_DanTouZhuangTai"/>
-                            <cust:LabelTextBox Label="导航数据选择：" x:Name="XiTong_DaoHangShuJuXuanZe"/>
-                            <cust:LabelTextBox Label="陀螺数据融合：" x:Name="XiTong_TuoLuoShuJuRongHe"/>
-                            <cust:LabelTextBox Label="数据未更新：" x:Name="XiTong_ShuJuWeiGengXin"/>
-                            <cust:LabelTextBox Label="优选结果：" x:Name="XiTong_ShiJianJianGeYiChang"/>
-                            <Grid/>
-                            <cust:LabelTextBox Label="弹头组合：" x:Name="XiTong_DanTouZuHe"/>
-                            <cust:LabelTextBox Label="弹体组合：" x:Name="XiTong_DanTiZuHe"/>
-                            <cust:LabelTextBox Label="参试状态：" x:Name="XiTong_CanShiZhuangTai"/>
-                            <cust:LabelTextBox Label="1号数据经度：" x:Name="XiTong_1HaoShuJuJingDu"/>
-                            <cust:LabelTextBox Label="1号数据纬度：" x:Name="XiTong_1HaoShuJuWeiDu"/>
-                            <cust:LabelTextBox Label="1号数据高度：" x:Name="XiTong_1HaoShuJuGaoDu"/>
-                            <cust:LabelTextBox Label="1号数据东速：" x:Name="XiTong_1HaoShuJuDongXiangSuDu"/>
-                            <cust:LabelTextBox Label="1号数据北速：" x:Name="XiTong_1HaoShuJuBeiXiangSuDu"/>
-                            <cust:LabelTextBox Label="1号数据天速：" x:Name="XiTong_1HaoShuJuTianXiangSuDu"/>
-                            <cust:LabelTextBox Label="2号数据经度：" x:Name="XiTong_2HaoShuJuJingDu"/>
-                            <cust:LabelTextBox Label="2号数据纬度：" x:Name="XiTong_2HaoShuJuWeiDu"/>
-                            <cust:LabelTextBox Label="2号数据高度：" x:Name="XiTong_2HaoShuJuGaoDu"/>
-                            <cust:LabelTextBox Label="2号数据东速：" x:Name="XiTong_2HaoShuJuDongXiangSuDu"/>
-                            <cust:LabelTextBox Label="2号数据北速：" x:Name="XiTong_2HaoShuJuBeiXiangSuDu"/>
-                            <cust:LabelTextBox Label="2号数据天速：" x:Name="XiTong_2HaoShuJuTianXiangSuDu"/>
-                            <cust:LabelTextBox Label="功率输出闭合：" x:Name="XiTong_GongLvShuChuBiHe"/>
-                            <cust:LabelTextBox Label="解保指令发出：" x:Name="XiTong_JieBaoZhiLingFaChu"/>
-                            <cust:LabelTextBox Label="自毁指令发出：" x:Name="XiTong_ZiHuiZhiLingFaChu"/>
-                            <cust:LabelTextBox Label="复位信号：" x:Name="XiTong_FuWeiXinHao"/>
-                            <cust:LabelTextBox Label="对外供电：" x:Name="XiTong_DuiWaiGongDian"/>
-                            <cust:LabelTextBox Label="模拟自毁指令：" x:Name="XiTong_MoNiZiHui1"/>
-                            <cust:LabelTextBox Label="模拟自毁指令2：" x:Name="XiTong_MoNiZiHui2"/>
-                            <cust:LabelTextBox Label="加计数据融合结果：" x:Name="XiTong_HuiLuJianCe"/>
-                            <cust:LabelTextBox Label="起飞分离脱插：" x:Name="XiTong_QiFeiFenLiTuoCha"/>
-                            <cust:LabelTextBox Label="一级分离脱插：" x:Name="XiTong_YiJiFenLiTuoCha"/>
-                            <cust:LabelTextBox Label="安控接收机预令：" x:Name="XiTong_AnKongJieShouJiYuLing"/>
-                            <cust:LabelTextBox Label="安控接收机动令：" x:Name="XiTong_AnKongJieShouJiDongLing"/>
-                            <cust:LabelTextBox Label="一级自毁状态A：" x:Name="XiTong_1ZiHuiWorkA"/>
-                            <cust:LabelTextBox Label="一级自毁状态B：" x:Name="XiTong_1ZiHuiWorkB"/>
-                            <Grid/>
-                            <cust:LabelTextBox Label="二级自毁状态A：" x:Name="XiTong_2ZiHuiWorkA"/>
-                            <cust:LabelTextBox Label="二级自毁状态B：" x:Name="XiTong_2ZiHuiWorkB"/>
-                            <Grid/>
-                            <cust:LabelTextBox Label="总飞行时间状态：" x:Name="XiTong_ZongFeiXingShiJian"/>
-                            <cust:LabelTextBox Label="侧向：" x:Name="XiTong_CeXiang"/>
-                            <cust:LabelTextBox Label="后向：" x:Name="XiTong_HouXiang"/>
-                            <cust:LabelTextBox Label="Wx角速度状态：" x:Name="XiTong_WxJiaoSuDuStatus"/>
-                            <cust:LabelTextBox Label="Wy角速度状态：" x:Name="XiTong_WyJiaoSuDuStatus"/>
-                            <cust:LabelTextBox Label="Wz角速度状态：" x:Name="XiTong_WzJiaoSuDuStatus"/>
-                            <cust:LabelTextBox Label="坠落：" x:Name="XiTong_ZhuiLuo"/>
-                            <cust:LabelTextBox Label="分离时间：" x:Name="XiTong_FenLiShiTian"/>
-                            <Grid/>
-                            <cust:LabelTextBox Label="控制区上限：" x:Name="XiTong_KongZhiQuXiaXian"/>
-                            <cust:LabelTextBox Label="控制区下限：" x:Name="XiTong_KongZhiQuShangXian"/>
-                            <Grid/>
-                            <cust:LabelTextBox Label="弹头保险：" x:Name="XiTong_DanTouBaoXian"/>
-                            <cust:LabelTextBox Label="一级保险1：" x:Name="XiTong_1JiBaoXian1"/>
-                            <cust:LabelTextBox Label="一级保险2：" x:Name="XiTong_1JiBaoXian2"/>
-                            <cust:LabelTextBox Label="二级保险1：" x:Name="XiTong_2JiBaoXian1"/>
-                            <cust:LabelTextBox Label="二级保险2：" x:Name="XiTong_2JiBaoXian2"/>
-                            <Grid/>
-                            <cust:LabelTextBox Label="弹头起爆：" x:Name="XiTong_DanTouQiBao"/>
-                            <cust:LabelTextBox Label="一级起爆1：" x:Name="XiTong_1JiQiBao1"/>
-                            <cust:LabelTextBox Label="一级起爆2：" x:Name="XiTong_1JiQiBao2"/>
-                            <cust:LabelTextBox Label="二级起爆1：" x:Name="XiTong_2JiQiBao1"/>
-                            <cust:LabelTextBox Label="二级起爆2：" x:Name="XiTong_2JiQiBao2"/>
                             <Grid/>
                             <cust:LabelTextBox Label="经度：" x:Name="XiTong_JingDu"/>
                             <cust:LabelTextBox Label="纬度：" x:Name="XiTong_WeiDu"/>
@@ -115,12 +53,61 @@
                             <cust:LabelTextBox Label="Wx角速度：" x:Name="XiTong_WxJiaoSuDuValue"/>
                             <cust:LabelTextBox Label="Wy角速度：" x:Name="XiTong_WyJiaoSuDuValue"/>
                             <cust:LabelTextBox Label="Wz角速度：" x:Name="XiTong_WzJiaoSuDuValue"/>
+                            <cust:LabelTextBox Label="轴向比力：" x:Name="XiTong_ZhouXiangBiLi"/>
+                            <Grid/>
+                            <Grid/>
                             <cust:LabelTextBox Label="当前发射系X：" x:Name="XiTong_XFaSheXi"/>
                             <cust:LabelTextBox Label="当前发射系Y：" x:Name="XiTong_YFaSheXi"/>
                             <cust:LabelTextBox Label="当前发射系Z：" x:Name="XiTong_ZFaSheXi"/>
                             <cust:LabelTextBox Label="预示落点Z：" x:Name="XiTong_YuShiLuoDianZ"/>
                             <cust:LabelTextBox Label="预示落点射程：" x:Name="XiTong_YuShiLuoDianSheCheng"/>
-                            <cust:LabelTextBox Label="轴向过载：" x:Name="XiTong_ZhouXiangGuoZai"/>
+                            <Grid/>
+                            <cust:LabelTextBox Label="参试状态：" x:Name="XiTong_CanShiZhuangTai"/>
+                            <Grid/>
+                            <Grid/>
+                            <cust:LabelTextBox Label="策略阶段：" x:Name="XiTong_CeLueJieDuan"/>
+                            <cust:LabelTextBox Label="紧急断电：" x:Name="XiTong_JinJiDuanDian"/>
+                            <cust:LabelTextBox Label="起飞：" x:Name="XiTong_QiFei"/>
+                            <cust:LabelTextBox Label="预令：" x:Name="XiTong_YuLing"/>
+                            <cust:LabelTextBox Label="动令：" x:Name="XiTong_DongLing"/>
+                            <cust:LabelTextBox Label="一级分离：" x:Name="XiTong_YiJiFeiLi"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="策略判决结果1:" VerticalAlignment="Center"/>
+                                <dxe:TextEdit Grid.Column="2" x:Name="XiTong_CeLuePanJue1" BorderThickness="1" BorderBrush="Black" VerticalContentAlignment="Center" Height="20" Margin="5" IsReadOnly="True"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="策略判决结果2:" VerticalAlignment="Center"/>
+                                <dxe:TextEdit Grid.Column="2" x:Name="XiTong_CeLuePanJue2" BorderThickness="1" BorderBrush="Black" VerticalContentAlignment="Center" Height="20" Margin="5" IsReadOnly="True"/>
+                            </Grid>
+                            <Grid/>
+                            <cust:LabelTextBox Label="输入采集1：" x:Name="XiTong_ShuRuCaiJi1"/>
+                            <cust:LabelTextBox Label="输入采集2：" x:Name="XiTong_ShuRuCaiJi2"/>
+                            <Grid/>
+                            <cust:LabelTextBox Label="输入采集3：" x:Name="XiTong_ShuRuCaiJi3"/>
+                            <cust:LabelTextBox Label="输入采集4：" x:Name="XiTong_ShuRuCaiJi4"/>
+                            <Grid/>
+                            <cust:LabelTextBox Label="弹头解保：" x:Name="XiTong_DanTouJieBao"/>
+                            <cust:LabelTextBox Label="起爆状态：" x:Name="XiTong_QiBaoZhuangTai"/>
+                            <Grid/>
+                            <cust:LabelTextBox Label="内部控制电：" x:Name="XiTong_NeiBuKongZhiDian"/>
+                            <cust:LabelTextBox Label="功率电：" x:Name="XiTong_GongLvDian"/>
+                            <Grid/>
+                            <cust:LabelTextBox Label="导航数据选择：" x:Name="XiTong_DaoHangShuJuXuanZe"/>
+                            <cust:LabelTextBox Label="陀螺数据融合：" x:Name="XiTong_TuoLuoShuJuRongHe"/>
+                            <cust:LabelTextBox Label="数据未更新：" x:Name="XiTong_ShuJuWeiGengXin"/>
+                            <cust:LabelTextBox Label="优选结果：" x:Name="XiTong_YouXuanJieGuo"/>
+                            <cust:LabelTextBox Label="弹头组合：" x:Name="XiTong_DanTouZuHe"/>
+                            <cust:LabelTextBox Label="弹体组合：" x:Name="XiTong_DanTiZuHe"/>
+                            <cust:LabelTextBox Label="1号数据：" x:Name="XiTong_ShuJu1Hao"/>
+                            <cust:LabelTextBox Label="2号数据：" x:Name="XiTong_ShuJu2Hao"/>
                         </UniformGrid>
                     </ScrollViewer>
                     <dx:DXTabControl Grid.Column="1">
@@ -386,38 +373,34 @@
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <UniformGrid Rows="11" Columns="3" x:Name="DaoHangKuai_Ti">
+                            <UniformGrid Rows="18" Columns="3" x:Name="DaoHangKuai_Ti">
                                 <cust:LabelTextBox Label="导航系统时间：" x:Name="DHKuaiSu_Ti_DaoHangXiTongShiJian"/>
                                 <cust:LabelTextBox Label="GNSS时间：" x:Name="DHKuaiSu_Ti_GNSSTime"/>
                                 <cust:LabelTextBox Label="点火标志：" x:Name="DHKuaiSu_Ti_DianHuo"/>
-                                <cust:LabelTextBox Label="俯仰角：" x:Name="DHKuaiSu_Ti_FuYangJiao"/>
-                                <cust:LabelTextBox Label="滚转角：" x:Name="DHKuaiSu_Ti_GunZhuanJiao"/>
-                                <cust:LabelTextBox Label="偏航角：" x:Name="DHKuaiSu_Ti_PianHangJiao"/>
-                                <cust:LabelTextBox Label="陀螺X数据（本）：" x:Name="DHKuaiSu_Ti_TuoLuoXShuJuBen"/>
-                                <cust:LabelTextBox Label="陀螺Y数据（本）：" x:Name="DHKuaiSu_Ti_TuoLuoYShuJuBen"/>
-                                <cust:LabelTextBox Label="陀螺Z数据（本）：" x:Name="DHKuaiSu_Ti_TuoLuoZShuJuBen"/>
-                                <cust:LabelTextBox Label="陀螺X数据（上）：" x:Name="DHKuaiSu_Ti_TuoLuoXShuJuShang"/>
-                                <cust:LabelTextBox Label="陀螺Y数据（上）：" x:Name="DHKuaiSu_Ti_TuoLuoYShuJuShang"/>
-                                <cust:LabelTextBox Label="陀螺Z数据（上）：" x:Name="DHKuaiSu_Ti_TuoLuoZShuJuShang"/>
-                                <cust:LabelTextBox Label="加速度计X（本）：" x:Name="DHKuaiSu_Ti_JiaSuDuJiXBen"/>
-                                <cust:LabelTextBox Label="加速度计Y（本）：" x:Name="DHKuaiSu_Ti_JiaSuDuJiYBen"/>
-                                <cust:LabelTextBox Label="加速度计Z（本）：" x:Name="DHKuaiSu_Ti_JiaSuDuJiZBen"/>
-                                <cust:LabelTextBox Label="加速度计X（上）：" x:Name="DHKuaiSu_Ti_JiaSuDuJiXShang"/>
-                                <cust:LabelTextBox Label="加速度计Y（上）：" x:Name="DHKuaiSu_Ti_JiaSuDuJiYShang"/>
-                                <cust:LabelTextBox Label="加速度计Z（上）：" x:Name="DHKuaiSu_Ti_JiaSuDuJiZShang"/>
-                                <cust:LabelTextBox Label="工作阶段：" x:Name="DHKuaiSu_Ti_GongZuoJieDuan"/>
-                                <cust:LabelTextBox Label="分离标志：" x:Name="DHKuaiSu_Ti_FenLi"/>
-                                <cust:LabelTextBox Label="GPS数据更新：" x:Name="DHKuaiSu_Ti_GPSShuJuGengXin"/>
-                                <cust:LabelTextBox Label="陀螺X故障：" x:Name="DHKuaiSu_Ti_TuoLuoXGuZhang"/>
-                                <cust:LabelTextBox Label="陀螺Y故障：" x:Name="DHKuaiSu_Ti_TuoLuoYGuZhang"/>
-                                <cust:LabelTextBox Label="陀螺Z故障：" x:Name="DHKuaiSu_Ti_TuoLuoZGuZhang"/>
-                                <cust:LabelTextBox Label="GPS组合：" x:Name="DHKuaiSu_Ti_GPSZuHe"/>
                                 <cust:LabelTextBox Label="经度：" x:Name="DHKuaiSu_Ti_JingDu"/>
                                 <cust:LabelTextBox Label="纬度：" x:Name="DHKuaiSu_Ti_WeiDu"/>
                                 <cust:LabelTextBox Label="海拔高度：" x:Name="DHKuaiSu_Ti_GaoDu"/>
                                 <cust:LabelTextBox Label="东向速度：" x:Name="DHKuaiSu_Ti_DongXiangSuDu"/>
                                 <cust:LabelTextBox Label="北向速度：" x:Name="DHKuaiSu_Ti_BeiXiangSuDu"/>
                                 <cust:LabelTextBox Label="天向速度：" x:Name="DHKuaiSu_Ti_TianXiangSuDu"/>
+                                <cust:LabelTextBox Label="俯仰角：" x:Name="DHKuaiSu_Ti_FuYangJiao"/>
+                                <cust:LabelTextBox Label="滚转角：" x:Name="DHKuaiSu_Ti_GunZhuanJiao"/>
+                                <cust:LabelTextBox Label="偏航角：" x:Name="DHKuaiSu_Ti_PianHangJiao"/>
+                                <cust:LabelTextBox Label="陀螺X数据：" x:Name="DHKuaiSu_Ti_TuoLuoXShuJu"/>
+                                <cust:LabelTextBox Label="陀螺Y数据：" x:Name="DHKuaiSu_Ti_TuoLuoYShuJu"/>
+                                <cust:LabelTextBox Label="陀螺Z数据：" x:Name="DHKuaiSu_Ti_TuoLuoZShuJu"/>
+                                <cust:LabelTextBox Label="加速度计X：" x:Name="DHKuaiSu_Ti_JiaSuDuJiX"/>
+                                <cust:LabelTextBox Label="加速度计Y：" x:Name="DHKuaiSu_Ti_JiaSuDuJiY"/>
+                                <cust:LabelTextBox Label="加速度计Z：" x:Name="DHKuaiSu_Ti_JiaSuDuJiZ"/>
+                                <cust:LabelTextBox Label="工作阶段：" x:Name="DHKuaiSu_Ti_GongZuoJieDuan"/>
+                                <cust:LabelTextBox Label="分离标志：" x:Name="DHKuaiSu_Ti_FenLi"/>
+                                <cust:LabelTextBox Label="GPS数据更新：" x:Name="DHKuaiSu_Ti_GPSShuJuGengXin"/>
+                                <cust:LabelTextBox Label="GPS组合：" x:Name="DHKuaiSu_Ti_GPSZuHe"/>
+                                <cust:LabelTextBox Label="导航组合：" x:Name="DHKuaiSu_Ti_DaoHangZuHe"/>
+                                <Grid/>
+                                <cust:LabelTextBox Label="加计故障：" x:Name="DHKuaiSu_Ti_JiaJiGuZhang"/>
+                                <cust:LabelTextBox Label="陀螺故障：" x:Name="DHKuaiSu_Ti_TuoLuoGuZhang"/>
+
                             </UniformGrid>
                             <dx:DXTabControl Grid.Column="1">
                                 <dx:DXTabItem Header="坐标">
@@ -524,6 +507,162 @@
                                         </dxc:ChartControl>
                                     </UniformGrid>
                                 </dx:DXTabItem>
+                                <dx:DXTabItem Header="角度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="俯仰角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_JiaoDu_FuYangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="滚转角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_JiaoDu_GunZhuanJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="偏航角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_JiaoDu_PianHangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="陀螺">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_TuoLuo_TuoLuoX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_TuoLuo_TuoLuoY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_TuoLuo_TuoLuoZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="加速度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_JiaSuDu_JiaJiX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_JiaSuDu_JiaJiY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Ti_JiaSuDu_JiaJiZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
                             </dx:DXTabControl>
                         </Grid>
                     </dx:DXTabItem>
@@ -533,38 +672,33 @@
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <UniformGrid Rows="11" Columns="3" x:Name="DaoHangKuai_Tou">
+                            <UniformGrid Rows="18" Columns="3" x:Name="DaoHangKuai_Tou">
                                 <cust:LabelTextBox Label="导航系统时间：" x:Name="DHKuaiSu_Tou_DaoHangXiTongShiJian"/>
                                 <cust:LabelTextBox Label="GNSS时间：" x:Name="DHKuaiSu_Tou_GNSSTime"/>
                                 <cust:LabelTextBox Label="点火标志：" x:Name="DHKuaiSu_Tou_DianHuo"/>
-                                <cust:LabelTextBox Label="俯仰角：" x:Name="DHKuaiSu_Tou_FuYangJiao"/>
-                                <cust:LabelTextBox Label="滚转角：" x:Name="DHKuaiSu_Tou_GunZhuanJiao"/>
-                                <cust:LabelTextBox Label="偏航角：" x:Name="DHKuaiSu_Tou_PianHangJiao"/>
-                                <cust:LabelTextBox Label="陀螺X数据（本）：" x:Name="DHKuaiSu_Tou_TuoLuoXShuJuBen"/>
-                                <cust:LabelTextBox Label="陀螺Y数据（本）：" x:Name="DHKuaiSu_Tou_TuoLuoYShuJuBen"/>
-                                <cust:LabelTextBox Label="陀螺Z数据（本）：" x:Name="DHKuaiSu_Tou_TuoLuoZShuJuBen"/>
-                                <cust:LabelTextBox Label="陀螺X数据（上）：" x:Name="DHKuaiSu_Tou_TuoLuoXShuJuShang"/>
-                                <cust:LabelTextBox Label="陀螺Y数据（上）：" x:Name="DHKuaiSu_Tou_TuoLuoYShuJuShang"/>
-                                <cust:LabelTextBox Label="陀螺Z数据（上）：" x:Name="DHKuaiSu_Tou_TuoLuoZShuJuShang"/>
-                                <cust:LabelTextBox Label="加速度计X（本）：" x:Name="DHKuaiSu_Tou_JiaSuDuJiXBen"/>
-                                <cust:LabelTextBox Label="加速度计Y（本）：" x:Name="DHKuaiSu_Tou_JiaSuDuJiYBen"/>
-                                <cust:LabelTextBox Label="加速度计Z（本）：" x:Name="DHKuaiSu_Tou_JiaSuDuJiZBen"/>
-                                <cust:LabelTextBox Label="加速度计X（上）：" x:Name="DHKuaiSu_Tou_JiaSuDuJiXShang"/>
-                                <cust:LabelTextBox Label="加速度计Y（上）：" x:Name="DHKuaiSu_Tou_JiaSuDuJiYShang"/>
-                                <cust:LabelTextBox Label="加速度计Z（上）：" x:Name="DHKuaiSu_Tou_JiaSuDuJiZShang"/>
-                                <cust:LabelTextBox Label="工作阶段：" x:Name="DHKuaiSu_Tou_GongZuoJieDuan"/>
-                                <cust:LabelTextBox Label="分离标志：" x:Name="DHKuaiSu_Tou_FenLi"/>
-                                <cust:LabelTextBox Label="GPS数据更新：" x:Name="DHKuaiSu_Tou_GPSShuJuGengXin"/>
-                                <cust:LabelTextBox Label="陀螺X故障：" x:Name="DHKuaiSu_Tou_TuoLuoXGuZhang"/>
-                                <cust:LabelTextBox Label="陀螺Y故障：" x:Name="DHKuaiSu_Tou_TuoLuoYGuZhang"/>
-                                <cust:LabelTextBox Label="陀螺Z故障：" x:Name="DHKuaiSu_Tou_TuoLuoZGuZhang"/>
-                                <cust:LabelTextBox Label="GPS组合：" x:Name="DHKuaiSu_Tou_GPSZuHe"/>
                                 <cust:LabelTextBox Label="经度：" x:Name="DHKuaiSu_Tou_JingDu"/>
                                 <cust:LabelTextBox Label="纬度：" x:Name="DHKuaiSu_Tou_WeiDu"/>
                                 <cust:LabelTextBox Label="海拔高度：" x:Name="DHKuaiSu_Tou_GaoDu"/>
                                 <cust:LabelTextBox Label="东向速度：" x:Name="DHKuaiSu_Tou_DongXiangSuDu"/>
                                 <cust:LabelTextBox Label="北向速度：" x:Name="DHKuaiSu_Tou_BeiXiangSuDu"/>
                                 <cust:LabelTextBox Label="天向速度：" x:Name="DHKuaiSu_Tou_TianXiangSuDu"/>
+                                <cust:LabelTextBox Label="俯仰角：" x:Name="DHKuaiSu_Tou_FuYangJiao"/>
+                                <cust:LabelTextBox Label="滚转角：" x:Name="DHKuaiSu_Tou_GunZhuanJiao"/>
+                                <cust:LabelTextBox Label="偏航角：" x:Name="DHKuaiSu_Tou_PianHangJiao"/>
+                                <cust:LabelTextBox Label="陀螺X数据：" x:Name="DHKuaiSu_Tou_TuoLuoXShuJu"/>
+                                <cust:LabelTextBox Label="陀螺Y数据：" x:Name="DHKuaiSu_Tou_TuoLuoYShuJu"/>
+                                <cust:LabelTextBox Label="陀螺Z数据：" x:Name="DHKuaiSu_Tou_TuoLuoZShuJu"/>
+                                <cust:LabelTextBox Label="加速度计X：" x:Name="DHKuaiSu_Tou_JiaSuDuJiX"/>
+                                <cust:LabelTextBox Label="加速度计Y：" x:Name="DHKuaiSu_Tou_JiaSuDuJiY"/>
+                                <cust:LabelTextBox Label="加速度计Z：" x:Name="DHKuaiSu_Tou_JiaSuDuJiZ"/>
+                                <cust:LabelTextBox Label="工作阶段：" x:Name="DHKuaiSu_Tou_GongZuoJieDuan"/>
+                                <cust:LabelTextBox Label="分离标志：" x:Name="DHKuaiSu_Tou_FenLi"/>
+                                <cust:LabelTextBox Label="GPS数据更新：" x:Name="DHKuaiSu_Tou_GPSShuJuGengXin"/>
+                                <cust:LabelTextBox Label="GPS组合：" x:Name="DHKuaiSu_Tou_GPSZuHe"/>
+                                <cust:LabelTextBox Label="导航组合：" x:Name="DHKuaiSu_Tou_DaoHangZuHe"/>
+                                <Grid/>
+                                <cust:LabelTextBox Label="加计故障：" x:Name="DHKuaiSu_Tou_JiaJiGuZhang"/>
+                                <cust:LabelTextBox Label="陀螺故障：" x:Name="DHKuaiSu_Tou_TuoLuoGuZhang"/>
                             </UniformGrid>
                             <dx:DXTabControl Grid.Column="1">
                                 <dx:DXTabItem Header="坐标">
@@ -671,6 +805,162 @@
                                         </dxc:ChartControl>
                                     </UniformGrid>
                                 </dx:DXTabItem>
+                                <dx:DXTabItem Header="角度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="俯仰角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_JiaoDu_FuYangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="滚转角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_JiaoDu_GunZhuanJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="偏航角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_JiaoDu_PianHangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="陀螺">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_TuoLuo_TuoLuoX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_TuoLuo_TuoLuoY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_TuoLuo_TuoLuoZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="加速度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_JiaSuDu_JiaJiX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_JiaSuDu_JiaJiY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHKuaiSu_Tou_JiaSuDu_JiaJiZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
                             </dx:DXTabControl>
                         </Grid>
                     </dx:DXTabItem>
@@ -696,46 +986,43 @@
                                         <cust:LabelTextBox Label="GPS参与定位：" x:Name="DHManSu_Ti_GPSCanYuDingWei"/>
                                         <cust:LabelTextBox Label="BD2 SV可用：" x:Name="DHManSu_Ti_BD2KeYong"/>
                                         <cust:LabelTextBox Label="BD2参与定位：" x:Name="DHManSu_Ti_BD2CanYuDingWei"/>
+                                        <Grid/>
                                         <cust:LabelTextBox Label="PDOP：" x:Name="DHManSu_Ti_PDOP"/>
-                                        <cust:LabelTextBox Label="X陀螺+5V电压：" x:Name="DHManSu_Ti_XTuoLuoZheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="X陀螺-5V电压：" x:Name="DHManSu_Ti_XTuoLuoFu5VDianYa"/>
                                         <cust:LabelTextBox Label="HDOP：" x:Name="DHManSu_Ti_HDOP"/>
-                                        <cust:LabelTextBox Label="Y陀螺+5V电压：" x:Name="DHManSu_Ti_YTuoLuoZheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="Y陀螺-5V电压：" x:Name="DHManSu_Ti_YTuoLuoFu5VDianYa"/>
                                         <cust:LabelTextBox Label="VDOP：" x:Name="DHManSu_Ti_VDOP"/>
-                                        <cust:LabelTextBox Label="Z陀螺+5V电压：" x:Name="DHManSu_Ti_ZTuoLuoZheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="Z陀螺-5V电压：" x:Name="DHManSu_Ti_ZTuoLuoFu5VDianYa"/>
-                                        <cust:LabelTextBox Label="与GPS JSJ错误：" x:Name="DHManSu_Ti_GPSJieShouJiTongXinError"/>
-                                        <cust:LabelTextBox Label="与X陀螺错误：" x:Name="DHManSu_Ti_XTuoLuoTongXinError"/>
-                                        <cust:LabelTextBox Label="与Y陀螺错误：" x:Name="DHManSu_Ti_YTuoLuoTongXinError"/>
-                                        <cust:LabelTextBox Label="与Z陀螺错误：" x:Name="DHManSu_Ti_ZTuoLuoTongXinError"/>
-                                        <cust:LabelTextBox Label="IMU进入中断：" x:Name="DHManSu_Ti_IMUZhongDuan"/>
-                                        <cust:LabelTextBox Label="GPS中断次数：" x:Name="DHManSu_Ti_GPSZhongDuan"/>
+                                        <cust:LabelTextBox Label="经度(GPS测量)：" x:Name="DHManSu_Ti_JingDu"/>
+                                        <cust:LabelTextBox Label="纬度(GPS测量)：" x:Name="DHManSu_Ti_WeiDu"/>
+                                        <cust:LabelTextBox Label="海拔高度(GPS测量)：" x:Name="DHManSu_Ti_GaoDu"/>
+                                        <cust:LabelTextBox Label="东向速度(GPS测量)：" x:Name="DHManSu_Ti_DongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="北向速度(GPS测量)：" x:Name="DHManSu_Ti_BeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="天向速度(GPS测量)：" x:Name="DHManSu_Ti_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="其他状态数据：" x:Name="DHManSu_Ti_QiTaZhuangTaiShuJu"/>
                                         <cust:LabelTextBox Label="导航初值装订：" x:Name="DHManSu_Ti_DaoHangChuZhiZhuangDing"/>
-                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="DHManSu_Ti_XTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="DHManSu_Ti_YTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="DHManSu_Ti_ZTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="+5V电压值：" x:Name="DHManSu_Ti_Zheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="-5V电压值：" x:Name="DHManSu_Ti_Fu5VDianYa"/>
-                                        <cust:LabelTextBox Label="发送1553数据：" x:Name="DHManSu_Ti_1553ShuJuFaSong"/>
-                                        <cust:LabelTextBox Label="+15V电压值：" x:Name="DHManSu_Ti_Zheng15VDianYa"/>
-                                        <cust:LabelTextBox Label="-15V电压值：" x:Name="DHManSu_Ti_Fu15VDianYa"/>
                                         <cust:LabelTextBox Label="导航标志：" x:Name="DHManSu_Ti_DaoHangBiaoZhi"/>
                                         <cust:LabelTextBox Label="对准完成标志：" x:Name="DHManSu_Ti_DuiZhunWanCheng"/>
-                                        <cust:LabelTextBox Label="装订参数读取：" x:Name="DHManSu_Ti_ZhuangDingCanShuDuQu"/>
+                                        <cust:LabelTextBox Label="飞行参数读取:" x:Name="DHManSu_Ti_FeiXingCanShu"/>
                                         <cust:LabelTextBox Label="工作模式：" x:Name="DHManSu_Ti_GongZuoMoShi"/>
                                         <cust:LabelTextBox Label="GPS组合：" x:Name="DHManSu_Ti_GPSZuHe"/>
                                         <cust:LabelTextBox Label="点火标志：" x:Name="DHManSu_Ti_DianHuo"/>
                                         <cust:LabelTextBox Label="分离标志：" x:Name="DHManSu_Ti_FenLi"/>
-                                        <cust:LabelTextBox Label="X加计温度：" x:Name="DHManSu_Ti_XJiaJiWenDu"/>
-                                        <cust:LabelTextBox Label="Y加计温度：" x:Name="DHManSu_Ti_YJiaJiWenDu"/>
-                                        <cust:LabelTextBox Label="Z加计温度：" x:Name="DHManSu_Ti_ZJiaJiWenDu"/>
-                                        <cust:LabelTextBox Label="经度：" x:Name="DHManSu_Ti_JingDu"/>
-                                        <cust:LabelTextBox Label="纬度：" x:Name="DHManSu_Ti_WeiDu"/>
-                                        <cust:LabelTextBox Label="海拔高度：" x:Name="DHManSu_Ti_GaoDu"/>
-                                        <cust:LabelTextBox Label="东向速度：" x:Name="DHManSu_Ti_DongXiangSuDu"/>
-                                        <cust:LabelTextBox Label="北向速度：" x:Name="DHManSu_Ti_BeiXiangSuDu"/>
-                                        <cust:LabelTextBox Label="天向速度：" x:Name="DHManSu_Ti_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="发送1553数据：" x:Name="DHManSu_Ti_1553ShuJuFaSong"/>
+                                        <cust:LabelTextBox Label="加计故障：" x:Name="DHManSu_Ti_JiaJiGuZhang"/>
+                                        <cust:LabelTextBox Label="陀螺故障：" x:Name="DHManSu_Ti_TuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="经度(组合结果)：" x:Name="DHManSu_Ti_JingDuZuHe"/>
+                                        <cust:LabelTextBox Label="纬度(组合结果)：" x:Name="DHManSu_Ti_WeiDuZuHe"/>
+                                        <cust:LabelTextBox Label="海拔高度(组合结果)：" x:Name="DHManSu_Ti_GaoDuZuHe"/>
+                                        <cust:LabelTextBox Label="东向速度(组合结果)：" x:Name="DHManSu_Ti_DongXiangSuDuZuHe"/>
+                                        <cust:LabelTextBox Label="北向速度(组合结果)：" x:Name="DHManSu_Ti_BeiXiangSuDuZuHe"/>
+                                        <cust:LabelTextBox Label="天向速度(组合结果)：" x:Name="DHManSu_Ti_TianXiangSuDuZuHe"/>
+                                        <cust:LabelTextBox Label="俯仰角：" x:Name="DHManSu_Ti_FuYangJiao"/>
+                                        <cust:LabelTextBox Label="滚转角：" x:Name="DHManSu_Ti_GunZhuanJiao"/>
+                                        <cust:LabelTextBox Label="偏航角：" x:Name="DHManSu_Ti_PianHangJiao"/>
+                                        <cust:LabelTextBox Label="陀螺X数据：" x:Name="DHManSu_Ti_TuoLuoXShuJu"/>
+                                        <cust:LabelTextBox Label="陀螺Y数据：" x:Name="DHManSu_Ti_TuoLuoYShuJu"/>
+                                        <cust:LabelTextBox Label="陀螺Z数据：" x:Name="DHManSu_Ti_TuoLuoZShuJu"/>
+                                        <cust:LabelTextBox Label="加速度计X：" x:Name="DHManSu_Ti_JiaSuDuJiX"/>
+                                        <cust:LabelTextBox Label="加速度计Y：" x:Name="DHManSu_Ti_JiaSuDuJiY"/>
+                                        <cust:LabelTextBox Label="加速度计Z：" x:Name="DHManSu_Ti_JiaSuDuJiZ"/>
                                     </UniformGrid>
                                     <Grid Grid.Row="1" x:Name="DaoHangMan_Ti2">
                                         <Grid.RowDefinitions>
@@ -762,7 +1049,7 @@
                             </ScrollViewer>
 
                             <dx:DXTabControl Grid.Column="1">
-                                <dx:DXTabItem Header="坐标">
+                                <dx:DXTabItem Header="坐标（GPS测量）">
                                     <UniformGrid Rows="3">
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
@@ -814,7 +1101,7 @@
                                         </dxc:ChartControl>
                                     </UniformGrid>
                                 </dx:DXTabItem>
-                                <dx:DXTabItem Header="速度">
+                                <dx:DXTabItem Header="速度(GPS测量)">
                                     <UniformGrid Rows="3">
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
@@ -866,6 +1153,266 @@
                                         </dxc:ChartControl>
                                     </UniformGrid>
                                 </dx:DXTabItem>
+                                <dx:DXTabItem Header="坐标（组合结果）">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_ZuoBiao_JingDu_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_ZuoBiao_WeiDu_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_ZuoBiao_GaoDu_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="速度(组合结果)">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_Dong_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_Bei_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_Tian_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="角度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="俯仰角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_FuYangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="滚转角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_GunZhuanJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="偏航角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_PianHangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="陀螺">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_TuoLuoX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_TuoLuoY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_TuoLuoZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="加速度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_JiaJiX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_JiaJiY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Ti_SuDu_JiaJiZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
                             </dx:DXTabControl>
                         </Grid>
                     </dx:DXTabItem>
@@ -887,46 +1434,43 @@
                                         <cust:LabelTextBox Label="GPS参与定位：" x:Name="DHManSu_Tou_GPSCanYuDingWei"/>
                                         <cust:LabelTextBox Label="BD2 SV可用：" x:Name="DHManSu_Tou_BD2KeYong"/>
                                         <cust:LabelTextBox Label="BD2参与定位：" x:Name="DHManSu_Tou_BD2CanYuDingWei"/>
+                                        <Grid/>
                                         <cust:LabelTextBox Label="PDOP：" x:Name="DHManSu_Tou_PDOP"/>
-                                        <cust:LabelTextBox Label="X陀螺+5V电压：" x:Name="DHManSu_Tou_XTuoLuoZheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="X陀螺-5V电压：" x:Name="DHManSu_Tou_XTuoLuoFu5VDianYa"/>
                                         <cust:LabelTextBox Label="HDOP：" x:Name="DHManSu_Tou_HDOP"/>
-                                        <cust:LabelTextBox Label="Y陀螺+5V电压：" x:Name="DHManSu_Tou_YTuoLuoZheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="Y陀螺-5V电压：" x:Name="DHManSu_Tou_YTuoLuoFu5VDianYa"/>
                                         <cust:LabelTextBox Label="VDOP：" x:Name="DHManSu_Tou_VDOP"/>
-                                        <cust:LabelTextBox Label="Z陀螺+5V电压：" x:Name="DHManSu_Tou_ZTuoLuoZheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="Z陀螺-5V电压：" x:Name="DHManSu_Tou_ZTuoLuoFu5VDianYa"/>
-                                        <cust:LabelTextBox Label="与GPS JSJ错误：" x:Name="DHManSu_Tou_GPSJieShouJiTongXinError"/>
-                                        <cust:LabelTextBox Label="与X陀螺错误：" x:Name="DHManSu_Tou_XTuoLuoTongXinError"/>
-                                        <cust:LabelTextBox Label="与Y陀螺错误：" x:Name="DHManSu_Tou_YTuoLuoTongXinError"/>
-                                        <cust:LabelTextBox Label="与Z陀螺错误：" x:Name="DHManSu_Tou_ZTuoLuoTongXinError"/>
-                                        <cust:LabelTextBox Label="IMU进入中断：" x:Name="DHManSu_Tou_IMUZhongDuan"/>
-                                        <cust:LabelTextBox Label="GPS中断次数：" x:Name="DHManSu_Tou_GPSZhongDuan"/>
+                                        <cust:LabelTextBox Label="经度(GPS测量)：" x:Name="DHManSu_Tou_JingDu"/>
+                                        <cust:LabelTextBox Label="纬度(GPS测量)：" x:Name="DHManSu_Tou_WeiDu"/>
+                                        <cust:LabelTextBox Label="海拔高度(GPS测量)：" x:Name="DHManSu_Tou_GaoDu"/>
+                                        <cust:LabelTextBox Label="东向速度(GPS测量)：" x:Name="DHManSu_Tou_DongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="北向速度(GPS测量)：" x:Name="DHManSu_Tou_BeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="天向速度(GPS测量)：" x:Name="DHManSu_Tou_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="其他状态数据：" x:Name="DHManSu_Tou_QiTaZhuangTaiShuJu"/>
                                         <cust:LabelTextBox Label="导航初值装订：" x:Name="DHManSu_Tou_DaoHangChuZhiZhuangDing"/>
-                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="DHManSu_Tou_XTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="DHManSu_Tou_YTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="DHManSu_Tou_ZTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="+5V电压值：" x:Name="DHManSu_Tou_Zheng5VDianYa"/>
-                                        <cust:LabelTextBox Label="-5V电压值：" x:Name="DHManSu_Tou_Fu5VDianYa"/>
-                                        <cust:LabelTextBox Label="发送1553数据：" x:Name="DHManSu_Tou_1553ShuJuFaSong"/>
-                                        <cust:LabelTextBox Label="+15V电压值：" x:Name="DHManSu_Tou_Zheng15VDianYa"/>
-                                        <cust:LabelTextBox Label="-15V电压值：" x:Name="DHManSu_Tou_Fu15VDianYa"/>
                                         <cust:LabelTextBox Label="导航标志：" x:Name="DHManSu_Tou_DaoHangBiaoZhi"/>
                                         <cust:LabelTextBox Label="对准完成标志：" x:Name="DHManSu_Tou_DuiZhunWanCheng"/>
-                                        <cust:LabelTextBox Label="装订参数读取：" x:Name="DHManSu_Tou_ZhuangDingCanShuDuQu"/>
+                                        <cust:LabelTextBox Label="飞行参数读取:" x:Name="DHManSu_Tou_FeiXingCanShu"/>
                                         <cust:LabelTextBox Label="工作模式：" x:Name="DHManSu_Tou_GongZuoMoShi"/>
                                         <cust:LabelTextBox Label="GPS组合：" x:Name="DHManSu_Tou_GPSZuHe"/>
                                         <cust:LabelTextBox Label="点火标志：" x:Name="DHManSu_Tou_DianHuo"/>
                                         <cust:LabelTextBox Label="分离标志：" x:Name="DHManSu_Tou_FenLi"/>
-                                        <cust:LabelTextBox Label="X加计温度：" x:Name="DHManSu_Tou_XJiaJiWenDu"/>
-                                        <cust:LabelTextBox Label="Y加计温度：" x:Name="DHManSu_Tou_YJiaJiWenDu"/>
-                                        <cust:LabelTextBox Label="Z加计温度：" x:Name="DHManSu_Tou_ZJiaJiWenDu"/>
-                                        <cust:LabelTextBox Label="经度：" x:Name="DHManSu_Tou_JingDu"/>
-                                        <cust:LabelTextBox Label="纬度：" x:Name="DHManSu_Tou_WeiDu"/>
-                                        <cust:LabelTextBox Label="海拔高度：" x:Name="DHManSu_Tou_GaoDu"/>
-                                        <cust:LabelTextBox Label="东向速度：" x:Name="DHManSu_Tou_DongXiangSuDu"/>
-                                        <cust:LabelTextBox Label="北向速度：" x:Name="DHManSu_Tou_BeiXiangSuDu"/>
-                                        <cust:LabelTextBox Label="天向速度：" x:Name="DHManSu_Tou_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="发送1553数据：" x:Name="DHManSu_Tou_1553ShuJuFaSong"/>
+                                        <cust:LabelTextBox Label="加计故障：" x:Name="DHManSu_Tou_JiaJiGuZhang"/>
+                                        <cust:LabelTextBox Label="陀螺故障：" x:Name="DHManSu_Tou_TuoLuoGuZhang"/>
+                                        <cust:LabelTextBox Label="经度(组合结果)：" x:Name="DHManSu_Tou_JingDuZuHe"/>
+                                        <cust:LabelTextBox Label="纬度(组合结果)：" x:Name="DHManSu_Tou_WeiDuZuHe"/>
+                                        <cust:LabelTextBox Label="海拔高度(组合结果)：" x:Name="DHManSu_Tou_GaoDuZuHe"/>
+                                        <cust:LabelTextBox Label="东向速度(组合结果)：" x:Name="DHManSu_Tou_DongXiangSuDuZuHe"/>
+                                        <cust:LabelTextBox Label="北向速度(组合结果)：" x:Name="DHManSu_Tou_BeiXiangSuDuZuHe"/>
+                                        <cust:LabelTextBox Label="天向速度(组合结果)：" x:Name="DHManSu_Tou_TianXiangSuDuZuHe"/>
+                                        <cust:LabelTextBox Label="俯仰角：" x:Name="DHManSu_Tou_FuYangJiao"/>
+                                        <cust:LabelTextBox Label="滚转角：" x:Name="DHManSu_Tou_GunZhuanJiao"/>
+                                        <cust:LabelTextBox Label="偏航角：" x:Name="DHManSu_Tou_PianHangJiao"/>
+                                        <cust:LabelTextBox Label="陀螺X数据：" x:Name="DHManSu_Tou_TuoLuoXShuJu"/>
+                                        <cust:LabelTextBox Label="陀螺Y数据：" x:Name="DHManSu_Tou_TuoLuoYShuJu"/>
+                                        <cust:LabelTextBox Label="陀螺Z数据：" x:Name="DHManSu_Tou_TuoLuoZShuJu"/>
+                                        <cust:LabelTextBox Label="加速度计X：" x:Name="DHManSu_Tou_JiaSuDuJiX"/>
+                                        <cust:LabelTextBox Label="加速度计Y：" x:Name="DHManSu_Tou_JiaSuDuJiY"/>
+                                        <cust:LabelTextBox Label="加速度计Z：" x:Name="DHManSu_Tou_JiaSuDuJiZ"/>
                                     </UniformGrid>
                                     <Grid Grid.Row="1" x:Name="DaoHangMan_Tou2">
                                         <Grid.RowDefinitions>
@@ -953,7 +1497,7 @@
                             </ScrollViewer>
 
                             <dx:DXTabControl Grid.Column="1">
-                                <dx:DXTabItem Header="坐标">
+                                <dx:DXTabItem Header="坐标（GPS测量）">
                                     <UniformGrid Rows="3">
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
@@ -1005,7 +1549,7 @@
                                         </dxc:ChartControl>
                                     </UniformGrid>
                                 </dx:DXTabItem>
-                                <dx:DXTabItem Header="速度">
+                                <dx:DXTabItem Header="速度(GPS测量)">
                                     <UniformGrid Rows="3">
                                         <dxc:ChartControl Margin="2,2,2,2">
                                             <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
@@ -1057,6 +1601,266 @@
                                         </dxc:ChartControl>
                                     </UniformGrid>
                                 </dx:DXTabItem>
+                                <dx:DXTabItem Header="坐标（组合结果）">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D  PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="经度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_ZuoBiao_JingDu_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="纬度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_ZuoBiao_WeiDu_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="海拔高度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_ZuoBiao_GaoDu_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="速度(组合结果)">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="东向速度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_Dong_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="北向速度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_Bei_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="天向速度" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_Tian_ZuHe" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="角度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="俯仰角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_FuYangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="滚转角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_GunZhuanJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="偏航角" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_PianHangJiao" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="陀螺">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_TuoLuoX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_TuoLuoY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="陀螺Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_TuoLuoZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
+                                <dx:DXTabItem Header="加速度">
+                                    <UniformGrid Rows="3">
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计X" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_JiaJiX" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Y" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_JiaJiY" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                        <dxc:ChartControl Margin="2,2,2,2">
+                                            <dxc:XYDiagram2D PaneOrientation="Vertical" EnableAxisXNavigation="True" EnableAxisYNavigation="False" Rotated="False" DependentAxesYRange="{x:Null}" EqualBarWidth="False">
+                                                <dxc:XYDiagram2D.AxisY>
+                                                    <dxc:AxisY2D>
+                                                        <dxc:AxisY2D.Title>
+                                                            <dxc:AxisTitle Content="加速度计Z" Visible="True" FontSize="15" />
+                                                        </dxc:AxisY2D.Title>
+                                                    </dxc:AxisY2D>
+                                                </dxc:XYDiagram2D.AxisY>
+                                                <dxc:LineSeries2D  LabelsVisibility="False" MarkerVisible="False" x:Name="chart_DHManSu_Tou_SuDu_JiaJiZ" MarkerSize="10" ArgumentDataMember="X" ValueDataMember="Y" DisplayName="LineSeries1">
+                                                    <dxc:LineSeries2D.LineStyle>
+                                                        <dxc:LineStyle LineJoin="Bevel"/>
+                                                    </dxc:LineSeries2D.LineStyle>
+                                                </dxc:LineSeries2D>
+                                            </dxc:XYDiagram2D>
+                                        </dxc:ChartControl>
+                                    </UniformGrid>
+                                </dx:DXTabItem>
                             </dx:DXTabControl>
                         </Grid>
                     </dx:DXTabItem>
@@ -1083,58 +1887,46 @@
                             <ScrollViewer>
                                 <Grid Grid.Column="0">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="9*"></RowDefinition>
-                                        <RowDefinition Height="4*"></RowDefinition>
+                                        <RowDefinition Height="10*"></RowDefinition>
+                                        <RowDefinition Height="7*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Ti">
-                                        <cust:LabelTextBox Label="陀螺X故障标志：" x:Name="XTJS_Ti_XTuoLuoGuZhang"/>
+                                    <UniformGrid Grid.Row="0" Rows="10" Columns="3" x:Name="FanKui_Ti">
+                                        <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Ti_GPSTime"/>
+                                        <cust:LabelTextBox Label="故障标志：" x:Name="XTJS_Ti_GuZhangBiaoZhi"/>
+                                        <Grid/>
                                         <cust:LabelTextBox Label="GPS SV可用：" x:Name="XTJS_Ti_GPSSVKeYong"/>
                                         <cust:LabelTextBox Label="GPS参与定位：" x:Name="XTJS_Ti_GPSCanYuDingWei"/>
-                                        <cust:LabelTextBox Label="陀螺Y故障标志：" x:Name="XTJS_Ti_YTuoLuoGuZhang"/>
-                                        <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Ti_GPSTime"/>
-                                        <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Ti_PDOP"/>
-                                        <cust:LabelTextBox Label="陀螺Z故障标志：" x:Name="XTJS_Ti_ZTuoLuoGuZhang"/>
-                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Ti_XTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Ti_HDOP"/>
-                                        <cust:LabelTextBox Label="RS422通信状态：" x:Name="XTJS_Ti_RS422GuZhang"/>
-                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Ti_YTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Ti_VDOP"/>
-                                        <cust:LabelTextBox Label="1553B通信标志：" x:Name="XTJS_Ti_1553BGuZhang"/>
-                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Ti_ZTuoLuoWenDu"/>
                                         <Grid/>
-                                        <cust:LabelTextBox Label="经度：" x:Name="XTJS_Ti_JingDu"/>
-                                        <cust:LabelTextBox Label="纬度：" x:Name="XTJS_Ti_WeiDu"/>
-                                        <cust:LabelTextBox Label="海拔高度：" x:Name="XTJS_Ti_GaoDu"/>
-                                        <cust:LabelTextBox Label="东向速度：" x:Name="XTJS_Ti_DongXiangSuDu"/>
-                                        <cust:LabelTextBox Label="北向速度：" x:Name="XTJS_Ti_BeiXiangSuDu"/>
-                                        <cust:LabelTextBox Label="天向速度：" x:Name="XTJS_Ti_TianXiangSuDu"/>
-                                        <cust:LabelTextBox Label="轴向过载：" x:Name="XTJS_Ti_GuoZhai_ZhouXiang"/>
-                                        <cust:LabelTextBox Label="法向过载：" x:Name="XTJS_Ti_GuoZhai_FaXiang"/>
-                                        <cust:LabelTextBox Label="侧向过载：" x:Name="XTJS_Ti_GuoZhai_CeXiang"/>
+                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Ti_XTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Ti_YTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Ti_ZTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Ti_PDOP"/>
+                                        <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Ti_HDOP"/>
+                                        <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Ti_VDOP"/>
+                                        <cust:LabelTextBox Label="经度(GPS测量）：" x:Name="XTJS_Ti_JingDu"/>
+                                        <cust:LabelTextBox Label="纬度(GPS测量）：" x:Name="XTJS_Ti_WeiDu"/>
+                                        <cust:LabelTextBox Label="海拔高度(GPS测量）：" x:Name="XTJS_Ti_GaoDu"/>
+                                        <cust:LabelTextBox Label="东向速度(GPS测量）：" x:Name="XTJS_Ti_DongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="北向速度(GPS测量）：" x:Name="XTJS_Ti_BeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="天向速度(GPS测量）：" x:Name="XTJS_Ti_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="轴向过力：" x:Name="XTJS_Ti_GuoZhai_ZhouXiang"/>
+                                        <cust:LabelTextBox Label="法向过力：" x:Name="XTJS_Ti_GuoZhai_FaXiang"/>
+                                        <cust:LabelTextBox Label="侧向过力：" x:Name="XTJS_Ti_GuoZhai_CeXiang"/>
                                         <cust:LabelTextBox Label="x轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_X"/>
                                         <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Y"/>
                                         <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Ti_JiaoSuDu_Z"/>
+                                        <cust:LabelTextBox Label="BD2 SV可用：" x:Name="XTJS_Ti_BD2SV"/>
+                                        <cust:LabelTextBox Label="BD2参与定位：" x:Name="XTJS_Ti_BD2CanYuDingWei"/>
                                     </UniformGrid>
                                     <Grid Grid.Row="1" x:Name="FanKui_Ti2">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="GPS定位/状态："/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GPS"/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_BD2"/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GLONASS"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_BD2XiuZheng"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_Fix"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
-                                        <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Ti_GPSDingWeiZhuangTai_DGNSS"/>
+                                        <UniformGrid Rows="10" Columns="3">
+                                            <TextBlock Text="GPS定位/状态："/>
+                                            <Grid/>
+                                            <Grid/>
+                                            <cust:LabelTextBox  Label="是否采用北斗:" x:Name="XTJS_Ti_ShiFouCaiYongBeiDou"/>
+                                            <cust:LabelTextBox  Label="定位状态:" x:Name="XTJS_Ti_DingWeiZhuangTai"/>
+                                            <cust:LabelTextBox  Label="GNSS修正状态:" x:Name="XTJS_Ti_GNSSXiuZhengZhuangTai"/>
+                                        </UniformGrid>
                                     </Grid>
                                 </Grid>
                             </ScrollViewer>
@@ -1365,57 +2157,45 @@
                                 <Grid Grid.Column="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="9*"></RowDefinition>
-                                        <RowDefinition Height="4*"></RowDefinition>
+                                        <RowDefinition Height="7*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <UniformGrid Grid.Row="0" Rows="9" Columns="3" x:Name="FanKui_Tou">
-                                        <cust:LabelTextBox Label="陀螺X故障标志：" x:Name="XTJS_Tou_XTuoLuoGuZhang"/>
+                                    <UniformGrid Grid.Row="0" Rows="10" Columns="3" x:Name="FanKui_Tou">
+                                        <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Tou_GPSTime"/>
+                                        <cust:LabelTextBox Label="故障标志：" x:Name="XTJS_Tou_GuZhangBiaoZhi"/>
+                                        <Grid/>
                                         <cust:LabelTextBox Label="GPS SV可用：" x:Name="XTJS_Tou_GPSSVKeYong"/>
                                         <cust:LabelTextBox Label="GPS参与定位：" x:Name="XTJS_Tou_GPSCanYuDingWei"/>
-                                        <cust:LabelTextBox Label="陀螺Y故障标志：" x:Name="XTJS_Tou_YTuoLuoGuZhang"/>
-                                        <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Tou_GPSTime"/>
-                                        <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Tou_PDOP"/>
-                                        <cust:LabelTextBox Label="陀螺Z故障标志：" x:Name="XTJS_Tou_ZTuoLuoGuZhang"/>
-                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Tou_XTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Tou_HDOP"/>
-                                        <cust:LabelTextBox Label="RS422通信状态：" x:Name="XTJS_Tou_RS422GuZhang"/>
-                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Tou_YTuoLuoWenDu"/>
-                                        <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Tou_VDOP"/>
-                                        <cust:LabelTextBox Label="1553B通信标志：" x:Name="XTJS_Tou_1553BGuZhang"/>
-                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Tou_ZTuoLuoWenDu"/>
                                         <Grid/>
-                                        <cust:LabelTextBox Label="经度：" x:Name="XTJS_Tou_JingDu"/>
-                                        <cust:LabelTextBox Label="纬度：" x:Name="XTJS_Tou_WeiDu"/>
-                                        <cust:LabelTextBox Label="海拔高度：" x:Name="XTJS_Tou_GaoDu"/>
-                                        <cust:LabelTextBox Label="东向速度：" x:Name="XTJS_Tou_DongXiangSuDu"/>
-                                        <cust:LabelTextBox Label="北向速度：" x:Name="XTJS_Tou_BeiXiangSuDu"/>
-                                        <cust:LabelTextBox Label="天向速度：" x:Name="XTJS_Tou_TianXiangSuDu"/>
-                                        <cust:LabelTextBox Label="轴向过载：" x:Name="XTJS_Tou_GuoZhai_ZhouXiang"/>
-                                        <cust:LabelTextBox Label="法向过载：" x:Name="XTJS_Tou_GuoZhai_FaXiang"/>
-                                        <cust:LabelTextBox Label="侧向过载：" x:Name="XTJS_Tou_GuoZhai_CeXiang"/>
+                                        <cust:LabelTextBox Label="X陀螺温度：" x:Name="XTJS_Tou_XTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="Y陀螺温度：" x:Name="XTJS_Tou_YTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="Z陀螺温度：" x:Name="XTJS_Tou_ZTuoLuoWenDu"/>
+                                        <cust:LabelTextBox Label="PDOP：" x:Name="XTJS_Tou_PDOP"/>
+                                        <cust:LabelTextBox Label="HDOP：" x:Name="XTJS_Tou_HDOP"/>
+                                        <cust:LabelTextBox Label="VDOP：" x:Name="XTJS_Tou_VDOP"/>
+                                        <cust:LabelTextBox Label="经度(GPS测量）：" x:Name="XTJS_Tou_JingDu"/>
+                                        <cust:LabelTextBox Label="纬度(GPS测量）：" x:Name="XTJS_Tou_WeiDu"/>
+                                        <cust:LabelTextBox Label="海拔高度(GPS测量）：" x:Name="XTJS_Tou_GaoDu"/>
+                                        <cust:LabelTextBox Label="东向速度(GPS测量）：" x:Name="XTJS_Tou_DongXiangSuDu"/>
+                                        <cust:LabelTextBox Label="北向速度(GPS测量）：" x:Name="XTJS_Tou_BeiXiangSuDu"/>
+                                        <cust:LabelTextBox Label="天向速度(GPS测量）：" x:Name="XTJS_Tou_TianXiangSuDu"/>
+                                        <cust:LabelTextBox Label="轴向过力：" x:Name="XTJS_Tou_GuoZhai_ZhouXiang"/>
+                                        <cust:LabelTextBox Label="法向过力：" x:Name="XTJS_Tou_GuoZhai_FaXiang"/>
+                                        <cust:LabelTextBox Label="侧向过力：" x:Name="XTJS_Tou_GuoZhai_CeXiang"/>
                                         <cust:LabelTextBox Label="x轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_X"/>
                                         <cust:LabelTextBox Label="Y轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Y"/>
                                         <cust:LabelTextBox Label="Z轴角速度：" x:Name="XTJS_Tou_JiaoSuDu_Z"/>
+                                        <cust:LabelTextBox Label="BD2 SV可用：" x:Name="XTJS_Tou_BD2SV"/>
+                                        <cust:LabelTextBox Label="BD2参与定位：" x:Name="XTJS_Tou_BD2CanYuDingWei"/>
                                     </UniformGrid>
                                     <Grid Grid.Row="1" x:Name="FanKui_Tou2">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="GPS定位/状态："/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GPS"/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_BD2"/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GLONASS"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_BD2XiuZheng"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_Fix"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
-                                        <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black" Margin="1" Height="20" x:Name="XTJS_Tou_GPSDingWeiZhuangTai_DGNSS"/>
+                                        <UniformGrid Rows="10" Columns="3">
+                                            <TextBlock Text="GPS定位/状态："/>
+                                            <Grid/>
+                                            <Grid/>
+                                            <cust:LabelTextBox  Label="是否采用北斗:" x:Name="XTJS_Tou_ShiFouCaiYongBeiDou"/>
+                                            <cust:LabelTextBox  Label="定位状态:" x:Name="XTJS_Tou_DingWeiZhuangTai"/>
+                                            <cust:LabelTextBox  Label="GNSS修正状态:" x:Name="XTJS_Tou_GNSSXiuZhengZhuangTai"/>
+                                        </UniformGrid>
                                     </Grid>
                                 </Grid>
                             </ScrollViewer>

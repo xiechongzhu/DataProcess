@@ -121,6 +121,57 @@ namespace DataProcess
             XTJS_Tou_buffer = new List<double>();
             XTJS_Ti_buffer = new List<double>();
             HuiLuJianCe_buffer = new List<double>();
+
+
+            DHKuaiSu_Ti_JiaoDu_FuYangJiao_buffer = new List<double>();
+            DHKuaiSu_Ti_JiaoDu_GunZhuanJiao_buffer = new List<double>();
+            DHKuaiSu_Ti_JiaoDu_PianHangJiao_buffer = new List<double>();
+            DHKuaiSu_Ti_TuoLuo_TuoLuoX_buffer = new List<double>();
+            DHKuaiSu_Ti_TuoLuo_TuoLuoY_buffer = new List<double>();
+            DHKuaiSu_Ti_TuoLuo_TuoLuoZ_buffer = new List<double>();
+            DHKuaiSu_Ti_JiaSuDu_JiaJiX_buffer = new List<double>();
+            DHKuaiSu_Ti_JiaSuDu_JiaJiY_buffer = new List<double>();
+            DHKuaiSu_Ti_JiaSuDu_JiaJiZ_buffer = new List<double>();
+            DHKuaiSu_Tou_JiaoDu_FuYangJiao_buffer = new List<double>();
+            DHKuaiSu_Tou_JiaoDu_GunZhuanJiao_buffer = new List<double>();
+            DHKuaiSu_Tou_JiaoDu_PianHangJiao_buffer = new List<double>();
+            DHKuaiSu_Tou_TuoLuo_TuoLuoX_buffer = new List<double>();
+            DHKuaiSu_Tou_TuoLuo_TuoLuoY_buffer = new List<double>();
+            DHKuaiSu_Tou_TuoLuo_TuoLuoZ_buffer = new List<double>();
+            DHKuaiSu_Tou_JiaSuDu_JiaJiX_buffer = new List<double>();
+            DHKuaiSu_Tou_JiaSuDu_JiaJiY_buffer = new List<double>();
+            DHKuaiSu_Tou_JiaSuDu_JiaJiZ_buffer = new List<double>();
+
+            DHManSu_Ti_SuDu_BeiZuHe_buffer = new List<double>();
+            DHManSu_Ti_SuDu_DongZuHe_buffer = new List<double>();
+            DHManSu_Ti_SuDu_TianZuHe_buffer = new List<double>();
+            DHManSu_Ti_ZuoBiao_GaoDuZuHe_buffer = new List<double>();
+            DHManSu_Ti_ZuoBiao_JingDuZuHe_buffer = new List<double>();
+            DHManSu_Ti_ZuoBiao_WeiDuZuHe_buffer = new List<double>();
+            DHManSu_Tou_SuDu_BeiZuHe_buffer = new List<double>();
+            DHManSu_Tou_SuDu_DongZuHe_buffer = new List<double>();
+            DHManSu_Tou_SuDu_TianZuHe_buffer = new List<double>();
+            DHManSu_Tou_ZuoBiao_GaoDuZuHe_buffer = new List<double>();
+            DHManSu_Tou_ZuoBiao_JingDuZuHe_buffer = new List<double>();
+            DHManSu_Tou_ZuoBiao_WeiDuZuHe_buffer = new List<double>();
+            DHManSu_Ti_JiaoDu_FuYangJiao_buffer = new List<double>();
+            DHManSu_Ti_JiaoDu_GunZhuanJiao_buffer = new List<double>();
+            DHManSu_Ti_JiaoDu_PianHangJiao_buffer = new List<double>();
+            DHManSu_Ti_TuoLuo_TuoLuoX_buffer = new List<double>();
+            DHManSu_Ti_TuoLuo_TuoLuoY_buffer = new List<double>();
+            DHManSu_Ti_TuoLuo_TuoLuoZ_buffer = new List<double>();
+            DHManSu_Ti_JiaSuDu_JiaJiX_buffer = new List<double>();
+            DHManSu_Ti_JiaSuDu_JiaJiY_buffer = new List<double>();
+            DHManSu_Ti_JiaSuDu_JiaJiZ_buffer = new List<double>();
+            DHManSu_Tou_JiaoDu_FuYangJiao_buffer = new List<double>();
+            DHManSu_Tou_JiaoDu_GunZhuanJiao_buffer = new List<double>();
+            DHManSu_Tou_JiaoDu_PianHangJiao_buffer = new List<double>();
+            DHManSu_Tou_TuoLuo_TuoLuoX_buffer = new List<double>();
+            DHManSu_Tou_TuoLuo_TuoLuoY_buffer = new List<double>();
+            DHManSu_Tou_TuoLuo_TuoLuoZ_buffer = new List<double>();
+            DHManSu_Tou_JiaSuDu_JiaJiX_buffer = new List<double>();
+            DHManSu_Tou_JiaSuDu_JiaJiY_buffer = new List<double>();
+            DHManSu_Tou_JiaSuDu_JiaJiZ_buffer = new List<double>();
         }
 
         public void Clear()
@@ -202,6 +253,56 @@ namespace DataProcess
             XTJS_Ti_buffer.Clear();
             XTJS_Tou_buffer.Clear();
             HuiLuJianCe_buffer.Clear();
+
+            DHKuaiSu_Ti_JiaoDu_FuYangJiao_buffer.Clear();
+            DHKuaiSu_Ti_JiaoDu_GunZhuanJiao_buffer.Clear();
+            DHKuaiSu_Ti_JiaoDu_PianHangJiao_buffer.Clear();
+            DHKuaiSu_Ti_TuoLuo_TuoLuoX_buffer.Clear();
+            DHKuaiSu_Ti_TuoLuo_TuoLuoY_buffer.Clear();
+            DHKuaiSu_Ti_TuoLuo_TuoLuoZ_buffer.Clear();
+            DHKuaiSu_Ti_JiaSuDu_JiaJiX_buffer.Clear();
+            DHKuaiSu_Ti_JiaSuDu_JiaJiY_buffer.Clear();
+            DHKuaiSu_Ti_JiaSuDu_JiaJiZ_buffer.Clear();
+            DHKuaiSu_Tou_JiaoDu_FuYangJiao_buffer.Clear();
+            DHKuaiSu_Tou_JiaoDu_GunZhuanJiao_buffer.Clear();
+            DHKuaiSu_Tou_JiaoDu_PianHangJiao_buffer.Clear();
+            DHKuaiSu_Tou_TuoLuo_TuoLuoX_buffer.Clear();
+            DHKuaiSu_Tou_TuoLuo_TuoLuoY_buffer.Clear();
+            DHKuaiSu_Tou_TuoLuo_TuoLuoZ_buffer.Clear();
+            DHKuaiSu_Tou_JiaSuDu_JiaJiX_buffer.Clear();
+            DHKuaiSu_Tou_JiaSuDu_JiaJiY_buffer.Clear();
+            DHKuaiSu_Tou_JiaSuDu_JiaJiZ_buffer.Clear();
+
+            DHManSu_Ti_SuDu_BeiZuHe_buffer.Clear();
+            DHManSu_Ti_SuDu_DongZuHe_buffer.Clear();
+            DHManSu_Ti_SuDu_TianZuHe_buffer.Clear();
+            DHManSu_Ti_ZuoBiao_GaoDuZuHe_buffer.Clear();
+            DHManSu_Ti_ZuoBiao_JingDuZuHe_buffer.Clear();
+            DHManSu_Ti_ZuoBiao_WeiDuZuHe_buffer.Clear();
+            DHManSu_Tou_SuDu_BeiZuHe_buffer.Clear();
+            DHManSu_Tou_SuDu_DongZuHe_buffer.Clear();
+            DHManSu_Tou_SuDu_TianZuHe_buffer.Clear();
+            DHManSu_Tou_ZuoBiao_GaoDuZuHe_buffer.Clear();
+            DHManSu_Tou_ZuoBiao_JingDuZuHe_buffer.Clear();
+            DHManSu_Tou_ZuoBiao_WeiDuZuHe_buffer.Clear();
+            DHManSu_Ti_JiaoDu_FuYangJiao_buffer.Clear();
+            DHManSu_Ti_JiaoDu_GunZhuanJiao_buffer.Clear();
+            DHManSu_Ti_JiaoDu_PianHangJiao_buffer.Clear();
+            DHManSu_Ti_TuoLuo_TuoLuoX_buffer.Clear();
+            DHManSu_Ti_TuoLuo_TuoLuoY_buffer.Clear();
+            DHManSu_Ti_TuoLuo_TuoLuoZ_buffer.Clear();
+            DHManSu_Ti_JiaSuDu_JiaJiX_buffer.Clear();
+            DHManSu_Ti_JiaSuDu_JiaJiY_buffer.Clear();
+            DHManSu_Ti_JiaSuDu_JiaJiZ_buffer.Clear();
+            DHManSu_Tou_JiaoDu_FuYangJiao_buffer.Clear();
+            DHManSu_Tou_JiaoDu_GunZhuanJiao_buffer.Clear();
+            DHManSu_Tou_JiaoDu_PianHangJiao_buffer.Clear();
+            DHManSu_Tou_TuoLuo_TuoLuoX_buffer.Clear();
+            DHManSu_Tou_TuoLuo_TuoLuoY_buffer.Clear();
+            DHManSu_Tou_TuoLuo_TuoLuoZ_buffer.Clear();
+            DHManSu_Tou_JiaSuDu_JiaJiX_buffer.Clear();
+            DHManSu_Tou_JiaSuDu_JiaJiY_buffer.Clear();
+            DHManSu_Tou_JiaSuDu_JiaJiZ_buffer.Clear();
         }
 
         //系统判决
@@ -242,6 +343,34 @@ namespace DataProcess
         public List<double> DHKuaiSu_Tou_SuDu_Bei_buffer { get; }
         public List<double> DHKuaiSu_Tou_SuDu_Tian_buffer { get; }
 
+        //新增
+        public List<double> DHKuaiSu_Ti_JiaoDu_FuYangJiao_buffer { get; }
+        public List<double> DHKuaiSu_Ti_JiaoDu_GunZhuanJiao_buffer { get; }
+        public List<double> DHKuaiSu_Ti_JiaoDu_PianHangJiao_buffer { get; }
+
+        public List<double> DHKuaiSu_Ti_TuoLuo_TuoLuoX_buffer { get; }
+        public List<double> DHKuaiSu_Ti_TuoLuo_TuoLuoY_buffer { get; }
+        public List<double> DHKuaiSu_Ti_TuoLuo_TuoLuoZ_buffer { get; }
+
+        public List<double> DHKuaiSu_Ti_JiaSuDu_JiaJiX_buffer { get; }
+        public List<double> DHKuaiSu_Ti_JiaSuDu_JiaJiY_buffer { get; }
+        public List<double> DHKuaiSu_Ti_JiaSuDu_JiaJiZ_buffer { get; }
+
+        public List<double> DHKuaiSu_Tou_JiaoDu_FuYangJiao_buffer { get; }
+        public List<double> DHKuaiSu_Tou_JiaoDu_GunZhuanJiao_buffer { get; }
+        public List<double> DHKuaiSu_Tou_JiaoDu_PianHangJiao_buffer { get; }
+
+        public List<double> DHKuaiSu_Tou_TuoLuo_TuoLuoX_buffer { get; }
+        public List<double> DHKuaiSu_Tou_TuoLuo_TuoLuoY_buffer { get; }
+        public List<double> DHKuaiSu_Tou_TuoLuo_TuoLuoZ_buffer { get; }
+
+        public List<double> DHKuaiSu_Tou_JiaSuDu_JiaJiX_buffer { get; }
+        public List<double> DHKuaiSu_Tou_JiaSuDu_JiaJiY_buffer { get; }
+        public List<double> DHKuaiSu_Tou_JiaSuDu_JiaJiZ_buffer { get; }
+
+
+
+
         //导航慢
         public List<double> DHManSu_Ti_ZuoBiao_JingDu_buffer { get; }
         public List<double> DHManSu_Ti_ZuoBiao_WeiDu_buffer { get; }
@@ -258,6 +387,48 @@ namespace DataProcess
         public List<double> DHManSu_Tou_SuDu_Dong_buffer { get; }
         public List<double> DHManSu_Tou_SuDu_Bei_buffer { get; }
         public List<double> DHManSu_Tou_SuDu_Tian_buffer { get; }
+
+
+        //新增
+        public List<double> DHManSu_Ti_ZuoBiao_JingDuZuHe_buffer { get; }
+        public List<double> DHManSu_Ti_ZuoBiao_WeiDuZuHe_buffer { get; }
+        public List<double> DHManSu_Ti_ZuoBiao_GaoDuZuHe_buffer { get; }
+
+        public List<double> DHManSu_Ti_SuDu_DongZuHe_buffer { get; }
+        public List<double> DHManSu_Ti_SuDu_BeiZuHe_buffer { get; }
+        public List<double> DHManSu_Ti_SuDu_TianZuHe_buffer { get; }
+
+        public List<double> DHManSu_Tou_ZuoBiao_JingDuZuHe_buffer { get; }
+        public List<double> DHManSu_Tou_ZuoBiao_WeiDuZuHe_buffer { get; }
+        public List<double> DHManSu_Tou_ZuoBiao_GaoDuZuHe_buffer { get; }
+
+        public List<double> DHManSu_Tou_SuDu_DongZuHe_buffer { get; }
+        public List<double> DHManSu_Tou_SuDu_BeiZuHe_buffer { get; }
+        public List<double> DHManSu_Tou_SuDu_TianZuHe_buffer { get; }
+
+        public List<double> DHManSu_Ti_JiaoDu_FuYangJiao_buffer { get; }
+        public List<double> DHManSu_Ti_JiaoDu_GunZhuanJiao_buffer { get; }
+        public List<double> DHManSu_Ti_JiaoDu_PianHangJiao_buffer { get; }
+
+        public List<double> DHManSu_Ti_TuoLuo_TuoLuoX_buffer { get; }
+        public List<double> DHManSu_Ti_TuoLuo_TuoLuoY_buffer { get; }
+        public List<double> DHManSu_Ti_TuoLuo_TuoLuoZ_buffer { get; }
+
+        public List<double> DHManSu_Ti_JiaSuDu_JiaJiX_buffer { get; }
+        public List<double> DHManSu_Ti_JiaSuDu_JiaJiY_buffer { get; }
+        public List<double> DHManSu_Ti_JiaSuDu_JiaJiZ_buffer { get; }
+
+        public List<double> DHManSu_Tou_JiaoDu_FuYangJiao_buffer { get; }
+        public List<double> DHManSu_Tou_JiaoDu_GunZhuanJiao_buffer { get; }
+        public List<double> DHManSu_Tou_JiaoDu_PianHangJiao_buffer { get; }
+
+        public List<double> DHManSu_Tou_TuoLuo_TuoLuoX_buffer { get; }
+        public List<double> DHManSu_Tou_TuoLuo_TuoLuoY_buffer { get; }
+        public List<double> DHManSu_Tou_TuoLuo_TuoLuoZ_buffer { get; }
+
+        public List<double> DHManSu_Tou_JiaSuDu_JiaJiX_buffer { get; }
+        public List<double> DHManSu_Tou_JiaSuDu_JiaJiY_buffer { get; }
+        public List<double> DHManSu_Tou_JiaSuDu_JiaJiZ_buffer { get; }
 
         //系统即时
         public List<double> XTJS_Tou_ZuoBiao_JingDu_buffer { get; }

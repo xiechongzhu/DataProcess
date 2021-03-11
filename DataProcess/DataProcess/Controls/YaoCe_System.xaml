@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="DataProcess.Controls.YaoCe_System"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DataProcess.Controls"
+             xmlns:cust="clr-namespace:DataProcess.CustomControl"
+             mc:Ignorable="d" Height="600" Width="800">
+    <Grid>
+        <ScrollViewer>
+            <UniformGrid Rows="18" Columns="3" x:Name="XiTong">
+                <cust:LabelTextBox Label="GNSS时间："  x:Name="XiTong_GNSSTime"/>
+                <cust:LabelTextBox Label="总飞行时间：" x:Name="XiTong_ZongFeiXingTime"/>
+                <Grid/>
+                <cust:LabelTextBox Label="经度：" x:Name="XiTong_JingDu"/>
+                <cust:LabelTextBox Label="纬度：" x:Name="XiTong_WeiDu"/>
+                <cust:LabelTextBox Label="海拔高度：" x:Name="XiTong_GaoDu"/>
+                <cust:LabelTextBox Label="东向速度：" x:Name="XiTong_DongXiangSuDu"/>
+                <cust:LabelTextBox Label="北向速度：" x:Name="XiTong_BeiXiangSuDu"/>
+                <cust:LabelTextBox Label="天向速度：" x:Name="XiTong_TianXiangSuDu"/>
+                <cust:LabelTextBox Label="Wx角速度：" x:Name="XiTong_WxJiaoSuDuValue"/>
+                <cust:LabelTextBox Label="Wy角速度：" x:Name="XiTong_WyJiaoSuDuValue"/>
+                <cust:LabelTextBox Label="Wz角速度：" x:Name="XiTong_WzJiaoSuDuValue"/>
+                <cust:LabelTextBox Label="轴向比力：" x:Name="XiTong_ZhouXiangBiLi"/>
+                <Grid/>
+                <Grid/>
+                <cust:LabelTextBox Label="当前发射系X：" x:Name="XiTong_XFaSheXi"/>
+                <cust:LabelTextBox Label="当前发射系Y：" x:Name="XiTong_YFaSheXi"/>
+                <cust:LabelTextBox Label="当前发射系Z：" x:Name="XiTong_ZFaSheXi"/>
+                <cust:LabelTextBox Label="预示落点Z：" x:Name="XiTong_YuShiLuoDianZ"/>
+                <cust:LabelTextBox Label="预示落点射程：" x:Name="XiTong_YuShiLuoDianSheCheng"/>
+                <Grid/>
+                <cust:LabelTextBox Label="策略阶段：" x:Name="XiTong_CeLueJieDuan"/>
+                <cust:LabelTextBox Label="紧急断电：" x:Name="XiTong_JinJiDuanDian"/>
+                <cust:LabelTextBox Label="起飞：" x:Name="XiTong_QiFei"/>
+                <cust:LabelTextBox Label="预令：" x:Name="XiTong_YuLing"/>
+                <cust:LabelTextBox Label="动令：" x:Name="XiTong_DongLing"/>
+                <cust:LabelTextBox Label="一级分离：" x:Name="XiTong_YiJiFeiLi"/>
+                <cust:LabelTextBox Label="策略判决结果2：" x:Name="XiTong_CeLuePanJue1"/>
+                <cust:LabelTextBox Label="策略判决结果2：" x:Name="XiTong_CeLuePanJue2"/>
+                <Grid/>
+                <cust:LabelTextBox Label="输入采集1：" x:Name="XiTong_ShuRuCaiJi1"/>
+                <cust:LabelTextBox Label="输入采集2：" x:Name="XiTong_ShuRuCaiJi2"/>
+                <Grid/>
+                <cust:LabelTextBox Label="输入采集3：" x:Name="XiTong_ShuRuCaiJi3"/>
+                <cust:LabelTextBox Label="输入采集4：" x:Name="XiTong_ShuRuCaiJi4"/>
+                <Grid/>
+                <cust:LabelTextBox Label="弹头解保：" x:Name="XiTong_DanTouJieBao"/>
+                <cust:LabelTextBox Label="起爆状态：" x:Name="XiTong_QiBaoZhuangTai"/>
+                <Grid/>
+                <cust:LabelTextBox Label="内部控制电：" x:Name="XiTong_NeiBuKongZhiDian"/>
+                <cust:LabelTextBox Label="功率电：" x:Name="XiTong_GongLvDian"/>
+                <Grid/>
+                <cust:LabelTextBox Label="导航数据选择：" x:Name="XiTong_DaoHangShuJuXuanZe"/>
+                <cust:LabelTextBox Label="陀螺数据融合：" x:Name="XiTong_TuoLuoShuJuRongHe"/>
+                <cust:LabelTextBox Label="数据未更新：" x:Name="XiTong_ShuJuWeiGengXin"/>
+                <cust:LabelTextBox Label="优选结果：" x:Name="XiTong_YouXuanJieGuo"/>
+                <cust:LabelTextBox Label="弹头组合：" x:Name="XiTong_DanTouZuHe"/>
+                <cust:LabelTextBox Label="弹体组合：" x:Name="XiTong_DanTiZuHe"/>
+                <cust:LabelTextBox Label="导航状态指示2：" x:Name="XiTong_DaoHangZhuangTaiZhiShi2"/>
+                <cust:LabelTextBox Label="导航状态指示3：" x:Name="XiTong_DaoHangZhuangTaiZhiShi3"/>
+
+
+            </UniformGrid>
+        </ScrollViewer>
+        
+    </Grid>
+</UserControl>

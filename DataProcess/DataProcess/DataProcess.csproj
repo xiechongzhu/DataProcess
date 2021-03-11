@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{144670CB-6396-488C-A76D-2E03A3B69E78}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataProcess</RootNamespace>
     <AssemblyName>DataProcess</AssemblyName>
@@ -124,8 +124,14 @@
     <Compile Include="Controls\MyChartControl.xaml.cs">
       <DependentUpon>MyChartControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PopUp.xaml.cs">
+      <DependentUpon>PopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\YaoCeShuJuXianShi.xaml.cs">
       <DependentUpon>YaoCeShuJuXianShi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\YaoCe_System.xaml.cs">
+      <DependentUpon>YaoCe_System.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControl\LabelTextBox.cs" />
     <Compile Include="CustomControl\ProgressbarToNumber.cs" />
@@ -175,6 +181,7 @@
     <Compile Include="YaoCe\CRC16.cs" />
     <Compile Include="YaoCe\DataLogger.cs" />
     <Compile Include="YaoCe\DataParser.cs" />
+    <Compile Include="YaoCe\DetermineDataInterval.cs" />
     <Compile Include="YaoCe\GenericFunction.cs" />
     <Compile Include="YaoCe\HanziToPinyin.cs" />
     <Compile Include="YaoCe\Logger.cs" />
@@ -195,7 +202,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\PopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\YaoCeShuJuXianShi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\YaoCe_System.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
