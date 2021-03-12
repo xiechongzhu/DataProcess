@@ -44,11 +44,11 @@
                                     <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="前向必炸线(米):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editBoomLineFront"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editBoomLineFront"  Mask="f13" MaskType="Numeric"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="后向必炸线(米):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editBoomLineBack"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editBoomLineBack"  Mask="f13" MaskType="Numeric"/>
                                 <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="侧向必炸线(米):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="5" x:Name="editBoomLineSide"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="5" x:Name="editBoomLineSide"  Mask="f13" MaskType="Numeric"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -65,9 +65,9 @@
                                     <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="管道长度(米):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editPipeLength"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editPipeLength"  Mask="f13" MaskType="Numeric"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="管道宽度(米):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editPipeWidth"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editPipeWidth"  Mask="f13" MaskType="Numeric"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -84,9 +84,9 @@
                                     <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="经度(°):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editStartLng"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editStartLng"  Mask="f13" MaskType="Numeric"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="纬度(°):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editStartLat"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editStartLat"  Mask="f13" MaskType="Numeric"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -103,9 +103,9 @@
                                     <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="经度(°):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editEndLng"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editEndLng"  Mask="f13" MaskType="Numeric"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="纬度(°):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editEndLat"  Mask="f9" MaskType="Numeric"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editEndLat"  Mask="f13" MaskType="Numeric"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -132,9 +132,9 @@
                     <dxe:TextEdit x:Name="editFlyIpAddr" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" Mask="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" MaskType="RegEx"/>
                     <TextBlock Text="飞控组播端口:" Grid.Row="1" Grid.Column="2" Margin="25,5,5,5"/>
                     <dxe:TextEdit x:Name="editFlyPort" Grid.Row="1" Grid.Column="3" Margin="5,5,5,5" Mask="\d{1,5}" MaskType="RegEx"/>
-                    <TextBlock Text="遥测组播地址:" Grid.Row="2" Grid.Column="0" Margin="5,5,5,5"/>
+                    <TextBlock Text="自主安控组播地址:" Grid.Row="2" Grid.Column="0" Margin="5,5,5,5"/>
                     <dxe:TextEdit x:Name="editYaoCeIpAddr" Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" Mask="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" MaskType="RegEx"/>
-                    <TextBlock Text="遥测端口号:" Grid.Row="2" Grid.Column="2" Margin="25,5,5,5"/>
+                    <TextBlock Text="自主安控端口号:" Grid.Row="2" Grid.Column="2" Margin="25,5,5,5"/>
                     <dxe:TextEdit x:Name="editYaoCePort" Grid.Row="2" Grid.Column="3" Margin="5,5,5,5" Mask="\d{1,5}" MaskType="RegEx"/>
                 </Grid>
             </dx:DXTabItem>
@@ -165,69 +165,69 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="点火同步系数:" Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editFire" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editFire" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="点火同步偏置:" Grid.Row="0" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editFireFix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editFireFix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="头罩内温度传感器T1系数:" Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editHoodTemp" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editHoodTemp" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="头罩内温度传感器T1偏置:" Grid.Row="1" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editHoodTempFix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editHoodTempFix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内接收机附近空腔温度传感器T2系数:" Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editInsAirTemp" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editInsAirTemp" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内接收机附近空腔温度传感器T2偏置:" Grid.Row="2" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editInsAirTempFix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editInsAirTempFix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内筋条壁面温度传感器T3系数:" Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editInsWallTemp" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editInsWallTemp" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内筋条壁面温度传感器T3偏置:" Grid.Row="3" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editInsWallTempFix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editInsWallTempFix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控仓内空腔温度T4系数:" Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttAirTemp" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttAirTemp" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓内空腔温度T4偏置:" Grid.Row="4" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttAirTempFix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttAirTempFix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="级间断内窗口加强筋上温度传感器T5系数:" Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editTemperature1Temp" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editTemperature1Temp" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="级间断内窗口加强筋上温度传感器T5偏置:" Grid.Row="5" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editTemperature1TempFix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editTemperature1TempFix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="尾段内温度传感器T6系数:" Grid.Row="6" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editTemperature2Temp" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editTemperature2Temp" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="尾段内温度传感器T6偏置:" Grid.Row="6" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editTemperature2TempFix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editTemperature2TempFix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="Ⅱ象限气瓶表面温度TZ1系数:" Grid.Row="7" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls1Temp" Grid.Row="7" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls1Temp" Grid.Row="7" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="Ⅱ象限气瓶表面温度TZ1偏置:" Grid.Row="7" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls1TempFix" Grid.Row="7" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls1TempFix" Grid.Row="7" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="Ⅳ象限气瓶表面温度TZ2系数:" Grid.Row="8" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls2Temp" Grid.Row="8" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls2Temp" Grid.Row="8" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="Ⅳ象限气瓶表面温度TZ2偏置:" Grid.Row="8" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls2TempFix" Grid.Row="8" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls2TempFix" Grid.Row="8" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="Ⅰ象限贮箱表面温度TZ3系数:" Grid.Row="9" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls3Temp" Grid.Row="9" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls3Temp" Grid.Row="9" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="Ⅰ象限贮箱表面温度TZ3偏置:" Grid.Row="9" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls3TempFix" Grid.Row="9" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls3TempFix" Grid.Row="9" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="Ⅰ象限贮箱表面温度TZ4系数:" Grid.Row="10" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls4Temp" Grid.Row="10" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls4Temp" Grid.Row="10" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="Ⅰ象限贮箱表面温度TZ4偏置:" Grid.Row="10" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls4TempFix" Grid.Row="10" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls4TempFix" Grid.Row="10" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="Ⅲ象限贮箱表面温度TZ5系数:" Grid.Row="11" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls5Temp" Grid.Row="11" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls5Temp" Grid.Row="11" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="Ⅲ象限贮箱表面温度TZ5偏置:" Grid.Row="11" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls5TempFix" Grid.Row="11" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls5TempFix" Grid.Row="11" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="Ⅲ象限贮箱表面温度TZ6系数:" Grid.Row="12" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls6Temp" Grid.Row="12" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls6Temp" Grid.Row="12" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="Ⅲ象限贮箱表面温度TZ6偏置:" Grid.Row="12" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttWalls6TempFix" Grid.Row="12" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttWalls6TempFix" Grid.Row="12" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="压力系数">
@@ -248,39 +248,39 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="仪器内仓压力传感器P1系数:" Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editInsPresure" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editInsPresure" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器内仓压力传感器P1偏置:" Grid.Row="0" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editInsPresureFix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editInsPresureFix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控仓内空腔压力传感器P2系数:" Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttiPresure" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttiPresure" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓内空腔压力传感器P2偏置:" Grid.Row="1" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editAttiPresureFix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editAttiPresureFix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="尾段内压力传感器P3系数:" Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editTailPresure" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editTailPresure" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="尾段内压力传感器P3偏置:" Grid.Row="2" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editTailPresureFix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editTailPresureFix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="级间段一级发动机压力传感器系数:" Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLevel1Presure" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLevel1Presure" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="级间段一级发动机压力传感器偏置:" Grid.Row="3" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLevel1PresureFix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLevel1PresureFix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内二级发动机压力传感器PD2系数:" Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLevel2TransmitterPresure" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLevel2TransmitterPresure" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内二级发动机压力传感器PD2偏置:" Grid.Row="4" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLevel2TransmitterPresureFix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLevel2TransmitterPresureFix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控高压传感器PZ1系数:" Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editGestureControlHighPresure" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editGestureControlHighPresure" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控高压传感器PZ1偏置:" Grid.Row="5" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editGestureControlHighPresureFix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editGestureControlHighPresureFix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控低压传感器PZ2系数:" Grid.Row="6" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editGestureControlLowPresure" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editGestureControlLowPresure" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控低压传感器PZ2偏置:" Grid.Row="6" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editGestureControlLowPresureFix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editGestureControlLowPresureFix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="振动系数">
@@ -312,94 +312,94 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="姿控仓内安装板前版面振动传感器V1-X系数:" Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓内安装板前版面振动传感器V1-X偏置:" Grid.Row="0" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1Fix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1Fix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控仓内安装板前版面振动传感器V1-Y系数:" Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓内安装板前版面振动传感器V1-Y偏置:" Grid.Row="1" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2Fix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2Fix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控仓内安装板前版面振动传感器V1-Z系数:" Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake3" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake3" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓内安装板前版面振动传感器V1-Z偏置:" Grid.Row="2" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake3Fix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake3Fix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内十字梁上振动传感器V2-X系数:" Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake4" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake4" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内十字梁上振动传感器V2-X偏置:" Grid.Row="3" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake4Fix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake4Fix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内十字梁上振动传感器V2-Y系数:" Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake5" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake5" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内十字梁上振动传感器V2-Y偏置:" Grid.Row="4" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake5Fix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake5Fix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内十字梁上振动传感器V2-Z系数:" Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake6" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake6" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内十字梁上振动传感器V2-Z偏置:" Grid.Row="5" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake6Fix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake6Fix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内IMU上振动传感器V3-X系数:" Grid.Row="6" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake7" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake7" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内IMU上振动传感器V3-X偏置:" Grid.Row="6" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake7Fix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake7Fix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内IMU上振动传感器V3-Y系数:" Grid.Row="7" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake8" Grid.Row="7" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake8" Grid.Row="7" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内IMU上振动传感器V3-Y偏置:" Grid.Row="7" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake8Fix" Grid.Row="7" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake8Fix" Grid.Row="7" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内IMU上振动传感器V3-Z系数:" Grid.Row="8" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake9" Grid.Row="8" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake9" Grid.Row="8" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内IMU上振动传感器V3-Z偏置:" Grid.Row="8" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake9Fix" Grid.Row="8" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake9Fix" Grid.Row="8" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内后框上振动传感器V4-X系数:" Grid.Row="9" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake10" Grid.Row="9" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake10" Grid.Row="9" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内后框上振动传感器V4-X偏置:" Grid.Row="9" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake10Fix" Grid.Row="9" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake10Fix" Grid.Row="9" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内后框上振动传感器V4-Y系数:" Grid.Row="10" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake11" Grid.Row="10" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake11" Grid.Row="10" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内后框上振动传感器V4-Y偏置:" Grid.Row="10" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake11Fix" Grid.Row="10" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake11Fix" Grid.Row="10" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内后框上振动传感器V4-Z系数:" Grid.Row="11" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake12" Grid.Row="11" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake12" Grid.Row="11" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内后框上振动传感器V4-Z偏置:" Grid.Row="11" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake12Fix" Grid.Row="11" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake12Fix" Grid.Row="11" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="级间段内后法兰振动传感器V5-X系数:" Grid.Row="12" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1X" Grid.Row="12" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1X" Grid.Row="12" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="级间段内后法兰振动传感器V5-X偏置:" Grid.Row="12" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1XFix" Grid.Row="12" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1XFix" Grid.Row="12" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="级间段内后法兰振动传感器V5-Y系数:" Grid.Row="13" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1Y" Grid.Row="13" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1Y" Grid.Row="13" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="级间段内后法兰振动传感器V5-Y偏置:" Grid.Row="13" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1YFix" Grid.Row="13" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1YFix" Grid.Row="13" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="级间段内后法兰振动传感器V5-Z系数:" Grid.Row="14" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1Z" Grid.Row="14" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1Z" Grid.Row="14" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="级间段内后法兰振动传感器V5-Z偏置:" Grid.Row="14" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake1ZFix" Grid.Row="14" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake1ZFix" Grid.Row="14" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="尾段内振动传感器V6-X系数:" Grid.Row="15" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2X" Grid.Row="15" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2X" Grid.Row="15" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="尾段内振动传感器V6-X偏置:" Grid.Row="15" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2XFix" Grid.Row="15" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2XFix" Grid.Row="15" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="尾段内振动传感器V6-Y系数:" Grid.Row="16" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2Y" Grid.Row="16" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2Y" Grid.Row="16" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="尾段内振动传感器V6-Y偏置:" Grid.Row="16" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2YFix" Grid.Row="16" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2YFix" Grid.Row="16" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="尾段内振动传感器V6-Z系数:" Grid.Row="17" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2Z" Grid.Row="17" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2Z" Grid.Row="17" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="尾段内振动传感器V6-Z偏置:" Grid.Row="17" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editShake2ZFix" Grid.Row="17" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editShake2ZFix" Grid.Row="17" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="冲击噪声系数">
@@ -420,39 +420,39 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="仪器舱内前端框冲击传感器SH1-X系数:" Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash1_1" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash1_1" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内前端框冲击传感器SH1-X偏置:" Grid.Row="0" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash1_1Fix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash1_1Fix" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内前端框冲击传感器SH1-Y系数:" Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash1_2" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash1_2" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内前端框冲击传感器SH1-Y偏置:" Grid.Row="1" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash1_2Fix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash1_2Fix" Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控仓后端框x向冲击传感器SH2(轴向)系数:" Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash1_3" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash1_3" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓后端框x向冲击传感器SH2(轴向)偏置:" Grid.Row="2" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash1_3Fix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash1_3Fix" Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控仓后端框y向冲击传感器SH3(Ⅱ-Ⅳ)系数:" Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash2" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash2" Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓后端框y向冲击传感器SH3(Ⅱ-Ⅳ)偏置:" Grid.Row="3" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editLash2Fix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editLash2Fix" Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="仪器舱内噪声传感器N1系数:" Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editNoise1" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editNoise1" Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="仪器舱内噪声传感器N1偏置:" Grid.Row="4" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editNoise1Fix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editNoise1Fix" Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="姿控仓内噪声传感器N2系数:" Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editNoise2" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editNoise2" Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="姿控仓内噪声传感器N2偏置:" Grid.Row="5" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editNoise2Fix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editNoise2Fix" Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
 
                     <TextBlock Text="尾段内噪声传感器N3系数:" Grid.Row="6" Grid.Column="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editNoise" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editNoise" Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                     <TextBlock Text="尾段内噪声传感器N3偏置:" Grid.Row="6" Grid.Column="2" Margin="12,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <dxe:TextEdit x:Name="editNoiseFix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f9" MaskType="Numeric"/>
+                    <dxe:TextEdit x:Name="editNoiseFix" Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" Mask="f13" MaskType="Numeric"/>
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="视频软件">

@@ -91,9 +91,9 @@ namespace DataProcess.Controls
                 NorthSpeed = String.Format("{0}m/s", status.beiXiangSuDu);
                 SkySpeed = String.Format("{0}m/s", status.tianXiangSuDu);
                 EastSpeed = String.Format("{0}m/s", status.dongXiangSuDu);
-                Lng = LngLatToString((float)((status.jingDu) * 1e-2));
-                Lat = LngLatToString((float)((status.weiDu) * 1e-2));
-                FlyHeight = String.Format("{0}km", status.haiBaGaoDu * 1e-2);
+                Lng = LngLatToString((float)((status.jingDu) * 1e-7));
+                Lat = LngLatToString((float)((status.weiDu) * 1e-7));
+                FlyHeight = String.Format("{0}km", status.haiBaGaoDu * 1e-5);
             }
         }
 
