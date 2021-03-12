@@ -606,342 +606,6 @@ namespace DataProcess.Controls
             AddVariable();
             ResetAllTextEdit();
 
-            ToolTip ttprogbar = new ToolTip();
-            ttprogbar.Content = "Shows the progress of a download.";
-            XiTong_GNSSTime.ToolTip = (ttprogbar);
-        }
-
-        public void Post()
-        {
-            SYSTEMPARSE_STATUS s = new SYSTEMPARSE_STATUS
-            {
-                weiDu = 20,                    // 纬度
-                jingDu = 20,                   // 经度
-                haiBaGaoDu = 20,               // 海拔高度
-                dongXiangSuDu = 20,            // 东向速度
-                beiXiangSuDu = 20,             // 北向速度
-                tianXiangSuDu = 20,            // 天向速度
-                WxJiaoSuDu = 20,               // Wx角速度
-                WyJiaoSuDu = 20,               // Wy角速度
-                WzJiaoSuDu = 20,               // Wz角速度
-                zhouXiangGuoZai = 20,          // 轴向过载
-                GNSSTime = 20,                 // GNSS时间
-                curFaSheXi_X = 20,             // 当前发射系X
-                curFaSheXi_Y = 20,             // 当前发射系Y
-                curFaSheXi_Z = 20,             // 当前发射系Z
-                yuShiLuoDianSheCheng = 20,     // 预示落点射程
-                yuShiLuoDianZ = 20,            // 预示落点Z
-                feiXingZongShiJian = 20,       // 飞行总时间
-                canShiZhuangTai = 2,    // 参试状态 0x00:无意义，0x01:正式实验，0x10：测试1，数据输出状态
-                ceLueJieDuan = 2,               // 策略阶段(0-准备 1-起飞 2-一级 3-二级 4-结束)
-                jueCePanJueJieGuo1 = 2,         // 策略判决结果1
-                jueCePanJueJieGuo2 = 2,         // 策略判决结果2
-                shuRuCaiJi1 = 2,    // 输入采集1
-                shuRuCaiJi2 = 2,    // 输入采集2
-                shuRuCaiJi3 = 2,    // 输入采集3
-                shuRuCaiJi4 = 2,    // 输入采集4
-                danTouJieBaoXinHao = 5,    // 弹头解保信号
-                qiBaoXinHao = 2.3F,    // 起爆状态遥测信号
-                neiBuKongZhiDianYa = 30,    // 内部控制电压
-                gongLvDianDianYa = 44,  // 功率电电压
-                daoHangTip1 = 20,
-                daoHangTip2 = 20,
-                daoHangTip3 = 20,
-                daoHangTip4 = 20,
-            };
-            DAOHANGSHUJU_KuaiSu sDHK = new DAOHANGSHUJU_KuaiSu
-            {
-                daoHangXiTongShiJian = 20000,     // 导航系统时间
-                                                  // 
-                jingDu = 20,                    // 经度（组合结果）当量：1e-7
-                                                // 
-                weiDu = 20,                     // 纬度（组合结果）当量：1e-7
-                                                // 
-                haiBaGaoDu = 20,                // 海拔高度（组合结果）当量：1e-7
-                                                // 
-
-                // 
-                dongXiangSuDu = 20,             // 东向速度（组合结果）当量：1e-7
-                                                // 
-                beiXiangSuDu = 20,              // 北向速度（组合结果）当量：1e-7
-                                                // 
-                tianXiangSuDu = 20,             // 天向速度（组合结果）当量：1e-7
-                                                // 
-
-                // 
-                GNSSTime = 2000,                 // GNSS时间 单位s,UTC秒部
-                                                 // 
-                fuYangJiao = 20,               // 俯仰角
-                                               // 
-                gunZhuanJiao = 20,             // 滚转角
-                                               // 
-                pianHangJiao = 20,             // 偏航角
-                                               // 
-
-                // 
-                // 上5ms速度
-                // 
-                tuoLuoShuJu_X = 20,            // 陀螺X数据
-                                               // 
-                tuoLuoShuJu_Y = 20,            // 陀螺Y数据
-                                               // 
-                tuoLuoShuJu_Z = 20,            // 陀螺Z数据
-                                               // 
-
-                // 
-                // 上5ms加速度
-                // 
-                jiaSuDuJiShuJu_X = 20,         // 加速度计X数据
-                                               // 
-                jiaSuDuJiShuJu_Y = 20,         // 加速度计Y数据
-                                               // 
-                jiaSuDuJiShuJu_Z = 20,         // 加速度计Z数据
-                                               // 
-
-                // 
-                // 本5ms速度
-                // 
-                //tuoLuoShuJu_X2 = 20,           // 陀螺X数据2
-                // 
-                //tuoLuoShuJu_Y2 = 20,           // 陀螺Y数据2
-                // 
-                //tuoLuoShuJu_Z2 = 20,           // 陀螺Z数据2
-                // 
-
-                // 
-                // 本5ms加速度
-                // 
-                //jiaSuDuJiShuJu_X2 = 20,        // 加速度计X数据2
-                // 
-                //jiaSuDuJiShuJu_Y2 = 20,        // 加速度计Y数据2
-                // 
-                //jiaSuDuJiShuJu_Z2 = 20,        // 加速度计Z数据2
-                // 
-
-                // 
-                zhuangTaiBiaoZhiWei = 20,        // 状态标志位
-                                                 // 
-                tuoLuoGuZhangBiaoZhi = 20,       // 陀螺故障标志
-                                                 // 
-            };
-            DAOHANGSHUJU_ManSu sDHM = new DAOHANGSHUJU_ManSu
-            // 
-            {
-                // 
-                GPSTime = 20,                          // GPS时间 单位s,UTC秒部
-                                                       // 
-                GPSDingWeiMoShi = 20,                    // GPS定位模式
-                                                         // 
-
-                // 
-                GPS_SV = 20,                             // GPS SV可用/参与定位数（低4位为可用数，高4位为参与定位数）
-                                                         // 
-                BD2_SV = 20,                             // BD2 SV可用/参与定位数（低4位为可用数，高4位为参与定位数）
-                                                         // 
-
-                // 
-                jingDu = 20,                            // 经度（GPS测量）当量：1e-7
-                                                        // 
-                weiDu = 20,                             // 纬度（GPS测量）当量：1e-7
-                                                        // 
-                haiBaGaoDu = 20,                        // 海拔高度（GPS测量）当量：1e-2
-                                                        // 
-
-                // 
-                dongXiangSuDu = 20,                     // 东向速度（GPS测量）当量：1e-2
-                                                        // 
-                beiXiangSuDu = 20,                      // 北向速度（GPS测量）当量：1e-2
-                                                        // 
-                tianXiangSuDu = 20,                     // 天向速度（GPS测量）当量：1e-2
-                                                        // 
-
-                // 
-                PDOP = 20,                             // PDOP 当量0.01
-                                                       // 
-                HDOP = 20,                             // HDOP 当量0.01
-                                                       // 
-                VDOP = 20,                             // VDOP 当量0.01
-                                                       // 
-
-                // 
-                tuoLuoWenDu_X = 20,                      // X陀螺温度
-                                                         // 
-                tuoLuoWenDu_Y = 20,                      // Y陀螺温度
-                                                         // 
-                tuoLuoWenDu_Z = 20,                      // Z陀螺温度
-                                                         // 
-
-                // 
-                jiaJiWenDu_X = 20,                       // X加计温度
-                                                         // 
-                jiaJiWenDu_Y = 20,                       // Y加计温度
-                                                         // 
-                jiaJiWenDu_Z = 20,                       // Z加计温度
-                                                         // 
-
-                // 
-                dianYaZhi_zheng5V = 20,                  // +5V电压值     当量0.05
-                                                         // 
-                dianYaZhi_fu5V = 20,                     // -5V电压值     当量0.05
-                                                         // 
-
-                // 
-                dianYaZhi_zheng15V = 20,                 // +15V电压值    当量0.02
-                                                         // 
-                dianYaZhi_fu15V = 20,                    // -15V电压值    当量0.02
-                                                         // 
-
-                // 
-                tuoLuoDianYaZhi_X_zheng5V = 20,          // X陀螺+5V电压值     当量0.05
-                                                         // 
-                tuoLuoDianYaZhi_X_fu5V = 20,             // X陀螺-5V电压值     当量0.05
-                                                         // 
-
-                // 
-                tuoLuoDianYaZhi_Y_zheng5V = 20,          // Y陀螺+5V电压值     当量0.05
-                                                         // 
-                tuoLuoDianYaZhi_Y_fu5V = 20,             // Y陀螺-5V电压值     当量0.05
-                                                         // 
-
-                // 
-                tuoLuoDianYaZhi_Z_zheng5V = 20,          // Z陀螺+5V电压值     当量0.05
-                                                         // 
-                tuoLuoDianYaZhi_Z_fu5V = 20,             // Z陀螺-5V电压值     当量0.05
-                                                         // 
-
-                // 
-                yuTuoLuoTongXingCuoWuJiShu_X = 20,       // 与X陀螺通信错误计数（一直循环计数）
-                                                         // 
-                yuTuoLuoTongXingCuoWuJiShu_Y = 20,       // 与Y陀螺通信错误计数（一直循环计数）
-                                                         // 
-                yuTuoLuoTongXingCuoWuJiShu_Z = 20,       // 与Z陀螺通信错误计数（一直循环计数）
-                                                         // 
-                yuGPSJieShouJiTongXingCuoWuJiShu = 20,   // 与GPS接收机通信错误计数（一直循环计数）
-                                                         // 
-
-                // 
-                IMUJinRuZhongDuanCiShu = 20,             // IMU进入中断次数（每800次+1 循环计数）
-                                                         // 
-                GPSZhongDuanCiShu = 20,                  // GPS中断次数（每10次+1 循环计数）
-                                                         // 
-
-                // 
-                biaoZhiWei1 = 20,                        // 标志位1
-                                                         // 
-                biaoZhiWei2 = 20,                        // 标志位2
-                                                         // 
-
-                jingDu_ZuHe = 20,                            // 经度（GPS测量）当量：1e-7
-                                                             // 
-                weiDu_ZuHe = 20,                             // 纬度（GPS测量）当量：1e-7
-                                                             // 
-                haiBaGaoDu_ZuHe = 20,                        // 海拔高度（GPS测量）当量：1e-2
-                                                             // 
-
-                // 
-                dongXiangSuDu_ZuHe = 20,                     // 东向速度（GPS测量）当量：1e-2
-                                                             // 
-                beiXiangSuDu_ZuHe = 20,                      // 北向速度（GPS测量）当量：1e-2
-                                                             // 
-                tianXiangSuDu_ZuHe = 20,                     // 天向速度（GPS测量）当量：1e-2
-
-                fuYangJiao = 20,               // 俯仰角
-                                               // 
-                gunZhuanJiao = 20,             // 滚转角
-                                               // 
-                pianHangJiao = 20,             // 偏航角
-                                               // 
-
-                // 
-                // 上5ms速度
-                // 
-                tuoLuoShuJu_X = 20,            // 陀螺X数据
-                                               // 
-                tuoLuoShuJu_Y = 20,            // 陀螺Y数据
-                                               // 
-                tuoLuoShuJu_Z = 20,            // 陀螺Z数据
-                                               // 
-
-                // 
-                // 上5ms加速度
-                // 
-                jiaSuDuJiShuJu_X = 20,         // 加速度计X数据
-                                               // 
-                jiaSuDuJiShuJu_Y = 20,         // 加速度计Y数据
-                                               // 
-                jiaSuDuJiShuJu_Z = 20,         // 加速度计Z数据
-            }; //
-            SYSTEMImmediate_STATUS sXTJS = new SYSTEMImmediate_STATUS
-            // 
-            {
-                // 
-                guZhangBiaoZhi = 20,         // 故障标志位
-                                             // 
-
-                // 
-                tuoLuoWenDu_X = 20,          // X陀螺温度
-                                             // 
-                tuoLuoWenDu_Y = 20,          // Y陀螺温度
-                                             // 
-                tuoLuoWenDu_Z = 20,          // Z陀螺温度
-                                             // 
-
-                // 
-                GPS_SV = 20,                 // GPS SV可用/参与定位数（低4位为可用数，高4位为参与定位数）
-                                             // 
-                GPSDingWeiMoShi = 20,        // GPS定位模式
-                                             // 
-
-                // 
-                PDOP = 20,                 // PDOP 
-                                           // 
-                HDOP = 20,                 // HDOP 
-                                           // 
-                VDOP = 20,                 // VDOP 
-                                           // 
-
-                // 
-                GPSTime = 20,              // GPS时间 单位s,UTC秒，当量：0.1
-                                           // 
-
-                // 
-                jingDu = 20,                // 经度           当量：1e-7
-                                            // 
-                weiDu = 20,                 // 纬度           当量：1e-7
-                                            // 
-                haiBaGaoDu = 20,            // 海拔高度       当量：1e-2
-                                            // 
-
-                // 
-                dongXiangSuDu = 20,         // 东向速度       当量：1e-2
-                                            // 
-                beiXiangSuDu = 20,          // 北向速度       当量：1e-2
-                                            // 
-                tianXiangSuDu = 20,         // 天向速度       当量：1e-2
-                                            // 
-
-                // 
-                zhouXiangGuoZai = 20,      // 轴向过载
-                                           // 
-                faXiangGuoZai = 20,        // 法向过载
-                                           // 
-                ceXiangGuoZai = 20,        // 侧向过载
-                                           // 
-
-                // 
-                WxJiaoSuDu = 20,           // Wx角速度
-                                           // 
-                WyJiaoSuDu = 20,           // Wy角速度
-                                           // 
-                WzJiaoSuDu = 20,           // Wz角速度
-                                           // 
-                BD2SV = 20,                  // BD2SV 可用/参与定位
-            }; //
-            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SYSTEMImmediate_STATUS)));
-            Marshal.StructureToPtr(sDHK, ptr, true); //
-            IntPtr main = new WindowInteropHelper(m).Handle;
-            //PostMessage(main, WM_YAOCE_SystemStatus_DATA, 0, ptr);
-            PostMessage(main, WM_YAOCE_daoHangKuaiSu_Tou_DATA, 0, ptr);
         }
 
 private void ResetAllTextEdit()
@@ -1547,15 +1211,9 @@ private void timerUpdateChart_Tick(object sender, EventArgs e)
             {
                 chartPointDataSources[i].AddPoint(packet);
             });
-
+            chartPointDataSources[i].NotifyDataChanged();
         }
     }
-
-    for (int i = 0; i < chartPointDataSources.Count(); i++)
-    {
-        chartPointDataSources[i].NotifyDataChanged();
-    }
-
     yaoceDisplay.Clear();
 }
 
@@ -2666,7 +2324,7 @@ private void showSystemTimeStatus(ref SYSTEMPARSE_STATUS sObject)
     XiTong_ZFaSheXi.Text = sObject.curFaSheXi_Z.ToString();
 
     // GNSS时间
-    XiTong_GNSSTime.Text = sObject.GNSSTime.ToString();
+    XiTong_GNSSTime.Text = ((double)(sObject.GNSSTime*Math.Pow(10,-3))).ToString();
 
     // 飞行总时间
     XiTong_ZongFeiXingTime.Text = sObject.feiXingZongShiJian.ToString();
@@ -2931,22 +2589,25 @@ private void showSystemTimeStatus(ref SYSTEMPARSE_STATUS sObject)
 
     //bit5 触点1（起飞，0已起飞）
     //int CJ3_chuDian1 = (shuRuCaiJi3 >> 5 & 0x1) == 1 ? 1 : 0;
-    XiTong_QiFei.Text = (shuRuCaiJi3 >> 5 & 0x1) == 1 ? "未起飞" : "已起飞";
+    //20210312
+    XiTong_QiFei.Text = (shuRuCaiJi3 >> 5 & 0x1) == 0 ? "未起飞" : "已起飞";//狀態變反
 
     //bit6 触点2（预令，1有效）
     //int CJ3_chuDian2 = (shuRuCaiJi3 >> 6 & 0x1) == 1 ? 1 : 0;
+    //20210312
     XiTong_YuLing.Text = (shuRuCaiJi3 >> 6 & 0x1) == 1 ? "有效" : "无效";
 
-    //bit7 触点3（动令，1有效）
-    //int CJ3_chuDian3 = (shuRuCaiJi3 >> 7 & 0x1) == 1 ? 1 : 0;
-    XiTong_DongLing.Text = (shuRuCaiJi3 >> 7 & 0x1) == 1 ? "有效" : "无效";
+     //bit7 触点3（动令，1有效）
+     //int CJ3_chuDian3 = (shuRuCaiJi3 >> 7 & 0x1) == 1 ? 1 : 0;
+     //20210312
+     XiTong_DongLing.Text = (shuRuCaiJi3 >> 7 & 0x1) == 1 ? "有效" : "无效";
 
     /*--------------------输入采集4--------------------------- */
     byte shuRuCaiJi4 = sObject.shuRuCaiJi4;
 
     //bit0 触点4（一级分离，0已分离）
     //int CJ4_chuDian4 = (shuRuCaiJi4 >> 0 & 0x1) == 1 ? 1 : 0;
-    XiTong_YiJiFeiLi.Text = (shuRuCaiJi4 >> 0 & 0x1) == 1 ? "未分离" : "已分离";
+    XiTong_YiJiFeiLi.Text = (shuRuCaiJi4 >> 0 & 0x1) == 0 ? "未分离" : "已分离";
 
     //bit1 触点5
     int CJ4_chuDian5 = (shuRuCaiJi4 >> 1 & 0x1) == 1 ? 1 : 0;
@@ -3199,11 +2860,12 @@ private void showSystemTimeStatus(ref SYSTEMPARSE_STATUS sObject)
         XiTong_NeiBuKongZhiDian.Background = brushes;
     }
 
-    //功率电电压
-    if (DetermineDataInterval.InRange("[20,35]", sObject.qiBaoXinHao) == 100)
+            //功率电电压
+            // //20210312
+            if (DetermineDataInterval.InRange("[20,35]", sObject.gongLvDianDianYa) == 100)
     {
 
-        XiTong_GongLvDian.Text = sObject.qiBaoXinHao.ToString();
+        XiTong_GongLvDian.Text = sObject.gongLvDianDianYa.ToString();
         System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 0, 255, 0);
         System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
         System.Windows.Media.Brush brushes = solidColorBrush;
@@ -3211,7 +2873,7 @@ private void showSystemTimeStatus(ref SYSTEMPARSE_STATUS sObject)
     }
     else
     {
-        XiTong_GongLvDian.Text = sObject.qiBaoXinHao.ToString();
+        XiTong_GongLvDian.Text = sObject.gongLvDianDianYa.ToString();
         System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 0, 0);
 
         System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
@@ -3481,7 +3143,7 @@ private void showDHKuaiSuTimeStatus_Ti(ref DAOHANGSHUJU_KuaiSu sObject)
     // 
     // 导航系统时间
     // 
-    DHKuaiSu_Ti_DaoHangXiTongShiJian.Text = sObject.daoHangXiTongShiJian.ToString(); //
+    DHKuaiSu_Ti_DaoHangXiTongShiJian.Text = ((double)(sObject.daoHangXiTongShiJian*0.005)).ToString(); //
                                                                                      // 
 
     // 
@@ -3512,14 +3174,14 @@ private void showDHKuaiSuTimeStatus_Ti(ref DAOHANGSHUJU_KuaiSu sObject)
     DHKuaiSu_Ti_TianXiangSuDu.Text = ((double)(sObject.tianXiangSuDu * Math.Pow(10, -2))).ToString(); //
                                                                                                       // 
 
-    // 
-    // GNSS时间 单位s,UTC秒部
-    // 
-    DHKuaiSu_Ti_GNSSTime.Text = sObject.GNSSTime.ToString(); //
+            // 
+            // GNSS时间 单位s,UTC秒部
+            // 
+            DHKuaiSu_Ti_GNSSTime.Text = ((double)(sObject.GNSSTime * Math.Pow(10, -3))).ToString();//
                                                              // 
                                                              // 俯仰角
                                                              // 
-    DHKuaiSu_Ti_FuYangJiao.Text = sObject.fuYangJiao.ToString(); //
+            DHKuaiSu_Ti_FuYangJiao.Text = sObject.fuYangJiao.ToString(); //
                                                                  // 
                                                                  // 滚转角
                                                                  // 
@@ -3799,14 +3461,14 @@ private void showDHKuaiSuTimeStatus_Tou(ref DAOHANGSHUJU_KuaiSu sObject)
     DHKuaiSu_Tou_TianXiangSuDu.Text = ((double)(sObject.tianXiangSuDu * Math.Pow(10, -2))).ToString(); //
                                                                                                        // 
 
-    // 
-    // GNSS时间 单位s,UTC秒部
-    // 
-    DHKuaiSu_Tou_GNSSTime.Text = sObject.GNSSTime.ToString(); //
+            // 
+            // GNSS时间 单位s,UTC秒部
+            // 
+            DHKuaiSu_Tou_GNSSTime.Text = ((double)(sObject.GNSSTime * Math.Pow(10, -3))).ToString(); //
                                                               // 
                                                               // 俯仰角
                                                               // 
-    DHKuaiSu_Tou_FuYangJiao.Text = sObject.fuYangJiao.ToString(); //
+            DHKuaiSu_Tou_FuYangJiao.Text = sObject.fuYangJiao.ToString(); //
                                                                   // 
                                                                   // 滚转角
                                                                   // 
@@ -4055,7 +3717,7 @@ private void showDHManSuTimeStatus_Ti(ref DAOHANGSHUJU_ManSu sObject)
     // 
     // GPS时间 单位s,UTC秒部
     // 
-    DHManSu_Ti_GPSTime.Text = /*ConvertIntDatetime(sObject.GPSTime).ToString()*/sObject.GPSTime.ToString(); //
+    DHManSu_Ti_GPSTime.Text = ((double)(sObject.GPSTime*Math.Pow(10,-3))).ToString(); //
                                                                                                             // 
                                                                                                             // GPS定位模式
                                                                                                             // 
@@ -4069,7 +3731,7 @@ private void showDHManSuTimeStatus_Ti(ref DAOHANGSHUJU_ManSu sObject)
     // 
     tempValueSTR = (GPSDingWeiMoShi >> 0 & 0x01) == 1 ? "采用GPS定位" : "没有采用GPS定位"; //
                                                                                  // 
-    DHManSu_Ti_GPSDingWeiZhuangTai_GPS.Text = tempValueSTR; //
+    //DHManSu_Ti_GPSDingWeiZhuangTai_GPS.Text = tempValueSTR; //
                                                             // 
                                                             // bit1 (1:采用BD2定位 0:没有采用BD2定位)
                                                             // 
@@ -4081,13 +3743,13 @@ private void showDHManSuTimeStatus_Ti(ref DAOHANGSHUJU_ManSu sObject)
                                                             // 
     tempValueSTR = (GPSDingWeiMoShi >> 2 & 0x01) == 1 ? "采用GLONASS定位" : "没有采用GLONASS定位"; //
                                                                                          // 
-    DHManSu_Ti_GPSDingWeiZhuangTai_GLONASS.Text = tempValueSTR; //
+   // DHManSu_Ti_GPSDingWeiZhuangTai_GLONASS.Text = tempValueSTR; //
                                                                 // 
                                                                 // bit3 0:没有DGNSS可用 1：DGNSS可用
                                                                 // 
     tempValueSTR = (GPSDingWeiMoShi >> 3 & 0x01) == 1 ? "DGNSS可用" : "没有DGNSS可用"; //
                                                                                  // 
-    DHManSu_Ti_GPSDingWeiZhuangTai_DGNSS.Text = tempValueSTR; //
+    //DHManSu_Ti_GPSDingWeiZhuangTai_DGNSS.Text = tempValueSTR; //
                                                               // 
                                                               // bit4 bit5 (00:No Fix 01:2DFix 11:3D Fix)
                                                               // 
@@ -4107,7 +3769,7 @@ private void showDHManSuTimeStatus_Ti(ref DAOHANGSHUJU_ManSu sObject)
                                                                      // 
     tempValueSTR = (GPSDingWeiMoShi >> 7 & 0x01) == 1 ? "BD2修正有效" : "BD2修正无效"; //
                                                                                // 
-    DHManSu_Ti_GPSDingWeiZhuangTai_BD2XiuZheng.Text = tempValueSTR; //
+   // DHManSu_Ti_GPSDingWeiZhuangTai_BD2XiuZheng.Text = tempValueSTR; //
                                                                     // 
                                                                     // DHManSu_Ti_GPSDingWeiZhuangTai.Text = tempValueSTR; //
                                                                     // 
@@ -4428,7 +4090,8 @@ private void showDHManSuTimeStatus_Ti(ref DAOHANGSHUJU_ManSu sObject)
     stringBuilder_TuoLuoXGZ.Append(TuoLuoZGZ);
     stringBuilder_TuoLuoXGZ.Append(";");
 
-    if (TuoLuoGZ == 0)
+            /**/
+    if (TuoLuoGZ == 3)
     {
         DHManSu_Ti_TuoLuoGuZhang.Text = "正常";
     }

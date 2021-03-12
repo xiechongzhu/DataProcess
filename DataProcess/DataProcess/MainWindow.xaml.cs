@@ -347,24 +347,25 @@ namespace DataProcess
 
         private void LedTimer_Tick(object sender, EventArgs e)
         {
+            int time_out = 500;
             DateTime Now = DateTime.Now;
-            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > 200)
+            if((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW]).TotalMilliseconds > time_out)
             {
                 SetLedStatus(ImageSlow, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > 200)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FAST]).TotalMilliseconds > time_out)
             {
                 SetLedStatus(ImageFast, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > 200)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.TAIL]).TotalMilliseconds > time_out)
             {
                 SetLedStatus(ImageTail, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > 200)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.FLY]).TotalMilliseconds > time_out)
             {
                 SetLedStatus(ImageFly, LED_STATUS.LED_RED);
             }
-            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.YAOCE]).TotalMilliseconds > 200)
+            if ((Now - NetworkDateRecvTime[NETWORK_DATA_TYPE.YAOCE]).TotalMilliseconds > time_out)
             {
                 SetLedStatus(ImageUDP, LED_STATUS.LED_RED);
             }
@@ -1065,6 +1066,9 @@ namespace DataProcess
                 case YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA:
                     DAOHANGSHUJU_KuaiSu navData = Marshal.PtrToStructure<DAOHANGSHUJU_KuaiSu>(lParam);
                     mainInfoControl.SetNavDataFast(navData);
+                    break;
+                case YaoCeShuJuXianShi.WM_YAOCE_UDPPROPERTY_DATA:
+                    NetworkDateRecvTime[NETWORK_DATA_TYPE.YAOCE] = DateTime.Now;
                     break;
             }
             YaoCe.handleMessage(hwnd, msg, wParam, lParam);

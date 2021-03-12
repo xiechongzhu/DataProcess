@@ -65,173 +65,68 @@ namespace YaoCeProcess
         //------------------------------------------------------------------------------------//
  
         /// mainFormHandle
-// 
-        /// </summary>
-// 
         private IntPtr mainFormHandle; //
 // 
 
-// 
-        /// <summary>
-// 
+
         /// queue
-// 
-        /// </summary>
-// 
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>(); //
 // 
 
-// 
-        /// <summary>
-// 
         /// isRuning
-// 
-        /// </summary>
-// 
         private bool isRuning = false; //
 // 
 
 // 
-        /// <summary>
-// 
+
         /// thread
-// 
-        /// </summary>
-// 
-        Thread thread; //
-// 
+        Thread thread;
 
-// 
-        /// <summary>
-// 
+
         /// 每一个UDP帧固定长度651
-// 
-        /// </summary>
-// 
-        private const int UDPLENGTH = 651; //
-// 
+        private const int UDPLENGTH = 651; 
 
-// 
-        /// <summary>
-// 
         /// 每一个状态长帧结尾的校验
-// 
-        /// </summary>
-// 
-        private const int CRCLENGTH = 2; //
-// 
+        private const int CRCLENGTH = 2; 
+
         //------------------------------------------------------------------------------------//
-// 
         //---------------缓存的CAN长帧数据---------------//
-// 
-        /// <summary>
-// 
+
         /// 系统判据状态
-// 
-        /// </summary>
-// 
         const byte frameType_systemStatus_1 = 0x15; //       // 系统判据状态
-// 
 
-// 
-        /// <summary>
-// 
         /// 系统判据状态
-// 
-        /// </summary>
-// 
         const byte frameType_systemStatus_2 = 0x16; //       // 系统判据状态
-// 
 
-// 
-        /// <summary>
-// 
+ 
         /// 回路检测反馈状态
-// 
-        /// </summary>
-// 
         const byte frameType_HuiLuJianCe = 0x16; //          // 回路检测反馈状态
-// 
 
-// 
-        /// <summary>
-// 
+
         /// 导航快速（弹体）
-// 
-        /// </summary>
-// 
         const byte frameType_daoHangKuaiSu_Ti = 0x25; //     // 导航快速（弹体）
-// 
 
-// 
-        /// <summary>
-// 
         /// 导航快速（弹头）
-// 
-        /// </summary>
-// 
-        const byte frameType_daoHangKuaiSu_Tou = 0x35; //    // 导航快速（弹头）
-// 
+        const byte frameType_daoHangKuaiSu_Tou = 0x35; //    // 导航快速（弹头）弹头导航数据
 
-// 
-        /// <summary>
-// 
+ 
         /// 导航慢速（弹体）
-// 
-        /// </summary>
-// 
         const byte frameType_daoHangManSu_Ti = 0x21; //      // 导航慢速（弹体）
-// 
 
-// 
-        /// <summary>
-// 
         /// 导航慢速（弹头）
-// 
-        /// </summary>
-// 
-        const byte frameType_daoHangManSu_Tou = 0x31; //     // 导航慢速（弹头）
-// 
+        const byte frameType_daoHangManSu_Tou = 0x31; //     // 导航慢速（弹头）/***/
 
-// 
-        /// <summary>
-// 
         /// 系统状态即时反馈（弹体）
-// 
-        /// </summary>
-// 
         const byte frameType_XiTongJiShi_Ti = 0x26; //       // 系统状态即时反馈（弹体）   帧总长11  数据段总长度64 帧类型0x0B
-// 
 
-// 
-        /// <summary>
-// 
         /// 系统状态即时反馈（弹头）
-// 
-        /// </summary>
-// 
-        const byte frameType_XiTongJiShi_Tou = 0x36; //      // 系统状态即时反馈（弹头）
-// 
+        const byte frameType_XiTongJiShi_Tou = 0x36; //      // 系统状态即时反馈（弹头）/***/
 
-// 
         // 系统判决状态15
-// 
-        /// <summary>
-// 
         /// bRecvHeader_XiTong15
-// 
-        /// </summary>
-// 
         bool bRecvHeader_XiTong15 = false; //
-// 
 
-// 
-        /// <summary>
-// 
-        /// 状态数据
-// 
-        /// </summary>
-// 
+        /// 状态数据 
         byte[] statusBuffer_XiTong15 = null; //     // 状态数据
 // 
 
@@ -309,45 +204,23 @@ namespace YaoCeProcess
         byte frameLength_XiTong16 = 0; //           // 数据段总长度
 // 
 
-// 
-        /// <summary>
-// 
         /// 帧编号
-// 
-        /// </summary>
-// 
         UInt16 frameNO_XiTong16 = 0; //             // 帧编号
 // 
 
 // 
         // 回路检测反馈数据16
-// 
-        /// <summary>
-// 
         /// bRecvHeader_HuiLuJianCe16
-// 
-        /// </summary>
-// 
         bool bRecvHeader_HuiLuJianCe16 = false; //
 // 
 
-// 
-        /// <summary>
-// 
+
         /// 状态数据
-// 
-        /// </summary>
-// 
         byte[] statusBuffer_HuiLuJianCe16 = null; //     // 状态数据
 // 
 
-// 
-        /// <summary>
-// 
+ 
         /// 帧总长度
-// 
-        /// </summary>
-// 
         byte totalCountCan_HuiLuJianCe16 = 0; //         // 帧总长度
 // 
 
@@ -1465,6 +1338,7 @@ namespace YaoCeProcess
                 bRecvHeader = true; //
 // 
                 frameNO = (UInt16)(((UInt16)buffer[3] << 8) + buffer[2]); //
+                frameNO %= 256;
 // 
             }
 // 
@@ -1526,7 +1400,7 @@ namespace YaoCeProcess
 // 
                     byte[] canData = new byte[lastDataLen + 2]; //
 // 
-                    Array.Copy(buffer, 1, canData, 0, lastDataLen + 2); //
+                    Array.Copy(buffer, 1, canData, 0, Math.Min(buffer.Length - 1, lastDataLen + 2)); //
 // 
                     statusBuffer = statusBuffer.Concat(canData).ToArray(); //
 // 
@@ -1976,12 +1850,6 @@ namespace YaoCeProcess
 
          gongLvDianDianYa = br.ReadSingle(),  // 功率电电压
 
-       // danTouZhuangTai = br.ReadByte(),            // 弹头状态(0-状态异常 1-产品遥测上电正常 2-初始化正常 3-一级保险解除
-// 
-                                                                    // 4-二级保险解除 5-收到保险解除信号 6-三级保险解除 7-充电 8-起爆)
-// 
-
-// 
                         daoHangTip1 = br.ReadByte(),                // 导航状态提示1
 // 
                         daoHangTip2 = br.ReadByte(),                // 导航状态提示2
@@ -1989,111 +1857,6 @@ namespace YaoCeProcess
                         daoHangTip3 = br.ReadByte(),                // 导航状态提示3
 // 
                         daoHangTip4 = br.ReadByte(),                // 导航状态提示4
-// 
-                        //sysyemStatusTip = br.ReadByte(),            // 系统状态指示
-// 
-                        //chuDianZhuangTai = br.ReadByte(),           // 触点状态指示
-// 
-                        
-// 
-                        //shuChuKaiGuanStatus1 = br.ReadByte(),       // 输出开关状态1
-// 
-                        //shuChuKaiGuanStatus2 = br.ReadByte(),       // 输出开关状态2
-// 
-
-// 
-                        // 一次读取n个字节
-// 
-                        // Reserve = br.ReadBytes(5)
-// 
-
-// 
-                        /*
-// 
-                         // NOTE 20200506 协议弄反
-// 
-                        weiDu = br.ReadDouble(),                    // 纬度
-// 
-                        jingDu = br.ReadDouble(),                   // 经度
-// 
-                        haiBaGaoDu = br.ReadSingle(),               // 海拔高度
-// 
-
-// 
-                        dongXiangSuDu = br.ReadSingle(),            // 东向速度
-// 
-                        beiXiangSuDu = br.ReadSingle(),             // 北向速度
-// 
-                        tianXiangSuDu = br.ReadSingle(),            // 天向速度
-// 
-
-// 
-                        WxJiaoSuDu = br.ReadSingle(),               // Wx角速度
-// 
-                        WyJiaoSuDu = br.ReadSingle(),               // Wy角速度
-// 
-                        WzJiaoSuDu = br.ReadSingle(),               // Wz角速度
-// 
-
-// 
-                        zhouXiangGuoZai = br.ReadSingle(),          // 轴向过载
-// 
-                        GNSSTime = br.ReadSingle(),                 // GNSS时间
-// 
-
-// 
-                        curFaSheXi_X = br.ReadSingle(),             // 当前发射系X
-// 
-                        curFaSheXi_Y = br.ReadSingle(),             // 当前发射系Y
-// 
-                        curFaSheXi_Z = br.ReadSingle(),             // 当前发射系Z
-// 
-
-// 
-                        yuShiLuoDianSheCheng = br.ReadSingle(),     // 预示落点射程
-// 
-                        yuShiLuoDianZ = br.ReadSingle(),            // 预示落点Z
-// 
-                        feiXingZongShiJian = br.ReadDouble(),       // 飞行总时间
-// 
-
-// 
-                        ceLueJieDuan = br.ReadByte(),               // 策略阶段(0-准备 1-起飞 2-一级 3-二级 4-结束)
-// 
-                        danTouZhuangTai = br.ReadByte(),            // 弹头状态(0-状态异常 1-产品遥测上电正常 2-初始化正常 3-一级保险解除
-// 
-                                                                    // 4-二级保险解除 5-收到保险解除信号 6-三级保险解除 7-充电 8-起爆)
-// 
-
-// 
-                        daoHangTip1 = br.ReadByte(),                // 导航状态提示1
-// 
-                        daoHangTip2 = br.ReadByte(),                // 导航状态提示2
-// 
-                        daoHangTip3 = br.ReadByte(),                // 导航状态提示3
-// 
-                        daoHangTip4 = br.ReadByte(),                // 导航状态提示4
-// 
-                        sysyemStatusTip = br.ReadByte(),            // 系统状态指示
-// 
-                        chuDianZhuangTai = br.ReadByte(),           // 触点状态指示
-// 
-                        jueCePanJueJieGuo1 = br.ReadByte(),         // 策略判决结果1
-// 
-                        jueCePanJueJieGuo2 = br.ReadByte(),         // 策略判决结果2
-// 
-                        shuChuKaiGuanStatus1 = br.ReadByte(),       // 输出开关状态1
-// 
-                        shuChuKaiGuanStatus2 = br.ReadByte(),       // 输出开关状态2
-// 
-
-// 
-                        // 一次读取n个字节
-// 
-                        // Reserve = br.ReadBytes(5)
-// 
-                         */
-// 
                     }; //
 // 
                     // 向界面传递数据
@@ -2199,116 +1962,11 @@ namespace YaoCeProcess
                         jiaSuDuJiShuJu_Y = br.ReadSingle(),         // 加速度计Y数据
 // 
                         jiaSuDuJiShuJu_Z = br.ReadSingle(),         // 加速度计Z数据
-// 
 
-// 
-                        // 本5ms速度
-// 
-                        //tuoLuoShuJu_X2 = br.ReadSingle(),           // 陀螺X数据2
-// 
-                        //tuoLuoShuJu_Y2 = br.ReadSingle(),           // 陀螺Y数据2
-// 
-                        //tuoLuoShuJu_Z2 = br.ReadSingle(),           // 陀螺Z数据2
-// 
-
-// 
-                        // 本5ms加速度
-// 
-                        //jiaSuDuJiShuJu_X2 = br.ReadSingle(),        // 加速度计X数据2
-// 
-                        //jiaSuDuJiShuJu_Y2 = br.ReadSingle(),        // 加速度计Y数据2
-// 
-                        //jiaSuDuJiShuJu_Z2 = br.ReadSingle(),        // 加速度计Z数据2
-// 
-
-// 
                         zhuangTaiBiaoZhiWei = br.ReadByte(),        // 状态标志位
 // 
                         tuoLuoGuZhangBiaoZhi = br.ReadByte(),       // 陀螺故障标志
-// 
-
-// 
-                        //-----------------------------------------------------------//
-// 
-
-// 
-                        /*
-// 
-                         daoHangXiTongShiJian = br.ReadUInt32(),     // 导航系统时间
-// 
-                        jingDu = br.ReadInt32(),                    // 经度（组合结果）当量：1e-7
-// 
-                        weiDu = br.ReadInt32(),                     // 纬度（组合结果）当量：1e-7
-// 
-                        haiBaGaoDu = br.ReadInt32(),                // 海拔高度（组合结果）当量：1e-7
-// 
-
-// 
-                        dongXiangSuDu = br.ReadInt32(),             // 东向速度（组合结果）当量：1e-7
-// 
-                        beiXiangSuDu = br.ReadInt32(),              // 北向速度（组合结果）当量：1e-7
-// 
-                        tianXiangSuDu = br.ReadInt32(),             // 天向速度（组合结果）当量：1e-7
-// 
-
-// 
-                        GNSSTime = br.ReadUInt32(),                 // GNSS时间 单位s,UTC秒部
-// 
-                        fuYangJiao = br.ReadSingle(),               // 俯仰角
-// 
-                        gunZhuanJiao = br.ReadSingle(),             // 滚转角
-// 
-                        pianHangJiao = br.ReadSingle(),             // 偏航角
-// 
-
-// 
-                        // 上5ms速度
-// 
-                        tuoLuoShuJu_X = br.ReadSingle(),            // 陀螺X数据
-// 
-                        tuoLuoShuJu_Y = br.ReadSingle(),            // 陀螺Y数据
-// 
-                        tuoLuoShuJu_Z = br.ReadSingle(),            // 陀螺Z数据
-// 
-
-// 
-                        // 上5ms加速度
-// 
-                        jiaSuDuJiShuJu_X = br.ReadSingle(),         // 加速度计X数据
-// 
-                        jiaSuDuJiShuJu_Y = br.ReadSingle(),         // 加速度计Y数据
-// 
-                        jiaSuDuJiShuJu_Z = br.ReadSingle(),         // 加速度计Z数据
-// 
-
-// 
-                        // 本5ms速度
-// 
-                        tuoLuoShuJu_X2 = br.ReadSingle(),           // 陀螺X数据2
-// 
-                        tuoLuoShuJu_Y2 = br.ReadSingle(),           // 陀螺Y数据2
-// 
-                        tuoLuoShuJu_Z2 = br.ReadSingle(),           // 陀螺Z数据2
-// 
-
-// 
-                        // 本5ms加速度
-// 
-                        jiaSuDuJiShuJu_X2 = br.ReadSingle(),        // 加速度计X数据2
-// 
-                        jiaSuDuJiShuJu_Y2 = br.ReadSingle(),        // 加速度计Y数据2
-// 
-                        jiaSuDuJiShuJu_Z2 = br.ReadSingle(),        // 加速度计Z数据2
-// 
-
-// 
-                        zhuangTaiBiaoZhiWei = br.ReadByte(),        // 状态标志位
-// 
-                        tuoLuoGuZhangBiaoZhi = br.ReadByte(),       // 陀螺故障标志
-// 
-                         */
-// 
-                    }; //
+                    };
 // 
                     // 向界面传递数据
 // 

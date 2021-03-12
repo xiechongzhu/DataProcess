@@ -808,11 +808,56 @@ namespace YaoCeProcess
                                  // 
         public byte BD2SV; //        // BD2SV 可用/参与定位
     }
-// 
 
-// 
+    //弹头导航数据
+    [Serializable]
+    // 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    
+    public struct DANTOUDAOHANGDATA
+    {
+
+        public uint GNSSTime; //GNSS时间  当量:0.001
+
+        public int jingDu_ZuHe; //组合后经度 当量:1e-7
+        public int weiDu_ZuHe; //组合后纬度 当量:1e-7
+        public int gaoDu_ZuHe; //组合后高度 当量:1e-2
+
+        public int dongXiangSuDu_ZuHe; //组合后东向速度 当量:1e-2
+        public int beiXiangSuDu_ZuHe; //组合后北向速度 当量:1e-2
+        public int tianXiangSuDu_ZuHe; //组合后天向速度 当量:1e-2
+
+        public int jingDu_GNSS; //GNSS测量经度 当量:1e-7
+        public int weiDu_GNSS; //GNSS测量纬度 当量:1e-7
+        public int gaoDu_GNSS; //GNSS测量高度 当量:1e-2
+
+        public int dongXiangSuDu_GNSS; //GNSS测量东向速度 当量:1e-2
+        public int beiXiangSuDu_GNSS; //GNSS测量北向速度 当量:1e-2
+        public int tianXiangSuDu_GNSS;//GNSS测量天向速度 当量:1e-2
+
+        public float fuYangJiao; //俯仰角
+        public float gunZhuanJiao; //滚转角
+        public float pianHangJiao; // 偏航角
+
+        public float WxJiaoSuDu; //角速度Wx
+        public float WyJiaoSuDu; //角速度Wy
+        public float WzJiaoSuDu; //角速度Wz
+
+        public float xBiLi; //x比力
+        public float yBiLi; //y比力
+        public float zBiLi; //z比力
+
+        public UInt16 HDOP; //HDOP 当量：0.01
+        public UInt16 VDOP; //VDOP 当量: 0.01
+
+        public byte keShiWeiXingShu; //可视卫星数
+        public byte shiYongWeiXingShu; //使用卫星数
+        public byte tuoLuoGuZhangBiaoShi; //陀螺故障标识
+    }
+
+    // 
     // 帧属性
-// 
+    // 
     [Serializable]
 // 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

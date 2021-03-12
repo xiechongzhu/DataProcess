@@ -97,8 +97,8 @@
                             <cust:LabelTextBox Label="弹头解保：" x:Name="XiTong_DanTouJieBao"/>
                             <cust:LabelTextBox Label="起爆状态：" x:Name="XiTong_QiBaoZhuangTai"/>
                             <Grid/>
-                            <cust:LabelTextBox Label="内部控制电：" x:Name="XiTong_NeiBuKongZhiDian"/>
-                            <cust:LabelTextBox Label="功率电：" x:Name="XiTong_GongLvDian"/>
+                            <cust:LabelTextBox Label="内部控制电压：" x:Name="XiTong_NeiBuKongZhiDian"/>
+                            <cust:LabelTextBox Label="功率电压：" x:Name="XiTong_GongLvDian"/>
                             <Grid/>
                             <cust:LabelTextBox Label="导航数据选择：" x:Name="XiTong_DaoHangShuJuXuanZe"/>
                             <cust:LabelTextBox Label="陀螺数据融合：" x:Name="XiTong_TuoLuoShuJuRongHe"/>
@@ -1037,13 +1037,13 @@
                                             <ColumnDefinition></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="GPS定位/状态："/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_GPS"/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_BD2"/>
-                                        <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_GLONASS"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_BD2XiuZheng"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="1" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_Fix"/>
-                                        <dxe:TextEdit Grid.Row="2" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
-                                        <dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_DGNSS"/>
+                                        <!--<dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_GPS"/>-->
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_BD2"/>
+                                        <!--<dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_GLONASS"/>-->
+                                        <!--<dxe:TextEdit Grid.Row="2" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_BD2XiuZheng"/>-->
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="1" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_Fix"/>
+                                        <dxe:TextEdit Grid.Row="1" Grid.Column="2" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_GNSSXiuZheng"/>
+                                        <!--<dxe:TextEdit Grid.Row="3" Grid.Column="0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black" Margin="1" x:Name="DHManSu_Ti_GPSDingWeiZhuangTai_DGNSS"/>-->
                                     </Grid>
                                 </Grid>
                             </ScrollViewer>
@@ -1866,7 +1866,7 @@
                     </dx:DXTabItem>
                 </dx:DXTabControl>
             </dx:DXTabItem>
-            <dx:DXTabItem Header="回路检测">
+            <dx:DXTabItem Header="回路检测" Visibility="Collapsed">
                 <UniformGrid Columns="2" Rows="15" x:Name="HuiLu">
                     <cust:LabelTextBox x:Name="HuiLu_ShuChuHuiLuDianZu1" Label="电机驱动输出1回路电阻：" Margin="10,0,10,0"/>
                     <cust:LabelTextBox x:Name="HuiLu_ShuChuHuiLuDianZu2" Label="电机驱动输出2回路电阻：" Margin="10,0,10,0"/>
