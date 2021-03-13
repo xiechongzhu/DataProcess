@@ -46,7 +46,7 @@ namespace DataProcess
 
         private void InitProgramDigram()
         {
-            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point));
+            FlyProtocol.GetDisplayPoints().ForEach(point => programDigram.AddPoint(point));
         }
 
         private void InitChartTitle()

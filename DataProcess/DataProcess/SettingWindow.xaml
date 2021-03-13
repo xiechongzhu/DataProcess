@@ -47,8 +47,10 @@
                                 <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editBoomLineFront"  Mask="f13" MaskType="Numeric"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="后向必炸线(米):" Margin="5"/>
                                 <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editBoomLineBack"  Mask="f13" MaskType="Numeric"/>
-                                <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="侧向必炸线(米):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="5" x:Name="editBoomLineSide"  Mask="f13" MaskType="Numeric"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="左侧向必炸线(米):" Margin="5"/>
+                                <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="5" x:Name="editBoomLineSideLeft"  Mask="f13" MaskType="Numeric"/>
+                                <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="右侧向必炸线(米):" Margin="5"/>
+                                <dxe:TextEdit Grid.Row="1" Grid.Column="3" Margin="5" x:Name="editBoomLineSideRight"  Mask="f13" MaskType="Numeric"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -60,14 +62,18 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="管道长度(米):" Margin="5"/>
                                 <dxe:TextEdit Grid.Row="0" Grid.Column="1" Margin="5" x:Name="editPipeLength"  Mask="f13" MaskType="Numeric"/>
-                                <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="管道宽度(米):" Margin="5"/>
-                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editPipeWidth"  Mask="f13" MaskType="Numeric"/>
+                                <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="左侧管道宽度(米):" Margin="5"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="5" x:Name="editPipeWidthLeft"  Mask="f13" MaskType="Numeric"/>
+                                <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" Text="右侧管道宽度(米):" Margin="5"/>
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="5" Margin="5" x:Name="editPipeWidthRight"  Mask="f13" MaskType="Numeric"/>
                             </Grid>
                         </GroupBox>
                     </Grid>

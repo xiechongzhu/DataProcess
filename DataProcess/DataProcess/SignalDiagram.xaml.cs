@@ -57,13 +57,13 @@ namespace DataProcess
             int pointY =(int)( ActualHeight / 2);
             for (int i = 0; i < PointsToDraw.Count; ++i)
             {
-                drawingContext.DrawEllipse(PointsToDraw[i].IsActive ? Brushes.Green : Brushes.Gray, null, new Point(40 + i * pointWidth, pointY), 8, 8);
+                drawingContext.DrawEllipse(PointsToDraw[i].IsActive ? Brushes.ForestGreen : Brushes.Gray, null, new Point(40 + i * pointWidth, pointY), 12, 12);
                 FormattedText formattedText = new FormattedText(
                 PointsToDraw[i].Name,
                 CultureInfo.GetCultureInfo("zh-cn"),
                 FlowDirection.LeftToRight,
                 new Typeface("微软雅黑"),
-                12,
+                15,
                 Brushes.Black, 0);
                 if (i % 2 == 0)
                 {
@@ -148,7 +148,7 @@ namespace DataProcess
 
         private bool IsAccZero(AngleData angleData)
         {
-            if(Math.Abs(angleData.ax) <= 0.0001 && Math.Abs(angleData.ay) <= 0.0001 && angleData.az == 0)
+            if(Math.Abs(angleData.ax) <= 0.0001 && Math.Abs(angleData.ay) <= 0.0001 && Math.Abs(angleData.az) <= 0.0001)
             {
                 return true;
             }
