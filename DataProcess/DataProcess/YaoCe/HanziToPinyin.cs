@@ -8,7 +8,7 @@ namespace DataProcess.YaoCe
 
     /// <summary>
         /// 汉字转拼音类
-        /// </summary>
+        
     public class Hz2Py
     {
         private static int[] pyValue = new int[]
@@ -85,7 +85,7 @@ namespace DataProcess.YaoCe
         };
         /// <summary>
         /// 把汉字转换成拼音(全拼)
-        /// </summary>
+        
         /// <param name="hzString">汉字字符串</param>
         /// <returns>转换后的拼音(全拼)字符串</returns>
         public static string Convert(string hzString)

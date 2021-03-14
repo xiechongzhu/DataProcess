@@ -172,6 +172,36 @@ namespace DataProcess
             DHManSu_Tou_JiaSuDu_JiaJiX_buffer = new List<double>();
             DHManSu_Tou_JiaSuDu_JiaJiY_buffer = new List<double>();
             DHManSu_Tou_JiaSuDu_JiaJiZ_buffer = new List<double>();
+
+            //弹头导航数据
+            DanTou_ZuHeJingDu_buffer = new List<double>();
+            DanTou_ZuHeWeiDu_buffer = new List<double>();
+            DanTou_ZuHeGaoDu_buffer = new List<double>();
+
+            DanTou_ZuHeDong_buffer = new List<double>();
+            DanTou_ZuHeBei_buffer = new List<double>();
+            DanTou_ZuHeTian_buffer = new List<double>();
+
+            DanTou_GNSSJingDu_buffer = new List<double>();
+            DanTou_GNSSWeiDu_buffer = new List<double>();
+            DanTou_GNSSGaoDu_buffer = new List<double>();
+
+            DanTou_GNSSDong_buffer = new List<double>();
+            DanTou_GNSSBei_buffer = new List<double>();
+            DanTou_GNSSTian_buffer = new List<double>();
+
+            DanTou_FuYangJiao_buffer = new List<double>();
+            DanTou_GunZhuanJiao_buffer = new List<double>();
+            DanTou_PianHangJiao_buffer = new List<double>();
+
+            DanTou_Wx_buffer = new List<double>();
+            DanTou_Wy_buffer = new List<double>();
+            DanTou_Wz_buffer = new List<double>();
+
+            DanTou_XBiLi_buffer = new List<double>();
+            DanTou_YBiLi_buffer = new List<double>();
+            DanTou_ZBiLi_buffer = new List<double>();
+            DanTou_buffer = new List<double>();
         }
 
         public void Clear()
@@ -303,6 +333,36 @@ namespace DataProcess
             DHManSu_Tou_JiaSuDu_JiaJiX_buffer.Clear();
             DHManSu_Tou_JiaSuDu_JiaJiY_buffer.Clear();
             DHManSu_Tou_JiaSuDu_JiaJiZ_buffer.Clear();
+
+            //弹头导航数据
+            DanTou_ZuHeJingDu_buffer.Clear();
+            DanTou_ZuHeWeiDu_buffer.Clear();
+            DanTou_ZuHeGaoDu_buffer.Clear();
+
+            DanTou_ZuHeDong_buffer.Clear();
+            DanTou_ZuHeBei_buffer.Clear();
+            DanTou_ZuHeTian_buffer.Clear();
+
+            DanTou_GNSSJingDu_buffer.Clear();
+            DanTou_GNSSWeiDu_buffer.Clear();
+            DanTou_GNSSGaoDu_buffer.Clear();
+
+            DanTou_GNSSDong_buffer.Clear();
+            DanTou_GNSSBei_buffer.Clear();
+            DanTou_GNSSTian_buffer.Clear();
+
+            DanTou_FuYangJiao_buffer.Clear();
+            DanTou_GunZhuanJiao_buffer.Clear();
+            DanTou_PianHangJiao_buffer.Clear();
+
+            DanTou_Wx_buffer.Clear();
+            DanTou_Wy_buffer.Clear();
+            DanTou_Wz_buffer.Clear();
+
+            DanTou_XBiLi_buffer.Clear();
+            DanTou_YBiLi_buffer.Clear();
+            DanTou_ZBiLi_buffer.Clear();
+            DanTou_buffer.Clear();
         }
 
         //系统判决
@@ -463,6 +523,37 @@ namespace DataProcess
         public List<double> XTJS_Ti_GuoZai_FaXiang_buffer { get; }
         public List<double> XTJS_Ti_GuoZai_CeXiang_buffer { get; }
 
+
+        //弹头导航数据
+        public List<double> DanTou_ZuHeJingDu_buffer { get; }
+        public List<double> DanTou_ZuHeWeiDu_buffer { get; }
+        public List<double> DanTou_ZuHeGaoDu_buffer { get; }
+
+        public List<double> DanTou_ZuHeDong_buffer { get; }
+        public List<double> DanTou_ZuHeBei_buffer { get; }
+        public List<double> DanTou_ZuHeTian_buffer { get; }
+
+        public List<double> DanTou_GNSSJingDu_buffer { get; }
+        public List<double> DanTou_GNSSWeiDu_buffer { get; }
+        public List<double> DanTou_GNSSGaoDu_buffer { get; }
+
+        public List<double> DanTou_GNSSDong_buffer { get; }
+        public List<double> DanTou_GNSSBei_buffer { get; }
+        public List<double> DanTou_GNSSTian_buffer { get; }
+
+        public List<double> DanTou_FuYangJiao_buffer { get; }
+        public List<double> DanTou_GunZhuanJiao_buffer { get; }
+        public List<double> DanTou_PianHangJiao_buffer { get; }
+
+        public List<double> DanTou_Wx_buffer { get; }
+        public List<double> DanTou_Wy_buffer { get; }
+        public List<double> DanTou_Wz_buffer { get; }
+
+        public List<double> DanTou_XBiLi_buffer { get; }
+        public List<double> DanTou_YBiLi_buffer { get; }
+        public List<double> DanTou_ZBiLi_buffer { get; }
+
+
         //帧序号
         public List<double> XiTongPanJu15_buffer { get; }
         public List<double> XiTongPanJu16_buffer { get; }
@@ -473,5 +564,6 @@ namespace DataProcess
         public List<double> DHM_Tou_buffer { get; }
         public List<double> XTJS_Ti_buffer { get; }
         public List<double> XTJS_Tou_buffer { get; }
+        public List<double> DanTou_buffer { get; }
     }
 }

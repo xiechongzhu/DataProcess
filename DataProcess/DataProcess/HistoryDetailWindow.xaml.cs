@@ -15,7 +15,7 @@ namespace DataProcess
 {
     /// <summary>
     /// HistoryDetailWindow.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class HistoryDetailWindow : DevExpress.Xpf.Core.ThemedWindow
     {
         private TestInfo testInfo = null;

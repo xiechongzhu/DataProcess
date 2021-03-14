@@ -15,7 +15,7 @@ using System.Threading.Tasks; //
 // 
 /// YaoCeProcess
 // 
-/// </summary>
+
 // 
 namespace YaoCeProcess
 // 
@@ -35,7 +35,7 @@ namespace YaoCeProcess
     // 
     /// 修改描述:/
     // 
-    /// </summary>
+    
     // 
     class CRC
     // 
@@ -47,7 +47,7 @@ namespace YaoCeProcess
         // 
         /// CRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="data"></param>
         // 
@@ -107,7 +107,7 @@ namespace YaoCeProcess
         // 
         /// ToCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="content"></param>
         // 
@@ -127,7 +127,7 @@ namespace YaoCeProcess
         // 
         /// ToCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="content"></param>
         // 
@@ -149,7 +149,7 @@ namespace YaoCeProcess
         // 
         /// ToCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="content"></param>
         // 
@@ -171,7 +171,7 @@ namespace YaoCeProcess
         // 
         /// ToCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="content"></param>
         // 
@@ -195,7 +195,7 @@ namespace YaoCeProcess
         // 
         /// ToCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="data"></param>
         // 
@@ -215,7 +215,7 @@ namespace YaoCeProcess
         // 
         /// ToCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="data"></param>
         // 
@@ -241,7 +241,7 @@ namespace YaoCeProcess
         // 
         /// ToModbusCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="s"></param>
         // 
@@ -261,7 +261,7 @@ namespace YaoCeProcess
         // 
         /// ToModbusCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="s"></param>
         // 
@@ -283,7 +283,7 @@ namespace YaoCeProcess
         // 
         /// ToModbusCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="data"></param>
         // 
@@ -303,7 +303,7 @@ namespace YaoCeProcess
         // 
         /// ToModbusCRC16
         // 
-        /// </summary>
+        
         // 
         /// <param name="data"></param>
         // 
@@ -329,7 +329,7 @@ namespace YaoCeProcess
         // 
         /// ByteToString
         // 
-        /// </summary>
+        
         // 
         /// <param name="arr"></param>
         // 
@@ -361,7 +361,7 @@ namespace YaoCeProcess
         // 
         /// ByteToString
         // 
-        /// </summary>
+        
         // 
         /// <param name="arr"></param>
         // 
@@ -393,7 +393,7 @@ namespace YaoCeProcess
         // 
         /// StringToHexString
         // 
-        /// </summary>
+        
         // 
         /// <param name="str"></param>
         // 
@@ -427,7 +427,7 @@ namespace YaoCeProcess
         // 
         /// ConvertChinese
         // 
-        /// </summary>
+        
         // 
         /// <param name="str"></param>
         // 
@@ -471,7 +471,7 @@ namespace YaoCeProcess
         // 
         /// FilterChinese
         // 
-        /// </summary>
+        
         // 
         /// <param name="str"></param>
         // 
@@ -507,7 +507,7 @@ namespace YaoCeProcess
         // 
         /// 字符串转16进制字符数组
         // 
-        /// </summary>
+        
         // 
         /// <param name="hex"></param>
         // 
@@ -527,7 +527,7 @@ namespace YaoCeProcess
         // 
         /// 字符串转16进制字符数组
         // 
-        /// </summary>
+        
         // 
         /// <param name="str"></param>
         // 
@@ -583,7 +583,7 @@ namespace YaoCeProcess
 // 
         /// ConvertChinese
 // 
-        /// </summary>
+        
 // 
         /// <param name="str"></param>
 // 
@@ -627,7 +627,7 @@ namespace YaoCeProcess
 // 
         /// FilterChinese
 // 
-        /// </summary>
+        
 // 
         /// <param name="str"></param>
 // 
@@ -663,7 +663,7 @@ namespace YaoCeProcess
 // 
         /// 字符串转16进制字符数组
 // 
-        /// </summary>
+        
 // 
         /// <param name="hex"></param>
 // 
@@ -683,7 +683,7 @@ namespace YaoCeProcess
 // 
         /// 字符串转16进制字符数组
 // 
-        /// </summary>
+        
 // 
         /// <param name="str"></param>
 // 

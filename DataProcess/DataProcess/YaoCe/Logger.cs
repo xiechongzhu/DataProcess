@@ -20,7 +20,7 @@ using DataProcess;
 // 
 /// YaoCeProcess
 // 
-/// </summary>
+
 // 
 namespace YaoCeProcess
 // 
@@ -40,7 +40,7 @@ namespace YaoCeProcess
     // 
     /// 修改描述:/
     // 
-    /// </summary>
+    
     // 
     public class Logger
     // 
@@ -50,7 +50,7 @@ namespace YaoCeProcess
         // 
         /// strLogDir
         // 
-        /// </summary>
+        
         // 
         private static String strLogDir = AppDomain.CurrentDomain.BaseDirectory + "Log"; //
                                                                                          // 
@@ -60,7 +60,7 @@ namespace YaoCeProcess
         // 
         /// LOG_LEVEL
         // 
-        /// </summary>
+        
         // 
         public enum LOG_LEVEL
         // 
@@ -80,7 +80,7 @@ namespace YaoCeProcess
         // 
         /// logWriter
         // 
-        /// </summary>
+        
         // 
         protected StreamWriter logWriter; //
                                           // 
@@ -90,7 +90,7 @@ namespace YaoCeProcess
         // 
         /// Logger
         // 
-        /// </summary>
+        
         // 
         private Logger()
         // 
@@ -108,7 +108,7 @@ namespace YaoCeProcess
         // 
         /// NewFile
         // 
-        /// </summary>
+        
         // 
         public void NewFile()
         // 

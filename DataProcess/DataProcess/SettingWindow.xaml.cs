@@ -18,7 +18,7 @@ namespace DataProcess
 {
     /// <summary>
     /// Interaction logic for SettingWindow.xaml
-    /// </summary>
+    
     public partial class SettingWindow : ThemedWindow
     {
         private SettingManager settingManager = new SettingManager();

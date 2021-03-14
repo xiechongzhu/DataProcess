@@ -16,7 +16,7 @@ namespace DataProcess
 {
     /// <summary>
     /// Window1.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class TestInfoWindow : DevExpress.Xpf.Core.ThemedWindow
     {
         public TestInfoWindow()

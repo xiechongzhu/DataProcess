@@ -847,8 +847,8 @@ namespace YaoCeProcess
         public float yBiLi; //y比力
         public float zBiLi; //z比力
 
-        public UInt16 HDOP; //HDOP 当量：0.01
-        public UInt16 VDOP; //VDOP 当量: 0.01
+        public ushort HDOP; //HDOP 当量：0.01
+        public ushort VDOP; //VDOP 当量: 0.01
 
         public byte keShiWeiXingShu; //可视卫星数
         public byte shiYongWeiXingShu; //使用卫星数

@@ -14,7 +14,7 @@ namespace DataProcess.Properties {
     
     /// <summary>
     ///   一个强类型的资源类，用于查找本地化的字符串等。
-    /// </summary>
+    
     // 此类是由 StronglyTypedResourceBuilder
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
@@ -34,7 +34,7 @@ namespace DataProcess.Properties {
         
         /// <summary>
         ///   返回此类使用的缓存的 ResourceManager 实例。
-        /// </summary>
+        
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
@@ -49,7 +49,7 @@ namespace DataProcess.Properties {
         /// <summary>
         ///   重写当前线程的 CurrentUICulture 属性，对
         ///   使用此强类型资源类的所有资源查找执行重写。
-        /// </summary>
+        
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
             get {

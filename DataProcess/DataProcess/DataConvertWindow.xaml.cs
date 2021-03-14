@@ -21,7 +21,7 @@ namespace DataProcess
 {
     /// <summary>
     /// Interaction logic for DataConvertSelectWindow.xaml
-    /// </summary>
+    
     public partial class DataConvertSelectWindow : ThemedWindow
     {
         private readonly ObservableCollection<String> DataSourceNames = new ObservableCollection<string>

@@ -251,7 +251,7 @@ namespace DataProcess
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
     {
 
@@ -287,6 +287,7 @@ namespace DataProcess
 
         private bool bRun;
         public static readonly int CHART_MAX_POINTS = 10000;
+        public static readonly int frame_MaxCount = 1000;
         private TestInfo testInfo = null;
         private UdpClient udpClientEnv = null;
         private UdpClient udpClientFly = null;

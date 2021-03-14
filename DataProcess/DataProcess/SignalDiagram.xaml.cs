@@ -11,7 +11,7 @@ namespace DataProcess
 {
     /// <summary>
     /// SignalDiagram.xaml 的交互逻辑
-    /// </summary>
+    
     /// 
 
     public class SignalPoint
