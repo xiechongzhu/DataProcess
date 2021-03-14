@@ -2,18 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static DataProcess.Protocol.FlyProtocol;
 
 namespace DataProcess
@@ -144,6 +135,17 @@ namespace DataProcess
         public void AddProgramData(ProgramControlData programData)
         {
             ActivePoint(FlyProtocol.GetProgramControlStatusDescription(programData.controlStatus), true);
+            switch(programData.controlStatus)
+            {
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                    ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE), true);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private bool IsAccZero(AngleData angleData)
