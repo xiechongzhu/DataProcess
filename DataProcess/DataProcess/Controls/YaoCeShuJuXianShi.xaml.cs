@@ -292,6 +292,7 @@ namespace DataProcess.Controls
                 //    }
                 //    break;
                 case E_STATUSTYPE_DaoHangKuaiSu_Ti:
+                case E_STATUSTYPE_DaoHangKuaiSu_Tou:
                     if (bOn)
                     {
                         SetLedStatus(imageKuaiSu, LED_STATUS.LED_GREEN);
@@ -301,18 +302,8 @@ namespace DataProcess.Controls
                         SetLedStatus(imageKuaiSu, LED_STATUS.LED_GRAY);
                     }
                     break;
-                case E_STATUSTYPE_DaoHangKuaiSu_Tou:
-                    if (bOn)
-                    {
-                        SetLedStatus(imageDanTou, LED_STATUS.LED_GREEN);
-                    }
-                    else
-                    {
-                        SetLedStatus(imageDanTou, LED_STATUS.LED_GRAY);
-                    }
-                    break;
+
                 case E_STATUSTYPE_DaoHangManSu_Ti:
-                case E_STATUSTYPE_DaoHangManSu_Tou:
                     if (bOn)
                     {
                         SetLedStatus(imageManSu, LED_STATUS.LED_GREEN);
@@ -320,6 +311,16 @@ namespace DataProcess.Controls
                     else
                     {
                         SetLedStatus(imageManSu, LED_STATUS.LED_GRAY);
+                    }
+                    break;
+                case E_STATUSTYPE_DaoHangManSu_Tou:
+                    if (bOn)
+                    {
+                        SetLedStatus(imageDanTou, LED_STATUS.LED_GREEN);
+                    }
+                    else
+                    {
+                        SetLedStatus(imageDanTou, LED_STATUS.LED_GRAY);
                     }
                     break;
                 //
@@ -443,6 +444,47 @@ namespace DataProcess.Controls
 
             AddVariable();
             ResetAllTextEdit();
+        }
+
+        public void Post()
+        {
+
+            DANTOUDAOHANGDATA sObject = new DANTOUDAOHANGDATA
+            {
+                GNSSTime = 20,
+                jingDu_ZuHe = 20,
+                weiDu_ZuHe = 20,
+                gaoDu_ZuHe = 20,
+                dongXiangSuDu_ZuHe = 20,
+                beiXiangSuDu_ZuHe = 20,
+                tianXiangSuDu_ZuHe = 20,
+                jingDu_GNSS = 20,
+                weiDu_GNSS = 20,
+                gaoDu_GNSS = 20,
+                dongXiangSuDu_GNSS = 20,
+                beiXiangSuDu_GNSS = 20,
+                tianXiangSuDu_GNSS = 20,
+                fuYangJiao = 20,
+                gunZhuanJiao = 20,
+                pianHangJiao = 20,
+                WxJiaoSuDu = 20,
+                WyJiaoSuDu = 20,
+                WzJiaoSuDu = 20,
+                xBiLi = 20,
+                yBiLi = 20,
+                zBiLi = 20,
+                HDOP = 20,
+                VDOP = 20,
+                keShiWeiXingShu = 20,
+                shiYongWeiXingShu = 20,
+                tuoLuoGuZhangBiaoShi = 20,
+            };
+
+            // 向界面传递数据
+            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DANTOUDAOHANGDATA)));
+            Marshal.StructureToPtr(sObject, ptr, true);
+
+            PostMessage(new WindowInteropHelper(m).Handle, YaoCeShuJuXianShi.WM_YAOCE_danTouDaoHang_DATA, 0, ptr);
         }
 
         private void ResetAllTextEdit()
@@ -1354,27 +1396,24 @@ namespace DataProcess.Controls
         //导航慢速弹头数据
         private void timerUpdateDHMStatus_Tou_Tick(object sender, EventArgs e)
         {
-            //// 是否收到数据
-            //if (bRecvStatusData_DHM)
-            //{
 
-            //    setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Tou, true);
-            //    if (bRecvStatusData_DHM_Tou)
-            //    {
-            //        // 填充实时数据
-            //        showDHManSuTimeStatus_Tou(ref sObject_DHM_Tou);
-            //        GenericFunction.changeAllTextEditColor(this.DaoHangMan_Tou);
-            //        GenericFunction.changeAllTextEditColor(this.DaoHangMan_Tou2);
-            //    }
-            //}
+
+                
+                if (bReceStatusData_DANTOU)
+                {
+                // 填充实时数据
+                setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Tou, true);
+                showDanTouDaoHangTimeStatus(ref sObject_DanTou);
+                GenericFunction.changeAllTextEditColor(DanTou);
+                }
         }
 
         //导航慢速弹头离线状态
         private void timerOfflineDHMStatus_Tou_Tick(object sender, EventArgs e)
         {
             //// 是否收到数据
-            //bRecvStatusData_DHM = false;
-            //setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Tou, false);
+            bReceStatusData_DANTOU = false;
+            setStatusOnOffLine(E_STATUSTYPE_DaoHangManSu_Tou, false);
         }
         /*------------------------------------------------------------------*/
 
@@ -4379,10 +4418,10 @@ namespace DataProcess.Controls
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
             initYaoCeParser();
-            //setUpdateTimerStatus(true);
+            setUpdateTimerStatus(true);
             //// 启动绘图定时器刷新数据
-            //setTimerUpdateChartStatus(true);
-            //Post();
+            setTimerUpdateChartStatus(true);
+            Post();
 
             if (load == null)
             {
@@ -4609,8 +4648,8 @@ namespace DataProcess.Controls
                         sObject_DanTou = sObject;
 
                         // 重新启动离线定时器
-                        timerOfflineDHKStatus.Stop();
-                        timerOfflineDHKStatus_Tou.Start();
+                        timerOfflineDHMStatus_Tou.Stop();
+                        timerOfflineDHMStatus_Tou.Start();
 
                         // 是否收到数据
                         bReceStatusData_DANTOU = true;
