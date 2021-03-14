@@ -178,6 +178,7 @@
     </Compile>
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Tools\WinApi.cs" />
+    <Compile Include="YaoCe\chartDataSource.cs" />
     <Compile Include="YaoCe\CRC16.cs" />
     <Compile Include="YaoCe\DataLogger.cs" />
     <Compile Include="YaoCe\DataParser.cs" />

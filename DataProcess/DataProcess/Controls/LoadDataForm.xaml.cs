@@ -21,7 +21,7 @@ namespace DataProcess.Controls
 {
     /// <summary>
     /// LoadDataForm.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class LoadDataForm : Window
     {
 

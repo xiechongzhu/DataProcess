@@ -17,7 +17,7 @@ namespace DataProcess.Controls
 {
     /// <summary>
     /// YaoCe_System.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class YaoCe_System : UserControl
     {
         public YaoCe_System()

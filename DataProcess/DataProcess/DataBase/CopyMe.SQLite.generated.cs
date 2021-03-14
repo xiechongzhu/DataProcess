@@ -19,7 +19,7 @@ namespace DataModels
 	/// Database       : database
 	/// Data Source    : database
 	/// Server Version : 3.24.0
-	/// </summary>
+	
 	public partial class DatabaseDB : LinqToDB.Data.DataConnection
 	{
 		public ITable<TestInfo> TestInfos { get { return this.GetTable<TestInfo>(); } }

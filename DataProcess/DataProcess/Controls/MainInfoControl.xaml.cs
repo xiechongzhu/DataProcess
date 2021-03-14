@@ -20,7 +20,7 @@ namespace DataProcess.Controls
 {
     /// <summary>
     /// MainInfoControl.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class MainInfoControl : UserControl
     {
         private String GpsTime;

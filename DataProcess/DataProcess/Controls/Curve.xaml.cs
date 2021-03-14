@@ -17,7 +17,7 @@ namespace DataProcess.Controls
 {
     /// <summary>
     /// Curve.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class Curve : UserControl
     {
         public Curve()

@@ -20,7 +20,7 @@ namespace DataProcess.Controls
 {
     /// <summary>
     /// MyChartControl.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class MyChartControl : UserControl
     {
         private readonly int MAX_DISPLAY_POINTS_COUNT = 5000;

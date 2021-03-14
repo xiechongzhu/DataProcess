@@ -1,9 +1,12 @@
 ﻿// 
+// 
+//
+// 
+using DataProcess.Controls;
 using System; //
 // 
 using System.Collections.Concurrent; //
 // 
-using System.Collections.Generic; //
 // 
 using System.IO; //
 // 
@@ -11,42 +14,35 @@ using System.Linq; //
 // 
 using System.Runtime.InteropServices; //
 // 
-using System.Text; //
 // 
 using System.Threading; //
-// 
-using System.Threading.Tasks; //
-//
-using DataProcess;
-// 
-using DataProcess.Controls;
 // 
 /// <summary>
 // 
 /// YaoCeProcess
 // 
-/// </summary>
+
 // 
 namespace YaoCeProcess
 // 
 {
-// 
+    // 
     /// <summary>
-// 
+    // 
     /// 文件名:DataParser/
-// 
+    // 
     /// 文件功能描述:数据分析/
-// 
+    // 
     /// 创建人:yangy
-// 
+    // 
     /// 版权所有:Copyright (C) ZGM/
-// 
+    // 
     /// 创建标识:2020.03.12/     
-// 
+    // 
     /// 修改描述:/
-// 
-    /// </summary>
-// 
+    // 
+    
+    // 
     public class DataParser
 // 
     {
@@ -99,28 +95,32 @@ namespace YaoCeProcess
         const byte frameType_systemStatus_2 = 0x16; //       // 系统判据状态
 
  
-        /// 回路检测反馈状态
-        const byte frameType_HuiLuJianCe = 0x16; //          // 回路检测反馈状态
+        ///// 回路检测反馈状态
+        //const byte frameType_HuiLuJianCe = 0x16; //          // 回路检测反馈状态
 
 
         /// 导航快速（弹体）
-        const byte frameType_daoHangKuaiSu_Ti = 0x25; //     // 导航快速（弹体）
+        const byte frameType_daoHangKuaiSu = 0x25; //     // 导航快速（弹体）
 
-        /// 导航快速（弹头）
-        const byte frameType_daoHangKuaiSu_Tou = 0x35; //    // 导航快速（弹头）弹头导航数据
+        ///// 导航快速（弹头）
+        //const byte frameType_daoHangKuaiSu_Tou = 0x31; //    // 导航快速（弹头）弹头导航数据
 
- 
+       
+        //20210313新增
+        const byte frameType_danTouDaoHang = 0x35; //弹头导航数据
+
+
         /// 导航慢速（弹体）
-        const byte frameType_daoHangManSu_Ti = 0x21; //      // 导航慢速（弹体）
+        const byte frameType_daoHangManSu = 0x21; //      // 导航慢速（弹体）
 
-        /// 导航慢速（弹头）
-        const byte frameType_daoHangManSu_Tou = 0x31; //     // 导航慢速（弹头）/***/
+        ///// 导航慢速（弹头）
+        //const byte frameType_daoHangManSu_Tou = 0x35; //     // 导航慢速（弹头）/***/
 
         /// 系统状态即时反馈（弹体）
-        const byte frameType_XiTongJiShi_Ti = 0x26; //       // 系统状态即时反馈（弹体）   帧总长11  数据段总长度64 帧类型0x0B
+        const byte frameType_XiTongJiShi = 0x26; //       // 系统状态即时反馈（弹体）   帧总长11  数据段总长度64 帧类型0x0B
 
-        /// 系统状态即时反馈（弹头）
-        const byte frameType_XiTongJiShi_Tou = 0x36; //      // 系统状态即时反馈（弹头）/***/
+        ///// 系统状态即时反馈（弹头）
+        //const byte frameType_XiTongJiShi_Tou = 0x36; //      // 系统状态即时反馈（弹头）/***/
 
         // 系统判决状态15
         /// bRecvHeader_XiTong15
@@ -135,80 +135,42 @@ namespace YaoCeProcess
 // 
         /// 帧总长度
 // 
-        /// </summary>
+        
 // 
         byte totalCountCan_XiTong15 = 0; //         // 帧总长度
-// 
 
-// 
-        /// <summary>
-// 
+
         /// 数据段总长度
-// 
-        /// </summary>
-// 
         byte frameLength_XiTong15 = 0; //           // 数据段总长度
 // 
 
-// 
-        /// <summary>
-// 
+
         /// 帧编号
-// 
-        /// </summary>
-// 
         UInt16 frameNO_XiTong15 = 0; //             // 帧编号
 // 
 
 // 
         // 系统判决状态16
-// 
-
-// 
-        /// <summary>
-// 
         /// bRecvHeader_XiTong16
-// 
-        /// </summary>
-// 
         bool bRecvHeader_XiTong16 = false; //
 // 
 
-// 
-        /// <summary>
-// 
+
         /// 状态数据
-// 
-        /// </summary>
-// 
         byte[] statusBuffer_XiTong16 = null; //     // 状态数据
 // 
 
-// 
-        /// <summary>
-// 
         /// 帧总长度
-// 
-        /// </summary>
-// 
         byte totalCountCan_XiTong16 = 0; //         // 帧总长度
 // 
 
-// 
-        /// <summary>
-// 
         /// 数据段总长度
-// 
-        /// </summary>
-// 
         byte frameLength_XiTong16 = 0; //           // 数据段总长度
 // 
 
         /// 帧编号
         UInt16 frameNO_XiTong16 = 0; //             // 帧编号
-// 
 
-// 
         // 回路检测反馈数据16
         /// bRecvHeader_HuiLuJianCe16
         bool bRecvHeader_HuiLuJianCe16 = false; //
@@ -224,23 +186,13 @@ namespace YaoCeProcess
         byte totalCountCan_HuiLuJianCe16 = 0; //         // 帧总长度
 // 
 
-// 
-        /// <summary>
-// 
+
         /// 数据段总长度
-// 
-        /// </summary>
-// 
         byte frameLength_HuiLuJianCe16 = 0; //           // 数据段总长度
 // 
 
-// 
-        /// <summary>
-// 
+
         /// 帧编号
-// 
-        /// </summary>
-// 
         UInt16 frameNO_HuiLuJianCe16 = 0; //             // 帧编号
 // 
 
@@ -252,14 +204,10 @@ namespace YaoCeProcess
         // 系统判决状态查询反馈 0x16->0x05
 // 
         // 回路检测反馈数据 0x16->0x06
-// 
 
-// 
-        /// <summary>
-// 
         /// curFrameType
 // 
-        /// </summary>
+        
 // 
         byte curFrameType = 0; //
 // 
@@ -269,7 +217,7 @@ namespace YaoCeProcess
 // 
         /// frameType_XTPJZT
 // 
-        /// </summary>
+        
 // 
         const byte frameType_XTPJZT = 0x01; //
 // 
@@ -279,7 +227,7 @@ namespace YaoCeProcess
 // 
         /// frameType_XTPJFK
 // 
-        /// </summary>
+        
 // 
         const byte frameType_XTPJFK = 0x05; //
 // 
@@ -289,22 +237,14 @@ namespace YaoCeProcess
 // 
         /// frameType_HLJCFK
 // 
-        /// </summary>
+        
 // 
         const byte frameType_HLJCFK = 0x06; //
 // 
 
 // 
         // 导航快速 弹体
-// 
-
-// 
-        /// <summary>
-// 
         /// bRecvHeader_DHK21
-// 
-        /// </summary>
-// 
         bool bRecvHeader_DHK21 = false; //
 // 
 
@@ -313,7 +253,7 @@ namespace YaoCeProcess
 // 
         /// 状态数据
 // 
-        /// </summary>
+        
 // 
         byte[] statusBuffer_DHK21 = null; //        // 状态数据
 // 
@@ -323,7 +263,7 @@ namespace YaoCeProcess
 // 
         /// 帧总长度
 // 
-        /// </summary>
+        
 // 
         byte totalCountCan_DHK21 = 0; //            // 帧总长度
 // 
@@ -333,7 +273,7 @@ namespace YaoCeProcess
 // 
         /// 数据段总长度
 // 
-        /// </summary>
+        
 // 
         byte frameLength_DHK21 = 0; //              // 数据段总长度
 // 
@@ -343,7 +283,7 @@ namespace YaoCeProcess
 // 
         /// 帧编号
 // 
-        /// </summary>
+        
 // 
         UInt16 frameNO_DHK21 = 0; //                // 帧编号
 // 
@@ -357,7 +297,7 @@ namespace YaoCeProcess
 // 
         /// bRecvHeader_DHK31
 // 
-        /// </summary>
+        
 // 
         bool bRecvHeader_DHK31 = false; //
 // 
@@ -367,7 +307,7 @@ namespace YaoCeProcess
 // 
         /// 状态数据
 // 
-        /// </summary>
+        
 // 
         byte[] statusBuffer_DHK31 = null; //        // 状态数据
 // 
@@ -377,7 +317,7 @@ namespace YaoCeProcess
 // 
         /// 帧总长度
 // 
-        /// </summary>
+        
 // 
         byte totalCountCan_DHK31 = 0; //            // 帧总长度
 // 
@@ -387,7 +327,7 @@ namespace YaoCeProcess
 // 
         /// 数据段总长度
 // 
-        /// </summary>
+        
 // 
         byte frameLength_DHK31 = 0; //              // 数据段总长度
 // 
@@ -397,7 +337,7 @@ namespace YaoCeProcess
 // 
         /// 帧编号
 // 
-        /// </summary>
+        
 // 
         UInt16 frameNO_DHK31 = 0; //                // 帧编号
 // 
@@ -411,7 +351,7 @@ namespace YaoCeProcess
 // 
         /// bRecvHeader_DHM25
 // 
-        /// </summary>
+        
 // 
         bool bRecvHeader_DHM25 = false; //
 // 
@@ -421,7 +361,7 @@ namespace YaoCeProcess
 // 
         /// 状态数据
 // 
-        /// </summary>
+        
 // 
         byte[] statusBuffer_DHM25 = null; //        // 状态数据
 // 
@@ -431,7 +371,7 @@ namespace YaoCeProcess
 // 
         /// 帧总长度
 // 
-        /// </summary>
+        
 // 
         byte totalCountCan_DHM25 = 0; //            // 帧总长度
 // 
@@ -441,7 +381,7 @@ namespace YaoCeProcess
 // 
         /// 数据段总长度
 // 
-        /// </summary>
+        
 // 
         byte frameLength_DHM25 = 0; //              // 数据段总长度
 // 
@@ -451,7 +391,7 @@ namespace YaoCeProcess
 // 
         /// 帧编号
 // 
-        /// </summary>
+        
 // 
         UInt16 frameNO_DHM25 = 0; //                // 帧编号
 // 
@@ -465,7 +405,7 @@ namespace YaoCeProcess
 // 
         /// bRecvHeader_DHM35
 // 
-        /// </summary>
+        
 // 
         bool bRecvHeader_DHM35 = false; //
 // 
@@ -475,7 +415,7 @@ namespace YaoCeProcess
 // 
         /// 状态数据
 // 
-        /// </summary>
+        
 // 
         byte[] statusBuffer_DHM35 = null; //        // 状态数据
 // 
@@ -485,7 +425,7 @@ namespace YaoCeProcess
 // 
         /// 帧总长度
 // 
-        /// </summary>
+        
 // 
         byte totalCountCan_DHM35 = 0; //            // 帧总长度
 // 
@@ -495,7 +435,7 @@ namespace YaoCeProcess
 // 
         /// 数据段总长度
 // 
-        /// </summary>
+        
 // 
         byte frameLength_DHM35 = 0; //              // 数据段总长度
 // 
@@ -505,7 +445,7 @@ namespace YaoCeProcess
 // 
         /// 帧编号
 // 
-        /// </summary>
+        
 // 
         UInt16 frameNO_DHM35 = 0; //                // 帧编号
 // 
@@ -514,45 +454,18 @@ namespace YaoCeProcess
         // TODO 20200219 新增
 // 
         // 系统即时状态反馈 弹体
-// 
-
-// 
-        /// <summary>
-// 
         /// bRecvHeader_XiTongJiShi26
-// 
-        /// </summary>
-// 
         bool bRecvHeader_XiTongJiShi26 = false; //
-// 
 
-// 
-        /// <summary>
-// 
         /// 状态数据
-// 
-        /// </summary>
-// 
         byte[] statusBuffer_XiTongJiShi26 = null; //        // 状态数据
-// 
 
-// 
-        /// <summary>
-// 
         /// 帧总长度
-// 
-        /// </summary>
-// 
         byte totalCountCan_XiTongJiShi26 = 0; //            // 帧总长度
 // 
 
-// 
-        /// <summary>
-// 
+
         /// 数据段总长度
-// 
-        /// </summary>
-// 
         byte frameLength_XiTongJiShi26 = 0; //              // 数据段总长度
 // 
 
@@ -561,7 +474,7 @@ namespace YaoCeProcess
 // 
         /// 帧编号
 // 
-        /// </summary>
+        
 // 
         UInt16 frameNO_XiTongJiShi26 = 0; //                // 帧编号
 // 
@@ -575,7 +488,7 @@ namespace YaoCeProcess
 // 
         /// bRecvHeader_XiTongJiShi36
 // 
-        /// </summary>
+        
 // 
         bool bRecvHeader_XiTongJiShi36 = false; //
 // 
@@ -585,7 +498,7 @@ namespace YaoCeProcess
 // 
         /// 状态数据
 // 
-        /// </summary>
+        
 // 
         byte[] statusBuffer_XiTongJiShi36 = null; //        // 状态数据
 // 
@@ -595,7 +508,7 @@ namespace YaoCeProcess
 // 
         /// 帧总长度
 // 
-        /// </summary>
+        
 // 
         byte totalCountCan_XiTongJiShi36 = 0; //            // 帧总长度
 // 
@@ -605,7 +518,7 @@ namespace YaoCeProcess
 // 
         /// 数据段总长度
 // 
-        /// </summary>
+        
 // 
         byte frameLength_XiTongJiShi36 = 0; //              // 数据段总长度
 // 
@@ -615,7 +528,7 @@ namespace YaoCeProcess
 // 
         /// 帧编号
 // 
-        /// </summary>
+        
 // 
         UInt16 frameNO_XiTongJiShi36 = 0; //                // 帧编号
 // 
@@ -627,7 +540,7 @@ namespace YaoCeProcess
 // 
         /// UDP 缓存buffer
 // 
-        /// </summary>
+        
 // 
         byte[] UDPBuffer = null; //
 // 
@@ -641,7 +554,7 @@ namespace YaoCeProcess
 // 
         /// Enqueue
 // 
-        /// </summary>
+        
 // 
         /// <param name="data"></param>
 // 
@@ -659,7 +572,7 @@ namespace YaoCeProcess
 // 
         /// Start
 // 
-        /// </summary>
+        
 // 
         public void Start()
 // 
@@ -687,7 +600,7 @@ namespace YaoCeProcess
 // 
         /// Stop
 // 
-        /// </summary>
+        
 // 
         public void Stop()
 // 
@@ -711,7 +624,7 @@ namespace YaoCeProcess
 // 
         /// ThreadFunction
 // 
-        /// </summary>
+        
 // 
         private void ThreadFunction()
 // 
@@ -749,7 +662,7 @@ namespace YaoCeProcess
 // 
         /// 报告指定的 System.Byte[] 在此实例中的第一个匹配项的索引。
 // 
-        /// </summary>
+        
 // 
         /// <param name="srcBytes">被执行查找的 System.Byte[]。</param>
 // 
@@ -815,7 +728,7 @@ namespace YaoCeProcess
 // 
         /// ParseDatas
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
@@ -929,7 +842,7 @@ namespace YaoCeProcess
 // 
         /// handleData
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
@@ -991,102 +904,58 @@ namespace YaoCeProcess
 // 
         /// ParseData
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
         private void ParseData(byte[] buffer)
-// 
         {
-// 
             //--------------------------------------------------------------------------------//
-// 
-
-// 
-            String errMsg; //
-// 
-            UInt16 dataLength; //
-// 
+            String errMsg;
+            UInt16 dataLength;
             if (!CheckPacket(buffer, out errMsg, out dataLength))
-// 
             {
-// 
                 // TODO 20200218 错误数据太多，影响界面刷新，卡顿
-// 
-                // Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_ERROR, "数据包错误:" + errMsg); //
-// 
-                return; //
-// 
+                // Logger.GetInstance().Log(Logger.LOG_LEVEL.LOG_ERROR, "数据包错误:" + errMsg); 
+                return; 
             }
-// 
+
             // 如果dataLength长度等于0，直接不进行下面数据的处理
-// 
             if (dataLength == 0)
-// 
-                return; //
-// 
+                return; 
 
-// 
             using (MemoryStream stream = new MemoryStream(buffer))
-// 
             {
-// 
                 // 位置偏移到CAN数据域
-// 
-                stream.Seek(Marshal.SizeOf(typeof(UDPHead)), 0); //
-// 
+                stream.Seek(Marshal.SizeOf(typeof(UDPHead)), 0); 
+
                 // 解析CAN数据帧
-// 
                 using (BinaryReader br = new BinaryReader(stream))
-// 
                 {
-// 
-                    UInt16 dataReadPos = 0; //
-// 
+                    UInt16 dataReadPos = 0; 
                     while (stream.Position < stream.Length - 1 && dataReadPos < dataLength)
-// 
                     {
-// 
                         // 解析CAN帧头
-// 
                         CANHead packHead = new CANHead
-// 
                         {
-// 
                             frameInfo1 = br.ReadByte(),
-// 
                             frameInfo2 = br.ReadByte()
-// 
-                        }; //
-// 
+                        };
+
                         // TODO 这里的CAN帧头是大端字节序
-// 
-                        UInt16 frameInfo = (UInt16)(((UInt16)packHead.frameInfo1 << 8) + packHead.frameInfo2); //
-// 
+                        UInt16 frameInfo = (UInt16)(((UInt16)packHead.frameInfo1 << 8) + packHead.frameInfo2); 
                         // 3bit占位 8bit 帧id(仲裁场) 1bitRTR(0) 4bit数据场(数据长度)
-// 
-                        byte canDataId = (byte)(frameInfo >> 5 & 0xFF); //
-// 
+                        byte canDataId = (byte)(frameInfo >> 5 & 0xFF);
 
-// 
                         // 偏移
-// 
-                        dataReadPos += (UInt16)Marshal.SizeOf(typeof(CANHead)); //
-// 
+                        dataReadPos += (UInt16)Marshal.SizeOf(typeof(CANHead));
 
-// 
                         // 当前CAN帧的数据长度
-// 
-                        int canLen = (int)frameInfo & 0xF; //
-// 
+                        int canLen = (int)frameInfo & 0xF;
                         // 一帧CAN数据最多只有八个字节，往后的数据不进行处理，直接丢弃
-// 
                         if (canLen > 8)
-// 
-                            return; //
-// 
+                            return;
                         // 读取can数据
-// 
                         // TODO 这里剩下的数据长度不包括校验的两个字节，如果想用校验，需要再读取两个字节的校验值
 // 
                         // TODO 20200217 更改为直接读取8个字节
@@ -1123,19 +992,15 @@ namespace YaoCeProcess
 // 
                             case frameType_systemStatus_2:
 // 
-                            case frameType_daoHangKuaiSu_Ti:
+                            case frameType_daoHangKuaiSu:
 // 
-                            case frameType_daoHangKuaiSu_Tou:
+                            case frameType_daoHangManSu:
 // 
-                            case frameType_daoHangManSu_Ti:
-// 
-                            case frameType_daoHangManSu_Tou:
+                            case frameType_danTouDaoHang:
 // 
                             // TODO 20200219 新增系统即时反馈状态
 // 
-                            case frameType_XiTongJiShi_Ti:
-// 
-                            case frameType_XiTongJiShi_Tou:
+                            case frameType_XiTongJiShi:
 // 
                                 // 将数据放入CAN数据处理模块，进行长帧的拼包工作
 // 
@@ -1163,7 +1028,7 @@ namespace YaoCeProcess
 // 
         /// CheckPacket
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
@@ -1275,7 +1140,7 @@ namespace YaoCeProcess
 // 
         /// HandleCanDataPinJie
 // 
-        /// </summary>
+        
 // 
         /// <param name="canDataId"></param>
 // 
@@ -1428,7 +1293,7 @@ namespace YaoCeProcess
 // 
         /// ParseCANData
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
@@ -1453,7 +1318,6 @@ namespace YaoCeProcess
             {
 // 
                 // 系统判据状态
-// 
                 case frameType_systemStatus_1:
 // 
                     HandleCanDataPinJie(canDataId, ref statusBuffer_XiTong15,
@@ -1508,7 +1372,7 @@ namespace YaoCeProcess
 // 
                     break; //
 // 
-                case frameType_daoHangKuaiSu_Ti:
+                case frameType_daoHangKuaiSu:
 // 
                     HandleCanDataPinJie(canDataId, ref statusBuffer_DHK21,
 // 
@@ -1517,18 +1381,8 @@ namespace YaoCeProcess
                         ref frameNO_DHK21, buffer); //
 // 
                     break; //
-// 
-                case frameType_daoHangKuaiSu_Tou:
-// 
-                    HandleCanDataPinJie(canDataId, ref statusBuffer_DHK31,
-// 
-                        ref totalCountCan_DHK31, ref frameLength_DHK31, ref bRecvHeader_DHK31,
-// 
-                        ref frameNO_DHK31, buffer); //
-// 
-                    break; //
-// 
-                case frameType_daoHangManSu_Ti:
+
+                case frameType_daoHangManSu:
 // 
                     HandleCanDataPinJie(canDataId, ref statusBuffer_DHM25,
 // 
@@ -1538,7 +1392,7 @@ namespace YaoCeProcess
 // 
                     break; //
 // 
-                case frameType_daoHangManSu_Tou:
+                case frameType_danTouDaoHang:
 // 
                     HandleCanDataPinJie(canDataId, ref statusBuffer_DHM35,
 // 
@@ -1550,7 +1404,7 @@ namespace YaoCeProcess
 // 
                 // TODO 20200219 新增
 // 
-                case frameType_XiTongJiShi_Ti:
+                case frameType_XiTongJiShi:
 // 
                     HandleCanDataPinJie(canDataId, ref statusBuffer_XiTongJiShi26,
 // 
@@ -1558,17 +1412,7 @@ namespace YaoCeProcess
 // 
                         ref frameNO_XiTongJiShi26, buffer); //
 // 
-                    break; //
-// 
-                case frameType_XiTongJiShi_Tou:
-// 
-                    HandleCanDataPinJie(canDataId, ref statusBuffer_XiTongJiShi36,
-// 
-                        ref totalCountCan_XiTongJiShi36, ref frameLength_XiTongJiShi36, ref bRecvHeader_XiTongJiShi36,
-// 
-                        ref frameNO_XiTongJiShi36, buffer); //
-// 
-                    break; //
+                    break;
 // 
                 default:
 // 
@@ -1584,7 +1428,7 @@ namespace YaoCeProcess
 // 
         /// ParseStatusData
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
@@ -1634,76 +1478,55 @@ namespace YaoCeProcess
 // 
                     }
 // 
-                    else if (frameType == frameType_HLJCFK)
-// 
-                    {
-// 
-                        ParseStatusData_huiLuJianCe(buffer, canId, frameType, frameNO); //
-// 
-                    }
+//                    else if (frameType == frameType_HLJCFK)
+//// 
+//                    {
+//// 
+//                        ParseStatusData_huiLuJianCe(buffer, canId, frameType, frameNO); //
+//// 
+//                    }
 // 
                     // 重新置为0
 // 
-                    curFrameType = 0x00; //
-// 
+                    curFrameType = 0x00; 
                     break; //
 // 
-                // TODO 注意导航快速数据需要分别显示在弹头弹体上
+                // TODO 注意导航快速数据需要分别显示在弹头弹体上  20210312改
+                /*去除弹头显示
+                 *0x35 弹头导航数据显示
+                 */
 // 
-                case frameType_daoHangKuaiSu_Ti:                // 导航快速（弹体）
-// 
-                case frameType_daoHangKuaiSu_Tou:               // 导航快速（弹头）
-// 
-                    ParseStatusData_daoHangKuaiSu(buffer, canId, frameNO); //
-// 
-                    break; //
+                case frameType_daoHangKuaiSu:                // 导航快速（弹体）
+                    ParseStatusData_daoHangKuaiSu(buffer, canId, frameNO); //                                                             // 
+                    break; 
 // 
                 // TODO 注意导航慢速数据需要分别显示在弹头弹体上
-// 
-                case frameType_daoHangManSu_Ti:                 // 导航慢速（弹体）
-// 
-                case frameType_daoHangManSu_Tou:                // 导航慢速（弹头）
-// 
-                    ParseStatusData_daoHangManSu(buffer, canId, frameNO); //
-// 
-                    break; //
-// 
+                case frameType_daoHangManSu:                 // 导航慢速（弹体）
+                    ParseStatusData_daoHangManSu(buffer, canId, frameNO); 
+                    break; 
+                    
+                case frameType_danTouDaoHang:                //0x35 弹头导航数据显示
+                    ParseStatusData_daoTouDaoHangData(buffer, canId, frameNO);
+                    break;
+                // 
                 // TODO 20200219 新增
-// 
-                case frameType_XiTongJiShi_Ti:                 // 系统状态即时反馈（弹体）
-// 
-                case frameType_XiTongJiShi_Tou:                // 系统状态即时反馈（弹头）
-// 
-                    ParseStatusData_XiTongJiShi(buffer, canId, frameNO); //
-// 
-                    break; //
-// 
-                default:
-// 
-                    break; //
-// 
-            }
-// 
-        }
-// 
+                // 
+                case frameType_XiTongJiShi:                 // 系统状态即时反馈（弹体）=
+                    ParseStatusData_XiTongJiShi(buffer, canId, frameNO); 
+                    break; 
 
-// 
-        /// <summary>
-// 
+                default:
+                    break; 
+            }
+        }
+
+
         /// ParseDataCRC16
-// 
-        /// </summary>
-// 
         /// <param name="buffer"></param>
-// 
         /// <returns></returns>
-// 
         private bool ParseDataCRC16(byte[] buffer)
-// 
         {
-// 
             // CRC16
-// 
             string crcValueSTR = CRC.ToCRC16(buffer, true); //    // bool 是否逆序
 // 
             byte[] crcValue = CRC.StringToHexByte(crcValueSTR); //
@@ -1737,23 +1560,76 @@ namespace YaoCeProcess
             return true; //
 // 
         }
-// 
 
-// 
+        //弹头导航数据
+        private void ParseStatusData_daoTouDaoHangData(byte[] buffer, byte canId, UInt16 frameNO)
+        { 
+            if (buffer.Length < Marshal.SizeOf(typeof(DANTOUDAOHANGDATA)) + CRCLENGTH)
+            { 
+                return;  
+            }
+            using (MemoryStream stream = new MemoryStream(buffer))
+            {
+                using (BinaryReader br = new BinaryReader(stream))
+                {
+                    DANTOUDAOHANGDATA sObject = new DANTOUDAOHANGDATA
+                    {
+                        GNSSTime = br.ReadUInt32(),
+                        jingDu_ZuHe = br.ReadInt32(),
+                        weiDu_ZuHe = br.ReadInt32(),
+                        gaoDu_ZuHe = br.ReadInt32(),
+                        dongXiangSuDu_ZuHe = br.ReadInt32(),
+                        beiXiangSuDu_ZuHe = br.ReadInt32(),
+                        tianXiangSuDu_ZuHe = br.ReadInt32(),
+                        jingDu_GNSS = br.ReadInt32(),
+                        weiDu_GNSS = br.ReadInt32(),
+                        gaoDu_GNSS = br.ReadInt32(),
+                        dongXiangSuDu_GNSS = br.ReadInt32(),
+                        beiXiangSuDu_GNSS = br.ReadInt32(),
+                        tianXiangSuDu_GNSS = br.ReadInt32(),
+                        fuYangJiao = br.ReadSingle(),
+                        gunZhuanJiao = br.ReadSingle(),
+                        pianHangJiao = br.ReadSingle(),
+                        WxJiaoSuDu = br.ReadSingle(),
+                        WyJiaoSuDu = br.ReadSingle(),
+                        WzJiaoSuDu = br.ReadSingle(),
+                        xBiLi = br.ReadSingle(),
+                        yBiLi = br.ReadSingle(),
+                        zBiLi = br.ReadSingle(),
+                        HDOP = br.ReadUInt16(),
+                        VDOP = br.ReadUInt16(),
+                        keShiWeiXingShu = br.ReadByte(),
+                        shiYongWeiXingShu = br.ReadByte(),
+                        tuoLuoGuZhangBiaoShi = br.ReadByte(),
+                    };
+                    // 向界面传递数据
+                    IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DANTOUDAOHANGDATA)));  
+                    Marshal.StructureToPtr(sObject, ptr, true);
+
+                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_danTouDaoHang_DATA, 0, ptr); 
+
+
+                    // 发送帧序号信息
+                    postFrameInfo(canId, frameNO);  
+                }
+            }
+        }
+
+        // 
         /// <summary>
-// 
+        // 
         /// ParseStatusData_SystemStatus
-// 
-        /// </summary>
-// 
+        // 
+        
+        // 
         /// <param name="buffer"></param>
-// 
+        // 
         /// <param name="canId"></param>
-// 
+        // 
         /// <param name="frameType"></param>
-// 
+        // 
         /// <param name="frameNO"></param>
-// 
+        // 
         private void ParseStatusData_SystemStatus(byte[] buffer, byte canId, byte frameType, UInt16 frameNO)
 // 
         {
@@ -1885,7 +1761,7 @@ namespace YaoCeProcess
 // 
         /// ParseStatusData_daoHangKuaiSu
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
@@ -1974,28 +1850,10 @@ namespace YaoCeProcess
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
 // 
-                    if (canId == frameType_daoHangKuaiSu_Ti)
-// 
-                    {
-// 
-                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA, 0, ptr); //
-// 
-                    }
-// 
-                    else
-// 
-                    {
-// 
-                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Tou_DATA, 0, ptr); //
-// 
-                    }
-// 
-                    //-------------------------------------------------------------------------------//
-// 
+                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA, 0, ptr); 
+
                     // 发送帧序号信息
-// 
-                    postFrameInfo(canId, frameNO); //
-// 
+                    postFrameInfo(canId, frameNO); 
                 }
 // 
             }
@@ -2008,7 +1866,7 @@ namespace YaoCeProcess
 // 
         /// ParseStatusData_daoHangManSu
 // 
-        /// </summary>
+        
 // 
         /// <param name="buffer"></param>
 // 
@@ -2301,50 +2159,32 @@ namespace YaoCeProcess
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
 // 
-                    if (canId == frameType_daoHangManSu_Ti)
 // 
-                    {
-// 
-                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Ti_DATA, 0, ptr); //
-// 
-                    }
-// 
-                    else
-// 
-                    {
-// 
-                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Tou_DATA, 0, ptr); //
-// 
-                    }
-// 
-                    //-------------------------------------------------------------------------------//
-// 
-                    // 发送帧序号信息
-// 
-                    postFrameInfo(canId, frameNO); //
-// 
-                }
-// 
-            }
-// 
-        }
-// 
+                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Ti_DATA, 0, ptr);
 
-// 
+                    // 发送帧序号信息
+                    postFrameInfo(canId, frameNO); 
+                }
+            }
+        }
+        // 
+
+        // 
         /// <summary>
-// 
+        // 
         /// ParseStatusData_huiLuJianCe
-// 
-        /// </summary>
-// 
+        // 
+
+        // 
         /// <param name="buffer"></param>
-// 
+        // 
         /// <param name="canId"></param>
-// 
+        // 
         /// <param name="frameType"></param>
-// 
+        // 
         /// <param name="frameNO"></param>
-// 
+        // 
+#if false
         private void ParseStatusData_huiLuJianCe(byte[] buffer, byte canId, byte frameType, UInt16 frameNO)
 // 
         {
@@ -2432,21 +2272,22 @@ namespace YaoCeProcess
             }
 // 
         }
-// 
+#endif
+        // 
 
-// 
+        // 
         /// <summary>
-// 
+        // 
         /// ParseStatusData_XiTongJiShi
-// 
-        /// </summary>
-// 
+        // 
+
+        // 
         /// <param name="buffer"></param>
-// 
+        // 
         /// <param name="canId"></param>
-// 
+        // 
         /// <param name="frameNO"></param>
-// 
+        // 
         private void ParseStatusData_XiTongJiShi(byte[] buffer, byte canId, UInt16 frameNO)
 // 
         {
@@ -2609,23 +2450,8 @@ namespace YaoCeProcess
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
 // 
-                    if (canId == frameType_XiTongJiShi_Ti)
-// 
-                    {
-// 
-                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Ti_DATA, 0, ptr); //
-// 
-                        // System.Diagnostics.Debug.WriteLine("XiTongJiShi_Ti frameNO:" + frameNO.ToString()); //
-// 
-                    }
-// 
-                    else
-// 
-                    {
-// 
-                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Tou_DATA, 0, ptr); //
-// 
-                    }
+                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Ti_DATA, 0, ptr); //
+
 // 
                     //-------------------------------------------------------------------------------//
 // 
@@ -2645,7 +2471,7 @@ namespace YaoCeProcess
 // 
         /// postFrameInfo
 // 
-        /// </summary>
+        
 // 
         /// <param name="canId"></param>
 // 

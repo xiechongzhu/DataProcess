@@ -17,7 +17,7 @@ namespace DataProcess
 {
     /// <summary>
     /// OpenDataWindow.xaml 的交互逻辑
-    /// </summary>
+    
     public partial class OpenDataWindow : DevExpress.Xpf.Core.ThemedWindow
     {
         public OpenDataWindow()
