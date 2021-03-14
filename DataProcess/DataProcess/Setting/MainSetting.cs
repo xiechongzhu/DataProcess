@@ -16,8 +16,10 @@ namespace DataProcess.Setting
         public String MainText;
         public double BoomLineFront;
         public double BoomLineBack;
-        public double BoomLineSide;
+        public double BoomLineSideLeft;
+        public double BoomLineSideRight;
         public double PipeLength;
-        public double PipeWidth;
+        public double PipeWidthLeft;
+        public double PipeWidthRight;
     }
 }

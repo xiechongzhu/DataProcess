@@ -67,6 +67,21 @@ namespace DataProcess.Protocol
             return ProgramControlStatusText.Values.ToList();
         }
 
+        public static List<String> GetDisplayPoints()
+        {
+            return new List<string>
+            {
+                "起飞",
+                "姿控发动机电爆管起爆",
+                "一级发动机关机",
+                "一级发动机分离",
+                "头罩分离点火",
+                "顶点",
+                "二级发动机点火",
+                "头体分离"
+            };
+        }
+
         public static String GetProgramControlStatusDescription(int status)
         {
             switch(status)

@@ -34,9 +34,11 @@ namespace DataProcess
             editInfo.Text = mainSetting.MainText;
             editBoomLineFront.Text = mainSetting.BoomLineFront.ToString();
             editBoomLineBack.Text = mainSetting.BoomLineBack.ToString();
-            editBoomLineSide.Text = mainSetting.BoomLineSide.ToString();
+            editBoomLineSideLeft.Text = mainSetting.BoomLineSideLeft.ToString();
+            editBoomLineSideRight.Text = mainSetting.BoomLineSideRight.ToString();
             editPipeLength.Text = mainSetting.PipeLength.ToString();
-            editPipeWidth.Text = mainSetting.PipeWidth.ToString();
+            editPipeWidthLeft.Text = mainSetting.PipeWidthLeft.ToString();
+            editPipeWidthRight.Text = mainSetting.PipeWidthRight.ToString();
 
             if(settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort,
                                                  out String flyIpAddr, out int flyPort, 
@@ -333,9 +335,11 @@ namespace DataProcess
                 MainText = editInfo.Text,
                 BoomLineFront = double.Parse(editBoomLineFront.Text),
                 BoomLineBack = double.Parse(editBoomLineBack.Text),
-                BoomLineSide = double.Parse(editBoomLineSide.Text),
+                BoomLineSideLeft = double.Parse(editBoomLineSideLeft.Text),
+                BoomLineSideRight = double.Parse(editBoomLineSideRight.Text),
                 PipeLength = double.Parse(editPipeLength.Text),
-                PipeWidth = double.Parse(editPipeWidth.Text)
+                PipeWidthLeft = double.Parse(editPipeWidthLeft.Text),
+                PipeWidthRight = double.Parse(editPipeWidthRight.Text)
             }))
             {
                 MessageBox.Show("保存主界面配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);

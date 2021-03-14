@@ -25,9 +25,11 @@ namespace DataProcess.GMap
         public PointLatLng EndPoint { get; set; }
         public double BoomLineFront { get; set; }
         public double BoomLineBack { get; set; }
-        public double BoomLineSide { get; set; }
+        public double BoomLineSideLeft { get; set; }
+        public double BoomLineSideRight { get; set; }
         public double PipeLineLength { get; set; }
-        public double PipeLineWidth { get; set; }
+        public double PipeLineWidthLeft { get; set; }
+        public double PipeLineWidthRight { get; set; }
         public double FlyHeight { get; set; }
         private bool NeedRefresh;
         private const double EARTH_RADIUS = 6378137;
@@ -87,6 +89,7 @@ namespace DataProcess.GMap
             DrawBoomLine(drawingContext);
             DrawFlyPipeLine(drawingContext);
             DrawTrackLine(drawingContext);
+            DrawLegend(drawingContext);
         }
 
         private void DrawStartAndEndPoint(DrawingContext drawingContext)
@@ -123,20 +126,20 @@ namespace DataProcess.GMap
             GPoint EndGPoint = FromLatLngToLocal(EndPoint);
             double DistanceInPix = Math.Sqrt(Math.Pow(StartGPoint.X - EndGPoint.X, 2) + Math.Pow(StartGPoint.Y - EndGPoint.Y, 2));
             double angle;
-            if(StartGPoint.X >= EndGPoint.X)
+            if(EndGPoint.X >= StartGPoint.X)
             {
-                angle = Math.Asin((StartGPoint.Y - EndGPoint.Y) / DistanceInPix);
+                angle = Math.Asin((EndGPoint.Y - StartGPoint.Y) / DistanceInPix);
             }
             else
             {
-                angle = Math.PI - Math.Asin((StartGPoint.Y - EndGPoint.Y) / DistanceInPix);
+                angle = Math.PI - Math.Asin((EndGPoint.Y - StartGPoint.Y) / DistanceInPix);
             }
             angle = angle / Math.PI * 180;
 
-            drawingContext.PushTransform(new RotateTransform(angle, EndGPoint.X, EndGPoint.Y));
-            drawingContext.DrawRectangle(null, new Pen(Brushes.IndianRed, 2), new Rect(EndGPoint.X - BoomLineFront / DistanceInM * DistanceInPix,
-                EndGPoint.Y - BoomLineSide / DistanceInM * DistanceInPix, (BoomLineFront + BoomLineBack) / DistanceInM * DistanceInPix,
-                2 * BoomLineSide / DistanceInM * DistanceInPix));
+            drawingContext.PushTransform(new RotateTransform(angle, StartGPoint.X, StartGPoint.Y));
+            drawingContext.DrawRectangle(null, new Pen(Brushes.IndianRed, 2), new Rect(StartGPoint.X - BoomLineBack / DistanceInM * DistanceInPix,
+                StartGPoint.Y - BoomLineSideLeft / DistanceInM * DistanceInPix, (BoomLineFront + BoomLineBack) / DistanceInM * DistanceInPix,
+                (BoomLineSideLeft + BoomLineSideRight) / DistanceInM * DistanceInPix));
             drawingContext.Pop();
         }
 
@@ -157,14 +160,14 @@ namespace DataProcess.GMap
             }
             angle = angle / Math.PI * 180;
             Point p1 = new Point(EndGPoint.X + DistanceInPix - PipeLineLength / DistanceInM * DistanceInPix,
-                EndGPoint.Y - PipeLineWidth / DistanceInM * DistanceInPix);
-            Point p2 = new Point(EndGPoint.X + DistanceInPix - PipeLineWidth / DistanceInM * DistanceInPix,
-                EndGPoint.Y - PipeLineWidth / DistanceInM * DistanceInPix);
+                EndGPoint.Y - PipeLineWidthRight / DistanceInM * DistanceInPix);
+            Point p2 = new Point(EndGPoint.X + DistanceInPix - PipeLineWidthRight / DistanceInM * DistanceInPix,
+                EndGPoint.Y - PipeLineWidthRight / DistanceInM * DistanceInPix);
             Point p3 = new Point(EndGPoint.X + DistanceInPix, EndGPoint.Y);
-            Point p4 = new Point(EndGPoint.X + DistanceInPix - PipeLineWidth / DistanceInM * DistanceInPix,
-                EndGPoint.Y + PipeLineWidth / DistanceInM * DistanceInPix);
+            Point p4 = new Point(EndGPoint.X + DistanceInPix - PipeLineWidthLeft / DistanceInM * DistanceInPix,
+                EndGPoint.Y + PipeLineWidthLeft / DistanceInM * DistanceInPix);
             Point p5 = new Point(EndGPoint.X + DistanceInPix - PipeLineLength / DistanceInM * DistanceInPix,
-                EndGPoint.Y + PipeLineWidth / DistanceInM * DistanceInPix);
+                EndGPoint.Y + PipeLineWidthLeft / DistanceInM * DistanceInPix);
             Pen pen = new Pen(Brushes.ForestGreen, 2);
             drawingContext.PushTransform(new RotateTransform(angle, EndGPoint.X, EndGPoint.Y));
             drawingContext.DrawLine(pen, p1, p2);
@@ -202,6 +205,26 @@ namespace DataProcess.GMap
                 Brushes.Black, 0);
                 drawingContext.DrawText(formattedText, new Point(controlPoints.Last().X - formattedText.Width / 2, controlPoints.Last().Y - formattedText.Height - 20));
             }
+        }
+
+        private void DrawLegend(DrawingContext drawingContext)
+        {
+            FormattedText boomLineText = new FormattedText(
+                "-----  必炸线",
+                CultureInfo.GetCultureInfo("zh-cn"),
+                FlowDirection.LeftToRight,
+                new Typeface("微软雅黑"),
+                14,
+                Brushes.IndianRed, 0);
+            drawingContext.DrawText(boomLineText, new Point(ActualWidth - 100, ActualHeight - 50));
+            FormattedText pipeLineText = new FormattedText(
+                "-----  飞行管道",
+                CultureInfo.GetCultureInfo("zh-cn"),
+                FlowDirection.LeftToRight,
+                new Typeface("微软雅黑"),
+                14,
+                Brushes.Green, 0);
+            drawingContext.DrawText(pipeLineText, new Point(ActualWidth - 100, ActualHeight - 30));
         }
 
         private double GetDistance(PointLatLng pointStart, PointLatLng pointEnd)

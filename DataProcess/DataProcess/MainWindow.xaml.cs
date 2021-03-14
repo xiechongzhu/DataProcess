@@ -335,9 +335,11 @@ namespace DataProcess
             mapControl.EndPoint = new PointLatLng(mainSetting.EndLat, mainSetting.EndLng);
             mapControl.BoomLineFront = mainSetting.BoomLineFront;
             mapControl.BoomLineBack = mainSetting.BoomLineBack;
-            mapControl.BoomLineSide = mainSetting.BoomLineSide;
+            mapControl.BoomLineSideLeft = mainSetting.BoomLineSideLeft;
+            mapControl.BoomLineSideRight = mainSetting.BoomLineSideRight;
             mapControl.PipeLineLength = mainSetting.PipeLength;
-            mapControl.PipeLineWidth = mainSetting.PipeWidth;
+            mapControl.PipeLineWidthLeft = mainSetting.PipeWidthLeft;
+            mapControl.PipeLineWidthRight = mainSetting.PipeWidthRight;
             mapControl.Refresh();
         }
 
@@ -477,7 +479,7 @@ namespace DataProcess
         {
             ProgramControlStatus.Text = FlyProtocol.GetProgramControlStatusDescription(-1);
             GpsTime.Text = "--";
-            FlyProtocol.GetPoints().ForEach(point => programDigram.AddPoint(point));
+            FlyProtocol.GetDisplayPoints().ForEach(point => programDigram.AddPoint(point));
         }
 
         private void ResetProgramDiagram()
@@ -1198,9 +1200,11 @@ namespace DataProcess
                 mapControl.EndPoint = new PointLatLng(mainSetting.EndLat, mainSetting.EndLng);
                 mapControl.BoomLineFront = mainSetting.BoomLineFront;
                 mapControl.BoomLineBack = mainSetting.BoomLineBack;
-                mapControl.BoomLineSide = mainSetting.BoomLineSide;
+                mapControl.BoomLineSideLeft = mainSetting.BoomLineSideLeft;
+                mapControl.BoomLineSideRight = mainSetting.BoomLineSideRight;
                 mapControl.PipeLineLength = mainSetting.PipeLength;
-                mapControl.PipeLineWidth = mainSetting.PipeWidth;
+                mapControl.PipeLineWidthLeft = mainSetting.PipeWidthLeft;
+                mapControl.PipeLineWidthRight = mainSetting.PipeWidthRight;
                 mapControl.Refresh();
             }
         }
