@@ -21,21 +21,21 @@ namespace DataProcess.Protocol
 
         public enum PROGRAM_CONTROL_STATUS
         {
-            STATUS_FLY_START = 0,       //起飞
-            STATUS_LEVEL1_SHUTDOWN,     //姿控发动机电爆管起爆
-            STATUS_ENGINE_LEAVE,        //一级发动机分离
-            STATUS_BOOM,                //一级发动机关机
-            STATUS_TOP,                 //顶点
-            STATUS_HEAD_BODY_LEAVE,     //头体分离
-            STATUS_LEVEL2_FIRE,         //二级发动机点火
-            STATUS_HOOD_FIRE,           //头罩分离点火
-            STATUS_HEAD_FIRE,           //弹头起旋点火
-            STATUS_LEVEL2_RELIEVE,      //二级发动机解保拔销
-            STATUS_LEVLE2_DRIVE,        //二级发动机解保驱动
-            STATUS_BUTERRY_ACTIVE,      //引控电池激活
-            STATUS_HEAD_PAYLOAD_LEAVE,  //弹头载荷脱插分离
-            STATUS_HEAD_LEAVE,          //头遥脱插分离
-            STATUS_HEAD_SAFE_LEAVE      //弹头安控/慢旋脱插分离
+            STATUS_FLY_START = 0,    
+            STATUS_LEVEL1_SHUTDOWN,
+            STATUS_ENGINE_LEAVE,
+            STATUS_BOOM,
+            STATUS_TOP,
+            STATUS_HEAD_BODY_LEAVE,
+            STATUS_LEVEL2_FIRE,
+            STATUS_HOOD_FIRE,
+            STATUS_HEAD_FIRE,
+            STATUS_LEVEL2_RELIEVE,
+            STATUS_LEVLE2_DRIVE,
+            STATUS_BUTERRY_ACTIVE,
+            STATUS_HEAD_PAYLOAD_LEAVE,
+            STATUS_HEAD_LEAVE,
+            STATUS_HEAD_SAFE_LEAVE 
         }
 
         private static readonly Dictionary<PROGRAM_CONTROL_STATUS, String> ProgramControlStatusText = new Dictionary<PROGRAM_CONTROL_STATUS, String>()
@@ -71,14 +71,14 @@ namespace DataProcess.Protocol
         {
             return new List<string>
             {
-                "起飞",
-                "姿控发动机电爆管起爆",
-                "一级发动机关机",
-                "一级发动机分离",
-                "头罩分离点火",
-                "顶点",
-                "二级发动机点火",
-                "头体分离"
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_FLY_START),
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_BOOM),
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN),
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE),
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HOOD_FIRE),
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_TOP),
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL2_FIRE),
+                GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE),
             };
         }
 
@@ -87,29 +87,29 @@ namespace DataProcess.Protocol
             switch(status)
             {
                 case 1:
-                    return "一级发动机分离";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE);
                 case 2:
-                    return "姿控发动机电爆管起爆";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_BOOM);
                 case 3:
-                    return "二级发动机点火";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL2_FIRE);
                 case 4:
-                    return "头罩分离点火";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HOOD_FIRE);
                 case 5:
-                    return "弹头起旋点火";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_FIRE);
                 case 6:
-                    return "二级发动机解保拔销";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL2_RELIEVE);
                 case 7:
-                    return "二级发动机解保驱动";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVLE2_DRIVE);
                 case 8:
-                    return "引控电池激活";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_BUTERRY_ACTIVE);
                 case 9:
-                    return "弹头载荷脱插分离";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_PAYLOAD_LEAVE);
                 case 10:
-                    return "头遥脱插分离";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_LEAVE);
                 case 11:
-                    return "弹头安控/慢旋脱插分离";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_SAFE_LEAVE);
                 case 12:
-                    return "头体分离";
+                    return GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE);
                 default:
                     return "--";
             }
