@@ -505,11 +505,6 @@ namespace DataProcess.Controls
             {
                 chartPointDataSources[i].ClearPoints();
             }
-
-            for (int i = 0; i < chartPointDataSources.Count(); i++)
-            {
-                chartPointDataSources[i].SetMaxCount(MainWindow.CHART_MAX_POINTS);
-            }
         }
 
         public void EnableLoadButton(bool e)
@@ -1031,8 +1026,11 @@ namespace DataProcess.Controls
             chart_DHKuaiSu_Ti_JiaSuDu_JiaJiY.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_JiaSuDu_JiaJiYList;
             chart_DHKuaiSu_Ti_JiaSuDu_JiaJiZ.DataSource = yaoCeChartDataSource.chart_DHKuaiSu_Ti_JiaSuDu_JiaJiZList;
 
+
+            //DHM
             chart_DHManSu_Ti_ZuoBiao_JingDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_JingDuList;
             chart_DHManSu_Ti_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_GaoDuList;
+            chart_DHManSu_Ti_ZuoBiao_WeiDu.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_ZuoBiao_WeiDuList;
 
             chart_DHManSu_Ti_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_DongList;
             chart_DHManSu_Ti_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_DHManSu_Ti_SuDu_BeiList;
@@ -1396,9 +1394,6 @@ namespace DataProcess.Controls
         //导航慢速弹头数据
         private void timerUpdateDHMStatus_Tou_Tick(object sender, EventArgs e)
         {
-
-
-                
                 if (bReceStatusData_DANTOU)
                 {
                 // 填充实时数据
@@ -1919,17 +1914,18 @@ namespace DataProcess.Controls
             if (celv1 == 0)
             {
                 celuepanjuejieguo1 = "无异常";
-                ToolTip tip = new ToolTip();
-                tip.Content = stringBuilder_CeLv1.ToString();
-                XiTong_CeLuePanJue1.ToolTip = (tip);
-                
+                //ToolTip tip = new ToolTip();
+                //tip.Content = stringBuilder_CeLv1.ToString();
+                //XiTong_CeLuePanJue1.ToolTip = (tip);
+                XiTong_CeLuePanJue1_Text.Text = stringBuilder_CeLv1.ToString();
             }
             else
             {
                 celuepanjuejieguo1 = "异常";
-                ToolTip tip = new ToolTip();
-                tip.Content = stringBuilder_CeLv1.ToString();
-                XiTong_CeLuePanJue1.ToolTip = (tip);
+                //ToolTip tip = new ToolTip();
+                //tip.Content = stringBuilder_CeLv1.ToString();
+                //XiTong_CeLuePanJue1.ToolTip = (tip);
+                XiTong_CeLuePanJue1_Text.Text = stringBuilder_CeLv1.ToString();
             }
             XiTong_CeLuePanJue1.Text = celuepanjuejieguo1;
 
@@ -1955,9 +1951,10 @@ namespace DataProcess.Controls
             else
             {
                 celuepanjuejieguo2 = "有动作";
-                ToolTip tip = new ToolTip();
-                tip.Content = stringBuilder_CeLv1.ToString();
-                XiTong_CeLuePanJue2.ToolTip = (tip);
+                //ToolTip tip = new ToolTip();
+                //tip.Content = stringBuilder_CeLv1.ToString();
+                //XiTong_CeLuePanJue2.ToolTip = (tip);
+                XiTong_CeLuePanJue2_Text.Text = stringBuilder_CeLv2.ToString();
 
             }
             XiTong_CeLuePanJue2.Text = celuepanjuejieguo2;
@@ -2042,12 +2039,12 @@ namespace DataProcess.Controls
             //20210312
             XiTong_QiFei.Text = (shuRuCaiJi3 >> 5 & 0x1) == 0 ? "未起飞" : "已起飞";//状态变反
 
-            //bit6 触点2（预令，1有效）
+            //bit6 触点2（预令，1有效）(协议更改 0有效)
             //int CJ3_chuDian2 = (shuRuCaiJi3 >> 6 & 0x1) == 1 ? 1 : 0;
             //20210312
             XiTong_YuLing.Text = (shuRuCaiJi3 >> 6 & 0x1) == 0 ? "有效" : "无效";
 
-            //bit7 触点3（动令，1有效）
+            //bit7 触点3（动令，1有效）(协议更改 0有效)
             //int CJ3_chuDian3 = (shuRuCaiJi3 >> 7 & 0x1) == 1 ? 1 : 0;
             //20210312
             XiTong_DongLing.Text = (shuRuCaiJi3 >> 7 & 0x1) == 0 ? "有效" : "无效";
@@ -2130,9 +2127,10 @@ namespace DataProcess.Controls
             else
             {
                 XiTong_ShuRuCaiJi1.Text = "解保状态异常";
-                ToolTip ttprogbar = new ToolTip();
-                ttprogbar.Content = stringBuilder_ShuRuCaiJi1.ToString();
-                XiTong_ShuRuCaiJi1.ToolTip = (ttprogbar);
+                //ToolTip ttprogbar = new ToolTip();
+                //ttprogbar.Content = stringBuilder_ShuRuCaiJi1.ToString();
+                //XiTong_ShuRuCaiJi1.ToolTip = (ttprogbar);
+                XiTong_ShuRuCaiJi1_Text.Text = stringBuilder_ShuRuCaiJi1.ToString();
             }
 
             int CJ2 = CJ1_qiBaoKongZhi + CJ3_qiBaoKongZhiJia + CJ3_qiBaoKongZhiJian +
@@ -2183,9 +2181,10 @@ namespace DataProcess.Controls
             else
             {
                 XiTong_ShuRuCaiJi2.Text = "解保状态异常";
-                ToolTip ttprogbar = new ToolTip();
-                ttprogbar.Content = stringBuilder_ShuRuCaiJi2.ToString();
-                XiTong_ShuRuCaiJi2.ToolTip = (ttprogbar);
+                //ToolTip ttprogbar = new ToolTip();
+                //ttprogbar.Content = stringBuilder_ShuRuCaiJi2.ToString();
+                //XiTong_ShuRuCaiJi2.ToolTip = (ttprogbar);
+                XiTong_ShuRuCaiJi2_Text.Text = stringBuilder_ShuRuCaiJi2.ToString();
             }
 
             int CJ3 = CJ1_huoGongPeiDian + CJ1_huoGongBFPeiDian;
@@ -2209,9 +2208,10 @@ namespace DataProcess.Controls
             else
             {
                 XiTong_ShuRuCaiJi3.Text = "配电异常";
-                ToolTip ttprogbar = new ToolTip();
-                ttprogbar.Content = stringBuilder_ShuRuCaiJi3.ToString();
-                XiTong_ShuRuCaiJi3.ToolTip = (ttprogbar);
+                //ToolTip ttprogbar = new ToolTip();
+                //ttprogbar.Content = stringBuilder_ShuRuCaiJi3.ToString();
+                //XiTong_ShuRuCaiJi3.ToolTip = (ttprogbar);
+                XiTong_ShuRuCaiJi3_Text.Text = stringBuilder_ShuRuCaiJi3.ToString();
             }
 
             int CJ4 = CJ4_chuDian7 + CJ4_chuDian8 + CJ4_chuDian9 + CJ4_chuDian10;
@@ -2239,9 +2239,10 @@ namespace DataProcess.Controls
             else
             {
                 XiTong_ShuRuCaiJi4.Text = "弹体保险异常";
-                ToolTip ttprogbar = new ToolTip();
-                ttprogbar.Content = stringBuilder_ShuRuCaiJi4.ToString();
-                XiTong_ShuRuCaiJi4.ToolTip = (ttprogbar);
+                //ToolTip ttprogbar = new ToolTip();
+                //ttprogbar.Content = stringBuilder_ShuRuCaiJi4.ToString();
+                //XiTong_ShuRuCaiJi4.ToolTip = (ttprogbar);
+                XiTong_ShuRuCaiJi4_Text.Text = stringBuilder_ShuRuCaiJi4.ToString();
             }
 
             //弹头解保
@@ -2534,9 +2535,10 @@ namespace DataProcess.Controls
                 System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
                 System.Windows.Media.Brush brushes = solidColorBrush;
                 XiTong_ShuJu1Hao.Background = brushes;
-                ToolTip ttprogbar1 = new ToolTip();
-                ttprogbar1.Content = stringBuilder_1Hao.ToString();
-                XiTong_ShuJu1Hao.ToolTip = (ttprogbar1);
+                //ToolTip ttprogbar1 = new ToolTip();
+                //ttprogbar1.Content = stringBuilder_1Hao.ToString();
+                //XiTong_ShuJu1Hao.ToolTip = (ttprogbar1);
+                XiTong_ShuJu1Hao_Text.Text = stringBuilder_1Hao.ToString();
             }
 
             int flagData2Green = 0;
@@ -2575,9 +2577,10 @@ namespace DataProcess.Controls
                 System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
                 System.Windows.Media.Brush brushes = solidColorBrush;
                 XiTong_ShuJu2Hao.Background = brushes;
-                ToolTip ttprogbar1 = new ToolTip();
-                ttprogbar1.Content = stringBuilder_2Hao.ToString();
-                XiTong_ShuJu2Hao.ToolTip = (ttprogbar1);
+                //ToolTip ttprogbar1 = new ToolTip();
+                //ttprogbar1.Content = stringBuilder_2Hao.ToString();
+                //XiTong_ShuJu2Hao.ToolTip = (ttprogbar1);
+                XiTong_ShuJu2Hao_Text.Text = stringBuilder_2Hao.ToString();
             }
 
             // 
@@ -2864,9 +2867,10 @@ namespace DataProcess.Controls
             else
             {
                 DHKuaiSu_Ti_JiaJiGuZhang.Text = "异常";
-                ToolTip ttprogbar = new ToolTip();
-                ttprogbar.Content = stringBuilder_JiaJi.ToString();
-                DHKuaiSu_Ti_JiaJiGuZhang.ToolTip = (ttprogbar);
+                //ToolTip ttprogbar = new ToolTip();
+                //ttprogbar.Content = stringBuilder_JiaJi.ToString();
+                //DHKuaiSu_Ti_JiaJiGuZhang.ToolTip = (ttprogbar);
+                DHKuaiSu_Ti_JiaJiGuZhang_Text.Text = stringBuilder_JiaJi.ToString();
             }
 
             if (TuoLuo == 0) //陀螺X,Y,Z 全为0显示正常，其他显示异常
@@ -2876,9 +2880,10 @@ namespace DataProcess.Controls
             else
             {
                 DHKuaiSu_Ti_TuoLuoGuZhang.Text = "异常";
-                ToolTip ttprogbar = new ToolTip();
-                ttprogbar.Content = stringBuilder_TuoLuo.ToString();
-                DHKuaiSu_Ti_TuoLuoGuZhang.ToolTip = (ttprogbar);
+                //ToolTip ttprogbar = new ToolTip();
+                //ttprogbar.Content = stringBuilder_TuoLuo.ToString();
+                //DHKuaiSu_Ti_TuoLuoGuZhang.ToolTip = (ttprogbar);
+                DHKuaiSu_Ti_TuoLuoGuZhang_Text.Text = stringBuilder_TuoLuo.ToString();
             }
         }
 
@@ -3399,9 +3404,10 @@ namespace DataProcess.Controls
             QiTaZhuangTaiData = string.Concat(QiTaZhuangTaiDataTuoLuo, QiTaZhuangTaiDataJiaJi, QiTaZhuangTaiData5VDianYa,
                                               QiTaZhuangTaiData15VDianYa, QiTaZhuangTaiDataXTuoLuoDianYa, QiTaZhuangTaiDataYTuoLuoDianYa,
                                               QiTaZhuangTaiDataZTuoLuoDianYa, QiTaZhuangTaiDataTuoLuoError, QiTaZhuangTaiDataCount);
-            ToolTip tip = new ToolTip();
-            tip.Content = QiTaZhuangTaiData;
-            DHManSu_Ti_QiTaZhuangTaiShuJu.ToolTip = tip;
+            //ToolTip tip = new ToolTip();
+            //tip.Content = QiTaZhuangTaiData;
+            //DHManSu_Ti_QiTaZhuangTaiShuJu.ToolTip = tip;
+            DHManSu_Ti_QiTaZhuangTaiShuJu_Text.Text = QiTaZhuangTaiData;
 
             // 
             // sObject.jingDuZuHe; //// 经度（组合结果）当量：1e-7
@@ -3559,9 +3565,10 @@ namespace DataProcess.Controls
             else
             {
                 DHManSu_Ti_TuoLuoGuZhang.Text = "异常";
-                ToolTip ttprogbar1 = new ToolTip();
-                ttprogbar1.Content = stringBuilder_TuoLuoXGZ.ToString();
-                DHManSu_Ti_TuoLuoGuZhang.ToolTip = ttprogbar1;
+                //ToolTip ttprogbar1 = new ToolTip();
+                //ttprogbar1.Content = stringBuilder_TuoLuoXGZ.ToString();
+                //DHManSu_Ti_TuoLuoGuZhang.ToolTip = ttprogbar1;
+                DHManSu_Ti_TuoLuoGuZhang_Text.Text = stringBuilder_TuoLuoXGZ.ToString();
 
             }
 
@@ -3572,9 +3579,10 @@ namespace DataProcess.Controls
             else
             {
                 DHManSu_Ti_JiaJiGuZhang.Text = "异常";
-                ToolTip ttprogbar1 = new ToolTip();
-                ttprogbar1.Content = stringBuilder_JiaJiXGZ.ToString();
-                DHManSu_Ti_JiaJiGuZhang.ToolTip = ttprogbar1;
+                //ToolTip ttprogbar1 = new ToolTip();
+                //ttprogbar1.Content = stringBuilder_JiaJiXGZ.ToString();
+                //DHManSu_Ti_JiaJiGuZhang.ToolTip = ttprogbar1;
+                DHManSu_Ti_JiaJiGuZhang_Text.Text = stringBuilder_JiaJiXGZ.ToString();
             }
         }
 
@@ -4046,9 +4054,10 @@ namespace DataProcess.Controls
             else
             {
                 XTJS_Ti_GuZhangBiaoZhi.Text = "异常";
-                ToolTip ttprogbar1 = new ToolTip();
-                ttprogbar1.Content = guZhangBiaoZhiWei.ToString();
-                XTJS_Ti_GuZhangBiaoZhi.ToolTip = ttprogbar1;
+                //ToolTip ttprogbar1 = new ToolTip();
+                //ttprogbar1.Content = guZhangBiaoZhiWei.ToString();
+                //XTJS_Ti_GuZhangBiaoZhi.ToolTip = ttprogbar1;
+                XTJS_Ti_GuZhangBiaoZhi_Text.Text = guZhangBiaoZhiWei.ToString();
             }
 
             // 
@@ -4418,10 +4427,10 @@ namespace DataProcess.Controls
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
             initYaoCeParser();
-            setUpdateTimerStatus(true);
-            //// 启动绘图定时器刷新数据
-            setTimerUpdateChartStatus(true);
-            Post();
+            //setUpdateTimerStatus(true);
+            ////// 启动绘图定时器刷新数据
+            //setTimerUpdateChartStatus(true);
+            //Post();
 
             if (load == null)
             {
@@ -4686,8 +4695,6 @@ namespace DataProcess.Controls
 
                         AddDANTOUJiaoSuDu(sObject.WxJiaoSuDu, sObject.WyJiaoSuDu, sObject.WzJiaoSuDu);
                         AddDANTOUBiLi(sObject.xBiLi, sObject.yBiLi, sObject.zBiLi);
-
-
                         Marshal.FreeHGlobal(ptr);
                     }
                     break;
@@ -5270,7 +5277,11 @@ namespace DataProcess.Controls
                     yaoceDisplay.DHK_Tou_buffer.Add(sObject.frameNo);
                     break;
 
-                case frameType_daoHangManSu_Ti:
+                case frameType_daoHangManSu_Ti:          
+                    if (yaoceDisplay.DHM_Ti_buffer.Count() > MainWindow.frame_MaxCount)
+                    {
+                        yaoceDisplay.DHM_Ti_buffer.RemoveAt(0);
+                    }
                     yaoceDisplay.DHM_Ti_buffer.Add(sObject.frameNo);
                     break;
 
@@ -5298,6 +5309,91 @@ namespace DataProcess.Controls
             {
                 Points.AddPoint(packet);
             });
+        }
+
+
+        private void XiTong_CeLuePanJue1_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_CeLuePanJue1_PoPup.IsOpen = false;
+            XiTong_CeLuePanJue1_PoPup.IsOpen = true;
+        }
+
+        private void XiTong_CeLuePanJue2_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_CeLuePanJue2_PoPup.IsOpen = false;
+            XiTong_CeLuePanJue2_PoPup.IsOpen = true;
+        }
+
+        private void XiTong_ShuRuCaiJi1_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_ShuRuCaiJi1_PoPup.IsOpen = false;
+            XiTong_ShuRuCaiJi1_PoPup.IsOpen = true;
+        }
+
+        private void XiTong_ShuRuCaiJi2_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_ShuRuCaiJi2_PoPup.IsOpen = false;
+            XiTong_ShuRuCaiJi2_PoPup.IsOpen = true;
+        }
+
+        private void XiTong_ShuRuCaiJi3_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_ShuRuCaiJi3_PoPup.IsOpen = false;
+            XiTong_ShuRuCaiJi3_PoPup.IsOpen = true;
+        }
+
+        private void XiTong_ShuRuCaiJi4_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_ShuRuCaiJi4_PoPup.IsOpen = false;
+            XiTong_ShuRuCaiJi4_PoPup.IsOpen = true;
+        }
+
+        private void XiTong_ShuJu1Hao_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_ShuJu1Hao_PoPup.IsOpen = false;
+            XiTong_ShuJu1Hao_PoPup.IsOpen = true;
+        }
+
+        private void XiTong_ShuJu2Hao_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XiTong_ShuJu2Hao_PoPup.IsOpen = false;
+            XiTong_ShuJu2Hao_PoPup.IsOpen = true;
+        }
+
+        private void XTJS_Ti_GuZhangBiaoZhi_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            XTJS_Ti_GuZhangBiaoZhi_PoPup.IsOpen = false;
+            XTJS_Ti_GuZhangBiaoZhi_PoPup.IsOpen = true;
+        }
+
+        private void DHKuaiSu_Ti_JiaJiGuZhang_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DHKuaiSu_Ti_JiaJiGuZhang_PoPup.IsOpen = false;
+            DHKuaiSu_Ti_JiaJiGuZhang_PoPup.IsOpen = true;
+        }
+
+        private void DHKuaiSu_Ti_TuoLuoGuZhang_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DHKuaiSu_Ti_TuoLuoGuZhang_PoPup.IsOpen = false;
+            DHKuaiSu_Ti_TuoLuoGuZhang_PoPup.IsOpen = true;
+        }
+
+        private void DHManSu_Ti_QiTaZhuangTaiShuJu_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DHManSu_Ti_QiTaZhuangTaiShuJu_PoPup.IsOpen = false;
+            DHManSu_Ti_QiTaZhuangTaiShuJu_PoPup.IsOpen = true;
+        }
+
+        private void DHManSu_Ti_JiaJiGuZhang_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DHManSu_Ti_JiaJiGuZhang_PoPup.IsOpen = false;
+            DHManSu_Ti_JiaJiGuZhang_PoPup.IsOpen = true;
+        }
+
+        private void DHManSu_Ti_TuoLuoGuZhang_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            DHManSu_Ti_TuoLuoGuZhang_PoPup.IsOpen = false;
+            DHManSu_Ti_TuoLuoGuZhang_PoPup.IsOpen = true;
         }
     }
 }

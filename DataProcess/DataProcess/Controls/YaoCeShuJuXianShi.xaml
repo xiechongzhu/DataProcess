@@ -41,7 +41,15 @@
                     </Grid.ColumnDefinitions>
                     <ScrollViewer>
                         <UniformGrid Rows="18" Columns="3" x:Name="XiTong">
-                            <cust:LabelTextBox Label="GNSS时间："  x:Name="XiTong_GNSSTime"/>
+                            <Grid x:Name="XiTong_GNSSTime_Grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="GNSS时间：" VerticalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_GNSSTime" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                            </Grid>
                             <cust:LabelTextBox Label="总飞行时间：" x:Name="XiTong_ZongFeiXingTime"/>
                             <Grid/>
                             <cust:LabelTextBox Label="经度：" x:Name="XiTong_JingDu"/>
@@ -71,28 +79,80 @@
                             <cust:LabelTextBox Label="预令：" x:Name="XiTong_YuLing"/>
                             <cust:LabelTextBox Label="动令：" x:Name="XiTong_DongLing"/>
                             <cust:LabelTextBox Label="一级分离：" x:Name="XiTong_YiJiFeiLi"/>
-                            <Grid>
+                            <Grid MouseEnter="XiTong_CeLuePanJue1_MouseEnter" x:Name="XiTong_CeLuePanJue1_Grid">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="6*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="策略判决结果1:" VerticalAlignment="Center"/>
-                                <dxe:TextEdit Grid.Column="2" x:Name="XiTong_CeLuePanJue1" BorderThickness="1" BorderBrush="Black" VerticalContentAlignment="Center" Height="20" Margin="5" IsReadOnly="True"/>
+                                <Label Content="策略判决结果1：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_CeLuePanJue1" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_CeLuePanJue1_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_CeLuePanJue1_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_CeLuePanJue1_Text" Background="White"/>
+                                </Popup>
                             </Grid>
-                            <Grid>
+                            <Grid MouseEnter="XiTong_CeLuePanJue2_MouseEnter" x:Name="XiTong_CeLuePanJue2_Grid">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="6*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="策略判决结果2:" VerticalAlignment="Center"/>
-                                <dxe:TextEdit Grid.Column="2" x:Name="XiTong_CeLuePanJue2" BorderThickness="1" BorderBrush="Black" VerticalContentAlignment="Center" Height="20" Margin="5" IsReadOnly="True"/>
+                                <Label Content="策略判决结果2：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_CeLuePanJue2" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_CeLuePanJue2_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_CeLuePanJue2_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_CeLuePanJue2_Text" Background="White"/>
+                                </Popup>
                             </Grid>
                             <Grid/>
-                            <cust:LabelTextBox Label="输入采集1：" x:Name="XiTong_ShuRuCaiJi1"/>
-                            <cust:LabelTextBox Label="输入采集2：" x:Name="XiTong_ShuRuCaiJi2"/>
+                            <Grid MouseEnter="XiTong_ShuRuCaiJi1_MouseEnter" x:Name="XiTong_ShuRuCaiJi1_Grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="输入采集1：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_ShuRuCaiJi1" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_ShuRuCaiJi1_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_ShuRuCaiJi1_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_ShuRuCaiJi1_Text" Background="White"/>
+                                </Popup>
+                            </Grid>
+                            <Grid MouseEnter="XiTong_ShuRuCaiJi2_MouseEnter" x:Name="XiTong_ShuRuCaiJi2_Grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="输入采集2：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_ShuRuCaiJi2" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_ShuRuCaiJi2_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_ShuRuCaiJi2_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_ShuRuCaiJi2_Text" Background="White"/>
+                                </Popup>
+                            </Grid>
                             <Grid/>
-                            <cust:LabelTextBox Label="输入采集3：" x:Name="XiTong_ShuRuCaiJi3"/>
-                            <cust:LabelTextBox Label="输入采集4：" x:Name="XiTong_ShuRuCaiJi4"/>
+                            <Grid MouseEnter="XiTong_ShuRuCaiJi3_MouseEnter" x:Name="XiTong_ShuRuCaiJi3_Grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="输入采集3：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_ShuRuCaiJi3" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_ShuRuCaiJi3_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_ShuRuCaiJi3_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_ShuRuCaiJi3_Text" Background="White"/>
+                                </Popup>
+                            </Grid>
+                            <Grid MouseEnter="XiTong_ShuRuCaiJi4_MouseEnter" x:Name="XiTong_ShuRuCaiJi4_Grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="输入采集4：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_ShuRuCaiJi4" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_ShuRuCaiJi4_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_ShuRuCaiJi4_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_ShuRuCaiJi4_Text" Background="White"/>
+                                </Popup>
+                            </Grid>
                             <Grid/>
                             <cust:LabelTextBox Label="弹头解保：" x:Name="XiTong_DanTouJieBao"/>
                             <cust:LabelTextBox Label="起爆状态：" x:Name="XiTong_QiBaoZhuangTai"/>
@@ -106,8 +166,30 @@
                             <cust:LabelTextBox Label="优选结果：" x:Name="XiTong_YouXuanJieGuo"/>
                             <cust:LabelTextBox Label="弹头组合：" x:Name="XiTong_DanTouZuHe"/>
                             <cust:LabelTextBox Label="弹体组合：" x:Name="XiTong_DanTiZuHe"/>
-                            <cust:LabelTextBox Label="1号数据：" x:Name="XiTong_ShuJu1Hao"/>
-                            <cust:LabelTextBox Label="2号数据：" x:Name="XiTong_ShuJu2Hao"/>
+                            <Grid MouseEnter="XiTong_ShuJu1Hao_MouseEnter" x:Name="XiTong_ShuJu1Hao_Grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="1号数据：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_ShuJu1Hao" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_ShuJu1Hao_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_ShuJu1Hao_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_ShuJu1Hao_Text" Background="White"/>
+                                </Popup>
+                            </Grid>
+                            <Grid MouseEnter="XiTong_ShuJu2Hao_MouseEnter" x:Name="XiTong_ShuJu2Hao_Grid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="2号数据：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_ShuJu2Hao" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                </dxe:TextEdit>
+                                <Popup x:Name="XiTong_ShuJu2Hao_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_ShuJu2Hao_Grid}" Placement="Bottom">
+                                    <TextBlock x:Name="XiTong_ShuJu2Hao_Text" Background="White"/>
+                                </Popup>
+                            </Grid>
                         </UniformGrid>
                     </ScrollViewer>
                     <dx:DXTabControl Grid.Column="1">
@@ -397,8 +479,30 @@
                         <cust:LabelTextBox Label="GPS组合：" x:Name="DHKuaiSu_Ti_GPSZuHe"/>
                         <cust:LabelTextBox Label="导航组合：" x:Name="DHKuaiSu_Ti_DaoHangZuHe"/>
                         <Grid/>
-                        <cust:LabelTextBox Label="加计故障：" x:Name="DHKuaiSu_Ti_JiaJiGuZhang"/>
-                        <cust:LabelTextBox Label="陀螺故障：" x:Name="DHKuaiSu_Ti_TuoLuoGuZhang"/>
+                        <Grid MouseEnter="DHKuaiSu_Ti_JiaJiGuZhang_MouseEnter" x:Name="DHKuaiSu_Ti_JiaJiGuZhang_Grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="6*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="加计故障：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="DHKuaiSu_Ti_JiaJiGuZhang" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                            </dxe:TextEdit>
+                            <Popup x:Name="DHKuaiSu_Ti_JiaJiGuZhang_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=DHKuaiSu_Ti_JiaJiGuZhang_Grid}" Placement="Bottom">
+                                <TextBlock x:Name="DHKuaiSu_Ti_JiaJiGuZhang_Text" Background="White"/>
+                            </Popup>
+                        </Grid>
+                        <Grid MouseEnter="DHKuaiSu_Ti_TuoLuoGuZhang_MouseEnter" x:Name="DHKuaiSu_Ti_TuoLuoGuZhang_Grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="6*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="陀螺故障：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="DHKuaiSu_Ti_TuoLuoGuZhang" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                            </dxe:TextEdit>
+                            <Popup x:Name="DHKuaiSu_Ti_TuoLuoGuZhang_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=DHKuaiSu_Ti_TuoLuoGuZhang_Grid}" Placement="Bottom">
+                                <TextBlock x:Name="DHKuaiSu_Ti_TuoLuoGuZhang_Text" Background="White"/>
+                            </Popup>
+                        </Grid>
 
                     </UniformGrid>
                     <dx:DXTabControl Grid.Column="1">
@@ -693,7 +797,18 @@
                                 <cust:LabelTextBox Label="东向速度(GPS测量)：" x:Name="DHManSu_Ti_DongXiangSuDu"/>
                                 <cust:LabelTextBox Label="北向速度(GPS测量)：" x:Name="DHManSu_Ti_BeiXiangSuDu"/>
                                 <cust:LabelTextBox Label="天向速度(GPS测量)：" x:Name="DHManSu_Ti_TianXiangSuDu"/>
-                                <cust:LabelTextBox Label="其他状态数据：" x:Name="DHManSu_Ti_QiTaZhuangTaiShuJu"/>
+                                <Grid MouseEnter="DHManSu_Ti_QiTaZhuangTaiShuJu_MouseEnter" x:Name="DHManSu_Ti_QiTaZhuangTaiShuJu_Grid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="其他状态数据：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="DHManSu_Ti_QiTaZhuangTaiShuJu" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                    </dxe:TextEdit>
+                                    <Popup x:Name="DHManSu_Ti_QiTaZhuangTaiShuJu_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=DHManSu_Ti_QiTaZhuangTaiShuJu_Grid}" Placement="Bottom">
+                                        <TextBlock x:Name="DHManSu_Ti_QiTaZhuangTaiShuJu_Text" Background="White"/>
+                                    </Popup>
+                                </Grid>
                                 <cust:LabelTextBox Label="导航初值装订：" x:Name="DHManSu_Ti_DaoHangChuZhiZhuangDing"/>
                                 <cust:LabelTextBox Label="导航标志：" x:Name="DHManSu_Ti_DaoHangBiaoZhi"/>
                                 <cust:LabelTextBox Label="对准完成标志：" x:Name="DHManSu_Ti_DuiZhunWanCheng"/>
@@ -703,8 +818,30 @@
                                 <cust:LabelTextBox Label="点火标志：" x:Name="DHManSu_Ti_DianHuo"/>
                                 <cust:LabelTextBox Label="分离标志：" x:Name="DHManSu_Ti_FenLi"/>
                                 <cust:LabelTextBox Label="发送1553数据：" x:Name="DHManSu_Ti_1553ShuJuFaSong"/>
-                                <cust:LabelTextBox Label="加计故障：" x:Name="DHManSu_Ti_JiaJiGuZhang"/>
-                                <cust:LabelTextBox Label="陀螺故障：" x:Name="DHManSu_Ti_TuoLuoGuZhang"/>
+                                <Grid MouseEnter="DHManSu_Ti_JiaJiGuZhang_MouseEnter" x:Name="DHManSu_Ti_JiaJiGuZhang_Grid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="加计故障：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="DHManSu_Ti_JiaJiGuZhang" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                    </dxe:TextEdit>
+                                    <Popup x:Name="DHManSu_Ti_JiaJiGuZhang_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=DHManSu_Ti_JiaJiGuZhang_Grid}" Placement="Bottom">
+                                        <TextBlock x:Name="DHManSu_Ti_JiaJiGuZhang_Text" Background="White"/>
+                                    </Popup>
+                                </Grid>
+                                <Grid MouseEnter="DHManSu_Ti_TuoLuoGuZhang_MouseEnter" x:Name="DHManSu_Ti_TuoLuoGuZhang_Grid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="陀螺故障：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="DHManSu_Ti_TuoLuoGuZhang" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                    </dxe:TextEdit>
+                                    <Popup x:Name="DHManSu_Ti_TuoLuoGuZhang_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=DHManSu_Ti_TuoLuoGuZhang_Grid}" Placement="Bottom">
+                                        <TextBlock x:Name="DHManSu_Ti_TuoLuoGuZhang_Text" Background="White"/>
+                                    </Popup>
+                                </Grid>
                                 <cust:LabelTextBox Label="经度(组合结果)：" x:Name="DHManSu_Ti_JingDuZuHe"/>
                                 <cust:LabelTextBox Label="纬度(组合结果)：" x:Name="DHManSu_Ti_WeiDuZuHe"/>
                                 <cust:LabelTextBox Label="海拔高度(组合结果)：" x:Name="DHManSu_Ti_GaoDuZuHe"/>
@@ -1137,7 +1274,18 @@
                             </Grid.RowDefinitions>
                             <UniformGrid Grid.Row="0" Rows="10" Columns="3" x:Name="FanKui_Ti">
                                 <cust:LabelTextBox Label="GPS时间：" x:Name="XTJS_Ti_GPSTime"/>
-                                <cust:LabelTextBox Label="故障标志：" x:Name="XTJS_Ti_GuZhangBiaoZhi"/>
+                                <Grid MouseEnter="XTJS_Ti_GuZhangBiaoZhi_MouseEnter" x:Name="XTJS_Ti_GuZhangBiaoZhi_Grid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="故障标志：" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XTJS_Ti_GuZhangBiaoZhi" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
+                                    </dxe:TextEdit>
+                                    <Popup x:Name="XTJS_Ti_GuZhangBiaoZhi_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XTJS_Ti_GuZhangBiaoZhi_Grid}" Placement="Bottom">
+                                        <TextBlock x:Name="XTJS_Ti_GuZhangBiaoZhi_Text" Background="White"/>
+                                    </Popup>
+                                </Grid>
                                 <Grid/>
                                 <cust:LabelTextBox Label="GPS SV可用：" x:Name="XTJS_Ti_GPSSVKeYong"/>
                                 <cust:LabelTextBox Label="GPS参与定位：" x:Name="XTJS_Ti_GPSCanYuDingWei"/>

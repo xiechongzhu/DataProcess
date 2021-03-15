@@ -6,10 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using DevExpress.XtraEditors;
+using DevExpress.Xpf.Core;
+using DevExpress.Xpf.Editors;
+using DevExpress.Xpf.Editors.Internal;
+using DevExpress.Xpf.Utils.About;
 
 namespace DataProcess.CustomControl
 {
-    public class LabelTextBox : TextBox
+    public class LabelTextBox : TextEdit
     {
         static LabelTextBox()
         {

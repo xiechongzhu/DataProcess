@@ -25,7 +25,8 @@
                                          MaxLength="{Binding MaxLength,RelativeSource={RelativeSource TemplatedParent}}"
                                          
                                          IsEnabled="{Binding IsEnabled,RelativeSource={RelativeSource TemplatedParent}}" Margin="5" IsReadOnly="True"
-                     BorderThickness="1" BorderBrush="Black"/>
+                     BorderThickness="1" BorderBrush="Black">
+            </dxe:TextEdit>
         </Grid>
     </ControlTemplate>
 
@@ -37,19 +38,20 @@
             </Grid.ColumnDefinitions>
             <Label HorizontalAlignment="Center" VerticalAlignment="Center"
                 Content="{Binding Label, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="0"/>
-            <TextBox Grid.Column="1"
+            <dxe:TextEdit Grid.Column="1"
                 Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalContentAlignment="{Binding HorizontalContentAlignment,RelativeSource={RelativeSource TemplatedParent}}"
                 VerticalContentAlignment="{Binding VerticalContentAlignment,RelativeSource={RelativeSource TemplatedParent}}"
                 Background="{Binding Background,RelativeSource={RelativeSource TemplatedParent}}"
                 Foreground="{Binding Foreground,RelativeSource={RelativeSource TemplatedParent}}"
                 TextWrapping="{Binding TextWrapping,RelativeSource={RelativeSource TemplatedParent}}"
-                TextAlignment="{Binding TextAlignment,RelativeSource={RelativeSource TemplatedParent}}" 
+                
                 HorizontalScrollBarVisibility="{Binding HorizontalScrollBarVisibility,RelativeSource={RelativeSource TemplatedParent}}"
                 VerticalScrollBarVisibility="{Binding VerticalScrollBarVisibility,RelativeSource={RelativeSource TemplatedParent}}"
                                          MaxLength="{Binding MaxLength,RelativeSource={RelativeSource TemplatedParent}}"
                                          IsReadOnly="{Binding IsReadOnly,RelativeSource={RelativeSource TemplatedParent}}"
-                                         IsEnabled="{Binding IsEnabled,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                         IsEnabled="{Binding IsEnabled,RelativeSource={RelativeSource TemplatedParent}}">
+            </dxe:TextEdit>
         </Grid>
     </ControlTemplate>
 

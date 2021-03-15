@@ -31,6 +31,11 @@ namespace DataProcess
             });
         }
 
+        public int getIndex()
+        {
+            return this.Count();
+        }
+
         public void AddPoint(double value)
         {
             Add(new Point(index++, value));

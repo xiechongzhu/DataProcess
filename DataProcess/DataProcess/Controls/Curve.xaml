@@ -19,7 +19,6 @@
                         <dxc:AxisY2D.WholeRange>
                             <dxc:Range MaxValue="0.9"  MinValue="0"/>
                         </dxc:AxisY2D.WholeRange>
-
                     </dxc:AxisY2D>
                 </dxc:XYDiagram2D.AxisY>
             </dxc:XYDiagram2D>
