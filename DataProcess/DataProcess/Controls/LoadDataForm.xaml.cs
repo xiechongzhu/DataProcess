@@ -28,21 +28,10 @@ namespace DataProcess.Controls
         /// 向主界面传输动作控制
         public delegate void setOffLineFilePlayStatus(int action, int param1 = 0);
 
-#if false
-        private static LoadDataForm _instance = null;
-
-        public static LoadDataForm Instance()
-        {
-            if(_instance == null)
-            {
-                _instance = new LoadDataForm();
-            }
-            return _instance;
-        }
-#endif
-
         /// setPlayStatus
         public setOffLineFilePlayStatus setPlayStatus;
+
+        
 
         /// 加载的文件名称
         public string loadFileName;

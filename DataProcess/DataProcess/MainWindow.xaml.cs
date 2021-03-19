@@ -1003,11 +1003,41 @@ namespace DataProcess
 
         protected IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            YaoCe.closeWindow(msg, wParam);
+
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_CLOSE = 0xF060;
+            if (msg == WM_SYSCOMMAND && (int)wParam == SC_CLOSE)
+            {
+                if(YaoCe.load != null)
+                {
+                    if (YaoCe.load.bLoadFileing)
+                    {
+                        MessageBox.Show("正在加载离线文件，不能关闭窗口!\n请先暂停文件加载！", "错误", MessageBoxButton.OK);
+                        handled = true;
+                        return hwnd;
+                    }
+                    else
+                    {
+                        YaoCe.closeWindow(msg, wParam);
+
+                        //强制退出应用程序
+                        Environment.Exit(0);
+                    }
+                }
+                else
+                {
+                    YaoCe.closeWindow(msg, wParam);
+
+                    //强制退出应用程序
+                    Environment.Exit(0);
+                }
+                
+            }
+
             switch (msg)
             {
                 case WinApi.WM_SLOW_DATA:
-                    if (bRun) 
+                    if (bRun)
                     {
                         NetworkDateRecvTime[NETWORK_DATA_TYPE.SLOW] = DateTime.Now;
                         SetLedStatus(ImageSlow, LED_STATUS.LED_GREEN);
@@ -1170,7 +1200,10 @@ namespace DataProcess
             {
                 Owner = this
             };
+            dataConvertSelectWindow.setBool = YaoCe.setDataConversion;
+            dataConvertSelectWindow.setPlayStatus = YaoCe.setOffLineFilePlayStatus;
             dataConvertSelectWindow.ShowDialog();
+            
         }
 
         private void btnOpenData_Click(object sender, RoutedEventArgs e)

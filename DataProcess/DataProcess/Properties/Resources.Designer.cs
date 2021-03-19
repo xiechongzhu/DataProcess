@@ -14,7 +14,7 @@ namespace DataProcess.Properties {
     
     /// <summary>
     ///   一个强类型的资源类，用于查找本地化的字符串等。
-    
+    /// </summary>
     // 此类是由 StronglyTypedResourceBuilder
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
@@ -34,7 +34,7 @@ namespace DataProcess.Properties {
         
         /// <summary>
         ///   返回此类使用的缓存的 ResourceManager 实例。
-        
+        /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
@@ -47,9 +47,9 @@ namespace DataProcess.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
-        
+        ///   重写当前线程的 CurrentUICulture 属性
+        ///   重写当前线程的 CurrentUICulture 属性。
+        /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
             get {
@@ -57,6 +57,59 @@ namespace DataProcess.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 纬度
+        ///经度
+        ///海拔高度
+        ///东向速度
+        ///北向速度
+        ///Wx角速度
+        ///Wy角速度
+        ///Wz角速度
+        ///轴向比力
+        ///GNSS时间
+        ///当前发射系X
+        ///当前发射系Y
+        ///当前发射系Z
+        ///预示落点射程
+        ///预示落点Z
+        ///飞行总时间
+        ///参试状态
+        ///策略阶段
+        ///策略判决结果1：总飞行时间
+        ///策略判决结果1：侧向
+        ///策略判决结果1：Wx角速度
+        ///策略判决结果1：Wy角速度
+        ///策略判决结果1：Wz角速度
+        ///策略判决结果1：后向
+        ///策略判决结果1：坠落
+        ///策略判决结果1：分离时间
+        ///策略判决结果2: 控制区下限
+        ///策略判决结果2:控制区上限
+        ///策略判决结果2:解保
+        ///策略判决结果2:起爆
+        ///策略判决结果2:模拟解保
+        ///策略判决结果2:模拟起爆
+        ///输入采集1：解保时序1状态
+        ///输入采集1：解保时序2状态
+        ///输入采集1：起爆控制状态
+        ///输入采集1：解保控制状态
+        ///输入采集1：火工品配电自保持状态
+        ///输入采集1：紧急断电状态
+        ///输入采集1：火工品BF配电指令状态
+        ///输入采集1：起爆点火指令1状态
+        ///输入采集2：起爆点火指令2状态
+        ///输入采集2：解保指令1+状态
+        ///输入采集2：解保指令1-状态
+        ///输入采集2：解保指令2+状态
+        ///输入采集2：解保指 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string 系统实时判决 {
+            get {
+                return ResourceManager.GetString("系统实时判决", resourceCulture);
             }
         }
     }

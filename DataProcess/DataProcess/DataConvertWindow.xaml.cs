@@ -1,4 +1,5 @@
-﻿using DataProcess.Log;
+﻿using DataProcess.Controls;
+using DataProcess.Log;
 using DataProcess.Parser.Fly;
 using DataProcess.Protocol;
 using DataProcess.Setting;
@@ -15,6 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using YaoCeProcess;
 
 
 namespace DataProcess
@@ -24,9 +26,18 @@ namespace DataProcess
     
     public partial class DataConvertSelectWindow : ThemedWindow
     {
+
+        /// 向主界面传输动作控制
+        public delegate void setOffLineFilePlayStatus(int action, int param1 = 0);
+        /// setPlayStatus
+        public setOffLineFilePlayStatus setPlayStatus;
+
+        public delegate void setDataConversion(bool i, string fileName, string fileCSV);
+        public setDataConversion setBool;
+
         private readonly ObservableCollection<String> DataSourceNames = new ObservableCollection<string>
         {
-            "飞控数据文件", "缓变参数文件", "速变参数文件", "尾段参数文件"
+            "飞控数据文件", "缓变参数文件", "速变参数文件", "尾段参数文件","安控数据文件"
         };
 
         public DataConvertSelectWindow()
@@ -91,9 +102,13 @@ namespace DataProcess
                 case "尾段参数文件":
                     bConvertResult = ConvertTailDataFile(out errMsg);
                     break;
+                case "安控数据文件":
+                    bConvertResult = ConvertAKDataFile(out errMsg);
+                    break;
                 default:
                     return;
             }
+
             if(!bConvertResult)
             {
                 System.Windows.MessageBox.Show("数据文件转换失败:"+errMsg, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -103,6 +118,24 @@ namespace DataProcess
                 System.Windows.MessageBox.Show("数据文件转换成功", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             editFolderPath.IsEnabled = editFileName.IsEnabled = btnSelectFile.IsEnabled = btnSelectDir.IsEnabled = btnConvert.IsEnabled = true;
+        }
+
+        private bool ConvertAKDataFile(out String errMsg)
+        {
+            errMsg = string.Empty;
+            string ParaseFileName = editFileName.Text;
+            string fileNameCSV = Path.Combine(editFolderPath.Text, "安控数据.csv");
+            setBool(true, ParaseFileName, fileNameCSV);
+            try
+            {
+                setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_START);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+                return false;
+            }
+            return true;
         }
 
         private bool ConvertFlyDataFile(out String errMsg)

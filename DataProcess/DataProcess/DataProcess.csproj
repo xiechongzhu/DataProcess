@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{144670CB-6396-488C-A76D-2E03A3B69E78}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataProcess</RootNamespace>
     <AssemblyName>DataProcess</AssemblyName>
@@ -187,6 +187,7 @@
     <Compile Include="YaoCe\HanziToPinyin.cs" />
     <Compile Include="YaoCe\Logger.cs" />
     <Compile Include="YaoCe\Protocol.cs" />
+    <Compile Include="YaoCe\writeCSV.cs" />
     <Page Include="Controls\Curve.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -329,6 +330,9 @@
     <Content Include="DataBase\CopyMe.SQLite.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CopyMe.SQLite.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="YaoCeConfigFile\系统实时判决.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Image\rock.jfif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
