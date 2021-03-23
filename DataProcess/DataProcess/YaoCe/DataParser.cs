@@ -516,7 +516,7 @@ namespace YaoCeProcess
             using (MemoryStream stream = new MemoryStream(buffer))
             {
                 // 位置偏移到CAN数据域
-                stream.Seek(Marshal.SizeOf(typeof(UDPHead)), 0); 
+                stream.Seek(Marshal.SizeOf(typeof(UDPHead)), 0);
 
                 // 解析CAN数据帧
                 using (BinaryReader br = new BinaryReader(stream))

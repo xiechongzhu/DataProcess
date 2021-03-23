@@ -1614,12 +1614,13 @@
                         <cust:LabelTextBox Label="可视化卫星数：" x:Name="danTouDaoHang_KeShiHuaWeiXingShu"/>
                         <cust:LabelTextBox Label="使用卫星数：" x:Name="danTouDaoHang_ShiYongWeiXingShu"/>
                         <Grid/>
-                        <TextBlock Text="陀螺故障标识:" FontSize="16" VerticalAlignment="Bottom"/>
+                        <cust:LabelTextBox Label="标识位：" x:Name="danTouDaoHang_BiaoShiWei"/>
+                        <!--<TextBlock Text="陀螺故障标识:" FontSize="16" VerticalAlignment="Bottom"/>
                         <Grid/>
-                        <Grid/>
-                        <cust:LabelTextBox Label="陀螺故障：" x:Name="danTouDaoHang_TuoLuoGuZhang"/>
+                        <Grid/>-->
+                        <!--<cust:LabelTextBox Label="陀螺故障：" x:Name="danTouDaoHang_TuoLuoGuZhang"/>
                         <cust:LabelTextBox Label="加计故障：" x:Name="danTouDaoHang_JiaJiGuZhang"/>
-                        <cust:LabelTextBox Label="组合计算：" x:Name="danTouDaoHang_ZuHeJieSuan"/>
+                        <cust:LabelTextBox Label="组合计算：" x:Name="danTouDaoHang_ZuHeJieSuan"/>-->
                     </UniformGrid>
                     <dx:DXTabControl Grid.Column="1">
                         <dx:DXTabItem Header="坐标(组合后)">

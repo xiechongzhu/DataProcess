@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{144670CB-6396-488C-A76D-2E03A3B69E78}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataProcess</RootNamespace>
     <AssemblyName>DataProcess</AssemblyName>
@@ -127,6 +127,9 @@
     <Compile Include="Controls\PopUp.xaml.cs">
       <DependentUpon>PopUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TransformationProgress.xaml.cs">
+      <DependentUpon>TransformationProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\YaoCeShuJuXianShi.xaml.cs">
       <DependentUpon>YaoCeShuJuXianShi.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,7 @@
     <Compile Include="YaoCe\DataLogger.cs" />
     <Compile Include="YaoCe\DataParser.cs" />
     <Compile Include="YaoCe\DetermineDataInterval.cs" />
+    <Compile Include="YaoCe\FileStatus.cs" />
     <Compile Include="YaoCe\GenericFunction.cs" />
     <Compile Include="YaoCe\HanziToPinyin.cs" />
     <Compile Include="YaoCe\Logger.cs" />
@@ -205,6 +209,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TransformationProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -331,7 +339,19 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CopyMe.SQLite.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="YaoCeConfigFile\导航快速.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="YaoCeConfigFile\导航慢速.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="YaoCeConfigFile\弹头导航.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="YaoCeConfigFile\系统实时判决.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="YaoCeConfigFile\系统状态即时反馈.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Image\rock.jfif">

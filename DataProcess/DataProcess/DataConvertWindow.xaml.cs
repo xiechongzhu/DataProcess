@@ -85,57 +85,59 @@ namespace DataProcess
                 return;
             }
 
-            editFolderPath.IsEnabled = editFileName.IsEnabled = btnSelectFile.IsEnabled = btnSelectDir.IsEnabled = btnConvert.IsEnabled = false;
-            bool bConvertResult;
-            String errMsg;
-            switch (combBoxFileType.Text)
+            if (FileStatus.FileIsOpen(editFileName.Text))
             {
-                case "飞控数据文件":
-                    bConvertResult = ConvertFlyDataFile(out errMsg);
-                    break;
-                case "缓变参数文件":
-                    bConvertResult = ConvertSlowDataFile(out errMsg);
-                    break;
-                case "速变参数文件":
-                    bConvertResult = ConvertFastDataFile(out errMsg);
-                    break;
-                case "尾段参数文件":
-                    bConvertResult = ConvertTailDataFile(out errMsg);
-                    break;
-                case "安控数据文件":
-                    bConvertResult = ConvertAKDataFile(out errMsg);
-                    break;
-                default:
-                    return;
+                System.Windows.MessageBox.Show("文件已打开，请关闭文件！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
-            if(!bConvertResult)
+            editFolderPath.IsEnabled = editFileName.IsEnabled = btnSelectFile.IsEnabled = btnSelectDir.IsEnabled = btnConvert.IsEnabled = false;
+
+            if (combBoxFileType.Text == "安控数据文件")
             {
-                System.Windows.MessageBox.Show("数据文件转换失败:"+errMsg, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                ConvertAKDataFile();
             }
             else
             {
-                System.Windows.MessageBox.Show("数据文件转换成功", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                bool bConvertResult;
+                String errMsg = String.Empty;
+                switch (combBoxFileType.Text)
+                {
+                    case "飞控数据文件":
+                        bConvertResult = ConvertFlyDataFile(out errMsg);
+                        break;
+                    case "缓变参数文件":
+                        bConvertResult = ConvertSlowDataFile(out errMsg);
+                        break;
+                    case "速变参数文件":
+                        bConvertResult = ConvertFastDataFile(out errMsg);
+                        break;
+                    case "尾段参数文件":
+                        bConvertResult = ConvertTailDataFile(out errMsg);
+                        break;
+                    default:
+                        return;
+                }
+
+                if (!bConvertResult)
+                {
+                    System.Windows.MessageBox.Show("数据文件转换失败:" + errMsg, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("数据文件转换成功", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             editFolderPath.IsEnabled = editFileName.IsEnabled = btnSelectFile.IsEnabled = btnSelectDir.IsEnabled = btnConvert.IsEnabled = true;
         }
 
-        private bool ConvertAKDataFile(out String errMsg)
+        private void ConvertAKDataFile()
         {
-            errMsg = string.Empty;
+            //errMsg = string.Empty;
             string ParaseFileName = editFileName.Text;
-            string fileNameCSV = Path.Combine(editFolderPath.Text, "安控数据.csv");
-            setBool(true, ParaseFileName, fileNameCSV);
-            try
-            {
-                setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_START);
-            }
-            catch (Exception ex)
-            {
-                errMsg = ex.Message;
-                return false;
-            }
-            return true;
+            //string fileNameCSV = Path.Combine(editFolderPath.Text, "安控数据.csv");
+            setBool(true, ParaseFileName, editFolderPath.Text);
+            setPlayStatus(YaoCeShuJuXianShi.E_LOADFILE_START);
         }
 
         private bool ConvertFlyDataFile(out String errMsg)

@@ -15,12 +15,11 @@ namespace DataProcess.Controls
             string strLine;
             while ((strLine = sr.ReadLine()) != null)
             {
-                //Console.WriteLine(strLine);
                 stringBuilder.Append(strLine);
                 stringBuilder.Append(",");
             }
 
-            Console.WriteLine(stringBuilder.ToString());
+            //Console.WriteLine(stringBuilder.ToString());
             sr?.Close();
             return stringBuilder;
 
