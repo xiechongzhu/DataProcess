@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using YaoCeProcess;
 using static DataProcess.Protocol.FlyProtocol;
 
 namespace DataProcess
@@ -29,7 +30,8 @@ namespace DataProcess
     {
         private List<SignalPoint> PointsToDraw = new List<SignalPoint>();
         private NavData? lastNavData = null;
-        private AngleData? lastAngleData = null;
+        //private AngleData? lastAngleData = null;
+        private double maxHeight = -10000;
 
         public SignalDiagram()
         {
@@ -99,8 +101,9 @@ namespace DataProcess
 
         public void Reset()
         {
-            lastAngleData = null;
+            //lastAngleData = null;
             lastNavData = null;
+            maxHeight = -10000;
             foreach (SignalPoint point in PointsToDraw)
             {
                 point.IsActive = false;
@@ -108,29 +111,45 @@ namespace DataProcess
             InvalidateVisual();
         }
 
+        public void AddSystemParseStatus(SYSTEMPARSE_STATUS status)
+        {
+            if(status.feiXingZongShiJian > 1)
+            {
+                ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_FLY_START), true);
+            }
+        }
+
         public void AddNavData(NavData navData)
         {
-            if(lastNavData != null)
+            if (navData.height > maxHeight)
             {
-                if(lastNavData.Value.height > navData.height && IsActive(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_BOOM)))
+                maxHeight = navData.height;
+            }
+            if (maxHeight - navData.height > 10)
+            {
+                ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_TOP), true);
+            }
+            if (lastNavData != null)
+            {
+                if(lastNavData.Value.skySpeed > navData.skySpeed)
                 {
-                    ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_TOP), true);
+                    ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN), true);
                 }
             }
             lastNavData = navData;
         }
 
-        public void AddAngleData(AngleData angelData)
+        /*public void AddAngleData(AngleData angelData)
         {
             if(lastAngleData != null)
             {
-                if(IsAccZero(lastAngleData.Value) && !IsAccZero(angelData))
+                if(!IsAccZero(lastAngleData.Value) && IsAccZero(angelData))
                 {
                     ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN), true);
                 }
             }
             lastAngleData = angelData;
-        }
+        }*/
 
         public void AddProgramData(ProgramControlData programData)
         {

@@ -570,7 +570,7 @@ namespace DataProcess
         {
             packets.ForEach(packet =>
             {
-                programDigram.AddAngleData(packet);
+                //programDigram.AddAngleData(packet);
                 ChartAccX.WriteData(packet.ax);
                 ChartAccY.WriteData(packet.ay);
                 ChartAccZ.WriteData(packet.az);

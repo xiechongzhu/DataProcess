@@ -2652,46 +2652,46 @@ namespace DataProcess.Controls
                 dicTip.Add(3, "是野值");
 
                 // bit0 bit1 1号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data1Text.Add(dicTip[(byte)(daoHangTip2 & 0x2)]);
+                data1Text.Add(dicTip[(byte)(daoHangTip2 & 0x03)]);
 
                 // bit2 bit3 1号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data1Text.Add(dicTip[(byte)(daoHangTip2 >> 2 & 0x2)]);
+                data1Text.Add(dicTip[(byte)(daoHangTip2 >> 2 & 0x03)]);
 
                 // bit4 bit5 1号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data1Text.Add(dicTip[(byte)(daoHangTip2 >> 4 & 0x2)]);
+                data1Text.Add(dicTip[(byte)(daoHangTip2 >> 4 & 0x03)]);
 
                 // bit6 bit7 1号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data1Text.Add(dicTip[(byte)(daoHangTip2 >> 6 & 0x2)]);
+                data1Text.Add(dicTip[(byte)(daoHangTip2 >> 6 & 0x03)]);
 
                 // ---------------------导航状态指示3
                 byte daoHangTip3 = sObject.daoHangTip3;
 
                 // bit0 bit1 1号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data1Text.Add(dicTip[(byte)(daoHangTip3 & 0x2)]);
+                data1Text.Add(dicTip[(byte)(daoHangTip3 & 0x03)]);
 
                 // bit2 bit3 1号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data1Text.Add(dicTip[(byte)(daoHangTip3 >> 2 & 0x2)]);
+                data1Text.Add(dicTip[(byte)(daoHangTip3 >> 2 & 0x03)]);
 
                 // bit4 bit5 2号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip3 >> 4 & 0x2)]);
+                data2Text.Add(dicTip[(byte)(daoHangTip3 >> 4 & 0x03)]);
 
                 // bit6 bit7 2号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip3 >> 6 & 0x2)]);
+                data2Text.Add(dicTip[(byte)(daoHangTip3 >> 6 & 0x03)]);
 
                 // -------------------------导航状态指示4
                 byte daoHangTip4 = sObject.daoHangTip4;
 
                 // bit0 bit1 2号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 & 0x2)]);
+                data2Text.Add(dicTip[(byte)(daoHangTip4 & 0x03)]);
 
                 // bit2 bit3 2号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 2 & 0x2)]);
+                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 2 & 0x03)]);
 
                 // bit4 bit5 2号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 4 & 0x2)]);
+                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 4 & 0x03)]);
 
                 // bit6 bit7 2号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 6 & 0x2)]);
+                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 6 & 0x03)]);
 
                 StringBuilder stringBuilder_1Hao = new StringBuilder();
                 List<string> No1 = new List<string>();
@@ -3252,46 +3252,46 @@ namespace DataProcess.Controls
                 dicTip.Add(3, "是野值");
 
                 // bit0 bit1 1号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip2 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip2 & 0x03)]);
                 s.Append(",");
                 // bit2 bit3 1号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip2 >> 2 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip2 >> 2 & 0x03)]);
                 s.Append(",");
                 // bit4 bit5 1号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip2 >> 4 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip2 >> 4 & 0x03)]);
                 s.Append(",");
                 // bit6 bit7 1号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip2 >> 6 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip2 >> 6 & 0x03)]);
                 s.Append(",");
                 // ---------------------导航状态指示3
                 byte daoHangTip3 = sObject.daoHangTip3;
 
                 // bit0 bit1 1号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip3 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip3 & 0x03)]);
                 s.Append(",");
                 // bit2 bit3 1号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip3 >> 2 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip3 >> 2 & 0x03)]);
                 s.Append(",");
                 // bit4 bit5 2号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip3 >> 4 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip3 >> 4 & 0x03)]);
                 s.Append(",");
                 // bit6 bit7 2号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip3 >> 6 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip3 >> 6 & 0x03)]);
                 s.Append(",");
                 // -------------------------导航状态指示4
                 byte daoHangTip4 = sObject.daoHangTip4;
 
                 // bit0 bit1 2号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip4 & 0x03)]);
                 s.Append(",");
                 // bit2 bit3 2号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 >> 2 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip4 >> 2 & 0x03)]);
                 s.Append(",");
                 // bit4 bit5 2号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 >> 4 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip4 >> 4 & 0x03)]);
                 s.Append(",");
                 // bit6 bit7 2号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 >> 6 & 0x2)]);
+                s.Append(dicTip[(byte)(daoHangTip4 >> 6 & 0x03)]);
                 s.Append(",");
 
                 //WriteAKDataCSVFile(s.ToString());

@@ -753,14 +753,14 @@ namespace DataProcess
         {
             angleDataList.ForEach(packet =>
             {
-                programDigram.AddAngleData(packet);
+                //programDigram.AddAngleData(packet);
                 chartDataSource.AngleAccXList.AddPoint(packet.ax);
                 chartDataSource.AngleAccYList.AddPoint(packet.ay);
                 chartDataSource.AngleAccZList.AddPoint(packet.az);
                 chartDataSource.AngleXList.AddPoint(packet.angleX);
                 chartDataSource.AngleYList.AddPoint(packet.angleY);
                 chartDataSource.AngleZList.AddPoint(packet.angleZ);
-                chartDataSource.AngelSequenceList.AddPoint(packet.sequence);
+                chartDataSource.AngelSequenceList.AddPoint(packet.sequence % 256);
             });
             chartDataSource.AngleAccXList.NotifyDataChanged();
             chartDataSource.AngleAccYList.NotifyDataChanged();
@@ -1094,6 +1094,7 @@ namespace DataProcess
             {
                 case YaoCeShuJuXianShi.WM_YAOCE_SystemStatus_DATA:
                     SYSTEMPARSE_STATUS systemStatus = Marshal.PtrToStructure<SYSTEMPARSE_STATUS>(lParam);
+                    programDigram.AddSystemParseStatus(systemStatus);
                     mainInfoControl.SetJudgmentStatus(systemStatus);
                     break;
                 case YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA:

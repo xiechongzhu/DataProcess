@@ -6,56 +6,69 @@
              xmlns:local="clr-namespace:DataProcess.Controls" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Header="数据源" Grid.ColumnSpan="2">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" Content="飞控数据" x:Name="radioFly" IsChecked="True"/>
-                <RadioButton Grid.Column="1" Content="安控数据" x:Name="radioYc"/>
-            </Grid>
-        </GroupBox>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="GPS时间:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editGpsTime"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="飞行总时间:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="2" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editFlyTime"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="纬度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="3" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editLat"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="经度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="4" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editLng"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="高度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="5" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editHeight"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="北向速度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="6" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editNorth"/>
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="天向速度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="7" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editSky"/>
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="东向速度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="8" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editEast"/>
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="俯仰角:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="9" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editPitch"/>
-        <TextBlock Grid.Row="10" Grid.Column="0" Text="偏航角:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="10" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editGrab"/>
-        <TextBlock Grid.Row="11" Grid.Column="0" Text="滚转角:" Margin="5,25,5,5" VerticalAlignment="Center"/>
-        <dxe:TextEdit Grid.Row="11" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editRoll"/>
-    </Grid>
+    <UserControl.Resources>
+        <Style TargetType="dxe:TextEdit">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Row="0" Grid.Column="0" Header="数据源" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Grid.Column="0" Content="飞控数据" x:Name="radioFly" IsChecked="True"/>
+                    <RadioButton Grid.Column="1" Content="安控数据" x:Name="radioYc"/>
+                </Grid>
+            </GroupBox>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="GPS时间:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editGpsTime"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="飞行总时间:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="2" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editFlyTime"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="纬度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="3" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editLat"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="经度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="4" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editLng"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="高度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="5" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editHeight"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="北向速度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="6" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editNorth"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="天向速度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="7" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editSky"/>
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="东向速度:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="8" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editEast"/>
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="俯仰角:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="9" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editPitch"/>
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="偏航角:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="10" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editGrab"/>
+            <TextBlock Grid.Row="11" Grid.Column="0" Text="滚转角:" Margin="5,25,5,5" VerticalAlignment="Center"/>
+            <dxe:TextEdit Grid.Row="11" Grid.Column="1" Margin="5,25,5,5" IsReadOnly="True" x:Name="editRoll"/>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
