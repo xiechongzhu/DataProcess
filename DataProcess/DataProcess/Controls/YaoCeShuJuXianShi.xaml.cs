@@ -2829,12 +2829,16 @@ namespace DataProcess.Controls
             else
             {
                 StringBuilder s = new StringBuilder(); 
-                // 经度
-                s.Append(((double)(sObject.jingDu * Math.Pow(10, -7))).ToString());
-                s.Append(",");
 
+                /* 修改时间：2021年4月15日19:18:44
+                 * 修改说明：经度纬度的位置反了，应该是先纬度在经度
+                 */
                 // 纬度
                 s.Append(((double)(sObject.weiDu * Math.Pow(10, -7))).ToString());
+                s.Append(",");
+
+                // 经度
+                s.Append(((double)(sObject.jingDu * Math.Pow(10, -7))).ToString());
                 s.Append(",");
 
                 // 海拔高度
@@ -3047,7 +3051,6 @@ namespace DataProcess.Controls
                 s.Append(",");
                 /*--------------------输入采集3--------------------------- */
                 byte shuRuCaiJi3 = sObject.shuRuCaiJi3;
-                s.Append(",");
                 //bit0 起爆点火时序1，B通道状态
                 s.Append((shuRuCaiJi3 >> 0 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
@@ -4497,8 +4500,10 @@ namespace DataProcess.Controls
                 stringBuilder_TuoLuoXGZ.Append(TuoLuoZGZ);
                 stringBuilder_TuoLuoXGZ.Append(";");
 
-                /**/
-                if (TuoLuoGZ == 3)
+                /* 修改时间：2021年4月15日19:09:25
+                 * 修改说明: 之前应该是修改过，1是正常；现改为0是正常
+                 */
+                if (TuoLuoGZ == 0)
                 {
                     DHManSu_Ti_TuoLuoGuZhang.Text = "正常";
                 }
@@ -5886,11 +5891,14 @@ namespace DataProcess.Controls
                 //z比力
                 danTouDaoHang_ZBiLi.Text = sObject.zBiLi.ToString();
 
+                /* 修改时间：2021年4月15日18:58:13 
+                 * 修改说明：HDOP、VDOP没有乘以当量 0.01：确认修改
+                 */
                 //HDOP
-                danTouDaoHang_HDOP.Text = sObject.HDOP.ToString();
+                danTouDaoHang_HDOP.Text = ((double)(sObject.HDOP * Math.Pow(10,-2))).ToString();
 
                 //VDOP
-                danTouDaoHang_VDOP.Text = sObject.VDOP.ToString();
+                danTouDaoHang_VDOP.Text = ((double)(sObject.VDOP * Math.Pow(10, -2))).ToString();
 
                 //可视卫星数
                 danTouDaoHang_KeShiHuaWeiXingShu.Text = sObject.keShiWeiXingShu.ToString();
@@ -6022,12 +6030,15 @@ namespace DataProcess.Controls
                 s.Append(sObject.zBiLi.ToString());
                 s.Append(",");
 
+                /* 修改时间：2021年4月15日18:58:13 
+                 * 修改说明：HDOP、VDOP没有乘以当量 0.01：确认修改
+                 */
                 //HDOP
-                s.Append(sObject.HDOP.ToString());
+                s.Append(((double)(sObject.HDOP * 0.01)).ToString());
                 s.Append(",");
 
                 //VDOP
-                s.Append(sObject.VDOP.ToString());
+                s.Append(((double)(sObject.VDOP * 0.01)).ToString());
                 s.Append(",");
 
                 //可视卫星数
