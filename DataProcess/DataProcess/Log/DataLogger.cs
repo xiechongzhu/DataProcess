@@ -48,18 +48,19 @@ namespace DataProcess.Log
 
         }
 
-        public DataLogger(DateTime dateTime)
+        public DataLogger(DateTime dateTime, String prefix)
         {
             String strDateTime = dateTime.ToString("yyyyMMddHHmmssfff");
             Directory.CreateDirectory(Path.Combine("Log", strDateTime));
+            Directory.CreateDirectory(Path.Combine("Log", strDateTime, prefix));
             Directory.CreateDirectory("tmp");
-            envPacketFilePath = Path.Combine("Log", strDateTime, EnvPacketFileName);
-            slowPacketFilePath = Path.Combine("Log", strDateTime, SlowPacketFileName);
-            fastPacketFilePath = Path.Combine("Log", strDateTime, FastPacketFileName);
-            tailPacketFilePath = Path.Combine("Log", strDateTime, TailPacketFileName);
-            flyPacketFilePath = Path.Combine("Log", strDateTime, flyPacketFileName);
+            envPacketFilePath = Path.Combine("Log", strDateTime, prefix, EnvPacketFileName);
+            slowPacketFilePath = Path.Combine("Log", strDateTime, prefix, SlowPacketFileName);
+            fastPacketFilePath = Path.Combine("Log", strDateTime, prefix, FastPacketFileName);
+            tailPacketFilePath = Path.Combine("Log", strDateTime, prefix, TailPacketFileName);
+            flyPacketFilePath = Path.Combine("Log", strDateTime, prefix, flyPacketFileName);
             ratiosFilePath = Path.Combine("Log", strDateTime, "params");
-            tailSequenceFilePath = Path.Combine("Log", strDateTime, tailSequenceFileName);
+            tailSequenceFilePath = Path.Combine("Log", strDateTime, prefix, tailSequenceFileName);
         }
 
         public void Close()

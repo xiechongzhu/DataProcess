@@ -9,17 +9,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace DataProcess.Protocol
 {
     public class EnvParser
     {
+        DispatcherTimer IdleTimer = new DispatcherTimer();
         public DataLogger dataLogger { get; set; }
         private TailParser tailParser;
-        public EnvParser(IntPtr mainWindowHandle)
+        private Priority ParserPriority;
+        public int IdleTimetout { get; set; }
+        public Action<Priority, bool> IdleHandler;
+        private DateTime LastRecvTime;
+        public bool PostMessageEnable { get; set; }
+
+        public EnvParser(IntPtr mainWindowHandle, Priority priority)
         {
+            ParserPriority = priority;
             this.mainWindowHandle = mainWindowHandle;
             IsStartLogData = false;
+            IdleTimer.Tick += IdleTimer_Tick;
+        }
+
+        private void IdleTimer_Tick(object sender, EventArgs e)
+        {
+            if(DateTime.Now - LastRecvTime > new TimeSpan(0,0,0,0,IdleTimetout))
+            {
+                IdleHandler.Invoke(ParserPriority, false);
+            }
         }
 
         public bool IsStartLogData { get; set; }
@@ -33,6 +51,8 @@ namespace DataProcess.Protocol
 
         public void Enqueue(byte[] data)
         {
+            LastRecvTime = DateTime.Now;
+            IdleHandler.Invoke(ParserPriority, true);
             queue.Enqueue(data);
             if (IsStartLogData)
             {
@@ -48,11 +68,17 @@ namespace DataProcess.Protocol
             isRuning = true;
             thread = new Thread(new ThreadStart(ThreadFunction));
             thread.Start();
+            IdleTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            IdleTimer.Start();
+            IdleHandler.Invoke(ParserPriority, true);
+            LastRecvTime = DateTime.Now;
+            PostMessageEnable = true;
         }
 
         public void Stop()
         {
             isRuning = false;
+            IdleTimer.Stop();
             thread?.Join();
         }
 
@@ -161,11 +187,17 @@ namespace DataProcess.Protocol
                     {
                         IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SlowPacket)));
                         Marshal.StructureToPtr(slowPacket, ptr, true);
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, ptr);
+                        if (PostMessageEnable)
+                        {
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, ptr);
+                        }
                     }
                     else
                     {
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, IntPtr.Zero);
+                        if (PostMessageEnable)
+                        {
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, IntPtr.Zero);
+                        }
                     }
                     if (IsStartLogData)
                     {
@@ -178,11 +210,17 @@ namespace DataProcess.Protocol
                     {
                         IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(FastPacket)));
                         Marshal.StructureToPtr(fastPacket, ptr, true);
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, ptr);
+                        if (PostMessageEnable)
+                        {
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, ptr);
+                        }
                     }
                     else
                     {
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, IntPtr.Zero);
+                        if (PostMessageEnable)
+                        {
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, IntPtr.Zero);
+                        }
                     }
                     if (IsStartLogData)
                     {
@@ -197,12 +235,18 @@ namespace DataProcess.Protocol
                         {
                             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(TailPacketRs)));
                             Marshal.StructureToPtr(packet, ptr, true);
-                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, ptr);
+                            if (PostMessageEnable)
+                            {
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, ptr);
+                            }
                         }
                     }
                     else
                     {
-                        WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, IntPtr.Zero);
+                        if (PostMessageEnable)
+                        {
+                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, IntPtr.Zero);
+                        }
                     }
                     if (IsStartLogData)
                     {

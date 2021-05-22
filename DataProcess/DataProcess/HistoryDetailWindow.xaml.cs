@@ -173,7 +173,7 @@ namespace DataProcess
             SettingManager settingManager = new SettingManager();
             if (testInfo != null)
             {
-                DataLogger dataLogger = new DataLogger(testInfo.TestTime);
+                DataLogger dataLogger = new DataLogger(testInfo.TestTime, String.Empty);
                 if(!settingManager.LoadRatios(dataLogger.ratiosFilePath, out ratios))
                 {
                     MessageBox.Show("加载系数配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);

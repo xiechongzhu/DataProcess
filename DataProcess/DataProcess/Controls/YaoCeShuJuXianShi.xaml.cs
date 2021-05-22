@@ -6155,7 +6155,8 @@ namespace DataProcess.Controls
         //开启UDP接收
         public void startUDPReceive()
         {
-            udpClientYaoCe.BeginReceive(EndYaoCeReceive, null);
+            //TODO
+            //udpClientYaoCe.BeginReceive(EndYaoCeReceive, null);
         }
 
         //关闭UDP套接字

@@ -40,18 +40,38 @@ namespace DataProcess
             editPipeWidthLeft.Text = mainSetting.PipeWidthLeft.ToString();
             editPipeWidthRight.Text = mainSetting.PipeWidthRight.ToString();
 
-            if(settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort,
-                                                 out String flyIpAddr, out int flyPort, 
-                                                 out String yaoceIpAddr,out int yaocePort,
+            if(settingManager.LoadNetworkSetting(out String envIpAddrHeigh, out int envPortHeigh,
+                                                 out String flyIpAddrHeigh, out int flyPortHeigh, 
+                                                 out String yaoceIpAddrHeigh, out int yaocePortHeigh,
+                                                 out String envIpAddrMiddle, out int envPortMiddle,
+                                                 out String flyIpAddrMiddle, out int flyPortMiddle,
+                                                 out String yaoceIpAddrMiddle, out int yaocePortMiddle,
+                                                 out String envIpAddrLow, out int envPortLow,
+                                                 out String flyIpAddrLow, out int flyPortLow,
+                                                 out String yaoceIpAddrLow, out int yaocePortLow,
+                                                 out int idleTime,
                                                  out int maxDisplayPoint))
             {
-                editEnvIpAddr.Text = envIpAddr;
-                editEnvPort.Text = envPort.ToString();
-                editFlyIpAddr.Text = flyIpAddr;
-                editFlyPort.Text = flyPort.ToString();
-                editYaoCeIpAddr.Text = yaoceIpAddr;
-                editYaoCePort.Text = yaocePort.ToString();
-                editMaxPoint.Text = maxDisplayPoint.ToString();
+                editEnvIpAddrHeigh.Text = envIpAddrHeigh;
+                editEnvPortHeigh.Text = envPortHeigh.ToString();
+                editFlyIpAddrHeigh.Text = flyIpAddrHeigh;
+                editFlyPortHeigh.Text = flyPortHeigh.ToString();
+                editYaoCeIpAddrHeigh.Text = yaoceIpAddrHeigh;
+                editYaoCePortHeigh.Text = yaocePortHeigh.ToString();
+                editEnvIpAddrMiddle.Text = envIpAddrMiddle;
+                editEnvPortMiddle.Text = envPortMiddle.ToString();
+                editFlyIpAddrMiddle.Text = flyIpAddrMiddle;
+                editFlyPortMiddle.Text = flyPortMiddle.ToString();
+                editYaoCeIpAddrMiddle.Text = yaoceIpAddrMiddle;
+                editYaoCePortMiddle.Text = yaocePortMiddle.ToString();
+                editEnvIpAddrLow.Text = envIpAddrLow;
+                editEnvPortLow.Text = envPortLow.ToString();
+                editFlyIpAddrLow.Text = flyIpAddrLow;
+                editFlyPortLow.Text = flyPortLow.ToString();
+                editYaoCeIpAddrLow.Text = yaoceIpAddrLow;
+                editYaoCePortLow.Text = yaocePortLow.ToString();
+                SpinIdleTime.Value = idleTime;
+                editMaxPoint.Value = maxDisplayPoint;
             }
 
             settingManager.LoadRatios(out Ratios ratios);
@@ -155,22 +175,32 @@ namespace DataProcess
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if(editEnvIpAddr.Text.Equals(String.Empty) || editFlyIpAddr.Text.Equals(String.Empty) || editYaoCeIpAddr.Text.Equals(String.Empty))
+            if (editEnvIpAddrHeigh.Text.Equals(String.Empty) || editFlyIpAddrHeigh.Text.Equals(String.Empty) || editYaoCeIpAddrHeigh.Text.Equals(String.Empty)
+                || editEnvIpAddrMiddle.Text.Equals(String.Empty) || editFlyIpAddrMiddle.Text.Equals(String.Empty) || editYaoCeIpAddrMiddle.Text.Equals(String.Empty)
+                || editEnvIpAddrLow.Text.Equals(String.Empty) || editFlyIpAddrLow.Text.Equals(String.Empty) || editYaoCeIpAddrLow.Text.Equals(String.Empty))
             {
                 MessageBox.Show("IP地址不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(editEnvPort.Text.Equals(String.Empty) || editFlyPort.Text.Equals(String.Empty) || editYaoCePort.Text.Equals(String.Empty))
+            if(editEnvPortHeigh.Text.Equals(String.Empty) || editFlyPortHeigh.Text.Equals(String.Empty) || editYaoCePortHeigh.Text.Equals(String.Empty)
+                || editEnvPortMiddle.Text.Equals(String.Empty) || editFlyPortMiddle.Text.Equals(String.Empty) || editYaoCePortMiddle.Text.Equals(String.Empty)
+                || editEnvPortLow.Text.Equals(String.Empty) || editFlyPortLow.Text.Equals(String.Empty) || editYaoCePortLow.Text.Equals(String.Empty))
             {
                 MessageBox.Show("端口不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(!settingManager.SaveNetworkSetting(editEnvIpAddr.Text, int.Parse(editEnvPort.Text),
-                                                  editFlyIpAddr.Text, int.Parse(editFlyPort.Text),
-                                                  editYaoCeIpAddr.Text,int.Parse(editYaoCePort.Text),
-                                                  int.Parse(editMaxPoint.Text)))
+            if(!settingManager.SaveNetworkSetting(editEnvIpAddrHeigh.Text, int.Parse(editEnvPortHeigh.Text),
+                                                  editFlyIpAddrHeigh.Text, int.Parse(editFlyPortHeigh.Text),
+                                                  editYaoCeIpAddrHeigh.Text,int.Parse(editYaoCePortHeigh.Text),
+                                                  editEnvIpAddrMiddle.Text, int.Parse(editEnvPortMiddle.Text),
+                                                  editFlyIpAddrMiddle.Text, int.Parse(editFlyPortMiddle.Text),
+                                                  editYaoCeIpAddrMiddle.Text, int.Parse(editYaoCePortMiddle.Text),
+                                                  editEnvIpAddrLow.Text, int.Parse(editEnvPortLow.Text),
+                                                  editFlyIpAddrLow.Text, int.Parse(editFlyPortLow.Text),
+                                                  editYaoCeIpAddrLow.Text, int.Parse(editYaoCePortLow.Text),
+                                                  int.Parse(SpinIdleTime.Text), int.Parse(editMaxPoint.Text)))
             {
                 MessageBox.Show("保存网络配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }

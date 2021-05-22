@@ -289,21 +289,32 @@ namespace DataProcess
         public static readonly int CHART_MAX_POINTS = 10000;
         public static readonly int frame_MaxCount = 1000;
         private TestInfo testInfo = null;
-        private UdpClient udpClientEnv = null;
-        private UdpClient udpClientFly = null;
-        private EnvParser envParser = null;
-        private FlyParser flyParser = null;
+        private UdpClient udpClientEnvHigh = null;
+        private UdpClient udpClientEnvMiddle = null; 
+        private UdpClient udpClientEnvLow = null;
+        private UdpClient udpClientFlyHeigh = null;
+        private UdpClient udpClientFlyMiddle = null;
+        private UdpClient udpClientFlyLow = null;
+        private EnvParser envParserHigh = null;
+        private EnvParser envParserMiddle = null;
+        private EnvParser envParserLow = null;
+        private FlyParser flyParserHigh = null;
+        private FlyParser flyParserMiddle = null;
+        private FlyParser flyParserLow = null;
         private DispatcherTimer uiRefreshTimer = new DispatcherTimer();
         private DispatcherTimer ledTimer = new DispatcherTimer();
         private DisplayBuffers displayBuffers = new DisplayBuffers();
-        private DataLogger dataLogger = null;
+        private DataLogger dataLoggerHeigh = null;
+        private DataLogger dataLoggerMiddle = null;
+        private DataLogger dataLoggerLow = null;
         ChartDataSource chartDataSource = new ChartDataSource();
         
         Ratios ratios;
         String MainText;
         private DispatcherTimer MainTimer = new DispatcherTimer();
 
-
+        private Dictionary<Priority, bool> EnvClientStatus = new Dictionary<Priority, bool>();
+        private Dictionary<Priority, bool> FlyClientStatus = new Dictionary<Priority, bool>();
 
         public MainWindow()
         {
@@ -804,19 +815,40 @@ namespace DataProcess
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
+            EnvClientStatus[Priority.HighPriority] = EnvClientStatus[Priority.MiddlePriority]
+                = EnvClientStatus[Priority.LowPriority] = true;
+            FlyClientStatus[Priority.HighPriority] = FlyClientStatus[Priority.MiddlePriority]
+                = FlyClientStatus[Priority.LowPriority] = true;
+
             NETWORK_DATA_TYPE[] keys = NetworkDateRecvTime.Keys.ToArray();
             for (int i = 0; i < keys.Length; ++i)
             {
                 NetworkDateRecvTime[keys[i]] = DateTime.MinValue;
             }
 
-            if (envParser == null)
+            if (envParserHigh == null)
             {
-                envParser = new EnvParser(new WindowInteropHelper(this).Handle);
+                envParserHigh = new EnvParser(new WindowInteropHelper(this).Handle, Priority.HighPriority);
             }
-            if(flyParser == null)
+            if (envParserMiddle == null)
             {
-                flyParser = new FlyParser(new WindowInteropHelper(this).Handle);
+                envParserMiddle = new EnvParser(new WindowInteropHelper(this).Handle, Priority.MiddlePriority);
+            }
+            if (envParserLow == null)
+            {
+                envParserLow = new EnvParser(new WindowInteropHelper(this).Handle, Priority.LowPriority);
+            }
+            if (flyParserHigh == null)
+            {
+                flyParserHigh = new FlyParser(new WindowInteropHelper(this).Handle, Priority.HighPriority);
+            }
+            if (flyParserMiddle == null)
+            {
+                flyParserMiddle = new FlyParser(new WindowInteropHelper(this).Handle, Priority.MiddlePriority);
+            }
+            if (flyParserLow == null)
+            {
+                flyParserLow = new FlyParser(new WindowInteropHelper(this).Handle, Priority.LowPriority);
             }
 
             YaoCe.initYaoCeParser();
@@ -835,23 +867,47 @@ namespace DataProcess
                 MessageBox.Show("加载系数配置文件失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            int maxDisplayPoint;
+            int maxDisplayPoint, idleTime;
             try
             {
                 
-                if (settingManager.LoadNetworkSetting(out String envIpAddr, out int envPort, 
-                                                      out String flyIpAddr, out int flyPort, 
-                                                      out String yaoceIpAddr,out int yaocePort,
-                                                      out maxDisplayPoint))
+                if (settingManager.LoadNetworkSetting(out String envIpAddrHeigh, out int envPortHeigh,
+                                                      out String flyIpAddrHeigh, out int flyPortHeigh,
+                                                      out String yaoceIpAddrHeigh, out int yaocePortHeigh,
+                                                      out String envIpAddrMiddle, out int envPortMiddle,
+                                                      out String flyIpAddrMiddle, out int flyPortMiddle,
+                                                      out String yaoceIpAddrMiddle, out int yaocePortMiddle, 
+                                                      out String envIpAddrLow, out int envPortLow,
+                                                      out String flyIpAddrLow, out int flyPortLow,
+                                                      out String yaoceIpAddrLow, out int yaocePortLow,
+                                                      out idleTime, out maxDisplayPoint))
                 {
-                    udpClientEnv = new UdpClient(envPort);
-                    udpClientEnv.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
-                    udpClientEnv.JoinMulticastGroup(IPAddress.Parse(envIpAddr));
-                    udpClientFly = new UdpClient(flyPort);
-                    udpClientFly.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
-                    udpClientFly.JoinMulticastGroup(IPAddress.Parse(flyIpAddr));
+                    udpClientEnvHigh = new UdpClient(envPortHeigh);
+                    udpClientEnvHigh.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+                    udpClientEnvHigh.JoinMulticastGroup(IPAddress.Parse(envIpAddrHeigh));
+                    udpClientEnvMiddle = new UdpClient(envPortMiddle);
+                    udpClientEnvMiddle.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+                    udpClientEnvMiddle.JoinMulticastGroup(IPAddress.Parse(envIpAddrMiddle));
+                    udpClientEnvLow = new UdpClient(envPortLow);
+                    udpClientEnvLow.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+                    udpClientEnvLow.JoinMulticastGroup(IPAddress.Parse(envIpAddrLow));
+                    udpClientFlyHeigh = new UdpClient(flyPortHeigh);
+                    udpClientFlyHeigh.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+                    udpClientFlyHeigh.JoinMulticastGroup(IPAddress.Parse(flyIpAddrHeigh));
+                    udpClientFlyMiddle = new UdpClient(flyPortMiddle);
+                    udpClientFlyMiddle.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+                    udpClientFlyMiddle.JoinMulticastGroup(IPAddress.Parse(flyIpAddrMiddle));
+                    udpClientFlyLow = new UdpClient(flyPortLow);
+                    udpClientFlyLow.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+                    udpClientFlyLow.JoinMulticastGroup(IPAddress.Parse(flyIpAddrLow));
 
-                    YaoCe.initYaoCeUdpClient(yaocePort,yaoceIpAddr);
+                    envParserHigh.IdleTimetout = envParserMiddle.IdleTimetout = envParserLow.IdleTimetout = idleTime;
+                    envParserHigh.IdleHandler = envParserMiddle.IdleHandler = envParserLow.IdleHandler = EnvParserIdleHandler;
+                    flyParserHigh.IdleTimetout = flyParserMiddle.IdleTimetout = flyParserLow.IdleTimetout = idleTime;
+                    flyParserHigh.IdleHandler = flyParserMiddle.IdleHandler = flyParserLow.IdleHandler = FlyParserIdleHandler;
+
+                    //TODO
+                    //YaoCe.initYaoCeUdpClient(yaocePort, yaoceIpAddr);
                 }
                 else
                 {
@@ -861,8 +917,12 @@ namespace DataProcess
             }
             catch(Exception ex)
             {
-                udpClientEnv?.Close();
-                udpClientFly?.Close();
+                udpClientEnvHigh?.Close();
+                udpClientEnvMiddle?.Close();
+                udpClientEnvLow?.Close();
+                udpClientFlyHeigh?.Close();
+                udpClientFlyMiddle?.Close();
+                udpClientFlyLow?.Close();
                 YaoCe.closeYaoCeUdp();
                 MessageBox.Show("加入组播组失败:" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -875,17 +935,31 @@ namespace DataProcess
             btnData.IsEnabled = true;
             ResetDisplay(maxDisplayPoint);
             displayBuffers.Clear();
-            dataLogger = new DataLogger(testInfo.TestTime);
-            envParser.dataLogger = dataLogger;
-            flyParser.dataLogger = dataLogger;
+            dataLoggerHeigh = new DataLogger(testInfo.TestTime, "高优先级");
+            envParserHigh.dataLogger = dataLoggerHeigh;
+            flyParserHigh.dataLogger = dataLoggerHeigh;
+            dataLoggerMiddle = new DataLogger(testInfo.TestTime, "中优先级");
+            envParserMiddle.dataLogger = dataLoggerMiddle;
+            flyParserMiddle.dataLogger = dataLoggerMiddle;
+            dataLoggerLow = new DataLogger(testInfo.TestTime, "低优先级");
+            envParserLow.dataLogger = dataLoggerLow;
+            flyParserLow.dataLogger = dataLoggerLow;
 
             YaoCe.startYaoCeDataLogger();
-            envParser.Start();
-            flyParser.Start();
+            envParserHigh.Start();
+            envParserMiddle.Start();
+            envParserLow.Start();
+            flyParserHigh.Start();
+            flyParserMiddle.Start();
+            flyParserLow.Start();
             YaoCe.startYaoCeParser();
 
-            udpClientEnv.BeginReceive(EndEnvReceive, null);
-            udpClientFly.BeginReceive(EndFlyReceive, null);
+            udpClientEnvHigh.BeginReceive(EndEnvReceive, udpClientEnvHigh);
+            udpClientEnvMiddle.BeginReceive(EndEnvReceive, udpClientEnvMiddle);
+            udpClientEnvLow.BeginReceive(EndEnvReceive, udpClientEnvLow);
+            udpClientFlyHeigh.BeginReceive(EndFlyReceive, udpClientFlyHeigh);
+            udpClientFlyMiddle.BeginReceive(EndFlyReceive, udpClientFlyMiddle);
+            udpClientFlyLow.BeginReceive(EndFlyReceive, udpClientFlyLow);
 
             YaoCe.startUDPReceive();
             YaoCe.ClearChart();
@@ -905,12 +979,24 @@ namespace DataProcess
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
             try
             {
-                byte[] recvBuffer = udpClientEnv?.EndReceive(ar, ref endPoint);
+                UdpClient socket = (UdpClient)ar.AsyncState;
+                byte[] recvBuffer = socket?.EndReceive(ar, ref endPoint);
                 if (recvBuffer != null)
                 {
-                    envParser.Enqueue(recvBuffer);
+                    if (socket == udpClientEnvHigh)
+                    {
+                        envParserHigh.Enqueue(recvBuffer);
+                    }
+                    else if(socket == udpClientEnvMiddle)
+                    {
+                        envParserMiddle.Enqueue(recvBuffer);
+                    }
+                    else if(socket == udpClientEnvLow)
+                    {
+                        envParserLow.Enqueue(recvBuffer);
+                    }
                 }
-                udpClientEnv?.BeginReceive(EndEnvReceive, null);
+                socket?.BeginReceive(EndEnvReceive, socket);
             }
             catch (Exception)
             { }
@@ -921,10 +1007,22 @@ namespace DataProcess
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
             try
             {
-                byte[] recvBuffer = udpClientFly?.EndReceive(ar, ref endPoint);
+                UdpClient socket = (UdpClient)ar.AsyncState;
+                byte[] recvBuffer = socket?.EndReceive(ar, ref endPoint);
                 if(recvBuffer != null)
                 {
-                    flyParser.Enqueue(recvBuffer);
+                    if (socket == udpClientFlyHeigh)
+                    {
+                        flyParserHigh.Enqueue(recvBuffer);
+                    }
+                    else if(socket == udpClientFlyMiddle)
+                    {
+                        flyParserMiddle.Enqueue(recvBuffer);
+                    }
+                    else if(socket == udpClientFlyLow)
+                    {
+                        flyParserLow.Enqueue(recvBuffer);
+                    }
                     if (recvBuffer.Length >= Marshal.SizeOf(typeof(FlyHeader)))
                     {
                         for (int i = 0; i < recvBuffer.Length - Marshal.SizeOf(typeof(FlyHeader)); ++i)
@@ -938,7 +1036,7 @@ namespace DataProcess
                         }
                     }
                 }
-                udpClientFly?.BeginReceive(EndFlyReceive, null);
+                socket?.BeginReceive(EndFlyReceive, socket);
             }
             catch (Exception)
             { }
@@ -949,23 +1047,47 @@ namespace DataProcess
             bRun = false;
             try
             {
-                udpClientEnv?.Close();
-                udpClientFly?.Close();
+                udpClientEnvHigh?.Close();
+                udpClientEnvMiddle?.Close();
+                udpClientEnvLow?.Close();
+                udpClientFlyHeigh?.Close();
+                udpClientFlyMiddle?.Close();
+                udpClientFlyLow?.Close();
                 YaoCe.closeYaoCeUdp();
             }
             catch (Exception) { }
-            udpClientEnv = null;
-            udpClientFly = null;
+            udpClientEnvHigh = udpClientEnvMiddle = udpClientEnvLow = null;
+            udpClientFlyHeigh = udpClientFlyMiddle = udpClientFlyLow = null;
             YaoCe.emptyYaoCeUdp();
-            if(envParser != null)
+            if(envParserHigh != null)
             {
-                envParser.IsStartLogData = false;
-                envParser.Stop();
+                envParserHigh.IsStartLogData = false;
+                envParserHigh.Stop();
             }
-            if(flyParser != null)
+            if (envParserMiddle != null)
             {
-                flyParser.IsStartLogData = false;
-                flyParser.Stop();
+                envParserMiddle.IsStartLogData = false;
+                envParserMiddle.Stop();
+            }
+            if (envParserLow != null)
+            {
+                envParserLow.IsStartLogData = false;
+                envParserLow.Stop();
+            }
+            if (flyParserHigh != null)
+            {
+                flyParserHigh.IsStartLogData = false;
+                flyParserHigh.Stop();
+            }
+            if (flyParserMiddle != null)
+            {
+                flyParserMiddle.IsStartLogData = false;
+                flyParserMiddle.Stop();
+            }
+            if (flyParserLow != null)
+            {
+                flyParserLow.IsStartLogData = false;
+                flyParserLow.Stop();
             }
 
             YaoCe.stopYaoCeParser();
@@ -981,7 +1103,9 @@ namespace DataProcess
             btnData.IsEnabled = false;
             btnData.Content = "开始存储数据";
             uiRefreshTimer.Stop();
-            dataLogger?.Close();
+            dataLoggerHeigh?.Close();
+            dataLoggerLow?.Close();
+            dataLoggerMiddle?.Close();
             YaoCe.stopYaoCeDataLogger();
 
             SaveTestInfo();
@@ -1372,12 +1496,16 @@ namespace DataProcess
         {
             if (!(bool)btnData.IsChecked)
             {
-                envParser.IsStartLogData = flyParser.IsStartLogData = true;
+                envParserHigh.IsStartLogData = flyParserHigh.IsStartLogData 
+                    = envParserMiddle.IsStartLogData = flyParserMiddle.IsStartLogData
+                    = envParserLow.IsStartLogData = flyParserLow.IsStartLogData = true;
                 btnData.Content = "停止存储数据";
             }
             else
             {
-                envParser.IsStartLogData = flyParser.IsStartLogData = false;
+                envParserHigh.IsStartLogData = flyParserHigh.IsStartLogData
+                    = envParserMiddle.IsStartLogData = flyParserMiddle.IsStartLogData
+                    = envParserLow.IsStartLogData = flyParserLow.IsStartLogData = false;
                 btnData.Content = "开始存储数据";
             }
             btnData.IsChecked = !btnData.IsChecked;
@@ -1406,6 +1534,52 @@ namespace DataProcess
                 {
                     MessageBox.Show("视频软件启动失败:" + exception.Message, "错误", MessageBoxButton.OK);
                 }
+            }
+        }
+
+        private void EnvParserIdleHandler(Priority priority, bool bActive)
+        {
+            EnvClientStatus[priority] = bActive;
+            if(EnvClientStatus[Priority.HighPriority])
+            {
+                envParserHigh.PostMessageEnable = true;
+                envParserMiddle.PostMessageEnable = envParserLow.PostMessageEnable = false;
+                return;
+            }
+            if(EnvClientStatus[Priority.MiddlePriority])
+            {
+                envParserMiddle.PostMessageEnable = true;
+                envParserHigh.PostMessageEnable = envParserLow.PostMessageEnable = false;
+                return;
+            }
+            if(EnvClientStatus[Priority.LowPriority])
+            {
+                envParserLow.PostMessageEnable = true;
+                envParserHigh.PostMessageEnable = envParserMiddle.PostMessageEnable = false;
+                return;
+            }
+        }
+
+        private void FlyParserIdleHandler(Priority priority, bool bActive)
+        {
+            FlyClientStatus[priority] = bActive;
+            if (FlyClientStatus[Priority.HighPriority])
+            {
+                flyParserHigh.PostMessageEnable = true;
+                flyParserMiddle.PostMessageEnable = flyParserLow.PostMessageEnable = false;
+                return;
+            }
+            if (FlyClientStatus[Priority.MiddlePriority])
+            {
+                flyParserMiddle.PostMessageEnable = true;
+                flyParserHigh.PostMessageEnable = flyParserLow.PostMessageEnable = false;
+                return;
+            }
+            if (FlyClientStatus[Priority.LowPriority])
+            {
+                flyParserLow.PostMessageEnable = true;
+                flyParserHigh.PostMessageEnable = flyParserMiddle.PostMessageEnable = false;
+                return;
             }
         }
     }

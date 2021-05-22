@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataProcess.Protocol
 {
+    public enum Priority
+    {
+        HighPriority,
+        MiddlePriority,
+        LowPriority
+    }
+
     public enum ChannelType
     {
         ChannelPresure = 0, //压力

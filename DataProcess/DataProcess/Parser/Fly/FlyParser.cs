@@ -7,11 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace DataProcess.Parser.Fly
 {
     public class FlyParser
     {
+        DispatcherTimer IdleTimer = new DispatcherTimer();
+        private Priority ParserPriority;
+        public int IdleTimetout { get; set; }
+        public Action<Priority, bool> IdleHandler;
+        private DateTime LastRecvTime;
+        public bool PostMessageEnable { get; set; }
         public DataLogger dataLogger { get; set; }
         private IntPtr mainWindowHandle;
         private ConcurrentQueue<byte[]> queue = new ConcurrentQueue<byte[]>();
@@ -24,10 +31,20 @@ namespace DataProcess.Parser.Fly
         private int searchPos2 = 0;
         public bool IsStartLogData { get; set; }
 
-        public FlyParser(IntPtr mainWindowHandle)
+        public FlyParser(IntPtr mainWindowHandle, Priority priority)
         {
+            ParserPriority = priority;
             this.mainWindowHandle = mainWindowHandle;
             IsStartLogData = false;
+            IdleTimer.Tick += IdleTimer_Tick;
+        }
+
+        private void IdleTimer_Tick(object sender, EventArgs e)
+        {
+            if (DateTime.Now - LastRecvTime > new TimeSpan(0, 0, 0, 0, IdleTimetout))
+            {
+                IdleHandler.Invoke(ParserPriority, false);
+            }
         }
 
         public FlyParser()
@@ -37,6 +54,8 @@ namespace DataProcess.Parser.Fly
 
         public void Enqueue(byte[] data)
         {
+            LastRecvTime = DateTime.Now;
+            IdleHandler.Invoke(ParserPriority, true);
             queue.Enqueue(data);
         }
 
@@ -47,11 +66,17 @@ namespace DataProcess.Parser.Fly
             isRuning = true;
             thread = new Thread(new ThreadStart(ThreadFunction));
             thread.Start();
+            IdleTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            IdleTimer.Start();
+            IdleHandler.Invoke(ParserPriority, true);
+            LastRecvTime = DateTime.Now;
+            PostMessageEnable = true;
         }
 
         public void Stop()
         {
             isRuning = false;
+            IdleTimer.Stop();
             thread?.Join();
         }
 
@@ -74,25 +99,37 @@ namespace DataProcess.Parser.Fly
                         {
                             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NavData)));
                             Marshal.StructureToPtr(data, ptr, true);
-                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_NAV_DATA, 0, ptr);
+                            if (PostMessageEnable)
+                            {
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_NAV_DATA, 0, ptr);
+                            }
                         }
                         foreach (AngleData data in angleDataList)
                         {
                             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AngleData)));
                             Marshal.StructureToPtr(data, ptr, true);
-                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_ANGLE_DATA, 0, ptr);
+                            if (PostMessageEnable)
+                            {
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_ANGLE_DATA, 0, ptr);
+                            }
                         }
                         foreach (ProgramControlData data in programControlDataList)
                         {
                             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ProgramControlData)));
                             Marshal.StructureToPtr(data, ptr, true);
-                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_PROGRAM_DATA, 0, ptr);
+                            if (PostMessageEnable)
+                            {
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_PROGRAM_DATA, 0, ptr);
+                            }
                         }
                         foreach (ServoData data in servoDataList)
                         {
                             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ServoData)));
                             Marshal.StructureToPtr(data, ptr, true);
-                            WinApi.PostMessage(mainWindowHandle, WinApi.WM_SERVO_DATA, 0, ptr);
+                            if (PostMessageEnable)
+                            {
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_SERVO_DATA, 0, ptr);
+                            }
                         }
                     }
                 }
