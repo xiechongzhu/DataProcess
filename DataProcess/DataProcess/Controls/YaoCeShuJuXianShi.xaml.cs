@@ -21,11 +21,15 @@ using System.Diagnostics;
 using YaoCeProcess;
 using System.Reflection;
 using System.Windows.Resources;
+using DataProcess.Protocol;
 
 namespace DataProcess.Controls
 {
     public partial class YaoCeShuJuXianShi : UserControl
     {
+        private Dictionary<Priority, bool> ParserStatus = new Dictionary<Priority, bool>();
+
+
         /// 每一个UDP帧固定长度651
         public const int UDPLENGTH = 651;
 
@@ -147,8 +151,9 @@ namespace DataProcess.Controls
         bool bReceStatusData_DANTOU = false; //弹头导航数据
 
         /// 码流记录
-        private _DataLogger yaoceDataLogger = new _DataLogger(); //
-
+        private _DataLogger yaoceDataLoggerHigh = new _DataLogger(Priority.HighPriority); //
+        private _DataLogger yaoceDataLoggerMiddle = new _DataLogger(Priority.MiddlePriority); //
+        private _DataLogger yaoceDataLoggerLow = new _DataLogger(Priority.LowPriority); //
 
         //-----------------------------------------------------//
 
@@ -384,8 +389,13 @@ namespace DataProcess.Controls
         public Image ImageUDP = null;
         public int maxDisplayPoint = 0;
 
-        private UdpClient udpClientYaoCe = null;
-        private DataParser yaoceParser = null;
+        private UdpClient udpClientYaoCeHigh = null;
+        private UdpClient udpClientYaoCeMiddle = null;
+        private UdpClient udpClientYaoCeLow = null;
+        private DataParser yaoceParserHigh = null;
+        private DataParser yaoceParserMiddle = null;
+        private DataParser yaoceParserLow = null;
+        private DataParser yaoceParserFile = null;
         private YaoCeChartDataSource yaoCeChartDataSource = new YaoCeChartDataSource();
         private yaoceDisplayBuffers yaoceDisplay = new yaoceDisplayBuffers();
 
@@ -1224,11 +1234,11 @@ namespace DataProcess.Controls
                         {
                             byte[] byteArray = new byte[readLength];
                             Array.Copy(heByte, 0, byteArray, 0, readLength);
-                            yaoceParser.Enqueue(byteArray);
+                            yaoceParserFile.Enqueue(byteArray);
                         }
                         else
                         {
-                            yaoceParser.Enqueue(heByte);
+                            yaoceParserFile.Enqueue(heByte);
                         }
                         // 已经读取的文件大小
                         alreadReadFileLength += readLength;
@@ -1265,7 +1275,7 @@ namespace DataProcess.Controls
                             Thread.Sleep(Interval);
 
                             // 关闭数据解析
-                            yaoceParser.Stop();
+                            yaoceParserFile.Stop();
 
                             // 停止绘图定时器刷新数据
                             setTimerUpdateChartStatus(false);
@@ -1288,7 +1298,7 @@ namespace DataProcess.Controls
                             Thread.Sleep(Interval);
 
                             // 关闭数据解析
-                            yaoceParser.Stop();
+                            yaoceParserFile.Stop();
                             timerConvertBar.Stop();
                             w.setProgressBarValue(0, 100, 100);
                             w.Close();
@@ -1363,12 +1373,12 @@ namespace DataProcess.Controls
                     {
                         byte[] byteArray = new byte[readLength];
                         Array.Copy(heByte, 0, byteArray, 0, readLength);
-                        yaoceParser.Enqueue(byteArray);
+                        yaoceParserFile.Enqueue(byteArray);
 
                     }
                     else
                     {
-                        yaoceParser.Enqueue(heByte);
+                        yaoceParserFile.Enqueue(heByte);
                     }
                     // 已经读取的文件大小
                     alreadReadFileLength += readLength;
@@ -1405,7 +1415,7 @@ namespace DataProcess.Controls
                         Thread.Sleep(Interval);
 
                         // 关闭数据解析
-                        yaoceParser.Stop();
+                        yaoceParserFile.Stop();
 
                         // 停止绘图定时器刷新数据
                         setTimerUpdateChartStatus(false);
@@ -1428,7 +1438,7 @@ namespace DataProcess.Controls
                         Thread.Sleep(Interval);
 
                         // 关闭数据解析
-                        yaoceParser.Stop();
+                        yaoceParserFile.Stop();
 
                         timerConvertBar.Stop();
                         w.setProgressBarValue(0, 100, 100);
@@ -1845,7 +1855,7 @@ namespace DataProcess.Controls
                         Thread.Sleep(Interval);
 
                         // 关闭数据解析
-                        yaoceParser.Stop();
+                        yaoceParserFile.Stop();
 
                         // 关闭绘图定时器刷新数据
                         setTimerUpdateChartStatus(false);
@@ -1899,7 +1909,7 @@ namespace DataProcess.Controls
             readFileTimer.Start();
 
             // 开启数据解析
-            yaoceParser.Start();
+            yaoceParserFile.Start();
 
             if (!dataConversion) //文件转换，不显示数据
             {
@@ -6111,64 +6121,129 @@ namespace DataProcess.Controls
         //初始化数据解析
         public void initYaoCeParser()
         {
-            if (yaoceParser == null)
+            if (yaoceParserHigh == null)
             {
-                yaoceParser = new DataParser(new WindowInteropHelper(m).Handle);
+                yaoceParserHigh = new DataParser(new WindowInteropHelper(m).Handle, Protocol.Priority.HighPriority);
+            }
+            if (yaoceParserMiddle == null)
+            {
+                yaoceParserMiddle = new DataParser(new WindowInteropHelper(m).Handle, Protocol.Priority.MiddlePriority);
+            }
+            if (yaoceParserLow== null)
+            {
+                yaoceParserLow = new DataParser(new WindowInteropHelper(m).Handle, Protocol.Priority.LowPriority);
+            }
+            if (yaoceParserFile == null)
+            {
+                yaoceParserFile = new DataParser(new WindowInteropHelper(m).Handle, Protocol.Priority.HighPriority);
             }
         }
 
         //开始数据解析
         public void startYaoCeParser()
         {
-            yaoceParser.Start();
+            ParserStatus[Priority.HighPriority] = ParserStatus[Priority.MiddlePriority] = ParserStatus[Priority.LowPriority] = true;
+            yaoceParserHigh.Start();
+            yaoceParserMiddle.Start();
+            yaoceParserLow.Start();
         }
 
         //停止数据解析
         public void stopYaoCeParser()
         {
-            if (yaoceParser != null)
+            if (yaoceParserHigh != null)
             {
-                yaoceParser.Stop();
+                yaoceParserHigh.Stop();
+            }
+            if (yaoceParserMiddle != null)
+            {
+                yaoceParserMiddle.Stop();
+            }
+            if (yaoceParserLow != null)
+            {
+                yaoceParserLow.Stop();
             }
         }
 
         //开始数据日志记录
         public void startYaoCeDataLogger()
         {
-            yaoceDataLogger.Start();
+            yaoceDataLoggerHigh.Start();
+            yaoceDataLoggerMiddle.Start();
+            yaoceDataLoggerLow.Start();
         }
 
         //停止数据日志记录
         public void stopYaoCeDataLogger()
         {
-            yaoceDataLogger.Stop();//
+            yaoceDataLoggerHigh.Stop();//
+            yaoceDataLoggerMiddle.Stop();//
+            yaoceDataLoggerLow.Stop();//
         }
 
         //初始化UDP套接字
-        public void initYaoCeUdpClient(int port, string ipAddr)
+        public void initYaoCeUdpClient(int portHigh, string ipAddrHigh, int portMiddle, string ipAddrMiddle,
+            int portLow, string ipAddrLow, int idleTime)
         {
-            udpClientYaoCe = new UdpClient(port);
-            udpClientYaoCe.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
-            udpClientYaoCe.JoinMulticastGroup(IPAddress.Parse(ipAddr));
+            udpClientYaoCeHigh = new UdpClient(portHigh);
+            udpClientYaoCeHigh.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+            udpClientYaoCeHigh.JoinMulticastGroup(IPAddress.Parse(ipAddrHigh));
+            udpClientYaoCeMiddle = new UdpClient(portMiddle);
+            udpClientYaoCeMiddle.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+            udpClientYaoCeMiddle.JoinMulticastGroup(IPAddress.Parse(ipAddrMiddle));
+            udpClientYaoCeLow = new UdpClient(portLow);
+            udpClientYaoCeLow.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
+            udpClientYaoCeLow.JoinMulticastGroup(IPAddress.Parse(ipAddrLow));
+
+            yaoceParserHigh.IdleTimeout = yaoceParserMiddle.IdleTimeout = yaoceParserLow.IdleTimeout = idleTime;
+            yaoceParserHigh.IdleHandler = yaoceParserMiddle.IdleHandler = yaoceParserLow.IdleHandler = IdleHandler;
+        }
+
+        private void IdleHandler(Priority priority, bool bActive)
+        {
+            ParserStatus[priority] = bActive;
+            if(ParserStatus[Priority.HighPriority])
+            {
+                yaoceParserHigh.PostMessageEnable = true;
+                yaoceParserMiddle.PostMessageEnable = yaoceParserLow.PostMessageEnable = false;
+                return;
+            }
+            if (ParserStatus[Priority.MiddlePriority])
+            {
+                yaoceParserMiddle.PostMessageEnable = true;
+                yaoceParserHigh.PostMessageEnable = yaoceParserLow.PostMessageEnable = false;
+                return;
+            }
+            if(ParserStatus[Priority.LowPriority])
+            {
+                yaoceParserLow.PostMessageEnable = true;
+                yaoceParserHigh.PostMessageEnable = yaoceParserMiddle.PostMessageEnable = false;
+                return;
+            }
         }
 
         //开启UDP接收
         public void startUDPReceive()
         {
-            //TODO
-            //udpClientYaoCe.BeginReceive(EndYaoCeReceive, null);
+            udpClientYaoCeHigh.BeginReceive(EndYaoCeReceive, udpClientYaoCeHigh);
+            udpClientYaoCeMiddle.BeginReceive(EndYaoCeReceive, udpClientYaoCeMiddle);
+            udpClientYaoCeLow.BeginReceive(EndYaoCeReceive, udpClientYaoCeLow);
         }
 
         //关闭UDP套接字
         public void closeYaoCeUdp()
         {
-            udpClientYaoCe?.Close();
+            udpClientYaoCeHigh?.Close();
+            udpClientYaoCeMiddle?.Close();
+            udpClientYaoCeLow?.Close();
         }
 
         //置空UDP套接字
         public void emptyYaoCeUdp()
         {
-            udpClientYaoCe = null;
+            udpClientYaoCeHigh = null;
+            udpClientYaoCeMiddle = null;
+            udpClientYaoCeLow = null;
         }
 
         private void EndYaoCeReceive(IAsyncResult ar)
@@ -6176,13 +6251,27 @@ namespace DataProcess.Controls
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
             try
             {
-                byte[] recvBuffer = udpClientYaoCe?.EndReceive(ar, ref endPoint);
+                UdpClient socket = (UdpClient)ar.AsyncState;
+                byte[] recvBuffer = socket?.EndReceive(ar, ref endPoint);
                 if (recvBuffer != null)
                 {
-                    yaoceParser.Enqueue(recvBuffer);
-                    yaoceDataLogger.Enqueue(recvBuffer);
+                    if (socket == udpClientYaoCeHigh)
+                    { 
+                        yaoceParserHigh.Enqueue(recvBuffer);
+                        yaoceDataLoggerHigh.Enqueue(recvBuffer);
+                    }
+                    else if (socket == udpClientYaoCeMiddle)
+                    {
+                        yaoceParserMiddle.Enqueue(recvBuffer);
+                        yaoceDataLoggerMiddle.Enqueue(recvBuffer);
+                    }
+                    else if (socket == udpClientYaoCeLow)
+                    {
+                        yaoceParserLow.Enqueue(recvBuffer);
+                        yaoceDataLoggerLow.Enqueue(recvBuffer);
+                    }
                 }
-                udpClientYaoCe?.BeginReceive(EndYaoCeReceive, null);
+                socket?.BeginReceive(EndYaoCeReceive, socket);
             }
             catch (Exception)
             { }
@@ -6209,12 +6298,26 @@ namespace DataProcess.Controls
                 Logger.GetInstance().closeFile();
 
                 // 关闭码流记录
-                yaoceDataLogger.Stop();
+                yaoceDataLoggerHigh.Stop();
+                yaoceDataLoggerMiddle.Stop();
+                yaoceDataLoggerLow.Stop();
 
                 // 关闭消息处理
-                if (yaoceParser != null)
+                if (yaoceParserHigh != null)
                 {
-                    yaoceParser.Stop();
+                    yaoceParserHigh.Stop();
+                }
+                if (yaoceParserMiddle != null)
+                {
+                    yaoceParserMiddle.Stop();
+                }
+                if (yaoceParserLow != null)
+                {
+                    yaoceParserLow.Stop();
+                }
+                if (yaoceParserFile != null)
+                {
+                    yaoceParserFile.Stop();
                 }
                 // 关闭绘图定时器刷新数据
                 setTimerUpdateChartStatus(false); 

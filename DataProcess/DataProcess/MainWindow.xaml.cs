@@ -871,9 +871,9 @@ namespace DataProcess
             try
             {
                 
-                if (settingManager.LoadNetworkSetting(out String envIpAddrHeigh, out int envPortHeigh,
-                                                      out String flyIpAddrHeigh, out int flyPortHeigh,
-                                                      out String yaoceIpAddrHeigh, out int yaocePortHeigh,
+                if (settingManager.LoadNetworkSetting(out String envIpAddrHigh, out int envPortHigh,
+                                                      out String flyIpAddrHigh, out int flyPortHigh,
+                                                      out String yaoceIpAddrHigh, out int yaocePortHigh,
                                                       out String envIpAddrMiddle, out int envPortMiddle,
                                                       out String flyIpAddrMiddle, out int flyPortMiddle,
                                                       out String yaoceIpAddrMiddle, out int yaocePortMiddle, 
@@ -882,18 +882,18 @@ namespace DataProcess
                                                       out String yaoceIpAddrLow, out int yaocePortLow,
                                                       out idleTime, out maxDisplayPoint))
                 {
-                    udpClientEnvHigh = new UdpClient(envPortHeigh);
+                    udpClientEnvHigh = new UdpClient(envPortHigh);
                     udpClientEnvHigh.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
-                    udpClientEnvHigh.JoinMulticastGroup(IPAddress.Parse(envIpAddrHeigh));
+                    udpClientEnvHigh.JoinMulticastGroup(IPAddress.Parse(envIpAddrHigh));
                     udpClientEnvMiddle = new UdpClient(envPortMiddle);
                     udpClientEnvMiddle.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
                     udpClientEnvMiddle.JoinMulticastGroup(IPAddress.Parse(envIpAddrMiddle));
                     udpClientEnvLow = new UdpClient(envPortLow);
                     udpClientEnvLow.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
                     udpClientEnvLow.JoinMulticastGroup(IPAddress.Parse(envIpAddrLow));
-                    udpClientFlyHeigh = new UdpClient(flyPortHeigh);
+                    udpClientFlyHeigh = new UdpClient(flyPortHigh);
                     udpClientFlyHeigh.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
-                    udpClientFlyHeigh.JoinMulticastGroup(IPAddress.Parse(flyIpAddrHeigh));
+                    udpClientFlyHeigh.JoinMulticastGroup(IPAddress.Parse(flyIpAddrHigh));
                     udpClientFlyMiddle = new UdpClient(flyPortMiddle);
                     udpClientFlyMiddle.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, 1024 * 1024 * 200);
                     udpClientFlyMiddle.JoinMulticastGroup(IPAddress.Parse(flyIpAddrMiddle));
@@ -906,8 +906,8 @@ namespace DataProcess
                     flyParserHigh.IdleTimetout = flyParserMiddle.IdleTimetout = flyParserLow.IdleTimetout = idleTime;
                     flyParserHigh.IdleHandler = flyParserMiddle.IdleHandler = flyParserLow.IdleHandler = FlyParserIdleHandler;
 
-                    //TODO
-                    //YaoCe.initYaoCeUdpClient(yaocePort, yaoceIpAddr);
+                    YaoCe.initYaoCeUdpClient(yaocePortHigh, yaoceIpAddrHigh, yaocePortMiddle, yaoceIpAddrMiddle,
+                        yaocePortLow, yaoceIpAddrLow, idleTime);
                 }
                 else
                 {

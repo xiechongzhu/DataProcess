@@ -1,10 +1,12 @@
 ﻿using DataProcess.Controls;
+using DataProcess.Protocol;
 using System;
 using System.Collections.Concurrent;
 using System.IO; 
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading; 
+using System.Threading;
+using System.Windows.Threading;
 
 namespace YaoCeProcess
 {
@@ -20,15 +22,39 @@ namespace YaoCeProcess
 // 
         [DllImport("User32.dll", EntryPoint = "PostMessage")]
         /// PostMessage
-        private static extern int PostMessage(IntPtr hwnd, int Msg, int wParam, IntPtr lParam); 
+        private static extern int PostMessage(IntPtr hwnd, int Msg, int wParam, IntPtr lParam);
+
+        private Priority ParserPriority;
+
+        private DispatcherTimer idleTimer = new DispatcherTimer();
+
+        public int IdleTimeout { get; set; }
+
+        public Action<Priority, bool> IdleHandler;
+
+        private DateTime LastRecvDataTime;
+
+        public bool PostMessageEnable = true;
+
 
         /// DataParser
-        public DataParser(IntPtr mainFormHandle)
+        public DataParser(IntPtr mainFormHandle, Priority priority)
         {
             this.mainFormHandle = mainFormHandle;
+            ParserPriority = priority;
+            idleTimer.Tick += IdleTimer_Tick;
         }
+
+        private void IdleTimer_Tick(object sender, EventArgs e)
+        {
+            if(DateTime.Now - LastRecvDataTime > new TimeSpan(0, 0, 0, 0, IdleTimeout))
+            {
+                IdleHandler?.Invoke(ParserPriority, false);
+            }
+        }
+
         //------------------------------------------------------------------------------------//
- 
+
         /// mainFormHandle
         private IntPtr mainFormHandle; 
 
@@ -244,6 +270,8 @@ namespace YaoCeProcess
         /// <param name="data"></param>
         public void Enqueue(byte[] data)
         {
+            LastRecvDataTime = DateTime.Now;
+            IdleHandler?.Invoke(ParserPriority, true);
             queue.Enqueue(data); 
         }
 
@@ -251,13 +279,18 @@ namespace YaoCeProcess
         /// Start
         public void Start()
         {
+            IdleHandler?.Invoke(ParserPriority, true);
             while (queue.TryDequeue(out byte[] dropBuffer)) ; 
             isRuning = true;
             thread = new Thread(new ThreadStart(ThreadFunction)); 
             thread.Start();
 
             UDPBuffer = null; 
-            UDPBuffer = new byte[0]; 
+            UDPBuffer = new byte[0];
+
+            LastRecvDataTime = DateTime.Now;
+            idleTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            idleTimer.Start();
         }
 
 
@@ -268,7 +301,8 @@ namespace YaoCeProcess
             thread?.Join(); 
 
             UDPBuffer = null; 
-            UDPBuffer = new byte[0]; 
+            UDPBuffer = new byte[0];
+            idleTimer.Stop();
         }
  
         /// ThreadFunction
@@ -651,7 +685,10 @@ namespace YaoCeProcess
 
             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(UDP_PROPERTY))); //
             Marshal.StructureToPtr(udpPocket, ptr, true); //
-            PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_UDPPROPERTY_DATA, 0, ptr); //
+            if (PostMessageEnable)
+            {
+                PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_UDPPROPERTY_DATA, 0, ptr); //
+            }
             //-------------------------------------------------------------------------------------//
 // 
 
@@ -1178,8 +1215,10 @@ namespace YaoCeProcess
                     // 向界面传递数据
                     IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DANTOUDAOHANGDATA)));  
                     Marshal.StructureToPtr(sObject, ptr, true);
-
-                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_danTouDaoHang_DATA, 0, ptr); 
+                    if (PostMessageEnable)
+                    {
+                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_danTouDaoHang_DATA, 0, ptr);
+                    }
                     // 发送帧序号信息
                     postFrameInfo(canId, frameNO);  
                 }
@@ -1311,8 +1350,11 @@ namespace YaoCeProcess
                     IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SYSTEMPARSE_STATUS))); //
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
-// 
-                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_SystemStatus_DATA, 0, ptr); //
+                                                                // 
+                    if (PostMessageEnable)
+                    {
+                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_SystemStatus_DATA, 0, ptr); //
+                    }
 // 
 
 // 
@@ -1420,8 +1462,11 @@ namespace YaoCeProcess
                     IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DAOHANGSHUJU_KuaiSu))); //
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
-// 
-                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA, 0, ptr); 
+                                                                // 
+                    if (PostMessageEnable)
+                    {
+                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA, 0, ptr);
+                    }
 
                     // 发送帧序号信息
                     postFrameInfo(canId, frameNO); 
@@ -1729,9 +1774,12 @@ namespace YaoCeProcess
                     IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DAOHANGSHUJU_ManSu))); //
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
-// 
-// 
-                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Ti_DATA, 0, ptr);
+                                                                // 
+                                                                // 
+                    if (PostMessageEnable)
+                    {
+                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Ti_DATA, 0, ptr);
+                    }
 
                     // 发送帧序号信息
                     postFrameInfo(canId, frameNO); 
@@ -1830,7 +1878,10 @@ namespace YaoCeProcess
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
 // 
-                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_HuiLuJianCe_DATA, 0, ptr); //
+                    if (PostMessageEnable)
+                    {
+                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_HuiLuJianCe_DATA, 0, ptr); //
+                    }
 // 
                     //-------------------------------------------------------------------------------//
 // 
@@ -2020,8 +2071,11 @@ namespace YaoCeProcess
                     IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SYSTEMImmediate_STATUS))); //
 // 
                     Marshal.StructureToPtr(sObject, ptr, true); //
-// 
-                    PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Ti_DATA, 0, ptr); //
+                                                                // 
+                    if (PostMessageEnable)
+                    {
+                        PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Ti_DATA, 0, ptr); //
+                    }
 
 // 
                     //-------------------------------------------------------------------------------//
@@ -2069,12 +2123,15 @@ namespace YaoCeProcess
             IntPtr ptrFrame = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(FRAME_PROPERTY))); //
 // 
             Marshal.StructureToPtr(frameObject, ptrFrame, true); //
-// 
-            PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_FRAMEPROPERTY_DATA, 0, ptrFrame); //
+                                                                 // 
+            if (PostMessageEnable)
+            {
+                PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_FRAMEPROPERTY_DATA, 0, ptrFrame); //
+            }
 // 
         }
 // 
     }
-// 
+    // 
 }
 // 

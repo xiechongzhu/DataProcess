@@ -2466,7 +2466,7 @@
                 </dx:DXTabControl>
             </dx:DXTabItem>
             <dx:DXTabItem Header="安控系统">
-                <Controls:YaoCeShuJuXianShi x:Name="YaoCe"></Controls:YaoCeShuJuXianShi>
+                <Controls:YaoCeShuJuXianShi x:Name="YaoCe"/>
             </dx:DXTabItem>
         </dx:DXTabControl>
     </Grid>

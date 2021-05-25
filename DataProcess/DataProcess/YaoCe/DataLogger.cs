@@ -1,4 +1,5 @@
 ﻿// 
+using DataProcess.Protocol;
 using System; //
 // 
 using System.Collections.Concurrent; //
@@ -51,9 +52,21 @@ namespace YaoCeProcess
         public String strDataFile; 
 
         /// DataLogger
-        public _DataLogger()
+        public _DataLogger(Priority priority)
         {
             strLogFolder = strLogDir + @"\Bitstream"; 
+            switch(priority)
+            {
+                case Priority.HighPriority:
+                    strLogFolder += @"\高优先级";
+                    break;
+                case Priority.MiddlePriority:
+                    strLogFolder += @"\中优先级";
+                    break;
+                case Priority.LowPriority:
+                    strLogFolder += @"\低优先级";
+                    break;
+            }
             Directory.CreateDirectory(strLogFolder);  
         }
 
