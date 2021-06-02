@@ -166,14 +166,5 @@ namespace DataProcess
                     break;
             }
         }
-
-        private bool IsAccZero(AngleData angleData)
-        {
-            if(Math.Abs(angleData.ax) <= 0.0001 && Math.Abs(angleData.ay) <= 0.0001 && Math.Abs(angleData.az) <= 0.0001)
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }
