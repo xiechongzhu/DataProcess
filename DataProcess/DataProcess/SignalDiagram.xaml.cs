@@ -101,7 +101,6 @@ namespace DataProcess
 
         public void Reset()
         {
-            //lastAngleData = null;
             lastNavData = null;
             maxHeight = -10000;
             foreach (SignalPoint point in PointsToDraw)
@@ -125,13 +124,13 @@ namespace DataProcess
             {
                 maxHeight = navData.height;
             }
-            if (maxHeight - navData.height > 10)
+            if (maxHeight - navData.height > 10 && IsActive(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_FLY_START)))
             {
                 ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_TOP), true);
             }
             if (lastNavData != null)
             {
-                if(lastNavData.Value.skySpeed > navData.skySpeed)
+                if(lastNavData.Value.skySpeed > navData.skySpeed && IsActive(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_FLY_START)))
                 {
                     ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN), true);
                 }
@@ -139,31 +138,25 @@ namespace DataProcess
             lastNavData = navData;
         }
 
-        /*public void AddAngleData(AngleData angelData)
-        {
-            if(lastAngleData != null)
-            {
-                if(!IsAccZero(lastAngleData.Value) && IsAccZero(angelData))
-                {
-                    ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL1_SHUTDOWN), true);
-                }
-            }
-            lastAngleData = angelData;
-        }*/
-
         public void AddProgramData(ProgramControlData programData)
         {
-            ActivePoint(FlyProtocol.GetProgramControlStatusDescription(programData.controlStatus), true);
-            switch(programData.controlStatus)
+            if (IsActive(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_FLY_START)))
             {
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                    ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE), true);
-                    break;
-                default:
-                    break;
+                ActivePoint(FlyProtocol.GetProgramControlStatusDescription(programData.controlStatus), true);
+                switch (programData.controlStatus)
+                {
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                        ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE), true);
+                        break;
+                    case 5:
+                        ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL2_FIRE), true);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

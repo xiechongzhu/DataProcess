@@ -270,8 +270,6 @@ namespace YaoCeProcess
         /// <param name="data"></param>
         public void Enqueue(byte[] data)
         {
-            LastRecvDataTime = DateTime.Now;
-            IdleHandler?.Invoke(ParserPriority, true);
             queue.Enqueue(data); 
         }
 
@@ -279,7 +277,6 @@ namespace YaoCeProcess
         /// Start
         public void Start()
         {
-            IdleHandler?.Invoke(ParserPriority, true);
             while (queue.TryDequeue(out byte[] dropBuffer)) ; 
             isRuning = true;
             thread = new Thread(new ThreadStart(ThreadFunction)); 
@@ -289,6 +286,7 @@ namespace YaoCeProcess
             UDPBuffer = new byte[0];
 
             LastRecvDataTime = DateTime.Now;
+            IdleHandler?.Invoke(ParserPriority, true);
             idleTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             idleTimer.Start();
         }
@@ -859,13 +857,14 @@ namespace YaoCeProcess
             // can数据长度（至少大于等于1才能取出数据中的第一个字节：帧序号）
 // 
             if (buffer.Length < 1) return; //
-// 
+                                           // 
 
-// 
+            // 
             //---------------------------------------------------------------//
-// 
-
-// 
+            // 
+            LastRecvDataTime = DateTime.Now;
+            IdleHandler?.Invoke(ParserPriority, true);
+            // 
             switch (canDataId)
 // 
             {
@@ -1213,10 +1212,10 @@ namespace YaoCeProcess
                         tuoLuoGuZhangBiaoShi = br.ReadByte(),
                     };
                     // 向界面传递数据
-                    IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DANTOUDAOHANGDATA)));  
-                    Marshal.StructureToPtr(sObject, ptr, true);
                     if (PostMessageEnable)
                     {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DANTOUDAOHANGDATA)));
+                        Marshal.StructureToPtr(sObject, ptr, true);
                         PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_danTouDaoHang_DATA, 0, ptr);
                     }
                     // 发送帧序号信息
@@ -1347,12 +1346,12 @@ namespace YaoCeProcess
 // 
                     // 向界面传递数据
 // 
-                    IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SYSTEMPARSE_STATUS))); //
-// 
-                    Marshal.StructureToPtr(sObject, ptr, true); //
+                    
                                                                 // 
                     if (PostMessageEnable)
                     {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SYSTEMPARSE_STATUS)));// 
+                        Marshal.StructureToPtr(sObject, ptr, true); //
                         PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_SystemStatus_DATA, 0, ptr); //
                     }
 // 
@@ -1459,12 +1458,13 @@ namespace YaoCeProcess
 // 
                     // 向界面传递数据
 // 
-                    IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DAOHANGSHUJU_KuaiSu))); //
-// 
-                    Marshal.StructureToPtr(sObject, ptr, true); //
+                    
                                                                 // 
                     if (PostMessageEnable)
                     {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DAOHANGSHUJU_KuaiSu))); //
+                                                                                                        // 
+                        Marshal.StructureToPtr(sObject, ptr, true); //
                         PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangKuaiSu_Ti_DATA, 0, ptr);
                     }
 
@@ -1771,13 +1771,14 @@ namespace YaoCeProcess
 // 
                     // 向界面传递数据
 // 
-                    IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DAOHANGSHUJU_ManSu))); //
-// 
-                    Marshal.StructureToPtr(sObject, ptr, true); //
+                    
                                                                 // 
                                                                 // 
                     if (PostMessageEnable)
                     {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(DAOHANGSHUJU_ManSu))); //
+                                                                                                       // 
+                        Marshal.StructureToPtr(sObject, ptr, true); //
                         PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_daoHangManSu_Ti_DATA, 0, ptr);
                     }
 
@@ -1874,12 +1875,13 @@ namespace YaoCeProcess
 // 
                     // 向界面传递数据
 // 
-                    IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(HUILUJIANCE_STATUS))); //
-// 
-                    Marshal.StructureToPtr(sObject, ptr, true); //
+                    
 // 
                     if (PostMessageEnable)
                     {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(HUILUJIANCE_STATUS))); //
+// 
+                        Marshal.StructureToPtr(sObject, ptr, true); //
                         PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_HuiLuJianCe_DATA, 0, ptr); //
                     }
 // 
@@ -2068,12 +2070,13 @@ namespace YaoCeProcess
 // 
                     // 向界面传递数据
 // 
-                    IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SYSTEMImmediate_STATUS))); //
-// 
-                    Marshal.StructureToPtr(sObject, ptr, true); //
+                    
                                                                 // 
                     if (PostMessageEnable)
                     {
+                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SYSTEMImmediate_STATUS))); //
+                                                                                                           // 
+                        Marshal.StructureToPtr(sObject, ptr, true); //
                         PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_XiTongJiShi_Ti_DATA, 0, ptr); //
                     }
 
@@ -2120,12 +2123,13 @@ namespace YaoCeProcess
 // 
             }; //
 // 
-            IntPtr ptrFrame = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(FRAME_PROPERTY))); //
-// 
-            Marshal.StructureToPtr(frameObject, ptrFrame, true); //
+            
                                                                  // 
             if (PostMessageEnable)
             {
+                IntPtr ptrFrame = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(FRAME_PROPERTY))); //
+                                                                                                // 
+                Marshal.StructureToPtr(frameObject, ptrFrame, true); //
                 PostMessage(mainFormHandle, YaoCeShuJuXianShi.WM_YAOCE_FRAMEPROPERTY_DATA, 0, ptrFrame); //
             }
 // 
