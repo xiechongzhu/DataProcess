@@ -4330,7 +4330,7 @@ namespace DataProcess.Controls
                 QiTaZhuangTaiDataTuoLuo = string.Concat("X陀螺温度：", XTuoLuoWenDu, ";", "Y陀螺温度：", YTuoLuoWenDu, ";", "Z陀螺温度：", ZTuoLuoWenDu, ";\n");
 
                 string QiTaZhuangTaiDataJiaJi = "";
-                QiTaZhuangTaiDataJiaJi = string.Concat("X加计温度：", XJiaJiWenDu, ";", "Y加计温度：", YJiaJiWenDu, ";", "Z加计温度：", ";\n");
+                QiTaZhuangTaiDataJiaJi = string.Concat("X加计温度：", XJiaJiWenDu, ";", "Y加计温度：", YJiaJiWenDu, ";", "Z加计温度：", ZJiaJiWenDu, ";\n");
 
                 string QiTaZhuangTaiData5VDianYa = "";
                 QiTaZhuangTaiData5VDianYa = string.Concat("+5V电压值：", Zheng5VDianYa, ";", "-5V电压值：", Fu5VDianYa, ";\n");
@@ -4468,13 +4468,13 @@ namespace DataProcess.Controls
                 DHManSu_Ti_GongZuoMoShi.Text = tempSTR;
 
                 //bit2 陀螺X故障标志（0：正常 1：故障）
-                int TuoLuoXGZ = (biaoZhiWei2 >> 2 >> 0x1) == 0 ? 0 : 1;
+                int TuoLuoXGZ = (biaoZhiWei2 >> 2 & 0x1) == 0 ? 0 : 1;
 
                 //bit3 陀螺Y故障标志（0：正常 1：故障）
-                int TuoLuoYGZ = (biaoZhiWei2 >> 3 >> 0x1) == 0 ? 0 : 1;
+                int TuoLuoYGZ = (biaoZhiWei2 >> 3 & 0x1) == 0 ? 0 : 1;
 
                 //bit4 陀螺Z故障标志（0：正常 1：故障）
-                int TuoLuoZGZ = (biaoZhiWei2 >> 4 >> 0x1) == 0 ? 0 : 1;
+                int TuoLuoZGZ = (biaoZhiWei2 >> 4 & 0x1) == 0 ? 0 : 1;
 
                 // bit5 GPS组合标志（0：惯性 1：组合）
                 DHManSu_Ti_GPSZuHe.Text = (biaoZhiWei2 >> 5 & 0x1) == 0 ? "惯性" : "组合";

@@ -51,8 +51,6 @@ namespace DataProcess.Protocol
 
         public void Enqueue(byte[] data)
         {
-            LastRecvTime = DateTime.Now;
-            IdleHandler.Invoke(ParserPriority, true);
             queue.Enqueue(data);
             if (IsStartLogData)
             {
@@ -185,10 +183,12 @@ namespace DataProcess.Protocol
                     SlowPacket slowPacket;
                     if (SlowParser.Parse(body, out slowPacket))
                     {
-                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SlowPacket)));
-                        Marshal.StructureToPtr(slowPacket, ptr, true);
+                        LastRecvTime = DateTime.Now;
+                        IdleHandler.Invoke(ParserPriority, true);
                         if (PostMessageEnable)
                         {
+                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SlowPacket)));
+                            Marshal.StructureToPtr(slowPacket, ptr, true);
                             WinApi.PostMessage(mainWindowHandle, WinApi.WM_SLOW_DATA, 0, ptr);
                         }
                     }
@@ -208,10 +208,12 @@ namespace DataProcess.Protocol
                     FastPacket fastPacket;
                     if (FastParser.Parse(body, out fastPacket))
                     {
-                        IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(FastPacket)));
-                        Marshal.StructureToPtr(fastPacket, ptr, true);
+                        LastRecvTime = DateTime.Now;
+                        IdleHandler.Invoke(ParserPriority, true);
                         if (PostMessageEnable)
                         {
+                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(FastPacket)));
+                            Marshal.StructureToPtr(fastPacket, ptr, true);
                             WinApi.PostMessage(mainWindowHandle, WinApi.WM_FAST_DATA, 0, ptr);
                         }
                     }
@@ -233,10 +235,12 @@ namespace DataProcess.Protocol
                     {
                         foreach (TailPacketRs packet in tailPacketRs)
                         {
-                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(TailPacketRs)));
-                            Marshal.StructureToPtr(packet, ptr, true);
+                            LastRecvTime = DateTime.Now;
+                            IdleHandler.Invoke(ParserPriority, true);
                             if (PostMessageEnable)
                             {
+                                IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(TailPacketRs)));
+                                Marshal.StructureToPtr(packet, ptr, true);
                                 WinApi.PostMessage(mainWindowHandle, WinApi.WM_TAIL_DATA, 0, ptr);
                             }
                         }
