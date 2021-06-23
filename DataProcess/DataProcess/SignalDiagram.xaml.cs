@@ -140,19 +140,29 @@ namespace DataProcess
 
         public void AddProgramData(ProgramControlData programData)
         {
+            if(programData.controlStatus == 21)
+            {
+                ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_FLY_START), true);
+                return;
+            }
             if (IsActive(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_FLY_START)))
             {
-                ActivePoint(FlyProtocol.GetProgramControlStatusDescription(programData.controlStatus), true);
                 switch (programData.controlStatus)
                 {
-                    case 9:
-                    case 10:
-                    case 11:
-                    case 12:
-                        ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE), true);
+                    case 1:
+                        ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_BOOM), true);
+                        break;
+                    case 2:
+                        ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_ENGINE_LEAVE), true);
+                        break;
+                    case 3:
+                        ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HOOD_FIRE), true);
                         break;
                     case 5:
                         ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_LEVEL2_FIRE), true);
+                        break;
+                    case 11:
+                        ActivePoint(FlyProtocol.GetPoint(PROGRAM_CONTROL_STATUS.STATUS_HEAD_BODY_LEAVE), true);
                         break;
                     default:
                         break;
