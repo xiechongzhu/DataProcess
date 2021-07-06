@@ -95,45 +95,45 @@ namespace DataProcess.Parser.Fly
                             out List<ProgramControlData> programControlDataList, out List<ServoData> servoDataList);
                         foreach (NavData data in navDataList)
                         {
-                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NavData)));
-                            Marshal.StructureToPtr(data, ptr, true);
                             LastRecvTime = DateTime.Now;
                             IdleHandler.Invoke(ParserPriority, true);
                             if (PostMessageEnable)
                             {
-                                IdleHandler.Invoke(ParserPriority, true);
+                                IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NavData)));
+                                Marshal.StructureToPtr(data, ptr, true);
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_NAV_DATA, 0, ptr);
                             }
                         }
                         foreach (AngleData data in angleDataList)
                         {
-                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AngleData)));
-                            Marshal.StructureToPtr(data, ptr, true);
                             LastRecvTime = DateTime.Now;
                             IdleHandler.Invoke(ParserPriority, true);
                             if (PostMessageEnable)
                             {
-                                IdleHandler.Invoke(ParserPriority, true);
+                                IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AngleData)));
+                                Marshal.StructureToPtr(data, ptr, true);
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_ANGLE_DATA, 0, ptr);
                             }
                         }
                         foreach (ProgramControlData data in programControlDataList)
                         {
-                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ProgramControlData)));
-                            Marshal.StructureToPtr(data, ptr, true);
                             LastRecvTime = DateTime.Now;
                             IdleHandler.Invoke(ParserPriority, true);
                             if (PostMessageEnable)
                             {
-                                IdleHandler.Invoke(ParserPriority, true);
+                                IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ProgramControlData)));
+                                Marshal.StructureToPtr(data, ptr, true);
+                                WinApi.PostMessage(mainWindowHandle, WinApi.WM_PROGRAM_DATA, 0, ptr);
                             }
                         }
                         foreach (ServoData data in servoDataList)
                         {
-                            IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ServoData)));
-                            Marshal.StructureToPtr(data, ptr, true);
                             LastRecvTime = DateTime.Now;
                             IdleHandler.Invoke(ParserPriority, true);
                             if (PostMessageEnable)
                             {
+                                IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ServoData)));
+                                Marshal.StructureToPtr(data, ptr, true);
                                 WinApi.PostMessage(mainWindowHandle, WinApi.WM_SERVO_DATA, 0, ptr);
                             }
                         }
