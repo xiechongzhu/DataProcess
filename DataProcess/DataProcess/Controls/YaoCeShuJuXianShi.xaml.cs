@@ -1792,11 +1792,31 @@ namespace DataProcess.Controls
                                 string XTJSPath = Path.Combine(ParaseFileToCSVPath, "系统状态即时反馈数据.csv");
                                 string DanTouPath = Path.Combine(ParaseFileToCSVPath, "弹头导航数据.csv");
 
+                             #if false
                                 streamXiTongPanJue = new StreamWriter(XiTongPanJuePath, false, Encoding.GetEncoding("GB2312"));
                                 streamDHK = new StreamWriter(DHKPath, false, Encoding.GetEncoding("GB2312"));
                                 streamDHM = new StreamWriter(DHMPath, false, Encoding.GetEncoding("GB2312"));
                                 streamXTJS = new StreamWriter(XTJSPath, false, Encoding.GetEncoding("GB2312"));
                                 streamDanTou = new StreamWriter(DanTouPath, false, Encoding.GetEncoding("GB2312"));
+                             #endif
+                                try
+                                {
+                                    streamXiTongPanJue = new StreamWriter(XiTongPanJuePath, false, Encoding.GetEncoding("GB2312"));
+                                    streamDHK = new StreamWriter(DHKPath, false, Encoding.GetEncoding("GB2312"));
+                                    streamDHM = new StreamWriter(DHMPath, false, Encoding.GetEncoding("GB2312"));
+                                    streamXTJS = new StreamWriter(XTJSPath, false, Encoding.GetEncoding("GB2312"));
+                                    streamDanTou = new StreamWriter(DanTouPath, false, Encoding.GetEncoding("GB2312"));
+                                }
+                                catch(Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message, "警告");
+                                    streamXiTongPanJue?.Close();
+                                    streamDHK?.Close();
+                                    streamDHM?.Close();
+                                    streamXTJS?.Close();
+                                    streamDanTou?.Close();
+                                    return;
+                                }
 
                                 streamXiTongPanJue.WriteLine(WriteCSV.ReadTxT(path).ToString());
                                 streamDHK.WriteLine(WriteCSV.ReadTxT(pathDHK).ToString());
@@ -4812,16 +4832,21 @@ namespace DataProcess.Controls
                 s.Append(tempSTR);
                 s.Append(",");
 
+
+                /***********************************************************
+                 * 2021年8月11日15:09:08 代码错误，应该是 “&” 符号，误写为“>>”
+                 * 
+                 * ********************************************************/
                 //bit2 陀螺X故障标志（0：正常 1：故障）
-                s.Append((biaoZhiWei2 >> 2 >> 0x1) == 0 ? "正常" : "故障");
+                s.Append((biaoZhiWei2 >> 2 & 0x1) == 0 ? "正常" : "故障");
                 s.Append(",");
 
                 //bit3 陀螺Y故障标志（0：正常 1：故障）
-                s.Append((biaoZhiWei2 >> 3 >> 0x1) == 0 ? "正常" : "故障");
+                s.Append((biaoZhiWei2 >> 3 & 0x1) == 0 ? "正常" : "故障");
                 s.Append(",");
 
                 //bit4 陀螺Z故障标志（0：正常 1：故障）
-                s.Append((biaoZhiWei2 >> 4 >> 0x1) == 0 ? "正常" : "故障");
+                s.Append((biaoZhiWei2 >> 4 & 0x1) == 0 ? "正常" : "故障");
                 s.Append(",");
 
                 // bit5 GPS组合标志（0：惯性 1：组合）
