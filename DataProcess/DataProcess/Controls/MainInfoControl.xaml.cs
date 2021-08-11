@@ -91,8 +91,8 @@ namespace DataProcess.Controls
                 NorthSpeed = String.Format("{0}m/s", status.beiXiangSuDu);
                 SkySpeed = String.Format("{0}m/s", status.tianXiangSuDu);
                 EastSpeed = String.Format("{0}m/s", status.dongXiangSuDu);
-                Lng = LngLatToString((float)((status.jingDu) * 1e-7));
-                Lat = LngLatToString((float)((status.weiDu) * 1e-7));
+                Lng = LngLatToString((float)(status.jingDu * 1e-7));
+                Lat = LngLatToString((float)(status.weiDu * 1e-7));
                 FlyHeight = String.Format("{0}km", status.haiBaGaoDu * 1e-5);
             }
         }
@@ -109,22 +109,24 @@ namespace DataProcess.Controls
 
         private String LngLatToString(float value)
         {
-            int d1 = (int)value;
+            /*int d1 = (int)value;
             value = (value - d1) * 60;
             int d2 = (int)value;
             value = (value - d2) * 60;
             int d3 = (int)value;
-            return String.Format("{0}度{1}分{2}秒", d1 ,d2 ,d3);
+            return String.Format("{0}度{1}分{2}秒", d1 ,d2 ,d3);*/
+            return String.Format("{0:F2}", value);
         }
 
         private String GpsTimeToString(float gpsTime)
         {
-            int _gpsTime = (int)gpsTime;
+            /*int _gpsTime = (int)gpsTime;
             int gpsHour = _gpsTime / 3600;
             _gpsTime %= 3600;
             int gpsMinutes = _gpsTime / 60;
             int gpsSecends = _gpsTime % 60;
-            return String.Format("{0}时{1}分{2}秒", gpsHour, gpsMinutes, gpsSecends);
+            return String.Format("{0}时{1}分{2}秒", gpsHour, gpsMinutes, gpsSecends);*/
+            return String.Format("{0:F2}", gpsTime);
         }
     }
 }
