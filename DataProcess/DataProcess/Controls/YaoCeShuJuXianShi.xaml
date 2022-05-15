@@ -163,19 +163,16 @@
                                 <dxe:TextEdit  VerticalAlignment="Center" Grid.Column="1" x:Name="XiTong_ShuRuCaiJi4" Margin="5" IsReadOnly="True"  BorderThickness="1" BorderBrush="Black">
                                 </dxe:TextEdit>
                                 <Popup x:Name="XiTong_ShuRuCaiJi4_PoPup" StaysOpen="False" PlacementTarget="{Binding ElementName=XiTong_ShuRuCaiJi4_Grid}" Placement="Bottom">
-                                    
+
                                     <Border BorderBrush="SteelBlue" BorderThickness="2,2,2,2" CornerRadius="3" VerticalAlignment="Top">
                                         <TextBlock x:Name="XiTong_ShuRuCaiJi4_Text" Background="White"/>
                                     </Border >
                                 </Popup>
                             </Grid>
-                            <Grid/>
                             <cust:LabelTextBox Label="弹头解保：" x:Name="XiTong_DanTouJieBao"/>
-                            <cust:LabelTextBox Label="起爆状态：" x:Name="XiTong_QiBaoZhuangTai"/>
-                            <Grid/>
+                            <cust:LabelTextBox Label="弹头起爆状态：" x:Name="XiTong_QiBaoZhuangTai"/>
                             <cust:LabelTextBox Label="内部控制电压：" x:Name="XiTong_NeiBuKongZhiDian"/>
                             <cust:LabelTextBox Label="功率电压：" x:Name="XiTong_GongLvDian"/>
-                            <Grid/>
                             <cust:LabelTextBox Label="导航数据选择：" x:Name="XiTong_DaoHangShuJuXuanZe"/>
                             <cust:LabelTextBox Label="IMU数据可用：" x:Name="XiTong_IMUShuJuRongHe"/>
                             <cust:LabelTextBox Label="优选结果：" x:Name="XiTong_YouXuanJieGuo"/>

@@ -67,8 +67,25 @@ namespace DataProcess
             if (ctls is LabelTextBox)
             {         
                 LabelTextBox lab = (LabelTextBox)ctls;
-                //Console.WriteLine("1:{0}", lab.Name);
-                if ((lab.Name != "XiTong_NeiBuKongZhiDian") && (lab.Name != "XiTong_GongLvDian"))
+                if(lab.Name == "XiTong_YuLing" || lab.Name == "XiTong_DongLing")
+                {
+                    if(lab.Text == "无效")
+                    {
+                        System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 0, 255, 0);
+                        System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
+                        System.Windows.Media.Brush brushes = solidColorBrush;
+                        lab.Background = brushes; //     // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
+                    }
+                    else
+                    {
+                        System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 0, 0);
+                        System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
+                        System.Windows.Media.Brush brushes = solidColorBrush;
+                        lab.Background = brushes; //     // 第1个参数为透明度(alpha)参数,其后为红,绿和蓝
+                    }
+                    return;
+                }
+                else if ((lab.Name != "XiTong_NeiBuKongZhiDian") && (lab.Name != "XiTong_GongLvDian"))
                 {
                     //Console.WriteLine("2:{0}", lab.Name);
                     if (lab.Text.Contains("正常") || lab.Text.Contains("有效"))
