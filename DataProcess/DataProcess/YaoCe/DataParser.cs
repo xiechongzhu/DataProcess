@@ -1341,7 +1341,7 @@ namespace YaoCeProcess
 // 
                         daoHangTip3 = br.ReadByte(),                // 导航状态提示3
 // 
-                        daoHangTip4 = br.ReadByte(),                // 导航状态提示4
+                        //daoHangTip4 = br.ReadByte(),                // 导航状态提示4
                     }; //
 // 
                     // 向界面传递数据

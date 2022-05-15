@@ -267,7 +267,7 @@ namespace YaoCeProcess
 // 
 
 // 
-        public byte daoHangTip4; //        // 导航状态提示4
+        //public byte daoHangTip4; //        // 导航状态提示4
 // 
                                         // bit0 bit1 2号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
 // 

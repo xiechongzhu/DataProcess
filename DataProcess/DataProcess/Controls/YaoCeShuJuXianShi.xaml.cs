@@ -2137,44 +2137,41 @@ namespace DataProcess.Controls
                 //
                 byte jueCePanJueJieGuo2 = sObject.jueCePanJueJieGuo2;
 
-                // bit0 控制区下限（1：有效）                                                        
+                // bit0 逻辑判断结果（1：有效）                                                        
                 int celv_2_0 = (jueCePanJueJieGuo2 >> 0 & 0x1) == 1 ? 1 : 0;
 
-                // bit1 控制区上限（1：有效）
+                // bit1 解保（1：有效）
                 //XiTong_KongZhiQuShangXian.Text = (jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? "有效" : "无效"; //
                 int celv_2_1 = (jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? 1 : 0;
 
-                //bit2 解保
+                //bit2 起爆
                 int celv_2_2 = (jueCePanJueJieGuo2 >> 2 & 0x1) == 1 ? 1 : 0;
 
-                //bit3 起爆
+                //bit3 模拟解保
                 int celv_2_3 = (jueCePanJueJieGuo2 >> 3 & 0x1) == 1 ? 1 : 0;
 
-                //bit4 模拟解保
+                //bit4 模拟起爆
                 int celv_2_4 = (jueCePanJueJieGuo2 >> 4 & 0x1) == 1 ? 1 : 0;
 
-                //bit5模拟起爆
-                int celv_2_5 = (jueCePanJueJieGuo2 >> 5 & 0x1) == 1 ? 1 : 0;
-
-                int celv1 = celv10 + celv11 + celv12 + celv13 + celv14 + celv15 + celv16 + celv17 + celv_2_0 + celv_2_1;
+                int celv1 = celv10 + celv11 + celv12 + celv13 + celv14 + celv15 + celv16 + celv17 + celv_2_0;
                 string celuepanjuejieguo1 = "";
                 StringBuilder stringBuilder_CeLv1 = new StringBuilder();
                 stringBuilder_CeLv1.Append("总飞行时间：");
                 stringBuilder_CeLv1.Append(celv10.ToString());
                 stringBuilder_CeLv1.Append(";");
-                stringBuilder_CeLv1.Append("侧向：");
+                stringBuilder_CeLv1.Append("超出必炸线标识：");
                 stringBuilder_CeLv1.Append(celv11.ToString());
                 stringBuilder_CeLv1.Append(";\n");
-                stringBuilder_CeLv1.Append("Wx角速度：");
+                stringBuilder_CeLv1.Append("必炸线：");
                 stringBuilder_CeLv1.Append(celv12.ToString());
                 stringBuilder_CeLv1.Append(";");
-                stringBuilder_CeLv1.Append("Wy角速度：");
+                stringBuilder_CeLv1.Append("Wx角速度：");
                 stringBuilder_CeLv1.Append(celv13.ToString());
                 stringBuilder_CeLv1.Append(";");
-                stringBuilder_CeLv1.Append("Wz角速度：");
+                stringBuilder_CeLv1.Append("Wy角速度：");
                 stringBuilder_CeLv1.Append(celv14.ToString());
                 stringBuilder_CeLv1.Append(";\n");
-                stringBuilder_CeLv1.Append("后向：");
+                stringBuilder_CeLv1.Append("Wz角速度：");
                 stringBuilder_CeLv1.Append(celv15.ToString());
                 stringBuilder_CeLv1.Append(";");
                 stringBuilder_CeLv1.Append("坠落：");
@@ -2183,11 +2180,8 @@ namespace DataProcess.Controls
                 stringBuilder_CeLv1.Append("分离时间：");
                 stringBuilder_CeLv1.Append(celv17.ToString());
                 stringBuilder_CeLv1.Append(";\n");
-                stringBuilder_CeLv1.Append("控制区上限：");
+                stringBuilder_CeLv1.Append("逻辑判断结果：");
                 stringBuilder_CeLv1.Append(celv_2_0.ToString());
-                stringBuilder_CeLv1.Append(";");
-                stringBuilder_CeLv1.Append("控制区下限：");
-                stringBuilder_CeLv1.Append(celv_2_1.ToString());
                 stringBuilder_CeLv1.Append(".");
                 if (celv1 == 0)
                 {
@@ -2201,7 +2195,7 @@ namespace DataProcess.Controls
                 }
                 XiTong_CeLuePanJue1.Text = celuepanjuejieguo1;
 
-                int celv2 = celv_2_2 + celv_2_3 + celv_2_4 + celv_2_5;
+                int celv2 = celv_2_1 + celv_2_2 + celv_2_3 + celv_2_4;
                 string celuepanjuejieguo2 = "";
                 StringBuilder stringBuilder_CeLv2 = new StringBuilder();
                 stringBuilder_CeLv2.Append("解保：");
@@ -2212,9 +2206,6 @@ namespace DataProcess.Controls
                 stringBuilder_CeLv2.Append(";");
                 stringBuilder_CeLv2.Append("模拟解保：");
                 stringBuilder_CeLv2.Append(celv_2_4.ToString());
-                stringBuilder_CeLv2.Append(";");
-                stringBuilder_CeLv2.Append("模拟起爆：");
-                stringBuilder_CeLv2.Append(celv_2_5.ToString());
                 stringBuilder_CeLv2.Append(".");
                 if (celv2 == 0)
                 {
@@ -2612,37 +2603,12 @@ namespace DataProcess.Controls
                 // 导航数据选择                        // 
                 XiTong_DaoHangShuJuXuanZe.Text = (daoHangTip1 & 0x1) == 0 ? "数据不可用" : "数据可用";
 
-                // 陀螺数据融合结果（0：所有数据不可用 1：数据可用） 
-                XiTong_TuoLuoShuJuRongHe.Text = ((daoHangTip1 >> 1) & 0x1) == 0 ? "所有数据不可用" : "数据可用";
+                // IMU数据可用（0：所有数据不可用 1：数据可用） 
+                XiTong_IMUShuJuRongHe.Text = ((daoHangTip1 >> 1) & 0x1) == 0 ? "所有数据不可用" : "数据可用";
 
-                // bit2 bit3 数据未更新标志（00：均无数据; // 01：1号输入无数据，2号输入有数据; // 10：1号输入有数据，2号输入无数据; // 11：均有数据）
-                byte tempValue = (byte)((daoHangTip1 >> 2) & 0x3);
-                string tempSTR = "";
-                switch (tempValue)
-                {
-                    case 0:
-                        tempSTR = "均无数据";
-                        break;
-                    case 1:
-                        // tempSTR = "1号输入无数据，2号输入有数据";  
-                        tempSTR = "1号无数据，2号有数据";
-                        break;
-                    case 2:
-                        // tempSTR = "1号输入有数据，2号输入无数据";
-                        tempSTR = "1号有数据，2号无数据";
-                        break;
-                    case 3:
-                        tempSTR = "均有数据";
-                        break;
-                    default:
-                        break;
-                }
-                XiTong_ShuJuWeiGengXin.Text = tempSTR;
-
-                //bit4 bit5 优选结果（00：优选结果无输出;   01：优选结果为1号, 10：优选结果为2号, 11:优选结果为1号和2号）
-                //0x3 0011
-                tempValue = (byte)((daoHangTip1 >> 4) & 0x3);
-                tempSTR = "";
+                //bit2 优选结果
+                byte tempValue = (byte)((daoHangTip1 >> 2) & 0x1);
+                String tempSTR = "";
                 switch (tempValue)
                 {
                     case 0:
@@ -2650,31 +2616,22 @@ namespace DataProcess.Controls
                         break;
                     case 1:
                         // tempSTR = "1号异常，2号正常"; 
-                        tempSTR = "优选结果为1号";
-                        break;
-                    case 2:
-                        // tempSTR = "1号正常，2号异常"; 
-                        tempSTR = "优选结果为2号";
-                        break;
-                    case 3:
-                        // tempSTR = "时间间隔均不正常"; 
-                        tempSTR = "优选结果为1号和2号";
+                        tempSTR = "优选结果有输出";
                         break;
                     default:
                         break;
                 }
                 XiTong_YouXuanJieGuo.Text = tempSTR;
 
-                // bit6 弹头组合无效标志（1表示无效）
-                XiTong_DanTouZuHe.Text = (daoHangTip1 >> 6 & 0x1) == 1 ? "无效" : "有效";
+                // bit3 数据更新标志
+                XiTong_ShuJuGengXinBiaoZhi.Text = (daoHangTip1 >> 3 & 0x1) == 1 ? "有数据" : "无数据";
 
-                // bit7 弹体组合无效标志（1表示无效）
-                XiTong_DanTiZuHe.Text = (daoHangTip1 >> 7 & 0x1) == 1 ? "无效" : "有效";
+                // bit4 失锁超时
+                XiTong_ShiSuoChaoShi.Text = (daoHangTip1 >> 4 & 0x1) == 1 ? "已超时" : "未超时";
 
                 // -------------------导航状态指示2
                 byte daoHangTip2 = sObject.daoHangTip2;
                 List<string> data1Text = new List<string>(); //1号数据集合
-                List<string> data2Text = new List<string>(); //2号数据集合
                 Dictionary<byte, string> dicTip = new Dictionary<byte, string>();
                 dicTip.Add(0, "不是野值");
                 dicTip.Add(1, "无数据");
@@ -2702,44 +2659,14 @@ namespace DataProcess.Controls
                 // bit2 bit3 1号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
                 data1Text.Add(dicTip[(byte)(daoHangTip3 >> 2 & 0x03)]);
 
-                // bit4 bit5 2号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip3 >> 4 & 0x03)]);
-
-                // bit6 bit7 2号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip3 >> 6 & 0x03)]);
-
-                // -------------------------导航状态指示4
-                byte daoHangTip4 = sObject.daoHangTip4;
-
-                // bit0 bit1 2号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 & 0x03)]);
-
-                // bit2 bit3 2号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 2 & 0x03)]);
-
-                // bit4 bit5 2号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 4 & 0x03)]);
-
-                // bit6 bit7 2号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                data2Text.Add(dicTip[(byte)(daoHangTip4 >> 6 & 0x03)]);
-
                 StringBuilder stringBuilder_1Hao = new StringBuilder();
                 List<string> No1 = new List<string>();
-                No1.Add("1号数据经度:");
-                No1.Add("1号数据纬度:");
-                No1.Add("1号数据高度:");
-                No1.Add("1号数据东向速度:");
-                No1.Add("1号数据北向速度:");
-                No1.Add("1号数据天向速度:");
-
-                StringBuilder stringBuilder_2Hao = new StringBuilder();
-                List<string> No2 = new List<string>();
-                No2.Add("2号数据经度:");
-                No2.Add("2号数据纬度:");
-                No2.Add("2号数据高度:");
-                No2.Add("2号数据东向速度:");
-                No2.Add("2号数据北向速度:");
-                No2.Add("2号数据天向速度:");
+                No1.Add("数据经度:");
+                No1.Add("数据纬度:");
+                No1.Add("数据高度:");
+                No1.Add("数据东向速度:");
+                No1.Add("数据北向速度:");
+                No1.Add("数据天向速度:");
 
                 for (int j = 0; j < No1.Count(); j++)
                 {
@@ -2751,18 +2678,6 @@ namespace DataProcess.Controls
                         stringBuilder_1Hao.Append("\n");
                     }
                 }
-
-                for (int j = 0; j < No2.Count(); j++)
-                {
-                    stringBuilder_2Hao.Append(No2[j]);
-                    stringBuilder_2Hao.Append(data2Text[j]);
-                    stringBuilder_2Hao.Append(";");
-                    if ((j + 1) % 3 == 0)
-                    {
-                        stringBuilder_2Hao.Append("\n");
-                    }
-                }
-
 
                 int flagData1Green = 0;
                 int flagData1Red = 0;
@@ -2803,44 +2718,6 @@ namespace DataProcess.Controls
                 }
                 XiTong_ShuJu1Hao_Text.Text = stringBuilder_1Hao.ToString();
 
-                int flagData2Green = 0;
-                int flagData2Red = 0;
-                for (int i = 0; i < data2Text.Count(); i++)
-                {
-                    if (data2Text[i] == "不是野值")
-                    {
-                        flagData2Green++;
-                    }
-                    if (data2Text[i] == "是野值")
-                    {
-                        flagData2Red++;
-                    }
-                }
-                if (flagData2Green == 6)  //全为0时显示为绿色
-                {
-                    XiTong_ShuJu2Hao.Text = "正常";
-                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 0, 255, 0);
-                    System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
-                    System.Windows.Media.Brush brushes = solidColorBrush;
-                    XiTong_ShuJu2Hao.Background = brushes;
-                }
-                else if (flagData2Red == 6)  //全为1时显示为红色
-                {
-                    XiTong_ShuJu2Hao.Text = "错误";
-                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 0, 0);
-                    System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
-                    System.Windows.Media.Brush brushes = solidColorBrush;
-                    XiTong_ShuJu2Hao.Background = brushes;
-                }
-                else  //其他值为黄色
-                {
-                    XiTong_ShuJu2Hao.Text = "警告";
-                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 255, 0);
-                    System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
-                    System.Windows.Media.Brush brushes = solidColorBrush;
-                    XiTong_ShuJu2Hao.Background = brushes;
-                }
-                XiTong_ShuJu2Hao_Text.Text = stringBuilder_2Hao.ToString();
 
                 // 
                 // 预示落点Z
@@ -2970,59 +2847,48 @@ namespace DataProcess.Controls
                 // 
                 byte jueCePanJueJieGuo1 = sObject.jueCePanJueJieGuo1;
 
-                // bit0 总飞行时间（1：有效                                                     
+                // bit0 总飞行时间                                             
                 s.Append((jueCePanJueJieGuo1 >> 0 & 0x1) == 1 ? 1 : 0); //
                 s.Append(",");
-                // bit1 侧向（1：有效）
-                //XiTong_CeXiang.Text = (jueCePanJueJieGuo1 >> 1 & 0x1) == 1 ? "有效" : "无效";
+                // bit1 超出必炸线标识
                 s.Append((jueCePanJueJieGuo1 >> 1 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                // bit2 Wx角速度（1：有效）
-                //XiTong_WxJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 2 & 0x1) == 1 ? "有效" : "无效";
+                //bit2 必炸线
                 s.Append((jueCePanJueJieGuo1 >> 2 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                // bit3 Wy角速度（1：有效）
-                //XiTong_WyJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 3 & 0x1) == 1 ? "有效" : "无效";
+                // bit3 Wx角速度（1：有效）
                 s.Append((jueCePanJueJieGuo1 >> 3 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                // bit4 Wz角速度（1：有效）
-                //XiTong_WzJiaoSuDuStatus.Text = (jueCePanJueJieGuo1 >> 4 & 0x1) == 1 ? "有效" : "无效"; //
+                // bit4 Wy角速度（1：有效）
                 s.Append((jueCePanJueJieGuo1 >> 4 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                // bit5 后向（1：有效）
-                //XiTong_HouXiang.Text = (jueCePanJueJieGuo1 >> 5 & 0x1) == 1 ? "有效" : "无效"; //
+                // bit5 Wz角速度（1：有效）
                 s.Append((jueCePanJueJieGuo1 >> 5 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
                 // bit6 坠落（1：有效）
-                //XiTong_ZhuiLuo.Text = (jueCePanJueJieGuo1 >> 6 & 0x1) == 1 ? "有效" : "无效"; //
                 s.Append((jueCePanJueJieGuo1 >> 6 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
                 // bit7 分离时间（1：有效） 
-                //XiTong_FenLiShiTian.Text = (jueCePanJueJieGuo1 >> 7 & 0x1) == 1 ? "有效" : "无效"; //
                 s.Append((jueCePanJueJieGuo1 >> 7 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
                 // 策略判决结果2
                 //
                 byte jueCePanJueJieGuo2 = sObject.jueCePanJueJieGuo2;
 
-                // bit0 控制区下限（1：有效）                                                        
+                // bit0 逻辑判断结果                                                     
                 s.Append((jueCePanJueJieGuo2 >> 0 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                // bit1 控制区上限（1：有效）
-                //XiTong_KongZhiQuShangXian.Text = (jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? "有效" : "无效"; //
-                s.Append((jueCePanJueJieGuo2 >> 1 & 0x1) == 1 ? 1 : 0);
+                //bit1 解保
+                s.Append((jueCePanJueJieGuo2 >> 1& 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                //bit2 解保
+                //bit2 起爆
                 s.Append((jueCePanJueJieGuo2 >> 2 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                //bit3 起爆
+                //bit3 模拟解保
                 s.Append((jueCePanJueJieGuo2 >> 3 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
-                //bit4 模拟解保
+                //bit4 模拟起爆
                 s.Append((jueCePanJueJieGuo2 >> 4 & 0x1) == 1 ? 1 : 0);
-                s.Append(",");
-                //bit5模拟起爆
-                s.Append((jueCePanJueJieGuo2 >> 5 & 0x1) == 1 ? 1 : 0);
                 s.Append(",");
                 /*--------------------输入采集1--------------------------- */
                 byte shuRuCaiJi1 = sObject.shuRuCaiJi1;
@@ -3211,67 +3077,20 @@ namespace DataProcess.Controls
                 // 导航状态指示1
                 byte daoHangTip1 = sObject.daoHangTip1;
 
-                // 导航数据选择                        // 
+                // 导航数据可用                     // 
                 s.Append((daoHangTip1 & 0x1) == 0 ? "数据不可用" : "数据可用");
                 s.Append(",");
-                // 陀螺数据融合结果（0：所有数据不可用 1：数据可用） 
+                // IMU数据可用
                 s.Append(((daoHangTip1 >> 1) & 0x1) == 0 ? "所有数据不可用" : "数据可用");
                 s.Append(",");
-                // bit2 bit3 数据未更新标志（00：均无数据; // 01：1号输入无数据，2号输入有数据; // 10：1号输入有数据，2号输入无数据; // 11：均有数据）
-                byte tempValue = (byte)((daoHangTip1 >> 2) & 0x3);
-                string tempSTR = "";
-                switch (tempValue)
-                {
-                    case 0:
-                        tempSTR = "均无数据";
-                        break;
-                    case 1:
-                        // tempSTR = "1号输入无数据，2号输入有数据";  
-                        tempSTR = "1号无数据，2号有数据";
-                        break;
-                    case 2:
-                        // tempSTR = "1号输入有数据，2号输入无数据";
-                        tempSTR = "1号有数据，2号无数据";
-                        break;
-                    case 3:
-                        tempSTR = "均有数据";
-                        break;
-                    default:
-                        break;
-                }
-                s.Append(tempSTR);
+                // 优选结果
+                s.Append(((daoHangTip1 >> 2) & 0x1) == 0 ? "无输出" : "有输出");
                 s.Append(",");
-                //bit4 bit5 优选结果（00：优选结果无输出;   01：优选结果为1号, 10：优选结果为2号, 11:优选结果为1号和2号）
-                //0x3 0011
-                tempValue = (byte)((daoHangTip1 >> 4) & 0x3);
-                tempSTR = "";
-                switch (tempValue)
-                {
-                    case 0:
-                        tempSTR = "优选结果无输出";
-                        break;
-                    case 1:
-                        // tempSTR = "1号异常，2号正常"; 
-                        tempSTR = "优选结果为1号";
-                        break;
-                    case 2:
-                        // tempSTR = "1号正常，2号异常"; 
-                        tempSTR = "优选结果为2号";
-                        break;
-                    case 3:
-                        // tempSTR = "时间间隔均不正常"; 
-                        tempSTR = "优选结果为1号和2号";
-                        break;
-                    default:
-                        break;
-                }
-                s.Append(tempSTR);
+                //数据更新标识
+                s.Append(((daoHangTip1 >> 3) & 0x1) == 0 ? "无数据" : "有数据");
                 s.Append(",");
-                // bit6 弹头组合无效标志（1表示无效）
-                s.Append((daoHangTip1 >> 6 & 0x1) == 1 ? "无效" : "有效");
-                s.Append(",");
-                // bit7 弹体组合无效标志（1表示无效）
-                s.Append((daoHangTip1 >> 7 & 0x1) == 1 ? "无效" : "有效");
+                //失锁超时
+                s.Append((daoHangTip1 >> 4 & 0x1) == 1 ? "已超时" : "未超时");
                 s.Append(",");
                 // -------------------导航状态指示2
                 byte daoHangTip2 = sObject.daoHangTip2;
@@ -3302,29 +3121,7 @@ namespace DataProcess.Controls
                 // bit2 bit3 1号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
                 s.Append(dicTip[(byte)(daoHangTip3 >> 2 & 0x03)]);
                 s.Append(",");
-                // bit4 bit5 2号数据经度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip3 >> 4 & 0x03)]);
-                s.Append(",");
-                // bit6 bit7 2号数据纬度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip3 >> 6 & 0x03)]);
-                s.Append(",");
-                // -------------------------导航状态指示4
-                byte daoHangTip4 = sObject.daoHangTip4;
 
-                // bit0 bit1 2号数据高度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 & 0x03)]);
-                s.Append(",");
-                // bit2 bit3 2号数据东向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 >> 2 & 0x03)]);
-                s.Append(",");
-                // bit4 bit5 2号数据北向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 >> 4 & 0x03)]);
-                s.Append(",");
-                // bit6 bit7 2号数据天向速度标志（00：不是野值；01：无数据；10：数据用于初始化；11：是野值）
-                s.Append(dicTip[(byte)(daoHangTip4 >> 6 & 0x03)]);
-                s.Append(",");
-
-                //WriteAKDataCSVFile(s.ToString());
                 stringBuilders.Add(s);
             }
         }
