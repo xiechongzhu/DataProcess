@@ -135,6 +135,9 @@ namespace DataProcess.Protocol
                         packetLen = Marshal.SizeOf(typeof(EnvPacketHeader)) + Marshal.SizeOf(typeof(TailPacketUdp));
                         break;
                     default:
+                        Array.Copy(dataBuffer, headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)), dataBuffer, 0, pos - headerPos);
+                        pos -= (headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)));
+                        headerPos = 0;
                         break;
                 }
                 if (packetLen != 0 && headerPos + packetLen <= pos)
