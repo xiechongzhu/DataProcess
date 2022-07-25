@@ -121,26 +121,30 @@ namespace DataProcess.GMap
 
         private void DrawBoomLine(DrawingContext drawingContext)
         {
-            double DistanceInM = GetDistance(StartPoint, EndPoint);
-            GPoint StartGPoint = FromLatLngToLocal(StartPoint);
-            GPoint EndGPoint = FromLatLngToLocal(EndPoint);
-            double DistanceInPix = Math.Sqrt(Math.Pow(StartGPoint.X - EndGPoint.X, 2) + Math.Pow(StartGPoint.Y - EndGPoint.Y, 2));
-            double angle;
-            if(EndGPoint.X >= StartGPoint.X)
+            try
             {
-                angle = Math.Asin((EndGPoint.Y - StartGPoint.Y) / DistanceInPix);
-            }
-            else
-            {
-                angle = Math.PI - Math.Asin((EndGPoint.Y - StartGPoint.Y) / DistanceInPix);
-            }
-            angle = angle / Math.PI * 180;
+                double DistanceInM = GetDistance(StartPoint, EndPoint);
+                GPoint StartGPoint = FromLatLngToLocal(StartPoint);
+                GPoint EndGPoint = FromLatLngToLocal(EndPoint);
+                double DistanceInPix = Math.Sqrt(Math.Pow(StartGPoint.X - EndGPoint.X, 2) + Math.Pow(StartGPoint.Y - EndGPoint.Y, 2));
+                double angle;
+                if (EndGPoint.X >= StartGPoint.X)
+                {
+                    angle = Math.Asin((EndGPoint.Y - StartGPoint.Y) / DistanceInPix);
+                }
+                else
+                {
+                    angle = Math.PI - Math.Asin((EndGPoint.Y - StartGPoint.Y) / DistanceInPix);
+                }
+                angle = angle / Math.PI * 180;
 
-            drawingContext.PushTransform(new RotateTransform(angle, StartGPoint.X, StartGPoint.Y));
-            drawingContext.DrawRectangle(null, new Pen(Brushes.IndianRed, 2), new Rect(StartGPoint.X - BoomLineBack / DistanceInM * DistanceInPix,
-                StartGPoint.Y - BoomLineSideLeft / DistanceInM * DistanceInPix, (BoomLineFront + BoomLineBack) / DistanceInM * DistanceInPix,
-                (BoomLineSideLeft + BoomLineSideRight) / DistanceInM * DistanceInPix));
-            drawingContext.Pop();
+                drawingContext.PushTransform(new RotateTransform(angle, StartGPoint.X, StartGPoint.Y));
+                drawingContext.DrawRectangle(null, new Pen(Brushes.IndianRed, 2), new Rect(StartGPoint.X - BoomLineBack / DistanceInM * DistanceInPix,
+                    StartGPoint.Y - BoomLineSideLeft / DistanceInM * DistanceInPix, (BoomLineFront + BoomLineBack) / DistanceInM * DistanceInPix,
+                    (BoomLineSideLeft + BoomLineSideRight) / DistanceInM * DistanceInPix));
+                drawingContext.Pop();
+            }
+            catch (Exception) { }
         }
 
         private void DrawFlyPipeLine(DrawingContext drawingContext)

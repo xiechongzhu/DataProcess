@@ -1550,19 +1550,19 @@ namespace YaoCeProcess
 // 
 
 // 
-                        tuoLuoWenDu_X = br.ReadByte(),                      // X陀螺温度
+                        tuoLuoWenDu_X = br.ReadSByte(),                      // X陀螺温度
 // 
-                        tuoLuoWenDu_Y = br.ReadByte(),                      // Y陀螺温度
+                        tuoLuoWenDu_Y = br.ReadSByte(),                      // Y陀螺温度
 // 
-                        tuoLuoWenDu_Z = br.ReadByte(),                      // Z陀螺温度
+                        tuoLuoWenDu_Z = br.ReadSByte(),                      // Z陀螺温度
 // 
 
 // 
-                        jiaJiWenDu_X = br.ReadByte(),                       // X加计温度
+                        jiaJiWenDu_X = br.ReadSByte(),                       // X加计温度
 // 
-                        jiaJiWenDu_Y = br.ReadByte(),                       // Y加计温度
+                        jiaJiWenDu_Y = br.ReadSByte(),                       // Y加计温度
 // 
-                        jiaJiWenDu_Z = br.ReadByte(),                       // Z加计温度
+                        jiaJiWenDu_Z = br.ReadSByte(),                       // Z加计温度
 // 
 
 // 
@@ -1940,11 +1940,11 @@ namespace YaoCeProcess
 // 
 
 // 
-                        tuoLuoWenDu_X = br.ReadByte(),          // X陀螺温度
+                        tuoLuoWenDu_X = br.ReadSByte(),          // X陀螺温度
 // 
-                        tuoLuoWenDu_Y = br.ReadByte(),          // Y陀螺温度
+                        tuoLuoWenDu_Y = br.ReadSByte(),          // Y陀螺温度
 // 
-                        tuoLuoWenDu_Z = br.ReadByte(),          // Z陀螺温度
+                        tuoLuoWenDu_Z = br.ReadSByte(),          // Z陀螺温度
 // 
 
 // 

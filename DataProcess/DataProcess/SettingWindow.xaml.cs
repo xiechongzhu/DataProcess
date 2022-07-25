@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -175,23 +176,39 @@ namespace DataProcess
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if (editEnvIpAddrHeigh.Text.Equals(String.Empty) || editFlyIpAddrHeigh.Text.Equals(String.Empty) || editYaoCeIpAddrHeigh.Text.Equals(String.Empty)
-                || editEnvIpAddrMiddle.Text.Equals(String.Empty) || editFlyIpAddrMiddle.Text.Equals(String.Empty) || editYaoCeIpAddrMiddle.Text.Equals(String.Empty)
-                || editEnvIpAddrLow.Text.Equals(String.Empty) || editFlyIpAddrLow.Text.Equals(String.Empty) || editYaoCeIpAddrLow.Text.Equals(String.Empty))
+            if (!CheckMulticastDestAddress(editEnvIpAddrHeigh.Text) || !CheckMulticastDestAddress(editFlyIpAddrHeigh.Text) || !CheckMulticastDestAddress(editYaoCeIpAddrHeigh.Text)
+                || !CheckMulticastDestAddress(editEnvIpAddrMiddle.Text) || !CheckMulticastDestAddress(editFlyIpAddrMiddle.Text) || !CheckMulticastDestAddress(editYaoCeIpAddrMiddle.Text)
+                || !CheckMulticastDestAddress(editEnvIpAddrLow.Text) || !CheckMulticastDestAddress(editFlyIpAddrLow.Text) || !CheckMulticastDestAddress(editYaoCeIpAddrLow.Text))
             {
-                MessageBox.Show("IP地址不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("组播地址范围：[224.0.1.0~238.255.255.255]", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(editEnvPortHeigh.Text.Equals(String.Empty) || editFlyPortHeigh.Text.Equals(String.Empty) || editYaoCePortHeigh.Text.Equals(String.Empty)
-                || editEnvPortMiddle.Text.Equals(String.Empty) || editFlyPortMiddle.Text.Equals(String.Empty) || editYaoCePortMiddle.Text.Equals(String.Empty)
-                || editEnvPortLow.Text.Equals(String.Empty) || editFlyPortLow.Text.Equals(String.Empty) || editYaoCePortLow.Text.Equals(String.Empty))
+            if(!CheckPort(editEnvPortHeigh.Text) || !CheckPort(editFlyPortHeigh.Text) || !CheckPort(editYaoCePortHeigh.Text)
+                || !CheckPort(editEnvPortMiddle.Text) || !CheckPort(editFlyPortMiddle.Text) || !CheckPort(editYaoCePortMiddle.Text)
+                || !CheckPort(editEnvPortLow.Text) || !CheckPort(editFlyPortLow.Text) || !CheckPort(editYaoCePortLow.Text))
             {
-                MessageBox.Show("端口不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("端口范围：[1024, 65535]", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(!settingManager.SaveNetworkSetting(editEnvIpAddrHeigh.Text, int.Parse(editEnvPortHeigh.Text),
+            List<int> portList = new List<int>();
+            portList.Add(int.Parse(editEnvPortHeigh.Text));
+            portList.Add(int.Parse(editFlyPortHeigh.Text));
+            portList.Add(int.Parse(editYaoCePortHeigh.Text));
+            portList.Add(int.Parse(editEnvPortMiddle.Text));
+            portList.Add(int.Parse(editFlyPortMiddle.Text));
+            portList.Add(int.Parse(editYaoCePortMiddle.Text));
+            portList.Add(int.Parse(editEnvPortLow.Text));
+            portList.Add(int.Parse(editFlyPortLow.Text));
+            portList.Add(int.Parse(editYaoCePortLow.Text));
+            if(portList.GroupBy(i => i).Where(g => g.Count() > 1).Count() >= 1)
+            {
+                MessageBox.Show("组播端口不能重复", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!settingManager.SaveNetworkSetting(editEnvIpAddrHeigh.Text, int.Parse(editEnvPortHeigh.Text),
                                                   editFlyIpAddrHeigh.Text, int.Parse(editFlyPortHeigh.Text),
                                                   editYaoCeIpAddrHeigh.Text,int.Parse(editYaoCePortHeigh.Text),
                                                   editEnvIpAddrMiddle.Text, int.Parse(editEnvPortMiddle.Text),
@@ -203,6 +220,7 @@ namespace DataProcess
                                                   int.Parse(SpinIdleTime.Text), int.Parse(editMaxPoint.Text)))
             {
                 MessageBox.Show("保存网络配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
             Ratios ratios = new Ratios
@@ -345,6 +363,7 @@ namespace DataProcess
             if(!settingManager.SaveRatios(ratios))
             {
                 MessageBox.Show("保存系数配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             VideoSetting videoSetting = new VideoSetting
             {
@@ -354,9 +373,10 @@ namespace DataProcess
             if(!settingManager.SaveVideoSetting(videoSetting))
             {
                 MessageBox.Show("保存视频软件配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
-            if(!settingManager.SaveMainSetting(new MainSetting
+            MainSetting mainSetting = new MainSetting
             {
                 StartLng = double.Parse(editStartLng.Text),
                 StartLat = double.Parse(editStartLat.Text),
@@ -370,9 +390,78 @@ namespace DataProcess
                 PipeLength = double.Parse(editPipeLength.Text),
                 PipeWidthLeft = double.Parse(editPipeWidthLeft.Text),
                 PipeWidthRight = double.Parse(editPipeWidthRight.Text)
-            }))
+            };
+
+            if(mainSetting.BoomLineFront <= 0)
+            {
+                MessageBox.Show("前向必炸线的值必须大于0", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(mainSetting.BoomLineBack <= 0)
+            {
+                MessageBox.Show("后向必炸线的值必须大于0", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(mainSetting.BoomLineSideLeft <= 0)
+            {
+                MessageBox.Show("左侧向必炸线的值必须大于0", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (mainSetting.BoomLineSideRight <= 0)
+            {
+                MessageBox.Show("右侧向必炸线的值必须大于0", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(mainSetting.PipeLength <= 0)
+            {
+                MessageBox.Show("管道长度的值必须大于0", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(mainSetting.PipeWidthLeft <= 0)
+            {
+                MessageBox.Show("左侧管道宽度的值必须大于0", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (mainSetting.PipeWidthRight <= 0)
+            {
+                MessageBox.Show("右侧管道宽度的值必须大于0", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(mainSetting.StartLng < -180 || mainSetting.StartLng > 180)
+            {
+                MessageBox.Show("发射点经度填写错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (mainSetting.StartLat < -90 || mainSetting.StartLat > 90)
+            {
+                MessageBox.Show("发射点纬度填写错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(mainSetting.EndLng < -180 || mainSetting.EndLng > 180)
+            {
+                MessageBox.Show("落点经度填写错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (mainSetting.EndLat < -90 || mainSetting.EndLat > 90)
+            {
+                MessageBox.Show("落点纬度填写错误", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!settingManager.SaveMainSetting(mainSetting))
             {
                 MessageBox.Show("保存主界面配置失败", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             DialogResult = true;
             Close();
@@ -390,6 +479,46 @@ namespace DataProcess
             if(openFileDialog.ShowDialog() == true)
             {
                 editVideoExePath.Text = openFileDialog.FileName;
+            }
+        }
+
+        private bool CheckMulticastDestAddress(string strMulticastAddr)
+        {
+            try
+            {
+                if (strMulticastAddr.Split(new char[] { '.' }).Length != 4)
+                {
+                    return false;
+                }
+                IPAddress address = IPAddress.Parse(strMulticastAddr);
+
+                if (IPAddress.NetworkToHostOrder(address.Address) < IPAddress.NetworkToHostOrder(IPAddress.Parse("224.0.1.0").Address) ||
+                    IPAddress.NetworkToHostOrder(address.Address) > IPAddress.NetworkToHostOrder(IPAddress.Parse("238.255.255.255").Address))
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool CheckPort(string strPort)
+        {
+            try
+            {
+                int port = int.Parse(strPort);
+                if(port < 1024 || port > 65535)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
             }
         }
     }

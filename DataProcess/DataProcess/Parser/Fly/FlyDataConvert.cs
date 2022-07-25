@@ -10,17 +10,17 @@ namespace DataProcess.Parser.Fly
     {
         public static double GetVoltage28(byte value)
         {
-            return (double)value * 50 / 256;
+            return (double)value * 50 / 255;
         }
 
         public static double GetVoltage160(ushort value)
         {
-            return (double)value * 300 / 65536;
+            return (double)value * 300 / 65535;
         }
 
         public static double GetElectricity(sbyte value)
         {
-            return (double)value * 200 / 256;
+            return (double)value * 200 / 255;
         }
     }
 }

@@ -549,19 +549,19 @@ namespace YaoCeProcess
 // 
         // 原协议类型为char
 // 
-        public byte tuoLuoWenDu_X; //        // X陀螺温度
+        public sbyte tuoLuoWenDu_X; //        // X陀螺温度
 // 
-        public byte tuoLuoWenDu_Y; //        // Y陀螺温度
+        public sbyte tuoLuoWenDu_Y; //        // Y陀螺温度
 // 
-        public byte tuoLuoWenDu_Z; //        // Z陀螺温度
+        public sbyte tuoLuoWenDu_Z; //        // Z陀螺温度
 // 
 
 // 
-        public byte jiaJiWenDu_X; //         // X加计温度
+        public sbyte jiaJiWenDu_X; //         // X加计温度
 // 
-        public byte jiaJiWenDu_Y; //         // Y加计温度
+        public sbyte jiaJiWenDu_Y; //         // Y加计温度
 // 
-        public byte jiaJiWenDu_Z; //         // Z加计温度
+        public sbyte jiaJiWenDu_Z; //         // Z加计温度
 // 
         //----------------------------------------------------//
 // 
@@ -736,11 +736,11 @@ namespace YaoCeProcess
 // 
 
 // 
-        public byte tuoLuoWenDu_X; //          // X陀螺温度
+        public sbyte tuoLuoWenDu_X; //          // X陀螺温度
 // 
-        public byte tuoLuoWenDu_Y; //          // Y陀螺温度
+        public sbyte tuoLuoWenDu_Y; //          // Y陀螺温度
 // 
-        public byte tuoLuoWenDu_Z; //          // Z陀螺温度
+        public sbyte tuoLuoWenDu_Z; //          // Z陀螺温度
 // 
 
 // 

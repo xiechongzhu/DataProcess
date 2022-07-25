@@ -229,11 +229,11 @@ namespace DataProcess.Parser.Fly
             dataLength2 += flyPacket.header.dataLen.SwapUInt16();
 
 
-            for (; searchPos2 < dataLength2; ++searchPos2)
+            for (searchPos2 = 0; searchPos2 < dataLength2; ++searchPos2)
             {
                 if(EqualHeader(FlyProtocol.navHeader, dataBuffer2, searchPos2))
                 {
-                    if(searchPos2 + FlyProtocol.NavDataLengthWithPadding >= dataLength2)
+                    if(searchPos2 + FlyProtocol.NavDataLengthWithPadding > dataLength2)
                     {
                         break;
                     }
@@ -252,7 +252,7 @@ namespace DataProcess.Parser.Fly
                 }
                 if(EqualHeader(FlyProtocol.angleHeader, dataBuffer2, searchPos2))
                 {
-                    if (searchPos2 + FlyProtocol.AngleDataLengthWithPadding >= dataLength2)
+                    if (searchPos2 + FlyProtocol.AngleDataLengthWithPadding > dataLength2)
                     {
                         break;
                     }
@@ -271,7 +271,7 @@ namespace DataProcess.Parser.Fly
                 }
                 if(EqualHeader(FlyProtocol.programHeader, dataBuffer2, searchPos2))
                 {
-                    if (searchPos2 + FlyProtocol.ProgramDataLengthWithPadding >= dataLength2)
+                    if (searchPos2 + FlyProtocol.ProgramDataLengthWithPadding > dataLength2)
                     {
                         break;
                     }
@@ -290,7 +290,7 @@ namespace DataProcess.Parser.Fly
                 }
                 if(EqualHeader(FlyProtocol.servoHeader, dataBuffer2, searchPos2))
                 {
-                    if (searchPos2 + FlyProtocol.ServoDataLengthWithPadding >= dataLength2)
+                    if (searchPos2 + FlyProtocol.ServoDataLengthWithPadding > dataLength2)
                     {
                         break;
                     }

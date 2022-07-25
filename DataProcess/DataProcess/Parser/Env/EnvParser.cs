@@ -118,7 +118,7 @@ namespace DataProcess.Protocol
                 {
                     Array.Copy(dataBuffer, pos - Marshal.SizeOf(typeof(EnvPacketHeader)), dataBuffer, 0, Marshal.SizeOf(typeof(EnvPacketHeader)));
                     pos = Marshal.SizeOf(typeof(EnvPacketHeader));
-                    break;    
+                    break;
                 }
 
                 EnvPacketHeader header = Tool.ByteToStruct<EnvPacketHeader>(dataBuffer, headerPos, Marshal.SizeOf(typeof(EnvPacketHeader)));
@@ -135,8 +135,8 @@ namespace DataProcess.Protocol
                         packetLen = Marshal.SizeOf(typeof(EnvPacketHeader)) + Marshal.SizeOf(typeof(TailPacketUdp));
                         break;
                     default:
-                        Array.Copy(dataBuffer, headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)), dataBuffer, 0, pos - headerPos);
-                        pos -= (headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)));
+                        Array.Copy(dataBuffer, headerPos + Marshal.SizeOf(typeof(EnvPacketHeader)), dataBuffer, 0, pos - headerPos - Marshal.SizeOf(typeof(EnvPacketHeader)));
+                        pos -= headerPos + Marshal.SizeOf(typeof(EnvPacketHeader));
                         headerPos = 0;
                         break;
                 }
@@ -149,13 +149,13 @@ namespace DataProcess.Protocol
                     {
                         list.Add(protocolData);
                         Array.Copy(dataBuffer, headerPos + packetLen, dataBuffer, 0, pos - headerPos - packetLen);
-                        pos -= (headerPos + packetLen);
+                        pos -= headerPos + packetLen;
                         headerPos = 0;
                     }
                     else
                     {
                         Array.Copy(dataBuffer, headerPos + contentHeaderPos, dataBuffer, 0, pos - headerPos - contentHeaderPos);
-                        pos -= (headerPos + contentHeaderPos);
+                        pos -= headerPos + contentHeaderPos;
                         headerPos = 0;
                     }
                 }

@@ -21,7 +21,7 @@ namespace DataProcess.Protocol
 
         public enum PROGRAM_CONTROL_STATUS
         {
-            STATUS_FLY_START = 0,    
+            STATUS_FLY_START = 0,
             STATUS_LEVEL1_SHUTDOWN,
             STATUS_ENGINE_LEAVE,
             STATUS_BOOM,
@@ -123,7 +123,7 @@ namespace DataProcess.Protocol
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public byte[] syncHeader;
         public byte dataType;
-        public ushort dataLen; 
+        public ushort dataLen;
     }
 
     [Serializable]

@@ -1050,8 +1050,8 @@ namespace DataProcess.Controls
             chart_XiTong_ZuoBiao_GaoDu.DataSource = yaoCeChartDataSource.chart_XiTong_ZuoBiao_GaoDuList;
 
             chart_XiTong_SuDu_Dong.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_DongList;
-            chart_XiTong_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_DongList;
-            chart_XiTong_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_DongList;
+            chart_XiTong_SuDu_Bei.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_BeiList;
+            chart_XiTong_SuDu_Tian.DataSource = yaoCeChartDataSource.chart_XiTong_SuDu_TianList;
 
             chart_XiTong_JiaoSuDu_Wx.DataSource = yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WxList;
             chart_XiTong_JiaoSuDu_Wy.DataSource = yaoCeChartDataSource.chart_XiTong_JiaoSuDu_WyList;
@@ -2068,7 +2068,7 @@ namespace DataProcess.Controls
                         break;
 
                     default:
-                        canShiZhuangTai = "错误数据";
+                        canShiZhuangTai = "未定义";
                         break;
                 }
                 XiTong_CanShiZhuangTai.Text = canShiZhuangTai;
@@ -2093,6 +2093,7 @@ namespace DataProcess.Controls
                         ceLueJieDuanValue = "结束";
                         break;
                     default:
+                        ceLueJieDuanValue = "未定义";
                         break;
                 }
                 XiTong_CeLueJieDuan.Text = ceLueJieDuanValue;
@@ -2187,11 +2188,13 @@ namespace DataProcess.Controls
                 {
                     celuepanjuejieguo1 = "无异常";
                     XiTong_CeLuePanJue1_Text.Text = stringBuilder_CeLv1.ToString();
+                    XiTong_CeLuePanJue1.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(30, 0, 255, 0));
                 }
                 else
                 {
                     celuepanjuejieguo1 = "异常";
                     XiTong_CeLuePanJue1_Text.Text = stringBuilder_CeLv1.ToString();
+                    XiTong_CeLuePanJue1.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(30, 255, 0, 0));
                 }
                 XiTong_CeLuePanJue1.Text = celuepanjuejieguo1;
 
@@ -2199,23 +2202,28 @@ namespace DataProcess.Controls
                 string celuepanjuejieguo2 = "";
                 StringBuilder stringBuilder_CeLv2 = new StringBuilder();
                 stringBuilder_CeLv2.Append("解保：");
-                stringBuilder_CeLv2.Append(celv_2_2.ToString());
+                stringBuilder_CeLv2.Append(celv_2_1.ToString());
                 stringBuilder_CeLv2.Append(";");
                 stringBuilder_CeLv2.Append("起爆：");
-                stringBuilder_CeLv2.Append(celv_2_3.ToString());
+                stringBuilder_CeLv2.Append(celv_2_2.ToString());
                 stringBuilder_CeLv2.Append(";");
                 stringBuilder_CeLv2.Append("模拟解保：");
+                stringBuilder_CeLv2.Append(celv_2_3.ToString());
+                stringBuilder_CeLv2.Append("；");
+                stringBuilder_CeLv2.Append("模拟起爆：");
                 stringBuilder_CeLv2.Append(celv_2_4.ToString());
                 stringBuilder_CeLv2.Append(".");
                 if (celv2 == 0)
                 {
                     celuepanjuejieguo2 = "无动作";
                     XiTong_CeLuePanJue2_Text.Text = stringBuilder_CeLv2.ToString();
+                    XiTong_CeLuePanJue2.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(30, 0, 255, 0));
                 }
                 else
                 {
                     celuepanjuejieguo2 = "有动作";
                     XiTong_CeLuePanJue2_Text.Text = stringBuilder_CeLv2.ToString();
+                    XiTong_CeLuePanJue2.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(30, 255, 0, 0));
 
                 }
                 XiTong_CeLuePanJue2.Text = celuepanjuejieguo2;
@@ -2441,7 +2449,7 @@ namespace DataProcess.Controls
                 }
                 else
                 {
-                    XiTong_ShuRuCaiJi2.Text = "解保状态异常";      
+                    XiTong_ShuRuCaiJi2.Text = "起爆状态异常";
                 }
                 XiTong_ShuRuCaiJi2_Text.Text = stringBuilder_ShuRuCaiJi2.ToString();
 
@@ -2497,7 +2505,7 @@ namespace DataProcess.Controls
                 }
                 else
                 {
-                    XiTong_ShuRuCaiJi4.Text = "弹体保险异常";     
+                    XiTong_ShuRuCaiJi4.Text = "弹体保险异常";
                 }
                 XiTong_ShuRuCaiJi4_Text.Text = stringBuilder_ShuRuCaiJi4.ToString();
 
@@ -2553,7 +2561,7 @@ namespace DataProcess.Controls
                     }
                 }
 
-                if (flag == 102)
+                if (flagQiBao == 102)
                 {
                     XiTong_QiBaoZhuangTai.Text = danTouJieBao.ToString() + "V-异常";
                 }
@@ -2711,7 +2719,7 @@ namespace DataProcess.Controls
                 else //其他值为黄色
                 {
                     XiTong_ShuJu1Hao.Text = "警告";
-                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 0, 0);
+                    System.Windows.Media.Color color = System.Windows.Media.Color.FromArgb(30, 255, 255, 0);
                     System.Windows.Media.SolidColorBrush solidColorBrush = new System.Windows.Media.SolidColorBrush(color);
                     System.Windows.Media.Brush brushes = solidColorBrush;
                     XiTong_ShuJu1Hao.Background = brushes; 
@@ -3062,7 +3070,7 @@ namespace DataProcess.Controls
                     }
                 }
 
-                if (flag == 102)
+                if (flagQiBao == 102)
                 {
                     s.Append(danTouJieBao.ToString() + "V-异常");
                     s.Append(",");
@@ -3321,13 +3329,13 @@ namespace DataProcess.Controls
                                // 
                     case 2:
                         // 
-                        tempSTR = "上5ms组合，本5ms组合"; //
+                        tempSTR = "上5ms组合，本5ms惯导"; //
                                                    // 
                         break; //
                                // 
                     case 3:
                         // 
-                        tempSTR = "上5ms组合，本5ms惯导"; //
+                        tempSTR = "上5ms组合，本5ms组合"; //
                                                    // 
                         break; //
                                // 
@@ -3605,13 +3613,13 @@ namespace DataProcess.Controls
                                // 
                     case 2:
                         // 
-                        tempSTR = "上5ms组合，本5ms组合"; //
+                        tempSTR = "上5ms组合，本5ms惯导"; //
                                                    // 
                         break; //
                                // 
                     case 3:
                         // 
-                        tempSTR = "上5ms组合，本5ms惯导"; //
+                        tempSTR = "上5ms组合，本5ms组合"; //
                                                    // 
                         break; //
                                // 
@@ -5767,6 +5775,7 @@ namespace DataProcess.Controls
                         tempSTR = "陀螺异常、加计异常、未组合";
                         break;
                     default:
+                        tempSTR = "无效数据:" + tuoLuoGuZhang;
                         break;
                 }
                 danTouDaoHang_BiaoShiWei.Text = tempSTR;
@@ -5892,7 +5901,8 @@ namespace DataProcess.Controls
             //bit 2 组合解算正常标识 0未组合 1组合
             danTouDaoHang_ZuHeJieSuan.Text = (tuoLuoGuZhang >> 2 & 0x1) == 0 ? "未组合" : "组合";
 #endif
-                /*协议更改20210321 0："陀螺无效、加计无效、未组合" 
+                /*协议更改20210321 
+                 * 0："陀螺无效、加计无效、未组合" 
                  * 1："陀螺正常、加计正常、未组合" 
                  * 2："陀螺正常、加计正常、未组合"
                  * 3: "陀螺正常、加计正常、组合"
@@ -5916,6 +5926,7 @@ namespace DataProcess.Controls
                         tempSTR = "陀螺异常、加计异常、未组合";
                         break;
                     default:
+                        tempSTR = "无效数据:" + tuoLuoGuZhang;
                         break;
                 }
                 s.Append(tempSTR);
