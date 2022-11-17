@@ -1108,7 +1108,7 @@ namespace DataProcess
             dataLoggerMiddle?.Close();
             YaoCe.stopYaoCeDataLogger();
 
-            SaveTestInfo();
+            //SaveTestInfo();
             InitLedStatus();
             ledTimer.Stop();
         }
